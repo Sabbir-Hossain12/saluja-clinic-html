@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Well – Saluja Clinic · West London GP Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-light-blue: #41B6E6;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── FADE UP ─────────────────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up.d1 { transition-delay: 0.10s; }
+    .fade-up.d2 { transition-delay: 0.20s; }
+    .fade-up.d3 { transition-delay: 0.30s; }
+    .fade-up.d4 { transition-delay: 0.40s; }
+    .fade-up.d5 { transition-delay: 0.50s; }
+    .fade-up.d6 { transition-delay: 0.60s; }
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .ub-left, .ub-right { display: flex; align-items: center; gap: 1.5rem; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero { background: var(--white); padding: 4.5rem 2rem 3.5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -120px; right: -160px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(0,127,59,0.05) 0%, transparent 70%); pointer-events: none; }
+    .hero::after  { content: ''; position: absolute; bottom: -80px; left: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.055) 0%, transparent 70%); pointer-events: none; }
+    .hero-blob-mid { position: absolute; top: 15%; left: 38%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.04) 0%, transparent 70%); pointer-events: none; }
+
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); margin-bottom: 1rem; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--nhs-blue); }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-green); background: rgba(0,127,59,0.08); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--nhs-green); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.8rem); font-weight: 600; line-height: 1.1; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .hero h1 em { font-style: normal; color: var(--nhs-green); }
+    .hero-sub { font-size: 1.02rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 2rem; max-width: 500px; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--nhs-green); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,127,59,0.3); transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #005c2e; transform: translateY(-2px); }
+    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-outline:hover { background: var(--nhs-blue); color: var(--white); transform: translateY(-2px); }
+
+    /* ── HERO VISUAL — wellness rings ───────────────────── */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 340px; }
+
+    /* Activity ring stack (Apple-watch-style) */
+    .rings-wrap { position: relative; width: 240px; height: 240px; }
+    .ring-svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring-track { fill: none; }
+    .ring-fill  { fill: none; stroke-linecap: round; }
+
+    /* Outer: Move (green) */
+    .rt-outer { stroke: rgba(0,127,59,0.12);  stroke-width: 18; r: 108; cx: 120; cy: 120; }
+    .rf-outer { stroke: var(--nhs-green);      stroke-width: 18; r: 108; cx: 120; cy: 120;
+                stroke-dasharray: 678.6; stroke-dashoffset: 678.6;
+                animation: ring-fill-anim 1.8s ease forwards 0.4s; }
+    @keyframes ring-fill-anim { to { stroke-dashoffset: 135; } }
+
+    /* Mid: Exercise (blue) */
+    .rt-mid { stroke: rgba(0,94,184,0.1); stroke-width: 18; r: 85;  cx: 120; cy: 120; }
+    .rf-mid { stroke: var(--nhs-blue);    stroke-width: 18; r: 85;  cx: 120; cy: 120;
+              stroke-dasharray: 533.8; stroke-dashoffset: 533.8;
+              animation: ring-fill-mid 1.8s ease forwards 0.7s; }
+    @keyframes ring-fill-mid { to { stroke-dashoffset: 200; } }
+
+    /* Inner: Stand (aqua) */
+    .rt-inner { stroke: rgba(0,159,187,0.1); stroke-width: 18; r: 62;  cx: 120; cy: 120; }
+    .rf-inner { stroke: var(--nhs-aqua);     stroke-width: 18; r: 62;  cx: 120; cy: 120;
+                stroke-dasharray: 389.6; stroke-dashoffset: 389.6;
+                animation: ring-fill-inner 1.8s ease forwards 1.0s; }
+    @keyframes ring-fill-inner { to { stroke-dashoffset: 60; } }
+
+    /* Centre content */
+    .rings-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem; }
+    .rc-icon  { font-size: 1.8rem; animation: center-bounce 3s ease-in-out infinite; }
+    @keyframes center-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .rc-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
+
+    /* Floating badges around rings */
+    .ring-badge {
+      position: absolute; background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 0.45rem 0.9rem;
+      box-shadow: 0 4px 18px rgba(0,94,184,0.10);
+      font-size: 0.76rem; font-weight: 600; color: var(--text-dark);
+      display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; z-index: 3;
+    }
+    .rb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .rb-1 { top: -10px; right: -30px; animation: rba 5s ease-in-out infinite; }
+    .rb-2 { bottom:  0; left: -40px; animation: rbb 5.5s ease-in-out infinite; }
+    .rb-3 { top: 50%;  right: -55px; transform: translateY(-50%); animation: rbc 6s ease-in-out infinite; }
+    @keyframes rba { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-9px)} }
+    @keyframes rbb { 0%,100%{transform:translateY(0)}  50%{transform:translateY(9px)} }
+    @keyframes rbc { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 8px))} }
+
+    /* ── WAVE ────────────────────────────────────────────── */
+    .wave-divider { line-height: 0; overflow: hidden; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ── SECTION COMMON ──────────────────────────────────── */
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 600; line-height: 1.2; margin-bottom: 0.8rem; }
+    .section-title em { font-style: normal; color: var(--nhs-blue); }
+    .section-lead { font-size: 1rem; line-height: 1.75; color: var(--text-mid); max-width: 680px; margin-bottom: 2.5rem; }
+
+    /* ── TOPIC CARDS GRID ────────────────────────────────── */
+    .topics-section { padding: 4rem 0; }
+    .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+
+    .topic-card {
+      border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit;
+      background: var(--white); border: 1.5px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
+      position: relative;
+    }
+    .topic-card:hover { transform: translateY(-7px); box-shadow: 0 20px 56px rgba(0,94,184,0.13); border-color: var(--nhs-light-blue); }
+
+    /* Animated top colour bar */
+    .tc-bar { height: 5px; width: 100%; transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .topic-card:hover .tc-bar { transform: scaleX(1); }
+
+    .tc-body { padding: 1.6rem 1.6rem 1.4rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+
+    .tc-icon-wrap {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.7rem;
+      transition: transform 0.3s;
+    }
+    .topic-card:hover .tc-icon-wrap { transform: scale(1.1) rotate(-5deg); }
+
+    .tc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-dark); line-height: 1.2; }
+    .tc-desc  { font-size: 0.88rem; line-height: 1.68; color: var(--text-mid); flex: 1; }
+
+    .tc-tips { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .tc-tips li { font-size: 0.83rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 0.5rem; }
+    .tc-tips li::before { content: '›'; color: var(--nhs-blue); font-weight: 700; flex-shrink: 0; }
+
+    .tc-link { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; font-weight: 600; color: var(--nhs-blue); margin-top: 0.5rem; transition: gap 0.2s; }
+    .topic-card:hover .tc-link { gap: 0.75rem; }
+
+    /* Colour themes per card */
+    .tc-green  .tc-bar        { background: linear-gradient(90deg, var(--nhs-green), var(--nhs-aqua)); }
+    .tc-green  .tc-icon-wrap  { background: rgba(0,127,59,0.08); }
+    .tc-blue   .tc-bar        { background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-light-blue)); }
+    .tc-blue   .tc-icon-wrap  { background: rgba(0,94,184,0.08); }
+    .tc-aqua   .tc-bar        { background: linear-gradient(90deg, var(--nhs-aqua), var(--nhs-light-blue)); }
+    .tc-aqua   .tc-icon-wrap  { background: rgba(0,159,187,0.08); }
+    .tc-dark   .tc-bar        { background: linear-gradient(90deg, var(--nhs-dark), var(--nhs-blue)); }
+    .tc-dark   .tc-icon-wrap  { background: rgba(0,48,135,0.08); }
+
+    /* ── PROGRESS TRACKER SECTION ────────────────────────── */
+    .tracker-section { background: var(--off-white); padding: 4rem 0; position: relative; overflow: hidden; }
+    .tracker-section::before { content: ''; position: absolute; top: -100px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.04) 0%, transparent 70%); pointer-events: none; }
+
+    .tracker-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+    .tracker-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .tracker-item {}
+    .ti-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+    .ti-label { font-weight: 600; font-size: 0.92rem; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; }
+    .ti-icon { font-size: 1rem; }
+    .ti-pct { font-size: 0.82rem; font-weight: 700; color: var(--nhs-blue); }
+    .ti-bar-bg { height: 10px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .ti-bar-fill { height: 100%; border-radius: 99px; width: 0; transition: width 1.4s cubic-bezier(0.25, 1, 0.5, 1); }
+    .ti-tip { font-size: 0.78rem; color: var(--text-soft); margin-top: 0.35rem; }
+
+    /* Tracker right: animated wellness dashboard card */
+    .dash-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 1.8rem; box-shadow: 0 8px 40px rgba(0,94,184,0.08);
+      animation: dash-float 6s ease-in-out infinite;
+    }
+    @keyframes dash-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .dash-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+    .dash-stat { background: var(--off-white); border-radius: 14px; padding: 1rem; text-align: center; }
+    .ds-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; line-height: 1; margin-bottom: 0.2rem; }
+    .ds-label { font-size: 0.73rem; color: var(--text-soft); }
+    .dash-row { background: var(--off-white); border-radius: 14px; padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; }
+    .dr-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .dr-body { flex: 1; }
+    .dr-label { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); }
+    .dr-val { font-size: 0.75rem; color: var(--text-soft); }
+    .dr-badge { font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 20px; }
+    .badge-good { background: rgba(0,127,59,0.12); color: var(--nhs-green); }
+    .badge-warn { background: rgba(0,94,184,0.1); color: var(--nhs-blue); }
+
+    /* ── QUICK TIPS STRIP ────────────────────────────────── */
+    .tips-section { padding: 4rem 0; }
+    .tips-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .tip-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: 1.4rem; position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .tip-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,94,184,0.10); border-color: var(--nhs-aqua); }
+    .tip-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .tip-card:hover::before { transform: scaleX(1); }
+    .tip-number { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: rgba(0,94,184,0.08); line-height: 1; margin-bottom: 0.5rem; }
+    .tip-text { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); }
+
+    /* ── NHS TOOLS BANNER ────────────────────────────────── */
+    .tools-banner {
+      margin: 0 2rem; border-radius: 24px; overflow: hidden;
+      background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 60%, var(--nhs-aqua) 100%);
+      padding: 3rem 3rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+      max-width: 1160px; margin: 0 auto 4rem;
+      position: relative; overflow: hidden;
+    }
+    /* Animated shimmer sweep */
+    .tools-banner::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+      animation: banner-shimmer 4s ease-in-out infinite;
+    }
+    @keyframes banner-shimmer { 0%{left:-100%} 100%{left:200%} }
+    .tb-left .tbl-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.5rem; }
+    .tb-left h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; }
+    .tb-left p { font-size: 0.92rem; line-height: 1.7; color: rgba(255,255,255,0.75); }
+    .tb-right { display: flex; flex-direction: column; gap: 0.8rem; flex-shrink: 0; position: relative; z-index: 1; }
+    .tb-btn {
+      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.25);
+      color: #fff; border-radius: 12px; padding: 0.85rem 1.4rem;
+      text-decoration: none; font-size: 0.88rem; font-weight: 600;
+      display: flex; align-items: center; gap: 0.6rem;
+      backdrop-filter: blur(4px); white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .tb-btn:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.45); transform: translateX(4px); }
+
+    /* ── EMERGENCY ───────────────────────────────────────── */
+    .emergency { background: var(--text-dark); padding: 2.5rem 2rem; }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .emerg-card { border-radius: 16px; padding: 2rem; }
+    .nhs111 { background: rgba(0,94,184,0.35); border: 1.5px solid rgba(65,182,230,0.3); }
+    .urgent  { background: rgba(180,0,0,0.35); border: 1.5px solid rgba(255,100,100,0.3); }
+    .emerg-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
+    .emerg-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .footer-logo-wrap { display: inline-block; background: #fff; border-radius: 10px; padding: 6px 14px 4px; margin-bottom: 1rem; }
+    .footer-logo-wrap svg { height: 42px; width: auto; display: block; }
+    .footer-tagline { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+    .footer-address { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.65); }
+    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .footer-heading { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.7); }
+    .hour-day { color: rgba(255,255,255,0.45); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.2rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.38); }
+
+    @media (max-width: 980px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .topics-grid { grid-template-columns: 1fr 1fr; }
+      .tracker-inner { grid-template-columns: 1fr; }
+      .tips-grid { grid-template-columns: 1fr 1fr; }
+      .tools-banner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .topics-grid { grid-template-columns: 1fr; }
+      .tips-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 440px) {
+      .tips-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="ub-left">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-right">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
+            <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
+            <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
+            <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
+            <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
+            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="active">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob-mid"></div>
+  <div class="hero-inner">
+
+    <div>
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="health-information.html">Health Information</a><span>›</span>
+        <span>Live Well</span>
+      </div>
+      <div class="hero-tag"><span class="dot"></span> Healthy Living</div>
+      <h1>Live <em>Well</em> —<br>Every Day</h1>
+      <p class="hero-sub">Simple, NHS-backed advice on eating, moving, sleeping, and looking after your mind — the foundations of a longer, healthier life.</p>
+      <div class="hero-actions">
+        <a href="https://www.nhs.uk/live-well/" target="_blank" class="btn-primary">Explore on NHS.uk →</a>
+        <a href="#topics" class="btn-outline">Browse topics</a>
+      </div>
+    </div>
+
+    <!-- Right: animated wellness rings -->
+    <div class="hero-visual">
+      <div style="position:relative;">
+        <div class="ring-badge rb-1"><span class="rb-dot" style="background:var(--nhs-green);"></span>Move more</div>
+        <div class="ring-badge rb-2"><span class="rb-dot" style="background:var(--nhs-blue);"></span>Sleep better</div>
+        <div class="ring-badge rb-3"><span class="rb-dot" style="background:var(--nhs-aqua);"></span>Eat well</div>
+        <div class="rings-wrap">
+          <svg class="ring-svg" viewBox="0 0 240 240">
+            <!-- Outer ring (Move) -->
+            <circle class="ring-track rt-outer" cx="120" cy="120" r="108" stroke-width="18"/>
+            <circle class="ring-fill  rf-outer" cx="120" cy="120" r="108" stroke-width="18"/>
+            <!-- Mid ring (Exercise) -->
+            <circle class="ring-track rt-mid"   cx="120" cy="120" r="85"  stroke-width="18"/>
+            <circle class="ring-fill  rf-mid"   cx="120" cy="120" r="85"  stroke-width="18"/>
+            <!-- Inner ring (Stand) -->
+            <circle class="ring-track rt-inner" cx="120" cy="120" r="62"  stroke-width="18"/>
+            <circle class="ring-fill  rf-inner" cx="120" cy="120" r="62"  stroke-width="18"/>
+          </svg>
+          <div class="rings-center">
+            <div class="rc-icon">🌿</div>
+            <div class="rc-label">Live Well</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+  </svg>
+</div>
+
+<!-- TOPICS SECTION -->
+<section class="topics-section" id="topics">
+  <div class="section-inner">
+
+    <div class="fade-up">
+      <div class="section-label" style="color:var(--nhs-green);">Healthy Living Topics</div>
+      <h2 class="section-title">Six Pillars of <em>Living Well</em></h2>
+      <p class="section-lead">The NHS Live Well programme covers six key areas of healthy living. Click any topic to explore full NHS guidance, tips, and personalised tools.</p>
+    </div>
+
+    <div class="topics-grid">
+
+      <!-- Eat Well -->
+      <a href="https://www.nhs.uk/live-well/eat-well/" target="_blank" class="topic-card tc-green fade-up d1">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">🥗</div>
+          <div class="tc-title">Eat Well</div>
+          <p class="tc-desc">A balanced diet is the foundation of good health. Learn about the Eatwell Guide, portion sizes, and what to eat more — or less — of.</p>
+          <ul class="tc-tips">
+            <li>5 portions of fruit and veg a day</li>
+            <li>Limit ultra-processed foods</li>
+            <li>Stay hydrated — 6–8 glasses of water daily</li>
+            <li>Cut back on sugar and saturated fat</li>
+          </ul>
+          <div class="tc-link">Read NHS Eat Well advice →</div>
+        </div>
+      </a>
+
+      <!-- Exercise -->
+      <a href="https://www.nhs.uk/live-well/exercise/" target="_blank" class="topic-card tc-blue fade-up d2">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">🏃</div>
+          <div class="tc-title">Exercise &amp; Physical Activity</div>
+          <p class="tc-desc">Being active is one of the best things you can do for your health. The NHS recommends 150 minutes of moderate activity per week.</p>
+          <ul class="tc-tips">
+            <li>150 mins moderate activity weekly</li>
+            <li>Strength exercises 2 days per week</li>
+            <li>Reduce long periods of sitting</li>
+            <li>Even short walks make a difference</li>
+          </ul>
+          <div class="tc-link">See exercise guidelines →</div>
+        </div>
+      </a>
+
+      <!-- Sleep -->
+      <a href="https://www.nhs.uk/live-well/sleep-and-tiredness/" target="_blank" class="topic-card tc-aqua fade-up d3">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">😴</div>
+          <div class="tc-title">Sleep &amp; Tiredness</div>
+          <p class="tc-desc">Poor sleep affects your mood, concentration, and physical health. Adults need 7–9 hours of quality sleep each night.</p>
+          <ul class="tc-tips">
+            <li>Stick to regular sleep and wake times</li>
+            <li>Keep your bedroom cool and dark</li>
+            <li>Avoid screens 1 hour before bed</li>
+            <li>Limit caffeine after 2pm</li>
+          </ul>
+          <div class="tc-link">Improve your sleep →</div>
+        </div>
+      </a>
+
+      <!-- Healthy Weight -->
+      <a href="https://www.nhs.uk/live-well/healthy-weight/" target="_blank" class="topic-card tc-green fade-up d4">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">⚖️</div>
+          <div class="tc-title">Healthy Weight</div>
+          <p class="tc-desc">Maintaining a healthy weight reduces your risk of type 2 diabetes, heart disease, and certain cancers. Small changes add up.</p>
+          <ul class="tc-tips">
+            <li>Check your BMI regularly</li>
+            <li>Focus on sustainable habits, not quick fixes</li>
+            <li>Increase movement, reduce portions</li>
+            <li>Ask your GP about NHS weight services</li>
+          </ul>
+          <div class="tc-link">Manage your weight →</div>
+        </div>
+      </a>
+
+      <!-- Mental Wellbeing -->
+      <a href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/five-steps-to-mental-wellbeing/" target="_blank" class="topic-card tc-dark fade-up d5">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">🧠</div>
+          <div class="tc-title">Mental Wellbeing</div>
+          <p class="tc-desc">Looking after your mental health is just as important as physical health. Small daily actions can make a big difference to how you feel.</p>
+          <ul class="tc-tips">
+            <li>Connect with others — talk and listen</li>
+            <li>Be active — exercise boosts mood</li>
+            <li>Learn something new to build confidence</li>
+            <li>Give back — volunteering helps wellbeing</li>
+          </ul>
+          <div class="tc-link">Five steps to wellbeing →</div>
+        </div>
+      </a>
+
+      <!-- Stop Smoking / Alcohol -->
+      <a href="https://www.nhs.uk/live-well/quit-smoking/" target="_blank" class="topic-card tc-aqua fade-up d6">
+        <div class="tc-bar"></div>
+        <div class="tc-body">
+          <div class="tc-icon-wrap">🚭</div>
+          <div class="tc-title">Stop Smoking &amp; Alcohol</div>
+          <p class="tc-desc">Stopping smoking is the single best thing you can do for your health. Cutting back on alcohol also significantly reduces health risks.</p>
+          <ul class="tc-tips">
+            <li>Quitting smoking reduces risk of cancer and heart disease immediately</li>
+            <li>Nicotine replacement therapy doubles quit success</li>
+            <li>Men: no more than 14 units of alcohol per week</li>
+            <li>Free NHS Stop Smoking services available locally</li>
+          </ul>
+          <div class="tc-link">Quit smoking support →</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS TRACKER SECTION -->
+<section class="tracker-section">
+  <div class="tracker-inner">
+
+    <div class="fade-up">
+      <div class="section-label" style="color:var(--nhs-aqua);">NHS Targets</div>
+      <h2 class="section-title">How the <em>UK</em> is<br>Living Well</h2>
+      <p class="section-lead" style="margin-bottom:2rem;">NHS statistics show how the UK population measures up against key healthy living targets — and where there is room to improve.</p>
+
+      <div class="tracker-list" id="trackerList">
+        <div class="tracker-item">
+          <div class="ti-head"><span class="ti-label"><span class="ti-icon">🥗</span> Adults eating 5-a-day</span><span class="ti-pct">28%</span></div>
+          <div class="ti-bar-bg"><div class="ti-bar-fill" data-width="28" style="background: linear-gradient(90deg, var(--nhs-green), var(--nhs-aqua));"></div></div>
+          <div class="ti-tip">Only 28% of adults meet the recommended 5 daily portions of fruit and veg.</div>
+        </div>
+        <div class="tracker-item">
+          <div class="ti-head"><span class="ti-label"><span class="ti-icon">🏃</span> Meeting activity guidelines</span><span class="ti-pct">62%</span></div>
+          <div class="ti-bar-bg"><div class="ti-bar-fill" data-width="62" style="background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-light-blue));"></div></div>
+          <div class="ti-tip">62% of adults meet the 150 minutes per week physical activity target.</div>
+        </div>
+        <div class="tracker-item">
+          <div class="ti-head"><span class="ti-label"><span class="ti-icon">😴</span> Getting 7+ hours sleep</span><span class="ti-pct">71%</span></div>
+          <div class="ti-bar-bg"><div class="ti-bar-fill" data-width="71" style="background: linear-gradient(90deg, var(--nhs-aqua), var(--nhs-light-blue));"></div></div>
+          <div class="ti-tip">71% of UK adults report sleeping 7 or more hours most nights.</div>
+        </div>
+        <div class="tracker-item">
+          <div class="ti-head"><span class="ti-label"><span class="ti-icon">🚭</span> Adults who are non-smokers</span><span class="ti-pct">85%</span></div>
+          <div class="ti-bar-bg"><div class="ti-bar-fill" data-width="85" style="background: linear-gradient(90deg, var(--nhs-green), #00a860);"></div></div>
+          <div class="ti-tip">85% of UK adults are now non-smokers — but nearly 6 million still smoke.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated dashboard card -->
+    <div class="fade-up d2">
+      <div class="dash-card">
+        <div class="dash-title">🌿 Your Wellness Snapshot</div>
+        <div class="dash-grid">
+          <div class="dash-stat">
+            <div class="ds-num" style="color:var(--nhs-green);">150</div>
+            <div class="ds-label">mins/week activity target</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-num" style="color:var(--nhs-blue);">7–9</div>
+            <div class="ds-label">hours of sleep needed</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-num" style="color:var(--nhs-aqua);">5</div>
+            <div class="ds-label">fruit &amp; veg portions daily</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-num" style="color:var(--nhs-dark);">14</div>
+            <div class="ds-label">max units alcohol/week</div>
+          </div>
+        </div>
+        <div class="dash-row">
+          <div class="dr-icon">🫀</div>
+          <div class="dr-body"><div class="dr-label">Heart Age Check</div><div class="dr-val">Know your cardiovascular risk</div></div>
+          <span class="dr-badge badge-good">Free</span>
+        </div>
+        <div class="dash-row">
+          <div class="dr-icon">💊</div>
+          <div class="dr-body"><div class="dr-label">BMI Calculator</div><div class="dr-val">Check your healthy weight range</div></div>
+          <span class="dr-badge badge-warn">Try it</span>
+        </div>
+        <div class="dash-row">
+          <div class="dr-icon">🧠</div>
+          <div class="dr-body"><div class="dr-label">Mind Plan</div><div class="dr-val">Personalised wellbeing support</div></div>
+          <span class="dr-badge badge-good">Free</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUICK TIPS -->
+<section class="tips-section">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label" style="color:var(--nhs-blue);">Quick Wins</div>
+      <h2 class="section-title">Small Changes,<br><em>Big Results</em></h2>
+    </div>
+    <div class="tips-grid" style="margin-top:2rem;">
+      <div class="tip-card fade-up d1">
+        <div class="tip-number">01</div>
+        <div class="tip-text"><strong>Walk more.</strong> Just 10 extra minutes of brisk walking a day can significantly lower your risk of early death.</div>
+      </div>
+      <div class="tip-card fade-up d2">
+        <div class="tip-number">02</div>
+        <div class="tip-text"><strong>Swap one meal.</strong> Replacing one processed meal per day with a home-cooked alternative cuts calories and boosts nutrition.</div>
+      </div>
+      <div class="tip-card fade-up d3">
+        <div class="tip-number">03</div>
+        <div class="tip-text"><strong>Set a sleep schedule.</strong> Going to bed and waking at the same time every day — even weekends — improves sleep quality rapidly.</div>
+      </div>
+      <div class="tip-card fade-up d4">
+        <div class="tip-number">04</div>
+        <div class="tip-text"><strong>Screen-free evenings.</strong> Putting your phone away 1 hour before bed reduces blue light exposure and helps you fall asleep faster.</div>
+      </div>
+      <div class="tip-card fade-up d1">
+        <div class="tip-number">05</div>
+        <div class="tip-text"><strong>Drink more water.</strong> Swapping sugary drinks for water reduces calorie intake and improves energy levels and skin health.</div>
+      </div>
+      <div class="tip-card fade-up d2">
+        <div class="tip-number">06</div>
+        <div class="tip-text"><strong>Connect with someone.</strong> Calling or meeting a friend or family member once a week has measurable mental health benefits.</div>
+      </div>
+      <div class="tip-card fade-up d3">
+        <div class="tip-number">07</div>
+        <div class="tip-text"><strong>Take your medications.</strong> If prescribed, taking medicines consistently and attending medication reviews is key to managing long-term conditions.</div>
+      </div>
+      <div class="tip-card fade-up d4">
+        <div class="tip-number">08</div>
+        <div class="tip-text"><strong>Book your checks.</strong> Don't put off NHS health checks, cervical screening, or cancer screening — early detection saves lives.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NHS TOOLS BANNER -->
+<div class="section-inner fade-up" style="padding-bottom:0; margin-bottom:4rem;">
+  <div class="tools-banner">
+    <div class="tb-left">
+      <div class="tbl-label">NHS-Approved Tools</div>
+      <h2>Put it into practice</h2>
+      <p>Use our free NHS health tools to check your BMI, assess your heart age, create a personalised mind plan, and build your quit-smoking strategy.</p>
+    </div>
+    <div class="tb-right">
+      <a href="bmi-calculator.html" class="tb-btn">⚖️ BMI Calculator</a>
+      <a href="heart-age.html" class="tb-btn">🫀 Heart Age Calculator</a>
+      <a href="your-mind-plan.html" class="tb-btn">🧠 Your Mind Plan</a>
+      <a href="personal-quit-plan.html" class="tb-btn">🚭 Personal Quit Plan</a>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div><div class="emerg-label">Non-Emergency</div><div class="emerg-number">NHS 111</div><p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones.</p></div>
+    </div>
+    <div class="emerg-card urgent">
+      <div><div class="emerg-label">Life-Threatening Emergency</div><div class="emerg-number">999</div><p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, or any life-threatening condition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+          <defs>
+            <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
+              <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
+              <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
+              <stop offset="100%" stop-color="#d8d8d8"/>
+            </linearGradient>
+            <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
+              <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
+              <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
+              <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+            </linearGradient>
+            <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+              <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
+              <stop offset="100%" stop-color="#000000"/>
+            </radialGradient>
+            <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
+              <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+            <filter id="fSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+            <filter id="fTS">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+              <feOffset dx="0" dy="1" result="offsetBlur"/>
+              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+            </filter>
+          </defs>
+          <rect width="720" height="160" fill="#ffffff"/>
+          <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fSh)"/>
+          <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fS)">S</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+        </svg>
+      </div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  /* ── Fade-up observer ───────────────────────────────── */
+  const fadeObs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.07 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+  /* ── Progress bar animation on scroll ──────────────── */
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const fill = e.target.querySelector('.ti-bar-fill');
+      if (fill) fill.style.width = (fill.dataset.width || 0) + '%';
+      barObs.unobserve(e.target);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.ti-bar-bg').forEach(el => barObs.observe(el));
+</script>
+</body>
+</html>

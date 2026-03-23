@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Practice News – Saluja Clinic · West London GP Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-light-blue: #41B6E6;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+      /* Elegant accent — replaces yellow throughout */
+      --accent:         #009FBB;   /* NHS Aqua */
+      --accent-light:   rgba(0,159,187,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    /* Safety: if JS doesn't fire, ensure content is still visible */
+    @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; } }
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── HERO — white minimalistic ───────────────────────── */
+    .hero {
+      background: var(--white);
+      padding: 4.5rem 2rem 3.5rem;
+      position: relative; overflow: hidden;
+      min-height: 320px; display: flex; align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -120px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,94,184,0.055) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -80px;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,159,187,0.065) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-blob-mid {
+      position: absolute; top: 10%; left: 40%;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(65,182,230,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-text { display: flex; flex-direction: column; gap: 1rem; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); }
+    .breadcrumb a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--nhs-blue); }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+    }
+    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(1.6)} }
+
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 600; line-height: 1.1; color: var(--text-dark); }
+    .hero h1 em { font-style: normal; color: var(--nhs-blue); }
+    .hero-sub { font-size: 1.05rem; line-height: 1.7; color: var(--text-mid); max-width: 520px; }
+
+    /* Hero right: animated news cards preview */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .news-preview-stack { position: relative; width: 100%; max-width: 360px; margin-bottom: 30px; }
+    .np-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.2rem 1.4rem;
+      box-shadow: 0 4px 24px rgba(0,94,184,0.08); position: relative; overflow: hidden;
+      animation: mock-float 6s ease-in-out infinite;
+    }
+    @keyframes mock-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .np-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
+    .np-card::after {
+      content: '';
+      position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      animation: shimmer-sweep 3.5s ease-in-out infinite 2s;
+    }
+    @keyframes shimmer-sweep { 0%{left:-60%} 100%{left:160%} }
+    .np-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nhs-aqua); margin-bottom: 0.5rem; }
+    .np-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--text-dark); line-height: 1.3; margin-bottom: 0.4rem; }
+    .np-card-meta { font-size: 0.76rem; color: var(--text-soft); }
+    .np-card-back { position: absolute; bottom: -14px; left: 10px; right: 10px; background: var(--off-white); border: 1.5px solid var(--border); border-radius: 14px; height: 60px; z-index: -1; }
+    .np-card-back2 { position: absolute; bottom: -24px; left: 20px; right: 20px; background: rgba(245,248,252,0.6); border: 1.5px solid var(--border); border-radius: 14px; height: 50px; z-index: -2; }
+    .n-badge {
+      position: absolute; background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 0.5rem 0.9rem;
+      box-shadow: 0 4px 18px rgba(0,94,184,0.10);
+      font-size: 0.76rem; font-weight: 600; color: var(--text-dark);
+      display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; z-index: 3;
+    }
+    .nb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .nbadge-1 { top: -18px; right: -10px; animation: nba 5s ease-in-out infinite; }
+    .nbadge-2 { bottom: -10px; left: -14px; animation: nbb 5.5s ease-in-out infinite; }
+    @keyframes nba { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    @keyframes nbb { 0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)} }
+
+    .wave-divider { line-height: 0; overflow: hidden; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ── LIVE NEWS TICKER ────────────────────────────────── */
+    .ticker-outer {
+      background: var(--nhs-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      padding: 0;
+      display: flex;
+      align-items: stretch;
+      min-height: 44px;
+    }
+    .ticker-label {
+      background: var(--nhs-aqua);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .ticker-label .live-dot {
+      width: 7px; height: 7px; background: #fff; border-radius: 50%;
+      animation: live-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes live-pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .ticker-scroll-wrap { flex: 1; overflow: hidden; display: flex; align-items: center; }
+    .ticker-track {
+      display: flex;
+      animation: ticker-scroll 40s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+    .ticker-track:hover { animation-play-state: paused; cursor: pointer; }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      padding: 0 2rem;
+    }
+    .ticker-item .sep { color: var(--nhs-aqua); opacity: 0.6; font-size: 0.6rem; }
+    .ticker-item a { color: rgba(255,255,255,0.85); text-decoration: none; transition: color 0.2s; }
+    .ticker-item a:hover { color: var(--nhs-light-blue); }
+    @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* Loading state for ticker */
+    .ticker-loading { font-size: 0.8rem; color: rgba(255,255,255,0.5); padding: 0 1.5rem; font-style: italic; }
+
+    /* ── CONTENT ─────────────────────────────────────────── */
+    .content-wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+
+    .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nhs-blue); margin-bottom: 0.6rem; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 600; color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem; }
+    h2 em { font-style: normal; color: var(--nhs-blue); }
+    .section-lead { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; max-width: 640px; margin-bottom: 2.5rem; }
+
+    /* ── PINNED NOTICE — aqua accent instead of yellow ───── */
+    .pinned-notice {
+      background: linear-gradient(135deg, #f0fafd, #f8fdfe);
+      border: 1.5px solid rgba(0,159,187,0.3);
+      border-radius: 16px; padding: 2rem 2.5rem; margin-bottom: 3rem;
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .pinned-notice::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--nhs-aqua); border-radius: 2px 0 0 2px; }
+    .pin-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .pin-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--nhs-aqua);
+      background: rgba(0,159,187,0.1);
+      padding: 0.2rem 0.7rem; border-radius: 20px; margin-bottom: 0.6rem;
+    }
+    .pin-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .pin-body p { font-size: 0.95rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 1rem; }
+    .btn-outline-sm { display: inline-flex; align-items: center; gap: 0.4rem; border: 1.5px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .btn-outline-sm:hover { background: var(--nhs-blue); color: #fff; }
+
+    /* ── NEWS GRID ───────────────────────────────────────── */
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
+    .news-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .news-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,94,184,0.12); border-color: var(--nhs-aqua); }
+
+    .card-thumb { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .card-thumb .thumb-icon { font-size: 4rem; opacity: 0.55; position: relative; z-index: 1; }
+    .card-thumb .thumb-label { position: absolute; bottom: 1rem; left: 1rem; z-index: 2; background: rgba(0,0,0,0.4); color: #fff; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 20px; backdrop-filter: blur(4px); }
+    /* Elegant sweep shimmer */
+    .card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.07) 50%, transparent 70%); background-size: 200% 100%; animation: shimmer 4s ease-in-out infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    .thumb-plan    { background: linear-gradient(135deg, #003087, #005eb8); }
+    .thumb-welcome { background: linear-gradient(135deg, #005eb8, #009fbb); }
+
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+    .card-date { font-size: 0.78rem; color: var(--text-soft); }
+    .card-cat { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--nhs-aqua); background: rgba(0,159,187,0.08); padding: 0.2rem 0.6rem; border-radius: 20px; }
+    .card-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; line-height: 1.25; }
+    .card-body p { font-size: 0.9rem; line-height: 1.65; color: var(--text-mid); flex: 1; }
+    .card-read-more { margin-top: 1.2rem; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--nhs-blue); transition: gap 0.2s; }
+    .news-card:hover .card-read-more { gap: 0.7rem; }
+
+    /* ── STAY UPDATED ────────────────────────────────────── */
+    .stay-updated { background: var(--off-white); border: 1.5px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-top: 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .stay-updated h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .stay-updated p { font-size: 0.92rem; color: var(--text-mid); }
+    .stay-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.28); transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); }
+    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-outline:hover { background: var(--nhs-blue); color: var(--white); transform: translateY(-2px); }
+
+    /* ── EMERGENCY ───────────────────────────────────────── */
+    .emergency { background: var(--text-dark); padding: 2.5rem 2rem; }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .emerg-card { border-radius: 16px; padding: 2rem; }
+    .nhs111 { background: rgba(0,94,184,0.35); border: 1.5px solid rgba(65,182,230,0.3); }
+    .urgent  { background: rgba(180,0,0,0.35); border: 1.5px solid rgba(255,100,100,0.3); }
+    .emerg-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
+    .emerg-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .footer-logo-wrap { display: inline-block; background: #fff; border-radius: 10px; padding: 6px 14px 4px; margin-bottom: 1rem; }
+    .footer-logo-wrap svg { height: 42px; width: auto; display: block; }
+    .footer-tagline { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+    .footer-address { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.65); }
+    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .footer-heading { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.7); }
+    .hour-day { color: rgba(255,255,255,0.45); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.2rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.38); }
+
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .pinned-notice { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="emer">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="emer">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="news.html" target="_blank">News</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+
+      <a href="health-information.html" target="_blank">Health Information</a>
+      <a href="contact-us.html">Contact Us</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob-mid"></div>
+  <div class="hero-inner">
+    <!-- Left: text -->
+    <div class="hero-text">
+      <div class="breadcrumb"><a href="/">Home</a><span>›</span><span>Practice News</span></div>
+      <div class="hero-tag"><span></span> Latest Updates</div>
+      <h1>Practice <em>News</em> &amp;<br>Announcements</h1>
+      <p class="hero-sub">Stay up to date with the latest news, service changes, and important announcements from Saluja Clinic.</p>
+    </div>
+    <!-- Right: animated news card preview -->
+    <div class="hero-visual">
+      <div class="news-preview-stack">
+        <div class="n-badge nbadge-1"><span class="nb-dot" style="background:var(--nhs-green);"></span>New Article</div>
+        <div class="n-badge nbadge-2"><span class="nb-dot" style="background:var(--nhs-aqua);"></span>NHS Update</div>
+        <div class="np-card-back2"></div>
+        <div class="np-card-back"></div>
+        <div class="np-card">
+          <div class="np-card-label">Practice Update</div>
+          <div class="np-card-title">2025/26 Access Improvement Plan</div>
+          <div class="np-card-meta">📅 8 March 2026 · Saluja Clinic Team</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,16 C360,32 720,0 1080,16 C1260,24 1380,8 1440,16 L1440,32 L0,32 Z" fill="#003087" opacity="0.06"/>
+  </svg>
+</div>
+
+<!-- LIVE NHS HEALTH NEWS TICKER -->
+<div class="ticker-outer">
+  <div class="ticker-label">
+    <div class="live-dot"></div>
+    NHS Health News
+  </div>
+  <div class="ticker-scroll-wrap">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-loading">Loading latest NHS health news…</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+
+  <div class="pinned-notice fade-up">
+    <div class="pin-icon">📌</div>
+    <div class="pin-body">
+      <div class="pin-badge">Important Notice</div>
+      <h3>2025/26 Access Improvement Plan</h3>
+      <p>We have launched our Access Improvement Plan for 2025/26, outlining key changes to how patients can access GP services at Saluja Clinic — including updates to appointment booking, telephone access, and online consultation pathways.</p>
+      <a href="news-access-plan.html" class="btn-outline-sm">Read the full plan →</a>
+    </div>
+  </div>
+
+  <div class="fade-up">
+    <div class="section-tag">All News</div>
+    <h2>Recent <em>Announcements</em></h2>
+    <p class="section-lead">Read the latest updates from our practice team. We'll keep this page updated with news, service changes, and health information relevant to our patients.</p>
+  </div>
+
+  <div class="news-grid">
+    <a href="news-access-plan.html" class="news-card fade-up">
+      <div class="card-thumb thumb-plan">
+        <div class="thumb-icon">📋</div>
+        <div class="thumb-label">Practice Update</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-date">April 2025</span>
+          <span class="card-cat">Access &amp; Services</span>
+        </div>
+        <h3>2025/26 Access Improvement Plan</h3>
+        <p>Our latest access improvement plan sets out how we are working to improve patient access to GP services, appointments, and online tools throughout 2025 and 2026.</p>
+        <div class="card-read-more">Read more →</div>
+      </div>
+    </a>
+
+    <a href="news-welcome.html" class="news-card fade-up">
+      <div class="card-thumb thumb-welcome">
+        <div class="thumb-icon">🌐</div>
+        <div class="thumb-label">Website Launch</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-date">March 2026</span>
+          <span class="card-cat">Practice News</span>
+        </div>
+        <h3>Welcome to Our New Website</h3>
+        <p>We are delighted to welcome you to the redesigned Saluja Clinic website — making it easier to find information about our services, book appointments, and access health resources.</p>
+        <div class="card-read-more">Read more →</div>
+      </div>
+    </a>
+
+    <div class="news-card fade-up" style="border-style:dashed;opacity:0.45;pointer-events:none;">
+      <div class="card-thumb" style="background:linear-gradient(135deg,#e8eef4,#dde5ef);">
+        <div class="thumb-icon" style="opacity:0.3;">📰</div>
+        <div class="thumb-label">Coming Soon</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-date" style="color:#bbb;">Future</span>
+          <span class="card-cat" style="background:#f0f0f0;color:#aaa;">News</span>
+        </div>
+        <h3 style="color:#c0c8d4;">More News Coming Soon</h3>
+        <p style="color:#c0c8d4;">Future practice announcements, health campaigns and service updates will appear here.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay-updated fade-up">
+    <div>
+      <h3>Stay in the Loop</h3>
+      <p>For the most current information, use our online consultation service or contact the practice directly.</p>
+    </div>
+    <div class="stay-links">
+      <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-primary">💬 Online Consultation</a>
+      <a href="contact-us.html" class="btn-outline">📞 Contact Us</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones. For urgent medical advice when your GP is closed.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, severe bleeding, or any life-threatening condition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+          <defs>
+            <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
+              <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
+              <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
+              <stop offset="100%" stop-color="#d8d8d8"/>
+            </linearGradient>
+            <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
+              <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
+              <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
+              <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+            </linearGradient>
+            <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+              <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
+              <stop offset="100%" stop-color="#000000"/>
+            </radialGradient>
+            <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
+              <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+            <filter id="fSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+            <filter id="fTS">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+              <feOffset dx="0" dy="1" result="offsetBlur"/>
+              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+            </filter>
+          </defs>
+          <rect width="720" height="160" fill="#ffffff"/>
+          <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fSh)"/>
+          <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fS)">S</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+        </svg>
+      </div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  /* ── Scroll fade-up ──────────────────────────────────── */
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  /* ── Live NHS Health News Ticker ─────────────────────── */
+  // Attempts to load live headlines via rss2json free API (no key required for public feeds)
+  // Primary: BBC Health RSS  |  Fallback: NHS England feed  |  Static fallback if both fail
+  const FEEDS = [
+    'https://feeds.bbci.co.uk/news/health/rss.xml',
+    'https://www.england.nhs.uk/feed/'
+  ];
+  const RSS_API = 'https://api.rss2json.com/v1/api.json?rss_url=';
+  const FALLBACK_ITEMS = [
+    { title: 'Stay up to date with NHS health news at nhs.uk', link: 'https://www.nhs.uk/news/' },
+    { title: 'Book your annual flu vaccination — contact the practice for details', link: '#' },
+    { title: 'Online consultations available at salujaclinic.webgp.com — submit a query and we respond by next working day', link: 'https://salujaclinic.webgp.com/' },
+    { title: 'NHS App — book appointments and order repeat prescriptions from your phone', link: 'https://www.nhs.uk/nhs-app/' },
+    { title: 'Practice opening hours: Monday to Friday, 08:00–18:30', link: '#' },
+    { title: 'New patients always welcome — register online today', link: '#' },
+    { title: 'Concerned about your health? Use our online consultation service', link: 'https://salujaclinic.webgp.com/' },
+  ];
+
+  function buildTicker(items) {
+    const track = document.getElementById('tickerTrack');
+    track.innerHTML = '';
+    // Double items for seamless loop
+    const doubled = [...items, ...items];
+    doubled.forEach(item => {
+      const span = document.createElement('span');
+      span.className = 'ticker-item';
+      span.innerHTML = `<span class="sep">◆</span> <a href="${item.link || '#'}" target="_blank" rel="noopener">${item.title}</a>`;
+      track.appendChild(span);
+    });
+    // Set animation duration based on item count
+    const duration = Math.max(30, items.length * 5);
+    track.style.animationDuration = duration + 's';
+  }
+
+  async function loadFeed(feedUrl) {
+    const res = await fetch(RSS_API + encodeURIComponent(feedUrl));
+    const data = await res.json();
+    if (data.status === 'ok' && data.items && data.items.length > 0) {
+      return data.items.slice(0, 12).map(i => ({ title: i.title, link: i.link }));
+    }
+    throw new Error('Feed failed');
+  }
+
+  async function initTicker() {
+    for (const feed of FEEDS) {
+      try {
+        const items = await loadFeed(feed);
+        buildTicker(items);
+        return;
+      } catch(e) { /* try next */ }
+    }
+    buildTicker(FALLBACK_ITEMS);
+  }
+
+  initTicker();
+</script>-e 
+</body>
+</html>

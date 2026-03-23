@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Practice – Saluja Clinic · West London GP Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
+  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
+  --white:#fff;--off:#f5f8fc;
+  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
+@keyframes fuA{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.fu{animation:fuA .7s ease both}
+.fu.d1{animation-delay:.1s}.fu.d2{animation-delay:.2s}.fu.d3{animation-delay:.3s}.fu.d4{animation-delay:.4s}
+
+/* UTILITY BAR */
+.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
+.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
+.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
+.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
+.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+.lw{display:flex;align-items:center;text-decoration:none}
+.lw svg{height:84px;width:auto}
+nav{display:flex;align-items:center;gap:.25rem}
+nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+nav a:hover{background:var(--off);color:var(--nhs-blue)}
+nav a.act{color:var(--nhs-blue);font-weight:600}
+.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
+.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.04) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.05) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
+.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
+.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-blue);background:rgba(0,94,184,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
+.htag .dot{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--nhs-blue)}
+.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
+.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+
+/* ── HERO VISUAL — Practice Dashboard Card ─────────── */
+.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:400px}
+
+.pd-card{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}
+.pd-card::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+
+.pd-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:2}
+.pd-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.pd-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80}
+.pd-ldot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pdlp 1.3s ease-in-out infinite}
+@keyframes pdlp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+
+/* Practice identity row */
+.pd-ident{display:flex;align-items:center;gap:.9rem;padding:.75rem .9rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;margin-bottom:1rem;position:relative;z-index:2}
+.pd-crest{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#005EB8,#003087);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.pd-name{font-size:.88rem;font-weight:700;color:#fff;line-height:1.2}
+.pd-sub{font-size:.62rem;color:rgba(255,255,255,.38);margin-top:.1rem}
+.pd-since{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--nhs-lb);margin-left:auto;line-height:1}
+.pd-since-l{font-size:.58rem;color:rgba(255,255,255,.35);text-align:right}
+
+/* Heartbeat canvas strip */
+.pd-ecg-wrap{background:rgba(0,0,0,.3);border-radius:10px;padding:.5rem .6rem;border:1px solid rgba(255,255,255,.06);margin-bottom:1rem;position:relative;z-index:2}
+.pd-ecg-lbl{font-size:.56rem;font-weight:700;letter-spacing:.1em;color:rgba(65,182,230,.5);text-transform:uppercase;margin-bottom:.2rem}
+#pdCanvas{display:block;width:100%;border-radius:4px}
+
+/* Stats grid 2×2 */
+.pd-stats{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem;position:relative;z-index:2}
+.pd-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.75rem .9rem;position:relative;overflow:hidden}
+.pd-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0}
+.pd-st1::before{background:linear-gradient(90deg,#005EB8,#41B6E6)}
+.pd-st2::before{background:linear-gradient(90deg,#007F3B,#4ade80)}
+.pd-st3::before{background:linear-gradient(90deg,#009FBB,#34d399)}
+.pd-st4::before{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.pd-sv{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;line-height:1}
+.pd-sl{font-size:.6rem;color:rgba(255,255,255,.35);margin-top:.15rem}
+.pd-sc{font-size:.64rem;font-weight:700;color:rgba(74,222,128,.8);margin-top:.1rem}
+
+/* Status bar */
+.pd-status{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;position:relative;z-index:2}
+.pd-sbx{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:.55rem .75rem;display:flex;align-items:center;gap:.5rem}
+.pd-sbx-ic{font-size:.9rem;flex-shrink:0}
+.pd-sbx-t{font-size:.65rem;font-weight:600;color:rgba(255,255,255,.55)}
+.pd-sbx-v{font-size:.7rem;color:#fff;font-weight:700}
+
+/* Floating badges */
+.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
+.hbdot{width:7px;height:7px;border-radius:50%}
+.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
+.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
+@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* WAVE */
+.wave{line-height:0;overflow:hidden}
+.wave svg{display:block;width:100%}
+
+/* QUICK LINKS GRID */
+.ql-sec{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.sec-hdr{text-align:center;margin-bottom:2.8rem}
+.sec-tag{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-aqua);margin-bottom:.5rem}
+.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.5rem}
+.sec-h em{font-style:normal;color:var(--nhs-blue)}
+.sec-p{color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto}
+
+.ql-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.ql-card{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:1.6rem;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column;gap:.6rem}
+.ql-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(0,94,184,.11);border-color:var(--nhs-lb)}
+.ql-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.ql-card:hover::before{transform:scaleX(1)}
+.ql-ic{font-size:1.6rem;margin-bottom:.2rem}
+.ql-t{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--td)}
+.ql-d{font-size:.82rem;line-height:1.6;color:var(--tm);flex:1}
+.ql-arr{font-size:.8rem;font-weight:700;color:var(--nhs-blue);margin-top:.4rem;display:flex;align-items:center;gap:.3rem;transition:gap .2s}
+.ql-card:hover .ql-arr{gap:.6rem}
+
+/* PARTNERS */
+.partners{background:var(--off);padding:4.5rem 2rem}
+.partners-in{max-width:1200px;margin:0 auto}
+.pdiv{text-align:center;font-size:.82rem;color:var(--ts);letter-spacing:.08em;margin:1.8rem 0;display:flex;align-items:center;gap:1rem}
+.pdiv::before,.pdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.pcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,94,184,.11)}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua))}
+.pbadge{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nhs-blue);background:rgba(0,94,184,.07);border-radius:20px;padding:.25rem .8rem;display:inline-block;margin-bottom:.8rem}
+.pname{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--td);line-height:1.15;margin-bottom:.3rem}
+.ptitle{font-size:.82rem;font-weight:600;color:var(--nhs-blue);margin-bottom:.9rem}
+.pquals{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.pq{background:rgba(0,94,184,.06);border-radius:6px;padding:.2rem .6rem;font-size:.72rem;font-weight:600;color:var(--nhs-dark)}
+.pbio{font-size:.88rem;line-height:1.75;color:var(--tm)}
+.plang{margin-top:.8rem;font-size:.8rem;color:var(--ts);line-height:1.6}
+.plang strong{color:var(--td)}
+
+/* PRACTICE STORY */
+.story{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.story-in{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.story-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sstat{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.4rem;text-align:center;transition:transform .2s,box-shadow .2s}
+.sstat:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,94,184,.09)}
+.sstat-n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.3rem;color:var(--nhs-blue)}
+.sstat-l{font-size:.78rem;color:var(--ts);line-height:1.4}
+.story-txt .stag{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-aqua);margin-bottom:.5rem}
+.story-txt h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.8rem;line-height:1.2}
+.story-txt h2 em{font-style:normal;color:var(--nhs-blue)}
+.story-txt p{font-size:.92rem;line-height:1.75;color:var(--tm);margin-bottom:1rem}
+
+/* INFO STRIP */
+.istrip{background:var(--nhs-dark);padding:2.5rem 2rem}
+.istrip-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.is-item{text-align:center}
+.is-ic{font-size:1.5rem;margin-bottom:.4rem}
+.is-v{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.2rem}
+.is-l{font-size:.75rem;color:rgba(255,255,255,.5)}
+
+/* EMERGENCY */
+.emerg{background:var(--td);padding:2.5rem 2rem}
+.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.ec{border-radius:16px;padding:2rem}
+.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
+.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
+.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
+.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+
+/* FOOTER */
+footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
+.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
+.flw svg{height:42px;width:auto;display:block}
+.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
+.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
+.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
+.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
+.fl a:hover{color:#fff}
+.hg{display:flex;flex-direction:column;gap:.4rem}
+.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
+.hd{color:rgba(255,255,255,.42)}
+.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+
+@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.ql-grid{grid-template-columns:1fr 1fr}.story-in{grid-template-columns:1fr}.pgrid{grid-template-columns:1fr}.istrip-in{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.ql-grid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}.istrip-in{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.fi2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="ub">
+  <div class="inn">
+    <div class="ub-l">
+      <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
+      <span class="upill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-r">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hi">
+    <a href="index.html" class="lw">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+    </a>
+    <nav>
+      <a href="news.html" target="_blank">News</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+
+      <a href="health-information.html" target="_blank">Health Information</a>
+      <a href="contact-us.html">Contact Us</a>
+      <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="bc"><a href="/">Home</a><span>›</span><span>Our Practice</span></div>
+      <div class="htag"><span class="dot"></span>NHS GP Practice · Southall</div>
+      <h1>A family practice<br>built on <em>trust &amp; care</em></h1>
+      <p>Saluja Clinic has been at the heart of West London's communities since 1976 — a father and son NHS GP partnership combining nearly five decades of clinical wisdom with modern, patient-centred care.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-p">Book Appointment →</a>
+        <a href="meet-the-team.html" class="btn-o">Meet the Team</a>
+      </div>
+    </div>
+
+    <!-- Practice Dashboard Card -->
+    <div class="hv">
+      <div style="position:relative">
+        <div class="hbadge hb1"><span class="hbdot" style="background:var(--nhs-green)"></span>Established 1976</div>
+        <div class="hbadge hb2"><span class="hbdot" style="background:var(--nhs-blue)"></span>New patients welcome</div>
+
+        <div class="pd-card">
+          <div class="pd-top">
+            <span class="pd-lbl">Practice Dashboard</span>
+            <span class="pd-live"><span class="pd-ldot"></span>NHS Active</span>
+          </div>
+
+          <!-- Identity -->
+          <div class="pd-ident">
+            <div class="pd-crest">⚕</div>
+            <div>
+              <div class="pd-name">Saluja Clinic</div>
+              <div class="pd-sub">36A Northcote Avenue · Southall · UB1 2AY</div>
+            </div>
+            <div style="text-align:right">
+              <div class="pd-since" id="pdYears">49</div>
+              <div class="pd-since-l">years serving</div>
+            </div>
+          </div>
+
+          <!-- Heartbeat strip -->
+          <div class="pd-ecg-wrap">
+            <div class="pd-ecg-lbl">Practice Heartbeat</div>
+            <canvas id="pdCanvas" width="280" height="44"></canvas>
+          </div>
+
+          <!-- Stats 2×3 -->
+          <div class="pd-stats" style="grid-template-columns:1fr 1fr 1fr">
+            <div class="pd-stat pd-st1">
+              <div class="pd-sv">10,000+</div>
+              <div class="pd-sl">Registered patients</div>
+              <div class="pd-sc">↑ Growing</div>
+            </div>
+            <div class="pd-stat pd-st2">
+              <div class="pd-sv">~1,000</div>
+              <div class="pd-sl">Appointments / week</div>
+              <div class="pd-sc">↑ Active</div>
+            </div>
+            <div class="pd-stat pd-st3">
+              <div class="pd-sv">~52k</div>
+              <div class="pd-sl">Appointments / year</div>
+              <div class="pd-sc">↑ Active</div>
+            </div>
+            <div class="pd-stat pd-st4">
+              <div class="pd-sv">2</div>
+              <div class="pd-sl">GP Partners</div>
+              <div class="pd-sc">Father &amp; Son</div>
+            </div>
+            <div class="pd-stat pd-st1" style="grid-column:span 2">
+              <div class="pd-sv">6+</div>
+              <div class="pd-sl">Languages spoken</div>
+              <div class="pd-sc">Inclusive care</div>
+            </div>
+          </div>
+
+          <!-- Status row -->
+          <div class="pd-status">
+            <div class="pd-sbx">
+              <div class="pd-sbx-ic">🕐</div>
+              <div><div class="pd-sbx-t">Surgery hours</div><div class="pd-sbx-v">Mon–Fri 08:00–18:30</div></div>
+            </div>
+            <div class="pd-sbx">
+              <div class="pd-sbx-ic">📱</div>
+              <div><div class="pd-sbx-t">Online booking</div><div class="pd-sbx-v">webgp.com</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+
+<!-- QUICK LINKS -->
+<section class="ql-sec">
+  <div class="sec-hdr fu">
+    <div class="sec-tag">Explore Our Practice</div>
+    <h2 class="sec-h">Everything you need to <em>know about us</em></h2>
+    <p class="sec-p">From meeting your GP to registering as a new patient — find all the information about our practice in one place.</p>
+  </div>
+  <div class="ql-grid">
+    <a href="you-and-your-general-practice.html" class="ql-card fu d1">
+      <div class="ql-ic">🩺</div>
+      <div class="ql-t">You &amp; Your GP</div>
+      <div class="ql-d">Understand your relationship with your GP, how to make the most of your consultation, and when to seek urgent care.</div>
+      <div class="ql-arr">Learn more →</div>
+    </a>
+    <a href="meet-the-team.html" class="ql-card fu d1">
+      <div class="ql-ic">👥</div>
+      <div class="ql-t">Meet the Team</div>
+      <div class="ql-d">Get to know Dr Rajinder Singh Saluja and Dr Angad Singh Saluja — the GP partners who have led this practice for decades.</div>
+      <div class="ql-arr">Meet us →</div>
+    </a>
+    <a href="new-patients.html" class="ql-card fu d1">
+      <div class="ql-ic">📋</div>
+      <div class="ql-t">New Patients</div>
+      <div class="ql-d">New to the area or looking to change GP? We welcome new patients. Find out how to register with Saluja Clinic.</div>
+      <div class="ql-arr">Register now →</div>
+    </a>
+    <a href="appointments.html" class="ql-card fu d2">
+      <div class="ql-ic">📅</div>
+      <div class="ql-t">Appointments</div>
+      <div class="ql-d">Book online via our patient portal, call reception, or use the NHS App. Learn about same-day, routine, and telephone appointments.</div>
+      <div class="ql-arr">Book now →</div>
+    </a>
+    <a href="repeat-prescriptions.html" class="ql-card fu d2">
+      <div class="ql-ic">💊</div>
+      <div class="ql-t">Repeat Prescriptions</div>
+      <div class="ql-d">Request your repeat medication online via the NHS App or our patient portal. Allow 48 hours for processing.</div>
+      <div class="ql-arr">Request →</div>
+    </a>
+    <a href="try-the-new-nhs-app.html" class="ql-card fu d2">
+      <div class="ql-ic">📱</div>
+      <div class="ql-t">NHS App</div>
+      <div class="ql-d">Manage appointments, request repeat prescriptions, view your health record, and access NHS services — all from your phone.</div>
+      <div class="ql-arr">Get the app →</div>
+    </a>
+    <a href="our-policies.html" class="ql-card fu d3">
+      <div class="ql-ic">📄</div>
+      <div class="ql-t">Our Policies</div>
+      <div class="ql-d">Our practice policies covering patient rights, data protection, chaperones, zero tolerance, and confidentiality.</div>
+      <div class="ql-arr">Read policies →</div>
+    </a>
+    <a href="patient-participation-group.html" class="ql-card fu d3">
+      <div class="ql-ic">🤝</div>
+      <div class="ql-t">Patient Participation Group</div>
+      <div class="ql-d">Join our Patient Participation Group to help shape the future of the practice and improve services for everyone.</div>
+      <div class="ql-arr">Get involved →</div>
+    </a>
+    <a href="care-quality-commission.html" class="ql-card fu d3">
+      <div class="ql-ic">✅</div>
+      <div class="ql-t">Care Quality Commission</div>
+      <div class="ql-d">View our most recent CQC inspection report and rating. We are committed to safe, effective, and caring services.</div>
+      <div class="ql-arr">View report →</div>
+    </a>
+    <a href="friends-and-family-test.html" class="ql-card fu d4">
+      <div class="ql-ic">⭐</div>
+      <div class="ql-t">Friends &amp; Family Test</div>
+      <div class="ql-d">Tell us how we're doing. Your feedback helps us continually improve the services and care we provide.</div>
+      <div class="ql-arr">Give feedback →</div>
+    </a>
+    <a href="non-nhs-work.html" class="ql-card fu d4">
+      <div class="ql-ic">📝</div>
+      <div class="ql-t">Non-NHS Work</div>
+      <div class="ql-d">Information on private work, medical reports, letters, and certificates that fall outside the scope of NHS services.</div>
+      <div class="ql-arr">View fees →</div>
+    </a>
+    <a href="https://salujaclinic.webgp.com/" target="_blank" class="ql-card fu d4" style="background:linear-gradient(135deg,rgba(0,94,184,.04),rgba(0,159,187,.04));border-color:rgba(0,94,184,.2)">
+      <div class="ql-ic">💬</div>
+      <div class="ql-t">Online Consultation</div>
+      <div class="ql-d">Submit a non-urgent query online via our patient portal. We aim to respond by the next working day.</div>
+      <div class="ql-arr" style="color:var(--nhs-blue)">Submit query →</div>
+    </a>
+  </div>
+</section>
+
+<!-- REVIEWS TICKER -->
+<div class="rticker-wrap">
+  <div class="rticker-label"><span class="rticker-star">★</span> Patient Voices</div>
+  <div class="rticker-track-wrap">
+    <div class="rticker-track" id="rtickerTrack">
+
+      <div class="rtick-card">
+        <div class="rtick-stars">★★★★★</div>
+        <div class="rtick-quote">"Nearly 10 years a patient of Dr Angad — the team has always helped me, heard me, and treated me with respect and dignity. I don't think I could have made it without their help."</div>
+        <div class="rtick-meta"><span class="rtick-name">Nana</span><span class="rtick-src">Google Review</span></div>
+      </div>
+
+      <div class="rtick-card">
+        <div class="rtick-stars">★★★★★</div>
+        <div class="rtick-quote">"Great experience with Dr. Angad and the team. They were patient, professional, and made sure all my concerns were carefully addressed. Very appreciative of their care."</div>
+        <div class="rtick-meta"><span class="rtick-name">Mark E.</span><span class="rtick-src">Google Review</span></div>
+      </div>
+
+      <div class="rtick-card">
+        <div class="rtick-stars">★★★★★</div>
+        <div class="rtick-quote">"The staff at Saluja Clinic are always helpful and understanding. Even during busy times, they remain respectful and attentive. Thank you for the great service."</div>
+        <div class="rtick-meta"><span class="rtick-name">Isla E.</span><span class="rtick-src">Google Review</span></div>
+      </div>
+
+      <div class="rtick-card">
+        <div class="rtick-stars">★★★★★</div>
+        <div class="rtick-quote">"I'm very thankful to Saluja Clinic — the GPs and team treat you with genuine simplicity and warmth every single time."</div>
+        <div class="rtick-meta"><span class="rtick-name">Ali Y.</span><span class="rtick-src">Google Review</span></div>
+      </div>
+
+      <div class="rtick-card rtick-stat">
+        <div class="rtick-bignum">92%</div>
+        <div class="rtick-biglbl">of patients recommend<br>Saluja Clinic</div>
+        <div class="rtick-meta"><span class="rtick-src">Facebook · 11 Reviews</span></div>
+      </div>
+
+      <div class="rtick-card">
+        <div class="rtick-stars">★★★★★</div>
+        <div class="rtick-quote">"Dr Rajinder has an extraordinary ability to communicate across languages and cultures — he truly understands our community and has done so for nearly five decades."</div>
+        <div class="rtick-meta"><span class="rtick-name">Long-term Patient</span><span class="rtick-src">NHS Choices</span></div>
+      </div>
+
+      <div class="rtick-card rtick-stat">
+        <div class="rtick-bignum">49<span style="font-size:1.4rem;font-weight:400">yrs</span></div>
+        <div class="rtick-biglbl">serving West London<br>since 1976</div>
+        <div class="rtick-meta"><span class="rtick-src">Saluja Clinic · Southall</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.rticker-wrap{background:var(--nhs-dark);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:.9rem 0;display:flex;align-items:center;gap:0;overflow:hidden;position:relative}
+.rticker-wrap::before{content:'';position:absolute;left:180px;top:0;width:60px;height:100%;background:linear-gradient(to right,var(--nhs-dark),transparent);z-index:3;pointer-events:none}
+.rticker-wrap::after{content:'';position:absolute;right:0;top:0;width:80px;height:100%;background:linear-gradient(to left,var(--nhs-dark),transparent);z-index:3;pointer-events:none}
+.rticker-label{flex-shrink:0;padding:0 1.4rem 0 1.6rem;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap;display:flex;align-items:center;gap:.4rem;border-right:1px solid rgba(255,255,255,.1);z-index:4;background:var(--nhs-dark)}
+.rticker-star{color:var(--nhs-aqua);font-size:.9rem}
+.rticker-track-wrap{overflow:hidden;flex:1;cursor:pointer}
+.rticker-track{display:flex;gap:1.2rem;width:max-content;animation:rtick 42s linear infinite}
+.rticker-track:hover{animation-play-state:paused}
+@keyframes rtick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.rtick-card{flex-shrink:0;width:320px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.75rem 1rem;display:flex;flex-direction:column;gap:.35rem}
+.rtick-stars{color:#f0b429;font-size:.85rem;letter-spacing:1px}
+.rtick-quote{font-family:'DM Sans',sans-serif;font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.75);font-style:italic}
+.rtick-meta{display:flex;align-items:center;gap:.5rem;margin-top:.1rem}
+.rtick-name{font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:600;color:rgba(255,255,255,.5)}
+.rtick-src{font-family:'DM Sans',sans-serif;font-size:.62rem;color:var(--nhs-aqua);opacity:.7;margin-left:auto}
+.rtick-stat{width:200px;justify-content:center;align-items:center;text-align:center;background:rgba(0,94,184,.12);border-color:rgba(0,94,184,.2)}
+.rtick-bignum{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:#fff;line-height:1}
+.rtick-biglbl{font-family:'DM Sans',sans-serif;font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.4}
+</style>
+
+<!-- PRACTICE STORY -->
+<section class="story">
+  <div class="story-in">
+    <div class="story-stats">
+      <div class="sstat fu d1"><div class="sstat-n">1976</div><div class="sstat-l">Year the practice was established in West London</div></div>
+      <div class="sstat fu d2"><div class="sstat-n">49+</div><div class="sstat-l">Years of dedicated service to the Southall community</div></div>
+      <div class="sstat fu d3"><div class="sstat-n">6</div><div class="sstat-l">Languages spoken fluently including Hindi, Urdu &amp; Punjabi</div></div>
+      <div class="sstat fu d4"><div class="sstat-n">2</div><div class="sstat-l">GP Partners — a father and son dedicated to West London</div></div>
+    </div>
+    <div class="story-txt fu">
+      <div class="stag">Our Story</div>
+      <h2>Rooted in the community, <em>committed to you</em></h2>
+      <p>Saluja Clinic was founded in 1976 and has grown into one of West London's most trusted NHS GP practices. What makes us different is simple: we have always been a family practice in every sense — led by family, serving families.</p>
+      <p>Dr Rajinder Singh Saluja arrived in England in 1974 and spent over a decade building his reputation across West London before founding The Saluja Clinic in 1986. His son Dr Angad Singh Saluja joined in 2014, bringing with him training from Barts &amp; The London and a passion for modernising patient care without losing the personal touch that defines this practice.</p>
+      <p>Together, they serve one of London's most diverse communities — patients who value continuity, trust, and a GP who genuinely knows them.</p>
+      <a href="meet-the-team.html" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:600;color:var(--nhs-blue);text-decoration:none;margin-top:.5rem">Meet Dr Rajinder &amp; Dr Angad →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER BIOS -->
+<section class="partners">
+  <div class="partners-in">
+    <div class="sec-hdr fu">
+      <div class="sec-tag">Our GP Partners</div>
+      <h2 class="sec-h">The team behind <em>your care</em></h2>
+      <p class="sec-p">Saluja Clinic is led by two dedicated GP Partners — a father and son whose combined experience spans nearly five decades of NHS general practice.</p>
+    </div>
+    <div class="pdiv">A family dedicated to West London's health since 1976</div>
+    <div class="pgrid">
+      <div class="pcard fu d1">
+        <div class="pbadge">🩺 GP Partner &amp; Founding Principal</div>
+        <div class="pname">Dr Rajinder<br>Singh Saluja</div>
+        <div class="ptitle">MBBS · Obstetrics &amp; Gynaecology Specialist Interest · GP Since 1974</div>
+        <div class="pquals">
+          <span class="pq">MBBS</span>
+          <span class="pq">Obstetrics &amp; Gynaecology</span>
+          <span class="pq">GP Since 1974</span>
+          <span class="pq">Founding Principal 1986</span>
+        </div>
+        <p class="pbio">Born in Burma and educated in India, Dr Rajinder Saluja arrived in England in 1974, beginning his distinguished medical career at Luton &amp; Dunstable Hospital. He went on to serve communities across Feltham, Teddington and Southall before founding The Saluja Clinic in 1986 — selected from over 30 candidates. With nearly five decades of service, Dr Rajinder remains a beloved and trusted figure at the heart of this practice.</p>
+        <p class="plang"><strong>Languages:</strong> Hindi, Urdu, Punjabi, Burmese, Bengali and English</p>
+      </div>
+      <div class="pcard fu d2">
+        <div class="pbadge">🩺 GP Partner &amp; CQC Registered Manager</div>
+        <div class="pname">Dr Angad<br>Singh Saluja</div>
+        <div class="ptitle">BSc (Hons) Sports &amp; Exercise Medicine · MBBS · GP Partner since 2014</div>
+        <div class="pquals">
+          <span class="pq">BSc Sports &amp; Exercise Medicine</span>
+          <span class="pq">MBBS</span>
+          <span class="pq">MRCGP</span>
+          <span class="pq">FRCGP</span>
+          <span class="pq">INT Clinical Lead</span>
+          <span class="pq">CQC Registered Manager</span>
+        </div>
+        <p class="pbio">Educated at Haberdashers' School and St Bartholomew's &amp; The London Medical School, Dr Angad Saluja joined the practice in 2014, fulfilling a lifelong ambition to work alongside his father. He completed his Foundation Training in Trauma &amp; Emergency Medicine at The Royal London Hospital. Elected as NHS Ealing CCG Governing Board Member and End of Life Clinical Lead, Angad continues to modernise the practice while maintaining the personal care it is known for.</p>
+        <p class="plang"><strong>Languages:</strong> English, Punjabi</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="istrip">
+  <div class="istrip-in">
+    <div class="is-item">
+      <div class="is-ic">📞</div>
+      <div class="is-v">0208 574 5136</div>
+      <div class="is-l">Call reception · Mon–Fri</div>
+    </div>
+    <div class="is-item">
+      <div class="is-ic">🕐</div>
+      <div class="is-v">08:00 – 18:30</div>
+      <div class="is-l">Surgery hours · Monday to Friday</div>
+    </div>
+    <div class="is-item">
+      <div class="is-ic">📍</div>
+      <div class="is-v">Southall, UB1 2AY</div>
+      <div class="is-l">36A Northcote Avenue · West London</div>
+    </div>
+    <div class="is-item">
+      <div class="is-ic">💬</div>
+      <div class="is-v">webgp.com</div>
+      <div class="is-l">Online consultations · Next working day</div>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<section class="emerg">
+  <div class="emerg-in">
+    <div class="ec e111">
+      <div class="el">Non-Emergency Medical Advice</div>
+      <div class="en">NHS 111</div>
+      <div class="ed">For urgent medical questions that aren't life-threatening — available 24 hours a day, 7 days a week online or by phone.</div>
+    </div>
+    <div class="ec e999">
+      <div class="el">Life-Threatening Emergency</div>
+      <div class="en">999</div>
+      <div class="ed">Call 999 immediately if you or someone else is experiencing a life-threatening emergency. Do not wait — call immediately.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi2">
+    <div>
+      <div class="flw">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+      </div>
+      <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the health and wellbeing of our patients.</p>
+      <div class="fadr">
+        36A Northcote Avenue, Southall, UB1 2AY<br>
+        <a href="tel:02085745136">0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Our Practice</div>
+      <ul class="fl">
+        <li><a href="meet-the-team.html">Meet the Team</a></li>
+        <li><a href="new-patients.html">New Patients</a></li>
+        <li><a href="appointments.html">Appointments</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="our-policies.html">Our Policies</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Opening Hours</div>
+      <div class="hg">
+        <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
+        <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
+        <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Useful Links</div>
+      <ul class="fl">
+        <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nhs.uk/" target="_blank">NHS Website</a></li>
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+/* ===== FADE UP — handled by CSS animation ===== */
+
+/* ===== HERO CANVAS — Practice Heartbeat ===== */
+(function(){
+  var cv=document.getElementById('pdCanvas');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  var pts=[];
+  var t=0;
+
+  /* Seed with flat line */
+  for(var i=0;i<W;i++) pts.push(H/2);
+
+  /* NHS-style ECG waveform generator */
+  function nextSample(phase){
+    var p=phase%240;
+    /* baseline */
+    if(p<80||p>180) return H/2;
+    /* P wave */
+    if(p>=80&&p<95) return H/2 - 4*Math.sin((p-80)/15*Math.PI);
+    /* PQ segment */
+    if(p>=95&&p<105) return H/2;
+    /* Q dip */
+    if(p>=105&&p<110) return H/2+4;
+    /* R spike */
+    if(p>=110&&p<115) return H/2-H*0.38;
+    /* S dip */
+    if(p>=115&&p<120) return H/2+5;
+    /* ST segment */
+    if(p>=120&&p<140) return H/2;
+    /* T wave */
+    if(p>=140&&p<165) return H/2 - 6*Math.sin((p-140)/25*Math.PI);
+    return H/2;
+  }
+
+  function draw(){
+    t+=1.4;
+    /* Add new sample */
+    pts.push(nextSample(t));
+    if(pts.length>W) pts.shift();
+
+    ctx.clearRect(0,0,W,H);
+
+    /* Grid lines */
+    ctx.strokeStyle='rgba(65,182,230,.08)';ctx.lineWidth=0.5;
+    for(var x=0;x<W;x+=20){
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
+    }
+    for(var y=0;y<H;y+=10){
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    }
+
+    /* Waveform */
+    ctx.beginPath();
+    ctx.strokeStyle='rgba(74,222,128,0.9)';
+    ctx.lineWidth=1.5;
+    ctx.shadowColor='rgba(74,222,128,0.6)';
+    ctx.shadowBlur=4;
+    ctx.moveTo(0,pts[0]);
+    for(var i=1;i<pts.length;i++) ctx.lineTo(i,pts[i]);
+    ctx.stroke();
+
+    /* Glowing dot at leading edge */
+    var lx=pts.length-1, ly=pts[lx];
+    ctx.shadowBlur=10;
+    ctx.fillStyle='rgba(74,222,128,1)';
+    ctx.beginPath();ctx.arc(lx,ly,2.5,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ===== TICKER — clone cards for seamless infinite scroll ===== */
+(function(){
+  var track=document.getElementById('rtickerTrack');
+  if(!track)return;
+  var clone=track.innerHTML;
+  track.innerHTML=clone+clone;
+})();
+</script>
+</body>
+</html>

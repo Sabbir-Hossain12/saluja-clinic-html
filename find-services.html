@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Services – Saluja Clinic · West London GP Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-light-blue: #41B6E6;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .ub-left, .ub-right { display: flex; align-items: center; gap: 1.5rem; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero { background: var(--white); padding: 4.5rem 2rem 3.5rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -100px; right: -140px; width: 650px; height: 650px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.055) 0%, transparent 70%); pointer-events: none; }
+    .hero::after  { content: ''; position: absolute; bottom: -80px; left: -100px; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.06) 0%, transparent 70%); pointer-events: none; }
+    .hero-blob-mid { position: absolute; top: 20%; left: 40%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(65,182,230,0.04) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); margin-bottom: 1rem; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--nhs-blue); }
+
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.6rem); font-weight: 600; line-height: 1.1; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .hero h1 em { font-style: normal; color: var(--nhs-blue); }
+    .hero-sub { font-size: 1.02rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 2rem; max-width: 500px; }
+
+    /* Search bar in hero */
+    .hero-search { display: flex; gap: 0; max-width: 480px; background: var(--white); border: 2px solid var(--nhs-blue); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,94,184,0.12); transition: box-shadow 0.2s; }
+    .hero-search:focus-within { box-shadow: 0 4px 28px rgba(0,94,184,0.22); }
+    .hero-search input { flex: 1; border: none; outline: none; padding: 0.9rem 1.2rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text-dark); background: transparent; }
+    .hero-search input::placeholder { color: var(--text-soft); }
+    .hero-search button { background: var(--nhs-blue); border: none; color: #fff; padding: 0.9rem 1.4rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .hero-search button:hover { background: var(--nhs-dark); }
+    .hero-search-hint { font-size: 0.8rem; color: var(--text-soft); margin-top: 0.6rem; }
+
+    /* Hero visual — animated map pin grid */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 320px; }
+    .map-mock {
+      position: relative; width: 320px; height: 280px;
+      background: var(--off-white); border: 1.5px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,94,184,0.10);
+      animation: map-float 6s ease-in-out infinite;
+    }
+    @keyframes map-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    /* SVG road pattern */
+    .map-mock::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,94,184,0.07) 1px, transparent 1px) 0 0 / 40px 40px,
+        linear-gradient(0deg, rgba(0,94,184,0.07) 1px, transparent 1px) 0 0 / 40px 40px;
+    }
+    /* Road lines */
+    .map-road-h { position: absolute; left: 0; right: 0; height: 14px; background: rgba(255,255,255,0.85); border-top: 1px solid rgba(0,94,184,0.15); border-bottom: 1px solid rgba(0,94,184,0.15); }
+    .map-road-v { position: absolute; top: 0; bottom: 0; width: 14px; background: rgba(255,255,255,0.85); border-left: 1px solid rgba(0,94,184,0.15); border-right: 1px solid rgba(0,94,184,0.15); }
+
+    /* Map pins */
+    .map-pin {
+      position: absolute; display: flex; flex-direction: column; align-items: center; gap: 0;
+      animation: pin-bounce 2s ease-in-out infinite;
+      cursor: default; z-index: 2;
+    }
+    .map-pin:nth-child(odd) { animation-delay: 0.4s; }
+    .map-pin:nth-child(3n) { animation-delay: 0.8s; }
+    @keyframes pin-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+    .pin-head {
+      width: 32px; height: 32px; border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    .pin-head span { transform: rotate(45deg); font-size: 0.9rem; }
+    .pin-tail { width: 4px; height: 8px; border-radius: 0 0 4px 4px; }
+
+    .pin-blue .pin-head { background: var(--nhs-blue); }
+    .pin-blue .pin-tail { background: var(--nhs-blue); }
+    .pin-green .pin-head { background: var(--nhs-green); }
+    .pin-green .pin-tail { background: var(--nhs-green); }
+    .pin-aqua .pin-head { background: var(--nhs-aqua); }
+    .pin-aqua .pin-tail { background: var(--nhs-aqua); }
+    .pin-red .pin-head { background: #c00; }
+    .pin-red .pin-tail { background: #c00; }
+
+    /* Pin tooltip on hover */
+    .pin-tooltip {
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 0.3rem 0.7rem; font-size: 0.7rem; font-weight: 600; color: var(--text-dark);
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: opacity 0.2s;
+    }
+    .map-pin:hover .pin-tooltip { opacity: 1; }
+
+    /* Pulse rings on pins */
+    .pin-pulse {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+      animation: ring-pulse 2s ease-out infinite;
+    }
+    @keyframes ring-pulse { 0%{box-shadow:0 0 0 0 rgba(0,94,184,0.4)} 70%{box-shadow:0 0 0 12px rgba(0,94,184,0)} 100%{box-shadow:0 0 0 0 rgba(0,94,184,0)} }
+
+    /* Your location dot */
+    .my-location {
+      position: absolute; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--nhs-blue); border: 3px solid #fff;
+      box-shadow: 0 0 0 4px rgba(0,94,184,0.25), 0 2px 8px rgba(0,0,0,0.15);
+      animation: loc-pulse 2s ease-in-out infinite;
+    }
+    @keyframes loc-pulse { 0%,100%{box-shadow:0 0 0 4px rgba(0,94,184,0.25),0 2px 8px rgba(0,0,0,0.15)} 50%{box-shadow:0 0 0 8px rgba(0,94,184,0.1),0 2px 8px rgba(0,0,0,0.15)} }
+
+    /* Floating service badges */
+    .map-badge {
+      position: absolute; background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 0.45rem 0.85rem;
+      box-shadow: 0 4px 18px rgba(0,94,184,0.10);
+      font-size: 0.75rem; font-weight: 600; color: var(--text-dark);
+      display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; z-index: 5;
+    }
+    .mb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mbadge-1 { top: -20px; right: -15px; animation: mba 5s ease-in-out infinite; }
+    .mbadge-2 { bottom: -15px; left: -20px; animation: mbb 5.5s ease-in-out infinite; }
+    @keyframes mba { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes mbb { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+    /* Wave */
+    .wave-divider { line-height: 0; overflow: hidden; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ── CONTENT ─────────────────────────────────────────── */
+    .content-wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-aqua); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 600; color: var(--text-dark); margin-bottom: 0.8rem; line-height: 1.2; }
+    .section-title em { font-style: normal; color: var(--nhs-blue); }
+    .section-lead { font-size: 1rem; line-height: 1.75; color: var(--text-mid); max-width: 680px; margin-bottom: 2.5rem; }
+
+    /* ── SERVICE CATEGORIES GRID ─────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+
+    .svc-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 18px;
+      padding: 1.6rem 1.4rem; text-decoration: none; color: inherit;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,94,184,0.12); border-color: var(--nhs-light-blue); }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .svc-card:hover::before { transform: scaleX(1); }
+
+    .svc-blue::before   { background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-light-blue)); }
+    .svc-green::before  { background: linear-gradient(90deg, var(--nhs-green), var(--nhs-aqua)); }
+    .svc-aqua::before   { background: linear-gradient(90deg, var(--nhs-aqua), var(--nhs-light-blue)); }
+    .svc-dark::before   { background: linear-gradient(90deg, var(--nhs-dark), var(--nhs-blue)); }
+
+    .svc-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .svc-card:hover .svc-icon { transform: scale(1.1) rotate(-5deg); }
+    .svc-blue  .svc-icon { background: rgba(0,94,184,0.08); }
+    .svc-green .svc-icon { background: rgba(0,127,59,0.08); }
+    .svc-aqua  .svc-icon { background: rgba(0,159,187,0.08); }
+    .svc-dark  .svc-icon { background: rgba(0,48,135,0.08); }
+
+    .svc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); line-height: 1.2; }
+    .svc-desc  { font-size: 0.83rem; line-height: 1.6; color: var(--text-mid); flex: 1; }
+    .svc-link  { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; font-weight: 600; color: var(--nhs-blue); transition: gap 0.2s; }
+    .svc-card:hover .svc-link { gap: 0.6rem; }
+
+    /* ── NHS SERVICE SEARCH EMBED ────────────────────────── */
+    .search-embed {
+      background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%);
+      border-radius: 24px; padding: 3rem 3rem; margin-bottom: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .se-left { color: #fff; }
+    .se-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.6rem; }
+    .se-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+    .se-sub { font-size: 0.92rem; line-height: 1.7; color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; }
+    .se-search { display: flex; background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 12px; overflow: hidden; backdrop-filter: blur(4px); transition: border-color 0.2s; }
+    .se-search:focus-within { border-color: rgba(255,255,255,0.6); }
+    .se-search input { flex: 1; background: transparent; border: none; outline: none; color: #fff; padding: 0.85rem 1.2rem; font-family: 'DM Sans', sans-serif; font-size: 0.93rem; }
+    .se-search input::placeholder { color: rgba(255,255,255,0.5); }
+    .se-search button { background: rgba(255,255,255,0.2); border: none; border-left: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 0.85rem 1.2rem; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+    .se-search button:hover { background: rgba(255,255,255,0.3); }
+    .se-hint { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.6rem; }
+
+    .se-right { display: flex; flex-direction: column; gap: 0.8rem; }
+    .se-quick-link {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 0.85rem 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      text-decoration: none; color: rgba(255,255,255,0.9);
+      font-size: 0.88rem; font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .se-quick-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #fff; }
+    .se-ql-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .se-ql-arrow { margin-left: auto; font-size: 0.8rem; opacity: 0.5; transition: transform 0.2s, opacity 0.2s; }
+    .se-quick-link:hover .se-ql-arrow { transform: translateX(4px); opacity: 1; }
+
+    /* ── LOCAL SERVICES STRIP ────────────────────────────── */
+    .local-strip-heading { margin-bottom: 1.5rem; }
+    .local-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+
+    .local-card {
+      border: 1.5px solid var(--border); border-radius: 16px; padding: 1.5rem;
+      background: var(--off-white); overflow: hidden; position: relative;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .local-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,94,184,0.09); border-color: var(--nhs-light-blue); }
+    .lc-type { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .lc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .lc-addr { font-size: 0.82rem; color: var(--text-soft); line-height: 1.5; margin-bottom: 0.8rem; }
+    .lc-meta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .lc-chip { font-size: 0.73rem; font-weight: 600; padding: 0.2rem 0.65rem; border-radius: 20px; }
+    .chip-open { background: rgba(0,127,59,0.1); color: var(--nhs-green); }
+    .chip-closed { background: rgba(180,0,0,0.08); color: #c00; }
+    .chip-phone { background: rgba(0,94,184,0.08); color: var(--nhs-blue); }
+    .lc-directions { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; font-weight: 600; color: var(--nhs-blue); text-decoration: none; }
+    .lc-directions:hover { text-decoration: underline; }
+
+    /* ── TIPS STRIP ──────────────────────────────────────── */
+    .tips-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    .tip-card { background: var(--off-white); border: 1.5px solid var(--border); border-radius: 16px; padding: 1.8rem; }
+    .tip-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.7rem; }
+    .tip-card p { font-size: 0.88rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 0.8rem; }
+    .tip-card a { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 600; color: var(--nhs-blue); text-decoration: none; }
+    .tip-card a:hover { text-decoration: underline; }
+
+    /* ── EMERGENCY ───────────────────────────────────────── */
+    .emergency { background: var(--text-dark); padding: 2.5rem 2rem; }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .emerg-card { border-radius: 16px; padding: 2rem; }
+    .nhs111 { background: rgba(0,94,184,0.35); border: 1.5px solid rgba(65,182,230,0.3); }
+    .urgent  { background: rgba(180,0,0,0.35); border: 1.5px solid rgba(255,100,100,0.3); }
+    .emerg-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
+    .emerg-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .footer-logo-wrap { display: inline-block; background: #fff; border-radius: 10px; padding: 6px 14px 4px; margin-bottom: 1rem; }
+    .footer-logo-wrap svg { height: 42px; width: auto; display: block; }
+    .footer-tagline { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+    .footer-address { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.65); }
+    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .footer-heading { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.7); }
+    .hour-day { color: rgba(255,255,255,0.45); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.2rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.38); }
+
+    @media (max-width: 1000px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .search-embed { grid-template-columns: 1fr; }
+      .local-strip { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .tips-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .local-strip { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="ub-left">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-right">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="active">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob-mid"></div>
+  <div class="hero-inner">
+
+    <!-- Left -->
+    <div>
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="health-information.html">Health Information</a><span>›</span>
+        <span>Find Services</span>
+      </div>
+      <div class="hero-tag"><span class="dot"></span> NHS Services</div>
+      <h1>Find <em>NHS Services</em><br>Near You</h1>
+      <p class="hero-sub">Locate pharmacies, hospitals, dentists, walk-in centres, and other NHS services in Southall, Ealing, and across West London.</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Enter postcode or town…" id="heroSearchInput" />
+        <button onclick="doSearch()">Search →</button>
+      </div>
+      <p class="hero-search-hint">e.g. UB1 2AY, Southall, or Ealing — powered by NHS.uk</p>
+    </div>
+
+    <!-- Right: animated map mockup -->
+    <div class="hero-visual">
+      <div style="position:relative;">
+        <div class="map-badge mbadge-1"><span class="mb-dot" style="background:var(--nhs-green);"></span>Open Now</div>
+        <div class="map-badge mbadge-2"><span class="mb-dot" style="background:var(--nhs-blue);"></span>4 nearby</div>
+        <div class="map-mock">
+          <!-- Roads -->
+          <div class="map-road-h" style="top:42%;"></div>
+          <div class="map-road-h" style="top:72%;"></div>
+          <div class="map-road-v" style="left:28%;"></div>
+          <div class="map-road-v" style="left:62%;"></div>
+
+          <!-- Your location -->
+          <div class="my-location" style="position:absolute;top:43%;left:29%;transform:translate(-50%,-50%);"></div>
+
+          <!-- Saluja Clinic pin (blue) -->
+          <div class="map-pin pin-blue" style="top:22%;left:24%;">
+            <div class="pin-tooltip">Saluja Clinic</div>
+            <div class="pin-head"><div class="pin-pulse"></div><span>🏥</span></div>
+            <div class="pin-tail"></div>
+          </div>
+
+          <!-- Pharmacy -->
+          <div class="map-pin pin-green" style="top:28%;left:58%;">
+            <div class="pin-tooltip">Pharmacy</div>
+            <div class="pin-head"><span>💊</span></div>
+            <div class="pin-tail"></div>
+          </div>
+
+          <!-- Dentist -->
+          <div class="map-pin pin-aqua" style="top:54%;left:70%;">
+            <div class="pin-tooltip">Dentist</div>
+            <div class="pin-head"><span>🦷</span></div>
+            <div class="pin-tail"></div>
+          </div>
+
+          <!-- Hospital -->
+          <div class="map-pin pin-red" style="top:62%;left:38%;">
+            <div class="pin-tooltip">Hospital</div>
+            <div class="pin-head"><span>🏨</span></div>
+            <div class="pin-tail"></div>
+          </div>
+
+          <!-- Walk-in -->
+          <div class="map-pin pin-blue" style="top:20%;left:72%;">
+            <div class="pin-tooltip">Walk-in Centre</div>
+            <div class="pin-head"><span>🚶</span></div>
+            <div class="pin-tail"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+  </svg>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+
+  <!-- Service categories -->
+  <div class="fade-up">
+    <div class="section-label">Browse by Type</div>
+    <h2 class="section-title">Find the Right <em>Service</em></h2>
+    <p class="section-lead">Search directly for the type of service you need using the NHS service finder.</p>
+  </div>
+
+  <div class="services-grid fade-up">
+
+    <a href="https://www.nhs.uk/service-search/pharmacy/find-a-pharmacy" target="_blank" class="svc-card svc-green">
+      <div class="svc-icon">💊</div>
+      <div class="svc-title">Pharmacy</div>
+      <p class="svc-desc">Find your nearest pharmacy for prescriptions, medicines, and health advice. Many are open evenings and weekends.</p>
+      <div class="svc-link">Find a pharmacy →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search/hospital/" target="_blank" class="svc-card svc-blue">
+      <div class="svc-icon">🏥</div>
+      <div class="svc-title">Hospital</div>
+      <p class="svc-desc">Find NHS hospitals and specialist services in your area, including A&amp;E departments, outpatient clinics, and diagnostic services.</p>
+      <div class="svc-link">Find a hospital →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search/find-a-dentist" target="_blank" class="svc-card svc-aqua">
+      <div class="svc-icon">🦷</div>
+      <div class="svc-title">Dentist</div>
+      <p class="svc-desc">Search for NHS dental practices near you, including those accepting new patients and providing emergency dental care.</p>
+      <div class="svc-link">Find a dentist →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search/find-an-urgent-treatment-centre" target="_blank" class="svc-card svc-dark">
+      <div class="svc-icon">🚶</div>
+      <div class="svc-title">Urgent Treatment Centre</div>
+      <p class="svc-desc">For urgent but non-life-threatening conditions — often quicker than A&amp;E. Open to walk-in patients without an appointment.</p>
+      <div class="svc-link">Find urgent care →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/nhs-services/opticians/" target="_blank" class="svc-card svc-blue">
+      <div class="svc-icon">👁️</div>
+      <div class="svc-title">Optician</div>
+      <p class="svc-desc">Find an optician for an NHS eye test, glasses, or contact lens prescriptions. Some patients are eligible for free NHS sight tests.</p>
+      <div class="svc-link">Find an optician →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search/mental-health/find-an-urgent-mental-health-helpline" target="_blank" class="svc-card svc-aqua">
+      <div class="svc-icon">🧠</div>
+      <div class="svc-title">Mental Health Support</div>
+      <p class="svc-desc">Find local NHS mental health services, crisis lines, talking therapies (IAPT), and urgent mental health support near you.</p>
+      <div class="svc-link">Find mental health services →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search/sexual-health/find-a-sexual-health-clinic" target="_blank" class="svc-card svc-green">
+      <div class="svc-icon">🩺</div>
+      <div class="svc-title">Sexual Health Clinic</div>
+      <p class="svc-desc">Confidential NHS sexual health clinics providing STI testing, contraception, and advice — no GP referral required.</p>
+      <div class="svc-link">Find a clinic →</div>
+    </a>
+
+    <a href="https://www.nhs.uk/service-search" target="_blank" class="svc-card svc-dark">
+      <div class="svc-icon">🔍</div>
+      <div class="svc-title">More NHS Services</div>
+      <p class="svc-desc">Search the full NHS service finder for physiotherapy, hearing services, podiatry, community nursing, and many more.</p>
+      <div class="svc-link">Browse all services →</div>
+    </a>
+
+  </div>
+
+  <!-- NHS service search embed panel -->
+  <div class="search-embed fade-up">
+    <div class="se-left">
+      <div class="se-label">NHS Service Finder</div>
+      <div class="se-title">Search from here</div>
+      <p class="se-sub">Use the NHS service finder to search for any healthcare service in England by postcode or town name.</p>
+      <div class="se-search">
+        <input type="text" id="embedSearchInput" placeholder="Enter postcode, e.g. UB1 2AY…" />
+        <button onclick="doEmbedSearch()">🔍</button>
+      </div>
+      <p class="se-hint">Opens NHS.uk service search in a new tab</p>
+    </div>
+    <div class="se-right">
+      <a href="https://www.nhs.uk/service-search/pharmacy/find-a-pharmacy" target="_blank" class="se-quick-link">
+        <span class="se-ql-icon">💊</span> Find a pharmacy near me <span class="se-ql-arrow">›</span>
+      </a>
+      <a href="https://www.nhs.uk/service-search/hospital/" target="_blank" class="se-quick-link">
+        <span class="se-ql-icon">🏥</span> Find my nearest hospital <span class="se-ql-arrow">›</span>
+      </a>
+      <a href="https://www.nhs.uk/service-search/find-an-urgent-treatment-centre" target="_blank" class="se-quick-link">
+        <span class="se-ql-icon">🚶</span> Urgent treatment centres <span class="se-ql-arrow">›</span>
+      </a>
+      <a href="https://www.nhs.uk/service-search/find-a-dentist" target="_blank" class="se-quick-link">
+        <span class="se-ql-icon">🦷</span> Find an NHS dentist <span class="se-ql-arrow">›</span>
+      </a>
+      <a href="https://111.nhs.uk" target="_blank" class="se-quick-link">
+        <span class="se-ql-icon">📞</span> NHS 111 — get advice now <span class="se-ql-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Local services (West London) -->
+  <div class="fade-up local-strip-heading">
+    <div class="section-label">West London</div>
+    <h2 class="section-title">Key Local <em>Services</em></h2>
+    <p class="section-lead">Important NHS services for patients in Southall, Ealing, and the surrounding area.</p>
+  </div>
+
+  <div class="local-strip fade-up">
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-blue);">🏥 Hospital</div>
+      <div class="lc-name">Ealing Hospital</div>
+      <div class="lc-addr">Uxbridge Road, Southall, UB1 3HW</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-open">A&amp;E Open</span>
+        <span class="lc-chip chip-phone">0300 707 6543</span>
+      </div>
+      <a href="https://www.google.com/maps/search/Ealing+Hospital+Southall" target="_blank" class="lc-directions">📍 Get directions →</a>
+    </div>
+
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-blue);">🏥 Hospital</div>
+      <div class="lc-name">Northwick Park Hospital</div>
+      <div class="lc-addr">Watford Road, Harrow, HA1 3UJ</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-open">A&amp;E Open</span>
+        <span class="lc-chip chip-phone">020 8864 3232</span>
+      </div>
+      <a href="https://www.google.com/maps/search/Northwick+Park+Hospital" target="_blank" class="lc-directions">📍 Get directions →</a>
+    </div>
+
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-aqua);">🚶 Urgent Care</div>
+      <div class="lc-name">Southall Walk-in Centre</div>
+      <div class="lc-addr">Ealing Hospital, Uxbridge Road, UB1 3HW</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-open">Open 8am–8pm</span>
+        <span class="lc-chip chip-phone">No appointment needed</span>
+      </div>
+      <a href="https://www.google.com/maps/search/Southall+Walk+In+Centre" target="_blank" class="lc-directions">📍 Get directions →</a>
+    </div>
+
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-green);">💊 Pharmacy</div>
+      <div class="lc-name">Lloyds Pharmacy Southall</div>
+      <div class="lc-addr">King Street, Southall, UB2 4DE</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-open">Open Mon–Sat</span>
+        <span class="lc-chip chip-phone">020 8574 4124</span>
+      </div>
+      <a href="https://www.nhs.uk/service-search/pharmacy/find-a-pharmacy" target="_blank" class="lc-directions">🔍 Find nearby pharmacies →</a>
+    </div>
+
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-blue);">🧠 Mental Health</div>
+      <div class="lc-name">West London NHS Trust</div>
+      <div class="lc-addr">Uxbridge Road, Southall, UB1 3EU</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-phone">0800 328 4444 (crisis line)</span>
+      </div>
+      <a href="https://www.westlondon.nhs.uk" target="_blank" class="lc-directions">🌐 Visit website →</a>
+    </div>
+
+    <div class="local-card">
+      <div class="lc-type" style="color:var(--nhs-aqua);">🦷 NHS Dentist</div>
+      <div class="lc-name">Find an NHS Dentist</div>
+      <div class="lc-addr">Use the NHS service finder to locate dental practices near UB1 accepting new NHS patients.</div>
+      <div class="lc-meta">
+        <span class="lc-chip chip-phone">NHS dental services</span>
+      </div>
+      <a href="https://www.nhs.uk/service-search/find-a-dentist" target="_blank" class="lc-directions">🔍 Find NHS dentists →</a>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tips-row fade-up">
+    <div class="tip-card">
+      <h3>Not sure which service to use?</h3>
+      <p>NHS 111 can help you decide where to go for the care you need — whether that's your GP, a pharmacy, a walk-in centre, or A&amp;E. Available any time, day or night.</p>
+      <a href="https://111.nhs.uk" target="_blank">Visit NHS 111 online →</a>
+    </div>
+    <div class="tip-card">
+      <h3>Already registered with us?</h3>
+      <p>For non-urgent queries about your health, our online consultation service lets you submit a request and receive a response from your GP team by the next working day.</p>
+      <a href="https://salujaclinic.webgp.com/" target="_blank">Submit an online consultation →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div><div class="emerg-label">Non-Emergency</div><div class="emerg-number">NHS 111</div><p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones.</p></div>
+    </div>
+    <div class="emerg-card urgent">
+      <div><div class="emerg-label">Life-Threatening Emergency</div><div class="emerg-number">999</div><p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, or any life-threatening condition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+          <defs>
+            <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
+              <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
+              <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
+              <stop offset="100%" stop-color="#d8d8d8"/>
+            </linearGradient>
+            <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
+              <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
+              <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
+              <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+            </linearGradient>
+            <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+              <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
+              <stop offset="100%" stop-color="#000000"/>
+            </radialGradient>
+            <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
+              <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+            <filter id="fSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+            <filter id="fTS">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+              <feOffset dx="0" dy="1" result="offsetBlur"/>
+              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+            </filter>
+          </defs>
+          <rect width="720" height="160" fill="#ffffff"/>
+          <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fSh)"/>
+          <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fS)">S</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+        </svg>
+      </div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  /* Fade-up */
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  /* Search functions — open NHS service search in new tab */
+  function doSearch() {
+    const val = document.getElementById('heroSearchInput').value.trim();
+    const q = val || 'UB1 2AY';
+    window.open('https://www.nhs.uk/service-search?postcode=' + encodeURIComponent(q), '_blank');
+  }
+  function doEmbedSearch() {
+    const val = document.getElementById('embedSearchInput').value.trim();
+    const q = val || 'UB1 2AY';
+    window.open('https://www.nhs.uk/service-search?postcode=' + encodeURIComponent(q), '_blank');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Heart Age Calculator – Saluja Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
+  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
+  --red:#c0392b;--white:#fff;--off:#f5f8fc;
+  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.fu.vis{opacity:1;transform:none}
+.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}
+
+/* UTILITY BAR */
+.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
+.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
+.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
+.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
+.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+.lw{display:flex;align-items:center;text-decoration:none}
+.lw svg{height:84px;width:auto}
+nav{display:flex;align-items:center;gap:.25rem}
+nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+nav a:hover{background:var(--off);color:var(--nhs-blue)}
+nav a.act{color:var(--nhs-blue);font-weight:600}
+.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
+.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.04) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
+.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
+.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);background:rgba(192,57,43,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
+.htag .dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--nhs-blue)}
+.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
+.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+
+/* HERO VISUAL — Cardiac Monitor */
+.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:380px}
+.mc{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)}
+.mc::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+.mc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:2}
+.mc-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.mc-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80}
+.mc-ldot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:lp 1.3s ease-in-out infinite}
+@keyframes lp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+.mc-hr{display:flex;align-items:center;gap:1.2rem;margin-bottom:1rem;position:relative;z-index:2}
+.mc-hw{position:relative;width:82px;height:82px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.hring{position:absolute;border-radius:50%;border:1.5px solid rgba(192,57,43,.2);animation:hrexp 2.4s ease-out infinite}
+.hr1{width:56px;height:56px;animation-delay:0s}
+.hr2{width:56px;height:56px;animation-delay:.7s}
+.hr3{width:56px;height:56px;animation-delay:1.4s}
+@keyframes hrexp{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.6);opacity:0}}
+.mc-heart{position:relative;z-index:2;animation:hbeat 1.15s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(192,57,43,.6))}
+@keyframes hbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(.98)}42%{transform:scale(1.1)}70%{transform:scale(1)}}
+.mc-stats{display:flex;flex-direction:column;gap:.5rem;flex:1}
+.mc-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.45rem .8rem}
+.mc-sv{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;line-height:1}
+.mc-sl{font-size:.6rem;color:rgba(255,255,255,.38);margin-top:.1rem}
+.mc-ecgw{background:rgba(0,0,0,.32);border-radius:12px;padding:.5rem;border:1px solid rgba(255,255,255,.06);margin-bottom:.8rem;position:relative;z-index:2}
+.mc-ecgl{font-size:.58rem;font-weight:700;letter-spacing:.1em;color:rgba(0,255,80,.45);text-transform:uppercase;margin-bottom:.2rem}
+#ecgCanvas{display:block;width:100%;border-radius:6px}
+.mc-bot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;position:relative;z-index:2}
+.mc-bs{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:.6rem;text-align:center}
+.mc-bv{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#fff;line-height:1}
+.mc-bl{font-size:.58rem;color:rgba(255,255,255,.32);margin-top:.15rem}
+.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
+.hbdot{width:7px;height:7px;border-radius:50%}
+.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
+.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
+@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* WAVE */
+.wave{line-height:0;overflow:hidden}
+.wave svg{display:block;width:100%}
+
+/* CALCULATOR */
+.csec{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.ccard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);position:relative;overflow:hidden}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--nhs-blue),var(--nhs-aqua))}
+.ctit{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--td);margin-bottom:.4rem}
+.csub{font-size:.88rem;color:var(--ts);margin-bottom:2rem;line-height:1.6}
+.fg{display:flex;flex-direction:column;gap:1.4rem}
+.fi{display:flex;flex-direction:column;gap:.5rem}
+.fi label{font-size:.85rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.4rem}
+.niw{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.niw:focus-within{border-color:var(--nhs-blue);box-shadow:0 0 0 3px rgba(0,94,184,.1)}
+.nb{background:var(--off);border:none;width:44px;height:44px;font-size:1.1rem;cursor:pointer;color:var(--tm);transition:background .15s,color .15s}
+.nb:hover{background:var(--nhs-blue);color:#fff}
+.ni{flex:1;border:none;outline:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--td);background:transparent;height:44px}
+.seg{display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.sb{flex:1;padding:.7rem;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--ts);transition:background .18s,color .18s}
+.sb.act{background:var(--nhs-blue);color:#fff;font-weight:600}
+.sb:not(.act):hover{background:var(--off);color:var(--nhs-blue)}
+.tr{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1rem;background:var(--off);border-radius:10px;border:1.5px solid var(--border);transition:border-color .2s}
+.tr:hover{border-color:var(--nhs-lb)}
+.tl{font-size:.88rem;font-weight:500;color:var(--td);display:flex;align-items:center;gap:.5rem}
+.tog{position:relative;width:44px;height:24px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tsl{position:absolute;inset:0;background:var(--border);border-radius:24px;cursor:pointer;transition:background .25s}
+.tsl::before{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .25s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.tog input:checked+.tsl{background:var(--nhs-blue)}
+.tog input:checked+.tsl::before{transform:translateX(20px)}
+.rw{display:flex;flex-direction:column;gap:.4rem}
+.rl{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ts)}
+input[type=range]{width:100%;height:6px;appearance:none;background:var(--border);border-radius:99px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:var(--nhs-blue);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,94,184,.3);cursor:pointer;transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.rv{text-align:center;font-weight:700;font-size:1rem;color:var(--nhs-blue)}
+.csub2{font-size:.88rem;color:var(--ts);margin-bottom:1.5rem;line-height:1.5}
+.csbtn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,var(--nhs-blue),var(--nhs-aqua));color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.5rem;box-shadow:0 4px 20px rgba(0,94,184,.3);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+.csbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
+.csbtn:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,94,184,.38)}
+.csbtn:hover::after{transform:translateX(100%)}
+
+/* RESULT PANEL */
+.rpanel{display:flex;flex-direction:column;gap:1.4rem}
+.defp{background:var(--off);border:1.5px solid var(--border);border-radius:24px;padding:2.4rem}
+.defp-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--td);margin-bottom:1.2rem}
+.dpi{display:flex;align-items:flex-start;gap:.9rem;padding:.9rem 1rem;background:#fff;border-radius:12px;border:1.5px solid var(--border);transition:border-color .2s,box-shadow .2s;margin-bottom:.7rem}
+.dpi:hover{border-color:var(--nhs-lb);box-shadow:0 4px 14px rgba(0,94,184,.07)}
+.dpi-ic{font-size:1.25rem;flex-shrink:0}
+.dpi-nm{font-weight:600;font-size:.9rem;color:var(--td)}
+.dpi-ds{font-size:.8rem;color:var(--ts);margin-top:.15rem}
+.rcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);display:none;flex-direction:column;gap:1.4rem}
+.rcard.show{display:flex;animation:rin .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rin{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+.gw{display:flex;justify-content:center}
+.rn{display:flex;justify-content:center;gap:3rem;padding:1rem 0}
+.rni{text-align:center}
+.rnv{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;line-height:1}
+.rnl{font-size:.74rem;color:var(--ts);margin-top:.3rem}
+.rverd{background:var(--off);border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem}
+.rvi{font-size:1.6rem;flex-shrink:0}
+.rvt{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.rvd{font-size:.84rem;line-height:1.6;color:var(--tm)}
+.rtips{display:flex;flex-direction:column;gap:.7rem}
+.rti{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem 1rem;background:var(--off);border-radius:10px;font-size:.84rem;line-height:1.55;color:var(--tm);border-left:3px solid var(--nhs-blue)}
+.rdis{font-size:.74rem;color:var(--ts);line-height:1.6;padding:.8rem 1rem;background:rgba(0,94,184,.04);border-radius:8px}
+
+/* ABOUT */
+.about{background:var(--off);padding:4rem 0}
+.about-in{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.astats{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.astat{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.4rem;text-align:center;transition:transform .2s,box-shadow .2s}
+.astat:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,94,184,.09)}
+.asn{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:.3rem}
+.asl{font-size:.78rem;color:var(--ts);line-height:1.4}
+.atxt .sl{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.atxt h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.8rem;line-height:1.2}
+.atxt h2 em{font-style:normal;color:var(--nhs-blue)}
+.atxt p{font-size:.92rem;line-height:1.75;color:var(--tm);margin-bottom:1rem}
+.atxt a{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:600;color:var(--nhs-blue);text-decoration:none}
+.atxt a:hover{text-decoration:underline}
+
+/* RISK */
+.risk{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.rc{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.rc:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,94,184,.10);border-color:var(--nhs-lb)}
+.rc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.rcm::before{background:linear-gradient(90deg,var(--nhs-green),var(--nhs-aqua))}
+.rcn::before{background:linear-gradient(90deg,var(--ts),var(--nhs-lb))}
+.rc:hover::before{transform:scaleX(1)}
+.rctag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem}
+.tagm{color:var(--nhs-green)}.tagn{color:var(--ts)}
+.rcic{font-size:1.5rem;margin-bottom:.5rem}
+.rcnm{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.35rem}
+.rcds{font-size:.82rem;line-height:1.6;color:var(--tm)}
+.sh{font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.st{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem}
+.st em{font-style:normal;color:var(--nhs-blue)}
+.sp{color:var(--tm);font-size:.95rem;line-height:1.7;max-width:620px}
+
+/* EMERGENCY */
+.emerg{background:var(--td);padding:2.5rem 2rem}
+.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.ec{border-radius:16px;padding:2rem}
+.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
+.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
+.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
+.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+
+/* FOOTER */
+footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
+.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
+.flw svg{height:42px;width:auto;display:block}
+.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
+.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
+.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
+.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
+.fl a:hover{color:#fff}
+.hg{display:flex;flex-direction:column;gap:.4rem}
+.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
+.hd{color:rgba(255,255,255,.42)}
+.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+
+@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.csec{grid-template-columns:1fr}.about-in{grid-template-columns:1fr}.rgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.rgrid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}}
+@media(max-width:440px){.fi2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="ub"><div class="inn"><div class="ub-l"><span>&#128222; <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon&#8211;Fri 08:00&#8211;18:30</span><span class="upill">NHS GP Practice &middot; West London</span></div><div class="ub-r"><a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a><span>|</span><a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a></div></div></div>
+<header>
+  <div class="hi">
+    <a href="index.html" class="lw">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="act">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="ncta" target="_blank">Book Appointment &#8594;</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="bc"><a href="/">Home</a><span>&#8250;</span><a href="health-information.html">Health Information</a><span>&#8250;</span><span>Heart Age Calculator</span></div>
+      <div class="htag"><span class="dot"></span>Cardiovascular Health</div>
+      <h1>What Is Your<br><em>Heart Age?</em></h1>
+      <p>Your heart age may be older than your real age due to risk factors like high blood pressure, smoking, or inactivity. Find out where you stand and what you can do about it.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#calculator" class="btn-p">Check my heart age &#8594;</a>
+        <a href="https://www.nhs.uk/conditions/coronary-heart-disease/prevention/" target="_blank" class="btn-o">Prevention tips</a>
+      </div>
+    </div>
+    <div class="hv">
+      <div style="position:relative">
+        <div class="hbadge hb1"><span class="hbdot" style="background:#c0392b"></span>~100,000 beats/day</div>
+        <div class="hbadge hb2"><span class="hbdot" style="background:#007F3B"></span>Risk factors tracked</div>
+        <div class="mc" style="position:relative">
+          <div class="mc-top"><span class="mc-lbl">Cardiac Monitor</span><span class="mc-live"><span class="mc-ldot"></span>Live</span></div>
+          <div class="mc-hr">
+            <div class="mc-hw">
+              <div class="hring hr1"></div><div class="hring hr2"></div><div class="hring hr3"></div>
+              <svg class="mc-heart" width="62" height="56" viewBox="0 0 110 100">
+                <defs><linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#c0392b"/></linearGradient></defs>
+                <path d="M55 88C55 88 8 56 8 27c0-14 11-23 25-23 10 0 18 6 22 14 4-8 12-14 22-14 14 0 25 9 25 23 0 29-47 61-47 61z" fill="url(#hg)" filter="drop-shadow(0 0 8px rgba(192,57,43,.6))"/>
+                <polyline points="22,44 30,44 36,34 41,54 47,28 52,60 57,44 68,44 74,44 82,44" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="mc-stats">
+              <div class="mc-stat"><div class="mc-sv" style="color:#f87171" id="mcBpm">72</div><div class="mc-sl">BPM &middot; Heart Rate</div></div>
+              <div class="mc-stat"><div class="mc-sv" style="color:#60a5fa">120<span style="font-size:.85rem;opacity:.6">/80</span></div><div class="mc-sl">mmHg &middot; Blood Pressure</div></div>
+            </div>
+          </div>
+          <div class="mc-ecgw"><div class="mc-ecgl">ECG Trace &middot; Lead II</div><canvas id="ecgCanvas" width="292" height="68"></canvas></div>
+          <div class="mc-bot">
+            <div class="mc-bs"><div class="mc-bv" style="color:#34d399">5.0</div><div class="mc-bl">Cholesterol</div></div>
+            <div class="mc-bs"><div class="mc-bv" style="color:#60a5fa">98%</div><div class="mc-bl">SpO&#8322;</div></div>
+            <div class="mc-bs"><div class="mc-bv" style="color:#fbbf24">36.6&deg;</div><div class="mc-bl">Temp</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+
+<div class="csec fu" id="calculator">
+  <div class="ccard">
+    <div class="ctit">&#129706; Heart Age Calculator</div>
+    <p class="csub">Answer a few questions about your health. Your result is an estimate based on known cardiovascular risk factors &mdash; always discuss results with your GP.</p>
+    <div class="fg">
+      <div class="fi"><label>&#127874; Your Age</label><div class="niw"><button class="nb" onclick="step('age',-1)">&#8722;</button><input class="ni" type="number" id="age" value="45" min="25" max="84"/><button class="nb" onclick="step('age',1)">+</button></div></div>
+      <div class="fi"><label>&#9893; Sex assigned at birth</label><div class="seg"><button class="sb act" id="sm" onclick="setSex('male')">Male</button><button class="sb" id="sf" onclick="setSex('female')">Female</button></div></div>
+      <div class="fi"><label>&#129658; Systolic BP <span style="font-weight:400;color:var(--ts)">(top number, mmHg)</span></label><div class="rw"><input type="range" id="bp" min="90" max="200" value="120" oninput="document.getElementById('bpv').textContent=this.value+' mmHg'"/><div class="rl"><span>90</span><span>Normal: 90&#8211;120</span><span>200</span></div><div class="rv" id="bpv">120 mmHg</div></div></div>
+      <div class="fi"><label>&#128137; Total Cholesterol <span style="font-weight:400;color:var(--ts)">(mmol/L)</span></label><div class="rw"><input type="range" id="chol" min="2" max="10" step="0.1" value="5" oninput="document.getElementById('cholv').textContent=parseFloat(this.value).toFixed(1)+' mmol/L'"/><div class="rl"><span>2.0</span><span>Ideal: below 5.0</span><span>10.0</span></div><div class="rv" id="cholv">5.0 mmol/L</div></div></div>
+      <div class="fi" style="gap:.7rem"><label>&#9888;&#65039; Risk factors</label>
+        <div class="tr"><span class="tl">&#128684; Current smoker</span><label class="tog"><input type="checkbox" id="smoker"/><span class="tsl"></span></label></div>
+        <div class="tr"><span class="tl">&#128138; Diagnosed with diabetes</span><label class="tog"><input type="checkbox" id="diabetes"/><span class="tsl"></span></label></div>
+        <div class="tr"><span class="tl">&#127939; Physically inactive (&lt;30 min/week)</span><label class="tog"><input type="checkbox" id="inactive"/><span class="tsl"></span></label></div>
+        <div class="tr"><span class="tl">&#128106; Family history of heart disease</span><label class="tog"><input type="checkbox" id="family"/><span class="tsl"></span></label></div>
+      </div>
+    </div>
+    <button class="csbtn" onclick="calcHA()">Calculate My Heart Age &#8594;</button>
+  </div>
+  <div class="rpanel" id="rpanel">
+    <div class="defp" id="defp">
+      <div class="defp-t">What affects heart age?</div>
+      <div class="dpi"><div class="dpi-ic">&#129658;</div><div><div class="dpi-nm">Blood Pressure</div><div class="dpi-ds">The biggest contributor. Even modest reductions make a big difference.</div></div></div>
+      <div class="dpi"><div class="dpi-ic">&#128684;</div><div><div class="dpi-nm">Smoking</div><div class="dpi-ds">Adds an average of 8 years to heart age. Quitting is the most powerful change.</div></div></div>
+      <div class="dpi"><div class="dpi-ic">&#128137;</div><div><div class="dpi-nm">Cholesterol</div><div class="dpi-ds">High cholesterol narrows arteries. Diet and statins can bring levels down.</div></div></div>
+      <div class="dpi"><div class="dpi-ic">&#127939;</div><div><div class="dpi-nm">Physical Activity</div><div class="dpi-ds">150 mins of moderate exercise per week reduces cardiovascular risk by up to 35%.</div></div></div>
+    </div>
+    <div class="rcard" id="rcard">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ts)">Your Estimated Heart Age</div>
+      <div class="gw">
+        <svg width="280" height="155" viewBox="0 0 280 155" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#007F3B"/><stop offset="40%" stop-color="#009FBB"/><stop offset="70%" stop-color="#005EB8"/><stop offset="100%" stop-color="#c0392b"/></linearGradient></defs>
+          <path d="M30 140 A110 110 0 0 1 250 140" fill="none" stroke="#e8f0f8" stroke-width="20" stroke-linecap="round"/>
+          <path id="gf" d="M30 140 A110 110 0 0 1 250 140" fill="none" stroke="url(#gg)" stroke-width="20" stroke-linecap="round" stroke-dasharray="345.6" stroke-dashoffset="345.6"/>
+          <g id="gn" transform="rotate(-90,140,140)"><line x1="140" y1="140" x2="140" y2="48" stroke="#1a1a2e" stroke-width="3" stroke-linecap="round"/><circle cx="140" cy="140" r="8" fill="#1a1a2e"/><circle cx="140" cy="140" r="4" fill="#fff"/></g>
+          <text x="22" y="157" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7a99">Low</text>
+          <text x="228" y="157" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7a99">High</text>
+        </svg>
+      </div>
+      <div class="rn">
+        <div class="rni"><div class="rnv" style="color:var(--nhs-blue)" id="rreal">&#8212;</div><div class="rnl">Your actual age</div></div>
+        <div class="rni" style="align-self:center;font-size:1.5rem;color:var(--ts)">&#8594;</div>
+        <div class="rni"><div class="rnv" style="color:var(--red)" id="rheart">&#8212;</div><div class="rnl">Your heart age</div></div>
+      </div>
+      <div class="rverd" id="rverd"></div>
+      <div class="rtips" id="rtips"></div>
+      <div class="rdis">&#9888;&#65039; This calculator provides an estimate only. It is not a medical diagnosis. Please speak to your GP before making significant changes to your health routine.</div>
+    </div>
+  </div>
+</div>
+
+<section class="about">
+  <div class="about-in">
+    <div class="astats fu">
+      <div class="astat"><div class="asn" style="color:var(--red)">7.6M</div><div class="asl">people in the UK living with heart and circulatory conditions</div></div>
+      <div class="astat"><div class="asn" style="color:var(--nhs-blue)">160k</div><div class="asl">heart attacks occur in the UK every year</div></div>
+      <div class="astat"><div class="asn" style="color:var(--nhs-green)">80%</div><div class="asl">of premature heart disease is preventable with lifestyle changes</div></div>
+      <div class="astat"><div class="asn" style="color:var(--nhs-aqua)">+5</div><div class="asl">years added to heart age by high blood pressure on average</div></div>
+    </div>
+    <div class="atxt fu d2">
+      <div class="sl">Why it matters</div>
+      <h2>Heart Disease Is<br><em>Largely Preventable</em></h2>
+      <p>Heart age is a way of expressing your cardiovascular risk in a format that is easy to understand. If your heart age is higher than your actual age, it means your heart is under more strain than it should be for someone your age.</p>
+      <p>With the right lifestyle changes &mdash; and medication if needed &mdash; many people can significantly reduce their heart age and cut their risk of heart attack and stroke.</p>
+      <a href="https://www.nhs.uk/conditions/coronary-heart-disease/" target="_blank">Learn about coronary heart disease on NHS.uk &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="risk">
+  <div class="fu"><div class="sh" style="color:var(--nhs-aqua);margin-bottom:.5rem">Risk Factors</div><h2 class="st">What <em>Affects</em> Your Heart Age</h2><p class="sp">Some risk factors can be changed, others cannot. Focusing on what you can control makes the biggest difference.</p></div>
+  <div class="rgrid">
+    <div class="rc rcm fu d1"><div class="rctag tagm">&#10003; Modifiable</div><div class="rcic">&#129658;</div><div class="rcnm">High Blood Pressure</div><p class="rcds">The leading modifiable risk factor. Target: below 130/80 mmHg. Managed through diet, exercise, and medication if needed.</p></div>
+    <div class="rc rcm fu d2"><div class="rctag tagm">&#10003; Modifiable</div><div class="rcic">&#128684;</div><div class="rcnm">Smoking</div><p class="rcds">Doubles your risk of heart attack. Within a year of quitting, risk drops by 50%. Free NHS Stop Smoking services available.</p></div>
+    <div class="rc rcm fu d3"><div class="rctag tagm">&#10003; Modifiable</div><div class="rcic">&#128137;</div><div class="rcnm">High Cholesterol</div><p class="rcds">Builds up in arteries, causing narrowing. Managed through diet, exercise, and statins if prescribed.</p></div>
+    <div class="rc rcm fu d1"><div class="rctag tagm">&#10003; Modifiable</div><div class="rcic">&#9878;&#65039;</div><div class="rcnm">Excess Weight</div><p class="rcds">Obesity increases blood pressure and cholesterol. Even losing 5&#8211;10% of body weight improves heart health.</p></div>
+    <div class="rc rcm fu d2"><div class="rctag tagm">&#10003; Modifiable</div><div class="rcic">&#127939;</div><div class="rcnm">Physical Inactivity</div><p class="rcds">Regular activity strengthens the heart and lowers blood pressure. Aim for 150 minutes of moderate activity weekly.</p></div>
+    <div class="rc rcn fu d3"><div class="rctag tagn">&#9679; Fixed factors</div><div class="rcic">&#129516;</div><div class="rcnm">Age, Sex &amp; Family History</div><p class="rcds">Risk increases with age. A family history of heart disease raises your risk &mdash; but doesn't make it inevitable.</p></div>
+  </div>
+</section>
+
+<section class="emerg">
+  <div class="emerg-in">
+    <div class="ec e111"><div class="el">Chest Pain &mdash; Non-Emergency</div><div class="en">NHS 111</div><p class="ed">If you have chest pain that comes and goes and is not severe, call NHS 111 for advice. Available 24 hours a day.</p></div>
+    <div class="ec e999"><div class="el">Suspected Heart Attack</div><div class="en">999</div><p class="ed">Call 999 immediately for crushing chest pain, pain spreading to your arm or jaw, shortness of breath, or sudden sweating.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi2">
+    <div>
+      <div class="flw">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+      </div>
+      <p class="ftag">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="fadr">36A Northcote Avenue<br>Southall, UB1 2AY<br><br><a href="tel:02085745136">&#128222; 0208 574 5136</a><br><a href="mailto:salujaclinic@nhs.net">&#9993; salujaclinic@nhs.net</a></p>
+    </div>
+    <div><div class="fh">Quick Links</div><ul class="fl"><li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li><li><a href="new-patients.html">Register as New Patient</a></li><li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li><li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li><li><a href="health-information.html">Health Information</a></li></ul></div>
+    <div><div class="fh">Opening Hours</div><div class="hg"><div class="hr2"><span class="hd">Mon&#8211;Fri</span><span>08:00&#8211;18:30</span></div><div class="hr2"><span class="hd">Saturday</span><span>Closed</span></div><div class="hr2"><span class="hd">Sunday</span><span>Closed</span></div></div></div>
+    <div><div class="fh">Useful Links</div><ul class="fl"><li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li><li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li><li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li><li><a href="practice-policies-patient-information.html">Practice Policies</a></li><li><a href="contact-us.html">Contact the Practice</a></li></ul></div>
+  </div>
+  <div class="fb"><span>&#169; 2026 Saluja Clinic &middot; NHS GP Practice &middot; 36A Northcote Avenue, Southall, UB1 2AY</span><span>Serving West London since 1976 &middot; Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span></div>
+</footer>
+
+<script>
+/* ===== FADE UP ===== */
+var fo = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.07});
+document.querySelectorAll('.fu').forEach(function(el){fo.observe(el)});
+
+/* ===== ECG CANVAS ===== */
+(function(){
+  var c=document.getElementById('ecgCanvas');
+  if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,MID=H*0.52,SPD=2.2,TAIL=W*0.85;
+  function g(x,mu,sig){return Math.exp(-0.5*Math.pow((x-mu)/sig,2))}
+  function pqrst(x){
+    if(x<0.08)return g(x,0.04,0.015)*3;
+    if(x<0.28)return 0;
+    if(x<0.32)return -g(x,0.30,0.012)*4;
+    if(x<0.40)return g(x,0.36,0.022)*28;
+    if(x<0.46)return -g(x,0.43,0.015)*6;
+    if(x<0.68)return g(x,0.58,0.04)*4;
+    return 0;
+  }
+  var S=300,lut=[];
+  for(var i=0;i<S;i++)lut.push(pqrst(i/S));
+  function samp(gx){var p=((gx*SPD*0.5)%120)/120;return lut[Math.floor(p*S)%S]}
+  var off=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(0,255,80,0.06)';ctx.lineWidth=0.5;
+    for(var x=0;x<=W;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(var y=0;y<=H;y+=14){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    off+=SPD;
+    ctx.beginPath();ctx.lineWidth=1.8;ctx.strokeStyle='rgba(0,255,80,0.88)';
+    ctx.shadowColor='#00ff50';ctx.shadowBlur=8;ctx.lineJoin='round';ctx.lineCap='round';
+    var st=false;
+    for(var px=0;px<W;px++){
+      var age=W-px;if(age>TAIL)continue;
+      var gx=off-age;if(gx<0)continue;
+      var y2=MID-samp(gx)*(H*0.32);
+      if(!st){ctx.moveTo(px,y2);st=true}else{ctx.lineTo(px,y2)}
+    }
+    ctx.stroke();ctx.shadowBlur=0;
+    var hy=MID-samp(off)*(H*0.32);
+    ctx.beginPath();ctx.arc(W-2,hy,3,0,Math.PI*2);
+    ctx.fillStyle='#00ff80';ctx.shadowColor='#00ff80';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+    requestAnimationFrame(draw);
+  }
+  draw();
+  var bel=document.getElementById('mcBpm');
+  if(bel)setInterval(function(){bel.textContent=68+Math.floor(Math.random()*10)},2200);
+})();
+
+/* ===== FORM HELPERS ===== */
+var sex='male';
+function step(id,d){var el=document.getElementById(id);el.value=Math.min(Math.max(parseInt(el.value)+d,parseInt(el.min)),parseInt(el.max))}
+function setSex(s){sex=s;document.getElementById('sm').classList.toggle('act',s==='male');document.getElementById('sf').classList.toggle('act',s==='female')}
+
+/* ===== CALCULATOR ===== */
+function calcHA(){
+  var age=parseInt(document.getElementById('age').value)||45;
+  var bp2=parseInt(document.getElementById('bp').value)||120;
+  var chol=parseFloat(document.getElementById('chol').value)||5;
+  var smk=document.getElementById('smoker').checked;
+  var dia=document.getElementById('diabetes').checked;
+  var ina=document.getElementById('inactive').checked;
+  var fam=document.getElementById('family').checked;
+  var ex=0;
+  if(bp2>=140)ex+=5;else if(bp2>=130)ex+=2;
+  if(chol>=7.5)ex+=5;else if(chol>=6.5)ex+=3;else if(chol>=5.5)ex+=1;
+  if(smk)ex+=8;if(dia)ex+=4;if(ina)ex+=3;if(fam)ex+=2;
+  if(sex==='female')ex-=2;
+  var ha=Math.min(84,Math.max(age-2,age+ex));
+  var diff=ha-age;
+  var ratio=Math.min(0.98,Math.max(0.02,0.35+diff*0.032));
+  animGauge(ratio);
+  document.getElementById('rreal').textContent=age;
+  animNum('rheart',age,ha,800);
+  var icon,title,text,col;
+  if(diff<=0){icon='&#127881;';col='var(--nhs-green)';title='Great news &mdash; your heart is in good shape!';text='Your estimated heart age is at or below your actual age. Keep up your healthy habits.'}
+  else if(diff<=4){icon='&#9888;&#65039;';col='var(--nhs-blue)';title='Slightly elevated &mdash; some room to improve';text='Your heart is about '+diff+' year'+(diff===1?'':'s')+' older than your actual age. Small lifestyle changes could bring this down.'}
+  else if(diff<=9){icon='&#128310;';col='#e67e22';title='Elevated heart age &mdash; action recommended';text='Your heart age is '+diff+' years older than your actual age. We recommend speaking to your GP.'}
+  else{icon='&#128308;';col='var(--red)';title='High heart age &mdash; please see your GP';text='Your heart age is '+diff+' years older than your actual age. Please book an appointment with your GP.'}
+  document.getElementById('rverd').innerHTML='<div class="rvi">'+icon+'</div><div><div class="rvt" style="color:'+col+'">'+title+'</div><div class="rvd">'+text+'</div></div>';
+  var tips=[];
+  if(bp2>=130)tips.push({i:'&#129658;',t:'Your blood pressure is elevated. Reducing salt, increasing activity, and speaking to your GP about medication can help.'});
+  if(smk)tips.push({i:'&#128685;',t:'Stopping smoking is the single most powerful change you can make. Free NHS Stop Smoking services are available.'});
+  if(chol>=5.5)tips.push({i:'&#128137;',t:'Your cholesterol is above optimal. A diet lower in saturated fat and higher in fibre, along with exercise, can reduce it.'});
+  if(ina)tips.push({i:'&#127939;',t:'Being more physically active &mdash; even 30 minutes of brisk walking most days &mdash; significantly lowers cardiovascular risk.'});
+  if(diff>0)tips.push({i:'&#128104;&#8205;&#9877;&#65039;',t:'Book an NHS Health Check with us. Available to all patients aged 40&#8211;74, it covers blood pressure, cholesterol, BMI, and more.'});
+  if(tips.length===0)tips.push({i:'&#9989;',t:"Keep doing what you're doing! Regular check-ups, staying active, not smoking, and eating well are the foundations of a healthy heart."});
+  document.getElementById('rtips').innerHTML=tips.map(function(t){return'<div class="rti"><div style="flex-shrink:0">'+t.i+'</div><div>'+t.t+'</div></div>'}).join('');
+  document.getElementById('defp').style.display='none';
+  document.getElementById('rcard').classList.add('show');
+  document.getElementById('rcard').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function animNum(id,from,to,dur){
+  var el=document.getElementById(id);var s=null;
+  function t(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(t)}
+  requestAnimationFrame(t);
+}
+function animGauge(ratio){
+  var tl=345.6,to2=tl*(1-ratio);
+  var fill=document.getElementById('gf'),needle=document.getElementById('gn');
+  var id0=parseFloat(fill.getAttribute('stroke-dashoffset'))||tl;
+  var nd=-90,nt=-90+ratio*180;var s=null;
+  function t(ts){
+    if(!s)s=ts;var p=Math.min((ts-s)/900,1);var e=1-Math.pow(1-p,3);
+    fill.setAttribute('stroke-dashoffset',id0+(to2-id0)*e);
+    needle.setAttribute('transform','rotate('+(nd+(nt-nd)*e)+',140,140)');
+    if(p<1)requestAnimationFrame(t);
+  }
+  requestAnimationFrame(t);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health A–Z – Saluja Clinic · West London GP Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-light-blue: #41B6E6;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .ub-left, .ub-right { display: flex; align-items: center; gap: 1.5rem; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero { background: var(--white); padding: 4rem 2rem 3rem; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -120px; right: -160px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.05) 0%, transparent 70%); pointer-events: none; }
+    .hero::after  { content: ''; position: absolute; bottom: -80px; left: -80px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.055) 0%, transparent 70%); pointer-events: none; }
+    .hero-blob-mid { position: absolute; top: 10%; left: 35%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(65,182,230,0.035) 0%, transparent 70%); pointer-events: none; }
+
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+
+    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); margin-bottom: 1rem; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--nhs-blue); }
+
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.8rem); font-weight: 600; line-height: 1.1; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .hero h1 em { font-style: normal; color: var(--nhs-blue); }
+    .hero-sub { font-size: 1rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 2rem; max-width: 500px; }
+
+    /* Animated search bar */
+    .hero-search-wrap { position: relative; max-width: 480px; }
+    .hero-search {
+      display: flex; align-items: center;
+      background: var(--white); border: 2px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,94,184,0.08);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .hero-search:focus-within { border-color: var(--nhs-blue); box-shadow: 0 4px 28px rgba(0,94,184,0.18); }
+    .search-icon { padding: 0 1rem; font-size: 1.1rem; color: var(--text-soft); flex-shrink: 0; }
+    .hero-search input { flex: 1; border: none; outline: none; padding: 1rem 0.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text-dark); background: transparent; }
+    .hero-search input::placeholder { color: var(--text-soft); }
+    .hero-search button { background: var(--nhs-blue); border: none; color: #fff; padding: 1rem 1.4rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .hero-search button:hover { background: var(--nhs-dark); }
+
+    /* Search suggestions dropdown */
+    .search-suggestions {
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,94,184,0.12);
+      z-index: 50; overflow: hidden;
+      display: none;
+    }
+    .search-suggestions.open { display: block; animation: sugg-in 0.18s ease; }
+    @keyframes sugg-in { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+    .sugg-item { padding: 0.7rem 1.2rem; font-size: 0.88rem; color: var(--text-mid); cursor: pointer; display: flex; align-items: center; gap: 0.7rem; transition: background 0.15s; }
+    .sugg-item:hover { background: var(--off-white); color: var(--nhs-blue); }
+    .sugg-item .si-letter { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--nhs-blue); width: 24px; text-align: center; flex-shrink: 0; }
+
+    .search-hint { font-size: 0.78rem; color: var(--text-soft); margin-top: 0.6rem; padding-left: 0.2rem; }
+
+    /* Hero right: animated letter mosaic */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; min-height: 320px; }
+    .letter-mosaic { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; width: 310px; }
+    .lm-tile {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .lm-tile:hover { transform: scale(1.15) translateY(-3px); box-shadow: 0 8px 20px rgba(0,94,184,0.2); z-index: 2; }
+    /* Shimmer on hover */
+    .lm-tile::after { content: ''; position: absolute; top: 0; left: -60%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-15deg); transition: left 0.4s; }
+    .lm-tile:hover::after { left: 120%; }
+
+    .tile-blue   { background: rgba(0,94,184,0.1);   color: var(--nhs-blue); border: 1.5px solid rgba(0,94,184,0.18); }
+    .tile-aqua   { background: rgba(0,159,187,0.1);  color: var(--nhs-aqua); border: 1.5px solid rgba(0,159,187,0.2); }
+    .tile-green  { background: rgba(0,127,59,0.1);   color: var(--nhs-green); border: 1.5px solid rgba(0,127,59,0.2); }
+    .tile-light  { background: rgba(65,182,230,0.1); color: var(--nhs-light-blue); border: 1.5px solid rgba(65,182,230,0.2); }
+    .tile-dark   { background: rgba(0,48,135,0.1);   color: var(--nhs-dark); border: 1.5px solid rgba(0,48,135,0.18); }
+
+    /* Floating badges */
+    .mosaic-badge {
+      position: absolute; background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 0.45rem 0.9rem;
+      box-shadow: 0 4px 18px rgba(0,94,184,0.10);
+      font-size: 0.76rem; font-weight: 600; color: var(--text-dark);
+      display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; z-index: 5;
+    }
+    .mb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mbadge-1 { top: -16px; right: 10px; animation: mba 5s ease-in-out infinite; }
+    .mbadge-2 { bottom: -12px; left: 0; animation: mbb 5.5s ease-in-out infinite; }
+    @keyframes mba { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes mbb { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+    /* ── WAVE ────────────────────────────────────────────── */
+    .wave-divider { line-height: 0; overflow: hidden; }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* ── ALPHABET NAV ────────────────────────────────────── */
+    .alpha-nav-outer {
+      position: sticky; top: 103px; z-index: 80;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,94,184,0.06);
+    }
+    .alpha-nav { max-width: 1200px; margin: 0 auto; padding: 0.7rem 2rem; display: flex; gap: 0.2rem; flex-wrap: wrap; align-items: center; }
+    .alpha-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: transparent; cursor: pointer;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700;
+      color: var(--text-soft); transition: background 0.18s, color 0.18s, transform 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .alpha-btn:hover { background: var(--off-white); color: var(--nhs-blue); transform: translateY(-2px); }
+    .alpha-btn.active { background: var(--nhs-blue); color: var(--white); box-shadow: 0 3px 10px rgba(0,94,184,0.3); }
+    .alpha-btn.disabled { color: var(--border); cursor: default; pointer-events: none; }
+    .alpha-all { margin-left: auto; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; width: auto; padding: 0 0.9rem; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 8px; }
+    .alpha-all:hover { background: var(--nhs-blue); color: var(--white); }
+
+    /* ── CONTENT ─────────────────────────────────────────── */
+    .content-wrap { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+
+    /* Stats strip */
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue));
+      border-radius: 20px; margin-bottom: 3.5rem; overflow: hidden;
+    }
+    .stat-item { padding: 2rem 1.5rem; text-align: center; position: relative; }
+    .stat-item + .stat-item::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 1px; background: rgba(255,255,255,0.15); }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+    .stat-num span { font-size: 1.8rem; }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+
+    /* Letter group */
+    .letter-group { margin-bottom: 3rem; scroll-margin-top: 160px; }
+    .letter-header {
+      display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem;
+    }
+    .letter-badge {
+      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--nhs-blue), var(--nhs-aqua));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: #fff;
+      box-shadow: 0 4px 14px rgba(0,94,184,0.25);
+      transition: transform 0.3s;
+    }
+    .letter-group:hover .letter-badge { transform: rotate(-5deg) scale(1.05); }
+    .letter-divider { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+    /* Conditions grid */
+    .conditions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .condition-card {
+      background: var(--off-white); border: 1.5px solid var(--border); border-radius: 14px;
+      padding: 1.2rem 1.3rem; text-decoration: none; color: inherit;
+      display: flex; align-items: center; gap: 0.9rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s, background 0.22s;
+    }
+    .condition-card:hover { transform: translateX(6px); box-shadow: 0 6px 24px rgba(0,94,184,0.10); border-color: var(--nhs-light-blue); background: var(--white); }
+    /* Slide-in left accent bar */
+    .condition-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--nhs-blue), var(--nhs-aqua)); transform: scaleY(0); transform-origin: bottom; transition: transform 0.25s; border-radius: 0 2px 2px 0; }
+    .condition-card:hover::before { transform: scaleY(1); }
+    .cc-icon { font-size: 1.3rem; flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: var(--white); border-radius: 10px; border: 1px solid var(--border); transition: transform 0.2s; }
+    .condition-card:hover .cc-icon { transform: scale(1.1); }
+    .cc-body { flex: 1; min-width: 0; }
+    .cc-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--text-dark); line-height: 1.2; }
+    .cc-sub  { font-size: 0.77rem; color: var(--text-soft); margin-top: 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cc-arrow { color: var(--text-soft); font-size: 0.85rem; flex-shrink: 0; transition: transform 0.2s, color 0.2s; }
+    .condition-card:hover .cc-arrow { transform: translateX(4px); color: var(--nhs-blue); }
+
+    /* No results state */
+    .no-results { text-align: center; padding: 4rem 2rem; display: none; }
+    .no-results.show { display: block; }
+    .no-results h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .no-results p { color: var(--text-mid); font-size: 0.92rem; }
+
+    /* NHS promo banner */
+    .nhs-promo {
+      background: var(--off-white); border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 2.5rem; display: flex; align-items: center; gap: 2rem;
+      margin-top: 3rem;
+    }
+    .nhs-promo-icon { font-size: 3rem; flex-shrink: 0; }
+    .nhs-promo h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.4rem; }
+    .nhs-promo p { font-size: 0.9rem; line-height: 1.65; color: var(--text-mid); margin-bottom: 1rem; }
+    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.92rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 14px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); }
+
+    /* ── EMERGENCY ───────────────────────────────────────── */
+    .emergency { background: var(--text-dark); padding: 2.5rem 2rem; }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .emerg-card { border-radius: 16px; padding: 2rem; }
+    .nhs111 { background: rgba(0,94,184,0.35); border: 1.5px solid rgba(65,182,230,0.3); }
+    .urgent  { background: rgba(180,0,0,0.35); border: 1.5px solid rgba(255,100,100,0.3); }
+    .emerg-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
+    .emerg-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .footer-logo-wrap { display: inline-block; background: #fff; border-radius: 10px; padding: 6px 14px 4px; margin-bottom: 1rem; }
+    .footer-logo-wrap svg { height: 42px; width: auto; display: block; }
+    .footer-tagline { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+    .footer-address { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.65); }
+    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .footer-heading { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.7); }
+    .hour-day { color: rgba(255,255,255,0.45); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.2rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.38); }
+
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .conditions-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .conditions-grid { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item + .stat-item::before { display: none; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      .nhs-promo { flex-direction: column; }
+      nav { display: none; }
+    }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="ub-left">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-right">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
+            <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
+            <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
+            <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
+            <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
+            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="active">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob-mid"></div>
+  <div class="hero-inner">
+
+    <!-- Left -->
+    <div>
+      <div class="breadcrumb">
+        <a href="/">Home</a><span>›</span>
+        <a href="health-information.html">Health Information</a><span>›</span>
+        <span>Health A–Z</span>
+      </div>
+      <div class="hero-tag"><span class="dot"></span> NHS Health Directory</div>
+      <h1>Health <em>A–Z</em><br>Conditions &amp; Treatments</h1>
+      <p class="hero-sub">Browse hundreds of NHS-approved health topics — from symptoms and diagnoses to treatments and self-care advice.</p>
+
+      <div class="hero-search-wrap">
+        <div class="hero-search">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="heroSearch" placeholder="Search conditions, symptoms…" autocomplete="off"/>
+          <button onclick="doHeroSearch()">Search NHS</button>
+        </div>
+        <div class="search-suggestions" id="searchSugg"></div>
+        <p class="search-hint">e.g. Asthma, Diabetes, Back pain — opens NHS.uk in a new tab</p>
+      </div>
+    </div>
+
+    <!-- Right: letter mosaic -->
+    <div class="hero-visual">
+      <div style="position:relative;">
+        <div class="mosaic-badge mbadge-1"><span class="mb-dot" style="background:var(--nhs-green);"></span>900+ conditions</div>
+        <div class="mosaic-badge mbadge-2"><span class="mb-dot" style="background:var(--nhs-aqua);"></span>NHS approved</div>
+        <div class="letter-mosaic" id="letterMosaic"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+  </svg>
+</div>
+
+<!-- ALPHABET NAV -->
+<div class="alpha-nav-outer">
+  <div class="alpha-nav" id="alphaNav"></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap">
+
+  <!-- Stats strip -->
+  <div class="stats-strip fade-up">
+    <div class="stat-item">
+      <div class="stat-num" data-target="900" data-suffix="+">0</div>
+      <div class="stat-label">Health conditions covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="26" data-suffix="">0</div>
+      <div class="stat-label">Alphabetical sections</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-target="100" data-suffix="%">0</div>
+      <div class="stat-label">NHS reviewed &amp; approved</div>
+    </div>
+  </div>
+
+  <!-- No results -->
+  <div class="no-results" id="noResults">
+    <h3>No results found</h3>
+    <p>Try a different search term, or browse by letter below.</p>
+  </div>
+
+  <!-- Conditions directory (JS populated) -->
+  <div id="conditionsDir"></div>
+
+  <!-- NHS full directory promo -->
+  <div class="nhs-promo fade-up">
+    <div class="nhs-promo-icon">🏥</div>
+    <div>
+      <h3>Full NHS Health A–Z</h3>
+      <p>This directory covers the most commonly searched conditions at Saluja Clinic. For the complete NHS health encyclopaedia — including over 900 conditions with in-depth clinical information, treatment guides, and self-care advice — visit NHS.uk directly.</p>
+      <a href="https://www.nhs.uk/conditions/" target="_blank" class="btn-primary">Browse full NHS Health A–Z →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div><div class="emerg-label">Non-Emergency</div><div class="emerg-number">NHS 111</div><p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones.</p></div>
+    </div>
+    <div class="emerg-card urgent">
+      <div><div class="emerg-label">Life-Threatening Emergency</div><div class="emerg-number">999</div><p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, or any life-threatening condition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+          <defs>
+            <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
+              <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
+              <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
+              <stop offset="100%" stop-color="#d8d8d8"/>
+            </linearGradient>
+            <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
+              <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
+              <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
+              <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+            </linearGradient>
+            <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+              <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
+              <stop offset="100%" stop-color="#000000"/>
+            </radialGradient>
+            <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
+              <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+            </linearGradient>
+            <filter id="fSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+            <filter id="fTS">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+              <feOffset dx="0" dy="1" result="offsetBlur"/>
+              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+            </filter>
+          </defs>
+          <rect width="720" height="160" fill="#ffffff"/>
+          <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fSh)"/>
+          <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fS)">S</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text>
+          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+        </svg>
+      </div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   DATA — conditions directory
+   Each entry: { name, slug, icon, sub }
+   slug used to build https://www.nhs.uk/conditions/{slug}/
+───────────────────────────────────────────────────────────── */
+const CONDITIONS = {
+  A: [
+    { name: 'Acne',              slug: 'acne',              icon: '🩹', sub: 'Skin condition' },
+    { name: 'Allergies',         slug: 'allergies',         icon: '🤧', sub: 'Immune response' },
+    { name: 'Anaemia',           slug: 'iron-deficiency-anaemia', icon: '🩸', sub: 'Low red blood cells' },
+    { name: 'Anxiety',           slug: 'generalised-anxiety-disorder', icon: '🧠', sub: 'Mental health' },
+    { name: 'Arthritis',         slug: 'arthritis',         icon: '🦴', sub: 'Joint condition' },
+    { name: 'Asthma',            slug: 'asthma',            icon: '🫁', sub: 'Respiratory condition' },
+    { name: 'Atrial Fibrillation', slug: 'atrial-fibrillation', icon: '🫀', sub: 'Heart condition' },
+  ],
+  B: [
+    { name: 'Back Pain',         slug: 'back-pain',         icon: '🔙', sub: 'Musculoskeletal' },
+    { name: 'Blood Pressure (High)', slug: 'high-blood-pressure-hypertension', icon: '🩺', sub: 'Cardiovascular' },
+    { name: 'Blood Pressure (Low)', slug: 'low-blood-pressure-hypotension', icon: '💉', sub: 'Cardiovascular' },
+    { name: 'Bronchitis',        slug: 'bronchitis',        icon: '🫁', sub: 'Respiratory infection' },
+    { name: 'Burns',             slug: 'burns-and-scalds',  icon: '🔥', sub: 'Injury' },
+  ],
+  C: [
+    { name: 'Cancer (overview)', slug: 'cancer',            icon: '🎗️', sub: 'Serious illness' },
+    { name: 'Chest Pain',        slug: 'chest-pain',        icon: '🫀', sub: 'Cardiovascular symptom' },
+    { name: 'Chickenpox',        slug: 'chickenpox',        icon: '🔴', sub: 'Viral infection' },
+    { name: 'Chronic Fatigue',   slug: 'chronic-fatigue-syndrome-cfs-me', icon: '😴', sub: 'ME/CFS' },
+    { name: 'COPD',              slug: 'chronic-obstructive-pulmonary-disease-copd', icon: '🫁', sub: 'Lung disease' },
+    { name: 'Constipation',      slug: 'constipation',      icon: '🏥', sub: 'Digestive issue' },
+    { name: "Crohn's Disease",   slug: 'crohns-disease',    icon: '🏥', sub: 'Inflammatory bowel' },
+  ],
+  D: [
+    { name: 'Dementia',          slug: 'dementia',          icon: '🧠', sub: 'Neurological condition' },
+    { name: 'Depression',        slug: 'clinical-depression', icon: '💙', sub: 'Mental health' },
+    { name: 'Diabetes (Type 1)', slug: 'type-1-diabetes',   icon: '💉', sub: 'Autoimmune condition' },
+    { name: 'Diabetes (Type 2)', slug: 'type-2-diabetes',   icon: '💉', sub: 'Metabolic condition' },
+    { name: 'DVT',               slug: 'deep-vein-thrombosis-dvt', icon: '🩸', sub: 'Blood clot' },
+  ],
+  E: [
+    { name: 'Eczema',            slug: 'atopic-eczema',     icon: '🩹', sub: 'Skin condition' },
+    { name: 'Epilepsy',          slug: 'epilepsy',          icon: '⚡', sub: 'Neurological condition' },
+    { name: 'Ear Infections',    slug: 'ear-infections',    icon: '👂', sub: 'Infection' },
+  ],
+  F: [
+    { name: 'Fever',             slug: 'fever-in-adults',   icon: '🌡️', sub: 'Symptom' },
+    { name: 'Flu (Influenza)',   slug: 'flu',               icon: '🤒', sub: 'Viral infection' },
+    { name: 'Fibroids',          slug: 'fibroids',          icon: '🏥', sub: "Women's health" },
+  ],
+  G: [
+    { name: 'Gallstones',        slug: 'gallstones',        icon: '🏥', sub: 'Digestive condition' },
+    { name: 'Gastroenteritis',   slug: 'diarrhoea-and-vomiting', icon: '🤢', sub: 'Stomach bug' },
+    { name: 'GERD / Heartburn',  slug: 'heartburn-and-acid-reflux', icon: '🔥', sub: 'Digestive condition' },
+    { name: 'Gout',              slug: 'gout',              icon: '🦶', sub: 'Joint condition' },
+  ],
+  H: [
+    { name: 'Hayfever',          slug: 'hay-fever',         icon: '🌸', sub: 'Seasonal allergy' },
+    { name: 'Headaches',         slug: 'headaches',         icon: '🤕', sub: 'Neurological symptom' },
+    { name: 'Heart Disease',     slug: 'coronary-heart-disease', icon: '🫀', sub: 'Cardiovascular' },
+    { name: 'Hernia',            slug: 'hernia',            icon: '🏥', sub: 'Physical condition' },
+    { name: 'HIV',               slug: 'hiv-and-aids',      icon: '🔬', sub: 'Viral infection' },
+    { name: 'Hypothyroidism',    slug: 'underactive-thyroid-hypothyroidism', icon: '🦋', sub: 'Thyroid condition' },
+  ],
+  I: [
+    { name: 'IBS',               slug: 'irritable-bowel-syndrome-ibs', icon: '🏥', sub: 'Bowel condition' },
+    { name: 'Insomnia',          slug: 'insomnia',          icon: '😴', sub: 'Sleep disorder' },
+  ],
+  J: [
+    { name: 'Joint Pain',        slug: 'joint-pain',        icon: '🦴', sub: 'Musculoskeletal' },
+    { name: 'Jaundice',          slug: 'jaundice',          icon: '🏥', sub: 'Liver symptom' },
+  ],
+  K: [
+    { name: 'Kidney Disease',    slug: 'chronic-kidney-disease', icon: '🏥', sub: 'Renal condition' },
+    { name: 'Kidney Stones',     slug: 'kidney-stones',     icon: '🔴', sub: 'Urinary condition' },
+  ],
+  L: [
+    { name: 'Leg Cramps',        slug: 'leg-cramps',        icon: '🦵', sub: 'Muscular symptom' },
+    { name: 'Low Blood Pressure', slug: 'low-blood-pressure-hypotension', icon: '🩺', sub: 'Cardiovascular' },
+    { name: 'Lupus',             slug: 'lupus',             icon: '🔬', sub: 'Autoimmune condition' },
+  ],
+  M: [
+    { name: 'Measles',           slug: 'measles',           icon: '🔴', sub: 'Viral infection' },
+    { name: 'Menopause',         slug: 'menopause',         icon: '🌡️', sub: "Women's health" },
+    { name: 'Migraine',          slug: 'migraine',          icon: '⚡', sub: 'Neurological condition' },
+    { name: 'Multiple Sclerosis', slug: 'multiple-sclerosis', icon: '🧠', sub: 'Neurological condition' },
+  ],
+  N: [
+    { name: 'Nausea / Vomiting', slug: 'feeling-sick-nausea', icon: '🤢', sub: 'Symptom' },
+    { name: 'Neck Pain',         slug: 'neck-pain',         icon: '🔙', sub: 'Musculoskeletal' },
+    { name: "Nosebleeds",        slug: 'nosebleed',         icon: '👃', sub: 'Common symptom' },
+  ],
+  O: [
+    { name: 'Obesity',           slug: 'obesity',           icon: '⚖️', sub: 'Weight condition' },
+    { name: 'Osteoarthritis',    slug: 'osteoarthritis',    icon: '🦴', sub: 'Joint condition' },
+    { name: 'Osteoporosis',      slug: 'osteoporosis',      icon: '🦴', sub: 'Bone condition' },
+  ],
+  P: [
+    { name: 'Parkinson\'s',      slug: 'parkinsons-disease', icon: '🧠', sub: 'Neurological condition' },
+    { name: 'PCOS',              slug: 'polycystic-ovary-syndrome-pcos', icon: '🏥', sub: "Women's health" },
+    { name: 'Pneumonia',         slug: 'pneumonia',         icon: '🫁', sub: 'Lung infection' },
+    { name: 'Psoriasis',         slug: 'psoriasis',         icon: '🩹', sub: 'Skin condition' },
+  ],
+  R: [
+    { name: 'Rheumatoid Arthritis', slug: 'rheumatoid-arthritis', icon: '🦴', sub: 'Autoimmune condition' },
+    { name: 'Rosacea',           slug: 'rosacea',           icon: '🩹', sub: 'Skin condition' },
+  ],
+  S: [
+    { name: 'Sciatica',          slug: 'sciatica',          icon: '⚡', sub: 'Nerve pain' },
+    { name: 'Shingles',          slug: 'shingles',          icon: '🔴', sub: 'Viral infection' },
+    { name: 'Sleep Apnoea',      slug: 'sleep-apnoea',      icon: '😴', sub: 'Sleep disorder' },
+    { name: 'Stroke',            slug: 'stroke',            icon: '🧠', sub: 'Neurological emergency' },
+  ],
+  T: [
+    { name: 'Tinnitus',          slug: 'tinnitus',          icon: '👂', sub: 'Hearing condition' },
+    { name: 'Tonsillitis',       slug: 'tonsillitis',       icon: '🤒', sub: 'Throat infection' },
+    { name: 'Type 2 Diabetes',   slug: 'type-2-diabetes',   icon: '💉', sub: 'Metabolic condition' },
+  ],
+  U: [
+    { name: 'Ulcerative Colitis', slug: 'ulcerative-colitis', icon: '🏥', sub: 'Bowel condition' },
+    { name: 'Urinary Incontinence', slug: 'urinary-incontinence', icon: '🏥', sub: 'Bladder condition' },
+    { name: 'UTI',               slug: 'urinary-tract-infections-utis', icon: '🏥', sub: 'Urinary infection' },
+  ],
+  V: [
+    { name: 'Varicose Veins',    slug: 'varicose-veins',    icon: '🦵', sub: 'Vascular condition' },
+    { name: 'Vertigo',           slug: 'vertigo',           icon: '😵', sub: 'Inner ear condition' },
+  ],
+  W: [
+    { name: 'Warts',             slug: 'warts-and-verrucas', icon: '🩹', sub: 'Skin condition' },
+    { name: 'Whooping Cough',    slug: 'whooping-cough',    icon: '🤒', sub: 'Bacterial infection' },
+  ],
+};
+
+/* Letters with no entries — for disabled alpha buttons */
+const EMPTY_LETTERS = ['Q','X','Y','Z'];
+
+/* ─────────────────────────────────────────────────────────────
+   BUILD LETTER MOSAIC (hero right)
+───────────────────────────────────────────────────────────── */
+const TILE_CLASSES = ['tile-blue','tile-aqua','tile-green','tile-light','tile-dark'];
+const mosaic = document.getElementById('letterMosaic');
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach((l, i) => {
+  const div = document.createElement('div');
+  div.className = 'lm-tile ' + TILE_CLASSES[i % TILE_CLASSES.length];
+  div.textContent = l;
+  div.style.animationDelay = (i * 0.04) + 's';
+  div.title = l;
+  div.addEventListener('click', () => scrollToLetter(l));
+  mosaic.appendChild(div);
+  // Staggered pop-in
+  setTimeout(() => div.style.opacity = '1', 60 + i * 40);
+});
+// Start tiles hidden, then pop in
+[...mosaic.children].forEach(t => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s, transform 0.2s, box-shadow 0.2s'; });
+
+/* ─────────────────────────────────────────────────────────────
+   BUILD ALPHABET NAV
+───────────────────────────────────────────────────────────── */
+const alphaNav = document.getElementById('alphaNav');
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(l => {
+  const btn = document.createElement('button');
+  btn.className = 'alpha-btn' + (EMPTY_LETTERS.includes(l) ? ' disabled' : '');
+  btn.textContent = l;
+  btn.dataset.letter = l;
+  btn.title = EMPTY_LETTERS.includes(l) ? 'No entries for ' + l : l;
+  if (!EMPTY_LETTERS.includes(l)) btn.addEventListener('click', () => scrollToLetter(l));
+  alphaNav.appendChild(btn);
+});
+// "All" button
+const allBtn = document.createElement('button');
+allBtn.className = 'alpha-btn alpha-all';
+allBtn.textContent = 'All ↑';
+allBtn.addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); clearFilter(); });
+alphaNav.appendChild(allBtn);
+
+/* ─────────────────────────────────────────────────────────────
+   BUILD CONDITIONS DIRECTORY
+───────────────────────────────────────────────────────────── */
+const dir = document.getElementById('conditionsDir');
+
+Object.keys(CONDITIONS).sort().forEach((letter, gi) => {
+  const group = document.createElement('div');
+  group.className = 'letter-group fade-up';
+  group.id = 'letter-' + letter;
+  group.style.transitionDelay = (gi % 5 * 0.08) + 's';
+
+  group.innerHTML = `
+    <div class="letter-header">
+      <div class="letter-badge">${letter}</div>
+      <div class="letter-divider"></div>
+    </div>
+    <div class="conditions-grid" id="grid-${letter}"></div>
+  `;
+  dir.appendChild(group);
+
+  const grid = group.querySelector('.conditions-grid');
+  CONDITIONS[letter].forEach(c => {
+    const a = document.createElement('a');
+    a.className = 'condition-card';
+    a.href = 'https://www.nhs.uk/conditions/' + c.slug + '/';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.dataset.name = c.name.toLowerCase();
+    a.innerHTML = `
+      <div class="cc-icon">${c.icon}</div>
+      <div class="cc-body">
+        <div class="cc-name">${c.name}</div>
+        <div class="cc-sub">${c.sub}</div>
+      </div>
+      <div class="cc-arrow">›</div>
+    `;
+    grid.appendChild(a);
+  });
+});
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL TO LETTER
+───────────────────────────────────────────────────────────── */
+function scrollToLetter(l) {
+  const el = document.getElementById('letter-' + l);
+  if (!el) return;
+  clearFilter();
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setActiveAlpha(l);
+}
+
+function setActiveAlpha(l) {
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector('.alpha-btn[data-letter="' + l + '"]');
+  if (btn) btn.classList.add('active');
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SEARCH / FILTER
+───────────────────────────────────────────────────────────── */
+const SUGGESTIONS = [
+  'Asthma','Back Pain','Blood Pressure','Cancer','Chest Pain','COPD',
+  'Dementia','Depression','Diabetes','Eczema','Epilepsy','Flu',
+  'Gout','Hayfever','Headaches','Heart Disease','Hypertension','IBS',
+  'Insomnia','Kidney Stones','Migraine','Multiple Sclerosis','Osteoporosis',
+  'Psoriasis','Rheumatoid Arthritis','Sciatica','Shingles','Stroke',
+  'Tinnitus','Urinary Tract Infection','Varicose Veins','Vertigo',
+];
+
+const heroSearchEl = document.getElementById('heroSearch');
+const suggBox = document.getElementById('searchSugg');
+
+heroSearchEl.addEventListener('input', () => {
+  const q = heroSearchEl.value.trim().toLowerCase();
+  if (q.length < 2) { suggBox.classList.remove('open'); filterConditions(''); return; }
+  filterConditions(q);
+  const matches = SUGGESTIONS.filter(s => s.toLowerCase().includes(q)).slice(0, 6);
+  if (matches.length) {
+    suggBox.innerHTML = matches.map(m =>
+      `<div class="sugg-item" onclick="pickSugg('${m}')">
+         <span class="si-letter">${m[0]}</span>${m}
+       </div>`
+    ).join('');
+    suggBox.classList.add('open');
+  } else {
+    suggBox.classList.remove('open');
+  }
+});
+
+heroSearchEl.addEventListener('blur', () => setTimeout(() => suggBox.classList.remove('open'), 180));
+
+function pickSugg(name) {
+  heroSearchEl.value = name;
+  suggBox.classList.remove('open');
+  filterConditions(name.toLowerCase());
+}
+
+function filterConditions(q) {
+  if (!q) { clearFilter(); return; }
+  let anyVisible = false;
+  document.querySelectorAll('.letter-group').forEach(g => {
+    const cards = g.querySelectorAll('.condition-card');
+    let groupVisible = false;
+    cards.forEach(c => {
+      const match = c.dataset.name.includes(q);
+      c.style.display = match ? '' : 'none';
+      if (match) groupVisible = true;
+    });
+    g.style.display = groupVisible ? '' : 'none';
+    if (groupVisible) anyVisible = true;
+  });
+  document.getElementById('noResults').classList.toggle('show', !anyVisible);
+}
+
+function clearFilter() {
+  document.querySelectorAll('.letter-group').forEach(g => {
+    g.style.display = '';
+    g.querySelectorAll('.condition-card').forEach(c => c.style.display = '');
+  });
+  document.getElementById('noResults').classList.remove('show');
+}
+
+function doHeroSearch() {
+  const q = heroSearchEl.value.trim();
+  if (!q) return;
+  window.open('https://www.nhs.uk/search/results?q=' + encodeURIComponent(q), '_blank');
+}
+heroSearchEl.addEventListener('keydown', e => { if (e.key === 'Enter') doHeroSearch(); });
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL SPY — highlight alpha nav letter as you scroll
+───────────────────────────────────────────────────────────── */
+const scrollSpy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const l = e.target.id.replace('letter-', '');
+      setActiveAlpha(l);
+    }
+  });
+}, { rootMargin: '-140px 0px -60% 0px', threshold: 0 });
+
+document.querySelectorAll('.letter-group').forEach(g => scrollSpy.observe(g));
+
+/* ─────────────────────────────────────────────────────────────
+   FADE-UP OBSERVER
+───────────────────────────────────────────────────────────── */
+const fadeObs = new IntersectionObserver(
+  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.06 }
+);
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+/* ─────────────────────────────────────────────────────────────
+   COUNT-UP STATS
+───────────────────────────────────────────────────────────── */
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    let start = 0;
+    const dur = 1400;
+    const step = 16;
+    const inc =
+  Math.ceil(target / (dur / step));
+  const timer = setInterval(() => {
+    start += inc;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = start + suffix;
+  }, step);
+  countObs.unobserve(el);
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stat-num').forEach(el => countObs.observe(el));
+
+</script>
+</body>
+</html>

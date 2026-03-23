@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BMI Calculator – Saluja Clinic · West London GP Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
+  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
+  --white:#fff;--off:#f5f8fc;
+  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
+  --bmi-under:#60a5fa;
+  --bmi-normal:#4ade80;
+  --bmi-over:#fbbf24;
+  --bmi-obese1:#f97316;
+  --bmi-obese2:#ef4444;
+  --bmi-obese3:#991b1b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.fu.vis{opacity:1;transform:none}
+.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}
+
+/* UTILITY BAR */
+.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
+.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
+.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
+.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
+.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+.lw{display:flex;align-items:center;text-decoration:none}
+.lw svg{height:84px;width:auto}
+nav{display:flex;align-items:center;gap:.25rem}
+nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+nav a:hover{background:var(--off);color:var(--nhs-blue)}
+nav a.act{color:var(--nhs-blue);font-weight:600}
+.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
+.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.045) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.055) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
+.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
+.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-blue);background:rgba(0,94,184,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
+.htag .dot{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--nhs-blue)}
+.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
+.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+
+/* ── HERO VISUAL — BMI Analyser Card ────────────────── */
+.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:400px}
+
+/* Card */
+.bmi-card{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}
+.bmi-card::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+
+/* Top bar */
+.bc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;position:relative;z-index:2}
+.bc-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.bc-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80}
+.bc-ldot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:bclp 1.3s ease-in-out infinite}
+@keyframes bclp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+
+/* Main body: silhouette + scale side by side */
+.bc-body{display:flex;gap:1rem;align-items:flex-end;margin-bottom:1rem;position:relative;z-index:2}
+
+/* Silhouette area */
+.bc-sil{flex:1;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.bc-sil-wrap{position:relative;width:80px;height:130px;display:flex;align-items:flex-end;justify-content:center}
+/* Glow behind silhouette */
+.sil-glow{position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,rgba(74,222,128,.15) 0%,transparent 70%);animation:sglow 2.5s ease-in-out infinite;transition:background 1s}
+@keyframes sglow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+/* The SVG figure */
+#silFig{transition:transform .8s cubic-bezier(.34,1.2,.64,1),filter .8s;filter:drop-shadow(0 0 8px rgba(74,222,128,.5))}
+/* BMI value below silhouette */
+.bc-bmi-val{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:#fff;line-height:1;text-align:center}
+.bc-bmi-lbl{font-size:.6rem;color:rgba(255,255,255,.38);text-align:center;margin-top:.1rem}
+
+/* Vertical scale */
+.bc-scale{width:32px;display:flex;flex-direction:column;align-items:center;gap:0;position:relative}
+.bc-scale-track{width:10px;height:120px;border-radius:8px;background:linear-gradient(to top,#991b1b,#ef4444 25%,#f97316 45%,#fbbf24 60%,#4ade80 77%,#60a5fa 100%);position:relative;box-shadow:0 0 10px rgba(0,0,0,.3)}
+.bc-scale-marker{position:absolute;left:50%;width:18px;height:6px;background:#fff;border-radius:3px;transform:translate(-50%, 50%);transition:bottom 1s cubic-bezier(.34,1.2,.64,1);box-shadow:0 0 8px rgba(255,255,255,.5)}
+/* Labels on scale */
+.bc-scale-labels{position:absolute;left:18px;top:0;height:120px;display:flex;flex-direction:column;justify-content:space-between;padding:2px 0}
+.bcsl{font-size:.52rem;color:rgba(255,255,255,.3);white-space:nowrap}
+
+/* Category badge */
+.bc-cat{text-align:center;margin-bottom:.9rem;font-size:.74rem;font-weight:700;letter-spacing:.06em;padding:.4rem 1.1rem;border-radius:20px;display:inline-block;position:relative;left:50%;transform:translateX(-50%);z-index:2;transition:all .6s}
+
+/* Bottom stats row */
+.bc-stats{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;position:relative;z-index:2}
+.bc-st{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.55rem .8rem;display:flex;align-items:center;gap:.6rem}
+.bc-st-ic{font-size:1rem;flex-shrink:0}
+.bc-stv{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#fff;line-height:1}
+.bc-stl{font-size:.58rem;color:rgba(255,255,255,.35)}
+
+/* Floating badges */
+.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
+.hbdot{width:7px;height:7px;border-radius:50%}
+.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
+.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
+@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* WAVE */
+.wave{line-height:0;overflow:hidden}
+.wave svg{display:block;width:100%}
+
+/* CALCULATOR */
+.csec{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.ccard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);position:relative;overflow:hidden}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua),var(--nhs-green))}
+.ctit{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--td);margin-bottom:.4rem}
+.csub{font-size:.88rem;color:var(--ts);margin-bottom:1.5rem;line-height:1.6}
+
+/* Unit toggle */
+.unit-row{display:flex;gap:.6rem;margin-bottom:1.8rem}
+.utab{flex:1;padding:.6rem;border:1.5px solid var(--border);border-radius:8px;background:transparent;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--ts);cursor:pointer;transition:all .18s;text-align:center}
+.utab.act{background:var(--nhs-blue);color:#fff;border-color:var(--nhs-blue);font-weight:600}
+.utab:not(.act):hover{border-color:var(--nhs-blue);color:var(--nhs-blue)}
+
+.fg{display:flex;flex-direction:column;gap:1.3rem}
+.fi{display:flex;flex-direction:column;gap:.5rem}
+.fi label{font-size:.85rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.4rem}
+
+/* Number stepper */
+.niw{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.niw:focus-within{border-color:var(--nhs-blue);box-shadow:0 0 0 3px rgba(0,94,184,.1)}
+.nb{background:var(--off);border:none;width:44px;height:44px;font-size:1.1rem;cursor:pointer;color:var(--tm);transition:background .15s,color .15s}
+.nb:hover{background:var(--nhs-blue);color:#fff}
+.ni{flex:1;border:none;outline:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--td);background:transparent;height:44px}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+
+/* Dual inputs (feet/inches) */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.nw2{display:flex;flex-direction:column;gap:.3rem}
+.nlbl{font-size:.74rem;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.05em}
+
+/* Sex selector */
+.seg{display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.sb{flex:1;padding:.7rem;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--ts);transition:background .18s,color .18s}
+.sb.act{background:var(--nhs-blue);color:#fff;font-weight:600}
+.sb:not(.act):hover{background:var(--off);color:var(--nhs-blue)}
+
+.csbtn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,var(--nhs-blue),var(--nhs-aqua));color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.5rem;box-shadow:0 4px 20px rgba(0,94,184,.3);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+.csbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
+.csbtn:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,94,184,.38)}
+.csbtn:hover::after{transform:translateX(100%)}
+
+/* RESULT PANEL */
+.rpanel{display:flex;flex-direction:column;gap:1.4rem}
+
+/* Default — BMI categories */
+.defp{background:var(--off);border:1.5px solid var(--border);border-radius:24px;padding:2.2rem}
+.defp-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--td);margin-bottom:1.2rem}
+.dpi{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;background:#fff;border-radius:12px;border:1.5px solid var(--border);transition:border-color .2s,box-shadow .2s;margin-bottom:.6rem}
+.dpi:hover{border-color:var(--nhs-lb);box-shadow:0 4px 14px rgba(0,94,184,.07)}
+.dpd{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.dpn{font-weight:600;font-size:.88rem;color:var(--td)}
+.dpr{font-size:.78rem;color:var(--ts);margin-left:auto}
+
+/* Result card */
+.rcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);display:none;flex-direction:column;gap:1.4rem}
+.rcard.show{display:flex;animation:rin .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rin{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+
+/* BMI gauge (horizontal colour bar) */
+.bmi-bar-wrap{margin-bottom:.5rem}
+.bmi-bar{display:flex;height:12px;border-radius:99px;overflow:hidden}
+.bb1{flex:2;background:var(--bmi-under)}
+.bb2{flex:3;background:var(--bmi-normal)}
+.bb3{flex:2;background:var(--bmi-over)}
+.bb4{flex:2;background:var(--bmi-obese1)}
+.bb5{flex:2;background:var(--bmi-obese2)}
+.bmi-bar-outer{position:relative;margin-bottom:1.8rem}
+.bmi-needle{position:absolute;top:-5px;width:4px;height:22px;background:var(--td);border-radius:2px;transform:translateX(-50%);transition:left 1s cubic-bezier(.34,1.2,.64,1);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.bmi-needle::after{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:6px solid var(--td)}
+.bmi-bar-lbls{display:flex;font-size:.62rem;color:var(--ts);font-weight:600;margin-top:.3rem}
+.bbl{flex:2;text-align:center}.bbl2{flex:3}.bbl3{flex:2}.bbl4{flex:2}.bbl5{flex:2}
+
+/* Big BMI number */
+.rnum-row{display:flex;justify-content:center;align-items:baseline;gap:.5rem;padding:1rem 0}
+.rbmi{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;line-height:1;color:var(--td)}
+.rbmi-unit{font-size:.9rem;color:var(--ts);margin-left:.3rem;padding-bottom:.8rem;align-self:flex-end}
+
+/* Sub stats */
+.rstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;margin-bottom:.5rem}
+.rst{background:var(--off);border-radius:12px;padding:.9rem;text-align:center}
+.rstv{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--td);line-height:1}
+.rstl{font-size:.65rem;color:var(--ts);margin-top:.2rem}
+
+/* Category badge */
+.rcat{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.65rem 1.3rem;border-radius:12px;font-weight:700;font-size:.95rem;animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes badge-pop{from{transform:scale(.7)}to{transform:scale(1)}}
+
+/* Verdict */
+.rverd{background:var(--off);border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem}
+.rvi{font-size:1.5rem;flex-shrink:0}
+.rvt{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.rvd{font-size:.84rem;line-height:1.65;color:var(--tm)}
+
+/* Tips */
+.rtips{display:flex;flex-direction:column;gap:.7rem}
+.rti{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem 1rem;background:var(--off);border-radius:10px;font-size:.84rem;line-height:1.55;color:var(--tm);border-left:3px solid var(--nhs-blue)}
+
+/* Ideal weight range */
+.ideal-box{background:rgba(0,127,59,.06);border:1.5px solid rgba(0,127,59,.2);border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem}
+.ib-ic{font-size:1.2rem}
+.ib-t{font-size:.85rem;font-weight:600;color:var(--td);margin-bottom:.2rem}
+.ib-v{font-size:.82rem;color:var(--tm)}
+
+.rdis{font-size:.74rem;color:var(--ts);line-height:1.6;padding:.8rem 1rem;background:rgba(0,94,184,.04);border-radius:8px}
+
+/* INFO SECTION */
+.info{background:var(--off);padding:4rem 0}
+.info-in{max-width:1200px;margin:0 auto;padding:0 2rem}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.ic{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.ic:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,94,184,.10);border-color:var(--nhs-lb)}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.ic:hover::before{transform:scaleX(1)}
+.ic-ic{font-size:1.4rem;margin-bottom:.5rem}
+.ic-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.35rem}
+.ic-d{font-size:.82rem;line-height:1.6;color:var(--tm)}
+
+/* EMERGENCY */
+.emerg{background:var(--td);padding:2.5rem 2rem}
+.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.ec{border-radius:16px;padding:2rem}
+.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
+.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
+.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
+.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+
+/* FOOTER */
+footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
+.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
+.flw svg{height:42px;width:auto;display:block}
+.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
+.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
+.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
+.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
+.fl a:hover{color:#fff}
+.hg{display:flex;flex-direction:column;gap:.4rem}
+.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
+.hd{color:rgba(255,255,255,.42)}
+.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+
+@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.csec{grid-template-columns:1fr}.igrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.igrid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}}
+@media(max-width:440px){.fi2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="ub">
+  <div class="inn">
+    <div class="ub-l">
+      <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
+      <span class="upill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-r">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hi">
+    <a href="index.html" class="lw">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="act">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="bc"><a href="/">Home</a><span>›</span><a href="health-information.html">Health Information</a><span>›</span><span>BMI Calculator</span></div>
+      <div class="htag"><span class="dot"></span>Healthy Weight</div>
+      <h1>Calculate Your<br><em>BMI</em></h1>
+      <p>Body Mass Index is a simple measure of weight relative to height. While not a complete picture of health, it's a useful first step in understanding whether your weight may be affecting your wellbeing.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#calculator" class="btn-p">Calculate my BMI →</a>
+        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
+      </div>
+    </div>
+
+    <!-- Animated BMI Analyser Card -->
+    <div class="hv">
+      <div style="position:relative">
+        <div class="hbadge hb1"><span class="hbdot" style="background:var(--bmi-normal)"></span>Healthy: BMI 18.5–24.9</div>
+        <div class="hbadge hb2"><span class="hbdot" style="background:var(--nhs-blue)"></span>WHO standard measure</div>
+
+        <div class="bmi-card">
+          <!-- Top bar -->
+          <div class="bc-top">
+            <span class="bc-lbl">BMI Analyser</span>
+            <span class="bc-live"><span class="bc-ldot"></span>Active</span>
+          </div>
+
+          <!-- Silhouette + scale -->
+          <div class="bc-body">
+            <div class="bc-sil">
+              <div class="bc-sil-wrap">
+                <div class="sil-glow" id="silGlow"></div>
+                <!-- Human silhouette SVG — body shape changes via JS transform -->
+                <svg id="silFig" width="54" height="120" viewBox="0 0 54 120" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Head -->
+                  <circle cx="27" cy="10" r="9" fill="rgba(74,222,128,0.85)"/>
+                  <!-- Neck -->
+                  <rect x="23" y="18" width="8" height="6" rx="2" fill="rgba(74,222,128,0.85)"/>
+                  <!-- Torso -->
+                  <ellipse cx="27" cy="46" rx="14" ry="20" fill="rgba(74,222,128,0.85)"/>
+                  <!-- Left arm -->
+                  <path d="M13 26 Q4 38 6 55" stroke="rgba(74,222,128,0.85)" stroke-width="7" stroke-linecap="round" fill="none"/>
+                  <!-- Right arm -->
+                  <path d="M41 26 Q50 38 48 55" stroke="rgba(74,222,128,0.85)" stroke-width="7" stroke-linecap="round" fill="none"/>
+                  <!-- Left leg -->
+                  <path d="M20 64 Q16 85 15 110" stroke="rgba(74,222,128,0.85)" stroke-width="8" stroke-linecap="round" fill="none"/>
+                  <!-- Right leg -->
+                  <path d="M34 64 Q38 85 39 110" stroke="rgba(74,222,128,0.85)" stroke-width="8" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div class="bc-bmi-val" id="heroBMI">22.4</div>
+              <div class="bc-bmi-lbl">BMI Score</div>
+            </div>
+
+            <!-- Vertical scale -->
+            <div class="bc-scale" style="position:relative;margin-bottom:0">
+              <div class="bc-scale-track">
+                <div class="bc-scale-marker" id="scaleMarker" style="bottom:55%"></div>
+              </div>
+              <div class="bc-scale-labels">
+                <span class="bcsl">Obese</span>
+                <span class="bcsl">Over</span>
+                <span class="bcsl">Normal</span>
+                <span class="bcsl">Under</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category badge -->
+          <div class="bc-cat" id="heroCat" style="background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25)">Normal Weight</div>
+
+          <!-- Stats row -->
+          <div class="bc-stats">
+            <div class="bc-st">
+              <div class="bc-st-ic">📏</div>
+              <div><div class="bc-stv" id="heroHt">175cm</div><div class="bc-stl">Height</div></div>
+            </div>
+            <div class="bc-st">
+              <div class="bc-st-ic">⚖️</div>
+              <div><div class="bc-stv" id="heroWt">68.5kg</div><div class="bc-stl">Weight</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+
+<!-- CALCULATOR + RESULT -->
+<div class="csec fu" id="calculator">
+
+  <!-- Form -->
+  <div class="ccard">
+    <div class="ctit">⚖️ BMI Calculator</div>
+    <p class="csub">Enter your height and weight for an instant result. BMI is one indicator of health — your GP can provide a fuller picture.</p>
+
+    <!-- Metric / Imperial toggle -->
+    <div class="unit-row">
+      <button class="utab act" id="tabMetric" onclick="setUnits('metric')">Metric (cm / kg)</button>
+      <button class="utab" id="tabImperial" onclick="setUnits('imperial')">Imperial (ft / lbs)</button>
+    </div>
+
+    <div class="fg">
+
+      <!-- Height metric -->
+      <div class="fi" id="heightMetric">
+        <label>📏 Height (cm)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('htcm',-1)">−</button>
+          <input class="ni" type="number" id="htcm" value="175" min="100" max="220"/>
+          <button class="nb" onclick="step('htcm',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Height imperial -->
+      <div class="fi" id="heightImperial" style="display:none">
+        <label>📏 Height</label>
+        <div class="dual">
+          <div class="nw2">
+            <div class="nlbl">Feet</div>
+            <div class="niw">
+              <button class="nb" onclick="step('htft',-1)">−</button>
+              <input class="ni" type="number" id="htft" value="5" min="3" max="7"/>
+              <button class="nb" onclick="step('htft',1)">+</button>
+            </div>
+          </div>
+          <div class="nw2">
+            <div class="nlbl">Inches</div>
+            <div class="niw">
+              <button class="nb" onclick="step('htin',-1)">−</button>
+              <input class="ni" type="number" id="htin" value="9" min="0" max="11"/>
+              <button class="nb" onclick="step('htin',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weight metric -->
+      <div class="fi" id="weightMetric">
+        <label>⚖️ Weight (kg)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('wtkg',-.5)">−</button>
+          <input class="ni" type="number" id="wtkg" value="70" min="20" max="250" step="0.5"/>
+          <button class="nb" onclick="step('wtkg',.5)">+</button>
+        </div>
+      </div>
+
+      <!-- Weight imperial -->
+      <div class="fi" id="weightImperial" style="display:none">
+        <label>⚖️ Weight (lbs)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('wtlbs',-1)">−</button>
+          <input class="ni" type="number" id="wtlbs" value="154" min="44" max="550"/>
+          <button class="nb" onclick="step('wtlbs',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Age -->
+      <div class="fi">
+        <label>🎂 Age</label>
+        <div class="niw">
+          <button class="nb" onclick="step('age',-1)">−</button>
+          <input class="ni" type="number" id="age" value="35" min="18" max="100"/>
+          <button class="nb" onclick="step('age',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Sex -->
+      <div class="fi">
+        <label>⚥ Sex assigned at birth</label>
+        <div class="seg">
+          <button class="sb act" id="sm" onclick="setSex('male')">Male</button>
+          <button class="sb" id="sf" onclick="setSex('female')">Female</button>
+        </div>
+      </div>
+
+    </div>
+    <button class="csbtn" onclick="calcBMI()">Calculate My BMI →</button>
+    <p style="font-size:.75rem;color:var(--ts);margin-top:1rem;line-height:1.6">This calculator is for adults aged 18 and over. For children and young people please use our separate child BMI calculator. BMI is a screening tool, not a diagnostic measure.</p>
+  </div>
+
+  <!-- Result panel -->
+  <div class="rpanel">
+
+    <!-- Default categories -->
+    <div class="defp" id="defp">
+      <div class="defp-t">BMI Categories</div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-under)"></div><span class="dpn">Underweight</span><span class="dpr">Below 18.5</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-normal)"></div><span class="dpn">Normal weight</span><span class="dpr">18.5 – 24.9</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-over)"></div><span class="dpn">Overweight</span><span class="dpr">25.0 – 29.9</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-obese1)"></div><span class="dpn">Obese Class I</span><span class="dpr">30.0 – 34.9</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-obese2)"></div><span class="dpn">Obese Class II</span><span class="dpr">35.0 – 39.9</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--bmi-obese3)"></div><span class="dpn">Obese Class III</span><span class="dpr">40.0 and above</span></div>
+      <p style="font-size:.78rem;color:var(--ts);margin-top:1rem;line-height:1.6">Note: These ranges apply to adults. BMI may not be accurate for athletes, pregnant women, or people of certain ethnicities.</p>
+    </div>
+
+    <!-- Result card -->
+    <div class="rcard" id="rcard">
+
+      <!-- Colour bar -->
+      <div class="bmi-bar-outer">
+        <div class="bmi-bar">
+          <div class="bb1"></div><div class="bb2"></div><div class="bb3"></div><div class="bb4"></div><div class="bb5"></div>
+        </div>
+        <div class="bmi-needle" id="bmiNeedle" style="left:40%"></div>
+        <div class="bmi-bar-lbls">
+          <div class="bbl" style="flex:2">Under</div>
+          <div class="bbl" style="flex:3">Normal</div>
+          <div class="bbl" style="flex:2">Over</div>
+          <div class="bbl" style="flex:2">Obese I</div>
+          <div class="bbl" style="flex:2">Ob. II+</div>
+        </div>
+      </div>
+
+      <!-- Big BMI number -->
+      <div class="rnum-row">
+        <span class="rbmi" id="rBMI">0</span>
+        <span class="rbmi-unit">kg/m²</span>
+      </div>
+
+      <!-- Sub stats -->
+      <div class="rstats">
+        <div class="rst"><div class="rstv" id="rHt">—</div><div class="rstl">Height</div></div>
+        <div class="rst"><div class="rstv" id="rWt">—</div><div class="rstl">Weight</div></div>
+        <div class="rst"><div class="rstv" id="rIdealRange">—</div><div class="rstl">Ideal range (kg)</div></div>
+      </div>
+
+      <!-- Category badge -->
+      <div class="rcat" id="rCat"></div>
+
+      <!-- Ideal weight note -->
+      <div class="ideal-box">
+        <div class="ib-ic">🎯</div>
+        <div><div class="ib-t">Healthy weight range for your height</div><div class="ib-v" id="rIdealText">—</div></div>
+      </div>
+
+      <!-- Verdict -->
+      <div class="rverd">
+        <div class="rvi" id="rIcon">💬</div>
+        <div><div class="rvt" id="rTitle"></div><div class="rvd" id="rDesc"></div></div>
+      </div>
+
+      <!-- Tips -->
+      <div class="rtips" id="rtips"></div>
+
+      <div class="rdis">This result is a general guide only and is not a substitute for professional medical advice. BMI does not account for muscle mass, bone density, age, ethnicity, or other individual factors. Please speak to your GP for a complete health assessment.</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO SECTION -->
+<section class="info">
+  <div class="info-in">
+    <div style="text-align:center;max-width:680px;margin:0 auto">
+      <div class="sh" style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-aqua);margin-bottom:.5rem">Understanding BMI</div>
+      <h2 class="st" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">What your <em style="font-style:normal;color:var(--nhs-blue)">BMI means</em> for your health</h2>
+      <p class="sp" style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">BMI is a useful starting point, but health is much more than a single number. Here's what else matters alongside your result.</p>
+    </div>
+    <div class="igrid fu">
+      <div class="ic">
+        <div class="ic-ic">🏃</div>
+        <div class="ic-t">Physical Activity</div>
+        <div class="ic-d">Even within a 'healthy' BMI range, low fitness levels increase cardiovascular risk. Regular movement is independently protective.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">🍎</div>
+        <div class="ic-t">Diet Quality</div>
+        <div class="ic-d">What you eat matters as much as how much. A diet rich in vegetables, wholegrains, and lean protein supports metabolic health at any BMI.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">📊</div>
+        <div class="ic-t">Waist Circumference</div>
+        <div class="ic-d">Fat distribution matters. A waist measurement above 88cm (women) or 102cm (men) indicates elevated risk regardless of BMI category.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">😴</div>
+        <div class="ic-t">Sleep & Stress</div>
+        <div class="ic-d">Poor sleep and chronic stress disrupt hormones that regulate appetite and metabolism, contributing to weight gain over time.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">🩸</div>
+        <div class="ic-t">Blood Tests</div>
+        <div class="ic-d">Cholesterol, blood glucose, and blood pressure readings give a fuller picture of cardiometabolic health than BMI alone.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">🏥</div>
+        <div class="ic-t">NHS Health Check</div>
+        <div class="ic-d">Available free to all patients aged 40–74, our NHS Health Check includes BMI, BP, cholesterol and blood sugar — book via the online form.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="emerg">
+  <div class="emerg-in">
+    <div class="ec e111">
+      <div class="el">Non-Emergency Medical Advice</div>
+      <div class="en">NHS 111</div>
+      <div class="ed">For urgent medical questions that aren't life-threatening — available 24 hours a day, 7 days a week online or by phone.</div>
+    </div>
+    <div class="ec e999">
+      <div class="el">Life-Threatening Emergency</div>
+      <div class="en">999</div>
+      <div class="ed">Call 999 immediately if you or someone else is experiencing a medical emergency such as chest pain, difficulty breathing, or loss of consciousness.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi2">
+    <div>
+      <div class="flw">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+      </div>
+      <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the health and wellbeing of our patients.</p>
+      <div class="fadr">
+        36A Northcote Avenue, Southall, UB1 2AY<br>
+        <a href="tel:02085745136">0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Quick Links</div>
+      <ul class="fl">
+        <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
+        <li><a href="appointments.html">Appointments</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Opening Hours</div>
+      <div class="hg">
+        <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
+        <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
+        <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Useful Links</div>
+      <ul class="fl">
+        <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nhs.uk/" target="_blank">NHS Website</a></li>
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+/* ===== FADE UP ===== */
+var fo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08});
+document.querySelectorAll('.fu').forEach(function(el){fo.observe(el)});
+
+/* ===== HERO BMI CARD — cycling demo readings ===== */
+(function(){
+  var DEMOS=[
+    {bmi:17.2,ht:'162cm',wt:'45.1kg',cat:'Underweight',   bg:'rgba(96,165,250,.15)', col:'#60a5fa',brd:'rgba(96,165,250,.3)', scaleBot:'8%',  silCol:'#60a5fa',scaleX:.85},
+    {bmi:22.4,ht:'175cm',wt:'68.5kg',cat:'Normal Weight', bg:'rgba(74,222,128,.15)', col:'#4ade80',brd:'rgba(74,222,128,.25)',scaleBot:'55%', silCol:'#4ade80',scaleX:1.0},
+    {bmi:27.1,ht:'170cm',wt:'78.3kg',cat:'Overweight',    bg:'rgba(251,191,36,.15)', col:'#fbbf24',brd:'rgba(251,191,36,.25)',scaleBot:'70%', silCol:'#fbbf24',scaleX:1.13},
+    {bmi:31.8,ht:'168cm',wt:'89.7kg',cat:'Obese Class I', bg:'rgba(249,115,22,.15)', col:'#fb923c',brd:'rgba(249,115,22,.25)',scaleBot:'82%', silCol:'#fb923c',scaleX:1.26},
+    {bmi:22.4,ht:'175cm',wt:'68.5kg',cat:'Normal Weight', bg:'rgba(74,222,128,.15)', col:'#4ade80',brd:'rgba(74,222,128,.25)',scaleBot:'55%', silCol:'#4ade80',scaleX:1.0},
+  ];
+
+  var idx=0;
+  function apply(d){
+    // BMI count-up
+    animNum('heroBMI', parseFloat(document.getElementById('heroBMI').textContent)||22.4, d.bmi, 900, 1);
+    document.getElementById('heroHt').textContent=d.ht;
+    document.getElementById('heroWt').textContent=d.wt;
+
+    // Category
+    var cat=document.getElementById('heroCat');
+    cat.textContent=d.cat;
+    cat.style.background=d.bg;
+    cat.style.color=d.col;
+    cat.style.border='1px solid '+d.brd;
+
+    // Scale marker
+    document.getElementById('scaleMarker').style.bottom=d.scaleBot;
+
+    // Glow colour
+    document.getElementById('silGlow').style.background='radial-gradient(circle,'+d.bg.replace('.15','.25')+' 0%,transparent 70%)';
+
+    // Silhouette colour + scale
+    var fig=document.getElementById('silFig');
+    var col=d.silCol;
+    var sc=d.scaleX;
+    // Update all filled parts colour
+    fig.querySelectorAll('circle,rect,ellipse').forEach(function(el){el.setAttribute('fill','rgba('+hexToRgb(col)+',.85)')});
+    fig.querySelectorAll('path').forEach(function(el){el.setAttribute('stroke','rgba('+hexToRgb(col)+',.85)')});
+    fig.style.transform='scaleX('+sc+')';
+    fig.style.filter='drop-shadow(0 0 8px '+col+'88)';
+  }
+
+  function hexToRgb(hex){
+    // parse hex shorthand or full
+    var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return r+','+g+','+b;
+  }
+
+  function animNum(id,from,to,dur,dec){
+    var el=document.getElementById(id);if(!el)return;
+    var s=null;
+    function t(ts){
+      if(!s)s=ts;
+      var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=(from+(to-from)*e).toFixed(dec);
+      if(p<1)requestAnimationFrame(t);
+    }
+    requestAnimationFrame(t);
+  }
+
+  apply(DEMOS[0]);
+  setInterval(function(){idx=(idx+1)%DEMOS.length;apply(DEMOS[idx]);},3200);
+})();
+
+/* ===== UNIT TOGGLE ===== */
+var units='metric';
+var sex='male';
+function setUnits(u){
+  units=u;
+  document.getElementById('tabMetric').classList.toggle('act',u==='metric');
+  document.getElementById('tabImperial').classList.toggle('act',u==='imperial');
+  document.getElementById('heightMetric').style.display=u==='metric'?'':'none';
+  document.getElementById('heightImperial').style.display=u==='imperial'?'':'none';
+  document.getElementById('weightMetric').style.display=u==='metric'?'':'none';
+  document.getElementById('weightImperial').style.display=u==='imperial'?'':'none';
+}
+function setSex(s){
+  sex=s;
+  document.getElementById('sm').classList.toggle('act',s==='male');
+  document.getElementById('sf').classList.toggle('act',s==='female');
+}
+function step(id,d){
+  var el=document.getElementById(id);
+  var v=parseFloat(el.value)+d;
+  v=Math.min(Math.max(v,parseFloat(el.min)),parseFloat(el.max));
+  el.value=id==='wtkg'?v.toFixed(1):Math.round(v);
+}
+
+/* ===== BMI CALCULATOR ===== */
+function calcBMI(){
+  var htM, wtKg, htStr, wtStr;
+
+  if(units==='metric'){
+    var cm=parseFloat(document.getElementById('htcm').value)||175;
+    htM=cm/100;
+    htStr=cm+'cm';
+    wtKg=parseFloat(document.getElementById('wtkg').value)||70;
+    wtStr=wtKg.toFixed(1)+'kg';
+  } else {
+    var ft=parseFloat(document.getElementById('htft').value)||5;
+    var inp=parseFloat(document.getElementById('htin').value)||9;
+    htM=(ft*12+inp)*0.0254;
+    htStr=ft+"'"+inp+'"';
+    var lbs=parseFloat(document.getElementById('wtlbs').value)||154;
+    wtKg=lbs*0.453592;
+    wtStr=lbs+'lbs';
+  }
+
+  var bmi=wtKg/(htM*htM);
+  var bmiR=Math.round(bmi*10)/10;
+
+  // Ideal weight range (BMI 18.5–24.9) in kg
+  var idealLow=Math.round(18.5*htM*htM*10)/10;
+  var idealHigh=Math.round(24.9*htM*htM*10)/10;
+
+  // Category
+  var cat,catColour,catBg,catBrd,icon,title,desc,needleLeft;
+  var tips=[];
+
+  if(bmi<18.5){
+    cat='Underweight'; catColour='#2563eb'; catBg='rgba(37,99,235,.1)'; catBrd='rgba(37,99,235,.25)';
+    icon='⚠️'; title='Your BMI suggests you may be underweight';
+    desc='Being underweight can affect bone density, immunity, and energy levels. There are many reasons for a low BMI, including underlying health conditions. A GP assessment can help identify the cause.';
+    tips=['🥗 Focus on nutrient-dense foods including healthy fats, proteins, and complex carbohydrates.','💪 Strength training can help build muscle mass safely.','🩺 Speak to your GP — unexplained low weight warrants a health check.'];
+    needleLeft=Math.min(18,bmi/18.5*18)+'%';
+  } else if(bmi<25){
+    cat='Normal Weight'; catColour='#15803d'; catBg='rgba(21,128,61,.1)'; catBrd='rgba(21,128,61,.25)';
+    icon='✅'; title='Your BMI is in the healthy range';
+    desc='A BMI of 18.5–24.9 is associated with lower risk of weight-related health conditions. Maintaining this through a balanced diet and regular activity supports long-term health.';
+    tips=['🏃 Aim for at least 150 minutes of moderate exercise per week.','🍎 Continue eating a varied, balanced diet rich in vegetables, wholegrains, and lean protein.','😴 Good sleep (7–9 hours) helps maintain a healthy metabolism.'];
+    needleLeft=(18+(bmi-18.5)/(24.9-18.5)*27)+'%';
+  } else if(bmi<30){
+    cat='Overweight'; catColour='#b45309'; catBg='rgba(180,83,9,.1)'; catBrd='rgba(180,83,9,.25)';
+    icon='💛'; title='Your BMI falls in the overweight range';
+    desc='Being overweight can raise the risk of type 2 diabetes, heart disease, and joint problems. Even modest weight loss of 5–10% can meaningfully reduce these risks.';
+    tips=['🚶 Start with 30 minutes of walking daily — it\'s one of the most effective interventions.','📉 Reducing portion sizes and ultra-processed food intake can help.','🩺 Consider an NHS Health Check to assess your cardiovascular risk profile.','💧 Staying well hydrated helps regulate appetite.'];
+    needleLeft=(45+(bmi-25)/(29.9-25)*18)+'%';
+  } else if(bmi<35){
+    cat='Obese Class I'; catColour='#c2410c'; catBg='rgba(194,65,12,.1)'; catBrd='rgba(194,65,12,.25)';
+    icon='🔴'; title='Your BMI is in the obese range (Class I)';
+    desc='Class I obesity is associated with significantly increased risk of type 2 diabetes, hypertension, sleep apnoea, and cardiovascular disease. Support is available — you don\'t need to do this alone.';
+    tips=['🏥 Book an appointment with your GP to discuss a structured weight management plan.','📋 You may be eligible for NHS weight management programmes or medication support.','🥦 Dietary changes alongside physical activity are more effective than either alone.','🧠 Addressing emotional or stress-related eating can be a key component.'];
+    needleLeft=(63+(bmi-30)/(34.9-30)*13)+'%';
+  } else if(bmi<40){
+    cat='Obese Class II'; catColour='#dc2626'; catBg='rgba(220,38,38,.1)'; catBrd='rgba(220,38,38,.25)';
+    icon='🔴'; title='Your BMI indicates Class II obesity';
+    desc='Class II obesity carries a high risk of serious health complications. Medical support — including specialist programmes, pharmacotherapy, or bariatric options — can make a significant difference.';
+    tips=['🏥 Please speak to your GP as a priority — specialist referral options are available.','💊 Newer weight loss medications (GLP-1 agonists) may be clinically appropriate for you.','🫂 Peer support groups and psychological support can complement medical treatment.'];
+    needleLeft=(76+(bmi-35)/(39.9-35)*10)+'%';
+  } else {
+    cat='Obese Class III'; catColour='#991b1b'; catBg='rgba(153,27,27,.1)'; catBrd='rgba(153,27,27,.25)';
+    icon='🔴'; title='Your BMI indicates severe obesity (Class III)';
+    desc='Class III obesity carries serious health risks and warrants specialist medical review. A range of effective treatments exists including specialist weight management clinics and bariatric surgery referral.';
+    tips=['🏥 Please make an urgent appointment with your GP.','🏨 Specialist weight management and bariatric surgery services are available via NHS referral.','❤️ Your GP can help review all cardiovascular risk factors alongside weight management.'];
+    needleLeft='90%';
+  }
+
+  // Needle position
+  var bmiClamped=Math.max(10,Math.min(50,bmi));
+  // Map: <18.5 → 0-18%, 18.5-25 → 18-45%, 25-30 → 45-63%, 30-35 → 63-76%, 35-40 → 76-87%, >40 → 87-100%
+  var nl;
+  if(bmi<18.5)      nl=bmi/18.5*18;
+  else if(bmi<25)   nl=18+(bmi-18.5)/(24.9-18.5)*27;
+  else if(bmi<30)   nl=45+(bmi-25)/5*18;
+  else if(bmi<35)   nl=63+(bmi-30)/5*13;
+  else if(bmi<40)   nl=76+(bmi-35)/5*11;
+  else              nl=87+Math.min((bmi-40)/10*13,13);
+
+  // Show result
+  document.getElementById('defp').style.display='none';
+  var rc=document.getElementById('rcard');
+  rc.classList.add('show');
+
+  // Animate BMI number
+  animNumR('rBMI',0,bmiR,900,1);
+  document.getElementById('rHt').textContent=htStr;
+  document.getElementById('rWt').textContent=wtStr;
+  document.getElementById('rIdealRange').textContent=idealLow+'–'+idealHigh;
+  document.getElementById('rIdealText').textContent='For your height of '+htStr+', a healthy weight is '+idealLow+'–'+idealHigh+'kg ('+Math.round(idealLow*2.205)+'–'+Math.round(idealHigh*2.205)+' lbs)';
+
+  var catEl=document.getElementById('rCat');
+  catEl.textContent='● '+cat;
+  catEl.style.background=catBg;
+  catEl.style.color=catColour;
+  catEl.style.border='1.5px solid '+catBrd;
+
+  document.getElementById('rIcon').textContent=icon;
+  document.getElementById('rTitle').textContent=title;
+  document.getElementById('rDesc').textContent=desc;
+
+  document.getElementById('rtips').innerHTML=tips.map(function(t){return'<div class="rti">'+t+'</div>'}).join('');
+
+  // Animate needle
+  setTimeout(function(){document.getElementById('bmiNeedle').style.left=nl+'%';},200);
+
+  rc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NHS Health Checks – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
+      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
+      --white:#ffffff; --off-white:#f5f8fc;
+      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
+      --col-heart:#c0392b;
+      --col-brain:#6c3483;
+      --col-kidney:#1a5276;
+      --col-diabetes:#0e6655;
+      --col-check:#005EB8;
+      --col-bp:#c0392b;
+      --col-chol:#b7770d;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+
+    /* ── UTILITY BAR ─────────────────────────────── */
+    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
+    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}.utility-bar a:hover{color:#fff}
+    .utility-bar .emer{display:flex;align-items:center;gap:1.5rem}
+    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+    /* ── HEADER ──────────────────────────────────── */
+    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+    .logo-wrap svg{height:84px;width:auto}
+    nav{display:flex;align-items:center;gap:.25rem}
+    nav a{font-size:.88rem;font-weight:500;letter-spacing:.02em;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
+    .nav-cta{background:var(--nhs-blue)!important;color:var(--white)!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25);transition:background .2s,transform .15s!important}
+    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+    /* ── PAGE BANNER ─────────────────────────────── */
+    .page-banner{background:var(--white);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3.2rem;position:relative;overflow:hidden}
+    .page-banner::before{content:'';position:absolute;top:-80px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
+    .page-banner::after{content:'';position:absolute;bottom:-60px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.06) 0%,transparent 70%);pointer-events:none}
+    .page-banner-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+    .breadcrumb a{color:var(--text-soft);text-decoration:none}.breadcrumb a:hover{color:var(--nhs-blue)}
+    .breadcrumb-sep{opacity:.4}
+    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,94,184,.07);border:1px solid rgba(0,94,184,.15);border-radius:20px;padding:.3rem .9rem;color:var(--nhs-blue);margin-bottom:1.1rem}
+    .page-tag span{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%}
+    .page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:.9rem}
+    .page-banner h1 em{font-style:normal;color:var(--nhs-blue)}
+    .page-banner-sub{font-size:1rem;color:var(--text-mid);max-width:600px;line-height:1.7}
+    .banner-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--nhs-blue);color:#fff;padding:.9rem 1.8rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;white-space:nowrap;margin-top:1.5rem}
+    .banner-cta:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+    .banner-cta svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2}
+
+    /* ── ELIGIBILITY STRIP ───────────────────────── */
+    .elig-strip{background:var(--nhs-blue);padding:0}
+    .elig-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+    .elig-item{padding:1.6rem 1.4rem;text-align:center;border-right:1px solid rgba(255,255,255,.15);color:var(--white)}
+    .elig-item:last-child{border-right:none}
+    .elig-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.25rem}
+    .elig-label{font-size:.83rem;font-weight:500;opacity:.88}
+    .elig-sub{font-size:.71rem;opacity:.6;margin-top:.15rem}
+
+    /* ── SECTION SHARED ──────────────────────────── */
+    .section-inner{max-width:1200px;margin:0 auto}
+    .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nhs-blue);margin-bottom:.6rem}
+    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
+    h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--text-dark);margin-bottom:.5rem}
+    .section-lead{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
+    .section-divider{max-width:1200px;margin:0 auto;height:1px;background:var(--border)}
+
+    /* ── TWO-COL TOPIC LAYOUT ────────────────────── */
+    .two-col{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+    .two-col.reverse{direction:rtl}.two-col.reverse>*{direction:ltr}
+
+    /* ── CANVAS CARDS ────────────────────────────── */
+    .canvas-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:1.4rem;box-shadow:0 8px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
+    .canvas-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+    .canvas-card.body-map::before{background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua))}
+    .canvas-card.check-flow::before{background:linear-gradient(90deg,var(--col-check),#41B6E6)}
+    .canvas-card.bp::before{background:linear-gradient(90deg,var(--col-bp),#e88080)}
+    .canvas-card.chol::before{background:linear-gradient(90deg,var(--col-chol),#e8c060)}
+    .canvas-card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+    .canvas-card-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--nhs-dark)}
+    .phase-badge{font-size:.71rem;font-weight:700;letter-spacing:.07em;padding:.22rem .75rem;border-radius:20px;transition:all .4s;text-transform:uppercase}
+    .phase-badge.body-map{background:rgba(0,94,184,.1);color:var(--nhs-blue)}
+    .phase-badge.check-flow{background:rgba(0,94,184,.1);color:var(--col-check)}
+    .phase-badge.bp{background:rgba(192,57,43,.1);color:var(--col-bp)}
+    .phase-badge.chol{background:rgba(183,119,13,.1);color:var(--col-chol)}
+    canvas.anim{width:100%;height:auto;border-radius:10px;display:block;border:1px solid var(--border)}
+    .phase-dots{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem}
+    .pdot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .4s,transform .4s}
+    .pdot.active.body-map{background:var(--nhs-blue);transform:scale(1.4)}
+    .pdot.active.check-flow{background:var(--col-check);transform:scale(1.4)}
+    .pdot.active.bp{background:var(--col-bp);transform:scale(1.4)}
+    .pdot.active.chol{background:var(--col-chol);transform:scale(1.4)}
+
+    /* ── CONTENT PIECES ──────────────────────────── */
+    .topic-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:20px;padding:.28rem .85rem;margin-bottom:1rem;background:rgba(0,94,184,.08);border:1px solid rgba(0,94,184,.15);color:var(--nhs-blue)}
+    .topic-tag span{width:6px;height:6px;border-radius:50%;background:var(--nhs-blue)}
+    .info-list{list-style:none;margin:1.1rem 0;display:flex;flex-direction:column;gap:.5rem}
+    .info-list li{font-size:.88rem;color:var(--text-mid);padding-left:1.4rem;position:relative;line-height:1.65}
+    .info-list li::before{content:'';position:absolute;left:.1rem;top:.52rem;width:7px;height:7px;border-radius:50%;background:var(--nhs-blue)}
+    .info-box{border-radius:14px;padding:1.3rem 1.5rem;margin-top:1.3rem;background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.15)}
+    .info-box h4{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:.6rem}
+    .info-box p{font-size:.86rem;line-height:1.68;color:var(--text-mid)}
+    .info-box ul{list-style:none;margin-top:.5rem;display:flex;flex-direction:column;gap:.35rem}
+    .info-box ul li{font-size:.86rem;padding-left:1.1rem;position:relative;color:var(--text-mid)}
+    .info-box ul li::before{content:'–';position:absolute;left:0;color:var(--nhs-blue);font-weight:700}
+    .alert-strip{display:flex;gap:.8rem;align-items:flex-start;border-radius:12px;padding:1rem 1.3rem;margin-top:1rem;font-size:.84rem;line-height:1.65;color:var(--text-mid)}
+    .alert-strip.positive{background:rgba(0,127,59,.06);border:1px solid rgba(0,127,59,.2)}
+    .alert-strip.info{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.18)}
+    .alert-strip-icon{font-size:1.1rem;flex-shrink:0}
+
+    /* ── RISK FACTORS GRID ───────────────────────── */
+    .risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem}
+    .risk-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.6rem 1.2rem;text-align:center;transition:transform .22s,box-shadow .22s;cursor:default}
+    .risk-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,94,184,.1)}
+    .risk-icon{font-size:2rem;margin-bottom:.7rem;display:block}
+    .risk-name{font-size:.88rem;font-weight:700;color:var(--text-dark);margin-bottom:.3rem}
+    .risk-desc{font-size:.78rem;color:var(--text-soft);line-height:1.55}
+
+    /* ── CONDITION PILLS ─────────────────────────── */
+    .cond-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2.5rem}
+    .cond-pill{border-radius:16px;padding:1.4rem 1rem;text-align:center;border:1px solid var(--border);background:var(--white);transition:transform .2s,box-shadow .2s}
+    .cond-pill:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+    .cond-pill-dot{width:14px;height:14px;border-radius:50%;margin:0 auto .7rem}
+    .cond-pill-name{font-size:.82rem;font-weight:700;color:var(--text-dark);line-height:1.3}
+    .cond-pill.heart .cond-pill-dot{background:var(--col-heart)}
+    .cond-pill.brain .cond-pill-dot{background:var(--col-brain)}
+    .cond-pill.kidney .cond-pill-dot{background:var(--col-kidney)}
+    .cond-pill.diabetes .cond-pill-dot{background:var(--col-diabetes)}
+    .cond-pill.dementia .cond-pill-dot{background:#5d4037}
+
+    /* ── PROCESS STEPS ───────────────────────────── */
+    .steps-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2.5rem;position:relative}
+    .steps-row::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua));z-index:0}
+    .step-pill{text-align:center;position:relative;z-index:1}
+    .step-num{width:56px;height:56px;border-radius:50%;background:var(--nhs-blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;box-shadow:0 4px 14px rgba(0,94,184,.3)}
+    .step-name{font-size:.8rem;font-weight:700;color:var(--text-dark);margin-bottom:.25rem}
+    .step-desc{font-size:.74rem;color:var(--text-soft);line-height:1.5}
+
+    /* ── FAQ ACCORDION ───────────────────────────── */
+    .faq-section{background:var(--off-white);padding:5rem 2rem}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem}
+    .faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--text-dark);user-select:none;gap:1rem}
+    .faq-q:hover{background:var(--off-white)}
+    .faq-icon{width:22px;height:22px;border-radius:50%;background:rgba(0,94,184,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;transition:transform .3s}
+    .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--nhs-blue);color:#fff}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+    .faq-a-inner{padding:0 1.5rem 1.2rem;font-size:.86rem;line-height:1.72;color:var(--text-mid)}
+    .faq-item.open .faq-a{max-height:300px}
+
+    /* ── BOOK BANNER ─────────────────────────────── */
+    .book-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,#0070cc 100%);padding:4rem 2rem}
+    .book-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .book-inner h2{color:#fff;margin-bottom:.7rem}
+    .book-inner p{color:rgba(255,255,255,.8);font-size:1rem;line-height:1.7;max-width:540px}
+    .book-ctas{display:flex;flex-direction:column;gap:1rem;align-items:center}
+
+    /* ── NHS APP BANNER ──────────────────────────── */
+    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
+    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .app-inner h2{color:var(--white)}
+    .app-inner .section-lead{color:rgba(255,255,255,.8)}
+    .app-inner .section-tag{color:rgba(255,255,255,.6)}
+    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
+    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
+    .btn-white{background:var(--white);color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:var(--white);padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
+    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+    /* ── EMERGENCY ───────────────────────────────── */
+    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
+    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .emerg-card{border-radius:16px;padding:2rem}
+    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
+    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
+    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
+    .emerg-card.urgent .emerg-number{color:#dc3545}
+    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
+    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
+    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}.footer-links a:hover{color:#fff}
+    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
+    .hours-grid{display:grid;gap:.3rem}
+    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
+    .hour-day{opacity:.7}
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:960px){
+      .two-col,.two-col.reverse{grid-template-columns:1fr;direction:ltr;gap:2.5rem}
+      .page-banner-inner{grid-template-columns:1fr}
+      .cond-grid{grid-template-columns:repeat(3,1fr)}
+      .risk-grid{grid-template-columns:1fr 1fr}
+      .steps-row{grid-template-columns:1fr 1fr}
+      .steps-row::before{display:none}
+      .faq-grid{grid-template-columns:1fr}
+      .elig-inner{grid-template-columns:1fr 1fr}
+      .app-inner,.book-inner{grid-template-columns:1fr}
+      .emergency-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr 1fr}
+      nav{display:none}
+    }
+    @media(max-width:600px){
+      .cond-grid,.risk-grid,.steps-row{grid-template-columns:1fr}
+      .elig-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="emer">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="emer">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
+            <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
+            <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
+            <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
+            <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
+            <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
+            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="index.html">Our Practice</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#team">Our Doctors</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE BANNER -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="#">Clinics &amp; Services</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>NHS Health Checks</span>
+      </div>
+      <div class="page-tag"><span></span> Free NHS Service · Ages 40–74</div>
+      <h1>NHS <em>Health Checks</em></h1>
+      <p class="page-banner-sub">Working together to improve your health. A free NHS Health Check every five years helps us identify your risk of heart disease, stroke, type 2 diabetes, kidney disease and dementia — before symptoms appear. Prevention starts here.</p>
+      <a href="https://salujaclinic.webgp.com/" class="banner-cta" target="_blank">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Your Free Health Check
+      </a>
+    </div>
+    <div style="display:none" class="banner-visual"></div>
+  </div>
+</div>
+
+<!-- ELIGIBILITY STRIP -->
+<div class="elig-strip">
+  <div class="elig-inner">
+    <div class="elig-item">
+      <div class="elig-num">40–74</div>
+      <div class="elig-label">Age range eligible</div>
+      <div class="elig-sub">Men and women, no prior diagnosis</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-num">Every 5 yrs</div>
+      <div class="elig-label">Frequency of check</div>
+      <div class="elig-sub">Invited automatically by your practice</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-num">20–30 min</div>
+      <div class="elig-label">Duration of appointment</div>
+      <div class="elig-sub">Quick, painless, and completely free</div>
+    </div>
+    <div class="elig-item">
+      <div class="elig-num">5 conditions</div>
+      <div class="elig-label">Screened in one visit</div>
+      <div class="elig-sub">Heart · Stroke · Diabetes · Kidney · Dementia</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — BODY MAP ANIMATION
+     ══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--white)">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="canvas-card body-map">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Conditions Screened · Body Map</div>
+          <div class="phase-badge body-map" id="bodyPhase">Heart Disease</div>
+        </div>
+        <canvas id="bodyCanvas" class="anim" width="500" height="340"></canvas>
+        <div class="phase-dots" id="bodyDots">
+          <div class="pdot body-map active"></div>
+          <div class="pdot body-map"></div>
+          <div class="pdot body-map"></div>
+          <div class="pdot body-map"></div>
+          <div class="pdot body-map"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="topic-tag"><span></span> What We Check For</div>
+      <h2>Five Conditions.<br><em style="font-style:normal;color:var(--nhs-blue)">One Appointment.</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Everyone is at risk of developing heart disease, stroke, diabetes, kidney disease and some forms of dementia as they age. The good news — these conditions can often be <strong>prevented or managed</strong> when identified early, even if you have a family history of them.</p>
+
+      <div class="cond-grid" style="margin-top:1.8rem;grid-template-columns:1fr 1fr;gap:.9rem">
+        <div style="background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);border-radius:12px;padding:1rem 1.1rem">
+          <div style="font-size:.8rem;font-weight:700;color:var(--col-heart);margin-bottom:.3rem">❤️ Heart Disease</div>
+          <div style="font-size:.8rem;color:var(--text-mid);line-height:1.55">Blocked arteries can cause heart attack or angina</div>
+        </div>
+        <div style="background:rgba(108,52,131,.06);border:1px solid rgba(108,52,131,.2);border-radius:12px;padding:1rem 1.1rem">
+          <div style="font-size:.8rem;font-weight:700;color:var(--col-brain);margin-bottom:.3rem">🧠 Stroke</div>
+          <div style="font-size:.8rem;color:var(--text-mid);line-height:1.55">Blocked arteries or bleeds in the brain</div>
+        </div>
+        <div style="background:rgba(26,82,118,.06);border:1px solid rgba(26,82,118,.2);border-radius:12px;padding:1rem 1.1rem">
+          <div style="font-size:.8rem;font-weight:700;color:var(--col-kidney);margin-bottom:.3rem">🫘 Kidney Disease</div>
+          <div style="font-size:.8rem;color:var(--text-mid);line-height:1.55">Damaged by high BP or unmanaged diabetes</div>
+        </div>
+        <div style="background:rgba(14,102,85,.06);border:1px solid rgba(14,102,85,.2);border-radius:12px;padding:1rem 1.1rem">
+          <div style="font-size:.8rem;font-weight:700;color:var(--col-diabetes);margin-bottom:.3rem">🩸 Type 2 Diabetes</div>
+          <div style="font-size:.8rem;color:var(--text-mid);line-height:1.55">Linked to weight, inactivity and diet</div>
+        </div>
+        <div style="background:rgba(93,64,55,.06);border:1px solid rgba(93,64,55,.2);border-radius:12px;padding:1rem 1.1rem;grid-column:1/-1">
+          <div style="font-size:.8rem;font-weight:700;color:#5d4037;margin-bottom:.3rem">🧩 Dementia Risk Factors</div>
+          <div style="font-size:.8rem;color:var(--text-mid);line-height:1.55">High BP, diabetes and inactivity increase risk — early action helps</div>
+        </div>
+      </div>
+      <div class="alert-strip positive" style="margin-top:1.2rem">
+        <div class="alert-strip-icon">✅</div>
+        <div>Having one of these conditions can increase your risk of another. A single 20-minute check helps identify multiple risks at once — for free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:0 2rem"><div class="section-divider"></div></div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — RISK FACTORS + CHECK PROCESS
+     ══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--off-white)">
+  <div class="section-inner">
+    <div class="two-col reverse" style="max-width:1200px;margin:0 auto">
+      <div class="fade-up">
+        <div class="topic-tag"><span></span> Risk Factors</div>
+        <h2>Are You at <em style="font-style:normal;color:var(--nhs-blue)">Higher Risk?</em></h2>
+        <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:1.2rem">Your risk increases with age, but several lifestyle and health factors amplify it further. The NHS Health Check identifies exactly where you stand — and what you can do about it.</p>
+        <div class="risk-grid" style="grid-template-columns:1fr 1fr;margin-top:0;gap:.9rem">
+          <div class="risk-card"><span class="risk-icon">⚖️</span><div class="risk-name">Being Overweight</div><div class="risk-desc">Raises risk of diabetes, heart disease &amp; stroke</div></div>
+          <div class="risk-card"><span class="risk-icon">🛋️</span><div class="risk-name">Physical Inactivity</div><div class="risk-desc">Linked to diabetes, high BP &amp; poor heart health</div></div>
+          <div class="risk-card"><span class="risk-icon">🍔</span><div class="risk-name">Poor Diet</div><div class="risk-desc">High salt, fat &amp; sugar affect cholesterol &amp; BP</div></div>
+          <div class="risk-card"><span class="risk-icon">🚬</span><div class="risk-name">Smoking</div><div class="risk-desc">Major contributor to heart disease &amp; stroke</div></div>
+          <div class="risk-card"><span class="risk-icon">🍺</span><div class="risk-name">Excess Alcohol</div><div class="risk-desc">Raises blood pressure and damages the liver</div></div>
+          <div class="risk-card"><span class="risk-icon">📈</span><div class="risk-name">High BP / Cholesterol</div><div class="risk-desc">Often symptomless — only found through testing</div></div>
+        </div>
+        <div class="alert-strip info" style="margin-top:1.2rem">
+          <div class="alert-strip-icon">ℹ️</div>
+          <div>Many risk factors have <strong>no symptoms</strong> — you can have high blood pressure or raised cholesterol and feel completely well. Only a check can reveal them.</div>
+        </div>
+      </div>
+      <div class="fade-up" style="animation-delay:.12s">
+        <div class="canvas-card check-flow">
+          <div class="canvas-card-hdr">
+            <div class="canvas-card-title">Your Check Appointment · Step by Step</div>
+            <div class="phase-badge check-flow" id="checkPhase">Welcome &amp; History</div>
+          </div>
+          <canvas id="checkCanvas" class="anim" width="500" height="340"></canvas>
+          <div class="phase-dots" id="checkDots">
+            <div class="pdot check-flow active"></div>
+            <div class="pdot check-flow"></div>
+            <div class="pdot check-flow"></div>
+            <div class="pdot check-flow"></div>
+            <div class="pdot check-flow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:0 2rem"><div class="section-divider"></div></div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — BLOOD PRESSURE ANIMATION
+     ══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--white)" id="bp">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="canvas-card bp">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Blood Pressure · Artery Simulation</div>
+          <div class="phase-badge bp" id="bpPhase">Healthy Pressure</div>
+        </div>
+        <canvas id="bpCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="bpDots">
+          <div class="pdot bp active"></div>
+          <div class="pdot bp"></div>
+          <div class="pdot bp"></div>
+          <div class="pdot bp"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="topic-tag"><span></span> Blood Pressure</div>
+      <h2>Understanding <em style="font-style:normal;color:var(--col-bp)">Blood Pressure</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Blood pressure is the force of blood pushing against artery walls. Chronically high pressure — hypertension — silently damages arteries, the heart, kidneys and brain over years before any symptoms appear. It is one of the most important things we check.</p>
+      <div class="info-box" style="background:rgba(192,57,43,.05);border-color:rgba(192,57,43,.2);margin-top:1.3rem">
+        <h4>📊 What the Numbers Mean</h4>
+        <ul>
+          <li><strong>Optimal:</strong> below 120/80 mmHg — arteries under healthy, sustainable pressure</li>
+          <li><strong>Elevated:</strong> 120–139 / 80–89 mmHg — lifestyle changes recommended</li>
+          <li><strong>High (Stage 1):</strong> 140–159 / 90–99 mmHg — monitoring and possible medication</li>
+          <li><strong>High (Stage 2):</strong> 160+ / 100+ mmHg — treatment usually required</li>
+          <li><strong>Crisis:</strong> above 180/120 mmHg — seek medical attention immediately</li>
+        </ul>
+      </div>
+      <div class="alert-strip info" style="margin-top:1rem">
+        <div class="alert-strip-icon">💊</div>
+        <div>If your blood pressure is raised at your NHS Health Check, we will discuss lifestyle changes and — if needed — medication to bring it into a healthy range. Early treatment prevents stroke, heart attack and kidney damage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:0 2rem"><div class="section-divider"></div></div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — CHOLESTEROL ANIMATION
+     ══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--off-white)" id="cholesterol">
+  <div class="two-col reverse">
+    <div class="fade-up">
+      <div class="topic-tag"><span></span> Cholesterol</div>
+      <h2>Cholesterol &amp; <em style="font-style:normal;color:var(--col-chol)">Artery Health</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Cholesterol is a fatty substance in the blood. Too much LDL ("bad") cholesterol causes plaques to build up inside artery walls, narrowing them over time. This reduces blood flow and can eventually cause a heart attack or stroke — often without any prior warning.</p>
+      <div class="info-box" style="background:rgba(183,119,13,.05);border-color:rgba(183,119,13,.25)">
+        <h4>🩸 Target Cholesterol Levels</h4>
+        <ul>
+          <li><strong>Total cholesterol:</strong> ideally below 5 mmol/L</li>
+          <li><strong>LDL ("bad") cholesterol:</strong> below 3 mmol/L</li>
+          <li><strong>HDL ("good") cholesterol:</strong> above 1 mmol/L (men), 1.2 (women)</li>
+          <li><strong>Triglycerides:</strong> below 1.7 mmol/L</li>
+          <li>Your GP will explain your personal results and what they mean for your risk</li>
+        </ul>
+      </div>
+      <div class="info-box" style="background:rgba(0,127,59,.05);border-color:rgba(0,127,59,.2);margin-top:1rem">
+        <h4>🥗 What Helps Lower Cholesterol?</h4>
+        <ul>
+          <li>Reducing saturated fat (butter, processed meat, pastries)</li>
+          <li>Increasing soluble fibre (oats, lentils, beans, fruit)</li>
+          <li>Regular aerobic exercise — 150 minutes per week</li>
+          <li>Stopping smoking and reducing alcohol</li>
+          <li>Statins — safe, effective medication if lifestyle changes are insufficient</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="canvas-card chol">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Cholesterol Plaque · Artery View</div>
+          <div class="phase-badge chol" id="cholPhase">Healthy Artery</div>
+        </div>
+        <canvas id="cholCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="cholDots">
+          <div class="pdot chol active"></div>
+          <div class="pdot chol"></div>
+          <div class="pdot chol"></div>
+          <div class="pdot chol"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS STEPS -->
+<section style="padding:5rem 2rem;background:var(--white)">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center;margin-bottom:.5rem">
+      <div class="section-tag" style="display:inline-block;margin-bottom:.5rem">The Appointment</div>
+      <h2>What Happens at Your Check</h2>
+      <p class="section-lead" style="margin:0 auto;text-align:center">A single 20–30 minute visit covers five key measurements and ends with personalised, actionable advice.</p>
+    </div>
+    <div class="steps-row fade-up" style="animation-delay:.1s">
+      <div class="step-pill">
+        <div class="step-num">1</div>
+        <div class="step-name">History &amp; Lifestyle</div>
+        <div class="step-desc">Family history, smoking, diet, activity level and current medications discussed</div>
+      </div>
+      <div class="step-pill">
+        <div class="step-num">2</div>
+        <div class="step-name">Height, Weight &amp; BMI</div>
+        <div class="step-desc">Body measurements recorded; BMI and waist circumference calculated</div>
+      </div>
+      <div class="step-pill">
+        <div class="step-num">3</div>
+        <div class="step-name">Blood Pressure</div>
+        <div class="step-desc">Cuff applied to your arm — quick, painless reading in under 2 minutes</div>
+      </div>
+      <div class="step-pill">
+        <div class="step-num">4</div>
+        <div class="step-name">Cholesterol Test</div>
+        <div class="step-desc">Simple finger-prick or venous blood sample to measure cholesterol levels</div>
+      </div>
+      <div class="step-pill">
+        <div class="step-num">5</div>
+        <div class="step-name">Results &amp; Advice</div>
+        <div class="step-desc">Your risk score explained; personalised plan to maintain or improve your health</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-tag">Common Questions</div>
+      <h2>Questions You May Have</h2>
+    </div>
+    <div class="faq-grid fade-up" style="animation-delay:.1s">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Why do I need this check if I feel fine?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">The NHS Health Check helps identify potential risks early — before symptoms appear. High blood pressure, raised cholesterol and early-stage diabetes often produce no symptoms at all. By having this check and following your health professional's advice, you significantly improve your chances of a longer, healthier life.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          These conditions run in my family — does that matter?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">If you have a family history of heart disease, stroke, type 2 diabetes, or kidney disease, you may indeed be at higher risk — and that makes the check even more important. Taking action now through lifestyle changes or medication can help prevent or delay the onset of these conditions.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          I know my lifestyle isn't perfect — will I be judged?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely not. Our role is to help, not judge. If you'd like support — whether that's eating more healthily, becoming more active, cutting down on alcohol, or stopping smoking — we will work with you to find practical, realistic approaches that suit your life.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What if I'm told I'm at 'low risk'?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">A low risk result is great news, but it doesn't guarantee you won't develop these conditions in future. Think of it as a baseline and an opportunity to maintain your healthy habits. You'll be re-invited for a check every five years to monitor any changes.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Who is eligible and how do I book?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Everyone aged 40–74 who has not been previously diagnosed with heart disease, stroke, diabetes, kidney disease or dementia is eligible. You'll be automatically invited every five years. You can also proactively request your check — simply call us on 0208 574 5136 or book online via our website.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What happens after the appointment?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">You'll receive a full explanation of your results and what they mean. Where needed, you may be asked to return for an additional blood test (for diabetes or kidney function). Personalised lifestyle advice will be given, and treatment or medication may be prescribed if appropriate. Some patients are referred to specialist services for further support.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK BANNER -->
+<div class="book-banner">
+  <div class="book-inner">
+    <div>
+      <div class="section-tag" style="color:rgba(255,255,255,.5)">Free NHS Service</div>
+      <h2>Book Your Free Health Check Today</h2>
+      <p>If you are aged 40–74 and haven't had an NHS Health Check in the last five years, you may be due one. Don't wait for an invitation — be proactive about your health. It takes just 20 minutes and could change your life.</p>
+    </div>
+    <div class="book-ctas">
+      <a href="https://salujaclinic.webgp.com/" class="btn-white" target="_blank">↗ Book Online Now</a>
+      <a href="tel:02085745136" class="btn-ghost">📞 Call 0208 574 5136</a>
+    </div>
+  </div>
+</div>
+
+<!-- NHS APP BANNER -->
+<div class="app-banner">
+  <div class="app-inner section-inner">
+    <div>
+      <div class="section-tag">Digital Access</div>
+      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+      <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere.</p>
+      <div class="app-bullets">
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Book your NHS Health Check appointment</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>View your test results and health record</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions instantly</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
+        <defs>
+          <linearGradient id="aCS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
+          <linearGradient id="aCT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
+          <radialGradient id="aCS2" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient>
+          <linearGradient id="aCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient>
+          <filter id="aSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="transparent"/>
+        <circle cx="80" cy="80" r="68" fill="url(#aCR)" filter="url(#aSh)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#aCS2)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#aCS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#aCT)">SALUJA CLINIC</text>
+      </svg>
+      <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
+        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24/7, free from all phones. For urgent medical advice when your GP is closed, or if you're concerned about any new health symptoms.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Call 999 immediately for chest pain, signs of stroke (facial droop, arm weakness, speech difficulty), or any life-threatening emergency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html" target="_blank">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="https://www.nhs.uk/conditions/nhs-health-check/" target="_blank">NHS Health Check Info</a></li>
+        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     CANVAS ANIMATIONS
+══════════════════════════════════════════════════════════ -->
+<script>
+const fadeObs = new IntersectionObserver(
+  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+function ease(t){ return t<.5?2*t*t:-1+(4-2*t)*t; }
+function lerp(a,b,t){ return a+(b-a)*t; }
+function sr(n){ let x=Math.sin(n+1)*10000; return x-Math.floor(x); }
+function cycleFn(durs){
+  const total=durs.reduce((a,b)=>a+b,0);
+  return t=>{ let c=t%total,acc=0; for(let i=0;i<durs.length;i++){ if(c<acc+durs[i]) return{idx:i,t:(c-acc)/durs[i]}; acc+=durs[i]; } return{idx:0,t:0}; };
+}
+function setUI(badgeId,dotsId,dotCls,labels,idx){
+  document.getElementById(badgeId).textContent=labels[idx];
+  document.querySelectorAll('#'+dotsId+' .pdot').forEach((d,i)=>{ d.classList.toggle('active',i===idx); d.classList.add(dotCls); });
+}
+
+/* ══════════════════════════════════════════════════════════
+   1. BODY MAP — five conditions light up sequentially on a body silhouette
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('bodyCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=340; C.width=W; C.height=H;
+  const LABELS=['Heart Disease','Stroke','Type 2 Diabetes','Kidney Disease','Dementia Risk'];
+  const COLS=['#c0392b','#6c3483','#0e6655','#1a5276','#5d4037'];
+  const getPhase=cycleFn([5,5,5,5,5]);
+  let st=null,lastIdx=-1,pulseT=0;
+
+  // Body landmark coords (relative to W=500,H=340)
+  const SPOTS={
+    heart:{x:220,y:145,r:18,label:'Heart'},
+    brain:{x:250,y:48,r:20,label:'Brain'},
+    kidney_l:{x:200,y:200,r:13,label:'Kidney'},
+    kidney_r:{x:300,y:200,r:13,label:''},
+    gut:{x:250,y:215,r:22,label:'Pancreas'},
+    head:{x:250,y:44,r:26},
+  };
+
+  // Which spots light up per phase idx
+  const ACTIVE=[
+    [{...SPOTS.heart,col:'#c0392b',label:'Heart'}],
+    [{...SPOTS.brain,col:'#6c3483',label:'Brain / Arteries'}],
+    [{...SPOTS.gut,col:'#0e6655',label:'Pancreas'}],
+    [{x:200,y:200,r:13,col:'#1a5276',label:'Kidneys'},{x:300,y:200,r:13,col:'#1a5276',label:''}],
+    [{...SPOTS.brain,col:'#5d4037',label:'Brain — dementia risk'},{...SPOTS.heart,col:'#5d4037',label:''},{x:200,y:200,r:13,col:'#5d4037',label:''},{x:300,y:200,r:13,col:'#5d4037',label:''}],
+  ];
+
+  function drawBody(){
+    // Simple human silhouette using paths
+    const cx=250;
+    ctx.save();
+    // head
+    ctx.beginPath(); ctx.arc(cx,52,28,0,Math.PI*2);
+    ctx.fillStyle='#e8d0b8'; ctx.fill(); ctx.strokeStyle='rgba(160,120,80,.3)'; ctx.lineWidth=1.5; ctx.stroke();
+    // neck
+    ctx.beginPath(); ctx.rect(cx-10,78,20,18);
+    ctx.fillStyle='#e8d0b8'; ctx.fill();
+    // torso
+    ctx.beginPath();
+    ctx.moveTo(cx-52,96); ctx.bezierCurveTo(cx-58,130,cx-54,230,cx-44,268);
+    ctx.lineTo(cx+44,268); ctx.bezierCurveTo(cx+54,230,cx+58,130,cx+52,96);
+    ctx.closePath();
+    const tg=ctx.createLinearGradient(cx-58,96,cx+58,96);
+    tg.addColorStop(0,'#ddc8b0'); tg.addColorStop(.5,'#e8d8c0'); tg.addColorStop(1,'#ddc8b0');
+    ctx.fillStyle=tg; ctx.fill(); ctx.strokeStyle='rgba(160,120,80,.2)'; ctx.lineWidth=1.5; ctx.stroke();
+    // arms
+    [[cx-52,96,cx-80,180,cx-72,200],[cx+52,96,cx+80,180,cx+72,200]].forEach(([x0,y0,x1,y1,x2,y2])=>{
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.quadraticCurveTo(x1,y1,x2,y2);
+      ctx.strokeStyle='#e0c8a8'; ctx.lineWidth=22; ctx.lineCap='round'; ctx.stroke();
+      ctx.strokeStyle='rgba(160,120,80,.2)'; ctx.lineWidth=20; ctx.stroke();
+    });
+    // legs
+    [[cx-24,268,cx-30,320],[cx+24,268,cx+30,320]].forEach(([x0,y0,x1,y1])=>{
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1);
+      ctx.strokeStyle='#e0c8a8'; ctx.lineWidth=26; ctx.lineCap='round'; ctx.stroke();
+      ctx.strokeStyle='rgba(160,120,80,.2)'; ctx.lineWidth=24; ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function drawOrgans(){
+    ctx.save(); ctx.globalAlpha=.18;
+    // heart outline
+    ctx.beginPath(); ctx.arc(220,145,12,0,Math.PI*2); ctx.fillStyle='#c0392b'; ctx.fill();
+    // brain top
+    ctx.beginPath(); ctx.arc(250,50,16,Math.PI,0,false); ctx.fillStyle='#6c3483'; ctx.fill();
+    // kidneys
+    ctx.beginPath(); ctx.ellipse(202,200,9,12,-.2,0,Math.PI*2); ctx.fillStyle='#1a5276'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(298,200,9,12,.2,0,Math.PI*2); ctx.fillStyle='#1a5276'; ctx.fill();
+    // stomach/pancreas area
+    ctx.beginPath(); ctx.ellipse(250,218,18,10,0,0,Math.PI*2); ctx.fillStyle='#0e6655'; ctx.fill();
+    ctx.restore();
+  }
+
+  function drawActiveSPot(spots, progress, elapsed){
+    spots.forEach(s=>{
+      if(!s.r) return;
+      const pulse=Math.sin(elapsed*3)*.3+.7;
+      const glow=ease(progress)*pulse;
+      // outer glow ring
+      ctx.save(); ctx.globalAlpha=glow*.35;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r+10,0,Math.PI*2);
+      const rg=ctx.createRadialGradient(s.x,s.y,s.r,s.x,s.y,s.r+10);
+      rg.addColorStop(0,s.col+'cc'); rg.addColorStop(1,'transparent');
+      ctx.fillStyle=rg; ctx.fill(); ctx.restore();
+      // main spot
+      ctx.save(); ctx.globalAlpha=ease(progress)*.9;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.col+'bb'; ctx.fill();
+      ctx.strokeStyle=s.col; ctx.lineWidth=2.5; ctx.stroke();
+      if(s.label){
+        ctx.fillStyle=s.col; ctx.font='700 9px "DM Sans",sans-serif';
+        ctx.textAlign='center'; ctx.fillText(s.label,s.x,s.y+s.r+13);
+      }
+      ctx.restore();
+    });
+  }
+
+  function drawRiskLabel(idx, progress){
+    const descs=['Blocked arteries → heart attack / angina','Blocked artery or bleed → stroke','Inactivity &amp; weight → type 2 diabetes','High BP / diabetes → kidney damage','Vascular risk factors → dementia'];
+    const col=COLS[idx];
+    ctx.save(); ctx.globalAlpha=ease(progress)*.82;
+    ctx.beginPath(); ctx.roundRect(W/2-130,H-38,260,26,8);
+    ctx.fillStyle=col+'22'; ctx.fill(); ctx.strokeStyle=col+'55'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle=col; ctx.font='600 9px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText(descs[idx].replace('&amp;','&'),W/2,H-21);
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    pulseT+=0.03;
+    if(idx!==lastIdx){ lastIdx=idx; setUI('bodyPhase','bodyDots','body-map',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,280);
+    bg.addColorStop(0,'#f8f4f2'); bg.addColorStop(1,'#ede8e4');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    drawBody(); drawOrgans();
+    drawActiveSPot(ACTIVE[idx], t, elapsed);
+    drawRiskLabel(idx,t);
+    ctx.save(); ctx.globalAlpha=.15; ctx.fillStyle=COLS[idx];
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('NHS HEALTH CHECK — BODY MAP',W/2,14); ctx.restore();
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   2. CHECK APPOINTMENT FLOW
+   Steps: clipboard/history → scales/height → BP cuff → blood drop → results card
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('checkCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=340; C.width=W; C.height=H;
+  const LABELS=['Welcome & History','Height & Weight','Blood Pressure','Cholesterol Test','Your Results'];
+  const getPhase=cycleFn([5,6,6,6,7]);
+  let st=null,lastIdx=-1;
+
+  const STEP_X=[70,165,250,335,430];
+  const STEP_COLS=['#4a90d9','#2ecc71','#e74c3c','#f39c12','#005EB8'];
+  const STEP_ICONS=['📋','⚖️','💉','🩸','✅'];
+
+  function drawTimeline(activeIdx, progress){
+    // track
+    ctx.save(); ctx.globalAlpha=.2;
+    ctx.beginPath(); ctx.moveTo(STEP_X[0],H/2); ctx.lineTo(STEP_X[4],H/2);
+    ctx.strokeStyle='#005EB8'; ctx.lineWidth=3; ctx.stroke(); ctx.restore();
+    // progress fill
+    if(activeIdx>0||progress>.1){
+      const endX=lerp(STEP_X[Math.max(0,activeIdx-1)],STEP_X[activeIdx],ease(progress));
+      const gr=ctx.createLinearGradient(STEP_X[0],0,STEP_X[4],0);
+      gr.addColorStop(0,'#005EB8'); gr.addColorStop(1,'#009FBB');
+      ctx.save(); ctx.globalAlpha=.7;
+      ctx.beginPath(); ctx.moveTo(STEP_X[0],H/2); ctx.lineTo(endX,H/2);
+      ctx.strokeStyle=gr; ctx.lineWidth=4; ctx.stroke(); ctx.restore();
+    }
+    STEP_X.forEach((sx,i)=>{
+      const done=i<activeIdx, active=i===activeIdx;
+      const alpha=done?1:active?ease(progress):.25;
+      ctx.save(); ctx.globalAlpha=alpha;
+      ctx.beginPath(); ctx.arc(sx,H/2,active?22:18,0,Math.PI*2);
+      ctx.fillStyle=done?STEP_COLS[i]:(active?STEP_COLS[i]+'99':STEP_COLS[i]+'33');
+      ctx.fill();
+      if(active){
+        ctx.strokeStyle=STEP_COLS[i]; ctx.lineWidth=2.5; ctx.stroke();
+      }
+      ctx.font=`${active?'16':'13'}px sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(STEP_ICONS[i],sx,H/2);
+      ctx.restore();
+    });
+  }
+
+  // Large centre illustration per step
+  function drawIllustration(idx, t, elapsed){
+    const cy=H/2, cx=W/2;
+    ctx.save(); ctx.globalAlpha=Math.min(1,ease(t)*1.4);
+
+    if(idx===0){
+      // Clipboard
+      ctx.beginPath(); ctx.roundRect(cx-40,cy-70,80,110,8);
+      ctx.fillStyle='#f8f8f8'; ctx.fill(); ctx.strokeStyle='#9ab'; ctx.lineWidth=2; ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(cx-18,cy-78,36,16,6);
+      ctx.fillStyle='#ccd'; ctx.fill(); ctx.strokeStyle='#aab'; ctx.lineWidth=1.5; ctx.stroke();
+      // lines of text
+      [0,1,2,3,4].forEach(i=>{
+        ctx.beginPath(); ctx.roundRect(cx-30,cy-50+i*16, i===4?30:54, 7, 3);
+        ctx.fillStyle=`rgba(0,94,184,${0.15+i*.03})`; ctx.fill();
+      });
+      ctx.fillStyle='#005EB8'; ctx.font='700 11px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('Family History',cx,cy+52);
+      ctx.fillText('Lifestyle Questionnaire',cx,cy+65);
+    } else if(idx===1){
+      // Scales
+      ctx.beginPath(); ctx.roundRect(cx-36,cy+12,72,12,4);
+      ctx.fillStyle='#e8e8f0'; ctx.fill(); ctx.strokeStyle='#aab'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.rect(cx-20,cy-28,40,44); ctx.fillStyle='#f4f4f8'; ctx.fill();
+      ctx.strokeStyle='#aab'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.fillStyle='#005EB8'; ctx.font='700 13px "DM Sans",sans-serif'; ctx.textAlign='center';
+      const bmi=lerp(22,26,Math.sin(elapsed)*.5+.5).toFixed(1);
+      ctx.fillText('BMI '+bmi,cx,cy+4);
+      ctx.fillStyle='#666'; ctx.font='600 9px "DM Sans",sans-serif';
+      ctx.fillText('HEIGHT · WEIGHT · BMI',cx,cy+58);
+    } else if(idx===2){
+      // BP cuff
+      const inflate=ease(Math.min(1,t*1.8));
+      ctx.beginPath(); ctx.ellipse(cx,cy,45+inflate*10,30+inflate*6,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,220,240,.7)'; ctx.fill();
+      ctx.strokeStyle='#6090c0'; ctx.lineWidth=2+inflate*2; ctx.stroke();
+      // reading
+      const systolic=Math.round(lerp(160,122,ease(t)));
+      ctx.fillStyle='#c0392b'; ctx.font='700 18px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillText(`${systolic}/80`,cx,cy+6);
+      ctx.fillStyle='#666'; ctx.font='600 9px "DM Sans",sans-serif';
+      ctx.fillText('mmHg  —  Blood Pressure',cx,cy+58);
+      // inflate arrows
+      ctx.save(); ctx.globalAlpha=inflate*.5;
+      ctx.fillStyle='#c0392b'; ctx.font='bold 11px sans-serif';
+      ctx.fillText('→',cx+50,cy); ctx.fillText('←',cx-50,cy);
+      ctx.restore();
+    } else if(idx===3){
+      // Finger-prick blood drop
+      const drop=ease(Math.min(1,t*1.5));
+      ctx.beginPath();
+      ctx.arc(cx,cy+10,16*drop,0,Math.PI*2);
+      ctx.fillStyle='rgba(180,30,30,.85)'; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(cx,cy-30*drop); ctx.lineTo(cx-10*drop,cy+2); ctx.lineTo(cx+10*drop,cy+2); ctx.closePath();
+      ctx.fillStyle='rgba(180,30,30,.7)'; ctx.fill();
+      // vial
+      ctx.beginPath(); ctx.roundRect(cx+30,cy-28,18,50,4);
+      ctx.fillStyle='rgba(240,250,255,.8)'; ctx.fill(); ctx.strokeStyle='#80b8d0'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(cx+31,cy+8,16,12,2); ctx.fillStyle='rgba(180,30,30,.5)'; ctx.fill();
+      ctx.fillStyle='#666'; ctx.font='600 9px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('Cholesterol Blood Test',cx,cy+60);
+    } else {
+      // Results card
+      ctx.beginPath(); ctx.roundRect(cx-68,cy-55,136,110,12);
+      ctx.fillStyle='#fff'; ctx.fill(); ctx.strokeStyle='rgba(0,94,184,.3)'; ctx.lineWidth=2; ctx.stroke();
+      ctx.beginPath(); ctx.rect(cx-68,cy-55,136,22); // header
+      ctx.fillStyle='rgba(0,94,184,.88)'; ctx.fill();
+      // rounded top corners clip
+      ctx.fillStyle='#fff'; ctx.font='700 9px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillStyle='rgba(0,94,184,.88)'; ctx.font='700 9px "DM Sans",sans-serif';
+      ctx.fillText('NHS HEALTH CHECK RESULTS',cx,cy-39);
+      const rows=[['Blood Pressure','122/78','✓'],['Cholesterol','4.2 mmol/L','✓'],['BMI','24.1','✓'],['Glucose','5.1 mmol/L','✓']];
+      rows.forEach((r,i)=>{
+        ctx.fillStyle=i%2===0?'#f8f8ff':'#fff';
+        ctx.fillRect(cx-67,cy-32+i*21,134,21);
+        ctx.fillStyle='#333'; ctx.font='600 8px "DM Sans",sans-serif'; ctx.textAlign='left';
+        ctx.fillText(r[0],cx-62,cy-17+i*21);
+        ctx.fillStyle='#005EB8'; ctx.font='700 8px "DM Sans",sans-serif'; ctx.textAlign='center';
+        ctx.fillText(r[1],cx+14,cy-17+i*21);
+        ctx.fillStyle='#007F3B'; ctx.textAlign='right'; ctx.fillText(r[2],cx+64,cy-17+i*21);
+      });
+      ctx.fillStyle='rgba(0,127,59,.9)'; ctx.font='700 11px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('✓  LOW RISK — Great news!',cx,cy+64);
+    }
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('checkPhase','checkDots','check-flow',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#f4f8fc'); bg.addColorStop(1,'#e8f0f8');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.12; ctx.fillStyle='#005EB8';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('YOUR 20-MINUTE NHS HEALTH CHECK',W/2,14); ctx.restore();
+    drawTimeline(idx,t);
+    drawIllustration(idx,t,elapsed);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   3. BLOOD PRESSURE — artery cross-section with pulse waves & cuff reading
+   Phases: healthy → elevated → high (wall thickening) → treated / normal restored
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('bpCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const CX=W/2,CY=H/2;
+  const LABELS=['Healthy Pressure','Elevated (Pre-High)','High Blood Pressure','Treated — Restored'];
+  const getPhase=cycleFn([6,6,7,5]);
+  let st=null,lastIdx=-1;
+
+  // Pulse wave particles flowing along vessel
+  const PULSES=Array.from({length:8},(_,i)=>({ t:sr(i), speed:0.009+sr(i+10)*.004 }));
+
+  function drawVessel(wallThick, lumenR){
+    // outer wall
+    ctx.beginPath(); ctx.arc(CX,CY,lumenR+wallThick+6,0,Math.PI*2);
+    const og=ctx.createRadialGradient(CX,CY,lumenR+wallThick,CX,CY,lumenR+wallThick+6);
+    og.addColorStop(0,'#e8b080'); og.addColorStop(1,'#c07040');
+    ctx.fillStyle=og; ctx.fill();
+    // elastic wall
+    ctx.beginPath(); ctx.arc(CX,CY,lumenR+wallThick,0,Math.PI*2);
+    const wg=ctx.createRadialGradient(CX,CY,lumenR,CX,CY,lumenR+wallThick);
+    wg.addColorStop(0,'#f0a060'); wg.addColorStop(1,'#d07040');
+    ctx.fillStyle=wg; ctx.fill();
+    // lumen
+    ctx.beginPath(); ctx.arc(CX,CY,lumenR,0,Math.PI*2);
+    const lg=ctx.createRadialGradient(CX,CY,0,CX,CY,lumenR);
+    lg.addColorStop(0,'#ffeedd'); lg.addColorStop(.6,'#ffe0cc'); lg.addColorStop(1,'#ffd0b8');
+    ctx.fillStyle=lg; ctx.fill();
+  }
+
+  function drawRBCs(lumenR, speed, elapsed){
+    const n=10;
+    for(let i=0;i<n;i++){
+      const angle=(i/n)*Math.PI*2+elapsed*speed;
+      const r=lumenR*.55;
+      const rx=CX+Math.cos(angle)*r, ry=CY+Math.sin(angle)*r*.6;
+      ctx.beginPath(); ctx.ellipse(rx,ry,9,6,angle+Math.PI/2,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,40,40,.85)'; ctx.fill();
+      ctx.beginPath(); ctx.ellipse(rx,ry,4,2.5,angle+Math.PI/2,0,Math.PI*2);
+      ctx.fillStyle='rgba(140,20,20,.7)'; ctx.fill();
+    }
+  }
+
+  function drawPulseWave(lumenR, pressure, elapsed){
+    // radial pressure waves emanating from centre
+    for(let w=0;w<3;w++){
+      const wT=((elapsed*1.5)+(w/3))%1;
+      const wr=lumenR*wT;
+      ctx.save(); ctx.globalAlpha=(1-wT)*(pressure>1.3?0.35:0.18);
+      ctx.beginPath(); ctx.arc(CX,CY,wr,0,Math.PI*2);
+      ctx.strokeStyle=pressure>1.5?'rgba(220,50,50,.8)':'rgba(0,94,184,.6)';
+      ctx.lineWidth=1.5; ctx.stroke(); ctx.restore();
+    }
+  }
+
+  function drawReading(systolic, col){
+    ctx.save(); ctx.globalAlpha=.9;
+    ctx.beginPath(); ctx.roundRect(W-110,20,95,44,10);
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fill();
+    ctx.strokeStyle=col+'80'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle=col; ctx.font='700 17px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText(systolic+'/80',W-62,44);
+    ctx.fillStyle='#666'; ctx.font='600 8px "DM Sans",sans-serif';
+    ctx.fillText('mmHg',W-62,56);
+    ctx.restore();
+  }
+
+  function drawWallDamage(progress){
+    if(progress<=0) return;
+    ctx.save(); ctx.globalAlpha=ease(progress)*.6;
+    ctx.fillStyle='rgba(180,80,20,.4)';
+    for(let i=0;i<6;i++){
+      const a=(i/6)*Math.PI*2+0.5;
+      const bx=CX+Math.cos(a)*58, by=CY+Math.sin(a)*58;
+      ctx.beginPath(); ctx.ellipse(bx,by,5+sr(i)*4,3+sr(i)*2,a,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawTreatmentCheck(alpha){
+    if(alpha<=0) return;
+    ctx.save(); ctx.globalAlpha=alpha;
+    ctx.beginPath(); ctx.arc(CX,CY,34,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,127,59,.15)'; ctx.fill();
+    ctx.strokeStyle='rgba(0,127,59,.8)'; ctx.lineWidth=3; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(CX-14,CY+2); ctx.lineTo(CX-4,CY+14); ctx.lineTo(CX+18,CY-12);
+    ctx.strokeStyle='#007F3B'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('bpPhase','bpDots','bp',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,200);
+    bg.addColorStop(0,'#fdf4f0'); bg.addColorStop(1,'#f0e4dc');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.15; ctx.fillStyle='#c0392b';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('ARTERY CROSS-SECTION — BLOOD PRESSURE',W/2,H-10); ctx.restore();
+
+    // Compute per-phase values
+    let wallThick=22, lumenR=65, pressure=1, systolic=118, col='#007F3B', wallDamage=0, treatAlpha=0;
+    if(idx===0){ wallThick=22; lumenR=65; pressure=1; systolic=118; col='#007F3B'; }
+    else if(idx===1){ wallThick=lerp(22,28,ease(t)); lumenR=lerp(65,58,ease(t)); pressure=lerp(1,1.4,ease(t)); systolic=Math.round(lerp(118,138,ease(t))); col=lerp(0,1,ease(t))>.5?'#e67e22':'#007F3B'; }
+    else if(idx===2){ wallThick=lerp(28,36,ease(t)); lumenR=lerp(58,48,ease(t)); pressure=lerp(1.4,1.9,ease(t)); systolic=Math.round(lerp(138,165,ease(t))); col='#c0392b'; wallDamage=ease(t); }
+    else { wallThick=lerp(36,23,ease(t)); lumenR=lerp(48,64,ease(t)); pressure=lerp(1.9,1,ease(t)); systolic=Math.round(lerp(165,120,ease(t))); col='#007F3B'; wallDamage=lerp(1,0,ease(t)); treatAlpha=ease(t)>.6?ease((t-.6)/.4):0; }
+
+    drawVessel(wallThick, lumenR);
+    drawWallDamage(wallDamage);
+    drawPulseWave(lumenR, pressure, elapsed);
+    drawRBCs(lumenR, 1.2*pressure, elapsed);
+    drawReading(systolic, col);
+    if(idx===3 && treatAlpha>0) drawTreatmentCheck(treatAlpha);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   4. CHOLESTEROL — longitudinal artery section, plaque builds then is treated
+   Phases: clean artery with flow → LDL deposits begin → significant stenosis → statin/treatment, lumen widens
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('cholCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const VCY=H/2, VR=60, WALL=16;
+  const LABELS=['Healthy Artery','LDL Depositing','Significant Narrowing','Treatment Working'];
+  const getPhase=cycleFn([5,7,6,6]);
+  let st=null,lastIdx=-1;
+
+  // Blood cells
+  const CELLS=Array.from({length:20},(_,i)=>({ x:sr(i)*W, y:VCY+(sr(i+10)-.5)*(VR*2-16), vx:2.2+sr(i+20)*1.4, vy:0, r:8 }));
+
+  // LDL deposits (stable positions along top/bottom walls)
+  const DEPOSITS=Array.from({length:12},(_,i)=>({
+    x:40+i*(W-80)/11,
+    side:i%2===0?-1:1,
+    maxH:12+sr(i+30)*16,
+    phase:sr(i+40),
+  }));
+
+  function drawWalls(lumenTop, lumenBot){
+    // top wall
+    const tg=ctx.createLinearGradient(0,lumenTop-WALL,0,lumenTop);
+    tg.addColorStop(0,'#d09070'); tg.addColorStop(1,'#f0c8a8');
+    ctx.fillStyle=tg; ctx.fillRect(0,lumenTop-WALL,W,WALL);
+    // bottom wall
+    const bg=ctx.createLinearGradient(0,lumenBot,0,lumenBot+WALL);
+    bg.addColorStop(0,'#f0c8a8'); bg.addColorStop(1,'#d09070');
+    ctx.fillStyle=bg; ctx.fillRect(0,lumenBot,W,WALL);
+    ctx.save(); ctx.strokeStyle='rgba(160,90,50,.25)'; ctx.lineWidth=1;
+    ctx.strokeRect(0,lumenTop-WALL,W,WALL); ctx.strokeRect(0,lumenBot,W,WALL); ctx.restore();
+  }
+
+  function drawLumen(lumenTop, lumenBot){
+    const lg=ctx.createLinearGradient(0,lumenTop,0,lumenBot);
+    lg.addColorStop(0,'#ffe8e0'); lg.addColorStop(.5,'#fff4f0'); lg.addColorStop(1,'#ffe8e0');
+    ctx.fillStyle=lg; ctx.fillRect(0,lumenTop,W,lumenBot-lumenTop);
+  }
+
+  function drawPlaque(depositProgress, lumenTop, lumenBot){
+    if(depositProgress<=0) return;
+    DEPOSITS.forEach(d=>{
+      const h=d.maxH*ease(depositProgress);
+      const wy=d.side<0 ? lumenTop : lumenBot-h;
+      const yellow=`rgba(${lerp(200,180,depositProgress)},${lerp(160,100,depositProgress)},${lerp(40,30,depositProgress)},${.85*ease(depositProgress)})`;
+      const core=`rgba(${lerp(240,200,depositProgress)},${lerp(200,130,depositProgress)},${lerp(60,40,depositProgress)},.9)`;
+      ctx.beginPath();
+      ctx.ellipse(d.x,wy+d.side*(h<0?0:h/2)*-1+(d.side<0?h/2:-h/2),18+depositProgress*8,Math.max(1,h/2),0,0,Math.PI*2);
+      ctx.fillStyle=yellow; ctx.fill();
+      // core
+      ctx.beginPath(); ctx.ellipse(d.x,wy+(d.side<0?h*.35:-h*.35+h),10,Math.max(1,h*.3),0,0,Math.PI*2);
+      ctx.fillStyle=core; ctx.fill();
+    });
+  }
+
+  function drawCells(lumenTop,lumenBot,speed){
+    CELLS.forEach(cell=>{
+      cell.x+=cell.vx*speed;
+      if(cell.x>W+12) cell.x=-12;
+      // Keep cell in lumen
+      cell.y=Math.max(lumenTop+cell.r+2, Math.min(lumenBot-cell.r-2, cell.y));
+      ctx.beginPath(); ctx.ellipse(cell.x,cell.y,cell.r,cell.r*.65,0.2,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,40,40,.82)'; ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cell.x,cell.y,cell.r*.48,cell.r*.32,0.2,0,Math.PI*2);
+      ctx.fillStyle='rgba(140,20,20,.7)'; ctx.fill();
+    });
+  }
+
+  function drawLDLParticles(progress,lumenTop,lumenBot,elapsed){
+    if(progress<=0) return;
+    for(let i=0;i<8;i++){
+      const px=((elapsed*30+i*62)%W);
+      const isFalling=i%2===0;
+      const py=isFalling?lerp(lumenTop+10,lumenTop-4,((elapsed*.4+i*.3)%1)):lerp(lumenBot-10,lumenBot+4,((elapsed*.35+i*.25)%1));
+      ctx.save(); ctx.globalAlpha=progress*.7;
+      ctx.beginPath(); ctx.arc(px,py,4,0,Math.PI*2);
+      ctx.fillStyle='rgba(220,160,40,.9)'; ctx.fill();
+      ctx.fillStyle='#fff'; ctx.font='bold 5px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('LDL',px,py);
+      ctx.restore();
+    }
+  }
+
+  function drawStatinEffect(alpha,lumenTop,lumenBot){
+    if(alpha<=0) return;
+    ctx.save(); ctx.globalAlpha=alpha*.7;
+    // Statin molecules cleaning
+    for(let i=0;i<5;i++){
+      const mx=50+i*90, myT=lumenTop+4, myB=lumenBot-4;
+      ctx.beginPath();
+      for(let s=0;s<6;s++){ const a=(s*Math.PI*2/6)-Math.PI/6; s===0?ctx.moveTo(mx+Math.cos(a)*8,myT+Math.sin(a)*8):ctx.lineTo(mx+Math.cos(a)*8,myT+Math.sin(a)*8); }
+      ctx.closePath(); ctx.fillStyle='rgba(0,127,59,.7)'; ctx.fill();
+      ctx.fillStyle='#fff'; ctx.font='bold 5px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('Rx',mx,myT);
+    }
+    ctx.restore();
+  }
+
+  function drawResultLabel(idx, t){
+    const descs=['Clean vessel walls, smooth blood flow','LDL particles adhering to artery wall','Narrowed lumen, reduced flow','Treatment clearing plaques, flow restored'];
+    const cols=['#007F3B','#e67e22','#c0392b','#007F3B'];
+    ctx.save(); ctx.globalAlpha=.75;
+    ctx.fillStyle=cols[idx]; ctx.font='700 9px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText(descs[idx],W/2,H-10); ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('cholPhase','cholDots','chol',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#fdf8f0'); bg.addColorStop(1,'#f4ece0');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.14; ctx.fillStyle='#b7770d';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('ARTERY — LONGITUDINAL SECTION',W/2,14); ctx.restore();
+
+    let depositP=0, lumenNarrow=0, speed=1, statinA=0;
+    if(idx===0){ depositP=0; lumenNarrow=0; speed=1; }
+    else if(idx===1){ depositP=ease(t); lumenNarrow=ease(t)*.35; speed=lerp(1,.7,ease(t)); }
+    else if(idx===2){ depositP=1; lumenNarrow=lerp(.35,.7,ease(t)); speed=lerp(.7,.3,ease(t)); }
+    else { depositP=lerp(1,0.15,ease(t)); lumenNarrow=lerp(.7,.1,ease(t)); speed=lerp(.3,1,ease(t)); statinA=ease(t); }
+
+    const lumenTop=VCY-VR+lumenNarrow*VR;
+    const lumenBot=VCY+VR-lumenNarrow*VR;
+
+    drawWalls(lumenTop, lumenBot);
+    drawLumen(lumenTop, lumenBot);
+    drawPlaque(depositP, lumenTop, lumenBot);
+    drawCells(lumenTop,lumenBot,speed);
+    drawLDLParticles(idx===1?ease(t):0, lumenTop, lumenBot, elapsed);
+    drawStatinEffect(statinA, lumenTop, lumenBot);
+    drawResultLabel(idx, t);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>

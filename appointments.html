@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Appointments – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-yellow:     #FFB81C;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── UTILITY BAR ── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 0.75rem 2rem; }
+    .breadcrumb .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-soft); }
+    .breadcrumb a { color: var(--nhs-blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { opacity: 0.4; }
+    .breadcrumb .current { color: var(--text-mid); font-weight: 500; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: var(--white); padding: 5rem 2rem 4rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .page-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.05) 0%, transparent 70%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.05) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border: 1px solid rgba(0,94,184,0.15); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-blue 2s infinite; }
+    @keyframes pulse-blue { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.5rem); font-weight: 600; line-height: 1.12; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .page-hero h1 em { font-style: italic; color: var(--nhs-blue); }
+    .hero-lead { font-size: 1.05rem; line-height: 1.75; color: var(--text-mid); max-width: 500px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,94,184,0.35); }
+    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-outline:hover { background: rgba(0,94,184,0.06); transform: translateY(-1px); }
+
+    /* Floating bubbles */
+    .floating-bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .bubble { position: absolute; border-radius: 50%; opacity: 0; animation: floatBubble linear infinite; }
+    @keyframes floatBubble { 0%{transform:translateY(100%) scale(0.6);opacity:0} 15%{opacity:0.18} 80%{opacity:0.08} 100%{transform:translateY(-100px) scale(1.1);opacity:0} }
+
+    /* ── HERO CARD ── */
+    .appt-card { background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 2rem; box-shadow: 0 8px 40px rgba(0,94,184,0.10); position: relative; overflow: hidden; }
+    .appt-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua), var(--nhs-green)); }
+    .appt-card-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 1.2rem; }
+
+    /* ── SECTION COMMONS ── */
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 2rem; }
+    .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1rem; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 600; line-height: 1.18; color: var(--text-dark); margin-bottom: 1rem; }
+    h2 em { font-style: italic; color: var(--nhs-blue); }
+    .section-lead { font-size: 1.02rem; line-height: 1.75; color: var(--text-mid); max-width: 640px; margin-bottom: 3rem; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── HOW TO BOOK ── */
+    .book-section { background: var(--white); }
+    .book-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .book-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem 1.8rem; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; text-decoration: none; color: inherit; display: block; }
+    .book-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,94,184,0.13); }
+    .book-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .bc-blue::before { background: var(--nhs-blue); }
+    .bc-aqua::before { background: var(--nhs-aqua); }
+    .bc-green::before { background: var(--nhs-green); }
+    .book-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.3rem; }
+    .bi-blue { background: rgba(0,94,184,0.09); }
+    .bi-aqua { background: rgba(0,159,187,0.09); }
+    .bi-green { background: rgba(0,127,59,0.09); }
+    .book-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .bi-blue svg { stroke: var(--nhs-blue); }
+    .bi-aqua svg { stroke: var(--nhs-aqua); }
+    .bi-green svg { stroke: var(--nhs-green); }
+    .book-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.4rem; }
+    .book-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.65rem; }
+    .book-desc { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); margin-bottom: 1.4rem; }
+    .book-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+    .book-link { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; font-weight: 600; color: var(--nhs-blue); text-decoration: none; padding: 0.55rem 1rem; background: rgba(0,94,184,0.07); border-radius: 8px; transition: background 0.2s; }
+    .book-link:hover { background: rgba(0,94,184,0.13); }
+    .book-link.aqua { color: var(--nhs-aqua); background: rgba(0,159,187,0.07); }
+    .book-link.aqua:hover { background: rgba(0,159,187,0.13); }
+    .book-link.green { color: var(--nhs-green); background: rgba(0,127,59,0.07); }
+    .book-link.green:hover { background: rgba(0,127,59,0.13); }
+    .book-link svg { width: 13px; height: 13px; stroke-width: 2.5; }
+    .book-number { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+
+    /* ── OUT OF HOURS ── */
+    .ooh-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .ooh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .ooh-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+    .info-callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--nhs-blue); border-radius: 0 12px 12px 0; padding: 1.2rem 1.4rem; margin-top: 1.6rem; }
+    .info-callout p { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); margin: 0; }
+    .info-callout strong { color: var(--nhs-blue); }
+    .ooh-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,94,184,0.07); }
+    .ooh-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+    .ooh-card-title svg { width: 22px; height: 22px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .ooh-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .ooh-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .ooh-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nhs-blue); flex-shrink: 0; margin-top: 6px; }
+    .ooh-item-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-mid); }
+    .nhs111-banner { background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue)); border-radius: 14px; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.2rem; }
+    .nhs111-number { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: #fff; line-height: 1; flex-shrink: 0; }
+    .nhs111-text { font-size: 0.85rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
+    .nhs111-text strong { color: #fff; display: block; margin-bottom: 0.15rem; }
+
+    /* ── EMERGENCY SECTION ── */
+    .emerg-section { background: var(--white); }
+    .emerg-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .symptom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.8rem; }
+    .symptom-pill { display: flex; align-items: center; gap: 0.55rem; padding: 0.7rem 0.85rem; background: rgba(218,41,28,0.05); border: 1px solid rgba(218,41,28,0.15); border-radius: 10px; font-size: 0.82rem; font-weight: 500; color: var(--text-dark); }
+    .symptom-dot { width: 8px; height: 8px; border-radius: 50%; background: #DA291C; flex-shrink: 0; }
+    .emergency-callout { background: rgba(218,41,28,0.06); border: 1.5px solid rgba(218,41,28,0.25); border-radius: 14px; padding: 1.4rem 1.6rem; display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.2rem; }
+    .emerg-icon-wrap { width: 44px; height: 44px; border-radius: 12px; background: rgba(218,41,28,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .emerg-icon-wrap svg { width: 20px; height: 20px; stroke: #DA291C; fill: none; stroke-width: 2; }
+    .emergency-callout-text h4 { font-size: 0.92rem; font-weight: 700; color: #DA291C; margin-bottom: 0.3rem; }
+    .emergency-callout-text p { font-size: 0.84rem; line-height: 1.6; color: var(--text-mid); }
+    .emergency-callout-text strong { color: var(--text-dark); }
+    .ae-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 18px; padding: 1.8rem 2rem; }
+    .ae-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+    .ae-title svg { width: 20px; height: 20px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .ae-hospital { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .ae-hospital:last-child { border-bottom: none; padding-bottom: 0; }
+    .ae-hosp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nhs-aqua); flex-shrink: 0; margin-top: 6px; }
+    .ae-hosp-text { font-size: 0.85rem; line-height: 1.55; color: var(--text-mid); }
+    .ae-hosp-text a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
+    .ae-hosp-text a:hover { text-decoration: underline; }
+    .ae-hosp-text span { display: block; font-size: 0.78rem; color: var(--text-soft); }
+    .ae-note { background: rgba(0,94,184,0.06); border: 1px solid rgba(0,94,184,0.15); border-radius: 10px; padding: 0.8rem 1rem; font-size: 0.82rem; color: var(--text-mid); line-height: 1.55; margin-bottom: 1rem; }
+    .ae-note strong { color: var(--nhs-blue); }
+
+    /* ── CANCELLATIONS & HOME VISITS ── */
+    .info-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .info-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .info-panel { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2.2rem; position: relative; overflow: hidden; }
+    .info-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .ip-blue::before { background: var(--nhs-blue); }
+    .ip-green::before { background: var(--nhs-green); }
+    .info-panel-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .ipi-blue { background: rgba(0,94,184,0.09); }
+    .ipi-green { background: rgba(0,127,59,0.09); }
+    .info-panel-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ipi-blue svg { stroke: var(--nhs-blue); }
+    .ipi-green svg { stroke: var(--nhs-green); }
+    .info-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.8rem; }
+    .info-panel p { font-size: 0.9rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 0.9rem; }
+    .info-panel p:last-child { margin-bottom: 0; }
+    .cancel-methods { display: flex; flex-direction: column; gap: 0.55rem; margin: 1rem 0; }
+    .cancel-method { display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.9rem; background: var(--off-white); border: 1px solid var(--border); border-radius: 10px; font-size: 0.86rem; font-weight: 500; color: var(--text-dark); }
+    .cancel-method svg { width: 16px; height: 16px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .info-callout-green { background: rgba(0,127,59,0.06); border: 1px solid rgba(0,127,59,0.2); border-left: 4px solid var(--nhs-green); border-radius: 0 12px 12px 0; padding: 1rem 1.2rem; margin-top: 1rem; }
+    .info-callout-green p { font-size: 0.86rem; line-height: 1.6; color: var(--text-mid); margin: 0; }
+    .info-callout-green strong { color: var(--nhs-green); }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--nhs-dark); padding: 4rem 2rem; }
+    .cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cta-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 2rem; }
+    .cta-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .cta-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+    .cta-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+    .cta-card p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 1.2rem; }
+    .btn-white { background: #fff; color: var(--nhs-dark); padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.15s; }
+    .btn-white:hover { background: var(--off-white); transform: translateY(-1px); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,0.4); color: #fff; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.15s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+
+    /* ── EMERGENCY BAND ── */
+    .emergency { background: var(--nhs-dark); padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .emerg-card { border-radius: 16px; padding: 1.8rem 2rem; }
+    .emerg-card.nhs111 { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); }
+    .emerg-card.urgent { background: rgba(218,41,28,0.2); border: 1px solid rgba(218,41,28,0.35); }
+    .emerg-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .emerg-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0.8rem 0 1.2rem; }
+    .footer-address { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.9; }
+    .footer-address a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .footer-heading { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.84rem; color: rgba(255,255,255,0.65); }
+    .hour-day { color: rgba(255,255,255,0.5); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.4rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner, .ooh-grid, .emerg-layout, .info-two-col, .cta-inner, .emergency-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .book-grid { grid-template-columns: 1fr 1fr; }
+      .symptom-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 600px) {
+      .book-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div>🏥 NHS GP Practice · Southall, West London · Serving our community since 1976</div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="tel:02085745136" class="util-pill">📞 0208 574 5136</a>
+      <a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="84" style="width:auto">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="news.html">News</a>
+      <a href="clinics-and-services.html">Services</a>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="health-information.html">Health Info</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta active" target="_blank">Book Appointment</a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="inner">
+    <a href="/">Home</a>
+    <span class="sep">›</span>
+    <span class="current">Appointments</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="floating-bubbles">
+    <div class="bubble" style="left:8%;width:16px;height:16px;background:rgba(0,94,184,0.15);animation-duration:10s;animation-delay:0s;bottom:0;"></div>
+    <div class="bubble" style="left:25%;width:10px;height:10px;background:rgba(0,159,187,0.18);animation-duration:13s;animation-delay:2s;bottom:0;"></div>
+    <div class="bubble" style="left:54%;width:14px;height:14px;background:rgba(0,94,184,0.12);animation-duration:11s;animation-delay:4s;bottom:0;"></div>
+    <div class="bubble" style="left:74%;width:8px;height:8px;background:rgba(0,127,59,0.15);animation-duration:15s;animation-delay:1s;bottom:0;"></div>
+    <div class="bubble" style="left:91%;width:12px;height:12px;background:rgba(0,159,187,0.12);animation-duration:12s;animation-delay:3s;bottom:0;"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span></span>Saluja Clinic</div>
+      <h1>Book an<br><em>Appointment</em></h1>
+      <p class="hero-lead">Appointments are available online, by phone, or in person. We offer flexible options to make accessing your NHS GP as convenient as possible for every patient.</p>
+      <div class="hero-actions">
+        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Online Now
+        </a>
+        <a href="tel:02085745136" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call 0208 574 5136
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero visual: animated booking pathways flow -->
+    <div class="hero-visual">
+      <div class="appt-card">
+        <div class="appt-card-label">Ways to reach us</div>
+
+        <!-- Animated pathways SVG — three channels converging on the practice -->
+        <svg viewBox="0 0 300 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:1rem;">
+          <defs>
+            <linearGradient id="nodeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#003087"/>
+              <stop offset="100%" stop-color="#005EB8"/>
+            </linearGradient>
+            <linearGradient id="nodeAqua" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#007a91"/>
+              <stop offset="100%" stop-color="#009FBB"/>
+            </linearGradient>
+            <linearGradient id="nodeGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#005a2a"/>
+              <stop offset="100%" stop-color="#007F3B"/>
+            </linearGradient>
+            <linearGradient id="centreFill" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#003087"/>
+              <stop offset="100%" stop-color="#005EB8"/>
+            </linearGradient>
+            <filter id="nodeGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Paths: each channel node → centre -->
+            <path id="pathOnline"   d="M 60,52  C 100,52  140,122 150,122"/>
+            <path id="pathPhone"    d="M 60,122 C 90,122  120,122 150,122"/>
+            <path id="pathPerson"   d="M 60,192 C 100,192 140,122 150,122"/>
+          </defs>
+
+          <!-- Subtle background wash -->
+          <rect x="0" y="0" width="300" height="245" rx="10" fill="rgba(0,94,184,0.02)"/>
+
+          <!-- ── Connector lines ── -->
+          <!-- Online → centre -->
+          <path d="M 60,52 C 100,52 140,122 150,122"
+            fill="none" stroke="#005EB8" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.22">
+            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.8s" repeatCount="indefinite"/>
+          </path>
+          <!-- Phone → centre -->
+          <path d="M 60,122 C 90,122 120,122 150,122"
+            fill="none" stroke="#009FBB" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.22">
+            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.8s" begin="0.4s" repeatCount="indefinite"/>
+          </path>
+          <!-- In person → centre -->
+          <path d="M 60,192 C 100,192 140,122 150,122"
+            fill="none" stroke="#007F3B" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.22">
+            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.8s" begin="0.8s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- ── Travelling dots along each path ── -->
+          <!-- Online dots -->
+          <circle r="4" fill="#005EB8" opacity="0">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0s"><mpath href="#pathOnline"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="0s"/>
+          </circle>
+          <circle r="3" fill="#41B6E6" opacity="0">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.7s"><mpath href="#pathOnline"/></animateMotion>
+            <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+          </circle>
+          <!-- Phone dots -->
+          <circle r="4" fill="#009FBB" opacity="0">
+            <animateMotion dur="1.6s" repeatCount="indefinite" begin="0.4s"><mpath href="#pathPhone"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="1.6s" repeatCount="indefinite" begin="0.4s"/>
+          </circle>
+          <circle r="3" fill="#41B6E6" opacity="0">
+            <animateMotion dur="1.6s" repeatCount="indefinite" begin="1.1s"><mpath href="#pathPhone"/></animateMotion>
+            <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.85;1" dur="1.6s" repeatCount="indefinite" begin="1.1s"/>
+          </circle>
+          <!-- In person dots -->
+          <circle r="4" fill="#007F3B" opacity="0">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.8s"><mpath href="#pathPerson"/></animateMotion>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+          </circle>
+          <circle r="3" fill="#41B6E6" opacity="0">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="1.5s"><mpath href="#pathPerson"/></animateMotion>
+            <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.1;0.85;1" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+          </circle>
+
+          <!-- ── Channel nodes (left) — icon + label both inside each circle ── -->
+
+          <!-- Online (cy=52) -->
+          <circle cx="60" cy="52" r="28" fill="rgba(0,94,184,0.08)" stroke="#005EB8" stroke-width="1.2">
+            <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="0s"/>
+          </circle>
+          <!-- Monitor icon, compact, centred at cy-7 -->
+          <rect x="49" y="38" width="22" height="14" rx="2.5" fill="none" stroke="#005EB8" stroke-width="1.6"/>
+          <line x1="60" y1="52" x2="60" y2="55" stroke="#005EB8" stroke-width="1.6"/>
+          <line x1="55" y1="55" x2="65" y2="55" stroke="#005EB8" stroke-width="1.6"/>
+          <!-- Label inside, below icon -->
+          <text x="60" y="66" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="#005EB8" text-anchor="middle">Online</text>
+
+          <!-- Phone (cy=122) -->
+          <circle cx="60" cy="122" r="28" fill="rgba(0,159,187,0.08)" stroke="#009FBB" stroke-width="1.2">
+            <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+          </circle>
+          <!-- Phone handset icon, compact, centred around cy-7=115 -->
+          <path d="M53,109 C53,107.5 54.5,106 56,106 L57.5,106 L59,110 L57.5,111 C58.2,113 59.8,114.5 62,115.2 L62.8,113.5 L67,115 L67,116.5 C67,118 65.5,119.5 64,119.5 C57.5,119.5 53,114 53,109Z" fill="none" stroke="#009FBB" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Label inside, below icon -->
+          <text x="60" y="133" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="700" fill="#009FBB" text-anchor="middle">By Phone</text>
+
+          <!-- In Person (cy=192) -->
+          <circle cx="60" cy="192" r="28" fill="rgba(0,127,59,0.08)" stroke="#007F3B" stroke-width="1.2">
+            <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" begin="1s"/>
+          </circle>
+          <!-- Simple house icon, compact, centred around cy-7=185 -->
+          <polygon points="60,176 50,183 50,196 70,196 70,183" fill="none" stroke="#007F3B" stroke-width="1.6" stroke-linejoin="round"/>
+          <rect x="56" y="188" width="8" height="8" rx="1" fill="none" stroke="#007F3B" stroke-width="1.4"/>
+          <!-- Label inside, below icon -->
+          <text x="60" y="206" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="700" fill="#007F3B" text-anchor="middle">In Person</text>
+
+          <!-- ── Centre node: Saluja Clinic ── -->
+          <!-- Outer pulse rings -->
+          <circle cx="210" cy="122" r="34" fill="none" stroke="#005EB8" stroke-width="1.5">
+            <animate attributeName="r" from="34" to="52" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.35" to="0" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="210" cy="122" r="34" fill="none" stroke="#005EB8" stroke-width="1.5">
+            <animate attributeName="r" from="34" to="52" dur="2.5s" begin="0.83s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.35" to="0" dur="2.5s" begin="0.83s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="210" cy="122" r="34" fill="none" stroke="#005EB8" stroke-width="1.5">
+            <animate attributeName="r" from="34" to="52" dur="2.5s" begin="1.66s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.35" to="0" dur="2.5s" begin="1.66s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Centre circle fill -->
+          <circle cx="210" cy="122" r="34" fill="url(#centreFill)"/>
+          <!-- NHS cross inside -->
+          <rect x="205" y="109" width="10" height="26" rx="2" fill="white" opacity="0.9"/>
+          <rect x="197" y="117" width="26" height="10" rx="2" fill="white" opacity="0.9"/>
+          <!-- Label below -->
+          <text x="210" y="170" font-family="Cormorant Garamond,serif" font-size="10" font-weight="600" fill="#1a1a2e" text-anchor="middle">Saluja Clinic</text>
+          <text x="210" y="182" font-family="DM Sans,sans-serif" font-size="7.5" fill="#6b7a99" text-anchor="middle">Southall · UB1 2AY</text>
+        </svg>
+
+        <!-- Opening hours strip -->
+        <div style="background:var(--off-white);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-soft);">Reception open</div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--nhs-blue);">Mon–Fri · 08:00–18:30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BOOK -->
+<section class="book-section" id="how-to-book">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;" class="fade-up">
+      <div class="section-tag">Ways to Book</div>
+      <h2>Appointment <em>Options</em></h2>
+      <p style="font-size:1.02rem;line-height:1.75;color:var(--text-mid);">We offer multiple routes to booking, so you can access care in whatever way works best for you.</p>
+    </div>
+
+    <div class="book-grid">
+
+      <!-- Online / NHS App -->
+      <div class="book-card bc-blue fade-up" style="animation-delay:0.05s">
+        <div class="book-icon bi-blue">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+        </div>
+        <div class="book-label">Recommended</div>
+        <div class="book-title">NHS App &amp; Online</div>
+        <p class="book-desc">The fastest and most convenient way to book. Use the NHS App or our online booking system to view available slots and book at any time of day, without calling.</p>
+        <div class="book-actions">
+          <a href="https://salujaclinic.webgp.com/" target="_blank" class="book-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Book via Saluja Clinic Portal
+          </a>
+          <a href="https://www.nhs.uk/nhs-app/" target="_blank" class="book-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Download the NHS App
+          </a>
+          <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank" class="book-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Register for NHS Login
+          </a>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="book-card bc-aqua fade-up" style="animation-delay:0.1s">
+        <div class="book-icon bi-aqua">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="book-label">By Telephone</div>
+        <div class="book-title">Call Reception</div>
+        <p class="book-desc">Call our reception team who will be happy to help you book an appointment at a time that suits you. Lines are open during practice hours, Monday to Friday.</p>
+        <div class="book-number">0208 574 5136</div>
+        <div style="font-size:0.78rem;color:var(--text-soft);margin-bottom:1.2rem;">Mon–Fri · 08:00–18:30</div>
+        <div class="book-actions">
+          <a href="tel:02085745136" class="book-link aqua">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- In Person -->
+      <div class="book-card bc-green fade-up" style="animation-delay:0.15s">
+        <div class="book-icon bi-green">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="book-label">Walk-In</div>
+        <div class="book-title">Visit the Surgery</div>
+        <p class="book-desc">Come to the surgery in person and speak with a receptionist who will be happy to book an appointment for you. We are located at 36A Northcote Avenue, Southall.</p>
+        <div style="font-size:0.84rem;color:var(--text-mid);line-height:1.7;margin-bottom:1.2rem;">
+          36A Northcote Avenue<br>Southall, UB1 2AY
+        </div>
+        <div class="book-actions">
+          <a href="https://www.google.com/maps/place/Saluja+Clinic/@51.5127801,-0.383157,17z" target="_blank" class="book-link green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Get Directions
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OUT OF HOURS -->
+<section class="ooh-section" id="out-of-hours">
+  <div class="section-inner">
+    <div class="ooh-grid">
+      <div class="ooh-text fade-up">
+        <div class="section-tag">Outside Surgery Hours</div>
+        <h2>Out of Hours<br><em>Support</em></h2>
+        <p>When the surgery is closed, NHS 111 is the right service for urgent medical help or advice that is not a life-threatening emergency. You can reach NHS 111 any time, day or night, 365 days a year.</p>
+        <p>NHS 111 will assess your symptoms, provide clinical advice, and — if needed — direct you to the most appropriate service, whether that is a GP, urgent care centre, pharmacy, or A&E.</p>
+        <div class="nhs111-banner">
+          <div class="nhs111-number">111</div>
+          <div class="nhs111-text">
+            <strong>NHS 111 — available 24/7, free to call</strong>
+            Call from any landline or mobile. Also available online at 111.nhs.uk
+          </div>
+        </div>
+        <div class="info-callout">
+          <p><strong>Important:</strong> NHS 111 is for urgent situations that are not life-threatening. If you believe someone's life is at risk, call 999 immediately or go to A&E.</p>
+        </div>
+      </div>
+
+      <div class="fade-up" style="animation-delay:0.12s">
+        <div class="ooh-card">
+          <div class="ooh-card-title">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            When to Use NHS 111
+          </div>
+          <div class="ooh-item">
+            <div class="ooh-dot"></div>
+            <div class="ooh-item-text">You need medical help <strong>fast</strong>, but it is not a 999 emergency</div>
+          </div>
+          <div class="ooh-item">
+            <div class="ooh-dot"></div>
+            <div class="ooh-item-text">You are unsure whether you need to go to A&E or an urgent care service</div>
+          </div>
+          <div class="ooh-item">
+            <div class="ooh-dot"></div>
+            <div class="ooh-item-text">You do not have a GP available to call and need urgent advice</div>
+          </div>
+          <div class="ooh-item">
+            <div class="ooh-dot"></div>
+            <div class="ooh-item-text">You need health information or reassurance about what to do next</div>
+          </div>
+          <div class="ooh-item">
+            <div class="ooh-dot"></div>
+            <div class="ooh-item-text">You think you may need to go to hospital but are not sure</div>
+          </div>
+          <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;">
+            <a href="https://111.nhs.uk" target="_blank" style="flex:1;text-align:center;background:var(--nhs-blue);color:#fff;font-size:0.85rem;font-weight:600;padding:0.65rem 0.9rem;border-radius:10px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='#005EB8'">NHS 111 Online →</a>
+            <a href="tel:111" style="flex:1;text-align:center;border:2px solid var(--nhs-blue);color:var(--nhs-blue);font-size:0.85rem;font-weight:600;padding:0.65rem 0.9rem;border-radius:10px;text-decoration:none;">Call 111</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="emerg-section" id="emergencies">
+  <div class="section-inner">
+    <div class="emerg-layout">
+      <div class="fade-up">
+        <div class="section-tag" style="background:rgba(218,41,28,0.08);color:#DA291C;border:1px solid rgba(218,41,28,0.2);">Emergency</div>
+        <h2>When to Call <em style="color:#DA291C;">999</em><br>or Go to A&E</h2>
+        <p style="font-size:0.97rem;line-height:1.8;color:var(--text-mid);margin-bottom:1.5rem;">If you or someone else experiences any of the symptoms below and you believe it could be life-threatening, do not delay — call 999 immediately or go straight to the nearest Accident &amp; Emergency department.</p>
+
+        <div class="symptom-grid">
+          <div class="symptom-pill"><div class="symptom-dot"></div>Anaphylactic shock</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Black stools / rectal bleeding</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Breathlessness</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Chest pain</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Collapse / unconsciousness</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Non-blanching rash</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Prolonged seizures</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Severe abdominal pain</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Suspected stroke</div>
+          <div class="symptom-pill"><div class="symptom-dot"></div>Vomiting blood</div>
+        </div>
+
+        <div class="emergency-callout">
+          <div class="emerg-icon-wrap">
+            <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="emergency-callout-text">
+            <h4>Call 999 — Do Not Drive Yourself</h4>
+            <p>For life-threatening emergencies, <strong>call 999 immediately</strong>. Emergency situations are always prioritised. Do not attempt to drive yourself to A&E in a serious emergency — an ambulance is the safest option.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up" style="animation-delay:0.12s">
+        <!-- Nearest A&E -->
+        <div class="ae-card" style="margin-bottom:1.2rem;">
+          <div class="ae-title">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Nearest A&amp;E
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot" style="background:var(--nhs-blue)"></div>
+            <div class="ae-hosp-text">
+              <a href="http://www.nhs.uk/Services/clinics/Services/Service/DefaultView.aspx?id=294944" target="_blank">Ealing Hospital</a>
+              <span>Uxbridge Road, Southall UB1 3HW · Adults only</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paediatric A&E -->
+        <div class="ae-card">
+          <div class="ae-title">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Paediatric A&amp;E
+          </div>
+          <div class="ae-note">
+            <strong>Important:</strong> Ealing Hospital A&E cannot treat children. Please attend one of the hospitals below for paediatric emergencies.
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot"></div>
+            <div class="ae-hosp-text">
+              <a href="https://www.thh.nhs.uk/services/accident/index.php" target="_blank">Hillingdon Hospital</a>
+              <span>Pield Heath Road, Uxbridge UB8 3NN</span>
+            </div>
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot"></div>
+            <div class="ae-hosp-text">
+              <a href="http://www.chelwest.nhs.uk/your-visit/getting-here/west-middlesex-university-hospital" target="_blank">West Middlesex University Hospital</a>
+              <span>Twickenham Road, Isleworth TW7 6AF</span>
+            </div>
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot"></div>
+            <div class="ae-hosp-text">
+              <a href="https://www.imperial.nhs.uk/our-services/emergency-care/accident-and-emergency" target="_blank">St Mary's Hospital</a>
+              <span>Praed Street, London W2 1NY</span>
+            </div>
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot"></div>
+            <div class="ae-hosp-text">
+              <a href="http://www.lnwh.nhs.uk/patients-visitors/in-an-emergency/" target="_blank">Northwick Park Hospital</a>
+              <span>Watford Road, Harrow HA1 3UJ</span>
+            </div>
+          </div>
+          <div class="ae-hospital">
+            <div class="ae-hosp-dot"></div>
+            <div class="ae-hosp-text">
+              <a href="http://www.chelwest.nhs.uk/your-visit/getting-here/chelsea-and-westminster-hospital" target="_blank">Chelsea and Westminster Hospital</a>
+              <span>369 Fulham Road, London SW10 9NH</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANCELLATIONS & HOME VISITS -->
+<section class="info-section" id="cancellations">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:640px;margin:0 auto 3rem;" class="fade-up">
+      <div class="section-tag">Practice Policies</div>
+      <h2>Cancellations &amp; <em>Home Visits</em></h2>
+    </div>
+
+    <div class="info-two-col">
+
+      <!-- Cancellations -->
+      <div class="info-panel ip-blue fade-up">
+        <div class="info-panel-icon ipi-blue">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="14" x2="15" y2="20"/><line x1="15" y1="14" x2="9" y2="20"/></svg>
+        </div>
+        <h3>Cancelling Your Appointment</h3>
+        <p>We completely understand that life sometimes gets in the way of planned appointments. We only ask that if you cannot attend, please let us know as early as possible so that your slot can be offered to another patient who may need it.</p>
+        <p>A significant number of appointments go unused every week due to patients not attending and not notifying us — this leads to longer waiting times for everyone. Your consideration makes a real difference.</p>
+
+        <div class="cancel-methods">
+          <div class="cancel-method">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call us on <strong style="margin-left:4px;">0208 574 5136</strong>
+          </div>
+          <div class="cancel-method">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+            Cancel via <a href="https://systmonline.tpp-uk.com/2/Login" target="_blank" style="color:var(--nhs-blue);margin-left:4px;">Systm Online</a>
+          </div>
+          <div class="cancel-method">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Speak to reception in person
+          </div>
+        </div>
+        <p style="font-size:0.86rem;color:var(--text-soft);margin-top:0.5rem;">Please give us as much notice as possible so the slot can be reallocated.</p>
+      </div>
+
+      <!-- Home Visits -->
+      <div class="info-panel ip-green fade-up" style="animation-delay:0.1s">
+        <div class="info-panel-icon ipi-green">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Home Visits</h3>
+        <p>It is clinically better for patients to be seen at the surgery, where we have superior facilities, diagnostic equipment and lighting to properly assess you. We work closely with Ealing Community Transport to bring patients to the surgery where needed.</p>
+        <p>Home visits are available only for housebound patients and those who are too ill to attend in person. They are not available as an alternative to arranging transport.</p>
+
+        <div class="info-callout-green">
+          <p><strong>To request a home visit:</strong> please contact the surgery as early as possible on the morning you require the visit — ideally before 11:00am. A GP will call you back to discuss your symptoms and confirm whether a home visit is appropriate.</p>
+        </div>
+
+        <p style="font-size:0.86rem;color:var(--text-soft);margin-top:1rem;">Home visits are assessed individually and prioritised according to clinical need.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-card fade-up">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3>Book Online — Anytime</h3>
+      <p>Our online booking portal is available around the clock. Browse available appointments and book instantly, without waiting on the phone.</p>
+      <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-white">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Book an Appointment
+      </a>
+    </div>
+    <div class="cta-card fade-up" style="animation-delay:0.1s">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>New to Saluja Clinic?</h3>
+      <p>If you live in our catchment area and are not yet registered, we would love to welcome you. Find out how to join our patient list.</p>
+      <a href="new-patients.html" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        Register as a New Patient
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY BAND -->
+<div class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div class="emerg-label">Non-Emergency Urgent Advice</div>
+      <div class="emerg-number">NHS 111</div>
+      <div class="emerg-desc">For urgent medical advice when the surgery is closed. Available 24/7 by phone or online at <strong>111.nhs.uk</strong></div>
+    </div>
+    <div class="emerg-card urgent">
+      <div class="emerg-label">Life-Threatening Emergency</div>
+      <div class="emerg-number">999</div>
+      <div class="emerg-desc">Call 999 immediately for chest pain, stroke symptoms, serious injury, difficulty breathing, or any life-threatening situation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="60" style="width:auto;opacity:0.85">
+        <defs>
+          <linearGradient id="chromeSf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeTextf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShinef" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRimf" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadowf" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheenf">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRimf)" filter="url(#shadowf)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShinef)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeSf)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeTextf)" filter="url(#textSheenf)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>
+        Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk/location/1-2180983569" target="_blank">CQC Rating</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

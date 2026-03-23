@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anticoagulation Clinic – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
+      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
+      --white:#ffffff; --off-white:#f5f8fc;
+      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
+    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}
+    .utility-bar a:hover{color:#fff}
+    .utility-bar .emer{display:flex;align-items:center;gap:1.5rem}
+    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+    .logo-wrap svg{height:84px;width:auto}
+    nav{display:flex;align-items:center;gap:.25rem}
+    nav a{font-size:.88rem;font-weight:500;letter-spacing:.02em;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
+    .nav-cta{background:var(--nhs-blue)!important;color:var(--white)!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25);transition:background .2s,transform .15s!important}
+    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+    /* ── PAGE BANNER ─────────────────────────────────────── */
+    .page-banner{background:var(--white);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3.2rem;position:relative;overflow:hidden}
+    .page-banner::before{content:'';position:absolute;top:-80px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
+    .page-banner::after{content:'';position:absolute;bottom:-60px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.06) 0%,transparent 70%);pointer-events:none}
+    .page-banner-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+    .breadcrumb a{color:var(--text-soft);text-decoration:none}
+    .breadcrumb a:hover{color:var(--nhs-blue)}
+    .breadcrumb-sep{opacity:.4}
+    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,94,184,.07);border:1px solid rgba(0,94,184,.15);border-radius:20px;padding:.3rem .9rem;color:var(--nhs-blue);margin-bottom:1.1rem}
+    .page-tag span{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%}
+    .page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:.9rem}
+    .page-banner h1 em{font-style:normal;color:var(--nhs-blue)}
+    .page-banner-sub{font-size:1rem;color:var(--text-mid);max-width:640px;line-height:1.7}
+
+    /* ── SECTION COMMON ──────────────────────────────────── */
+    .section-inner{max-width:1200px;margin:0 auto}
+    .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nhs-blue);margin-bottom:.6rem}
+    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
+    h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--text-dark);margin-bottom:.5rem}
+    .section-lead{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
+
+    /* ── ANIMATION SECTION ───────────────────────────────── */
+    .anim-section{background:var(--off-white);padding:4.5rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .canvas-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:1.6rem;box-shadow:0 8px 40px rgba(0,94,184,.1);width:100%;max-width:800px;margin:0 auto}
+    .canvas-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+    .canvas-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--nhs-dark)}
+    #phaseLabel{font-size:.75rem;font-weight:700;letter-spacing:.07em;color:var(--nhs-blue);text-transform:uppercase;background:rgba(0,94,184,.07);padding:.25rem .85rem;border-radius:20px;transition:all .4s}
+    #bloodCanvas{width:100%;height:auto;border-radius:12px;display:block;border:1px solid var(--border)}
+    .phase-strip{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.2rem}
+    .phase-item{display:flex;flex-direction:column;align-items:center;gap:.4rem;cursor:default}
+    .phase-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:background .4s,transform .4s}
+    .phase-dot.active{background:var(--nhs-blue);transform:scale(1.35)}
+    .phase-lbl{font-size:.7rem;font-weight:600;letter-spacing:.04em;color:var(--text-soft);white-space:nowrap;transition:color .4s}
+    .phase-item.active .phase-lbl{color:var(--nhs-blue)}
+    .phase-connector{width:32px;height:1px;background:var(--border);margin-bottom:14px}
+
+    /* ── INFO CARDS ──────────────────────────────────────── */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.8rem}
+    .info-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:2rem;box-shadow:0 2px 16px rgba(0,94,184,.06);transition:transform .22s,box-shadow .22s;position:relative;overflow:hidden}
+    .info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua))}
+    .info-card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(0,94,184,.12)}
+    .card-icon{width:48px;height:48px;border-radius:12px;background:rgba(0,94,184,.08);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+    .card-icon svg{width:24px;height:24px;stroke:var(--nhs-blue);fill:none;stroke-width:1.7}
+    .info-card p{font-size:.9rem;line-height:1.72;color:var(--text-mid)}
+    .info-card ul{list-style:none;margin-top:.9rem;display:flex;flex-direction:column;gap:.45rem}
+    .info-card ul li{font-size:.87rem;color:var(--text-mid);padding-left:1.2rem;position:relative;line-height:1.6}
+    .info-card ul li::before{content:'–';position:absolute;left:0;color:var(--nhs-blue);font-weight:700}
+
+    /* ── CONDITION CARDS ─────────────────────────────────── */
+    .cond-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:transform .22s,box-shadow .22s}
+    .cond-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,94,184,.1)}
+    .cond-icon{width:52px;height:52px;border-radius:14px;background:rgba(0,94,184,.08);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+    .cond-icon svg{width:26px;height:26px;stroke:var(--nhs-blue);fill:none;stroke-width:1.7}
+    .cond-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--text-dark);margin-bottom:.5rem}
+    .cond-desc{font-size:.86rem;line-height:1.65;color:var(--text-mid)}
+
+    /* ── STEPS ───────────────────────────────────────────── */
+    .steps{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+    .step-card{display:flex;gap:1.4rem;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.8rem;box-shadow:0 2px 10px rgba(0,94,184,.05)}
+    .step-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:var(--nhs-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;line-height:1}
+    .step-body h4{font-size:.93rem;font-weight:700;color:var(--text-dark);margin-bottom:.3rem}
+    .step-body p{font-size:.86rem;line-height:1.65;color:var(--text-mid)}
+
+    /* ── ALERT BOXES ─────────────────────────────────────── */
+    .alert-box{border-radius:14px;padding:1.3rem 1.6rem;display:flex;gap:.9rem;align-items:flex-start;margin-top:1.5rem}
+    .alert-box.warning{background:rgba(255,184,28,.08);border:1px solid rgba(255,184,28,.4)}
+    .alert-box.info{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
+    .alert-box.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
+    .alert-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem}
+    .alert-body h4{font-size:.92rem;font-weight:700;color:var(--text-dark);margin-bottom:.3rem}
+    .alert-body p{font-size:.86rem;line-height:1.68;color:var(--text-mid)}
+
+    /* ── INR TABLE ───────────────────────────────────────── */
+    .inr-table{width:100%;border-collapse:collapse;margin-top:1.2rem}
+    .inr-table th{text-align:left;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);padding:.55rem .9rem;border-bottom:2px solid var(--border)}
+    .inr-table td{padding:.7rem .9rem;font-size:.86rem;border-bottom:1px solid var(--border);color:var(--text-mid)}
+    .inr-table tr:last-child td{border-bottom:none}
+    .inr-badge{display:inline-block;padding:.2rem .65rem;border-radius:20px;font-size:.74rem;font-weight:700}
+    .inr-badge.target{background:rgba(0,127,59,.1);color:var(--nhs-green)}
+
+    /* ── INTRO BLOCK ─────────────────────────────────────── */
+    .intro-block{background:var(--off-white);border:1px solid var(--border);border-radius:18px;padding:2.4rem;margin-bottom:2.8rem}
+    .intro-block p{font-size:.97rem;line-height:1.82;color:var(--text-mid);margin-bottom:.9rem}
+    .intro-block p:last-child{margin-bottom:0}
+    .intro-block strong{color:var(--text-dark)}
+
+    /* ── NHS APP BANNER ─────────────────────────────────── */
+    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
+    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .app-inner h2{color:var(--white)}
+    .app-inner .section-lead{color:rgba(255,255,255,.8);max-width:540px}
+    .app-inner .section-tag{color:rgba(255,255,255,.6)}
+    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
+    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
+    .app-cta-wrap{display:flex;flex-direction:column;gap:1rem;align-items:center}
+    .btn-white{background:var(--white);color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:var(--white);padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
+    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+    /* ── EMERGENCY ───────────────────────────────────────── */
+    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
+    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .emerg-card{border-radius:16px;padding:2rem;display:flex;gap:1.2rem;align-items:flex-start}
+    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
+    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
+    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
+    .emerg-card.urgent .emerg-number{color:#dc3545}
+    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
+    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
+    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}
+    .footer-links a:hover{color:#fff}
+    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
+    .hours-grid{display:grid;gap:.3rem}
+    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
+    .hour-day{opacity:.7}
+
+    /* ── ANIMATIONS ─────────────────────────────────────── */
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    /* ── MOBILE ─────────────────────────────────────────── */
+    @media(max-width:900px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr!important}
+      .app-inner{grid-template-columns:1fr}
+      .app-cta-wrap{flex-direction:row}
+      .emergency-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr 1fr}
+      nav{display:none}
+    }
+    @media(max-width:600px){
+      .footer-inner{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── UTILITY BAR ──────────────────────────────────────── -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="emer">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="emer">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── HEADER ───────────────────────────────────────────── -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="index.html">Our Practice</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#team">Our Doctors</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── PAGE BANNER ──────────────────────────────────────── -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="#">Clinics &amp; Services</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Anticoagulation</span>
+    </div>
+    <div class="page-tag"><span></span> NHS Clinical Service</div>
+    <h1>Anticoagulation <em>Clinic</em></h1>
+    <p class="page-banner-sub">Expert monitoring and management of blood-thinning therapy. Our nurse-led anticoagulation clinic provides regular INR testing, dose guidance and safety monitoring for patients on warfarin and other anticoagulants.</p>
+  </div>
+</div>
+
+<!-- ── ANIMATION SECTION ─────────────────────────────────── -->
+<div class="anim-section">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2rem;" class="fade-up">
+      <div class="section-tag" style="display:inline-block">How It Works</div>
+      <h2 style="margin-top:.4rem">Understanding Blood Clotting &amp; <em style="font-style:normal;color:var(--nhs-blue);">Anticoagulants</em></h2>
+      <p class="section-lead" style="margin:0 auto">See how a clot forms at a vessel injury, and how anticoagulant medication intervenes to prevent dangerous blockages.</p>
+    </div>
+
+    <div class="canvas-card fade-up" style="animation-delay:.1s">
+      <div class="canvas-card-header">
+        <div class="canvas-title">Blood Vessel · Live Simulation</div>
+        <div id="phaseLabel">Normal Flow</div>
+      </div>
+      <canvas id="bloodCanvas" width="740" height="260"></canvas>
+      <div class="phase-strip">
+        <div class="phase-item active" id="pi0">
+          <div class="phase-dot active" id="pd0"></div>
+          <div class="phase-lbl">Normal Flow</div>
+        </div>
+        <div class="phase-connector"></div>
+        <div class="phase-item" id="pi1">
+          <div class="phase-dot" id="pd1"></div>
+          <div class="phase-lbl">Clot Forming</div>
+        </div>
+        <div class="phase-connector"></div>
+        <div class="phase-item" id="pi2">
+          <div class="phase-dot" id="pd2"></div>
+          <div class="phase-lbl">Anticoagulant Action</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHAT IS ANTICOAGULATION ───────────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--white)">
+  <div class="section-inner">
+    <div class="section-tag">About the Treatment</div>
+    <h2>What is <em style="font-style:normal;color:var(--nhs-blue);">Anticoagulation?</em></h2>
+
+    <div class="intro-block fade-up">
+      <p>Anticoagulants — often called <strong>blood thinners</strong> — are medicines that reduce the blood's ability to form clots. They do not literally thin the blood, but interrupt key steps in the clotting cascade, making it harder for dangerous clots to develop inside blood vessels.</p>
+      <p>They are prescribed to people at elevated risk of harmful clots forming in veins or arteries. Left untreated, these clots can travel to the lungs (pulmonary embolism), brain (stroke), or heart, with potentially fatal consequences. Anticoagulants are highly effective — but they require careful, ongoing monitoring to keep you safe.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="info-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        </div>
+        <h3>Warfarin</h3>
+        <p>A long-established anticoagulant that works by blocking Vitamin K, which is essential to the clotting process. Because many factors alter its effect — including diet, other medicines, and illness — it requires regular <strong>INR blood tests</strong> to ensure the dose is correctly calibrated.</p>
+        <ul>
+          <li>Requires regular INR monitoring (typically monthly once stable)</li>
+          <li>Dose adjusted according to test results at each visit</li>
+          <li>Interacts with certain foods, alcohol, and other medicines</li>
+          <li>Managed through our nurse-led anticoagulation clinic</li>
+        </ul>
+      </div>
+      <div class="info-card fade-up" style="animation-delay:.12s">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>DOACs — Direct Oral Anticoagulants</h3>
+        <p>Newer agents — including <strong>apixaban, rivaroxaban, edoxaban</strong> and <strong>dabigatran</strong> — work differently from warfarin. They generally have a more predictable effect and do not require routine INR monitoring, but patients still need regular GP review to ensure continued safety.</p>
+        <ul>
+          <li>Fixed-dose regimen with no routine INR testing required</li>
+          <li>Regular GP and medication reviews still essential</li>
+          <li>Fewer dietary interactions compared to warfarin</li>
+          <li>Annual renal (kidney) function monitoring required</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONDITIONS ────────────────────────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--off-white)">
+  <div class="section-inner">
+    <div class="section-tag">Indications</div>
+    <h2>Conditions Requiring <em style="font-style:normal;color:var(--nhs-blue);">Anticoagulant Therapy</em></h2>
+    <p class="section-lead">Anticoagulation is prescribed for several conditions where there is an increased risk of dangerous blood clot formation.</p>
+    <div class="grid-3 fade-up">
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="cond-name">Atrial Fibrillation (AF)</div>
+        <p class="cond-desc">AF causes an irregular heart rhythm, which can allow clots to form in the heart and travel to the brain, causing a stroke. Anticoagulation significantly reduces this risk.</p>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="cond-name">DVT &amp; Pulmonary Embolism</div>
+        <p class="cond-desc">Deep vein thrombosis (DVT) and pulmonary embolism (PE) are treated and prevented with anticoagulation, both acutely and as long-term prophylaxis where ongoing risk remains.</p>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="cond-name">Mechanical Heart Valves</div>
+        <p class="cond-desc">Patients with mechanical prosthetic valves must take warfarin long-term. The artificial valve creates turbulent flow which increases clotting risk — lifelong anticoagulation is essential.</p>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="cond-name">Stroke Prevention (TIA)</div>
+        <p class="cond-desc">Following a TIA (mini-stroke) or ischaemic stroke, anticoagulation may be prescribed to reduce future stroke risk, particularly in patients with underlying conditions such as AF.</p>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="cond-name">Post-Surgical Prophylaxis</div>
+        <p class="cond-desc">After major surgery — especially hip and knee replacements — short-term anticoagulation prevents DVT and PE during recovery, when mobility is limited.</p>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/></svg></div>
+        <div class="cond-name">Antiphospholipid Syndrome</div>
+        <p class="cond-desc">This autoimmune condition causes the blood to clot more readily than normal. Long-term anticoagulation is typically required to prevent recurrent thrombotic events.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NURSE-LED CLINIC + INR TABLE ──────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--white)">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start" class="two-col">
+      <div class="fade-up">
+        <div class="section-tag">Our Service</div>
+        <h2 style="margin-bottom:1rem">Nurse-Led<br><em style="font-style:normal;color:var(--nhs-blue);">Anticoagulation Clinic</em></h2>
+        <p style="font-size:.97rem;line-height:1.75;color:var(--text-mid);margin-bottom:1.5rem">We run a dedicated nurse-led clinic for patients who are already established on warfarin and classed as clinically stable. Appointments are efficient, friendly, and focused on keeping you safe.</p>
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>INR Blood Test</h4>
+              <p>Your INR is measured via a simple finger-prick or venous draw to check your warfarin is working within your therapeutic range.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Dose Review &amp; Adjustment</h4>
+              <p>Our trained nurse reviews your result and adjusts your warfarin dose if needed, following established clinical protocols and consulting your GP where required.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Next Appointment Booked</h4>
+              <p>Your next monitoring appointment is scheduled before you leave. Frequency depends on stability — typically every 4–12 weeks for stable patients.</p>
+            </div>
+          </div>
+        </div>
+        <div class="alert-box info" style="margin-top:1.8rem">
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-body">
+            <h4>Who Can Use This Clinic?</h4>
+            <p>This clinic is for <strong>established, stable warfarin patients</strong>. Those newly starting warfarin, or with unstable INR readings, may initially be managed via the hospital anticoagulation service before transferring to us.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up" style="animation-delay:.15s">
+        <div class="info-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Understanding Your INR</h3>
+          <p>INR (International Normalised Ratio) measures how long your blood takes to clot relative to a normal sample. The ideal target range depends on your condition:</p>
+          <table class="inr-table">
+            <thead><tr><th>Condition</th><th>Target INR</th></tr></thead>
+            <tbody>
+              <tr><td>Atrial Fibrillation</td><td><span class="inr-badge target">2.0 – 3.0</span></td></tr>
+              <tr><td>DVT / Pulmonary Embolism</td><td><span class="inr-badge target">2.0 – 3.0</span></td></tr>
+              <tr><td>Mechanical Valve (aortic)</td><td><span class="inr-badge target">2.0 – 3.0</span></td></tr>
+              <tr><td>Mechanical Valve (mitral)</td><td><span class="inr-badge target">2.5 – 3.5</span></td></tr>
+              <tr><td>Antiphospholipid Syndrome</td><td><span class="inr-badge target">2.0 – 3.0</span></td></tr>
+            </tbody>
+          </table>
+          <div class="alert-box warning" style="margin-top:1.2rem;padding:1rem 1.3rem">
+            <div class="alert-icon" style="font-size:1.1rem">⚠️</div>
+            <div class="alert-body">
+              <h4 style="font-size:.85rem">INR Too High</h4>
+              <p style="font-size:.82rem">INR above target increases <strong>bleeding risk</strong>. Contact the surgery promptly if you notice unusual bruising, prolonged bleeding, or blood in your urine or stools.</p>
+            </div>
+          </div>
+          <div class="alert-box urgent" style="padding:1rem 1.3rem">
+            <div class="alert-icon" style="font-size:1.1rem">🔴</div>
+            <div class="alert-body">
+              <h4 style="font-size:.85rem">INR Too Low</h4>
+              <p style="font-size:.82rem">INR below target means <strong>insufficient protection</strong> against dangerous clots. Do not skip or delay your monitoring appointments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRESCRIBING POLICY ─────────────────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--off-white)">
+  <div class="section-inner">
+    <div class="section-tag">Important Policy</div>
+    <h2>Prescription &amp; Monitoring <em style="font-style:normal;color:var(--nhs-blue);">Requirements</em></h2>
+    <p class="section-lead" style="margin-bottom:2.5rem">Recent changes to prescribing guidance mean we can no longer issue anticoagulant prescriptions without first confirming that monitoring is up to date.</p>
+    <div class="grid-2">
+      <div class="info-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>What Has Changed</h3>
+        <p>Anticoagulants can be dangerous if not carefully monitored. To protect patient safety, GPs must now confirm that required monitoring has been completed before any prescription is issued.</p>
+        <ul>
+          <li>Prescriptions can <strong>no longer</strong> be issued "as directed"</li>
+          <li>A <strong>specific dose</strong> must be stated on every prescription</li>
+          <li>Your GP will check your recent monitoring record before prescribing</li>
+          <li>Prescriptions may be declined if monitoring is overdue</li>
+        </ul>
+      </div>
+      <div class="info-card fade-up" style="animation-delay:.12s">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>What You Need to Do</h3>
+        <p>To ensure you can receive your prescription without delay, please ensure the following:</p>
+        <ul>
+          <li>Attend all INR / monitoring appointments on time and regularly</li>
+          <li>If monitoring is overdue, <strong>book your test before</strong> requesting a prescription</li>
+          <li>Allow <strong>2 working days</strong> for routine prescription processing</li>
+          <li>If your condition or other medication has changed, speak to your GP first</li>
+          <li>Use the NHS App to request repeat prescriptions online at any time</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert-box urgent fade-up" style="margin-top:2rem;animation-delay:.2s">
+      <div class="alert-icon">⛔</div>
+      <div class="alert-body">
+        <h4>Do Not Run Out of Medication</h4>
+        <p>Suddenly stopping anticoagulation can dramatically increase your risk of stroke, DVT, or pulmonary embolism. Request your repeat prescription at least <strong>5–7 days</strong> before your supply runs out. If you are concerned about running out, call us immediately on <a href="tel:02085745136" style="color:var(--nhs-blue);font-weight:700">0208 574 5136</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PATIENT SAFETY ─────────────────────────────────────── -->
+<section style="padding:5rem 2rem;background:var(--white)">
+  <div class="section-inner">
+    <div class="section-tag">Safety Information</div>
+    <h2>Staying Safe on <em style="font-style:normal;color:var(--nhs-blue);">Anticoagulant Therapy</em></h2>
+    <p class="section-lead" style="margin-bottom:2.5rem">Anticoagulants are safe and effective when taken correctly and monitored regularly. Here is what every patient on anticoagulation should know.</p>
+    <div class="grid-2">
+      <div class="info-card fade-up">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>Warning Signs — Seek Help Promptly</h3>
+        <p>Contact the surgery or call 999/NHS 111 urgently if you experience any of the following:</p>
+        <ul>
+          <li>Unusual or heavy bleeding from cuts that won't stop</li>
+          <li>Unexplained bruising or blood blisters</li>
+          <li>Blood in your urine (pink, red, or brown)</li>
+          <li>Coughing or vomiting blood</li>
+          <li>Nosebleeds lasting more than 10 minutes</li>
+          <li>Severe or unusual headache, vision changes, or weakness</li>
+          <li>Black, tarry, or bloody stools (possible GI bleed)</li>
+        </ul>
+      </div>
+      <div class="info-card fade-up" style="animation-delay:.12s">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <h3>Drug &amp; Dietary Interactions</h3>
+        <p>Always inform your doctor, pharmacist, and dentist that you take anticoagulants before starting any new medication or undergoing a procedure.</p>
+        <ul>
+          <li><strong>Warfarin &amp; Vitamin K:</strong> Leafy greens, liver, and other Vitamin K–rich foods lower your INR — eat them consistently rather than avoiding them entirely</li>
+          <li>Aspirin and ibuprofen significantly increase bleeding risk</li>
+          <li>Herbal remedies including St John's Wort, fish oil, and ginkgo can interact</li>
+          <li>Alcohol increases bleeding risk — stay within recommended limits</li>
+          <li>Many antibiotics and antifungals can alter warfarin metabolism</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NHS APP BANNER ─────────────────────────────────────── -->
+<div class="app-banner">
+  <div class="app-inner section-inner">
+    <div>
+      <div class="section-tag">Digital Access</div>
+      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+      <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere. Our practice supports full NHS App integration for all patients.</p>
+      <div class="app-bullets">
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Manage and book GP appointments online</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat anticoagulation prescriptions instantly</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+      <!-- Saluja Clinic Logo -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.35))">
+        <defs>
+          <linearGradient id="appChromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="appChromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="appCircleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="appCircleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="appShadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="transparent"/>
+        <circle cx="80" cy="80" r="68" fill="url(#appCircleRim)" filter="url(#appShadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#appCircleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#appChromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#appChromeText)">SALUJA CLINIC</text>
+      </svg>
+      <div class="app-cta-wrap" style="margin:0">
+        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EMERGENCY / OOH ────────────────────────────────────── -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobiles. For urgent medical advice when your GP is closed, including concerns about your anticoagulation.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Dial 999 immediately for severe uncontrolled bleeding, symptoms of stroke (facial drooping, arm weakness, speech difficulty), chest pain, or any life-threatening emergency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html" target="_blank">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
+        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────────────────────────── -->
+<script>
+/* ── Scroll-triggered fade-up ──────────────────────────── */
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+/* ══════════════════════════════════════════════════════════
+   BLOOD VESSEL CANVAS ANIMATION
+   ══════════════════════════════════════════════════════════ */
+(function(){
+  const canvas = document.getElementById('bloodCanvas');
+  const ctx    = canvas.getContext('2d');
+  const W = 740, H = 260;
+  canvas.width = W; canvas.height = H;
+
+  /* Vessel geometry */
+  const VCY  = H / 2;   // center Y of vessel
+  const VR   = 72;      // lumen half-height
+  const WALL = 20;      // vessel wall thickness
+  const WX   = W * 0.52; // wound / clot X
+
+  /* Phase timing (seconds per full cycle) */
+  const P_NORMAL  = 5;
+  const P_CLOT    = 7;
+  const P_DRUG    = 7;
+  const P_RESET   = 3;
+  const CYCLE     = P_NORMAL + P_CLOT + P_DRUG + P_RESET; // 22 s
+
+  /* ─── Seeded pseudo-random (for stable fibrin strands) ─── */
+  function seeded(n){ let x=Math.sin(n+1)*10000; return x-Math.floor(x); }
+
+  /* Pre-built fibrin geometry (stable across frames) */
+  const FIBRIN = Array.from({length:9},(_,i)=>({
+    angle: (i/9)*Math.PI*1.6 + 0.3,
+    len  : 18 + seeded(i)*22,
+    cx   : (seeded(i+20)-0.5)*14,
+    cy   : (seeded(i+40)-0.5)*10,
+  }));
+
+  /* ─── RBC ─────────────────────────────────────────────── */
+  class RBC {
+    constructor(init=false){
+      this.rx=14; this.ry=8;
+      this.reset(init);
+    }
+    reset(init=false){
+      this.x  = init ? Math.random()*W : -20;
+      const margin = this.ry + 4;
+      this.y  = VCY + (Math.random()-0.5)*(VR*2 - margin*2);
+      this.bvx= 1.8 + Math.random()*1.4;
+      this.vx = this.bvx;
+      this.wob= Math.random()*Math.PI*2;
+      this.ws = 0.025+Math.random()*0.015;
+    }
+    update(speed){
+      this.x  += this.bvx * speed;
+      this.wob+= this.ws;
+      if(this.x > W+20) this.reset();
+    }
+    draw(alpha=1){
+      ctx.save(); ctx.globalAlpha=alpha;
+      ctx.translate(this.x,this.y);
+      ctx.rotate(Math.sin(this.wob)*0.12);
+      // Outer
+      ctx.beginPath(); ctx.ellipse(0,0,this.rx,this.ry,0,0,Math.PI*2);
+      ctx.fillStyle='#d43030'; ctx.fill();
+      // Biconcave indent
+      ctx.beginPath(); ctx.ellipse(0,0,this.rx*.52,this.ry*.52,0,0,Math.PI*2);
+      ctx.fillStyle='#a01818'; ctx.fill();
+      // Highlight
+      ctx.beginPath(); ctx.ellipse(-this.rx*.22,-this.ry*.22,this.rx*.28,this.ry*.28,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,170,170,.45)'; ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  /* ─── Platelet ────────────────────────────────────────── */
+  class Platelet {
+    constructor(init=false){
+      this.r=4;
+      this.reset(init);
+    }
+    reset(init=false){
+      this.x  = init ? Math.random()*W : -10;
+      this.y  = VCY + (Math.random()-0.5)*(VR*2-16);
+      this.bvx= 2.2 + Math.random()*1.6;
+    }
+    update(speed){ this.x+=this.bvx*speed; if(this.x>W+10) this.reset(); }
+    draw(alpha=1){
+      ctx.save(); ctx.globalAlpha=alpha;
+      ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle='#f5c842'; ctx.fill();
+      ctx.strokeStyle='rgba(200,140,0,.5)'; ctx.lineWidth=.8; ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ─── Drug Molecule (hexagon with Rx) ────────────────── */
+  class DrugMol {
+    constructor(init=false){
+      this.size=9;
+      this.reset(init);
+    }
+    reset(init=false){
+      this.x   = init ? Math.random()*W : -20;
+      this.y   = VCY + (Math.random()-0.5)*(VR*2-20);
+      this.bvx = 2.4 + Math.random()*1.2;
+      this.ang = Math.random()*Math.PI*2;
+      this.rs  = (Math.random()-.5)*.04;
+    }
+    update(){ this.x+=this.bvx; this.ang+=this.rs; if(this.x>W+20) this.reset(); }
+    draw(alpha=1){
+      ctx.save(); ctx.globalAlpha=alpha;
+      ctx.translate(this.x,this.y); ctx.rotate(this.ang);
+      ctx.beginPath();
+      for(let i=0;i<6;i++){
+        const a=(i*Math.PI*2/6)-Math.PI/6;
+        i===0?ctx.moveTo(Math.cos(a)*this.size,Math.sin(a)*this.size)
+             :ctx.lineTo(Math.cos(a)*this.size,Math.sin(a)*this.size);
+      }
+      ctx.closePath();
+      ctx.fillStyle='rgba(0,94,184,.88)'; ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1; ctx.stroke();
+      ctx.fillStyle='#fff'; ctx.font='bold 6.5px sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('Rx',0,0);
+      ctx.restore();
+    }
+  }
+
+  /* ─── Particle pools ──────────────────────────────────── */
+  const RBCS  = Array.from({length:22},()=>new RBC(true));
+  const PLTS  = Array.from({length:11},()=>new Platelet(true));
+  const DRUGS = Array.from({length:9}, ()=>new DrugMol(true));
+
+  /* ─── Phase helpers ───────────────────────────────────── */
+  function ease(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function getPhase(t){
+    const c=t%CYCLE;
+    if(c<P_NORMAL)
+      return {name:'normal',  p:c/P_NORMAL};
+    else if(c<P_NORMAL+P_CLOT)
+      return {name:'clot',    p:(c-P_NORMAL)/P_CLOT};
+    else if(c<P_NORMAL+P_CLOT+P_DRUG)
+      return {name:'drug',    p:(c-P_NORMAL-P_CLOT)/P_DRUG};
+    else
+      return {name:'reset',   p:(c-P_NORMAL-P_CLOT-P_DRUG)/P_RESET};
+  }
+
+  /* Smooth flow speed per phase */
+  function flowSpeed(ph){
+    if(ph.name==='normal') return 1;
+    if(ph.name==='clot')   return 1 - ease(ph.p)*0.55;  // slow to 45%
+    if(ph.name==='drug')   return 0.45 + ease(ph.p)*0.55; // recover
+    if(ph.name==='reset')  return 1;
+    return 1;
+  }
+
+  /* Clot radius (max ~48px, peaks in clot phase, shrinks in drug/reset) */
+  function clotRadius(ph){
+    if(ph.name==='normal') return 0;
+    if(ph.name==='clot')   return ease(ph.p)*48;
+    if(ph.name==='drug')   return 48 - ease(ph.p)*30;   // shrinks to 18
+    if(ph.name==='reset')  return 18 - ease(ph.p)*18;   // back to 0
+    return 0;
+  }
+
+  /* ─── Draw vessel walls ───────────────────────────────── */
+  function drawWalls(woundVisible){
+    // Top wall
+    const tg=ctx.createLinearGradient(0,VCY-VR-WALL,0,VCY-VR);
+    tg.addColorStop(0,'#d9906a'); tg.addColorStop(.6,'#f0c8a8'); tg.addColorStop(1,'#f8dcc0');
+    ctx.fillStyle=tg;
+    ctx.beginPath();
+    ctx.rect(0,VCY-VR-WALL,W,WALL);
+    ctx.fill();
+
+    // Bottom wall
+    const bg=ctx.createLinearGradient(0,VCY+VR,0,VCY+VR+WALL);
+    bg.addColorStop(0,'#f8dcc0'); bg.addColorStop(.5,'#f0c8a8'); bg.addColorStop(1,'#d9906a');
+    ctx.fillStyle=bg;
+    ctx.fillRect(0,VCY+VR,W,WALL);
+
+    // Wall cell nuclei (subtle texture)
+    ctx.save(); ctx.globalAlpha=0.12;
+    for(let x=20;x<W;x+=36){
+      ctx.beginPath(); ctx.ellipse(x,VCY-VR-WALL/2,5,3,0,0,Math.PI*2);
+      ctx.fillStyle='#8B3A0A'; ctx.fill();
+      ctx.beginPath(); ctx.ellipse(x+18,VCY+VR+WALL/2,5,3,0,0,Math.PI*2);
+      ctx.fillStyle='#8B3A0A'; ctx.fill();
+    }
+    ctx.restore();
+
+    // Wound crack (top wall)
+    if(woundVisible){
+      ctx.save();
+      ctx.strokeStyle='rgba(80,20,10,.7)'; ctx.lineWidth=2;
+      ctx.beginPath();
+      ctx.moveTo(WX-6, VCY-VR-WALL);
+      ctx.lineTo(WX-2, VCY-VR-WALL/2);
+      ctx.lineTo(WX+3, VCY-VR-8);
+      ctx.lineTo(WX,   VCY-VR);
+      ctx.stroke();
+      // small gap highlight
+      ctx.strokeStyle='rgba(255,100,60,.4)'; ctx.lineWidth=1;
+      ctx.beginPath();
+      ctx.moveTo(WX-1,VCY-VR-4); ctx.lineTo(WX+1,VCY-VR);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Wall borders
+    ctx.save(); ctx.strokeStyle='rgba(160,80,40,.4)'; ctx.lineWidth=1;
+    ctx.strokeRect(0,VCY-VR-WALL,W,WALL);
+    ctx.strokeRect(0,VCY+VR,W,WALL);
+    ctx.restore();
+  }
+
+  /* ─── Draw lumen background ───────────────────────────── */
+  function drawLumen(){
+    const lg=ctx.createLinearGradient(0,VCY-VR,0,VCY+VR);
+    lg.addColorStop(0,'#ffe6e6'); lg.addColorStop(.5,'#fff8f8'); lg.addColorStop(1,'#ffe6e6');
+    ctx.fillStyle=lg;
+    ctx.fillRect(0,VCY-VR,W,VR*2);
+  }
+
+  /* ─── Draw overall background ─────────────────────────── */
+  function drawBackground(){
+    ctx.fillStyle='#edf2f7';
+    ctx.fillRect(0,0,W,H);
+    // space above and below vessel
+    ctx.fillStyle='#f0f5fb';
+    ctx.fillRect(0,0,W,VCY-VR-WALL);
+    ctx.fillRect(0,VCY+VR+WALL,W,H-(VCY+VR+WALL));
+    // subtle label areas
+    ctx.save(); ctx.globalAlpha=.5;
+    ctx.fillStyle='#e2eaf5';
+    ctx.fillRect(0,0,W,VCY-VR-WALL);
+    ctx.fillRect(0,VCY+VR+WALL,W,H-(VCY+VR+WALL));
+    ctx.restore();
+    // Label "ARTERY"
+    ctx.save(); ctx.globalAlpha=.35;
+    ctx.font='600 11px "DM Sans",sans-serif'; ctx.fillStyle='#003087';
+    ctx.textAlign='left'; ctx.textBaseline='middle';
+    ctx.fillText('VESSEL WALL',12, VCY-VR-WALL/2);
+    ctx.fillText('VESSEL WALL',12, VCY+VR+WALL/2);
+    ctx.fillStyle='#a02020';
+    ctx.fillText('BLOOD FLOW  →',12, VCY);
+    ctx.restore();
+  }
+
+  /* ─── Draw clot blob ──────────────────────────────────── */
+  function drawClot(r, drugProgress){
+    if(r<=0) return;
+    const cx=WX, cy=VCY-VR;
+
+    ctx.save();
+    // Clip to lumen so clot doesn't bleed into wall
+    ctx.beginPath(); ctx.rect(0,VCY-VR,W,VR*2); ctx.clip();
+
+    // Blob shape (organic, slightly asymmetric)
+    ctx.beginPath();
+    const pts=[
+      [cx-r*.9, cy+r*.1],
+      [cx-r*.5, cy+r*.8],
+      [cx,      cy+r*1.7],
+      [cx+r*.6, cy+r*.9],
+      [cx+r*.95,cy+r*.1],
+    ];
+    ctx.moveTo(cx, cy);
+    for(let i=0;i<pts.length;i++){
+      const p0 = i===0 ? [cx,cy] : pts[i-1];
+      const p1 = pts[i];
+      const mx=(p0[0]+p1[0])/2, my=(p0[1]+p1[1])/2;
+      ctx.quadraticCurveTo(p0[0],p0[1],mx,my);
+    }
+    ctx.quadraticCurveTo(pts[pts.length-1][0],pts[pts.length-1][1],cx,cy);
+    ctx.closePath();
+
+    // Gradient fill
+    const cg=ctx.createRadialGradient(cx,cy+r*.4,0,cx,cy+r*.5,r*1.6);
+    if(drugProgress>0){
+      // Dissolving: shift to lighter purple/pink tones
+      const mix=ease(drugProgress);
+      cg.addColorStop(0,`rgba(${lerp(180,140,mix)},${lerp(60,80,mix)},${lerp(50,150,mix)},.9)`);
+      cg.addColorStop(.55,`rgba(${lerp(140,110,mix)},${lerp(30,50,mix)},${lerp(30,120,mix)},.8)`);
+      cg.addColorStop(1,`rgba(${lerp(100,80,mix)},${lerp(20,30,mix)},${lerp(20,80,mix)},.3)`);
+    } else {
+      cg.addColorStop(0,'rgba(180,60,50,.92)');
+      cg.addColorStop(.55,'rgba(140,30,30,.82)');
+      cg.addColorStop(1,'rgba(100,20,20,.3)');
+    }
+    ctx.fillStyle=cg; ctx.fill();
+
+    // Fibrin strands
+    ctx.save();
+    ctx.globalAlpha=drugProgress>0 ? Math.max(0,(1-drugProgress*.7))*.6 : .6;
+    ctx.strokeStyle='#c47820'; ctx.lineWidth=1.2; ctx.lineCap='round';
+    FIBRIN.forEach(f=>{
+      const ox=cx+f.cx, oy=cy+r*.3+f.cy;
+      const ex=ox+Math.cos(f.angle)*Math.min(f.len,r*.9);
+      const ey=oy+Math.sin(f.angle)*Math.min(f.len,r*.9);
+      ctx.beginPath();
+      ctx.moveTo(ox,oy);
+      ctx.quadraticCurveTo((ox+ex)/2+f.cy*1.2,(oy+ey)/2-f.cx*.8,ex,ey);
+      ctx.stroke();
+    });
+    ctx.restore();
+
+    // Trapped platelets (small yellow dots within clot)
+    ctx.save(); ctx.globalAlpha=drugProgress>0 ? Math.max(0.1,(1-drugProgress*.6)) : .85;
+    for(let i=0;i<6;i++){
+      const px=cx+(seeded(i+60)-.5)*r*1.2;
+      const py=cy+seeded(i+70)*r*1.2+2;
+      ctx.beginPath(); ctx.arc(px,py,3,0,Math.PI*2);
+      ctx.fillStyle='#f8c830'; ctx.fill();
+    }
+    ctx.restore();
+    ctx.restore();
+  }
+
+  function lerp(a,b,t){return a+(b-a)*t}
+
+  /* ─── Phase label updater ─────────────────────────────── */
+  const lbl = document.getElementById('phaseLabel');
+  const pItems = [
+    document.getElementById('pi0'),
+    document.getElementById('pi1'),
+    document.getElementById('pi2'),
+  ];
+  const pDots  = [
+    document.getElementById('pd0'),
+    document.getElementById('pd1'),
+    document.getElementById('pd2'),
+  ];
+  const LABELS = {
+    normal:'Normal Blood Flow',
+    clot:  'Clot Forming',
+    drug:  'Anticoagulant Action',
+    reset: 'Normal Flow Restoring'
+  };
+  const PHASE_IDX = {normal:0,clot:1,drug:2,reset:2};
+
+  let lastPhaseName = '';
+  function updateUI(phaseName){
+    if(phaseName===lastPhaseName) return;
+    lastPhaseName=phaseName;
+    lbl.textContent = LABELS[phaseName]||'';
+    const ai = PHASE_IDX[phaseName];
+    pItems.forEach((el,i)=>{el.classList.toggle('active',i===ai)});
+    pDots.forEach((el,i)=>{el.classList.toggle('active',i===ai)});
+  }
+
+  /* ─── Main render loop ────────────────────────────────── */
+  let startTime = null;
+
+  function render(now){
+    if(!startTime) startTime=now;
+    const elapsed=(now-startTime)/1000;
+    const ph=getPhase(elapsed);
+    const speed=flowSpeed(ph);
+    const cr=clotRadius(ph);
+    const dp= ph.name==='drug' ? ph.p : (ph.name==='reset' ? 1 : 0);
+
+    updateUI(ph.name);
+
+    ctx.clearRect(0,0,W,H);
+    drawBackground();
+    drawLumen();
+
+    // Clip to lumen for particles
+    ctx.save();
+    ctx.beginPath(); ctx.rect(0,VCY-VR,W,VR*2); ctx.clip();
+
+    // RBCs
+    const rbcAlpha = ph.name==='clot' ? 1 - ph.p*0.25 : 1;
+    RBCS.forEach(r=>{ r.update(speed); r.draw(rbcAlpha); });
+
+    // Platelets
+    PLTS.forEach(p=>{ p.update(speed); p.draw(.85); });
+
+    ctx.restore();
+
+    // Walls + wound
+    drawWalls(ph.name!=='normal');
+
+    // Clot
+    drawClot(cr, dp);
+
+    // Drug molecules (on top, clipped)
+    if(ph.name==='drug' || ph.name==='reset'){
+      const da = ph.name==='drug'
+        ? Math.min(1,(ph.p*3))
+        : Math.max(0,1-ease(ph.p)*1.5);
+      ctx.save();
+      ctx.beginPath(); ctx.rect(0,VCY-VR,W,VR*2); ctx.clip();
+      DRUGS.forEach(d=>{ d.update(); d.draw(da); });
+      ctx.restore();
+    }
+
+    // Flow arrows (subtle, animated)
+    if(speed>0.2){
+      ctx.save();
+      ctx.globalAlpha=0.12*speed;
+      ctx.strokeStyle='#a01818'; ctx.lineWidth=1.5;
+      const arrowY = [VCY-36, VCY, VCY+36];
+      const offset = (elapsed*60*speed*2) % 80;
+      arrowY.forEach(ay=>{
+        for(let ax=offset-80;ax<W+20;ax+=80){
+          ctx.beginPath();
+          ctx.moveTo(ax,ay); ctx.lineTo(ax+18,ay);
+          ctx.moveTo(ax+18,ay); ctx.lineTo(ax+12,ay-4);
+          ctx.moveTo(ax+18,ay); ctx.lineTo(ax+12,ay+4);
+          ctx.stroke();
+        }
+      });
+      ctx.restore();
+    }
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>

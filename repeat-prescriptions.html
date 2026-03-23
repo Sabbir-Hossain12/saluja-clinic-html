@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Repeat Prescriptions – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── UTILITY BAR ── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 0.75rem 2rem; }
+    .breadcrumb .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-soft); }
+    .breadcrumb a { color: var(--nhs-blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { opacity: 0.4; }
+    .breadcrumb .current { color: var(--text-mid); font-weight: 500; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: var(--white); padding: 5rem 2rem 4rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .page-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.05) 0%, transparent 70%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.05) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border: 1px solid rgba(0,94,184,0.15); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-blue 2s infinite; }
+    @keyframes pulse-blue { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.5rem); font-weight: 600; line-height: 1.12; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .page-hero h1 em { font-style: italic; color: var(--nhs-blue); }
+    .hero-lead { font-size: 1.05rem; line-height: 1.75; color: var(--text-mid); max-width: 500px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,94,184,0.35); }
+    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-outline:hover { background: rgba(0,94,184,0.06); transform: translateY(-1px); }
+
+    /* floating bubbles */
+    .floating-bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .bubble { position: absolute; border-radius: 50%; opacity: 0; animation: floatBubble linear infinite; }
+    @keyframes floatBubble { 0%{transform:translateY(100%) scale(0.6);opacity:0} 15%{opacity:0.18} 80%{opacity:0.08} 100%{transform:translateY(-100px) scale(1.1);opacity:0} }
+
+    /* ── HERO PRESCRIPTION CARD ── */
+    .rx-visual-card { background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 2rem 2rem 1.6rem; box-shadow: 0 8px 40px rgba(0,94,184,0.10); position: relative; overflow: hidden; }
+    .rx-visual-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua), var(--nhs-green)); }
+    .rx-card-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .rx-card-label svg { width: 14px; height: 14px; stroke: var(--text-soft); fill: none; stroke-width: 2; }
+    .rx-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.4rem; }
+    .rx-stat { text-align: center; padding: 1rem; background: var(--off-white); border-radius: 12px; }
+    .rx-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 700; color: var(--nhs-blue); line-height: 1; }
+    .rx-stat-label { font-size: 0.72rem; color: var(--text-soft); margin-top: 0.3rem; }
+    .rx-step-list { display: flex; flex-direction: column; gap: 0.65rem; }
+    .rx-step { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.9rem; background: var(--off-white); border: 1px solid var(--border); border-radius: 10px; font-size: 0.84rem; color: var(--text-mid); }
+    .rx-step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--nhs-blue); color: #fff; font-size: 0.72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .rx-step svg { width: 14px; height: 14px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; margin-left: auto; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1rem; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 600; line-height: 1.18; color: var(--text-dark); margin-bottom: 1rem; }
+    h2 em { font-style: italic; color: var(--nhs-blue); }
+    .section-lead { font-size: 1.02rem; line-height: 1.75; color: var(--text-mid); max-width: 640px; margin-bottom: 3rem; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── HOW TO REQUEST ── */
+    .request-section { background: var(--white); }
+    .request-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .req-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem 1.8rem; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .req-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,94,184,0.13); }
+    .req-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .rc-blue::before { background: var(--nhs-blue); }
+    .rc-aqua::before { background: var(--nhs-aqua); }
+    .rc-green::before { background: var(--nhs-green); }
+    .rc-dark::before { background: var(--nhs-dark); }
+    .req-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.3rem; }
+    .ri-blue { background: rgba(0,94,184,0.09); }
+    .ri-aqua { background: rgba(0,159,187,0.09); }
+    .ri-green { background: rgba(0,127,59,0.09); }
+    .ri-dark { background: rgba(0,48,135,0.09); }
+    .req-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ri-blue svg { stroke: var(--nhs-blue); }
+    .ri-aqua svg { stroke: var(--nhs-aqua); }
+    .ri-green svg { stroke: var(--nhs-green); }
+    .ri-dark svg { stroke: var(--nhs-dark); }
+    .req-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.4rem; }
+    .req-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.65rem; }
+    .req-desc { font-size: 0.88rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 1.3rem; }
+    .req-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+    .req-link { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 0.55rem 1rem; border-radius: 8px; transition: background 0.2s; }
+    .req-link.blue { color: var(--nhs-blue); background: rgba(0,94,184,0.07); }
+    .req-link.blue:hover { background: rgba(0,94,184,0.13); }
+    .req-link.aqua { color: var(--nhs-aqua); background: rgba(0,159,187,0.07); }
+    .req-link.aqua:hover { background: rgba(0,159,187,0.13); }
+    .req-link.green { color: var(--nhs-green); background: rgba(0,127,59,0.07); }
+    .req-link.green:hover { background: rgba(0,127,59,0.13); }
+    .req-link.dark { color: var(--nhs-dark); background: rgba(0,48,135,0.07); }
+    .req-link.dark:hover { background: rgba(0,48,135,0.13); }
+    .req-link svg { width: 13px; height: 13px; stroke-width: 2.5; flex-shrink: 0; }
+
+    /* ── PROCESSING TIMELINE ── */
+    .timeline-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .timeline-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .timeline-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+    .info-callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--nhs-blue); border-radius: 0 12px 12px 0; padding: 1.2rem 1.4rem; margin-top: 1.4rem; }
+    .info-callout p { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); margin: 0; }
+    .info-callout strong { color: var(--nhs-blue); }
+    .timeline-steps { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,94,184,0.07); }
+    .timeline-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.7rem; }
+    .timeline-card-title svg { width: 22px; height: 22px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .tl-step { display: flex; gap: 1rem; padding-bottom: 1.4rem; position: relative; }
+    .tl-step:last-child { padding-bottom: 0; }
+    .tl-step:not(:last-child)::after { content: ''; position: absolute; left: 15px; top: 32px; width: 2px; height: calc(100% - 12px); background: var(--border); }
+    .tl-dot { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,94,184,0.09); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+    .tl-dot svg { width: 14px; height: 14px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; }
+    .tl-content { padding-top: 0.2rem; }
+    .tl-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.2rem; }
+    .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+    .tl-desc { font-size: 0.84rem; line-height: 1.6; color: var(--text-mid); }
+    .two-day-banner { display: flex; align-items: center; gap: 1.4rem; background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue)); border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 1.8rem; }
+    .two-day-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: #fff; line-height: 1; flex-shrink: 0; }
+    .two-day-text { font-size: 0.9rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
+    .two-day-text strong { color: #fff; display: block; margin-bottom: 0.15rem; font-size: 1rem; }
+
+    /* ── SPECIAL CASES ── */
+    .special-section { background: var(--white); }
+    .special-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .special-card { border: 1px solid var(--border); border-radius: 20px; padding: 2rem 1.8rem; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .special-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+    .sc-emergency { background: rgba(218,41,28,0.03); border-color: rgba(218,41,28,0.2); }
+    .sc-emergency::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #DA291C; }
+    .sc-new { background: rgba(0,127,59,0.03); border-color: rgba(0,127,59,0.2); }
+    .sc-new::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--nhs-green); }
+    .sc-non { background: rgba(0,94,184,0.03); border-color: rgba(0,94,184,0.2); }
+    .sc-non::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--nhs-aqua); }
+    .special-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .si-red { background: rgba(218,41,28,0.09); }
+    .si-green { background: rgba(0,127,59,0.09); }
+    .si-aqua { background: rgba(0,159,187,0.09); }
+    .special-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .si-red svg { stroke: #DA291C; }
+    .si-green svg { stroke: var(--nhs-green); }
+    .si-aqua svg { stroke: var(--nhs-aqua); }
+    .special-label { font-size: 0.71rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.4rem; }
+    .special-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.7rem; }
+    .special-desc { font-size: 0.86rem; line-height: 1.72; color: var(--text-mid); margin-bottom: 1.1rem; }
+    .special-note { padding: 0.75rem 0.9rem; border-radius: 10px; font-size: 0.82rem; line-height: 1.55; }
+    .sn-red { background: rgba(218,41,28,0.06); border: 1px solid rgba(218,41,28,0.2); color: #8a1a12; }
+    .sn-green { background: rgba(0,127,59,0.06); border: 1px solid rgba(0,127,59,0.2); color: #004f25; }
+    .sn-aqua { background: rgba(0,159,187,0.06); border: 1px solid rgba(0,159,187,0.2); color: #005a6b; }
+    .special-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.84rem; font-weight: 600; text-decoration: none; margin-top: 1rem; }
+    .special-cta-red { color: #DA291C; }
+    .special-cta-green { color: var(--nhs-green); }
+    .special-cta-aqua { color: var(--nhs-aqua); }
+    .special-cta svg { width: 12px; height: 12px; stroke-width: 2.5; flex-shrink: 0; }
+    .ooh-111 { display: flex; align-items: center; gap: 1.2rem; background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue)); border-radius: 14px; padding: 1.2rem 1.4rem; margin-top: 1.2rem; }
+    .ooh-111-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 700; color: #fff; line-height: 1; flex-shrink: 0; }
+    .ooh-111-text { font-size: 0.84rem; color: rgba(255,255,255,0.8); line-height: 1.55; }
+    .ooh-111-text strong { color: #fff; display: block; margin-bottom: 0.1rem; }
+
+    /* ── ONLINE SERVICES ── */
+    .online-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .online-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .online-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+    .online-steps { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.6rem 0; }
+    .online-step { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.85rem 1rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; }
+    .os-num { width: 28px; height: 28px; border-radius: 50%; background: var(--nhs-blue); color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .os-text { font-size: 0.86rem; line-height: 1.6; color: var(--text-mid); }
+    .os-text strong { color: var(--text-dark); display: block; margin-bottom: 0.1rem; font-size: 0.88rem; }
+    .online-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,94,184,0.09); }
+    .online-card-header { background: linear-gradient(135deg, var(--nhs-blue), var(--nhs-dark)); padding: 1.6rem 2rem; }
+    .online-card-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+    .online-card-header p { font-size: 0.84rem; color: rgba(255,255,255,0.75); }
+    .online-card-body { padding: 1.6rem 2rem; }
+    .service-option { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .service-option:last-child { border-bottom: none; padding-bottom: 0; }
+    .service-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .sd-blue { background: var(--nhs-blue); }
+    .sd-aqua { background: var(--nhs-aqua); }
+    .service-option-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-mid); }
+    .service-option-text strong { color: var(--text-dark); display: block; font-size: 0.9rem; }
+    .service-option-links { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+    .so-link { font-size: 0.8rem; font-weight: 600; text-decoration: none; padding: 0.3rem 0.75rem; border-radius: 20px; transition: background 0.2s; }
+    .so-link.blue { color: var(--nhs-blue); background: rgba(0,94,184,0.08); }
+    .so-link.blue:hover { background: rgba(0,94,184,0.15); }
+    .so-link.aqua { color: var(--nhs-aqua); background: rgba(0,159,187,0.08); }
+    .so-link.aqua:hover { background: rgba(0,159,187,0.15); }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--nhs-dark); padding: 4rem 2rem; }
+    .cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .cta-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; padding: 2rem; }
+    .cta-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .cta-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+    .cta-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+    .cta-card p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 1.2rem; }
+    .btn-white { background: #fff; color: var(--nhs-dark); padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.15s; }
+    .btn-white:hover { background: var(--off-white); transform: translateY(-1px); }
+    .btn-ghost { border: 1.5px solid rgba(255,255,255,0.4); color: #fff; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.88rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.15s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+
+    /* ── EMERGENCY BAND ── */
+    .emerg-band { background: #DA291C; padding: 0.9rem 2rem; }
+    .emerg-band .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .emerg-band-text { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; font-weight: 600; color: #fff; }
+    .emerg-band-text svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; flex-shrink: 0; }
+    .emerg-band a { color: #fff; font-weight: 700; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); padding: 0.4rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.86rem; transition: background 0.2s; }
+    .emerg-band a:hover { background: rgba(255,255,255,0.3); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0.8rem 0 1.2rem; }
+    .footer-address { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.9; }
+    .footer-address a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .footer-heading { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.3rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.6); gap: 0.5rem; }
+    .hour-day { color: rgba(255,255,255,0.45); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.4rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner, .timeline-layout, .online-layout, .emerg-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .request-grid { grid-template-columns: 1fr; }
+      .special-grid { grid-template-columns: 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      header .header-inner { height: auto; padding: 1rem; flex-direction: column; gap: 1rem; }
+      nav { flex-wrap: wrap; justify-content: center; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .rx-stat-row { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div>NHS GP Practice · Southall, West London · Serving the community since 1976</div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="tel:02085745136" class="util-pill">📞 0208 574 5136</a>
+      <a href="https://111.nhs.uk" target="_blank" class="util-pill">🏥 NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="84" style="width:auto">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="news.html">News</a>
+      <a href="clinics-and-services.html">Services</a>
+      <a href="practice-policies-patient-information.html" class="active">Our Practice</a>
+      <a href="health-information.html">Health Info</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment</a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="inner">
+    <a href="/">Home</a>
+    <span class="sep">›</span>
+    <a href="practice-policies-patient-information.html">Our Practice</a>
+    <span class="sep">›</span>
+    <span class="current">Repeat Prescriptions</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="floating-bubbles">
+    <div class="bubble" style="left:8%;width:16px;height:16px;background:rgba(0,94,184,0.15);animation-duration:10s;animation-delay:0s;bottom:0;"></div>
+    <div class="bubble" style="left:25%;width:10px;height:10px;background:rgba(0,159,187,0.18);animation-duration:13s;animation-delay:2s;bottom:0;"></div>
+    <div class="bubble" style="left:54%;width:14px;height:14px;background:rgba(0,94,184,0.12);animation-duration:11s;animation-delay:4s;bottom:0;"></div>
+    <div class="bubble" style="left:74%;width:8px;height:8px;background:rgba(0,127,59,0.15);animation-duration:15s;animation-delay:1s;bottom:0;"></div>
+    <div class="bubble" style="left:91%;width:12px;height:12px;background:rgba(0,159,187,0.12);animation-duration:12s;animation-delay:3s;bottom:0;"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="hero-tag"><span></span>Saluja Clinic</div>
+      <h1>Repeat<br><em>Prescriptions</em></h1>
+      <p class="hero-lead">Medications your doctor has approved for regular, ongoing use. Order online via the NHS App, in person, or by post — allowing up to 2 working days for processing.</p>
+      <div class="hero-actions">
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-primary" target="_blank">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+          Order via NHS App
+        </a>
+        <a href="https://systmonline.tpp-uk.com/2/Login?Date=20171124101232" class="btn-outline" target="_blank">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          SystmOnline
+        </a>
+      </div>
+    </div>
+    <!-- HERO VISUAL CARD -->
+    <div class="rx-visual-card fade-up" style="transition-delay:0.15s;">
+      <div class="rx-card-label">
+        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="12" y2="16"/></svg>
+        Prescription at a Glance
+      </div>
+      <div class="rx-stat-row">
+        <div class="rx-stat">
+          <div class="rx-stat-num">2</div>
+          <div class="rx-stat-label">Working days<br>to process</div>
+        </div>
+        <div class="rx-stat">
+          <div class="rx-stat-num">4</div>
+          <div class="rx-stat-label">Ways<br>to request</div>
+        </div>
+        <div class="rx-stat">
+          <div class="rx-stat-num">5</div>
+          <div class="rx-stat-label">Days a week<br>open</div>
+        </div>
+      </div>
+      <div class="rx-step-list">
+        <div class="rx-step">
+          <div class="rx-step-num">1</div>
+          Submit your request (online, in person, or by post)
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="rx-step">
+          <div class="rx-step-num">2</div>
+          Prescription clerk reviews your medical records
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="rx-step">
+          <div class="rx-step-num">3</div>
+          Clinical Pharmacist or Doctor authorises
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="rx-step">
+          <div class="rx-step-num">4</div>
+          Prescription ready for collection at reception
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO REQUEST -->
+<section class="request-section">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-tag">Request Methods</div>
+      <h2>How to Order Your<br><em>Prescription</em></h2>
+      <p class="section-lead">There are four convenient ways to request your repeat prescription. Choose whichever is easiest for you — just remember to order in good time.</p>
+    </div>
+    <div class="request-grid fade-up" style="transition-delay:0.1s;">
+
+      <!-- Online / NHS App -->
+      <div class="req-card rc-blue">
+        <div class="req-icon ri-blue">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+        </div>
+        <div class="req-label">Digital</div>
+        <div class="req-title">NHS App &amp; Online Services</div>
+        <p class="req-desc">The quickest and most convenient way to order. Register with the NHS App or SystmOnline to request prescriptions 24/7 from your phone or computer. You can also track the status of your request.</p>
+        <div class="req-actions">
+          <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="req-link blue" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Register / Login – NHS App
+          </a>
+          <a href="https://systmonline.tpp-uk.com/2/Login?Date=20171124101232" class="req-link blue" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Login – SystmOnline
+          </a>
+        </div>
+      </div>
+
+      <!-- In Person -->
+      <div class="req-card rc-aqua">
+        <div class="req-icon ri-aqua">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="req-label">In Person</div>
+        <div class="req-title">Visit the Surgery</div>
+        <p class="req-desc">Fill in a prescription request form at reception, or underline the items you need on the tear-off side of your prescription slip and drop it in to us. Please only request medications you actually need.</p>
+        <div class="req-actions">
+          <a href="contact-us.html" class="req-link aqua">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Get Directions
+          </a>
+        </div>
+      </div>
+
+      <!-- By Post -->
+      <div class="req-card rc-green">
+        <div class="req-icon ri-green">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="req-label">By Post</div>
+        <div class="req-title">Royal Mail Return</div>
+        <p class="req-desc">If you are unable to collect your prescription in person, we can return it by post. Simply include a stamped, self-addressed envelope with your request and we'll send the prescription directly to you.</p>
+        <div class="req-actions">
+          <a href="contact-us.html" class="req-link green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Our Postal Address
+          </a>
+        </div>
+      </div>
+
+      <!-- Phone/Reception -->
+      <div class="req-card rc-dark">
+        <div class="req-icon ri-dark">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="req-label">By Phone</div>
+        <div class="req-title">Call Reception</div>
+        <p class="req-desc">For urgent queries about your prescription, call us during opening hours. Please note that phone lines can be busy, so online ordering is encouraged where possible for routine requests.</p>
+        <div class="req-actions">
+          <a href="tel:02085745136" class="req-link dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            0208 574 5136
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSING TIMELINE -->
+<section class="timeline-section">
+  <div class="section-inner">
+    <div class="timeline-layout">
+      <div class="fade-up">
+        <div class="section-tag">Processing Time</div>
+        <h2>Why Does It Take<br><em>2 Working Days?</em></h2>
+        <div class="two-day-banner">
+          <div class="two-day-num">48<span style="font-size:1.4rem;font-weight:400;">hrs</span></div>
+          <div class="two-day-text">
+            <strong>Allow up to 2 working days</strong>
+            Please order your medication before you run out — do not wait until your last dose.
+          </div>
+        </div>
+        <div class="timeline-text">
+          <p>Every prescription request at Saluja Clinic goes through a careful review process to ensure it is safe, appropriate, and up to date for your needs. This takes time to do properly, but it means you can trust what you're receiving.</p>
+          <p>Delays may occur if a requested medication is not on your repeat list, differs from what is recorded, or if your doctor wishes to review your medication first. You may be contacted to arrange an appointment.</p>
+        </div>
+        <div class="info-callout">
+          <p><strong>Important:</strong> Please do not order medication you do not need. Overstocking contributes to NHS waste and means medications cannot reach those who need them.</p>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.15s;">
+        <div class="timeline-steps">
+          <div class="timeline-card-title">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Your Prescription Journey
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">
+              <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="12" y2="16"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Step 1 · You</div>
+              <div class="tl-title">Request Submitted</div>
+              <div class="tl-desc">Via NHS App, SystmOnline, in person, or by post. Clock starts now.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Step 2 · Admin</div>
+              <div class="tl-title">Records Check</div>
+              <div class="tl-desc">Our prescription clerk verifies the request against your medical records to confirm the medication is on your repeat list.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Step 3 · Clinical</div>
+              <div class="tl-title">Clinician Authorisation</div>
+              <div class="tl-desc">Our Clinical Pharmacist or GP reviews and authorises the prescription, ensuring it remains appropriate for you.</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Step 4 · Ready</div>
+              <div class="tl-title">Available for Collection</div>
+              <div class="tl-desc">The signed prescription is filed at reception, ready to collect in person or sent by post if you provided an envelope.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIAL CASES -->
+<section class="special-section">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-tag">Special Circumstances</div>
+      <h2>Prescriptions That Need<br><em>Extra Attention</em></h2>
+      <p class="section-lead">Some prescription requests fall outside the standard 2-day process. Here's what to do in each situation.</p>
+    </div>
+    <div class="special-grid fade-up" style="transition-delay:0.1s;">
+
+      <!-- Emergency -->
+      <div class="special-card sc-emergency">
+        <div class="special-icon si-red">
+          <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="special-label">Urgent</div>
+        <div class="special-title">Emergency Medication</div>
+        <p class="special-desc">If you have run out of critical medication — including anti-epileptics, insulin, inhalers, or adrenaline pens for anaphylaxis — contact us immediately. Do not wait.</p>
+        <div class="special-note sn-red">You may need a telephone consultation with our GP Clinical Pharmacist or a Doctor before we can issue an emergency supply.</div>
+        <div class="ooh-111">
+          <div class="ooh-111-num">111</div>
+          <div class="ooh-111-text">
+            <strong>Outside opening hours?</strong>
+            Call NHS 111 from any phone for urgent medication advice and out-of-hours support.
+          </div>
+        </div>
+        <a href="tel:02085745136" class="special-cta special-cta-red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 16 16.92l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Us Now
+        </a>
+      </div>
+
+      <!-- New Patients -->
+      <div class="special-card sc-new">
+        <div class="special-icon si-green">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <div class="special-label">New to the Practice</div>
+        <div class="special-title">New Patient Prescriptions</div>
+        <p class="special-desc">If you are newly registered and take regular medication, please book an appointment with our Health Care Assistant <strong>before</strong> you need more medication.</p>
+        <div class="special-note sn-green">At your appointment, bring your repeat prescription slip from your previous GP, or a list of medications with packaging. Records from your old surgery can take one to two weeks to arrive.</div>
+        <a href="https://salujaclinic.webgp.com/" class="special-cta special-cta-green" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Appointment
+        </a>
+      </div>
+
+      <!-- Non-Repeat -->
+      <div class="special-card sc-non">
+        <div class="special-icon si-aqua">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="special-label">Not on Your Repeat List</div>
+        <div class="special-title">Non-Repeat Prescriptions</div>
+        <p class="special-desc">For medications not on your repeat list — such as seasonal hay fever treatment or a previously prescribed medication — book a telephone consultation with our GP Clinical Pharmacist.</p>
+        <div class="special-note sn-aqua">Written requests for non-repeat medication may take more than 2 working days to process, as the doctor may wish to speak with you first.</div>
+        <a href="https://salujaclinic.webgp.com/" class="special-cta special-cta-aqua" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Telephone Consultation
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE SERVICES DETAIL -->
+<section class="online-section">
+  <div class="section-inner">
+    <div class="online-layout">
+      <div class="fade-up">
+        <div class="section-tag">Online Services</div>
+        <h2>Order Digitally,<br><em>Any Time</em></h2>
+        <p class="online-text">The NHS App and SystmOnline let you manage your repeat prescriptions at any hour, from any device — no need to visit or call the surgery for routine requests.</p>
+        <div class="online-steps">
+          <div class="online-step">
+            <div class="os-num">1</div>
+            <div class="os-text">
+              <strong>Register for Online Services</strong>
+              You'll need to provide ID. Contact reception or follow the NHS App registration link below.
+            </div>
+          </div>
+          <div class="online-step">
+            <div class="os-num">2</div>
+            <div class="os-text">
+              <strong>Log In and Select Medications</strong>
+              View your repeat prescription list and tick which medications you need.
+            </div>
+          </div>
+          <div class="online-step">
+            <div class="os-num">3</div>
+            <div class="os-text">
+              <strong>Submit Your Request</strong>
+              We'll process it within 2 working days. You'll be notified when it's ready.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.15s;">
+        <div class="online-card">
+          <div class="online-card-header">
+            <h3>Digital Prescription Options</h3>
+            <p>Two secure platforms — choose whichever suits you</p>
+          </div>
+          <div class="online-card-body">
+            <div class="service-option">
+              <div class="service-dot sd-blue"></div>
+              <div class="service-option-text">
+                <strong>NHS App</strong>
+                The official NHS app for England. Manage prescriptions, book appointments, and access your health records in one place.
+                <div class="service-option-links">
+                  <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="so-link blue" target="_blank">Register →</a>
+                  <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="so-link blue" target="_blank">Log In →</a>
+                </div>
+              </div>
+            </div>
+            <div class="service-option">
+              <div class="service-dot sd-aqua"></div>
+              <div class="service-option-text">
+                <strong>SystmOnline</strong>
+                Our practice management system's patient portal. Quickly request specific items from your repeat prescription list.
+                <div class="service-option-links">
+                  <a href="https://systmonline.tpp-uk.com/2/Login?Date=20171124101232" class="so-link aqua" target="_blank">Log In →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY BAND -->
+<div class="emerg-band">
+  <div class="inner">
+    <div class="emerg-band-text">
+      <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Medical emergency? Always call 999 · For urgent non-emergency medical advice call NHS 111
+    </div>
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <a href="tel:999">Call 999</a>
+      <a href="tel:111">Call 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-card fade-up">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+      </div>
+      <h3>Order Your Prescription Online</h3>
+      <p>The fastest way to request your repeat medication — available 24 hours a day via the NHS App or SystmOnline.</p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-white" target="_blank">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+          NHS App
+        </a>
+        <a href="https://systmonline.tpp-uk.com/2/Login?Date=20171124101232" class="btn-ghost" target="_blank">SystmOnline</a>
+      </div>
+    </div>
+    <div class="cta-card fade-up" style="transition-delay:0.1s;">
+      <div class="cta-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3>Need to See a Doctor?</h3>
+      <p>For new medication, medication reviews, or if you have questions about your treatment, book an appointment with one of our GPs or Clinical Pharmacist.</p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="https://salujaclinic.webgp.com/" class="btn-white" target="_blank">Book Appointment</a>
+        <a href="contact-us.html" class="btn-ghost">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="60" style="width:auto;opacity:0.85">
+        <defs>
+          <linearGradient id="chromeSf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeTextf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShinef" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRimf" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadowf" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheenf">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRimf)" filter="url(#shadowf)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShinef)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeSf)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeTextf)" filter="url(#textSheenf)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>
+        Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html" style="color:#fff;">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="https://systmonline.tpp-uk.com/2/Login?Date=20171124101232" target="_blank">SystmOnline</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>NHS GP Practice · West London</span>
+  </div>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const faders = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  faders.forEach(f => obs.observe(f));
+
+  // Stagger children in grids
+  document.querySelectorAll('.request-grid, .special-grid').forEach(grid => {
+    Array.from(grid.children).forEach((child, i) => {
+      child.style.transitionDelay = (0.08 * i) + 's';
+    });
+  });
+</script>
+</body>
+</html>

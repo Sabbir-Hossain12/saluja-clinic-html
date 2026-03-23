@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saluja Clinic — Site Wireframe Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600;700&display=swap');
+
+  :root {
+    --bg: #f0ede8;
+    --ink: #1a1a2e;
+    --mid: #6b6b80;
+    --accent: #005eb8;
+    --accent2: #41b6e6;
+    --line: #c8c4bc;
+    --node-bg: #ffffff;
+    --node-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    --home-bg: #005eb8;
+    --home-fg: #ffffff;
+    --sec1: #e8f4fb;
+    --sec2: #edf7f0;
+    --sec3: #fef9ec;
+    --sec4: #f3eef8;
+    --sec5: #fef0f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--mid);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .url-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+    border: 1px solid var(--line);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ── Tree Layout ── */
+  .tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* HOME node */
+  .home-node {
+    background: var(--home-bg);
+    color: var(--home-fg);
+    border-radius: 12px;
+    padding: 18px 36px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 24px rgba(0,94,184,0.3);
+    z-index: 10;
+    min-width: 240px;
+  }
+
+  .home-node .label { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+  .home-node .url { font-family: 'DM Mono', monospace; font-size: 11px; opacity: 0.7; margin-top: 4px; }
+
+  /* Vertical connector from home down */
+  .v-line {
+    width: 2px;
+    height: 40px;
+    background: var(--line);
+    position: relative;
+  }
+
+  /* ── Top quick-links row (from home) ── */
+  .quicklinks-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  /* ── Quick link chips ── */
+  .qchip {
+    background: #fff;
+    border: 1.5px solid var(--accent2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    box-shadow: var(--node-shadow);
+  }
+
+  /* ── NAV sections row ── */
+  .nav-connector {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Horizontal bar connecting nav items */
+  .h-bar {
+    width: 100%;
+    max-width: 1100px;
+    height: 2px;
+    background: var(--line);
+    position: relative;
+    margin: 0 auto;
+  }
+
+  /* ── Nav sections grid ── */
+  .nav-sections {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 0;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .nav-sections { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 580px) {
+    .nav-sections { grid-template-columns: 1fr 1fr; }
+  }
+
+  .section-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* top tick mark */
+  .section-col::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 30px;
+    background: var(--line);
+    margin-bottom: 0;
+  }
+
+  .section-header {
+    border-radius: 10px;
+    padding: 12px 16px;
+    text-align: center;
+    width: 100%;
+    box-shadow: var(--node-shadow);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .section-header .s-icon { font-size: 20px; margin-bottom: 4px; }
+  .section-header .s-title { font-size: 13px; font-weight: 700; line-height: 1.2; }
+  .section-header .s-url { font-family: 'DM Mono', monospace; font-size: 10px; opacity: 0.6; margin-top: 3px; }
+
+  /* colour themes per section */
+  .col-news .section-header    { background: #fff8e8; border: 2px solid #f5c842; }
+  .col-clinics .section-header { background: var(--sec1); border: 2px solid var(--accent2); }
+  .col-practice .section-header{ background: var(--sec2); border: 2px solid #4caf7d; }
+  .col-health .section-header  { background: var(--sec3); border: 2px solid #f5a623; }
+  .col-contact .section-header { background: var(--sec5); border: 2px solid #e05252; }
+
+  /* sub-pages list */
+  .sub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .sub-node {
+    background: var(--node-bg);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ink);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    line-height: 1.3;
+  }
+
+  .sub-node::before {
+    content: '↳';
+    color: var(--mid);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .sub-node .sn-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--mid);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Quick actions row ── */
+  .quick-section {
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 10px;
+  }
+
+  .qnode {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--node-shadow);
+    color: var(--ink);
+  }
+
+  .qnode .qi { font-size: 18px; }
+  .qnode .qt span { display: block; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--mid); font-weight: 400; margin-top: 1px; }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--mid);
+  }
+
+  .leg-dot {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── External links note ── */
+  .ext-section {
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .ext-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+
+  .ext-node {
+    background: #fff;
+    border: 1.5px dashed var(--line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--mid);
+  }
+
+  .ext-node .ei { font-size: 16px; }
+
+  footer {
+    margin-top: 48px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--mid);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Wireframe Sitemap</div>
+  <h1>Saluja Clinic <span>Site Architecture</span></h1>
+  <p class="subtitle">Full page hierarchy, navigation structure & internal links</p>
+  <div class="url-tag">www.salujaclinic.co.uk</div>
+</header>
+
+<div class="tree" style="align-items:center; gap:0;">
+
+  <!-- HOME -->
+  <div class="home-node">
+    <div class="label">🏠 Home</div>
+    <div class="url">salujaclinic.co.uk/</div>
+  </div>
+
+  <div class="v-line"></div>
+
+  <!-- Quick access links from homepage -->
+  <div style="max-width:1200px;width:100%;margin-bottom:0;">
+    <div class="section-label">Homepage Quick Access Tiles</div>
+    <div class="quicklinks-row">
+      <div class="qchip">📅 Appointment Information</div>
+      <div class="qchip">💊 Repeat Prescriptions</div>
+      <div class="qchip">🆕 New Patients</div>
+      <div class="qchip">ℹ️ Health Information</div>
+      <div class="qchip">📱 NHS App Information</div>
+      <div class="qchip">🌐 Online Consultation (webgp.com)</div>
+    </div>
+  </div>
+
+  <div class="v-line" style="height:50px;"></div>
+
+  <!-- Horizontal bar -->
+  <div style="max-width:1200px;width:100%;position:relative;">
+    <div class="h-bar"></div>
+  </div>
+
+  <!-- 5 main nav sections -->
+  <div class="nav-sections">
+
+    <!-- NEWS -->
+    <div class="section-col col-news">
+      <div class="section-header">
+        <div class="s-icon">📰</div>
+        <div class="s-title">News</div>
+        <div class="s-url">/practicenews/</div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-node">
+          Welcome to our new website
+          <span class="sn-url">/2023/03/30/welcome-to-our-new-website/</span>
+        </div>
+        <div class="sub-node">
+          2025/26 Access Improvement Plan
+          <span class="sn-url">(homepage notice)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLINICS & SERVICES -->
+    <div class="section-col col-clinics">
+      <div class="section-header">
+        <div class="s-icon">🩺</div>
+        <div class="s-title">Clinics & Services</div>
+        <div class="s-url">/clinics-and-services/</div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-node">Surgery Clinics<span class="sn-url">/surgery-clinics/</span></div>
+        <div class="sub-node">Children's Health<span class="sn-url">/childrens-health/</span></div>
+        <div class="sub-node">Chronic Diseases<span class="sn-url">/managing-chronic-diseases/</span></div>
+        <div class="sub-node">Minor Surgery<span class="sn-url">/minor-surgery/</span></div>
+        <div class="sub-node">Non NHS Work<span class="sn-url">/non-nhs-work/</span></div>
+        <div class="sub-node">Sickness Certificate<span class="sn-url">/sickness-certificate/</span></div>
+        <div class="sub-node">Vaccinations<span class="sn-url">/vaccinations/</span></div>
+        <div class="sub-node">Anti-Coagulation<span class="sn-url">/anti-coagulation/</span></div>
+        <div class="sub-node">Cancer Screening<span class="sn-url">/cancer-screening/</span></div>
+        <div class="sub-node">Men's Health<span class="sn-url">/mens-health/</span></div>
+        <div class="sub-node">NHS Health Checks<span class="sn-url">/nhs-health-checks/</span></div>
+        <div class="sub-node">Planning a Family<span class="sn-url">/planning-a-family/</span></div>
+        <div class="sub-node">Healthy Lifestyle<span class="sn-url">/supporting-a-healthy-lifestyle/</span></div>
+        <div class="sub-node">Women's Health<span class="sn-url">/womens-health/</span></div>
+      </div>
+    </div>
+
+    <!-- OUR PRACTICE -->
+    <div class="section-col col-practice">
+      <div class="section-header">
+        <div class="s-icon">🏥</div>
+        <div class="s-title">Our Practice</div>
+        <div class="s-url">/practice-policies-patient-information/</div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-node">You & Your GP<span class="sn-url">…/you-and-your-general-practice/</span></div>
+        <div class="sub-node">Meet the Team<span class="sn-url">…/meet-the-team/</span></div>
+        <div class="sub-node">New Patients<span class="sn-url">…/new-patients/</span></div>
+        <div class="sub-node">Our Policies<span class="sn-url">/our-policies/</span></div>
+        <div class="sub-node">Friends & Family Test<span class="sn-url">/friends-and-family-test/</span></div>
+        <div class="sub-node">Patient Participation Group<span class="sn-url">/patient-participation-group/</span></div>
+        <div class="sub-node">Care Quality Commission<span class="sn-url">/care-quality-commission/</span></div>
+        <div class="sub-node">Appointments<span class="sn-url">/appointments/</span></div>
+        <div class="sub-node">Repeat Prescriptions<span class="sn-url">/repeat-prescriptions/</span></div>
+        <div class="sub-node">NHS App Info<span class="sn-url">/try-the-new-nhs-app/</span></div>
+        <div class="sub-node">Non-NHS Work Policy<span class="sn-url">/our-policies#nonnhswork</span></div>
+      </div>
+    </div>
+
+    <!-- HEALTH INFORMATION -->
+    <div class="section-col col-health">
+      <div class="section-header">
+        <div class="s-icon">💡</div>
+        <div class="s-title">Health Information</div>
+        <div class="s-url">/health-information/</div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-node">Find Services<span class="sn-url">…/find-services/</span></div>
+        <div class="sub-node">Health A-Z<span class="sn-url">…/health-a-z/</span></div>
+        <div class="sub-node">Live Well<span class="sn-url">…/live-well/</span></div>
+        <div class="sub-node">Heart Age Calculator<span class="sn-url">…/heart-age/</span></div>
+        <div class="sub-node">Blood Pressure Check<span class="sn-url">…/your-blood-pressure/</span></div>
+        <div class="sub-node">BMI (Children & Teens)<span class="sn-url">…/calculate-your-bmi-children/</span></div>
+        <div class="sub-node">BMI (Adults)<span class="sn-url">…/bmi-calculator/</span></div>
+        <div class="sub-node">Your Mind Plan<span class="sn-url">…/your-mind-plan/</span></div>
+        <div class="sub-node">Personal Quit Plan<span class="sn-url">…/personal-quit-plan/</span></div>
+      </div>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="section-col col-contact">
+      <div class="section-header">
+        <div class="s-icon">📞</div>
+        <div class="s-title">Contact Us</div>
+        <div class="s-url">/contact-us/</div>
+      </div>
+      <div class="sub-list">
+        <div class="sub-node">Phone: 0208 574 5136</div>
+        <div class="sub-node">Email: salujaclinic@nhs.net</div>
+        <div class="sub-node">Address: 36A Northcote Ave, Southall, UB1 2AY</div>
+        <div class="sub-node">Google Maps Directions<span class="sn-url">(external link)</span></div>
+        <div class="sub-node">Opening Times<span class="sn-url">Mon–Fri 08:00–18:30</span></div>
+        <div class="sub-node">Emergency: 999 / NHS 111<span class="sn-url">(out of hours)</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- External / Third-party links -->
+  <div class="ext-section">
+    <div class="section-label">External / Third-party Links</div>
+    <div class="ext-grid">
+      <div class="ext-node"><span class="ei">🌐</span> Online Consultation — salujaclinic.webgp.com</div>
+      <div class="ext-node"><span class="ei">📱</span> NHS App Login — nhs.uk/nhs-services/online-services/nhs-login/</div>
+      <div class="ext-node"><span class="ei">📱</span> Register NHS App — nhs.uk (same)</div>
+      <div class="ext-node"><span class="ei">🗺️</span> Google Maps — Saluja Clinic directions</div>
+      <div class="ext-node"><span class="ei">📞</span> NHS 111 — 111 (non-emergency, 24/7)</div>
+      <div class="ext-node"><span class="ei">🚨</span> Emergency — 999</div>
+    </div>
+  </div>
+
+  <!-- Footer info -->
+  <div class="quick-section">
+    <div class="section-label">Footer Information (appears on all pages)</div>
+    <div class="quick-grid">
+      <div class="qnode"><span class="qi">📍</span><div class="qt">Address<span>36A Northcote Avenue, Southall UB1 2AY</span></div></div>
+      <div class="qnode"><span class="qi">📞</span><div class="qt">Phone<span>0208 574 5136</span></div></div>
+      <div class="qnode"><span class="qi">📧</span><div class="qt">Email<span>salujaclinic@nhs.net</span></div></div>
+      <div class="qnode"><span class="qi">🕗</span><div class="qt">Hours<span>Mon–Fri 08:00–18:30</span></div></div>
+      <div class="qnode"><span class="qi">🔗</span><div class="qt">Support links<span>Footer nav (all pages)</span></div></div>
+      <div class="qnode"><span class="qi">©</span><div class="qt">Copyright<span>Saluja Clinic 2026</span></div></div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#005eb8;"></div> Root / Homepage</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#41b6e6;"></div> Clinics & Services (14 sub-pages)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#4caf7d;"></div> Our Practice (11 sub-pages)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#f5a623;"></div> Health Information (9 sub-pages)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#e05252;"></div> Contact Us</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#f5c842;"></div> News</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#e0ddd8; border:1.5px dashed #999;"></div> External Links</div>
+  </div>
+
+</div>
+
+<footer>
+  Generated from salujaclinic.co.uk • Wireframe Sitemap • March 2026
+</footer>
+
+</body>
+</html>

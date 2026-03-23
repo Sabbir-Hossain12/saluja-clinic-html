@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Policies – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── NHS Colour Palette ─────────────────────────────── */
+    :root {
+      --nhs-blue:        #005EB8;
+      --nhs-dark:        #003087;
+      --nhs-aqua:        #009FBB;
+      --nhs-green:       #007F3B;
+      --nhs-light-blue:  #41B6E6;
+      --nhs-warm-yellow: #FFB81C;
+      --white:           #ffffff;
+      --off-white:       #f5f8fc;
+      --text-dark:       #1a1a2e;
+      --text-mid:        #3a3a5c;
+      --text-soft:       #6b7a99;
+      --border:          #d8e4f0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITY BAR ─────────────────────────────────────── */
+    .utility-bar {
+      background: var(--nhs-dark);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      padding: 0.45rem 0;
+    }
+    .utility-bar .inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.4rem;
+    }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
+    .util-pill {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+    }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid var(--nhs-blue);
+      box-shadow: 0 2px 24px rgba(0,94,184,0.10);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100px;
+    }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a {
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+      color: var(--text-mid); text-decoration: none;
+      padding: 0.5rem 0.9rem; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta {
+      background: var(--nhs-blue) !important; color: var(--white) !important;
+      padding: 0.55rem 1.2rem !important; border-radius: 8px !important;
+      margin-left: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0,94,184,0.25);
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── PAGE HERO ───────────────────────────────────────── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%);
+      padding: 4rem 2rem 3.5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -60px;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,159,187,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+      margin-bottom: 1.4rem;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb-sep { opacity: 0.4; }
+    .breadcrumb-current { color: rgba(255,255,255,0.9); }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 600; line-height: 1.12;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .page-hero h1 em { font-style: normal; color: var(--nhs-light-blue); }
+    .page-hero-lead {
+      font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.8);
+      max-width: 600px; margin-bottom: 2rem;
+    }
+    .policy-count-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .policy-count-pill {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 0.6rem 1.2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.84rem; color: rgba(255,255,255,0.9);
+    }
+    .policy-count-pill strong { font-weight: 700; color: #fff; }
+
+    /* ── LAYOUT ──────────────────────────────────────────── */
+    .policies-layout {
+      max-width: 1200px; margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      display: grid; grid-template-columns: 260px 1fr; gap: 3rem;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR NAV ─────────────────────────────────────── */
+    .policy-nav {
+      position: sticky; top: 120px;
+    }
+    .policy-nav-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--nhs-blue);
+      margin-bottom: 1rem;
+    }
+    .policy-nav-group { margin-bottom: 1.6rem; }
+    .policy-nav-group-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-soft);
+      padding: 0.3rem 0; margin-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .policy-nav ul { list-style: none; }
+    .policy-nav ul li a {
+      display: block; padding: 0.35rem 0.7rem;
+      font-size: 0.84rem; color: var(--text-mid);
+      text-decoration: none; border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .policy-nav ul li a:hover {
+      background: var(--off-white); color: var(--nhs-blue);
+      border-left-color: var(--nhs-blue);
+    }
+    .policy-nav ul li a.active {
+      background: rgba(0,94,184,0.07);
+      color: var(--nhs-blue);
+      border-left-color: var(--nhs-blue);
+      font-weight: 600;
+    }
+
+    /* ── POLICY SECTIONS ─────────────────────────────────── */
+    .policies-content { }
+
+    .policy-group { margin-bottom: 3rem; }
+    .group-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .group-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(0,94,184,0.08);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .group-icon svg { width: 22px; height: 22px; stroke: var(--nhs-blue); fill: none; stroke-width: 1.7; }
+    .group-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; color: var(--text-dark);
+    }
+
+    /* ── ACCORDION ───────────────────────────────────────── */
+    .accordion { display: flex; flex-direction: column; gap: 0.75rem; }
+    .accordion-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .accordion-item:hover { box-shadow: 0 4px 20px rgba(0,94,184,0.09); }
+    .accordion-item.open { box-shadow: 0 6px 28px rgba(0,94,184,0.12); border-color: rgba(0,94,184,0.25); }
+    .accordion-trigger {
+      width: 100%; background: none; border: none; cursor: pointer;
+      padding: 1.2rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      text-align: left;
+    }
+    .accordion-trigger-left { display: flex; align-items: center; gap: 0.9rem; }
+    .accordion-trigger-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: rgba(0,94,184,0.07);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .accordion-trigger-icon svg { width: 18px; height: 18px; stroke: var(--nhs-blue); fill: none; stroke-width: 1.8; }
+    .accordion-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.96rem; font-weight: 600; color: var(--text-dark);
+    }
+    .accordion-subtitle {
+      font-size: 0.8rem; color: var(--text-soft); margin-top: 0.15rem;
+    }
+    .accordion-chevron {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s, transform 0.3s;
+    }
+    .accordion-chevron svg { width: 14px; height: 14px; stroke: var(--text-soft); fill: none; stroke-width: 2.5; transition: stroke 0.2s; }
+    .accordion-item.open .accordion-chevron { background: rgba(0,94,184,0.1); transform: rotate(180deg); }
+    .accordion-item.open .accordion-chevron svg { stroke: var(--nhs-blue); }
+    .accordion-item.open .accordion-title { color: var(--nhs-blue); }
+
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .accordion-body-inner {
+      padding: 0 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .accordion-body-inner p {
+      font-size: 0.9rem; line-height: 1.8; color: var(--text-mid);
+      margin-bottom: 1rem;
+    }
+    .accordion-body-inner p:last-child { margin-bottom: 0; }
+    .accordion-body-inner strong { color: var(--text-dark); }
+    .accordion-body-inner h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--text-dark);
+      margin: 1.4rem 0 0.6rem;
+    }
+    .accordion-body-inner h4:first-child { margin-top: 1.2rem; }
+    .accordion-body-inner ul {
+      list-style: none; display: flex; flex-direction: column; gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .accordion-body-inner ul li {
+      font-size: 0.88rem; color: var(--text-mid);
+      padding-left: 1.2rem; position: relative; line-height: 1.65;
+    }
+    .accordion-body-inner ul li::before {
+      content: '–'; position: absolute; left: 0;
+      color: var(--nhs-blue); font-weight: 700;
+    }
+    .accordion-body-inner ol {
+      padding-left: 1.4rem; display: flex; flex-direction: column; gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .accordion-body-inner ol li {
+      font-size: 0.88rem; color: var(--text-mid); line-height: 1.65;
+    }
+
+    /* Info boxes within accordions */
+    .policy-info-box {
+      background: rgba(0,94,184,0.04);
+      border: 1px solid rgba(0,94,184,0.18);
+      border-radius: 10px; padding: 1rem 1.2rem;
+      margin: 1rem 0; font-size: 0.88rem; color: var(--text-mid);
+      line-height: 1.7;
+    }
+    .policy-info-box.green {
+      background: rgba(0,127,59,0.04);
+      border-color: rgba(0,127,59,0.2);
+    }
+    .policy-info-box.amber {
+      background: rgba(255,184,28,0.06);
+      border-color: rgba(255,184,28,0.3);
+    }
+    .policy-info-box strong { color: var(--text-dark); }
+    .policy-info-box-title {
+      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--nhs-blue);
+      margin-bottom: 0.4rem;
+    }
+    .policy-info-box.green .policy-info-box-title { color: var(--nhs-green); }
+    .policy-info-box.amber .policy-info-box-title { color: #a07000; }
+
+    /* Contact table */
+    .contact-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.86rem; }
+    .contact-table th {
+      text-align: left; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft);
+      padding: 0.5rem 0.8rem; border-bottom: 2px solid var(--border);
+    }
+    .contact-table td {
+      padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border);
+      color: var(--text-mid); line-height: 1.5;
+    }
+    .contact-table tr:last-child td { border-bottom: none; }
+    .contact-table td:first-child { font-weight: 600; color: var(--text-dark); }
+
+    /* PDF links */
+    .pdf-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.55rem 1rem;
+      font-size: 0.85rem; font-weight: 600; color: var(--nhs-blue);
+      text-decoration: none; margin: 0.4rem 0.4rem 0 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pdf-link:hover { background: rgba(0,94,184,0.07); border-color: rgba(0,94,184,0.3); }
+    .pdf-link svg { width: 15px; height: 15px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; }
+
+    /* External links section */
+    .link-list { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.6rem; }
+    .link-list a {
+      color: var(--nhs-blue); font-size: 0.87rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .link-list a:hover { color: var(--nhs-dark); text-decoration: underline; }
+    .link-list a::before { content: '↗'; font-size: 0.8rem; }
+
+    /* Rights two-col */
+    .rights-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .rights-card {
+      background: var(--off-white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem 1.4rem;
+    }
+    .rights-card-title {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .rights-card.patient .rights-card-title { color: var(--nhs-blue); }
+    .rights-card.responsibility .rights-card-title { color: var(--nhs-green); }
+
+    /* ── EMERGENCY BAR ───────────────────────────────────── */
+    .emergency {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+    .emergency-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .emerg-card {
+      border-radius: 16px; padding: 2rem;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .emerg-card.nhs111 { background: rgba(0,94,184,0.05); border: 1px solid rgba(0,94,184,0.2); }
+    .emerg-card.urgent { background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); }
+    .emerg-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 700; line-height: 1;
+    }
+    .emerg-card.nhs111 .emerg-number { color: var(--nhs-blue); }
+    .emerg-card.urgent .emerg-number { color: #dc3545; }
+    .emerg-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .emerg-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--nhs-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 3.5rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-tagline { font-size: 0.88rem; margin-top: 0.8rem; line-height: 1.6; opacity: 0.75; }
+    .footer-address { font-size: 0.85rem; margin-top: 1rem; line-height: 1.8; opacity: 0.75; }
+    .footer-heading { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1200px; margin: 2.5rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; opacity: 0.6; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .hours-grid { display: grid; gap: 0.3rem; }
+    .hour-row { display: flex; justify-content: space-between; gap: 1.5rem; font-size: 0.84rem; }
+    .hour-day { opacity: 0.7; }
+
+    /* ── ANIMATIONS ─────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ─────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .policies-layout { grid-template-columns: 1fr; }
+      .policy-nav { position: static; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .policy-count-row { flex-direction: column; gap: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="emer">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="emer">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff" stop-opacity="1"/>
+            <stop offset="15%"  stop-color="#d0d0d0" stop-opacity="1"/>
+            <stop offset="30%"  stop-color="#f8f8f8" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#a0a0a0" stop-opacity="1"/>
+            <stop offset="65%"  stop-color="#e8e8e8" stop-opacity="1"/>
+            <stop offset="80%"  stop-color="#b0b0b0" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <rect width="720" height="160" fill="#ffffff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="clinics-and-services.html">Services</a>
+      <a href="practice-policies-patient-information.html" class="active">Our Practice</a>
+      <a href="health-information.html">Health Info</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner fade-up">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Our Policies</span>
+    </div>
+    <h1>Our <em>Policies</em> &amp; Commitments</h1>
+    <p class="page-hero-lead">
+      Transparency, safety, and respect are at the heart of everything we do. This page sets out our key policies and explains your rights as a patient of Saluja Clinic.
+    </p>
+    <div class="policy-count-row">
+      <div class="policy-count-pill"><strong>20+</strong> Practice Policies</div>
+      <div class="policy-count-pill"><strong>NHS</strong> Registered Practice</div>
+      <div class="policy-count-pill"><strong>CQC</strong> Regulated</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="policies-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="policy-nav">
+    <div class="policy-nav-label">Jump to Policy</div>
+
+    <div class="policy-nav-group">
+      <div class="policy-nav-group-title">Patient Rights</div>
+      <ul>
+        <li><a href="#rights-responsibilities">Rights &amp; Responsibilities</a></li>
+        <li><a href="#zero-tolerance">Zero Tolerance</a></li>
+        <li><a href="#nhs-constitution">NHS Constitution</a></li>
+        <li><a href="#feedback-complaints">Feedback &amp; Complaints</a></li>
+      </ul>
+    </div>
+
+    <div class="policy-nav-group">
+      <div class="policy-nav-group-title">Privacy &amp; Data</div>
+      <ul>
+        <li><a href="#patient-confidentiality">Patient Confidentiality</a></li>
+        <li><a href="#privacy-statement">Privacy Statement</a></li>
+        <li><a href="#fair-processing">Fair Processing Notice</a></li>
+        <li><a href="#freedom-of-information">Freedom of Information</a></li>
+        <li><a href="#summary-care-records">Summary Care Records</a></li>
+        <li><a href="#statement-of-intent">Statement of Intent</a></li>
+        <li><a href="#gp2gp">GP2GP Record Transfers</a></li>
+      </ul>
+    </div>
+
+    <div class="policy-nav-group">
+      <div class="policy-nav-group-title">Safeguarding</div>
+      <ul>
+        <li><a href="#chaperones">Chaperones</a></li>
+        <li><a href="#child-safeguarding">Child Safeguarding</a></li>
+        <li><a href="#vulnerable-adults">Vulnerable Adults</a></li>
+        <li><a href="#prevent">The Prevent Strategy</a></li>
+      </ul>
+    </div>
+
+    <div class="policy-nav-group">
+      <div class="policy-nav-group-title">Practice Operations</div>
+      <ul>
+        <li><a href="#non-nhs-work">Non-NHS Work</a></li>
+        <li><a href="#named-gp">Named GP</a></li>
+        <li><a href="#gp-earnings">GP Earnings</a></li>
+        <li><a href="#infection-control">Infection Control</a></li>
+        <li><a href="#social-media">Social Media Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="policy-nav-group">
+      <div class="policy-nav-group-title">Access &amp; Inclusion</div>
+      <ul>
+        <li><a href="#disability-access">Disability Access</a></li>
+        <li><a href="#accessibility-statement">Accessibility Statement</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="policies-content">
+
+    <!-- ── PATIENT RIGHTS ─────────────────────────────────── -->
+    <div class="policy-group fade-up" id="rights-responsibilities">
+      <div class="group-header">
+        <div class="group-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2 class="group-title">Patient Rights &amp; Responsibilities</h2>
+      </div>
+      <div class="accordion">
+
+        <div class="accordion-item open" id="rights-responsibilities">
+          <button class="accordion-trigger" aria-expanded="true">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="accordion-title">Your Rights &amp; Responsibilities</div>
+                <div class="accordion-subtitle">A mutual commitment between patient and practice</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body" style="max-height:2000px">
+            <div class="accordion-body-inner">
+              <p>We are committed to giving you the best possible service. This is best achieved when patients and practice work together in partnership. Below is a summary of your rights and the responsibilities we ask of you in return.</p>
+              <div class="rights-grid">
+                <div class="rights-card patient">
+                  <div class="rights-card-title">Your Rights</div>
+                  <ul>
+                    <li>To be treated with courtesy and respect at all times</li>
+                    <li>To be treated as a partner in your own care</li>
+                    <li>All aspects of your visit dealt with in privacy and confidence</li>
+                    <li>To be seen by a doctor of your choice, subject to availability</li>
+                    <li>To bring someone with you to consultations</li>
+                    <li>Repeat prescriptions available within two working days</li>
+                    <li>To see your medical records or receive a copy, subject to the law</li>
+                    <li>Out-of-hours emergency advice with no more than one further call</li>
+                  </ul>
+                </div>
+                <div class="rights-card responsibility">
+                  <div class="rights-card-title">Your Responsibilities</div>
+                  <ul>
+                    <li>Treat staff and doctors with the same courtesy you expect</li>
+                    <li>Order repeat medication in plenty of time (allow 2 working days)</li>
+                    <li>Keep a basic first aid kit at home and manage minor illnesses</li>
+                    <li>Attend specialist appointments or cancel them in good time</li>
+                    <li>Follow up test results with the person who requested them</li>
+                    <li>Arrive on time and check in at reception</li>
+                    <li>Cancel appointments you no longer need with adequate notice</li>
+                    <li>Keep the practice updated with changes to your contact details</li>
+                    <li>One patient per appointment — book separately for family members</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="policy-info-box amber" style="margin-top:1.2rem;">
+                <div class="policy-info-box-title">Late Arrivals</div>
+                Patients who are more than 10 minutes late for their appointment may not be seen. If you are unable to attend, please give the practice as much notice as possible so your slot can be offered to another patient.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="zero-tolerance">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+              <div>
+                <div class="accordion-title">Zero Tolerance Policy</div>
+                <div class="accordion-subtitle">Our commitment to staff safety and dignity</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Saluja Clinic fully supports the NHS Zero Tolerance Policy. We have a duty to ensure our staff can provide care without fear of abuse or violence. We understand that illness can make people act out of character, and we will always try to deal with misunderstandings or complaints through appropriate channels.</p>
+              <p>We ask all patients to treat doctors and staff courteously and act reasonably. All incidents will be followed up formally:</p>
+              <ul>
+                <li>A formal warning will be issued after a second incident</li>
+                <li>Removal from the practice list may follow a third incident where behaviour has been unreasonable</li>
+                <li>Violent or verbally abusive behaviour will not be tolerated and may result in immediate removal from the list</li>
+                <li>In extreme cases, the Police will be contacted if a patient poses a threat to staff or other patients</li>
+              </ul>
+              <div class="policy-info-box">
+                <div class="policy-info-box-title">A Note on Removal</div>
+                Removing a patient from our list is an exceptional last resort. A good patient–doctor relationship, based on mutual respect and trust, is the cornerstone of good care. When trust has irretrievably broken down, it is in the patient's interest — as much as the practice's — that they find a new practice.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="nhs-constitution">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+              <div>
+                <div class="accordion-title">NHS Constitution</div>
+                <div class="accordion-subtitle">The principles and values of the NHS in England</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The NHS Constitution establishes the principles and values of the NHS in England. It sets out the rights patients, the public and staff are entitled to, and the pledges the NHS is committed to achieving.</p>
+              <div class="link-list">
+                <a href="https://www.gov.uk/government/publications/the-nhs-constitution-for-england" target="_blank">The NHS Constitution for England (GOV.UK)</a>
+                <a href="https://www.nhs.uk/choiceintheNHS/Rightsandpledges/NHSConstitution/Pages/Overview.aspx" target="_blank">NHS Constitution Overview (NHS Choices)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="feedback-complaints">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+              <div>
+                <div class="accordion-title">Feedback &amp; Complaints</div>
+                <div class="accordion-subtitle">How to raise a concern or compliment</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>We aim to provide the best possible medical service. Most problems can be resolved quickly and easily at the time they arise with the person concerned, and this is often the best first approach.</p>
+              <p>Where a formal complaint is required, this should be made in writing as soon as possible after the event, and ideally within:</p>
+              <ul>
+                <li><strong>12 months</strong> from the date the event occurred, or</li>
+                <li><strong>12 months</strong> from the date you became aware of the event</li>
+              </ul>
+              <h4>How to Submit a Complaint</h4>
+              <p>Please send written complaints to:<br>
+              <strong>Practice Management, Saluja Clinic, 36A Northcote Avenue, Southall, UB1 2AY</strong></p>
+              <p>You can also ask at reception for a complaints form. If you wish to complain on behalf of another patient, written consent from that patient is required.</p>
+              <h4>Confidentiality</h4>
+              <p>All complaints are treated in the strictest confidence. Where the investigation involves reviewing medical records, you will be informed if information is to be disclosed to a person outside the practice. The practice maintains an annual review of complaints and the learning improvements they generate.</p>
+              <div class="policy-info-box green">
+                <div class="policy-info-box-title">Complaining on Behalf of Someone Else</div>
+                We maintain strict rules of medical confidentiality. If you are not the patient involved, we require written consent from the patient before we can discuss their case with you. Please ask at reception for the relevant form.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PRIVACY & DATA ─────────────────────────────────── -->
+    <div class="policy-group fade-up">
+      <div class="group-header">
+        <div class="group-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2 class="group-title">Privacy &amp; Data</h2>
+      </div>
+      <div class="accordion">
+
+        <div class="accordion-item" id="patient-confidentiality">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <div>
+                <div class="accordion-title">Patient Confidentiality</div>
+                <div class="accordion-subtitle">How we protect your personal information</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The practice complies fully with the Data Protection Act. All information about patients is confidential — from the most sensitive diagnosis to the simple fact of having visited the surgery or being registered here. No personal information will be disclosed without your permission, except in the most exceptional circumstances where someone is at grave risk of serious harm.</p>
+              <p>All members of the primary healthcare team — Patient Advisors, Nurses, HCAs and Doctors — will have access to your medical records in the course of their duties. All adhere to the highest standards of confidentiality.</p>
+              <h4>Under 14s</h4>
+              <p>The duty of confidentiality owed to a person under 14 is as great as the duty owed to any other person. Young people under 14 can choose to see health professionals without informing their parents or carers. If a GP considers the young person competent to make decisions about their health, they can give advice, prescribe and treat without further consent. In practice, health professionals will always encourage young people to discuss issues with a parent or carer.</p>
+              <div class="policy-info-box">
+                <div class="policy-info-box-title">Private Discussions</div>
+                As our reception area can be busy, if you wish to discuss something of a confidential nature, please mention it to one of our patient advisors who will arrange for you to speak in private.
+              </div>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="https://www.gov.uk/government/publications/confidentiality-nhs-code-of-practice" target="_blank">Confidentiality NHS Code of Practice</a>
+                <a href="http://www.gmc-uk.org/guidance/ethical_guidance/confidentiality.asp" target="_blank">GMC Confidentiality Guidance</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="privacy-statement">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="accordion-title">Privacy Statement Policy</div>
+                <div class="accordion-subtitle">How we use, share and protect your information</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>As part of our legal duties, the practice maintains full and accurate records of the care and services we provide, and keeps these confidential and secure.</p>
+              <h4>What Information We Hold</h4>
+              <ul>
+                <li>Basic details such as address, date of birth and next of kin</li>
+                <li>Records of all contact we have had with you</li>
+                <li>Notes and reports about your health</li>
+                <li>Details and records of your treatment and care</li>
+              </ul>
+              <h4>Why We Share Information</h4>
+              <p>We may share information with other health and social care organisations — including hospitals, mental health providers, community health, social care and NHS Digital — to support your care. When we do, we use the minimum necessary and share it securely and lawfully.</p>
+              <p>We may also be required to share information when required by law, for health or research purposes with special permission, or where there is a strong public interest such as a risk of serious harm.</p>
+              <h4>Your Rights Under Data Protection Law</h4>
+              <ul>
+                <li>To object to certain uses of your data</li>
+                <li>To receive a copy of information held about you</li>
+                <li>That your information will not be used for direct marketing</li>
+                <li>To have incorrect information amended or erased</li>
+              </ul>
+              <div class="policy-info-box">
+                <div class="policy-info-box-title">Opting Out</div>
+                You can choose not to have information that identifies you shared beyond your GP practice, or prevent anonymised data being used for planning and research. Simply contact us to register or end an opt-out, and we will update your medical record.
+              </div>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="http://www.hscic.gov.uk/article/6807/How-information-is-used" target="_blank">How NHS Digital uses your information</a>
+                <a href="http://www.hscic.gov.uk/yourinfo" target="_blank">Your information choices (NHS Digital)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="fair-processing">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div>
+                <div class="accordion-title">Fair Processing Notice</div>
+                <div class="accordion-subtitle">How GP practices use and share patient data</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The Fair Processing Notice informs you about the type of patient information that GP practices hold, how that information might be used, with whom we may share it, and how we ensure it is kept secure.</p>
+              <div style="margin-top:1rem;">
+                <a href="wp-content/uploads/2023/03/Fair-Processing-Notice-1.pdf.html" class="pdf-link" target="_blank">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Fair Processing Notice (PDF)
+                </a>
+                <a href="wp-content/uploads/2023/03/Fair-Processing-Notice-for-GPs-WSIC-Feb-2015.pdf.html" class="pdf-link" target="_blank">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  Fair Processing Notice – WSIC (PDF)
+                </a>
+              </div>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="http://integration.healthiernorthwestlondon.nhs.uk/" target="_blank">Whole Systems Integrated Care – Healthier NW London</a>
+                <a href="https://www.nhs.uk/NHSEngland/thenhs/records/healthrecords/Pages/overview.aspx" target="_blank">Your health and care records (NHS Choices)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="freedom-of-information">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+              <div>
+                <div class="accordion-title">Freedom of Information</div>
+                <div class="accordion-subtitle">Your right to access recorded public information</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The Freedom of Information Act creates a right of access to recorded information held by public authorities, including NHS GP practices. Any individual, anywhere in the world, may make a request for information.</p>
+              <h4>What Can Be Requested</h4>
+              <p>Information under seven broad publication scheme classes, including who we are and what we do, what we spend, our priorities, how we make decisions, our policies and procedures, and the services we offer. A publication scheme leaflet is available at the surgery on request.</p>
+              <h4>How to Make a Request</h4>
+              <p>Requests must be made in writing (including by email), state your name and an address for correspondence, and describe the information you are requesting.</p>
+              <div class="policy-info-box amber">
+                <div class="policy-info-box-title">What Cannot Be Requested</div>
+                Personal data about staff and patients is covered under the Data Protection Act and is not accessible via Freedom of Information requests.
+              </div>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="http://www.legislation.gov.uk/ukpga/2000/36/contents" target="_blank">Freedom of Information Act (Legislation.gov.uk)</a>
+                <a href="https://ico.org.uk/for-the-public/official-information" target="_blank">Information Commissioner's Office</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="summary-care-records">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div>
+                <div class="accordion-title">Summary Care Records</div>
+                <div class="accordion-subtitle">Your national electronic health record</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Your Summary Care Record (SCR) contains important information about any medicines you are taking, any allergies you suffer from, and any bad reactions to medicines you have previously experienced. It also includes your name, address, date of birth and NHS Number.</p>
+              <p>Access to your SCR by authorised healthcare staff helps improve decision-making and prevents mistakes when you are being cared for in an emergency or when your GP practice is closed.</p>
+              <h4>Your Choices</h4>
+              <ul>
+                <li>If you are registered with a GP practice, an SCR is created for you by default — no action is needed</li>
+                <li>To opt out, you need to inform your GP practice and complete an opt-out form</li>
+                <li>You can change your mind at any time</li>
+              </ul>
+              <h4>Who Can Access Your SCR</h4>
+              <p>Healthcare staff who access your SCR must be directly involved in caring for you, hold an NHS Smartcard with chip and passcode, and will only see the information needed to do their job. They will always ask for your permission before viewing it, except in genuine emergencies.</p>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="https://digital.nhs.uk/summary-care-records/patients" target="_blank">Summary Care Record patient information (NHS Digital)</a>
+                <a href="https://digital.nhs.uk/media/1286/SCR-opt-out-form/pdf/opt_out_SCR_form" target="_blank">SCR opt-out form (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="statement-of-intent">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+              <div>
+                <div class="accordion-title">Statement of Intent</div>
+                <div class="accordion-subtitle">Our IT commitments under NHS contract</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>New contractual requirements from 1 April 2014 require GP practices to publish a Statement of Intent in relation to key IT developments. Saluja Clinic confirms the following:</p>
+              <ul>
+                <li><strong>Summary Care Records:</strong> Your SCR is automatically updated on at least a daily basis.</li>
+                <li><strong>GP2GP Record Transfers:</strong> Active and operational. We send and receive patient records electronically when patients register or de-register.</li>
+                <li><strong>Patient Online Access:</strong> We offer online booking, checking and cancelling of appointments, repeat prescription requests, and viewing a summary of your medical records. Full record access and questionnaire options are not currently offered.</li>
+                <li><strong>Data for Commissioning:</strong> Specific arrangements are in place for patients to opt out of care.data. Annual training and audits ensure all data is handled correctly and safely.</li>
+              </ul>
+              <div class="policy-info-box green">
+                <div class="policy-info-box-title">Online Access Registration</div>
+                To set up an online account, complete and sign an application form at reception and provide photo ID and proof of address. You will be prompted to change your password on your first login.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="gp2gp">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+              <div>
+                <div class="accordion-title">GP2GP Record Transfers</div>
+                <div class="accordion-subtitle">How your records follow you to a new GP</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>When you register with a new GP practice, GP2GP allows your electronic medical record to be transferred securely and electronically, typically within minutes of registration — enabling much safer and better-informed care from the outset.</p>
+              <p>Paper notes continue to be sent via an NHS delivery service and may take up to two weeks to arrive. GP2GP is active at Saluja Clinic: we send and receive patient records via this system for all eligible registrations and de-registrations.</p>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="http://systems.hscic.gov.uk/gp2gp" target="_blank">More about GP2GP (HSCIC)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SAFEGUARDING ───────────────────────────────────── -->
+    <div class="policy-group fade-up">
+      <div class="group-header">
+        <div class="group-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h2 class="group-title">Safeguarding</h2>
+      </div>
+      <div class="accordion">
+
+        <div class="accordion-item" id="chaperones">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div>
+                <div class="accordion-title">Chaperones</div>
+                <div class="accordion-subtitle">Your right to have a chaperone present</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The surgery prides itself in maintaining professional standards. For certain examinations during consultations, an impartial observer — a Chaperone — will be offered. This will be a practice Nurse or Healthcare Assistant who is familiar with the procedure.</p>
+              <h4>Role of a Chaperone</h4>
+              <ul>
+                <li>Maintains professional boundaries during intimate examinations</li>
+                <li>Acknowledges a patient's vulnerability</li>
+                <li>Provides emotional comfort and reassurance</li>
+                <li>Assists in the examination</li>
+                <li>Assists with undressing patients, if required</li>
+              </ul>
+              <div class="policy-info-box">
+                You are free to decline any examination or choose an alternative examiner or chaperone. You may also <strong>request a chaperone</strong> for any examination or consultation at any time, even if one has not been offered. Please note that a GP may decline to conduct an examination if a chaperone is refused.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="child-safeguarding">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="accordion-title">Child Safeguarding</div>
+                <div class="accordion-subtitle">Protecting children in our care</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Child safeguarding is the responsibility of everyone at the surgery. We make every effort to recognise issues and address concerns as they arise, and maintain a robust system of note-keeping, recording, message handling and communication of concerns.</p>
+              <h4>Key Principles</h4>
+              <ul>
+                <li>The welfare of the child is paramount</li>
+                <li>Be prepared to consult with colleagues and take advice from local experts</li>
+                <li>Keep comprehensive, contemporaneous records</li>
+                <li>Be aware of GMC guidance about sharing confidential information</li>
+              </ul>
+              <h4>Four Categories of Child Abuse</h4>
+              <ul>
+                <li><strong>Physical abuse</strong> — including hitting, shaking, throwing, burning, or deliberately causing ill-health</li>
+                <li><strong>Sexual abuse</strong> — forcing or enticing a child to take part in sexual activities, including both contact and non-contact acts</li>
+                <li><strong>Emotional abuse</strong> — persistent ill-treatment affecting emotional development, including messages of being unloved, or living in a home where domestic violence occurs</li>
+                <li><strong>Neglect</strong> — failure to meet a child's physical or psychological needs, including adequate food, shelter, protection and emotional support</li>
+              </ul>
+              <div class="policy-info-box amber">
+                <div class="policy-info-box-title">Child Protection Plan</div>
+                Children judged to be at continuing risk have a Child Protection Plan in place, maintained by Children's Social Care (CSC). CSC, police and health professionals have 24-hour access to this. Each child on the register has a designated "key worker."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="vulnerable-adults">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+              <div>
+                <div class="accordion-title">Vulnerable Adults</div>
+                <div class="accordion-subtitle">Protecting adults at risk of harm or exploitation</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>A vulnerable adult is anyone over the age of 18 who may be unable to protect themselves from abuse, harm or exploitation by reason of illness, age, mental illness, disability or other physical or mental impairment.</p>
+              <h4>Forms of Abuse</h4>
+              <ul>
+                <li><strong>Neglect</strong> — ignoring mental or physical needs or basic life necessities</li>
+                <li><strong>Financial</strong> — theft or misuse of money or possessions</li>
+                <li><strong>Physical</strong> — hitting, assault, forced medication or restraint</li>
+                <li><strong>Sexual</strong> — assault, non-consensual acts or exposure</li>
+                <li><strong>Psychological</strong> — threats, control, isolation or taunting</li>
+                <li><strong>Discrimination</strong> — abuse based on perceived differences</li>
+                <li><strong>Institutional abuse</strong> — in hospitals, care homes or support services</li>
+              </ul>
+              <h4>Emergency Contacts</h4>
+              <table class="contact-table">
+                <thead><tr><th>Service</th><th>Contact Number</th></tr></thead>
+                <tbody>
+                  <tr><td>Police (local – Ealing)</td><td>020 8649 3573 / 999</td></tr>
+                  <tr><td>Community Mental Health (Avenue House)</td><td>020 8483 1720</td></tr>
+                  <tr><td>Out of Hours Mental Health</td><td>0300 1234 244</td></tr>
+                  <tr><td>Adult Support &amp; Safeguarding</td><td>020 8825 8000</td></tr>
+                  <tr><td>Adult Support (Out of Hours)</td><td>020 8825 5000</td></tr>
+                  <tr><td>Social Services</td><td>020 8825 8000</td></tr>
+                  <tr><td>MIND in Ealing</td><td>020 8992 0303</td></tr>
+                  <tr><td>Drug Misuse (RISE)</td><td>020 8843 5900</td></tr>
+                  <tr><td>Ealing CCG</td><td>020 8280 8080</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="prevent">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <div>
+                <div class="accordion-title">The Prevent Strategy</div>
+                <div class="accordion-subtitle">Our role in safeguarding against radicalisation</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The Government's national counter-terrorism strategy CONTEST has four work streams: Pursue, Protect, Prepare, and Prevent. Healthcare organisations are expected to support the Prevent strategy by helping to stop people from becoming terrorists or supporting terrorism.</p>
+              <p>Prevent operates in the pre-criminal space and focuses on stopping people from joining or supporting extremist groups. Healthcare professionals may meet people who are vulnerable to radicalisation — including those with mental health issues or learning disabilities.</p>
+              <h4>Three Key Objectives</h4>
+              <ul>
+                <li>Challenge ideology that supports terrorism and those who promote it</li>
+                <li><strong>Prevent vulnerable people from being drawn into terrorism</strong> and ensure appropriate support is given *(healthcare organisations are expected to support this objective)*</li>
+                <li><strong>Work with sectors and institutions where there are risks of radicalisation</strong> *(healthcare organisations are expected to support this objective)*</li>
+              </ul>
+              <p>Patient confidentiality is always paramount. Disclosing fears and suspicions must be approached responsibly, weighing the evidence and individual circumstances — in the same manner as safeguarding adults, children, and domestic violence concerns.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PRACTICE OPERATIONS ────────────────────────────── -->
+    <div class="policy-group fade-up">
+      <div class="group-header">
+        <div class="group-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h2 class="group-title">Practice Operations</h2>
+      </div>
+      <div class="accordion">
+
+        <div class="accordion-item" id="non-nhs-work">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+              <div>
+                <div class="accordion-title">Non-NHS Work &amp; Private Fees</div>
+                <div class="accordion-subtitle">Understanding charges for non-NHS services</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>The NHS provides most healthcare free of charge, but some services fall outside the NHS contract. GPs are self-employed and their NHS contract covers medical services to NHS patients, not non-NHS work. GPs must cover staff, buildings and running costs in the same way as any small business.</p>
+              <h4>Examples of Non-NHS Work for Patients</h4>
+              <ul>
+                <li>Accident/sickness certificates for insurance purposes</li>
+                <li>School fee and holiday insurance certificates</li>
+                <li>Reports for health clubs certifying fitness to exercise</li>
+                <li>Private prescriptions for travel purposes</li>
+              </ul>
+              <h4>Examples of Non-NHS Work for Institutions</h4>
+              <ul>
+                <li>Life assurance and income protection reports for insurance companies</li>
+                <li>Reports for the DWP (disability living allowance, attendance allowance)</li>
+                <li>Medical reports for local authorities (adoption and fostering)</li>
+                <li>Copies of records for solicitors</li>
+              </ul>
+              <div class="policy-info-box">
+                <div class="policy-info-box-title">About BMA Suggested Fees</div>
+                The BMA suggests fees that GPs may charge for non-NHS work as guidance only — they are not fixed recommendations. Our fee schedule is available on request at reception.
+              </div>
+              <div class="policy-info-box amber">
+                <div class="policy-info-box-title">Processing Time</div>
+                Non-NHS work is completed outside of NHS hours. Please allow <strong>up to 2 weeks</strong> for completion — urgent requests may cost more. If you have several forms, please present them all at once.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="named-gp">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div>
+                <div class="accordion-title">Named Accountable GP</div>
+                <div class="accordion-subtitle">Every patient has a named GP</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>We have allocated a Named Accountable GP for all registered patients. This does not affect which doctor you see for appointments, but ensures there is a specific GP responsible for overseeing your overall care.</p>
+              <p>If you are unsure who your Named GP is, please ask a member of our reception team. Unfortunately, due to the costs involved, we are unable to notify patients in writing when a Named GP changes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="gp-earnings">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div>
+                <div class="accordion-title">GP Earnings</div>
+                <div class="accordion-subtitle">Transparent disclosure of average GP pay</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>NHS England requires GP practices to disclose average GP earnings. The average pay for GPs working in Saluja Clinic in the <strong>2023/24 financial year</strong> was <strong>£58,148 before tax and National Insurance</strong>.</p>
+              <p>During that financial year, the practice had 3 full-time partner GPs, and 2 salaried GPs and 1 locum GP who were working in the practice for more than six months.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="infection-control">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="accordion-title">Infection Control Statement</div>
+                <div class="accordion-subtitle">How we keep the practice clean and safe</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>We aim to keep our surgery clean, tidy and safe at all times. We are proud of our modern, purpose-built practice and take every step to maintain the highest standards of cleanliness and infection control.</p>
+              <p>If you have any concerns about cleanliness or infection control, please report these to our reception staff. Key measures we take include:</p>
+              <ul>
+                <li>Annual infection control audits to review procedures</li>
+                <li>Annual staff training and updates on cleanliness and infection control</li>
+                <li>Regular review of policies to meet national guidance</li>
+                <li>Washable or disposable materials (couch rolls, curtains, floor coverings) cleaned or changed frequently</li>
+                <li>Alcohol hand rub gel available throughout the building</li>
+                <li>Encouragement for staff and patients to raise any concerns or incidents</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="social-media">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+              <div>
+                <div class="accordion-title">Social Media Policy</div>
+                <div class="accordion-subtitle">How to engage with us online appropriately</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Saluja Clinic welcomes comments and suggestions from patients via the suggestion box at reception or through our website feedback section. We ask that patients do not use social media platforms such as Facebook to comment on the practice or members of staff.</p>
+              <p>If you have any feedback about our service, please report it through the practice website. All feedback is investigated and responded to.</p>
+              <div class="policy-info-box amber">
+                <div class="policy-info-box-title">Important Note</div>
+                The partners reserve the right to remove a patient from the surgery list and report them to the relevant social networking site if they are found to have made libellous statements or defamatory comments about the surgery or a member of staff.
+              </div>
+              <h4>Ethical Social Networking</h4>
+              <p>In line with GMC guidance, social media sites must never be used to discuss individual patients or their care. If a GP is contacted by a patient through a private profile for medical advice, the patient will be directed to contact the surgery through the proper channel.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ACCESS & INCLUSION ────────────────────────────── -->
+    <div class="policy-group fade-up">
+      <div class="group-header">
+        <div class="group-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h2 class="group-title">Access &amp; Inclusion</h2>
+      </div>
+      <div class="accordion">
+
+        <div class="accordion-item" id="disability-access">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M16 11h-4l-2 7-2-4H6"/><line x1="12" y1="7" x2="12" y2="11"/></svg></div>
+              <div>
+                <div class="accordion-title">Disability Access</div>
+                <div class="accordion-subtitle">Facilities and support available at the surgery</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>If you have any special needs, please let our staff know so we can help and make note for future visits.</p>
+              <h4>Wheelchair Access</h4>
+              <p>Wheelchair access is available throughout the surgery. A disabled toilet is available in Waiting Room 2 (WR2).</p>
+              <h4>Disabled Parking</h4>
+              <p>We have 2 parking spaces on the forecourt reserved for Blue Badge holders. The Blue Badge scheme is for people with severe mobility problems.</p>
+              <h4>Hearing Difficulties</h4>
+              <div class="link-list">
+                <a href="http://www.bda.org.uk/" target="_blank">British Deaf Association</a>
+                <a href="http://www.signhealth.org.uk/" target="_blank">SignHealth — The Deaf Health Charity</a>
+                <a href="http://www.actiononhearingloss.org.uk/" target="_blank">Action Hearing Loss</a>
+                <a href="http://www.royaldeaf.org.uk/" target="_blank">Royal Association for Deaf People</a>
+                <a href="http://www.ndcs.org.uk/" target="_blank">National Deaf Children's Society</a>
+              </div>
+              <h4>Blind / Partially Sighted</h4>
+              <p>We can provide a large print version of our practice leaflet on request. Please ask at reception.</p>
+              <div class="link-list">
+                <a href="http://www.rnib.org.uk" target="_blank">Royal National Institute of Blind People (RNIB)</a>
+                <a href="http://www.guidedogs.org.uk/" target="_blank">Guide Dogs</a>
+                <a href="http://www.britishblindsport.org.uk/" target="_blank">British Blind Sport</a>
+              </div>
+              <div class="policy-info-box green" style="margin-top:1rem;">
+                <div class="policy-info-box-title">Guide Dogs</div>
+                Guide dogs are welcome at the surgery. We ask that you be aware of other patients and staff who may have an allergy or fear of dogs.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" id="accessibility-statement">
+          <button class="accordion-trigger" aria-expanded="false">
+            <div class="accordion-trigger-left">
+              <div class="accordion-trigger-icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <div>
+                <div class="accordion-title">Accessibility Statement</div>
+                <div class="accordion-subtitle">How accessible this website is</div>
+              </div>
+            </div>
+            <div class="accordion-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>This accessibility statement applies to the Saluja Clinic website. We want as many people as possible to be able to use this website. This means you should be able to:</p>
+              <ul>
+                <li>Change colours, contrast levels and fonts</li>
+                <li>Zoom in up to 300% without text spilling off the screen</li>
+                <li>Navigate most of the website using just a keyboard</li>
+                <li>Navigate most of the website using speech recognition software</li>
+                <li>Listen to most of the website using a screen reader (JAWS, NVDA, VoiceOver)</li>
+              </ul>
+              <h4>Known Limitations</h4>
+              <ul>
+                <li>Text may not reflow in a single column when browser window is resized</li>
+                <li>Some older PDF documents are not fully accessible to screen readers</li>
+                <li>Some online forms are difficult to navigate using only a keyboard</li>
+                <li>There is a limit to how far you can magnify the map on our Contact page</li>
+              </ul>
+              <h4>Compliance</h4>
+              <p>This website is partially compliant with the Web Content Accessibility Guidelines version 2.1 AA standard. This statement was prepared on 10/07/2023 and last updated 13/07/2023. Compliance was checked using WAVE, WebAIM Contrast Checker, HTML_CodeSniffer, Pa11y and axe.</p>
+              <h4>Requesting an Accessible Format</h4>
+              <p>If you need information in a different format — accessible PDF, large print, easy read, audio recording or braille — please call us on <strong>0208 574 5136</strong>. We will respond within 7 days.</p>
+              <div class="link-list" style="margin-top:1rem;">
+                <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines 2.1</a>
+                <a href="https://www.equalityadvisoryservice.com/" target="_blank">Equality Advisory and Support Service (EASS)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- EMERGENCY / OOH -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones. For urgent medical advice when your GP is closed.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, severe bleeding, or any life-threatening condition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.05em;">SALUJA CLINIC</div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>
+        Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html" target="_blank">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="our-policies.html" target="_blank">Our Policies</a></li>
+        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  // ── Accordion ──────────────────────────────────────────
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const body = item.querySelector('.accordion-body');
+      const isOpen = item.classList.contains('open');
+
+      // Close all in same accordion
+      const accordion = item.closest('.accordion');
+      accordion.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        i.querySelector('.accordion-body').style.maxHeight = '0';
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Initialise open items
+  document.querySelectorAll('.accordion-item.open').forEach(item => {
+    const body = item.querySelector('.accordion-body');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  });
+
+  // ── Sidebar active link on scroll ──────────────────────
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.policy-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 200) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ── Fade-up animations ─────────────────────────────────
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

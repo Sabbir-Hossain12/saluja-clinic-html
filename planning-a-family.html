@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planning a Family – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
+      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
+      --white:#fff; --off-white:#f5f8fc;
+      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
+      --col-pre:#e67e22;
+      --col-ante:#2471a3;
+      --col-plan:#8e44ad;
+      --col-emerg:#c0392b;
+      --col-post:#27ae60;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+
+    /* ── UTILITY BAR ─────────────────────────────── */
+    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
+    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}.utility-bar a:hover{color:#fff}
+    .utility-bar .row{display:flex;align-items:center;gap:1.5rem}
+    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+    /* ── HEADER ──────────────────────────────────── */
+    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+    .logo-wrap svg{height:84px;width:auto}
+    nav{display:flex;align-items:center;gap:.25rem}
+    nav a{font-size:.88rem;font-weight:500;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
+    .nav-cta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25);transition:background .2s,transform .15s!important}
+    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero-banner{background:var(--white);border-bottom:1px solid var(--border);overflow:hidden;position:relative}
+    .hero-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,94,184,.03) 0%,rgba(255,184,28,.05) 100%);pointer-events:none}
+    .hero-banner-inner{max-width:1200px;margin:0 auto;padding:3.5rem 2rem 3.2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1}
+    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+    .breadcrumb a{color:var(--text-soft);text-decoration:none}.breadcrumb a:hover{color:var(--nhs-blue)}
+    .breadcrumb-sep{opacity:.4}
+    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,94,184,.07);border:1px solid rgba(0,94,184,.15);border-radius:20px;padding:.3rem .9rem;color:var(--nhs-blue);margin-bottom:1.1rem}
+    .page-tag span{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%}
+    .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:1rem}
+    .hero-h1 em{font-style:normal;color:var(--nhs-blue)}
+    .hero-sub{font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;margin-bottom:1.8rem}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-primary{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-primary:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+    .btn-outline{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-outline:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+
+    /* Stork canvas */
+    #storkCanvas{width:100%;height:auto;display:block;border-radius:20px}
+
+    /* ── JOURNEY STRIP ────────────────────────────── */
+    .journey-strip{background:linear-gradient(90deg,var(--col-pre),var(--col-ante),var(--col-plan),var(--col-post));padding:0}
+    .journey-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+    .journey-item{padding:1.5rem 1.2rem;text-align:center;border-right:1px solid rgba(255,255,255,.2);color:#fff}
+    .journey-item:last-child{border-right:none}
+    .journey-emoji{font-size:1.6rem;margin-bottom:.4rem}
+    .journey-name{font-size:.85rem;font-weight:700;letter-spacing:.02em}
+    .journey-sub{font-size:.72rem;opacity:.8;margin-top:.15rem}
+
+    /* ── SECTION SHARED ───────────────────────────── */
+    .section-inner{max-width:1200px;margin:0 auto}
+    .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nhs-blue);margin-bottom:.6rem}
+    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
+    .section-lead{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
+    .section-divider{max-width:1200px;margin:0 auto;height:1px;background:var(--border)}
+
+    /* ── TWO-COL ──────────────────────────────────── */
+    .two-col{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+    .two-col.rev{direction:rtl}.two-col.rev>*{direction:ltr}
+
+    /* ── CANVAS CARDS ─────────────────────────────── */
+    .canvas-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:1.4rem;box-shadow:0 8px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
+    .canvas-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+    .canvas-card.pre::before{background:linear-gradient(90deg,var(--col-pre),#f5b942)}
+    .canvas-card.ante::before{background:linear-gradient(90deg,var(--col-ante),#5dade2)}
+    .canvas-card.plan::before{background:linear-gradient(90deg,var(--col-plan),#bb8fce)}
+    .canvas-card.post::before{background:linear-gradient(90deg,var(--col-post),#58d68d)}
+    .canvas-card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+    .canvas-card-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--nhs-dark)}
+    .phase-badge{font-size:.71rem;font-weight:700;letter-spacing:.07em;padding:.22rem .75rem;border-radius:20px;transition:all .4s;text-transform:uppercase}
+    .phase-badge.pre{background:rgba(230,126,34,.12);color:var(--col-pre)}
+    .phase-badge.ante{background:rgba(36,113,163,.12);color:var(--col-ante)}
+    .phase-badge.plan{background:rgba(142,68,173,.12);color:var(--col-plan)}
+    .phase-badge.post{background:rgba(39,174,96,.12);color:var(--col-post)}
+    canvas.anim{width:100%;height:auto;border-radius:10px;display:block;border:1px solid var(--border)}
+    .phase-dots{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem}
+    .pdot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .4s,transform .4s}
+    .pdot.active.pre{background:var(--col-pre);transform:scale(1.4)}
+    .pdot.active.ante{background:var(--col-ante);transform:scale(1.4)}
+    .pdot.active.plan{background:var(--col-plan);transform:scale(1.4)}
+    .pdot.active.post{background:var(--col-post);transform:scale(1.4)}
+
+    /* ── TOPIC CONTENT ────────────────────────────── */
+    .topic-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:20px;padding:.28rem .85rem;margin-bottom:1rem}
+    .topic-tag span{width:6px;height:6px;border-radius:50%}
+    .topic-tag.pre{background:rgba(230,126,34,.1);color:var(--col-pre)}.topic-tag.pre span{background:var(--col-pre)}
+    .topic-tag.ante{background:rgba(36,113,163,.1);color:var(--col-ante)}.topic-tag.ante span{background:var(--col-ante)}
+    .topic-tag.plan{background:rgba(142,68,173,.1);color:var(--col-plan)}.topic-tag.plan span{background:var(--col-plan)}
+    .topic-tag.emerg{background:rgba(192,57,43,.1);color:var(--col-emerg)}.topic-tag.emerg span{background:var(--col-emerg)}
+    .topic-tag.post{background:rgba(39,174,96,.1);color:var(--col-post)}.topic-tag.post span{background:var(--col-post)}
+    .topic-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:600;color:var(--text-dark);line-height:1.15;margin-bottom:1rem}
+    .info-list{list-style:none;margin:.9rem 0;display:flex;flex-direction:column;gap:.5rem}
+    .info-list li{font-size:.88rem;color:var(--text-mid);padding-left:1.4rem;position:relative;line-height:1.65}
+    .info-list li::before{content:'';position:absolute;left:.1rem;top:.52rem;width:7px;height:7px;border-radius:50%}
+    .info-list.pre li::before{background:var(--col-pre)}
+    .info-list.ante li::before{background:var(--col-ante)}
+    .info-list.plan li::before{background:var(--col-plan)}
+    .info-list.emerg li::before{background:var(--col-emerg)}
+    .info-list.post li::before{background:var(--col-post)}
+    .info-box{border-radius:14px;padding:1.3rem 1.5rem;margin-top:1.2rem}
+    .info-box.pre{background:rgba(230,126,34,.06);border:1px solid rgba(230,126,34,.2)}
+    .info-box.ante{background:rgba(36,113,163,.06);border:1px solid rgba(36,113,163,.2)}
+    .info-box.plan{background:rgba(142,68,173,.06);border:1px solid rgba(142,68,173,.2)}
+    .info-box.emerg{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2)}
+    .info-box.post{background:rgba(39,174,96,.06);border:1px solid rgba(39,174,96,.2)}
+    .info-box h4{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:.6rem}
+    .info-box p,.info-box li{font-size:.86rem;line-height:1.68;color:var(--text-mid)}
+    .info-box ul{list-style:none;margin-top:.5rem;display:flex;flex-direction:column;gap:.35rem}
+    .info-box ul li{padding-left:1.1rem;position:relative}
+    .info-box ul li::before{content:'–';position:absolute;left:0;font-weight:700;color:var(--nhs-blue)}
+    .alert-strip{display:flex;gap:.8rem;align-items:flex-start;border-radius:12px;padding:1rem 1.3rem;margin-top:1rem;font-size:.84rem;line-height:1.65;color:var(--text-mid)}
+    .alert-strip.urgent{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.2)}
+    .alert-strip.info{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.18)}
+    .alert-strip.warm{background:rgba(255,184,28,.07);border:1px solid rgba(255,184,28,.3)}
+    .alert-icon{font-size:1.1rem;flex-shrink:0}
+
+    /* ── MATERNITY UNITS TABLE ────────────────────── */
+    .units-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+    .unit-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.5rem;transition:transform .2s,box-shadow .2s}
+    .unit-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,94,184,.1)}
+    .unit-name{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:.4rem}
+    .unit-detail{font-size:.8rem;color:var(--text-soft);line-height:1.65}
+    .unit-detail a{color:var(--nhs-blue);text-decoration:none}.unit-detail a:hover{text-decoration:underline}
+
+    /* ── EMERGENCY CONTRACEPTION CALLOUT ─────────── */
+    .emerg-callout{background:linear-gradient(135deg,#7b1f1f,#a93226);padding:3.5rem 2rem}
+    .emerg-callout-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .emerg-callout h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff;margin-bottom:.7rem}
+    .emerg-callout p{font-size:.95rem;color:rgba(255,255,255,.82);line-height:1.72;max-width:560px}
+    .emerg-ctas{display:flex;flex-direction:column;gap:.9rem;align-items:center}
+    .btn-white-red{background:#fff;color:#a93226;padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap;display:inline-block;transition:transform .15s,box-shadow .15s}
+    .btn-white-red:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost-white{border:2px solid rgba(255,255,255,.5);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap;display:inline-block;transition:background .2s,border-color .2s}
+    .btn-ghost-white:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+    /* ── NHS APP ──────────────────────────────────── */
+    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
+    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .app-inner h2{color:#fff}
+    .app-inner .section-lead{color:rgba(255,255,255,.8)}
+    .app-inner .section-tag{color:rgba(255,255,255,.6)}
+    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
+    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
+    .btn-white{background:#fff;color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
+    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+    /* ── EMERGENCY ────────────────────────────────── */
+    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
+    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .emerg-card{border-radius:16px;padding:2rem}
+    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
+    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
+    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
+    .emerg-card.urgent .emerg-number{color:#dc3545}
+    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
+    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
+    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}.footer-links a:hover{color:#fff}
+    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
+    .hours-grid{display:grid;gap:.3rem}
+    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
+    .hour-day{opacity:.7}
+
+    /* ── ANIMATIONS ───────────────────────────────── */
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:960px){
+      .hero-banner-inner,.two-col,.two-col.rev{grid-template-columns:1fr;direction:ltr;gap:2.5rem}
+      .units-grid,.journey-inner{grid-template-columns:1fr 1fr}
+      .emerg-callout-inner,.app-inner{grid-template-columns:1fr}
+      .emergency-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr 1fr}
+      nav{display:none}
+    }
+    @media(max-width:600px){
+      .units-grid,.journey-inner,.footer-inner{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="row">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="row">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/>
+          </linearGradient>
+          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="#fff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="index.html">Our Practice</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#team">Our Doctors</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     HERO — STORK ANIMATION
+══════════════════════════════════════════ -->
+<div class="hero-banner">
+  <div class="hero-banner-inner">
+    <div class="fade-up">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="#">Clinics &amp; Services</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Planning a Family</span>
+      </div>
+      <div class="page-tag"><span></span> Family Services · NHS &amp; Free</div>
+      <h1 class="hero-h1">Planning a <em>Family</em></h1>
+      <p class="hero-sub">From the first thought of having a baby through to postnatal care, we're here every step of the way. Our practice offers a full range of free, confidential services to support you and your growing family.</p>
+      <div class="hero-btns">
+        <a href="https://salujaclinic.webgp.com/" class="btn-primary" target="_blank">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book an Appointment
+        </a>
+        <a href="#preconception" class="btn-outline">Preconception Advice ↓</a>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.15s">
+      <canvas id="storkCanvas" width="520" height="340"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- JOURNEY STRIP -->
+<div class="journey-strip">
+  <div class="journey-inner">
+    <div class="journey-item">
+      <div class="journey-emoji">🌱</div>
+      <div class="journey-name">Preconception</div>
+      <div class="journey-sub">Before you try</div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-emoji">🤰</div>
+      <div class="journey-name">Antenatal Care</div>
+      <div class="journey-sub">During pregnancy</div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-emoji">🩺</div>
+      <div class="journey-name">Family Planning</div>
+      <div class="journey-sub">Contraception &amp; advice</div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-emoji">👶</div>
+      <div class="journey-name">Postnatal Care</div>
+      <div class="journey-sub">After the birth</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     1. PRECONCEPTION
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--white)" id="preconception">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="canvas-card pre">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Preconception · Journey</div>
+          <div class="phase-badge pre" id="prePhase">Ready to Start</div>
+        </div>
+        <canvas id="preCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="preDots">
+          <div class="pdot pre active"></div>
+          <div class="pdot pre"></div>
+          <div class="pdot pre"></div>
+          <div class="pdot pre"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="topic-tag pre"><span></span> Before You Try</div>
+      <h2 class="topic-h2">Preconception <em style="font-style:normal;color:var(--col-pre)">Advice</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">If you're thinking about starting a family, a preconception appointment with your GP is a great first step. We can help you prepare your body and mind for a healthy pregnancy — before you even start trying.</p>
+      <ul class="info-list pre">
+        <li>Start taking <strong>folic acid 400mcg daily</strong> at least 3 months before trying to conceive</li>
+        <li>Review any existing medications with your GP — some are not safe in pregnancy</li>
+        <li>Check your rubella (German measles) immunity status</li>
+        <li>Stop smoking, reduce alcohol, and aim for a healthy BMI</li>
+        <li>Discuss any family history of genetic conditions</li>
+        <li>Ensure cervical screening is up to date before conceiving</li>
+      </ul>
+      <div class="info-box pre">
+        <h4>💊 Folic Acid — Why It Matters</h4>
+        <p>Folic acid significantly reduces the risk of neural tube defects such as spina bifida. Begin taking it <strong>before</strong> you start trying — ideally 3 months in advance — and continue through the first 12 weeks of pregnancy. It is available free on prescription or over the counter.</p>
+      </div>
+      <div class="alert-strip warm" style="margin-top:1rem">
+        <div class="alert-icon">🌱</div>
+        <div>Book a preconception appointment at Saluja Clinic — we will work through a personalised checklist and answer any questions you have about preparing for pregnancy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:0 2rem"><div class="section-divider"></div></div>
+
+<!-- ══════════════════════════════════════════
+     2. ANTENATAL CARE
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--off-white)" id="antenatal">
+  <div class="two-col rev">
+    <div class="fade-up">
+      <div class="topic-tag ante"><span></span> During Pregnancy</div>
+      <h2 class="topic-h2">Antenatal Care — <em style="font-style:normal;color:var(--col-ante)">Your Pregnancy, Your Choice</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">When you find out you're pregnant, you can contact your GP, contact a midwife directly, or <strong>self-refer</strong> to a maternity unit of your choice. You don't need to wait for a GP appointment to start your antenatal care.</p>
+      <div class="info-box ante">
+        <h4>📋 What to Do When You Find Out</h4>
+        <ul>
+          <li>Contact us or self-refer directly to your chosen maternity unit</li>
+          <li>Your first "booking appointment" with a midwife is usually at 8–10 weeks</li>
+          <li>Most women have around 10 antenatal appointments for a first pregnancy</li>
+          <li>Your 12-week scan and 20-week anomaly scan will be arranged</li>
+          <li>Keep taking folic acid until 12 weeks; take vitamin D throughout</li>
+        </ul>
+      </div>
+      <div style="margin-top:2rem">
+        <div style="font-size:.85rem;font-weight:700;color:var(--text-dark);margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase">NW London Maternity Units</div>
+        <div class="units-grid" style="margin-top:0">
+          <div class="unit-card">
+            <div class="unit-name">Hillingdon Hospital</div>
+            <div class="unit-detail">Uxbridge, UB8 3NN<br><a href="tel:01895279442">01895 279 442</a><br><a href="mailto:thh-tr.maternityreferrals@nhs.net">thh-tr.maternityreferrals@nhs.net</a></div>
+          </div>
+          <div class="unit-card">
+            <div class="unit-name">Northwick Park Hospital</div>
+            <div class="unit-detail">Harrow, HA1 3UJ<br><a href="tel:02088695252">020 8869 5252</a><br><a href="mailto:nwh-tr.antenatalbookings@nhs.net">nwh-tr.antenatalbookings@nhs.net</a></div>
+          </div>
+          <div class="unit-card">
+            <div class="unit-name">Queen Charlotte's &amp; Chelsea</div>
+            <div class="unit-detail">Du Cane Road, W12<br><a href="tel:02033126135">020 3312 6135</a><br><a href="mailto:ichc-tr.qcchmaternity@nhs.net">ichc-tr.qcchmaternity@nhs.net</a></div>
+          </div>
+          <div class="unit-card">
+            <div class="unit-name">West Middlesex Hospital</div>
+            <div class="unit-detail">Isleworth, TW7 6AF<br><a href="tel:02083215007">020 8321 5007</a><br><a href="mailto:wmu-tr.anc@nhs.net">wmu-tr.anc@nhs.net</a></div>
+          </div>
+          <div class="unit-card">
+            <div class="unit-name">St Mary's Hospital</div>
+            <div class="unit-detail">Paddington, W2 1NY<br><a href="tel:02033126135">020 3312 6135</a><br><a href="mailto:ichc-tr.stmarysmaternity@nhs.net">ichc-tr.stmarysmaternity@nhs.net</a></div>
+          </div>
+          <div class="unit-card">
+            <div class="unit-name">Chelsea &amp; Westminster</div>
+            <div class="unit-detail">Fulham Road, SW10<br><a href="tel:02033156000">020 3315 6000</a><br><a href="mailto:caw-tr.ANC@nhs.net">caw-tr.ANC@nhs.net</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="canvas-card ante">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Pregnancy Journey · Trimester View</div>
+          <div class="phase-badge ante" id="antePhase">First Trimester</div>
+        </div>
+        <canvas id="anteCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="anteDots">
+          <div class="pdot ante active"></div>
+          <div class="pdot ante"></div>
+          <div class="pdot ante"></div>
+          <div class="pdot ante"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:0 2rem"><div class="section-divider"></div></div>
+
+<!-- ══════════════════════════════════════════
+     3. FAMILY PLANNING
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--white)" id="family-planning">
+  <div class="two-col">
+    <div class="fade-up">
+      <div class="canvas-card plan">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Contraception · Options</div>
+          <div class="phase-badge plan" id="planPhase">Pill (Combined)</div>
+        </div>
+        <canvas id="planCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="planDots">
+          <div class="pdot plan active"></div>
+          <div class="pdot plan"></div>
+          <div class="pdot plan"></div>
+          <div class="pdot plan"></div>
+          <div class="pdot plan"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="topic-tag plan"><span></span> Family Planning Clinic</div>
+      <h2 class="topic-h2">Family Planning — <em style="font-style:normal;color:var(--col-plan)">Free &amp; Confidential</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Our family planning clinic offers free, confidential advice and a wide range of contraception services. All consultations are completely private — we're here to help you make the right choices for you.</p>
+      <ul class="info-list plan">
+        <li>Combined oral contraceptive pill and progestogen-only pill</li>
+        <li>Progestogen injections (Depo-Provera)</li>
+        <li>Fitting and checking of coils (IUDs and IUS / Mirena)</li>
+        <li>Fitting and checking of caps and diaphragms</li>
+        <li>Free emergency contraception</li>
+        <li>Free pregnancy tests</li>
+        <li>Confidential STI advice and referrals</li>
+        <li>Unplanned pregnancy counselling and support</li>
+        <li>Pre-conception advice and fertility awareness</li>
+        <li>Limited supply of free condoms</li>
+      </ul>
+      <div class="alert-strip info" style="margin-top:1rem">
+        <div class="alert-icon">🔒</div>
+        <div>All family planning appointments are completely confidential. Book through reception or online. You do not need to explain your reasons for requesting contraception.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY CONTRACEPTION CALLOUT -->
+<div class="emerg-callout" id="emergency-contraception">
+  <div class="emerg-callout-inner">
+    <div>
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.5rem">Time-Sensitive</div>
+      <h3>Emergency Contraception</h3>
+      <p>If you've had unprotected sex or contraception has failed, emergency contraception is available <strong>free of charge</strong>. The sooner you act, the more effective it is — ideally within 72 hours, and up to 120 hours (5 days) after sex.</p>
+      <p style="margin-top:.7rem">Available as a tablet (morning-after pill) or IUD (coil — the most effective option). Also available free from pharmacies, Brook centres, sexual health clinics, and some urgent care centres.</p>
+      <p style="margin-top:.7rem;font-size:.88rem;color:rgba(255,255,255,.6)">NW London Sexual Health line: <strong style="color:#fff">0800 756 7570</strong></p>
+    </div>
+    <div class="emerg-ctas">
+      <a href="tel:02085745136" class="btn-white-red">📞 Call Us Now</a>
+      <a href="https://www.nwlondonsexualhealth.nhs.uk/clinics.php" class="btn-ghost-white" target="_blank">Sexual Health Clinics →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     4. POSTNATAL CARE
+══════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;background:var(--off-white)" id="postnatal">
+  <div class="two-col rev">
+    <div class="fade-up">
+      <div class="topic-tag post"><span></span> After the Birth</div>
+      <h2 class="topic-h2">Postnatal Care — <em style="font-style:normal;color:var(--col-post)">The First 6–8 Weeks</em></h2>
+      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Postnatal care continues for 6–8 weeks after your baby is born. During this time, both you and your baby will be monitored by our team and your health visitor to ensure a healthy recovery and good start to life.</p>
+      <ul class="info-list post">
+        <li>6–8 week <strong>baby check</strong> with your GP — development, weight gain, hip check</li>
+        <li>6-week <strong>postnatal check for mum</strong> — physical and emotional wellbeing</li>
+        <li>Baby vaccinations begin at 8 weeks — book with the practice nurse</li>
+        <li>Ongoing support from your health visitor for feeding, sleep, and development</li>
+        <li>Postnatal depression screening — please talk to us, you are not alone</li>
+      </ul>
+      <div class="info-box post">
+        <h4>👶 Your Baby's 6–8 Week Check</h4>
+        <p>This important appointment checks your baby's growth, heart, hips, eyes, and reflexes. It also provides an opportunity to discuss feeding, sleep, and any concerns you have. Please book this appointment through reception when your baby is around 5–6 weeks old.</p>
+      </div>
+      <div class="info-box post" style="margin-top:1rem">
+        <h4>💛 Postnatal Depression</h4>
+        <p>Up to 1 in 5 new mothers experiences postnatal depression. It is not a sign of weakness — it is a medical condition and it is treatable. Please speak to your GP or health visitor if you feel low, anxious, tearful, or overwhelmed in the weeks after birth. We are here to help.</p>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.12s">
+      <div class="canvas-card post">
+        <div class="canvas-card-hdr">
+          <div class="canvas-card-title">Baby's First Weeks · Checks</div>
+          <div class="phase-badge post" id="postPhase">Coming Home</div>
+        </div>
+        <canvas id="postCanvas" class="anim" width="500" height="300"></canvas>
+        <div class="phase-dots" id="postDots">
+          <div class="pdot post active"></div>
+          <div class="pdot post"></div>
+          <div class="pdot post"></div>
+          <div class="pdot post"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NHS APP BANNER -->
+<div class="app-banner">
+  <div class="app-inner section-inner">
+    <div>
+      <div class="section-tag">Digital Access</div>
+      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+      <p class="section-lead">Manage appointments and your baby's health records all in one place.</p>
+      <div class="app-bullets">
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Book antenatal and postnatal appointments</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>View your test results and pregnancy records</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions — including folic acid</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
+        <defs>
+          <linearGradient id="aCS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
+          <linearGradient id="aCT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
+          <radialGradient id="aCS2" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/></radialGradient>
+          <linearGradient id="aCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
+          <filter id="aSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="transparent"/>
+        <circle cx="80" cy="80" r="68" fill="url(#aCR)" filter="url(#aSh)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#aCS2)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#aCS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#aCT)">SALUJA CLINIC</text>
+      </svg>
+      <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
+        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24/7. For pregnancy concerns, maternity advice out of hours, or any urgent but non-emergency medical question when your GP is closed.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Call 999 immediately for heavy bleeding, suspected miscarriage, severe abdominal pain, signs of pre-eclampsia, or any life-threatening emergency in pregnancy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html" target="_blank">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank">NW London Sexual Health</a></li>
+        <li><a href="https://www.brook.org.uk/" target="_blank">Brook — Young People's Health</a></li>
+        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     CANVAS ANIMATIONS
+══════════════════════════════════════════════════════════ -->
+<script>
+/* ── Shared helpers ─────────────────────────────────────── */
+const fadeObs = new IntersectionObserver(
+  es => es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold:0.08 }
+);
+document.querySelectorAll('.fade-up').forEach(el=>fadeObs.observe(el));
+
+function ease(t){ return t<.5?2*t*t:-1+(4-2*t)*t; }
+function lerp(a,b,t){ return a+(b-a)*t; }
+function sr(n){ let x=Math.sin(n+1)*10000; return x-Math.floor(x); }
+function cycleFn(durs){
+  const tot=durs.reduce((a,b)=>a+b,0);
+  return t=>{ let c=t%tot,acc=0; for(let i=0;i<durs.length;i++){ if(c<acc+durs[i]) return{idx:i,t:(c-acc)/durs[i]}; acc+=durs[i]; } return{idx:0,t:0}; };
+}
+function setUI(bId,dId,cls,labels,idx){
+  document.getElementById(bId).textContent=labels[idx];
+  document.querySelectorAll('#'+dId+' .pdot').forEach((d,i)=>{ d.classList.toggle('active',i===idx); d.classList.add(cls); });
+}
+
+/* ══════════════════════════════════════════════════════════
+   STORK HERO ANIMATION
+   The stork flies in from the right, descends, delivers a bundle to a house, then flies off
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('storkCanvas');
+  const ctx=C.getContext('2d');
+  const W=520,H=340; C.width=W; C.height=H;
+
+  // Sky colours
+  const SKY_TOP='#d6eaff', SKY_BOT='#fef3e2';
+  // Cloud positions (stable)
+  const CLOUDS=[{x:60,y:55,r:22},{x:160,y:35,r:18},{x:310,y:60,r:26},{x:430,y:42,r:20},{x:490,y:70,r:15}];
+  // Stars (twinkle gently)
+  const STARS=Array.from({length:18},(_,i)=>({x:sr(i)*W,y:sr(i+10)*H*.55,r:1.2+sr(i+20)*1.4,t:sr(i+30)*Math.PI*2}));
+
+  // Animation cycle: 28 s total
+  // 0–6  fly-in from right to centre-top
+  // 6–13 descend + approach house
+  // 13–19 deliver bundle to chimney
+  // 19–24 fly off to the left, up
+  // 24–28 brief pause showing house with hearts
+  const CYCLE=28;
+
+  // House position
+  const HX=100, HY=240;
+
+  let st=null;
+
+  function drawSky(elapsed){
+    const grad=ctx.createLinearGradient(0,0,0,H);
+    const t=(Math.sin(elapsed*.1)*.5+.5);
+    grad.addColorStop(0,lerpCol('aec6e8','d6eaff',t));
+    grad.addColorStop(1,lerpCol('fde8c8','fef3e2',t));
+    ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+  }
+
+  function lerpCol(c1,c2,t){
+    const p=(s,i)=>parseInt(s.slice(i,i+2),16);
+    return `rgb(${Math.round(lerp(p(c1,0),p(c2,0),t))},${Math.round(lerp(p(c1,2),p(c2,2),t))},${Math.round(lerp(p(c1,4),p(c2,4),t))})`;
+  }
+
+  function drawClouds(elapsed){
+    CLOUDS.forEach((cl,i)=>{
+      const ox=Math.sin(elapsed*.15+i)*.8;
+      ctx.save(); ctx.globalAlpha=.75;
+      [[-cl.r*.6,cl.r*.3,cl.r*.8],[0,0,cl.r],[cl.r*.55,cl.r*.3,cl.r*.7]].forEach(([dx,dy,r])=>{
+        ctx.beginPath(); ctx.arc(cl.x+ox+dx,cl.y+dy,r,0,Math.PI*2);
+        ctx.fillStyle='rgba(255,255,255,.88)'; ctx.fill();
+      });
+      ctx.restore();
+    });
+  }
+
+  function drawGround(){
+    const gg=ctx.createLinearGradient(0,H-60,0,H);
+    gg.addColorStop(0,'#b8e0a0'); gg.addColorStop(1,'#88c070');
+    ctx.fillStyle=gg; ctx.fillRect(0,H-60,W,60);
+    // little hills
+    ctx.beginPath(); ctx.ellipse(W*.7,H-60,80,25,0,Math.PI,0,true);
+    ctx.fillStyle='#a0d488'; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(W*.15,H-60,60,20,0,Math.PI,0,true);
+    ctx.fillStyle='#a0d488'; ctx.fill();
+  }
+
+  function drawHouse(heartAlpha){
+    const hx=HX, hy=HY;
+    // shadow
+    ctx.save(); ctx.globalAlpha=.12;
+    ctx.beginPath(); ctx.ellipse(hx+6,hy+68,42,10,0,0,Math.PI*2); ctx.fillStyle='#006'; ctx.fill();
+    ctx.restore();
+    // walls
+    ctx.beginPath(); ctx.rect(hx-34,hy,68,55);
+    ctx.fillStyle='#f5e6c8'; ctx.fill(); ctx.strokeStyle='#c8a870'; ctx.lineWidth=2; ctx.stroke();
+    // roof
+    ctx.beginPath(); ctx.moveTo(hx-42,hy); ctx.lineTo(hx,hy-40); ctx.lineTo(hx+42,hy);
+    ctx.fillStyle='#e05540'; ctx.fill(); ctx.strokeStyle='#b83020'; ctx.lineWidth=2; ctx.stroke();
+    // chimney
+    ctx.fillStyle='#cc4433'; ctx.fillRect(hx+14,hy-46,12,28);
+    ctx.strokeStyle='#a83020'; ctx.lineWidth=1.5; ctx.strokeRect(hx+14,hy-46,12,28);
+    // door
+    ctx.beginPath(); ctx.roundRect(hx-10,hy+28,20,27,3);
+    ctx.fillStyle='#8b5e3c'; ctx.fill(); ctx.strokeStyle='#6b3e1c'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.beginPath(); ctx.arc(hx+6,hy+43,2,0,Math.PI*2); ctx.fillStyle='#f0c040'; ctx.fill();
+    // windows
+    [[hx-24,hy+8],[hx+12,hy+8]].forEach(([wx,wy])=>{
+      ctx.beginPath(); ctx.roundRect(wx,wy,14,14,2); ctx.fillStyle='#aadcf8'; ctx.fill();
+      ctx.strokeStyle='#c8a870'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(wx+7,wy); ctx.lineTo(wx+7,wy+14); ctx.strokeStyle='#c8a870'; ctx.lineWidth=1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(wx,wy+7); ctx.lineTo(wx+14,wy+7); ctx.stroke();
+    });
+    // smoke from chimney
+    for(let i=0;i<3;i++){
+      const sy=hy-46-i*12;
+      ctx.save(); ctx.globalAlpha=(.4-i*.12);
+      ctx.beginPath(); ctx.arc(hx+20+Math.sin(sy*.15)*4,sy,4+i*2,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,200,200,.7)'; ctx.fill(); ctx.restore();
+    }
+    // Hearts when bundle delivered
+    if(heartAlpha>0){
+      [[-20,-25],[15,-30],[-5,-50]].forEach(([dx,dy],i)=>{
+        const hs=.7+i*.2;
+        ctx.save(); ctx.globalAlpha=heartAlpha*(Math.sin(Date.now()*.003+i)*.3+.7);
+        ctx.translate(hx+dx+20,hy+dy);
+        ctx.scale(hs,hs);
+        ctx.beginPath();
+        ctx.moveTo(0,4); ctx.bezierCurveTo(-14,-8,-22,4,-12,14); ctx.bezierCurveTo(-6,20,0,22,0,26);
+        ctx.bezierCurveTo(0,22,6,20,12,14); ctx.bezierCurveTo(22,4,14,-8,0,4);
+        ctx.fillStyle='#ff6b8a'; ctx.fill();
+        ctx.restore();
+      });
+    }
+  }
+
+  function drawBundle(bx,by,bundleVisible){
+    if(!bundleVisible) return;
+    // Blue cloth bundle
+    ctx.save();
+    ctx.beginPath(); ctx.ellipse(bx,by,14,11,0,0,Math.PI*2);
+    ctx.fillStyle='#6ab4e8'; ctx.fill();
+    ctx.strokeStyle='#3888c8'; ctx.lineWidth=1.5; ctx.stroke();
+    // knot at top
+    ctx.beginPath(); ctx.arc(bx,by-9,4,0,Math.PI*2);
+    ctx.fillStyle='#3888c8'; ctx.fill();
+    // baby face in bundle
+    ctx.beginPath(); ctx.arc(bx,by,6,0,Math.PI*2);
+    ctx.fillStyle='#fde0c8'; ctx.fill();
+    ctx.fillStyle='#333'; ctx.font='7px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('😊',bx,by+.5);
+    ctx.restore();
+  }
+
+  function drawStork(sx,sy,wingFlap,facing,bundleVisible,holdingBundle){
+    ctx.save();
+    ctx.translate(sx,sy);
+    if(facing<0) ctx.scale(-1,1);
+
+    const flap=Math.sin(wingFlap)*22;
+
+    // Wing (back)
+    ctx.beginPath();
+    ctx.moveTo(-8,0);
+    ctx.bezierCurveTo(-30,flap-10,-50,flap+10,-45,flap+25);
+    ctx.bezierCurveTo(-35,flap+30,-15,flap+10,0,8);
+    ctx.closePath();
+    ctx.fillStyle='#f5f5f5'; ctx.fill(); ctx.strokeStyle='#ddd'; ctx.lineWidth=1; ctx.stroke();
+
+    // Body
+    ctx.beginPath(); ctx.ellipse(0,8,18,12,-.2,0,Math.PI*2);
+    ctx.fillStyle='#f8f8f8'; ctx.fill(); ctx.strokeStyle='#ddd'; ctx.lineWidth=1.2; ctx.stroke();
+    // black tail markings
+    ctx.beginPath(); ctx.ellipse(-12,14,8,5,.3,0,Math.PI*2);
+    ctx.fillStyle='#222'; ctx.fill();
+
+    // Neck & head
+    ctx.beginPath(); ctx.moveTo(10,2); ctx.bezierCurveTo(18,-8,20,-18,16,-24);
+    ctx.strokeStyle='#f0f0f0'; ctx.lineWidth=8; ctx.lineCap='round'; ctx.stroke();
+    // Head circle
+    ctx.beginPath(); ctx.arc(14,-26,8,0,Math.PI*2);
+    ctx.fillStyle='#f0f0f0'; ctx.fill();
+    // Eye
+    ctx.beginPath(); ctx.arc(18,-28,2,0,Math.PI*2); ctx.fillStyle='#222'; ctx.fill();
+    ctx.beginPath(); ctx.arc(18.5,-28.5,.8,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
+    // Beak
+    ctx.beginPath(); ctx.moveTo(20,-26); ctx.lineTo(36,-24); ctx.lineTo(20,-22);
+    ctx.fillStyle='#e85520'; ctx.fill();
+
+    // Wing (front)
+    ctx.beginPath();
+    ctx.moveTo(8,0);
+    ctx.bezierCurveTo(28,flap-8,44,flap+8,40,flap+22);
+    ctx.bezierCurveTo(30,flap+28,12,flap+8,0,8);
+    ctx.closePath();
+    ctx.fillStyle='#ffffff'; ctx.fill(); ctx.strokeStyle='#ddd'; ctx.lineWidth=1; ctx.stroke();
+
+    // Legs (dangling)
+    ctx.strokeStyle='#e85520'; ctx.lineWidth=2.5; ctx.lineCap='round';
+    [[-6,20],[-2,20]].forEach(([lx,_])=>{
+      ctx.beginPath(); ctx.moveTo(lx,14); ctx.lineTo(lx+1,28);
+      ctx.lineTo(lx+6,30); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(lx+1,28); ctx.lineTo(lx-4,30); ctx.stroke();
+    });
+
+    // Bundle in beak
+    if(holdingBundle){
+      ctx.save(); if(facing<0) ctx.scale(-1,1);
+      const beakTip = facing>0 ? {x:sx+36,y:sy-24} : {x:sx-36,y:sy-24};
+      ctx.restore();
+      drawBundle(facing>0?36:-36,-24,true);
+    }
+
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const c=elapsed%CYCLE;
+
+    ctx.clearRect(0,0,W,H);
+    drawSky(elapsed);
+    drawClouds(elapsed);
+    drawGround();
+
+    // Stork state machine
+    let sx,sy,wingFlap=elapsed*5,facing=1,holdBundle=true,heartAlpha=0,showBundleOnChimney=false;
+
+    if(c<6){
+      // fly in from right
+      const t=c/6;
+      sx=lerp(W+60,W*0.65,ease(t));
+      sy=lerp(H*.25,H*.38,ease(t));
+      facing=-1;
+      holdBundle=true;
+    } else if(c<13){
+      // descend toward house
+      const t=(c-6)/7;
+      sx=lerp(W*0.65,HX+30,ease(t));
+      sy=lerp(H*.38,HY-52,ease(t));
+      facing=-1;
+      holdBundle=true;
+      wingFlap=elapsed*5*(1-ease(t)*.4);
+    } else if(c<19){
+      // deliver — hover over chimney, lower bundle
+      const t=(c-13)/6;
+      sx=HX+30;
+      sy=HY-52;
+      facing=-1;
+      holdBundle=t<.6;
+      wingFlap=elapsed*3;
+      showBundleOnChimney=t>.55;
+      heartAlpha=t>.55?ease((t-.55)/.45):0;
+    } else if(c<24){
+      // fly off left-and-up
+      const t=(c-19)/5;
+      sx=lerp(HX+30,-80,ease(t));
+      sy=lerp(HY-52,H*.15,ease(t));
+      facing=1;
+      holdBundle=false;
+      showBundleOnChimney=true;
+      heartAlpha=lerp(1,0,ease(t));
+    } else {
+      // house with hearts, stork gone
+      sx=-200; sy=0;
+      holdBundle=false;
+      showBundleOnChimney=true;
+      heartAlpha=ease((c-24)/4)*.9;
+    }
+
+    drawHouse(heartAlpha);
+    // Bundle on chimney after delivery
+    if(showBundleOnChimney) drawBundle(HX+20, HY-55, true);
+    drawStork(sx,sy,wingFlap,facing,true,holdBundle);
+
+    // Label
+    const labels=['Stork inbound!','Almost there...','Bundle delivered! 🎉','Flying home','❤️  New arrival!'];
+    const li=c<6?0:c<13?1:c<19?2:c<24?3:4;
+    ctx.save(); ctx.globalAlpha=.55;
+    ctx.fillStyle='#005EB8'; ctx.font='700 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText(labels[li],W/2,H-10); ctx.restore();
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   1. PRECONCEPTION — egg meets sperm → folic acid reminder → positive test
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('preCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const LABELS=['Preparing Your Body','Folic Acid Daily','Healthy Lifestyle','Positive Test!'];
+  const getPhase=cycleFn([5,6,6,7]);
+  let st=null,lastIdx=-1;
+
+  // Sperm swimming
+  const SPERM=Array.from({length:12},(_,i)=>({
+    x:sr(i)*W*.4+W*.6, y:H/2+(sr(i+10)-.5)*100,
+    vx:-(1.5+sr(i+20)*1.2), vy:(sr(i+30)-.5)*.6,
+    t:sr(i+40)*Math.PI*2, ts:0.05+sr(i+50)*.03,
+  }));
+
+  function drawEgg(cx,cy,r,glow){
+    if(glow>0){
+      ctx.save(); ctx.globalAlpha=glow*.4;
+      ctx.beginPath(); ctx.arc(cx,cy,r+18,0,Math.PI*2);
+      const rg=ctx.createRadialGradient(cx,cy,r,cx,cy,r+18);
+      rg.addColorStop(0,'rgba(255,200,50,.6)'); rg.addColorStop(1,'transparent');
+      ctx.fillStyle=rg; ctx.fill(); ctx.restore();
+    }
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+    const eg=ctx.createRadialGradient(cx-r*.3,cy-r*.3,0,cx,cy,r);
+    eg.addColorStop(0,'#ffe8c0'); eg.addColorStop(.6,'#f5c060'); eg.addColorStop(1,'#e0a030');
+    ctx.fillStyle=eg; ctx.fill();
+    ctx.strokeStyle='rgba(200,130,20,.4)'; ctx.lineWidth=2; ctx.stroke();
+    // Zona pellucida
+    ctx.beginPath(); ctx.arc(cx,cy,r-8,0,Math.PI*2);
+    ctx.strokeStyle='rgba(255,200,100,.3)'; ctx.lineWidth=3; ctx.stroke();
+  }
+
+  function drawSperm(s, alpha){
+    ctx.save(); ctx.globalAlpha=alpha;
+    const wobble=Math.sin(s.t)*.3;
+    // head
+    ctx.beginPath(); ctx.ellipse(s.x,s.y,7,5,wobble,0,Math.PI*2);
+    ctx.fillStyle='rgba(80,80,200,.8)'; ctx.fill();
+    // tail (sine wave)
+    ctx.beginPath(); ctx.moveTo(s.x+7,s.y);
+    for(let i=0;i<12;i++){
+      const tx=s.x+7+i*5, ty=s.y+Math.sin(s.t+i*.8)*4;
+      i===0?ctx.moveTo(tx,ty):ctx.lineTo(tx,ty);
+    }
+    ctx.strokeStyle='rgba(100,100,220,.6)'; ctx.lineWidth=1.8; ctx.lineCap='round'; ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawFolicAcid(progress){
+    const px=W*.6,py=H/2;
+    ctx.save(); ctx.globalAlpha=Math.min(1,progress*1.5);
+    ctx.beginPath(); ctx.roundRect(px-30,py-40,60,80,10);
+    ctx.fillStyle='#f0f8f0'; ctx.fill(); ctx.strokeStyle='#a0d090'; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle='#2d8a4e'; ctx.font='700 9px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('FOLIC',px,py-20); ctx.fillText('ACID',px,py-8);
+    ctx.fillText('400mcg',px,py+6);
+    // Pills
+    for(let i=0;i<5;i++){
+      ctx.beginPath(); ctx.ellipse(px+(i%2===0?-12:12),py+22+i*8,8,5,.5,0,Math.PI*2);
+      ctx.fillStyle='#58c878'; ctx.fill();
+    }
+    ctx.fillStyle='#2d8a4e'; ctx.font='600 8px "DM Sans",sans-serif';
+    ctx.fillText('Take daily!',px,py+58);
+    ctx.restore();
+  }
+
+  function drawLifestyle(progress){
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    const items=[['🚶',W*.25,H*.35,'Active'],['🥦',W*.5,H*.3,'Diet'],['🚭',W*.75,H*.38,'No Smoking'],['😴',W*.4,H*.65,'Rest']];
+    items.forEach(([e,x,y,l],i)=>{
+      ctx.save(); ctx.globalAlpha=ease(progress)*Math.min(1,(progress*4-i*.6));
+      ctx.beginPath(); ctx.arc(x,y,26,0,Math.PI*2);
+      ctx.fillStyle='rgba(39,174,96,.1)'; ctx.fill();
+      ctx.strokeStyle='rgba(39,174,96,.35)'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.font='22px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(e,x,y);
+      ctx.fillStyle='#27ae60'; ctx.font='600 9px "DM Sans",sans-serif'; ctx.textBaseline='alphabetic';
+      ctx.fillText(l,x,y+38);
+      ctx.restore();
+    });
+    ctx.restore();
+  }
+
+  function drawPositiveTest(progress){
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    const tx=W/2, ty=H/2;
+    ctx.beginPath(); ctx.roundRect(tx-50,ty-65,100,130,12);
+    ctx.fillStyle='#fff'; ctx.fill(); ctx.strokeStyle='#c0d8e8'; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle='#005EB8'; ctx.font='700 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('PREGNANCY TEST',tx,ty-48);
+    // Two lines = positive
+    ctx.fillStyle='#e04060'; ctx.fillRect(tx-18,ty-28,36,6);
+    ctx.fillRect(tx-18,ty-10,36,6);
+    ctx.fillStyle='#e04060'; ctx.font='700 28px sans-serif'; ctx.fillText('POSITIVE',tx-200,ty+100);
+    ctx.fillStyle='#e04060'; ctx.font='700 13px "DM Sans",sans-serif';
+    ctx.fillText('POSITIVE ✓',tx,ty+20);
+    ctx.font='500 9px "DM Sans",sans-serif'; ctx.fillStyle='#666';
+    ctx.fillText('Two lines = pregnant',tx,ty+38);
+    // Confetti
+    const confCols=['#ff6b8a','#ffb81c','#005EB8','#27ae60','#8e44ad'];
+    for(let i=0;i<16;i++){
+      const cx2=tx+(sr(i)-.5)*180, cy2=ty-50+sr(i+10)*100;
+      ctx.save(); ctx.globalAlpha=ease(progress)*.7;
+      ctx.fillStyle=confCols[i%5];
+      ctx.fillRect(cx2,cy2,5,3);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('prePhase','preDots','pre',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#fffbf0'); bg.addColorStop(1,'#fff0e8');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.14; ctx.fillStyle='#e67e22';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('PRECONCEPTION JOURNEY',W/2,H-10); ctx.restore();
+
+    if(idx===0){
+      drawEgg(W*.25,H*.5,36,ease(t)*.5);
+      SPERM.forEach(s=>{
+        s.x+=s.vx; s.y+=s.vy; s.t+=s.ts;
+        if(s.x<-20) s.x=W+10;
+        drawSperm(s,1);
+      });
+      // Meeting flash at peak
+      if(t>.7){
+        const flash=ease((t-.7)/.3);
+        ctx.save(); ctx.globalAlpha=flash*.6;
+        ctx.beginPath(); ctx.arc(W*.25,H*.5,44,0,Math.PI*2);
+        ctx.fillStyle='rgba(255,220,80,.5)'; ctx.fill(); ctx.restore();
+      }
+    } else if(idx===1){
+      drawEgg(W*.25,H*.5,32,.3);
+      drawFolicAcid(t);
+    } else if(idx===2){
+      drawEgg(W*.25,H*.5,32,.2);
+      drawLifestyle(t);
+    } else {
+      drawPositiveTest(t);
+    }
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   2. ANTENATAL — baby growing in womb across trimesters
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('anteCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const LABELS=['First Trimester (wk 1–12)','Second Trimester (wk 13–26)','Third Trimester (wk 27–40)','Due Date — Hello World!'];
+  const getPhase=cycleFn([6,7,7,6]);
+  let st=null,lastIdx=-1;
+
+  function drawWomb(cx,cy,rx,ry){
+    ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);
+    const wg=ctx.createRadialGradient(cx,cy,0,cx,cy,rx);
+    wg.addColorStop(0,'rgba(255,200,180,.3)');
+    wg.addColorStop(.7,'rgba(240,160,140,.25)');
+    wg.addColorStop(1,'rgba(200,100,80,.15)');
+    ctx.fillStyle=wg; ctx.fill();
+    ctx.strokeStyle='rgba(200,120,100,.3)'; ctx.lineWidth=3; ctx.stroke();
+  }
+
+  function drawBaby(cx,cy,size,wobble,heartBeat){
+    // size goes 0.12 → 1 over trimesters
+    const s=size;
+    ctx.save(); ctx.translate(cx,cy+Math.sin(wobble)*3);
+    // Body (curled foetus shape)
+    ctx.beginPath(); ctx.ellipse(0,4*s,16*s,22*s,.2,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,210,180,.9)'; ctx.fill();
+    ctx.strokeStyle='rgba(220,160,120,.4)'; ctx.lineWidth=1.2; ctx.stroke();
+    // Head
+    ctx.beginPath(); ctx.arc(3*s,-18*s,13*s,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,220,190,.9)'; ctx.fill();
+    ctx.strokeStyle='rgba(220,160,120,.3)'; ctx.lineWidth=1; ctx.stroke();
+    // Face (visible from ~T2)
+    if(size>.4){
+      const fa=(size-.4)/.6;
+      ctx.save(); ctx.globalAlpha=fa;
+      ctx.beginPath(); ctx.arc(6*s,-20*s,2.5*s,0,Math.PI*2); ctx.fillStyle='rgba(80,50,30,.5)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(6*s,-20*s,.8*s,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
+      ctx.restore();
+    }
+    // Arms
+    ctx.beginPath(); ctx.moveTo(-10*s,0); ctx.bezierCurveTo(-22*s,-8*s,-22*s,8*s,-12*s,14*s);
+    ctx.strokeStyle='rgba(255,210,180,.8)'; ctx.lineWidth=6*s; ctx.lineCap='round'; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(14*s,0); ctx.bezierCurveTo(24*s,-6*s,22*s,10*s,14*s,14*s);
+    ctx.strokeStyle='rgba(255,210,180,.8)'; ctx.lineWidth=5*s; ctx.stroke();
+    // Heartbeat pulse
+    if(heartBeat>0){
+      ctx.save(); ctx.globalAlpha=heartBeat*.6;
+      ctx.beginPath();
+      ctx.moveTo(-18*s,10*s);
+      [[-12,10],[-8,-2],[-4,18],[0,-14],[4,10],[10,10],[16,10]].forEach(([dx,dy])=>{
+        ctx.lineTo(dx*s,dy*s);
+      });
+      ctx.strokeStyle='#e04060'; ctx.lineWidth=1.5; ctx.lineCap='round'; ctx.stroke();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawUmbilical(cx,cy,size){
+    ctx.beginPath();
+    ctx.moveTo(cx+3*size,cy-6*size);
+    ctx.bezierCurveTo(cx+40,cy-40,cx+60,cy+30,cx+70,cy+50);
+    ctx.strokeStyle='rgba(200,120,100,.5)'; ctx.lineWidth=3*size; ctx.lineCap='round'; ctx.stroke();
+  }
+
+  function drawWeekBadge(week, col){
+    ctx.save(); ctx.globalAlpha=.8;
+    ctx.beginPath(); ctx.roundRect(W-90,12,78,30,8);
+    ctx.fillStyle=col+'22'; ctx.fill(); ctx.strokeStyle=col+'88'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle=col; ctx.font='700 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Week '+week,W-51,22);
+    ctx.font='600 8px "DM Sans",sans-serif'; ctx.fillStyle=col+'aa';
+    ctx.fillText('of pregnancy',W-51,34);
+    ctx.restore();
+  }
+
+  let hbT=0;
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000; hbT+=0.06;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('antePhase','anteDots','ante',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#f0f6ff'); bg.addColorStop(1,'#e4effe');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.12; ctx.fillStyle='#2471a3';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('ANTENATAL JOURNEY',W/2,H-10); ctx.restore();
+
+    const cx=W/2, cy=H/2+10;
+    let wombRx,wombRy,babySize,week,hbAlpha;
+    if(idx===0){ wombRx=lerp(55,70,t); wombRy=lerp(65,80,t); babySize=lerp(.12,.3,ease(t)); week=Math.round(lerp(4,12,t)); hbAlpha=.3; }
+    else if(idx===1){ wombRx=lerp(70,95,t); wombRy=lerp(80,105,t); babySize=lerp(.3,.65,ease(t)); week=Math.round(lerp(12,26,t)); hbAlpha=.5; }
+    else if(idx===2){ wombRx=lerp(95,130,t); wombRy=lerp(105,140,t); babySize=lerp(.65,.98,ease(t)); week=Math.round(lerp(26,40,t)); hbAlpha=.7; }
+    else { wombRx=130; wombRy=140; babySize=1; week=40; hbAlpha=0;
+      // Delivery sparkles
+      ctx.save(); ctx.globalAlpha=ease(t);
+      for(let i=0;i<12;i++){
+        const a=(i/12)*Math.PI*2, r=80+sr(i)*60;
+        const sx=cx+Math.cos(a)*r, sy=cy+Math.sin(a)*r*.6;
+        ctx.beginPath(); ctx.arc(sx,sy,3+sr(i+10)*4,0,Math.PI*2);
+        ctx.fillStyle=['#ff6b8a','#ffb81c','#005EB8','#27ae60'][i%4]; ctx.fill();
+      }
+      ctx.font='700 18px "DM Sans",sans-serif'; ctx.fillStyle='#e04060'; ctx.textAlign='center';
+      ctx.fillText('👶  Hello World!',cx,cy+165*babySize);
+      ctx.restore();
+    }
+
+    const hb=Math.abs(Math.sin(hbT*2))*.9*hbAlpha;
+    drawWomb(cx,cy,wombRx,wombRy);
+    drawUmbilical(cx,cy,babySize);
+    drawBaby(cx,cy,babySize,elapsed,hb);
+    drawWeekBadge(week,idx===3?'#e04060':'#2471a3');
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   3. FAMILY PLANNING — contraception wheel spinning to each method
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('planCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const METHODS=[
+    {name:'Combined Pill',  icon:'💊', col:'#8e44ad', eff:'99%',  desc:'Daily tablet; oestrogen + progestogen'},
+    {name:'Mini Pill',      icon:'💊', col:'#6c3483', eff:'99%',  desc:'Progestogen-only, fewer side effects'},
+    {name:'Injection',      icon:'💉', col:'#2471a3', eff:'99%',  desc:'Depo-Provera, every 12–13 weeks'},
+    {name:'Coil (IUD/IUS)', icon:'🔩', col:'#117a65', eff:'99%+', desc:'Long-acting; up to 5–10 years'},
+    {name:'Condoms',        icon:'🛡️', col:'#d35400', eff:'98%',  desc:'Also protects against STIs'},
+  ];
+  const LABELS=METHODS.map(m=>m.name);
+  const getPhase=cycleFn([5,5,5,5,5]);
+  let st=null,lastIdx=-1;
+
+  function drawWheel(activeIdx, t, elapsed){
+    const cx=W*.35, cy=H/2, R=90, n=METHODS.length;
+    // Outer ring bg
+    ctx.beginPath(); ctx.arc(cx,cy,R+12,0,Math.PI*2);
+    ctx.fillStyle='rgba(142,68,173,.06)'; ctx.fill();
+    ctx.strokeStyle='rgba(142,68,173,.15)'; ctx.lineWidth=2; ctx.stroke();
+
+    METHODS.forEach((m,i)=>{
+      const a0=(i/n)*Math.PI*2-Math.PI/2 + elapsed*.08;
+      const a1=((i+1)/n)*Math.PI*2-Math.PI/2 + elapsed*.08;
+      const active=i===activeIdx;
+      ctx.save();
+      if(active){ ctx.shadowBlur=12; ctx.shadowColor=m.col+'88'; }
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a0,a1); ctx.closePath();
+      ctx.fillStyle=active?m.col+'dd':m.col+'44'; ctx.fill();
+      ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+      ctx.restore();
+      // Icon
+      const mid=(a0+a1)/2, r2=R*.64;
+      ctx.font=`${active?'20':'15'}px sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(m.icon, cx+Math.cos(mid)*r2, cy+Math.sin(mid)*r2);
+    });
+
+    // Centre hub
+    ctx.beginPath(); ctx.arc(cx,cy,28,0,Math.PI*2);
+    ctx.fillStyle='#fff'; ctx.fill(); ctx.strokeStyle='rgba(142,68,173,.3)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle='#8e44ad'; ctx.font='700 10px "DM Sans",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('OPTIONS',cx,cy);
+  }
+
+  function drawDetail(m, progress){
+    const dx=W*.58, dy=H/2;
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    ctx.beginPath(); ctx.roundRect(dx-10,dy-65,W*.42,130,14);
+    ctx.fillStyle='rgba(142,68,173,.07)'; ctx.fill();
+    ctx.strokeStyle=m.col+'55'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.font='20px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(m.icon,dx+W*.17,dy-42);
+    ctx.fillStyle=m.col; ctx.font='700 11px "DM Sans",sans-serif';
+    ctx.fillText(m.name,dx+W*.17,dy-18);
+    ctx.fillStyle='#333'; ctx.font='500 9px "DM Sans",sans-serif';
+    ctx.fillText(m.desc,dx+W*.17,dy);
+    // Effectiveness badge
+    ctx.beginPath(); ctx.roundRect(dx+W*.08,dy+16,W*.18,22,8);
+    ctx.fillStyle=m.col+'22'; ctx.fill(); ctx.strokeStyle=m.col+'66'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle=m.col; ctx.font='700 10px "DM Sans",sans-serif';
+    ctx.fillText('Efficacy: '+m.eff,dx+W*.17,dy+30);
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('planPhase','planDots','plan',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#faf5ff'); bg.addColorStop(1,'#f0e8fc');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.12; ctx.fillStyle='#8e44ad';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('CONTRACEPTION OPTIONS',W/2,H-10); ctx.restore();
+    drawWheel(idx,t,elapsed);
+    drawDetail(METHODS[idx],t);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   4. POSTNATAL — baby growth chart, checks, then happy family
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('postCanvas'); const ctx=C.getContext('2d');
+  const W=500,H=300; C.width=W; C.height=H;
+  const LABELS=['Coming Home','6-Week Baby Check','Baby Vaccinations','Growing Strong!'];
+  const getPhase=cycleFn([5,6,6,7]);
+  let st=null,lastIdx=-1,pulseT=0;
+
+  function drawBabyFace(cx,cy,size,happy){
+    ctx.save(); ctx.translate(cx,cy);
+    // Body swaddle
+    ctx.beginPath(); ctx.ellipse(0,24*size,22*size,18*size,0,0,Math.PI*2);
+    ctx.fillStyle='#b8ddf8'; ctx.fill(); ctx.strokeStyle='#80b8e0'; ctx.lineWidth=1.5; ctx.stroke();
+    // Head
+    ctx.beginPath(); ctx.arc(0,0,22*size,0,Math.PI*2);
+    ctx.fillStyle='#fde8c8'; ctx.fill(); ctx.strokeStyle='rgba(220,170,100,.3)'; ctx.lineWidth=1.5; ctx.stroke();
+    // Eyes
+    [[-9,0],[9,0]].forEach(([ex,ey])=>{
+      ctx.beginPath(); ctx.arc(ex*size,ey-3,3*size,0,Math.PI*2);
+      ctx.fillStyle='#333'; ctx.fill();
+      ctx.beginPath(); ctx.arc((ex+1)*size,(ey-4),1*size,0,Math.PI*2);
+      ctx.fillStyle='#fff'; ctx.fill();
+    });
+    // Smile
+    if(happy){
+      ctx.beginPath();
+      ctx.arc(0,4*size,8*size,0.2,Math.PI-.2,false);
+      ctx.strokeStyle='#c07040'; ctx.lineWidth=2*size; ctx.lineCap='round'; ctx.stroke();
+    }
+    // Rosy cheeks
+    ctx.save(); ctx.globalAlpha=.25;
+    ctx.beginPath(); ctx.arc(-13*size,4*size,5*size,0,Math.PI*2); ctx.fillStyle='#ff8080'; ctx.fill();
+    ctx.beginPath(); ctx.arc(13*size,4*size,5*size,0,Math.PI*2); ctx.fill(); ctx.restore();
+    ctx.restore();
+  }
+
+  function drawGrowthChart(progress){
+    const mx=50,my=30,mw=W-100,mh=H-80;
+    ctx.save();
+    // Axes
+    ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(mx,my+mh); ctx.lineTo(mx+mw,my+mh); ctx.stroke();
+    // Labels
+    ctx.fillStyle='#999'; ctx.font='8px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('Age (months)',mx+mw/2,my+mh+16);
+    ctx.save(); ctx.translate(mx-16,my+mh/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('Weight (kg)',0,0); ctx.restore();
+    // Grid lines
+    ctx.save(); ctx.globalAlpha=.15;
+    for(let i=1;i<=5;i++){
+      ctx.beginPath(); ctx.moveTo(mx,my+mh-i*(mh/5)); ctx.lineTo(mx+mw,my+mh-i*(mh/5));
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=.8; ctx.stroke();
+    }
+    ctx.restore();
+    // NHS percentile bands
+    const bands=[[0.9,'#e8f8e8'],[0.75,'#d8f0d8'],[0.5,'#c8e8c8']];
+    bands.forEach(([frac,col])=>{
+      ctx.save(); ctx.globalAlpha=.3;
+      ctx.beginPath(); ctx.moveTo(mx,my+mh);
+      for(let x=0;x<=mw;x+=5){
+        const y=my+mh-frac*(mh*.85)*(1-(mw-x)/mw)*.5-(x/mw)*mh*.7*frac;
+        ctx.lineTo(mx+x,y);
+      }
+      ctx.lineTo(mx+mw,my+mh); ctx.closePath();
+      ctx.fillStyle=col; ctx.fill(); ctx.restore();
+    });
+    // Actual growth line (animated)
+    const pts=Array.from({length:12},(_,i)=>({
+      x:mx+i*(mw/11),
+      y:my+mh-(i/11)*mh*.72-Math.sin(i*.8)*6
+    }));
+    const nPts=Math.round(progress*pts.length);
+    if(nPts>1){
+      ctx.save(); ctx.globalAlpha=.9;
+      ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+      for(let i=1;i<nPts;i++) ctx.lineTo(pts[i].x,pts[i].y);
+      ctx.strokeStyle='#27ae60'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.stroke();
+      // Dot at tip
+      const p=pts[nPts-1];
+      ctx.beginPath(); ctx.arc(p.x,p.y,5,0,Math.PI*2);
+      ctx.fillStyle='#27ae60'; ctx.fill(); ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function drawCheck(progress){
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    // Stethoscope
+    const sx=W*.6,sy=H*.4;
+    ctx.beginPath(); ctx.arc(sx,sy,20,0,Math.PI*2);
+    ctx.fillStyle='rgba(39,174,96,.1)'; ctx.fill();
+    ctx.strokeStyle='rgba(39,174,96,.4)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.font='24px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('🩺',sx,sy);
+    // Checklist
+    const checks=['Height & weight ✓','Heart check ✓','Hip examination ✓','Eyes & reflexes ✓','Feeding discussed ✓'];
+    ctx.fillStyle='#27ae60'; ctx.font='700 9px "DM Sans",sans-serif'; ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+    checks.forEach((c,i)=>{
+      const ca=Math.min(1,(progress*6-i*.8));
+      if(ca>0){
+        ctx.save(); ctx.globalAlpha=ease(ca);
+        ctx.fillText(c,W*.35,H*.25+i*22);
+        ctx.restore();
+      }
+    });
+    ctx.restore();
+  }
+
+  function drawVaccine(progress){
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    const vx=W*.6,vy=H*.38;
+    // Syringe
+    ctx.beginPath(); ctx.roundRect(vx-30,vy-6,60,12,4);
+    ctx.fillStyle='#e8f4f8'; ctx.fill(); ctx.strokeStyle='#80b8d0'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(vx+30,vy); ctx.lineTo(vx+46,vy);
+    ctx.strokeStyle='#a0a0a0'; ctx.lineWidth=2; ctx.stroke();
+    ctx.beginPath(); ctx.roundRect(vx-28,vy-4,20,8,2); ctx.fillStyle='#80d0a8'; ctx.fill();
+    const shields=[{x:W*.25,y:H*.42,t:'BCG'},{x:W*.35,y:H*.58,t:'Dtap'},{x:W*.5,y:H*.45,t:'Hib'},{x:W*.62,y:H*.62,t:'Polio'}];
+    shields.forEach((s,i)=>{
+      const sa=Math.min(1,(progress*5-i*.8));
+      if(sa>0){
+        ctx.save(); ctx.globalAlpha=ease(sa);
+        ctx.font='18px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🛡️',s.x,s.y);
+        ctx.fillStyle='#2471a3'; ctx.font='700 8px "DM Sans",sans-serif'; ctx.fillText(s.t,s.x,s.y+16);
+        ctx.restore();
+      }
+    });
+    ctx.restore();
+  }
+
+  function drawHappyFamily(progress){
+    ctx.save(); ctx.globalAlpha=ease(progress);
+    // Simple family illustration: mum, dad, baby
+    const fy=H*.55;
+    [[W*.3,'👩',':'],[W*.5,'🧑','‍'],[W*.7,'👶','']].forEach(([fx,e])=>{
+      ctx.font='38px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(e,fx,fy);
+    });
+    ctx.font='700 14px "DM Sans",sans-serif'; ctx.fillStyle='#27ae60'; ctx.textAlign='center';
+    ctx.fillText('Growing Strong! 💚',W/2,fy+48);
+    // Stars
+    for(let i=0;i<8;i++){
+      const a=(i/8)*Math.PI*2, r=100;
+      const sx=W/2+Math.cos(a)*r,sy=H/2+Math.sin(a)*r*.5-20;
+      ctx.save(); ctx.globalAlpha=ease(progress)*(Math.sin(Date.now()*.002+i)*.4+.6);
+      ctx.font='14px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('⭐',sx,sy); ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st) st=now;
+    const elapsed=(now-st)/1000; pulseT+=.04;
+    const {idx,t}=getPhase(elapsed);
+    if(idx!==lastIdx){ lastIdx=idx; setUI('postPhase','postDots','post',LABELS,idx); }
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#f0fff4'); bg.addColorStop(1,'#e8f8ec');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.globalAlpha=.13; ctx.fillStyle='#27ae60';
+    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('POSTNATAL CARE — FIRST 8 WEEKS',W/2,H-10); ctx.restore();
+
+    if(idx===0){
+      drawBabyFace(W*.25,H*.44,1.3,Math.sin(pulseT)>.5);
+      ctx.save(); ctx.globalAlpha=ease(t)*.8;
+      ctx.fillStyle='#27ae60'; ctx.font='700 11px "DM Sans",sans-serif'; ctx.textAlign='center';
+      ctx.fillText('Book your 6–8 week check',W*.65,H*.38);
+      ctx.font='500 9px "DM Sans",sans-serif'; ctx.fillStyle='#555';
+      ctx.fillText('with Dr Saluja\'s team',W*.65,H*.52);
+      ctx.fillText('📞 0208 574 5136',W*.65,H*.66);
+      ctx.restore();
+    } else if(idx===1){
+      drawCheck(t);
+      drawBabyFace(W*.15,H*.52,.9,true);
+    } else if(idx===2){
+      drawVaccine(t);
+      drawBabyFace(W*.15,H*.5,.9,Math.sin(pulseT*2)>.3);
+    } else {
+      drawGrowthChart(t);
+      drawHappyFamily(t>.5?t:.5);
+    }
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>

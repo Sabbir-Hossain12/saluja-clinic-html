@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Participation Group – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nhs-blue:       #005EB8;
+      --nhs-dark:       #003087;
+      --nhs-aqua:       #009FBB;
+      --nhs-green:      #007F3B;
+      --nhs-yellow:     #FFB81C;
+      --white:          #ffffff;
+      --off-white:      #f5f8fc;
+      --text-dark:      #1a1a2e;
+      --text-mid:       #3a3a5c;
+      --text-soft:      #6b7a99;
+      --border:         #d8e4f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+    /* ── UTILITY BAR ── */
+    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
+    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .utility-bar a:hover { color: #fff; }
+    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
+    .logo-wrap svg { height: 84px; width: auto; }
+    nav { display: flex; align-items: center; gap: 0.25rem; }
+    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
+    nav a.active { color: var(--nhs-blue); font-weight: 600; }
+    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 0.75rem 2rem; }
+    .breadcrumb .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-soft); }
+    .breadcrumb a { color: var(--nhs-blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { opacity: 0.4; }
+    .breadcrumb .current { color: var(--text-mid); font-weight: 500; }
+
+    /* ── PAGE HERO ── */
+    .page-hero { background: var(--white); padding: 5rem 2rem 4rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .page-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(0,94,184,0.05) 0%, transparent 70%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,159,187,0.05) 0%, transparent 70%); pointer-events: none; }
+
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border: 1px solid rgba(0,94,184,0.15); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
+    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-blue 2s infinite; }
+    @keyframes pulse-blue { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.5rem); font-weight: 600; line-height: 1.12; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .page-hero h1 em { font-style: italic; color: var(--nhs-blue); }
+    .hero-lead { font-size: 1.05rem; line-height: 1.75; color: var(--text-mid); max-width: 500px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,94,184,0.35); }
+    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-outline:hover { background: rgba(0,94,184,0.06); transform: translateY(-1px); }
+
+    /* Hero visual card */
+    .hero-visual { position: relative; }
+    .ppg-stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 2.2rem; box-shadow: 0 8px 40px rgba(0,94,184,0.10); position: relative; overflow: hidden; }
+    .ppg-stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
+    .ppg-card-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 1.4rem; }
+    .ppg-pillars { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.6rem; }
+    .ppg-pillar { display: flex; align-items: center; gap: 0.9rem; padding: 0.9rem 1rem; background: var(--off-white); border: 1px solid var(--border); border-radius: 12px; }
+    .ppg-pillar-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ppg-pillar-icon svg { width: 18px; height: 18px; fill: none; stroke-width: 2; }
+    .pillar-blue .ppg-pillar-icon { background: rgba(0,94,184,0.1); }
+    .pillar-blue .ppg-pillar-icon svg { stroke: var(--nhs-blue); }
+    .pillar-green .ppg-pillar-icon { background: rgba(0,127,59,0.1); }
+    .pillar-green .ppg-pillar-icon svg { stroke: var(--nhs-green); }
+    .pillar-aqua .ppg-pillar-icon { background: rgba(0,159,187,0.1); }
+    .pillar-aqua .ppg-pillar-icon svg { stroke: var(--nhs-aqua); }
+    .ppg-pillar-text { font-size: 0.88rem; font-weight: 500; color: var(--text-dark); }
+    .ppg-pillar-sub { font-size: 0.76rem; color: var(--text-soft); }
+    .ppg-member-row { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .ppg-avatars { display: flex; }
+    .ppg-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--nhs-blue), var(--nhs-aqua)); border: 2px solid #fff; margin-left: -8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #fff; }
+    .ppg-avatar:first-child { margin-left: 0; }
+    .ppg-avatar.more { background: var(--off-white); color: var(--text-soft); border-color: var(--border); font-size: 0.65rem; }
+    .ppg-member-text { font-size: 0.82rem; color: var(--text-mid); }
+    .ppg-member-text strong { color: var(--text-dark); }
+
+    /* Community network graphic */
+    .community-graphic { width: 100%; padding: 0.3rem 0 1.1rem; }
+    .community-graphic svg { width: 100%; height: auto; overflow: visible; }
+    .ppg-stat-card .ppg-card-label { margin-bottom: 0.4rem; }
+
+    /* Floating bubbles */
+    .floating-bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .bubble { position: absolute; border-radius: 50%; opacity: 0; animation: floatBubble linear infinite; }
+    @keyframes floatBubble { 0%{transform:translateY(100%) scale(0.6);opacity:0} 15%{opacity:0.18} 80%{opacity:0.08} 100%{transform:translateY(-100px) scale(1.1);opacity:0} }
+
+    /* ── SECTION COMMONS ── */
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 2rem; }
+    .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1rem; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 600; line-height: 1.18; color: var(--text-dark); margin-bottom: 1rem; }
+    h2 em { font-style: italic; color: var(--nhs-blue); }
+    .section-lead { font-size: 1.02rem; line-height: 1.75; color: var(--text-mid); max-width: 640px; margin-bottom: 3rem; }
+
+    /* fade-up */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── ABOUT SECTION ── */
+    .about-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .info-callout { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--nhs-blue); border-radius: 0 12px 12px 0; padding: 1.2rem 1.4rem; margin-top: 1.8rem; }
+    .info-callout p { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); margin: 0; }
+    .info-callout strong { color: var(--nhs-blue); }
+
+    .legal-basis { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,94,184,0.07); }
+    .legal-basis-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+    .legal-basis-title svg { width: 22px; height: 22px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .legal-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .legal-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .legal-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(0,94,184,0.1); color: var(--nhs-blue); font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .legal-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-mid); }
+    .legal-text strong { color: var(--text-dark); display: block; margin-bottom: 0.2rem; }
+
+    /* ── WHAT WE DO ── */
+    .what-we-do { background: var(--white); }
+    .activities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .activity-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.8rem; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .activity-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,94,184,0.12); }
+    .activity-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .act-blue::before { background: var(--nhs-blue); }
+    .act-green::before { background: var(--nhs-green); }
+    .act-aqua::before { background: var(--nhs-aqua); }
+    .act-yellow::before { background: var(--nhs-yellow); }
+    .act-dark::before { background: var(--nhs-dark); }
+    .act-purple::before { background: #6a3d9a; }
+    .activity-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; }
+    .activity-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 2; }
+    .act-blue .activity-icon { background: rgba(0,94,184,0.1); }
+    .act-blue .activity-icon svg { stroke: var(--nhs-blue); }
+    .act-green .activity-icon { background: rgba(0,127,59,0.1); }
+    .act-green .activity-icon svg { stroke: var(--nhs-green); }
+    .act-aqua .activity-icon { background: rgba(0,159,187,0.1); }
+    .act-aqua .activity-icon svg { stroke: var(--nhs-aqua); }
+    .act-yellow .activity-icon { background: rgba(255,184,28,0.12); }
+    .act-yellow .activity-icon svg { stroke: #c88b00; }
+    .act-dark .activity-icon { background: rgba(0,48,135,0.08); }
+    .act-dark .activity-icon svg { stroke: var(--nhs-dark); }
+    .act-purple .activity-icon { background: rgba(106,61,154,0.08); }
+    .act-purple .activity-icon svg { stroke: #6a3d9a; }
+    .activity-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; }
+    .activity-desc { font-size: 0.87rem; line-height: 1.65; color: var(--text-soft); }
+
+    /* ── BENEFITS ── */
+    .benefits-section { background: var(--nhs-dark); color: var(--white); padding: 5rem 2rem; }
+    .benefits-section .section-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); }
+    .benefits-section h2 { color: var(--white); }
+    .benefits-section .section-lead { color: rgba(255,255,255,0.78); }
+    .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .benefit-item { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.4rem; transition: background 0.2s; }
+    .benefit-item:hover { background: rgba(255,255,255,0.1); }
+    .benefit-check { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,168,81,0.2); border: 1px solid rgba(0,168,81,0.35); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .benefit-check svg { width: 15px; height: 15px; stroke: #00A851; fill: none; stroke-width: 2.5; }
+    .benefit-text strong { display: block; font-size: 0.92rem; color: #fff; margin-bottom: 0.3rem; }
+    .benefit-text span { font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.55; }
+    .benefits-cta { margin-top: 3rem; text-align: center; }
+    .btn-white { background: #fff; color: var(--nhs-dark); padding: 0.85rem 2rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+
+    /* ── MEETINGS ── */
+    .meetings-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .meetings-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .meetings-list { display: flex; flex-direction: column; gap: 1rem; }
+    .meeting-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1.4rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .meeting-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,94,184,0.10); }
+    .meeting-card.next { border-color: var(--nhs-blue); background: linear-gradient(135deg, rgba(0,94,184,0.04), rgba(0,159,187,0.04)); }
+    .meeting-date-block { text-align: center; min-width: 56px; }
+    .meeting-day { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; line-height: 1; color: var(--nhs-blue); }
+    .meeting-month { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
+    .meeting-divider { width: 1px; height: 44px; background: var(--border); flex-shrink: 0; }
+    .meeting-info { flex: 1; }
+    .meeting-info strong { display: block; font-size: 0.92rem; color: var(--text-dark); margin-bottom: 0.2rem; }
+    .meeting-info span { font-size: 0.82rem; color: var(--text-soft); }
+    .next-badge { background: var(--nhs-blue); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 12px; white-space: nowrap; }
+
+    .minutes-box { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,94,184,0.07); }
+    .minutes-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.2rem; }
+    .minutes-item { display: flex; align-items: center; gap: 0.9rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: color 0.2s; }
+    .minutes-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .minutes-item:hover .minutes-link { color: var(--nhs-blue); }
+    .minutes-icon { width: 34px; height: 34px; border-radius: 8px; background: rgba(0,94,184,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .minutes-icon svg { width: 16px; height: 16px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; }
+    .minutes-link { font-size: 0.87rem; font-weight: 500; color: var(--text-dark); flex: 1; }
+    .minutes-date { font-size: 0.76rem; color: var(--text-soft); }
+    .minutes-dl { width: 28px; height: 28px; border-radius: 50%; background: var(--off-white); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .minutes-dl svg { width: 13px; height: 13px; stroke: var(--text-soft); fill: none; stroke-width: 2; }
+
+    /* ── JOIN SECTION ── */
+    .join-section { background: var(--white); }
+    .join-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .join-form-card { background: var(--white); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; box-shadow: 0 8px 40px rgba(0,94,184,0.10); position: relative; overflow: hidden; }
+    .join-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
+    .join-form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.4rem; }
+    .join-form-sub { font-size: 0.87rem; color: var(--text-soft); margin-bottom: 1.8rem; }
+    .form-field { margin-bottom: 1.2rem; }
+    .form-field label { display: block; font-size: 0.84rem; font-weight: 600; color: var(--text-mid); margin-bottom: 0.4rem; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 0.75rem 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--text-dark); outline: none; transition: border-color 0.2s; background: var(--white); }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--nhs-blue); }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: var(--text-soft); }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit { background: var(--nhs-blue); color: var(--white); padding: 0.9rem 2rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; width: 100%; margin-top: 0.5rem; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .form-submit:hover { background: var(--nhs-dark); transform: translateY(-1px); }
+    .form-note { font-size: 0.78rem; color: var(--text-soft); text-align: center; margin-top: 0.8rem; line-height: 1.5; }
+
+    /* Thank you */
+    .thankyou-state { display: none; text-align: center; padding: 2rem 0; }
+    .thankyou-icon { width: 72px; height: 72px; border-radius: 50%; background: rgba(0,127,59,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes popIn { from{transform:scale(0.3);opacity:0} to{transform:scale(1);opacity:1} }
+    .thankyou-icon svg { width: 36px; height: 36px; stroke: var(--nhs-green); fill: none; stroke-width: 2.5; }
+    .thankyou-state h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .thankyou-state p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.7; }
+
+    .join-why { }
+    .join-why h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; }
+    .join-why > p { font-size: 0.95rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 2rem; }
+    .who-welcome { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem; }
+    .who-item { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.9rem 1.1rem; background: var(--off-white); border: 1px solid var(--border); border-radius: 12px; }
+    .who-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nhs-blue); flex-shrink: 0; margin-top: 6px; }
+    .who-item-text { font-size: 0.88rem; line-height: 1.6; color: var(--text-mid); }
+    .who-item-text strong { color: var(--text-dark); display: block; margin-bottom: 0.15rem; }
+    .contact-aside { background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; display: flex; gap: 0.9rem; align-items: flex-start; }
+    .contact-aside-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(0,94,184,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-aside-icon svg { width: 18px; height: 18px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; }
+    .contact-aside-text { font-size: 0.85rem; line-height: 1.6; color: var(--text-mid); }
+    .contact-aside-text strong { color: var(--text-dark); display: block; margin-bottom: 0.2rem; }
+    .contact-aside-text a { color: var(--nhs-blue); text-decoration: none; }
+    .contact-aside-text a:hover { text-decoration: underline; }
+
+    /* ── EMERGENCY ── */
+    .emergency { background: var(--nhs-dark); padding: 2.5rem 2rem; }
+    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .emerg-card { border-radius: 16px; padding: 1.8rem 2rem; }
+    .emerg-card.nhs111 { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); }
+    .emerg-card.urgent { background: rgba(218,41,28,0.2); border: 1px solid rgba(218,41,28,0.35); }
+    .emerg-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+    .emerg-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 3.5rem 2rem 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0.8rem 0 1.2rem; }
+    .footer-address { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.9; }
+    .footer-address a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .footer-heading { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.55rem; }
+    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+    .hour-row { display: flex; justify-content: space-between; font-size: 0.84rem; color: rgba(255,255,255,0.65); }
+    .hour-day { color: rgba(255,255,255,0.5); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.4rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner, .about-grid, .meetings-layout, .join-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .emergency-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 600px) {
+      .activities-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div>🏥 NHS GP Practice · Southall, West London · Serving our community since 1976</div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="tel:02085745136" class="util-pill">📞 0208 574 5136</a>
+      <a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="84" style="width:auto">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheen">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="news.html">News</a>
+      <a href="clinics-and-services.html">Services</a>
+      <a href="practice-policies-patient-information.html" class="active">Our Practice</a>
+      <a href="health-information.html">Health Info</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment</a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="inner">
+    <a href="/">Home</a>
+    <span class="sep">›</span>
+    <a href="practice-policies-patient-information.html">Our Practice</a>
+    <span class="sep">›</span>
+    <span class="current">Patient Participation Group</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <!-- Floating bubbles -->
+  <div class="floating-bubbles">
+    <div class="bubble" style="left:12%;width:18px;height:18px;background:rgba(0,94,184,0.15);animation-duration:9s;animation-delay:0s;bottom:0;"></div>
+    <div class="bubble" style="left:28%;width:10px;height:10px;background:rgba(0,159,187,0.18);animation-duration:12s;animation-delay:2s;bottom:0;"></div>
+    <div class="bubble" style="left:52%;width:14px;height:14px;background:rgba(0,94,184,0.12);animation-duration:10s;animation-delay:4s;bottom:0;"></div>
+    <div class="bubble" style="left:72%;width:8px;height:8px;background:rgba(0,127,59,0.15);animation-duration:14s;animation-delay:1s;bottom:0;"></div>
+    <div class="bubble" style="left:88%;width:12px;height:12px;background:rgba(0,159,187,0.12);animation-duration:11s;animation-delay:3s;bottom:0;"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span></span>Our Practice</div>
+      <h1>Patient<br><em>Participation</em><br>Group</h1>
+      <p class="hero-lead">Shaping your NHS GP practice together. Our PPG brings registered patients and the practice team into partnership — so your voice genuinely influences the care you receive.</p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Join the PPG
+        </a>
+        <a href="#meetings" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Meeting Dates
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero visual -->
+    <div class="hero-visual">
+      <div class="ppg-stat-card">
+        <div class="ppg-card-label">Your community, your practice</div>
+
+        <!-- Animated community network -->
+        <div class="community-graphic">
+          <svg viewBox="0 0 300 204" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+            <defs>
+              <!-- Forward paths: centre → each node -->
+              <path id="ppg-pa" d="M150,110 L230,110"/>
+              <path id="ppg-pb" d="M150,110 L190,179"/>
+              <path id="ppg-pc" d="M150,110 L110,179"/>
+              <path id="ppg-pd" d="M150,110 L70,110"/>
+              <path id="ppg-pe" d="M150,110 L110,41"/>
+              <path id="ppg-pf" d="M150,110 L190,41"/>
+              <!-- Reverse paths: node → centre -->
+              <path id="ppg-par" d="M230,110 L150,110"/>
+              <path id="ppg-pcr" d="M110,179 L150,110"/>
+              <path id="ppg-per" d="M110,41  L150,110"/>
+            </defs>
+
+            <!-- Subtle background wash -->
+            <rect x="0" y="0" width="300" height="204" rx="10" fill="rgba(0,94,184,0.025)"/>
+
+            <!-- Expanding pulse rings from centre -->
+            <circle cx="150" cy="110" r="30" fill="none" stroke="#005EB8" stroke-width="2">
+              <animate attributeName="r"            from="30" to="74"  dur="2.8s" repeatCount="indefinite"/>
+              <animate attributeName="opacity"      from="0.45" to="0" dur="2.8s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2" to="0.4"  dur="2.8s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="150" cy="110" r="30" fill="none" stroke="#005EB8" stroke-width="2">
+              <animate attributeName="r"            from="30" to="74"  dur="2.8s" begin="0.93s" repeatCount="indefinite"/>
+              <animate attributeName="opacity"      from="0.45" to="0" dur="2.8s" begin="0.93s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2" to="0.4"  dur="2.8s" begin="0.93s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="150" cy="110" r="30" fill="none" stroke="#005EB8" stroke-width="2">
+              <animate attributeName="r"            from="30" to="74"  dur="2.8s" begin="1.86s" repeatCount="indefinite"/>
+              <animate attributeName="opacity"      from="0.45" to="0" dur="2.8s" begin="1.86s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2" to="0.4"  dur="2.8s" begin="1.86s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Connection lines — dashed, flowing outward -->
+            <line x1="150" y1="110" x2="230" y2="110" stroke="#005EB8" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+            </line>
+            <line x1="150" y1="110" x2="190" y2="179" stroke="#009FBB" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" begin="0.25s" repeatCount="indefinite"/>
+            </line>
+            <line x1="150" y1="110" x2="110" y2="179" stroke="#007F3B" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+            </line>
+            <line x1="150" y1="110" x2="70"  y2="110" stroke="#005EB8" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" begin="0.75s" repeatCount="indefinite"/>
+            </line>
+            <line x1="150" y1="110" x2="110" y2="41"  stroke="#009FBB" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" begin="1.0s" repeatCount="indefinite"/>
+            </line>
+            <line x1="150" y1="110" x2="190" y2="41"  stroke="#007F3B" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.28">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" begin="1.25s" repeatCount="indefinite"/>
+            </line>
+
+            <!-- Outbound travelling dots (centre → node) -->
+            <circle r="3.5" fill="#005EB8" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="0s"><mpath href="#ppg-pa"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="0s"/>
+            </circle>
+            <circle r="3.2" fill="#009FBB" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="0.35s"><mpath href="#ppg-pb"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="0.35s"/>
+            </circle>
+            <circle r="3.2" fill="#007F3B" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="0.7s"><mpath href="#ppg-pc"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="0.7s"/>
+            </circle>
+            <circle r="3.5" fill="#005EB8" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="1.05s"><mpath href="#ppg-pd"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="1.05s"/>
+            </circle>
+            <circle r="3.2" fill="#009FBB" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="1.4s"><mpath href="#ppg-pe"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="1.4s"/>
+            </circle>
+            <circle r="3.2" fill="#007F3B" opacity="0">
+              <animateMotion dur="2.1s" repeatCount="indefinite" begin="1.75s"><mpath href="#ppg-pf"/></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.1s" repeatCount="indefinite" begin="1.75s"/>
+            </circle>
+
+            <!-- Inbound return dots (node → centre) — smaller, lighter -->
+            <circle r="2" fill="#41B6E6" opacity="0">
+              <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.0s"><mpath href="#ppg-par"/></animateMotion>
+              <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.08;0.88;1" dur="2.6s" repeatCount="indefinite" begin="1.0s"/>
+            </circle>
+            <circle r="2" fill="#41B6E6" opacity="0">
+              <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.87s"><mpath href="#ppg-pcr"/></animateMotion>
+              <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.08;0.88;1" dur="2.6s" repeatCount="indefinite" begin="1.87s"/>
+            </circle>
+            <circle r="2" fill="#41B6E6" opacity="0">
+              <animateMotion dur="2.6s" repeatCount="indefinite" begin="0.5s"><mpath href="#ppg-per"/></animateMotion>
+              <animate attributeName="opacity" values="0;0.75;0.75;0" keyTimes="0;0.08;0.88;1" dur="2.6s" repeatCount="indefinite" begin="0.5s"/>
+            </circle>
+
+            <!-- ── Outer patient nodes ── -->
+            <!-- Node A: right (230,110) blue -->
+            <circle cx="230" cy="110" r="19" fill="rgba(0,94,184,0.08)" stroke="#005EB8" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="0s"/>
+            </circle>
+            <circle cx="230" cy="105" r="5.5" fill="#005EB8" opacity="0.6"/>
+            <path d="M219,123 Q230,116 241,123" fill="#005EB8" opacity="0.45" stroke="none"/>
+
+            <!-- Node B: lower-right (190,179) aqua -->
+            <circle cx="190" cy="179" r="19" fill="rgba(0,159,187,0.08)" stroke="#009FBB" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="0.53s"/>
+            </circle>
+            <circle cx="190" cy="174" r="5.5" fill="#009FBB" opacity="0.6"/>
+            <path d="M179,192 Q190,185 201,192" fill="#009FBB" opacity="0.45" stroke="none"/>
+
+            <!-- Node C: lower-left (110,179) green -->
+            <circle cx="110" cy="179" r="19" fill="rgba(0,127,59,0.08)" stroke="#007F3B" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="1.07s"/>
+            </circle>
+            <circle cx="110" cy="174" r="5.5" fill="#007F3B" opacity="0.6"/>
+            <path d="M99,192 Q110,185 121,192" fill="#007F3B" opacity="0.45" stroke="none"/>
+
+            <!-- Node D: left (70,110) blue -->
+            <circle cx="70" cy="110" r="19" fill="rgba(0,94,184,0.08)" stroke="#005EB8" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="1.6s"/>
+            </circle>
+            <circle cx="70" cy="105" r="5.5" fill="#005EB8" opacity="0.6"/>
+            <path d="M59,123 Q70,116 81,123" fill="#005EB8" opacity="0.45" stroke="none"/>
+
+            <!-- Node E: upper-left (110,41) aqua -->
+            <circle cx="110" cy="41" r="19" fill="rgba(0,159,187,0.08)" stroke="#009FBB" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="2.13s"/>
+            </circle>
+            <circle cx="110" cy="36" r="5.5" fill="#009FBB" opacity="0.6"/>
+            <path d="M99,54 Q110,47 121,54" fill="#009FBB" opacity="0.45" stroke="none"/>
+
+            <!-- Node F: upper-right (190,41) green -->
+            <circle cx="190" cy="41" r="19" fill="rgba(0,127,59,0.08)" stroke="#007F3B" stroke-width="1.5">
+              <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite" begin="2.67s"/>
+            </circle>
+            <circle cx="190" cy="36" r="5.5" fill="#007F3B" opacity="0.6"/>
+            <path d="M179,54 Q190,47 201,54" fill="#007F3B" opacity="0.45" stroke="none"/>
+
+            <!-- ── Central NHS node ── -->
+            <circle cx="150" cy="110" r="29" fill="#003087"/>
+            <circle cx="150" cy="110" r="29" fill="#005EB8">
+              <animate attributeName="r" values="29;31;29" dur="2.8s" repeatCount="indefinite"/>
+            </circle>
+            <!-- NHS cross — white -->
+            <rect x="143" y="94" width="14" height="32" rx="2.5" fill="white" opacity="0.95"/>
+            <rect x="135" y="102" width="30" height="14" rx="2.5" fill="white" opacity="0.95"/>
+          </svg>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin-bottom:1rem;"></div>
+
+        <div class="ppg-pillars">
+          <div class="ppg-pillar pillar-blue">
+            <div class="ppg-pillar-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="ppg-pillar-text">Patient Voice</div>
+              <div class="ppg-pillar-sub">Represent the patient community</div>
+            </div>
+          </div>
+          <div class="ppg-pillar pillar-green">
+            <div class="ppg-pillar-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ppg-pillar-text">Service Improvement</div>
+              <div class="ppg-pillar-sub">Help shape how we deliver care</div>
+            </div>
+          </div>
+          <div class="ppg-pillar pillar-aqua">
+            <div class="ppg-pillar-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="ppg-pillar-text">Community Health</div>
+              <div class="ppg-pillar-sub">Promote wellbeing in Southall</div>
+            </div>
+          </div>
+        </div>
+        <div class="ppg-member-row">
+          <div class="ppg-avatars">
+            <div class="ppg-avatar">S</div>
+            <div class="ppg-avatar" style="background:linear-gradient(135deg,#007F3B,#00A851);">R</div>
+            <div class="ppg-avatar" style="background:linear-gradient(135deg,#009FBB,#41B6E6);">P</div>
+            <div class="ppg-avatar" style="background:linear-gradient(135deg,#003087,#005EB8);">M</div>
+            <div class="ppg-avatar more">+</div>
+          </div>
+          <div class="ppg-member-text">Open to <strong>all registered patients</strong> — join us</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT THE PPG -->
+<section class="about-section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <div class="section-tag">What is a PPG?</div>
+        <h2>A Partnership Between<br><em>Patients &amp; Practice</em></h2>
+        <p>A Patient Participation Group (PPG) is a group of patients, carers, and GP practice staff who meet regularly to discuss and improve the services and care provided by the practice. Our PPG is an integral part of how Saluja Clinic operates.</p>
+        <p>The PPG gives patients a formal voice in how the practice is run, how it communicates, and how services are developed. It is an advisory group — we don't handle individual complaints or medical matters — but we are a trusted channel through which the patient community can engage with the practice leadership.</p>
+        <p>NHS England guidelines encourage all GP practices to have an active PPG, and at Saluja Clinic we are proud to maintain a group that is genuinely representative of our diverse West London community.</p>
+        <div class="info-callout">
+          <p><strong>Our PPG is open to all registered patients.</strong> Whether you have lived in Southall for decades or have just moved to the area, whether you attend frequently or rarely — your perspective matters and you are welcome.</p>
+        </div>
+      </div>
+
+      <div class="fade-up" style="animation-delay:0.12s">
+        <div class="legal-basis">
+          <div class="legal-basis-title">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            How the PPG Operates
+          </div>
+          <div class="legal-item">
+            <div class="legal-num">1</div>
+            <div class="legal-text">
+              <strong>Regular Meetings</strong>
+              We meet quarterly at the practice and occasionally virtually. All registered patients are welcome to attend.
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="legal-num">2</div>
+            <div class="legal-text">
+              <strong>Formal Agenda</strong>
+              Meetings follow a structured agenda shared in advance, covering practice updates, patient feedback themes, and improvement projects.
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="legal-num">3</div>
+            <div class="legal-text">
+              <strong>Minutes Published</strong>
+              Meeting minutes are recorded and made available to all patients, ensuring full transparency.
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="legal-num">4</div>
+            <div class="legal-text">
+              <strong>Practice Response</strong>
+              The practice partners respond formally to PPG recommendations, outlining agreed actions and timelines.
+            </div>
+          </div>
+          <div class="legal-item">
+            <div class="legal-num">5</div>
+            <div class="legal-text">
+              <strong>Virtual Option</strong>
+              For those unable to attend in person, we offer a virtual attendance option via video call.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-we-do">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;" class="fade-up">
+      <div class="section-tag">Our Activities</div>
+      <h2>What the PPG <em>Works On</em></h2>
+      <p class="section-lead" style="margin-bottom:0;">The PPG covers a wide range of topics that make a real difference to patient experience at Saluja Clinic.</p>
+    </div>
+    <div class="activities-grid">
+      <div class="activity-card act-blue fade-up">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="activity-title">Patient Feedback Review</div>
+        <div class="activity-desc">Reviewing anonymised patient feedback, Friends &amp; Family Test results, and complaint themes to identify areas for improvement in our services.</div>
+      </div>
+      <div class="activity-card act-green fade-up" style="animation-delay:0.08s">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="activity-title">Access &amp; Appointments</div>
+        <div class="activity-desc">Working with the practice team to improve how patients access appointments, reduce waiting times, and ensure fair access for all patient groups.</div>
+      </div>
+      <div class="activity-card act-aqua fade-up" style="animation-delay:0.16s">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="activity-title">Practice Communications</div>
+        <div class="activity-desc">Helping improve how the practice communicates with patients — from letters and text messages to signage, the website, and digital services.</div>
+      </div>
+      <div class="activity-card act-yellow fade-up" style="animation-delay:0.24s">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="activity-title">Health Promotion</div>
+        <div class="activity-desc">Planning and promoting local health events, screening campaigns, and awareness initiatives that benefit the Southall community.</div>
+      </div>
+      <div class="activity-card act-dark fade-up" style="animation-delay:0.32s">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="activity-title">Patient Surveys</div>
+        <div class="activity-desc">Designing, distributing, and analysing patient surveys to gather structured feedback on specific aspects of care or service delivery.</div>
+      </div>
+      <div class="activity-card act-purple fade-up" style="animation-delay:0.40s">
+        <div class="activity-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="activity-title">Community Representation</div>
+        <div class="activity-desc">Ensuring diverse patient groups — including older adults, younger patients, and our multilingual community — have a voice in practice decisions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS OF JOINING -->
+<section class="benefits-section">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto 3rem;" class="fade-up">
+      <div class="section-tag">Why Join?</div>
+      <h2>What You Gain by<br><em>Getting Involved</em></h2>
+      <p class="section-lead" style="margin-bottom:0;">Membership is voluntary, takes very little of your time, and can make a meaningful difference to how healthcare is delivered in your community.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item fade-up">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>Have a Real Say</strong>
+          <span>Your feedback directly influences decisions about appointment systems, opening times, communication, and new services at Saluja Clinic.</span>
+        </div>
+      </div>
+      <div class="benefit-item fade-up" style="animation-delay:0.08s">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>Understand Your NHS</strong>
+          <span>Gain insight into how GP practices work, what pressures primary care faces, and how decisions affecting patient care are made.</span>
+        </div>
+      </div>
+      <div class="benefit-item fade-up" style="animation-delay:0.16s">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>Represent Your Community</strong>
+          <span>Help ensure that the voices of all patients in Southall — especially underrepresented groups — are heard by the practice team.</span>
+        </div>
+      </div>
+      <div class="benefit-item fade-up" style="animation-delay:0.24s">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>Flexible Commitment</strong>
+          <span>Attend quarterly meetings at a time that suits you, with virtual options available. No minimum attendance requirement — just do what you can.</span>
+        </div>
+      </div>
+      <div class="benefit-item fade-up" style="animation-delay:0.32s">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>Early Access to News</strong>
+          <span>PPG members receive advance notice of changes to practice services, new clinics, and NHS updates before they are communicated publicly.</span>
+        </div>
+      </div>
+      <div class="benefit-item fade-up" style="animation-delay:0.40s">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="benefit-text">
+          <strong>No Experience Needed</strong>
+          <span>You don't need any medical or healthcare background. All you need is an interest in your local NHS services and a willingness to engage.</span>
+        </div>
+      </div>
+    </div>
+    <div class="benefits-cta fade-up">
+      <a href="#join" class="btn-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        Join the PPG — It's Free &amp; Open to All
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MEETINGS & MINUTES -->
+<section class="meetings-section" id="meetings">
+  <div class="section-inner">
+    <div class="meetings-layout">
+      <div>
+        <div class="section-tag fade-up">Meeting Schedule</div>
+        <h2 class="fade-up">Upcoming <em>Meetings</em></h2>
+        <p class="section-lead fade-up" style="margin-bottom:2rem;">All registered patients are welcome to attend PPG meetings. Meetings are held at the practice and are also available to join virtually.</p>
+        <div class="meetings-list">
+          <div class="meeting-card next fade-up">
+            <div class="meeting-date-block">
+              <div class="meeting-day">17</div>
+              <div class="meeting-month">Apr</div>
+            </div>
+            <div class="meeting-divider"></div>
+            <div class="meeting-info">
+              <strong>Spring PPG Meeting</strong>
+              <span>Thursday 17 April 2025 · 6:00 pm · Saluja Clinic &amp; Online</span>
+            </div>
+            <div class="next-badge">Next</div>
+          </div>
+          <div class="meeting-card fade-up" style="animation-delay:0.08s">
+            <div class="meeting-date-block">
+              <div class="meeting-day">10</div>
+              <div class="meeting-month">Jul</div>
+            </div>
+            <div class="meeting-divider"></div>
+            <div class="meeting-info">
+              <strong>Summer PPG Meeting</strong>
+              <span>Thursday 10 July 2025 · 6:00 pm · Saluja Clinic &amp; Online</span>
+            </div>
+          </div>
+          <div class="meeting-card fade-up" style="animation-delay:0.16s">
+            <div class="meeting-date-block">
+              <div class="meeting-day">09</div>
+              <div class="meeting-month">Oct</div>
+            </div>
+            <div class="meeting-divider"></div>
+            <div class="meeting-info">
+              <strong>Autumn PPG Meeting</strong>
+              <span>Thursday 9 October 2025 · 6:00 pm · Saluja Clinic &amp; Online</span>
+            </div>
+          </div>
+          <div class="meeting-card fade-up" style="animation-delay:0.24s">
+            <div class="meeting-date-block">
+              <div class="meeting-day">15</div>
+              <div class="meeting-month">Jan</div>
+            </div>
+            <div class="meeting-divider"></div>
+            <div class="meeting-info">
+              <strong>Annual Review Meeting</strong>
+              <span>Thursday 15 January 2026 · 6:00 pm · Saluja Clinic &amp; Online</span>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-soft);margin-top:1.2rem;">📍 Saluja Clinic, 36A Northcote Avenue, Southall, UB1 2AY · Virtual link sent on registration</p>
+      </div>
+
+      <div class="fade-up" style="animation-delay:0.1s">
+        <div class="minutes-box">
+          <div class="minutes-title">Meeting Minutes &amp; Documents</div>
+          <div class="minutes-item">
+            <div class="minutes-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="minutes-link">PPG Minutes — January 2025</span>
+            <span class="minutes-date">Jan 2025</span>
+            <div class="minutes-dl">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </div>
+          <div class="minutes-item">
+            <div class="minutes-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="minutes-link">PPG Minutes — October 2024</span>
+            <span class="minutes-date">Oct 2024</span>
+            <div class="minutes-dl">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </div>
+          <div class="minutes-item">
+            <div class="minutes-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="minutes-link">PPG Minutes — July 2024</span>
+            <span class="minutes-date">Jul 2024</span>
+            <div class="minutes-dl">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </div>
+          <div class="minutes-item">
+            <div class="minutes-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="minutes-link">PPG Minutes — April 2024</span>
+            <span class="minutes-date">Apr 2024</span>
+            <div class="minutes-dl">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </div>
+          <div class="minutes-item">
+            <div class="minutes-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span class="minutes-link">PPG Annual Report 2023–24</span>
+            <span class="minutes-date">2024</span>
+            <div class="minutes-dl">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-soft);margin-top:1rem;padding:0 0.2rem;">Minutes are published within 4 weeks of each meeting. If you need a copy in a different format please contact the practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN THE PPG -->
+<section class="join-section" id="join">
+  <div class="section-inner">
+    <div class="join-layout">
+      <!-- Form -->
+      <div class="fade-up">
+        <div class="join-form-card">
+          <div id="form-content">
+            <div class="join-form-title">Express Your Interest</div>
+            <div class="join-form-sub">Complete this short form and a member of our team will be in touch to confirm your PPG membership.</div>
+            <div class="form-row">
+              <div class="form-field">
+                <label>First Name *</label>
+                <input type="text" placeholder="e.g. Priya" id="fname"/>
+              </div>
+              <div class="form-field">
+                <label>Last Name *</label>
+                <input type="text" placeholder="e.g. Sharma" id="lname"/>
+              </div>
+            </div>
+            <div class="form-field">
+              <label>Email Address *</label>
+              <input type="email" placeholder="your@email.com" id="email"/>
+            </div>
+            <div class="form-field">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="07xxx xxxxxx" id="phone"/>
+            </div>
+            <div class="form-field">
+              <label>How would you prefer to attend meetings?</label>
+              <select id="attendance">
+                <option value="">Please select…</option>
+                <option>In person at the clinic</option>
+                <option>Virtually (video call)</option>
+                <option>Either / flexible</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Is there anything particular you'd like the PPG to address? <span style="font-weight:400;color:var(--text-soft)">(optional)</span></label>
+              <textarea placeholder="e.g. appointment access, digital services, health events…" id="comments"></textarea>
+            </div>
+            <button class="form-submit" onclick="submitForm()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Submit Expression of Interest
+            </button>
+            <p class="form-note">Your information is handled in accordance with NHS data protection guidelines. We will only use your contact details to communicate PPG-related matters.</p>
+          </div>
+          <div class="thankyou-state" id="thankyou">
+            <div class="thankyou-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Thank You!</h3>
+            <p>We've received your expression of interest. A member of our team will be in touch shortly to confirm your PPG membership and send you details of the next meeting.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why join info -->
+      <div class="join-why fade-up" style="animation-delay:0.12s">
+        <div class="section-tag">Open to Everyone</div>
+        <h3>Who Is Welcome<br>to <em style="font-style:italic;color:var(--nhs-blue);">Join?</em></h3>
+        <p>The PPG is open to any patient registered with Saluja Clinic. We actively welcome members who reflect the diversity of our community.</p>
+        <div class="who-welcome">
+          <div class="who-item">
+            <div class="who-dot"></div>
+            <div class="who-item-text">
+              <strong>Long-standing Patients</strong>
+              Patients who have been with the practice for years and have seen services evolve over time.
+            </div>
+          </div>
+          <div class="who-item">
+            <div class="who-dot"></div>
+            <div class="who-item-text">
+              <strong>Newer Patients &amp; Families</strong>
+              Recently registered patients who bring a fresh perspective on access and first impressions.
+            </div>
+          </div>
+          <div class="who-item">
+            <div class="who-dot"></div>
+            <div class="who-item-text">
+              <strong>Carers &amp; Family Representatives</strong>
+              Those who support or accompany vulnerable patients and can speak to the carer experience.
+            </div>
+          </div>
+          <div class="who-item">
+            <div class="who-dot"></div>
+            <div class="who-item-text">
+              <strong>Patients with Long-term Conditions</strong>
+              Those managing chronic conditions who use the practice regularly and understand its services deeply.
+            </div>
+          </div>
+          <div class="who-item">
+            <div class="who-dot"></div>
+            <div class="who-item-text">
+              <strong>Young Adults &amp; Working Patients</strong>
+              Patients in their 20s–40s who can highlight the perspective of those balancing work, family, and healthcare access.
+            </div>
+          </div>
+        </div>
+        <div class="contact-aside">
+          <div class="contact-aside-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.46 16.92z"/></svg>
+          </div>
+          <div class="contact-aside-text">
+            <strong>Prefer to get in touch directly?</strong>
+            Call us on <a href="tel:02085745136">0208 574 5136</a> or email <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a> and ask to be added to the PPG mailing list. You can also speak to reception in person at the clinic.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div class="emerg-label">Non-Emergency</div>
+      <div class="emerg-number">NHS 111</div>
+      <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobile phones. For urgent medical advice when your GP is closed.</p>
+    </div>
+    <div class="emerg-card urgent">
+      <div class="emerg-label">Life-Threatening Emergency</div>
+      <div class="emerg-number">999</div>
+      <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, severe bleeding, or any life-threatening condition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="72" style="width:auto;display:block;margin-bottom:0.8rem;">
+        <defs>
+          <linearGradient id="chromeSf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="15%"  stop-color="#d0d0d0"/>
+            <stop offset="30%"  stop-color="#f8f8f8"/>
+            <stop offset="50%"  stop-color="#a0a0a0"/>
+            <stop offset="65%"  stop-color="#e8e8e8"/>
+            <stop offset="80%"  stop-color="#b0b0b0"/>
+            <stop offset="100%" stop-color="#d8d8d8"/>
+          </linearGradient>
+          <linearGradient id="chromeTextf" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#c8c8c8"/>
+            <stop offset="10%"  stop-color="#f0f0f0"/>
+            <stop offset="25%"  stop-color="#b0b0b0"/>
+            <stop offset="40%"  stop-color="#ffffff"/>
+            <stop offset="55%"  stop-color="#909090"/>
+            <stop offset="70%"  stop-color="#e0e0e0"/>
+            <stop offset="85%"  stop-color="#a8a8a8"/>
+            <stop offset="100%" stop-color="#d0d0d0"/>
+          </linearGradient>
+          <radialGradient id="circleShinef" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"   stop-color="#3a3a3a"/>
+            <stop offset="40%"  stop-color="#1a1a1a"/>
+            <stop offset="100%" stop-color="#000000"/>
+          </radialGradient>
+          <linearGradient id="circleRimf" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#666666"/>
+            <stop offset="30%"  stop-color="#222222"/>
+            <stop offset="70%"  stop-color="#444444"/>
+            <stop offset="100%" stop-color="#111111"/>
+          </linearGradient>
+          <filter id="shadowf" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+          </filter>
+          <filter id="textSheenf">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+            <feOffset dx="0" dy="1" result="offsetBlur"/>
+            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+          </filter>
+        </defs>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRimf)" filter="url(#shadowf)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShinef)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeSf)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeTextf)" filter="url(#textSheenf)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">
+        36A Northcote Avenue<br>
+        Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+        <li><a href="new-patients.html">Register as New Patient</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="health-information.html">Health Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+        <li><a href="contact-us.html">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered fade-up
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submission — opens mailto to salujaclinic@nhs.net
+  function submitForm() {
+    const fname      = document.getElementById('fname').value.trim();
+    const lname      = document.getElementById('lname').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const phone      = document.getElementById('phone').value.trim();
+    const attendance = document.getElementById('attendance').value;
+    const comments   = document.getElementById('comments').value.trim();
+
+    if (!fname || !email) {
+      alert('Please enter your name and email address to continue.');
+      return;
+    }
+
+    const subject = encodeURIComponent('PPG Expression of Interest — ' + fname + ' ' + lname);
+    const body = encodeURIComponent(
+      'New PPG Expression of Interest\n' +
+      '================================\n\n' +
+      'Name:                ' + fname + ' ' + lname + '\n' +
+      'Email:               ' + email + '\n' +
+      'Phone:               ' + (phone || 'Not provided') + '\n' +
+      'Meeting preference:  ' + (attendance || 'Not specified') + '\n\n' +
+      'Topics for the PPG to address:\n' +
+      (comments || 'None provided') + '\n\n' +
+      '---\nSubmitted via Saluja Clinic website PPG page.'
+    );
+
+    window.location.href = 'mailto:salujaclinic@nhs.net?subject=' + subject + '&body=' + body;
+
+    // Show thank-you state after a moment (allows mail client to open)
+    setTimeout(() => {
+      document.getElementById('form-content').style.display = 'none';
+      const ty = document.getElementById('thankyou');
+      ty.style.display = 'block';
+    }, 900);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Women's Health – Saluja Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
+      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
+      --white:#fff; --off-white:#f5f8fc;
+      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
+      --col-breast:#c0497a;
+      --col-cervical:#5b4bb8;
+      --col-emerg:#c0392b;
+      --col-family:#e67e22;
+      --col-checks:#005EB8;
+      --col-lifestyle:#1a7a40;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+
+    /* UTILITY BAR */
+    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
+    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}.utility-bar a:hover{color:#fff}
+    .row{display:flex;align-items:center;gap:1.5rem}
+    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+    /* HEADER */
+    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+    .logo-wrap svg{height:84px;width:auto}
+    nav{display:flex;align-items:center;gap:.25rem}
+    nav a{font-size:.88rem;font-weight:500;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
+    .nav-cta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
+    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+    /* HERO */
+    .hero{background:var(--white);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3.5rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-80px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(192,73,122,.05) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-60px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(91,75,184,.05) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+    .breadcrumb a{color:var(--text-soft);text-decoration:none}.breadcrumb a:hover{color:var(--nhs-blue)}
+    .breadcrumb-sep{opacity:.4}
+    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(192,73,122,.08);border:1px solid rgba(192,73,122,.2);border-radius:20px;padding:.3rem .9rem;color:var(--col-breast);margin-bottom:1.1rem}
+    .page-tag span{width:6px;height:6px;background:var(--col-breast);border-radius:50%}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:1rem}
+    .hero h1 em{font-style:normal;color:var(--col-breast)}
+    .hero-sub{font-size:1rem;color:var(--text-mid);max-width:520px;line-height:1.75;margin-bottom:1.8rem}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-primary{background:var(--col-breast);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(192,73,122,.3);transition:filter .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px)}
+    .btn-outline{border:2px solid var(--border);color:var(--text-mid);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:border-color .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-outline:hover{border-color:var(--col-breast);color:var(--col-breast);transform:translateY(-2px)}
+    #heroCanvas{width:100%;height:auto;border-radius:20px;display:block}
+
+    /* STAT STRIP */
+    .stat-strip{background:linear-gradient(90deg,var(--col-breast),var(--col-cervical),var(--col-emerg));padding:0}
+    .stat-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+    .stat-item{padding:1.6rem 1.4rem;text-align:center;border-right:1px solid rgba(255,255,255,.2);color:#fff}
+    .stat-item:last-child{border-right:none}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;line-height:1;margin-bottom:.25rem}
+    .stat-label{font-size:.83rem;font-weight:500;opacity:.9}
+    .stat-sub{font-size:.72rem;opacity:.65;margin-top:.15rem}
+
+    /* SECTION */
+    .section-inner{max-width:1200px;margin:0 auto}
+    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
+
+    /* FEATURE BIOCARDS */
+    .feature-section{padding:5rem 2rem;background:var(--off-white)}
+    .feature-intro{text-align:center;margin-bottom:3.5rem}
+    .feature-tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--col-breast);margin-bottom:.6rem}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;max-width:1200px;margin:0 auto}
+
+    .biocard{background:var(--white);border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.06);transition:transform .28s cubic-bezier(.2,0,.2,1),box-shadow .28s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+    .biocard:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+    .biocard-canvas-wrap{position:relative;overflow:hidden;background:#000}
+    .biocard-canvas-wrap canvas{width:100%;height:auto;display:block;transition:transform .5s ease}
+    .biocard:hover .biocard-canvas-wrap canvas{transform:scale(1.03)}
+    .biocard-accent{height:5px}
+    .biocard.breast .biocard-accent{background:linear-gradient(90deg,var(--col-breast),#e8849a)}
+    .biocard.cervical .biocard-accent{background:linear-gradient(90deg,var(--col-cervical),#a08cdf)}
+    .biocard.emerg .biocard-accent{background:linear-gradient(90deg,var(--col-emerg),#e88080)}
+    .biocard-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
+    .biocard-topic{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem}
+    .biocard.breast .biocard-topic{color:var(--col-breast)}
+    .biocard.cervical .biocard-topic{color:var(--col-cervical)}
+    .biocard.emerg .biocard-topic{color:var(--col-emerg)}
+    .biocard-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--text-dark);margin-bottom:.7rem;line-height:1.25}
+    .biocard-desc{font-size:.87rem;line-height:1.7;color:var(--text-mid);margin-bottom:1.2rem;flex:1}
+    .biocard-bullets{list-style:none;margin-bottom:1.4rem;display:flex;flex-direction:column;gap:.4rem}
+    .biocard-bullets li{font-size:.82rem;color:var(--text-mid);padding-left:1.1rem;position:relative;line-height:1.55}
+    .biocard-bullets li::before{content:'';position:absolute;left:.1rem;top:.48rem;width:6px;height:6px;border-radius:50%}
+    .biocard.breast .biocard-bullets li::before{background:var(--col-breast)}
+    .biocard.cervical .biocard-bullets li::before{background:var(--col-cervical)}
+    .biocard.emerg .biocard-bullets li::before{background:var(--col-emerg)}
+    .biocard-cta{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;border-radius:10px;font-size:.86rem;font-weight:700;text-decoration:none;transition:filter .2s;margin-top:auto}
+    .biocard.breast .biocard-cta{background:rgba(192,73,122,.08);color:var(--col-breast)}
+    .biocard.cervical .biocard-cta{background:rgba(91,75,184,.08);color:var(--col-cervical)}
+    .biocard.emerg .biocard-cta{background:rgba(192,57,43,.08);color:var(--col-emerg)}
+    .biocard:hover .biocard-cta{filter:brightness(.92)}
+    .biocard-cta svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .2s}
+    .biocard:hover .biocard-cta svg{transform:translateX(4px)}
+    .biocard-urgency{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;border-radius:20px;padding:.25rem .75rem;margin-bottom:.8rem}
+    .biocard.emerg .biocard-urgency{background:rgba(192,57,43,.1);color:var(--col-emerg)}
+
+    /* ALSO EXPLORE */
+    .explore-section{padding:4rem 2rem;background:var(--white)}
+    .explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:1200px;margin:2.5rem auto 0}
+    .explore-card{background:var(--off-white);border:1px solid var(--border);border-radius:16px;padding:1.6rem;display:flex;gap:1.2rem;align-items:center;text-decoration:none;color:inherit;transition:transform .22s,box-shadow .22s,border-color .22s}
+    .explore-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.08);border-color:transparent}
+    .explore-icon-wrap{width:54px;height:54px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+    .explore-icon-wrap.family{background:rgba(230,126,34,.1)}
+    .explore-icon-wrap.checks{background:rgba(0,94,184,.08)}
+    .explore-icon-wrap.lifestyle{background:rgba(26,122,64,.08)}
+    .explore-title{font-size:.95rem;font-weight:700;color:var(--text-dark);margin-bottom:.25rem}
+    .explore-desc{font-size:.8rem;color:var(--text-soft);line-height:1.5}
+    .explore-arrow{margin-left:auto;font-size:.85rem;opacity:.4;transition:opacity .2s,transform .2s}
+    .explore-card:hover .explore-arrow{opacity:1;transform:translateX(3px)}
+
+    /* TALK TO US BANNER */
+    .talk-banner{background:linear-gradient(135deg,#2c0a2e 0%,#4a1a5e 55%,#6b3583 100%);padding:4rem 2rem;position:relative;overflow:hidden}
+    .talk-banner::before{content:'';position:absolute;top:-100px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+    .talk-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;position:relative;z-index:1}
+    .talk-inner h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:#fff;margin-bottom:.7rem}
+    .talk-inner p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.72;max-width:560px}
+    .talk-ctas{display:flex;flex-direction:column;gap:.9rem;align-items:center}
+    .btn-white-purple{background:#fff;color:#4a1a5e;padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap;display:inline-block;transition:transform .15s,box-shadow .15s}
+    .btn-white-purple:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost-purple{border:2px solid rgba(255,255,255,.45);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap;display:inline-block;transition:background .2s,border-color .2s}
+    .btn-ghost-purple:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+    /* NHS APP */
+    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
+    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+    .app-inner h2{color:#fff}
+    .app-inner p{color:rgba(255,255,255,.8);font-size:1rem;line-height:1.7;max-width:520px}
+    .app-inner .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.6rem}
+    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
+    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
+    .btn-white{background:#fff;color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
+    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+    /* EMERGENCY */
+    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
+    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .emerg-card{border-radius:16px;padding:2rem}
+    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
+    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
+    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
+    .emerg-card.urgent .emerg-number{color:#dc3545}
+    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+    /* FOOTER */
+    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
+    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
+    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}.footer-links a:hover{color:#fff}
+    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
+    .hours-grid{display:grid;gap:.3rem}
+    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
+    .hour-day{opacity:.7}
+
+    /* ANIMATIONS */
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:960px){
+      .hero-inner{grid-template-columns:1fr}
+      #heroCanvas{display:none}
+      .feature-grid,.explore-grid{grid-template-columns:1fr}
+      .stat-inner{grid-template-columns:1fr}
+      .talk-inner,.app-inner{grid-template-columns:1fr}
+      .emergency-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr 1fr}
+      nav{display:none}
+    }
+    @media(max-width:600px){
+      .footer-inner{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <div class="row">
+      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+      <span class="util-pill">NHS GP Practice · West London</span>
+    </div>
+    <div class="row">
+      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <span>|</span>
+      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+        <defs>
+          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
+          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
+          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/></radialGradient>
+          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
+          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
+          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="#fff"/>
+        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
+      </svg>
+    </a>
+    <nav>
+      <a href="index.html">Our Practice</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#team">Our Doctors</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="#">Clinics &amp; Services</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Women's Health</span>
+      </div>
+      <div class="page-tag"><span></span> Women's Health Services · NHS &amp; Free</div>
+      <h1>Women's <em>Health</em></h1>
+      <p class="hero-sub">From cervical and breast screening to family planning and emergency contraception, Saluja Clinic provides a comprehensive, confidential range of women's health services — all free on the NHS. Explore our dedicated service pages below, or speak to one of our GPs.</p>
+      <div class="hero-btns">
+        <a href="https://salujaclinic.webgp.com/" class="btn-primary" target="_blank">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book an Appointment
+        </a>
+        <a href="#services" class="btn-outline">Explore Services ↓</a>
+      </div>
+    </div>
+    <div class="fade-up" style="animation-delay:.15s">
+      <canvas id="heroCanvas" width="520" height="340"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-inner">
+    <div class="stat-item">
+      <div class="stat-num">1,400</div>
+      <div class="stat-label">Lives saved per year by breast screening</div>
+      <div class="stat-sub">NHS programme, England alone</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1 in 20</div>
+      <div class="stat-label">Cervical smears find cell changes</div>
+      <div class="stat-sub">Most are minor &amp; highly treatable</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">72–120 hrs</div>
+      <div class="stat-label">Emergency contraception window</div>
+      <div class="stat-sub">The sooner you act, the more effective it is</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE BIOCARDS -->
+<section class="feature-section" id="services">
+  <div class="feature-intro fade-up">
+    <div class="feature-tag">Women's Health Services</div>
+    <h2 style="margin-bottom:.7rem">Your Health, Your Choice</h2>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:600px;margin:0 auto;line-height:1.7">Each card below gives you a snapshot of the service and links through to the full, detailed page. Every service at Saluja Clinic is free, confidential, and led by our experienced team.</p>
+  </div>
+
+  <div class="feature-grid fade-up" style="animation-delay:.1s">
+
+    <!-- BREAST SCREENING BIOCARD -->
+    <a href="cancer-screening.html#breast" class="biocard breast">
+      <div class="biocard-canvas-wrap">
+        <canvas id="breastCard" width="380" height="200"></canvas>
+      </div>
+      <div class="biocard-accent"></div>
+      <div class="biocard-body">
+        <div class="biocard-topic">🎗️ NHS Cancer Screening</div>
+        <h3 class="biocard-title">Breast Screening</h3>
+        <p class="biocard-desc">The NHS National Breast Screening Programme invites all women aged 50–70 for a free mammogram every three years. Early detection means simpler, more successful treatment.</p>
+        <ul class="biocard-bullets">
+          <li>Free mammogram every <strong>3 years</strong>, ages 50–70</li>
+          <li>First invitation before your <strong>53rd birthday</strong></li>
+          <li>Under 50 with concerns? Book a GP appointment</li>
+          <li>Saves around <strong>1,400 lives</strong> per year in England</li>
+        </ul>
+        <div class="biocard-cta">
+          <span>Full breast screening information</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- CERVICAL SCREENING BIOCARD -->
+    <a href="cancer-screening.html#cervical" class="biocard cervical">
+      <div class="biocard-canvas-wrap">
+        <canvas id="cervicalCard" width="380" height="200"></canvas>
+      </div>
+      <div class="biocard-accent"></div>
+      <div class="biocard-body">
+        <div class="biocard-topic">🔬 NHS Cancer Screening</div>
+        <h3 class="biocard-title">Cervical Screening</h3>
+        <p class="biocard-desc">The smear test detects abnormal cells in the cervix before they become cancer. Our qualified nurses carry out cervical screening at the surgery — quick, private, and vital.</p>
+        <ul class="biocard-bullets">
+          <li>Ages 25–49: every <strong>3 years</strong></li>
+          <li>Ages 50–64: every <strong>5 years</strong></li>
+          <li>Appointment takes around <strong>10 minutes</strong></li>
+          <li>Book when you receive your invitation letter</li>
+        </ul>
+        <div class="biocard-cta">
+          <span>Full cervical screening information</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- EMERGENCY CONTRACEPTION BIOCARD -->
+    <a href="planning-a-family.html#emergency-contraception" class="biocard emerg">
+      <div class="biocard-canvas-wrap">
+        <canvas id="emergCard" width="380" height="200"></canvas>
+      </div>
+      <div class="biocard-accent"></div>
+      <div class="biocard-body">
+        <div class="biocard-topic">⏱️ Time-Sensitive · Act Now</div>
+        <div class="biocard-urgency">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          The sooner you act, the more effective
+        </div>
+        <h3 class="biocard-title">Emergency Contraception</h3>
+        <p class="biocard-desc">If contraception has failed or you've had unprotected sex, emergency contraception is available free. Effective up to 72 hours — and sometimes 120 hours — after sex.</p>
+        <ul class="biocard-bullets">
+          <li>Emergency pill: up to <strong>72 hours</strong> after sex</li>
+          <li>IUD (coil): up to <strong>120 hours</strong> — most effective option</li>
+          <li>Free even if under 16 · no GP referral needed</li>
+          <li>Call us for an emergency appointment today</li>
+        </ul>
+        <div class="biocard-cta">
+          <span>Full emergency contraception info</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ALSO EXPLORE -->
+<section class="explore-section">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center;margin-bottom:.5rem">
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);margin-bottom:.5rem">Also Relevant</div>
+      <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem)">More Women's Health Services</h2>
+      <p style="font-size:.95rem;color:var(--text-mid);max-width:540px;margin:.4rem auto 0;line-height:1.65">These pages cover services directly relevant to women's health at different life stages.</p>
+    </div>
+    <div class="explore-grid fade-up" style="animation-delay:.1s">
+      <a href="planning-a-family.html" class="explore-card">
+        <div class="explore-icon-wrap family">🤰</div>
+        <div>
+          <div class="explore-title">Planning a Family</div>
+          <div class="explore-desc">Preconception advice, antenatal care, family planning and postnatal support</div>
+        </div>
+        <div class="explore-arrow">→</div>
+      </a>
+      <a href="nhs-health-checks.html" class="explore-card">
+        <div class="explore-icon-wrap checks">🩺</div>
+        <div>
+          <div class="explore-title">NHS Health Checks</div>
+          <div class="explore-desc">Free check for ages 40–74 covering heart disease, diabetes, kidney and stroke risk</div>
+        </div>
+        <div class="explore-arrow">→</div>
+      </a>
+      <a href="supporting-a-healthy-lifestyle.html" class="explore-card">
+        <div class="explore-icon-wrap lifestyle">🌿</div>
+        <div>
+          <div class="explore-title">Healthy Lifestyle Support</div>
+          <div class="explore-desc">Weight management, smoking cessation, alcohol advice and sexual health services</div>
+        </div>
+        <div class="explore-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TALK TO US -->
+<div class="talk-banner">
+  <div class="talk-inner">
+    <div>
+      <div style="font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Always Here</div>
+      <h3>Not Sure Where to Start?</h3>
+      <p>Our GPs and nursing team are here to discuss any women's health concern — however big or small it may feel. All consultations are completely confidential and non-judgemental. You will always be listened to and treated with respect.</p>
+      <p style="margin-top:.7rem;font-size:.88rem;color:rgba(255,255,255,.55)">NW London Sexual Health line: <strong style="color:#fff">0800 756 7570</strong></p>
+    </div>
+    <div class="talk-ctas">
+      <a href="https://salujaclinic.webgp.com/" class="btn-white-purple" target="_blank">Book an Appointment</a>
+      <a href="tel:02085745136" class="btn-ghost-purple">📞 0208 574 5136</a>
+    </div>
+  </div>
+</div>
+
+<!-- NHS APP -->
+<div class="app-banner">
+  <div class="app-inner section-inner">
+    <div>
+      <div class="section-tag">Digital Access</div>
+      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+      <p>Book appointments, view your records, and manage screening invitations all in one place.</p>
+      <div class="app-bullets">
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Book smear tests and screening appointments</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>View your test results online</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat contraception prescriptions</div>
+        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
+        <defs>
+          <linearGradient id="aCS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
+          <linearGradient id="aCT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
+          <radialGradient id="aCS2" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/></radialGradient>
+          <linearGradient id="aCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
+          <filter id="aSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
+        </defs>
+        <rect width="720" height="160" fill="transparent"/>
+        <circle cx="80" cy="80" r="68" fill="url(#aCR)" filter="url(#aSh)"/>
+        <circle cx="80" cy="80" r="63" fill="url(#aCS2)"/>
+        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#aCS)">S</text>
+        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#aCT)">SALUJA CLINIC</text>
+      </svg>
+      <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
+        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY -->
+<section class="emergency">
+  <div class="emergency-inner">
+    <div class="emerg-card nhs111">
+      <div>
+        <div class="emerg-label">Non-Emergency</div>
+        <div class="emerg-number">NHS 111</div>
+        <p class="emerg-desc">Available 24/7. For urgent advice when your GP is closed — including concerns about emergency contraception, pregnancy, screening results, or any women's health question.</p>
+      </div>
+    </div>
+    <div class="emerg-card urgent">
+      <div>
+        <div class="emerg-label">Life-Threatening Emergency</div>
+        <div class="emerg-number">999</div>
+        <p class="emerg-desc">Call 999 immediately for severe pelvic pain, heavy uncontrolled bleeding, suspected ectopic pregnancy, or any life-threatening emergency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
+      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
+      <p class="footer-address">36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
+        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
+      </p>
+    </div>
+    <div>
+      <div class="footer-heading">Women's Health</div>
+      <ul class="footer-links">
+        <li><a href="cancer-screening.html#breast">Breast Screening</a></li>
+        <li><a href="cancer-screening.html#cervical">Cervical Screening</a></li>
+        <li><a href="planning-a-family.html#emergency-contraception">Emergency Contraception</a></li>
+        <li><a href="planning-a-family.html">Planning a Family</a></li>
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Opening Hours</div>
+      <div class="hours-grid">
+        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Useful Links</div>
+      <ul class="footer-links">
+        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank">NW London Sexual Health</a></li>
+        <li><a href="https://www.brook.org.uk/" target="_blank">Brook — Young People's Health</a></li>
+        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     CANVAS ANIMATIONS
+══════════════════════════════════════════ -->
+<script>
+const fadeObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el=>fadeObs.observe(el));
+function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+function lerp(a,b,t){return a+(b-a)*t;}
+function sr(n){let x=Math.sin(n+1)*10000;return x-Math.floor(x);}
+
+/* ══════════════════════════════════════════════════════════
+   HERO CANVAS — orbiting women's health symbols
+   A gentle animated illustration: soft orbiting rings with symbols
+   for breast, cervical, family planning, heart, wellbeing
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('heroCanvas');
+  if(!C)return;
+  const ctx=C.getContext('2d');
+  const W=520,H=340; C.width=W; C.height=H;
+  const CX=W/2, CY=H/2;
+  let st=null;
+
+  const RINGS=[
+    {r:58,  speed:.22, items:[{a:0,  icon:'🎗️',label:'Breast Screening'},{a:Math.PI,icon:'🤰',label:'Antenatal'}]},
+    {r:100, speed:.14, items:[{a:.5, icon:'🔬',label:'Cervical Smear'},{a:.5+Math.PI,icon:'💊',label:'Contraception'},{a:.5+Math.PI*1.3,icon:'🩺',label:'GP Check'}]},
+    {r:148, speed:.08, items:[{a:1,  icon:'❤️',label:'Heart Health'},{a:1+Math.PI*.7,icon:'🌿',label:'Wellbeing'},{a:1+Math.PI*1.4,icon:'👶',label:'Postnatal'}]},
+  ];
+
+  function drawRing(ring,elapsed){
+    // Orbit track
+    ctx.save();ctx.globalAlpha=.08;
+    ctx.beginPath();ctx.arc(CX,CY,ring.r,0,Math.PI*2);
+    ctx.strokeStyle='#c0497a';ctx.lineWidth=1;ctx.setLineDash([3,6]);ctx.stroke();
+    ctx.setLineDash([]);ctx.restore();
+    // Items
+    ring.items.forEach(item=>{
+      const a=item.a+elapsed*ring.speed;
+      const ix=CX+Math.cos(a)*ring.r, iy=CY+Math.sin(a)*ring.r;
+      // glow
+      ctx.save();ctx.globalAlpha=.18;
+      ctx.beginPath();ctx.arc(ix,iy,22,0,Math.PI*2);
+      ctx.fillStyle='#c0497a';ctx.fill();ctx.restore();
+      // bubble
+      ctx.save();
+      ctx.beginPath();ctx.arc(ix,iy,18,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,.9)';ctx.fill();
+      ctx.strokeStyle='rgba(192,73,122,.2)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.font='15px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(item.icon,ix,iy);
+      ctx.restore();
+    });
+  }
+
+  function drawCentre(elapsed){
+    // Pulsing centre circle
+    const pulse=Math.sin(elapsed*1.8)*.06+.94;
+    ctx.save();
+    ctx.beginPath();ctx.arc(CX,CY,34*pulse,0,Math.PI*2);
+    const rg=ctx.createRadialGradient(CX,CY,0,CX,CY,34);
+    rg.addColorStop(0,'rgba(192,73,122,.35)');
+    rg.addColorStop(1,'rgba(192,73,122,.08)');
+    ctx.fillStyle=rg;ctx.fill();
+    // Cross / medical
+    ctx.strokeStyle='rgba(192,73,122,.7)';ctx.lineWidth=3.5;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(CX,CY-14*pulse);ctx.lineTo(CX,CY+14*pulse);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(CX-14*pulse,CY);ctx.lineTo(CX+14*pulse,CY);ctx.stroke();
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st)st=now;
+    const elapsed=(now-st)/1000;
+    ctx.clearRect(0,0,W,H);
+    // Soft gradient background
+    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,250);
+    bg.addColorStop(0,'rgba(255,240,248,.9)');
+    bg.addColorStop(.6,'rgba(248,240,255,.7)');
+    bg.addColorStop(1,'rgba(240,248,255,.5)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    // Subtle decorative dots
+    ctx.save();ctx.globalAlpha=.06;
+    for(let i=0;i<30;i++){
+      const dx=sr(i)*W,dy=sr(i+10)*H;
+      ctx.beginPath();ctx.arc(dx,dy,sr(i+20)*3+1,0,Math.PI*2);
+      ctx.fillStyle='#c0497a';ctx.fill();
+    }
+    ctx.restore();
+    RINGS.forEach(ring=>drawRing(ring,elapsed));
+    drawCentre(elapsed);
+    // Watermark
+    ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#c0497a';
+    ctx.font='600 10px "DM Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillText("SALUJA CLINIC · WOMEN'S HEALTH",CX,H-10);ctx.restore();
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   BIOCARD 1 — BREAST SCREENING
+   Side-view breast with X-ray scan line sweeping, plates compressing gently
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('breastCard');
+  const ctx=C.getContext('2d');
+  const W=380,H=200; C.width=W; C.height=H;
+  const CX=W/2, CY=H/2+10;
+  let st=null;
+
+  const LOBES=[
+    {x:CX-18,y:CY-12,r:28,pulse:0,ps:.025},{x:CX+14,y:CY+5,r:24,pulse:1.2,ps:.02},
+    {x:CX-8,y:CY+18,r:20,pulse:2.4,ps:.018},{x:CX+28,y:CY-20,r:18,pulse:.6,ps:.022},
+    {x:CX-32,y:CY+8,r:16,pulse:1.8,ps:.019},{x:CX+5,y:CY-28,r:14,pulse:3,ps:.023},
+  ];
+  const DUCTS=[
+    {a:-.3,l:40,ca:[{da:.3,dl:18},{da:-.2,dl:15}]},
+    {a:.4,l:35,ca:[{da:.35,dl:14}]},
+    {a:-.8,l:32,ca:[{da:-.3,dl:12}]},
+    {a:.9,l:28,ca:[{da:.25,dl:10}]},
+  ];
+
+  function drawBreast(compress){
+    const sq=compress*18;
+    const rx=65,ry=55-sq;
+    ctx.beginPath();
+    ctx.moveTo(CX-72,CY+42);
+    ctx.bezierCurveTo(CX-78,CY-70+sq*1.5,CX+62,CY-70+sq*1.5,CX+65,CY+42);
+    ctx.bezierCurveTo(CX+65,CY+65,CX-72,CY+65,CX-72,CY+42);
+    ctx.closePath();
+    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,80);
+    bg.addColorStop(0,'#fdeae0');bg.addColorStop(.7,'#f8d8c8');bg.addColorStop(1,'#f0c0a8');
+    ctx.fillStyle=bg;ctx.fill();ctx.strokeStyle='rgba(200,130,100,.2)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+
+  function drawTissue(elapsed,compress){
+    const sq=compress*10;
+    const nx=CX+60, ny=CY+5;
+    LOBES.forEach(l=>{
+      l.pulse+=l.ps;
+      const p=Math.sin(l.pulse)*.5+.5;
+      ctx.beginPath();ctx.arc(l.x,l.y+sq*.3,l.r*(1+p*.06),0,Math.PI*2);
+      ctx.fillStyle=`rgba(240,160,140,${.55+p*.08})`;ctx.fill();
+    });
+    DUCTS.forEach(d=>{
+      const ex=nx+Math.cos(d.a)*d.l, ey=ny+Math.sin(d.a)*d.l;
+      ctx.beginPath();ctx.moveTo(nx,ny+sq*.3);ctx.lineTo(ex,ey+sq*.3);
+      ctx.strokeStyle='rgba(210,110,90,.3)';ctx.lineWidth=1.4;ctx.stroke();
+      d.ca.forEach(c=>{
+        const cx2=ex+Math.cos(d.a+c.da)*c.dl, cy2=ey+Math.sin(d.a+c.da)*c.dl;
+        ctx.beginPath();ctx.moveTo(ex,ey+sq*.3);ctx.lineTo(cx2,cy2+sq*.3);
+        ctx.strokeStyle='rgba(210,110,90,.2)';ctx.lineWidth=1;ctx.stroke();
+      });
+    });
+    ctx.beginPath();ctx.arc(nx,ny+sq*.3,5,0,Math.PI*2);
+    ctx.fillStyle='#d88070';ctx.fill();
+  }
+
+  function drawScanLine(elapsed){
+    const topY=CY-52, botY=CY+42;
+    const scanT=(elapsed*.35)%1;
+    const scanY=topY+(botY-topY)*scanT;
+    const sg=ctx.createLinearGradient(CX-70,scanY-6,CX-70,scanY+6);
+    sg.addColorStop(0,'rgba(192,73,122,0)');
+    sg.addColorStop(.5,'rgba(192,73,122,.55)');
+    sg.addColorStop(1,'rgba(192,73,122,0)');
+    ctx.fillStyle=sg;ctx.fillRect(CX-70,scanY-6,135,12);
+    ctx.beginPath();ctx.moveTo(CX-70,scanY);ctx.lineTo(CX+65,scanY);
+    ctx.strokeStyle='rgba(220,100,140,.7)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+
+  function drawPlates(compress){
+    if(compress<.05)return;
+    const pH=10,sq=compress*60;
+    ctx.beginPath();ctx.roundRect(CX-80,CY-52+sq*.25,145,pH,3);
+    ctx.fillStyle='#dde8f8';ctx.fill();ctx.strokeStyle='#6a9ccc';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.beginPath();ctx.roundRect(CX-80,CY+40-sq*.25,145,pH,3);
+    ctx.fillStyle='#dde8f8';ctx.fill();ctx.strokeStyle='#6a9ccc';ctx.lineWidth=1.5;ctx.stroke();
+  }
+
+  let compress=0,dir=1;
+  function render(now){
+    if(!st)st=now;
+    const elapsed=(now-st)/1000;
+    compress+=dir*.004; if(compress>1||compress<0)dir*=-1;
+    ctx.clearRect(0,0,W,H);
+    const bg2=ctx.createLinearGradient(0,0,0,H);
+    bg2.addColorStop(0,'#2a0a14');bg2.addColorStop(1,'#1a0810');
+    ctx.fillStyle=bg2;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.globalAlpha=.08;ctx.fillStyle='#e8849a';
+    ctx.font='600 9px "DM Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillText('MAMMOGRAPHY SIMULATION',W/2,H-8);ctx.restore();
+    drawBreast(compress*.4);
+    drawTissue(elapsed,compress*.4);
+    drawScanLine(elapsed);
+    drawPlates(compress*.4);
+    // Label
+    ctx.save();ctx.globalAlpha=.7;
+    ctx.fillStyle='#e8849a';ctx.font='700 10px "DM Sans",sans-serif';ctx.textAlign='right';
+    ctx.fillText('X-RAY SCREENING',W-14,18);ctx.restore();
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   BIOCARD 2 — CERVICAL SCREENING
+   Cervical os with cells cycling from normal → abnormal → brush → clear
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('cervicalCard');
+  const ctx=C.getContext('2d');
+  const W=380,H=200; C.width=W; C.height=H;
+  const CX=W/2,CY=H/2+5;
+  const OS_R=62;
+  let st=null;
+
+  function sr2(n){let x=Math.sin(n+1)*10000;return x-Math.floor(x);}
+  const CELLS=Array.from({length:22},(_,i)=>{
+    const a=(i/22)*Math.PI*2, r=(0.25+sr2(i)*.68)*OS_R*.82;
+    return{x:CX+Math.cos(a)*r,y:CY+Math.sin(a)*r,base:5+sr2(i+20)*4,abn:sr2(i+30)<.3,pulse:sr2(i+40)*Math.PI*2,ps:.025+sr2(i+50)*.015};
+  });
+
+  function drawCervix(){
+    ctx.beginPath();ctx.arc(CX,CY,OS_R+20,0,Math.PI*2);
+    const og=ctx.createRadialGradient(CX,CY,OS_R,CX,CY,OS_R+20);
+    og.addColorStop(0,'#c07060');og.addColorStop(1,'#a05040');
+    ctx.fillStyle=og;ctx.fill();
+    ctx.beginPath();ctx.arc(CX,CY,OS_R+8,0,Math.PI*2);
+    const mg=ctx.createRadialGradient(CX,CY,OS_R-4,CX,CY,OS_R+8);
+    mg.addColorStop(0,'#e09080');mg.addColorStop(1,'#c07060');
+    ctx.fillStyle=mg;ctx.fill();
+    ctx.beginPath();ctx.arc(CX,CY,OS_R,0,Math.PI*2);
+    const lg=ctx.createRadialGradient(CX,CY,0,CX,CY,OS_R);
+    lg.addColorStop(0,'#fff4f2');lg.addColorStop(.6,'#ffe0da');lg.addColorStop(1,'#ffd0c8');
+    ctx.fillStyle=lg;ctx.fill();
+    ctx.save();ctx.globalAlpha=.1;
+    for(let i=0;i<8;i++){
+      const a=(i/8)*Math.PI*2;
+      ctx.beginPath();ctx.moveTo(CX,CY);ctx.lineTo(CX+Math.cos(a)*(OS_R+20),CY+Math.sin(a)*(OS_R+20));
+      ctx.strokeStyle='#c06050';ctx.lineWidth=1;ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawCells(elapsed){
+    const cycle=elapsed*.25%1;
+    const abnProg=cycle<.4?cycle/.4:cycle<.6?1:(1-cycle)/.4;
+    CELLS.forEach(cell=>{
+      cell.pulse+=cell.ps;
+      const p=Math.sin(cell.pulse)*.5+.5;
+      const r=cell.base*(1+p*.1);
+      let fill,nuc;
+      if(cell.abn&&abnProg>.1){
+        const a=Math.min(1,abnProg*2);
+        fill=`rgba(${lerp(240,160,a)},${lerp(130,40,a)},${lerp(130,40,a)},.8)`;
+        nuc=`rgba(${lerp(160,80,a)},${lerp(60,10,a)},${lerp(60,10,a)},.9)`;
+      } else{fill='rgba(240,180,170,.75)';nuc='rgba(200,100,90,.65)';}
+      const boost=cell.abn&&abnProg>.1?lerp(1,1.45,Math.min(1,abnProg*2)):1;
+      ctx.beginPath();ctx.arc(cell.x,cell.y,r*boost,0,Math.PI*2);
+      ctx.fillStyle=fill;ctx.fill();
+      ctx.strokeStyle='rgba(180,80,70,.2)';ctx.lineWidth=.6;ctx.stroke();
+      ctx.beginPath();ctx.arc(cell.x,cell.y,r*boost*.38,0,Math.PI*2);
+      ctx.fillStyle=nuc;ctx.fill();
+    });
+    // Brush sweep
+    if(cycle>.6){
+      const sweepP=(cycle-.6)/.4;
+      const brushY=CY-OS_R*.65+(OS_R*1.3)*ease(sweepP);
+      ctx.save();ctx.globalAlpha=.85;
+      ctx.beginPath();ctx.moveTo(CX,brushY);ctx.lineTo(CX,brushY-90);
+      ctx.strokeStyle='#9080c8';ctx.lineWidth=3.5;ctx.lineCap='round';ctx.stroke();
+      for(let i=-3;i<=3;i++){
+        ctx.beginPath();ctx.moveTo(CX+i*5,brushY);ctx.lineTo(CX+i*4.5,brushY+10+Math.abs(i)*2);
+        ctx.strokeStyle='rgba(144,128,200,.9)';ctx.lineWidth=1.8;ctx.lineCap='round';ctx.stroke();
+      }
+      ctx.restore();
+    }
+    // Status badge
+    const isAbn=cycle>.15&&cycle<.75;
+    ctx.save();ctx.globalAlpha=.8;
+    ctx.beginPath();ctx.roundRect(W-96,10,84,24,8);
+    ctx.fillStyle=isAbn?'rgba(192,57,43,.8)':cycle>.75?'rgba(91,75,184,.85)':'rgba(39,174,96,.8)';
+    ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='700 9px "DM Sans",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(isAbn?'Changes detected':cycle>.75?'Sample collected':'Normal cells',W-54,22);
+    ctx.restore();
+  }
+
+  function render(now){
+    if(!st)st=now;
+    const elapsed=(now-st)/1000;
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,180);
+    bg.addColorStop(0,'#1a0a2e');bg.addColorStop(1,'#10061a');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.globalAlpha=.08;ctx.fillStyle='#a08cdf';
+    ctx.font='600 9px "DM Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillText('CERVICAL CELLS · MICROSCOPE VIEW',W/2,H-8);ctx.restore();
+    drawCervix();
+    drawCells(elapsed);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   BIOCARD 3 — EMERGENCY CONTRACEPTION
+   Animated countdown clock with pill/IUD options, urgency colours shifting
+══════════════════════════════════════════════════════════ */
+(function(){
+  const C=document.getElementById('emergCard');
+  const ctx=C.getContext('2d');
+  const W=380,H=200; C.width=W; C.height=H;
+  let st=null;
+
+  function render(now){
+    if(!st)st=now;
+    const elapsed=(now-st)/1000;
+    ctx.clearRect(0,0,W,H);
+
+    // Warm dark background
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#2e0808');bg.addColorStop(1,'#1a0404');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+    // Central clock face
+    const cx=W*.35,cy=H*.5,cr=52;
+    const totalHrs=120;
+    // Cycle: 0→1 represents 120 hours ticking down
+    const cycle=(elapsed*.08)%1;
+    const elapsed_hrs=cycle*totalHrs;
+    const urgency=Math.min(1,elapsed_hrs/72); // 0=urgent green, 1=red at 72h
+
+    // Clock glow
+    ctx.save();ctx.globalAlpha=.2;
+    ctx.beginPath();ctx.arc(cx,cy,cr+16,0,Math.PI*2);
+    const rg=ctx.createRadialGradient(cx,cy,cr,cx,cy,cr+16);
+    const r=Math.round(lerp(200,80,1-urgency)),g=Math.round(lerp(60,180,1-urgency));
+    rg.addColorStop(0,`rgba(${r},${g},60,.5)`);rg.addColorStop(1,'transparent');
+    ctx.fillStyle=rg;ctx.fill();ctx.restore();
+
+    // Clock body
+    ctx.beginPath();ctx.arc(cx,cy,cr,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,.06)';ctx.fill();
+    ctx.strokeStyle=`rgba(${r},${g},60,.7)`;ctx.lineWidth=3;ctx.stroke();
+
+    // Tick marks
+    for(let i=0;i<12;i++){
+      const a=(i/12)*Math.PI*2-Math.PI/2;
+      const r1=cr-4,r2=cr-10;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*r1,cy+Math.sin(a)*r1);
+      ctx.lineTo(cx+Math.cos(a)*r2,cy+Math.sin(a)*r2);
+      ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1.5;ctx.stroke();
+    }
+
+    // Hour hand (showing hours elapsed)
+    const hourA=(elapsed_hrs/12)*(Math.PI*2)-Math.PI/2;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(hourA);
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-cr*.55);
+    ctx.strokeStyle=`rgba(${r+50},${g+50},100,.85)`;ctx.lineWidth=3;ctx.lineCap='round';ctx.stroke();ctx.restore();
+
+    // Minute sweep
+    const minA=(elapsed*.5)%(Math.PI*2)-Math.PI/2;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(minA);
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-cr*.72);
+    ctx.strokeStyle='rgba(255,255,255,.65)';ctx.lineWidth=2;ctx.lineCap='round';ctx.stroke();ctx.restore();
+
+    // Centre dot
+    ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,.8)';ctx.fill();
+
+    // Hours remaining
+    const hrsLeft=Math.max(0,72-elapsed_hrs).toFixed(0);
+    ctx.fillStyle=`rgba(${r+80},${g+80},100,.9)`;ctx.font='700 14px "DM Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillText(hrsLeft+'h',cx,cy+5);
+    ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='600 7px "DM Sans",sans-serif';
+    ctx.fillText('remaining',cx,cy+16);
+
+    // Urgency arc
+    const arcFrac=Math.min(1,elapsed_hrs/72);
+    ctx.beginPath();ctx.arc(cx,cy,cr-4,-Math.PI/2,-Math.PI/2+arcFrac*Math.PI*2,false);
+    ctx.strokeStyle=`rgba(${r},${g},60,.5)`;ctx.lineWidth=5;ctx.stroke();
+
+    // Right panel — options
+    const px=W*.62;
+    // Pill option
+    ctx.save();ctx.globalAlpha=.9;
+    ctx.beginPath();ctx.roundRect(px-36,cy-55,72,42,8);
+    ctx.fillStyle='rgba(255,255,255,.07)';ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.12)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font='16px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('💊',px,cy-42);
+    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='600 8px "DM Sans",sans-serif';ctx.textBaseline='alphabetic';
+    ctx.fillText('Emergency Pill',px,cy-22);ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='500 7px sans-serif';
+    ctx.fillText('up to 72 hours',px,cy-12);
+    // IUD option
+    ctx.beginPath();ctx.roundRect(px-36,cy-4,72,42,8);
+    ctx.fillStyle='rgba(255,255,255,.07)';ctx.fill();
+    ctx.strokeStyle='rgba(255,200,80,.3)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font='16px sans-serif';ctx.textBaseline='middle';ctx.fillText('🩺',px,cy+17);
+    ctx.fillStyle='rgba(255,200,80,.8)';ctx.font='700 8px "DM Sans",sans-serif';ctx.textBaseline='alphabetic';
+    ctx.fillText('IUD — Most Effective',px,cy+37);ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='500 7px sans-serif';
+    ctx.fillText('up to 120 hours',px,cy+47);
+    ctx.restore();
+
+    // Bottom label
+    ctx.save();ctx.globalAlpha=.55;ctx.fillStyle='#e88080';
+    ctx.font='700 9px "DM Sans",sans-serif';ctx.textAlign='center';
+    ctx.fillText('EMERGENCY CONTRACEPTION — ACT QUICKLY',W/2,H-9);ctx.restore();
+
+    // Urgency flash on pill box when < 12 hrs
+    if(elapsed_hrs<12&&Math.sin(elapsed*4)>.5){
+      ctx.save();ctx.globalAlpha=.3;
+      ctx.beginPath();ctx.roundRect(px-38,cy-57,76,44,9);
+      ctx.fillStyle='rgba(255,80,80,.4)';ctx.fill();ctx.restore();
+    }
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>

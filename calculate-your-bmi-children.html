@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BMI Calculator (Children &amp; Teens) – Saluja Clinic · West London GP Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
+  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
+  --white:#fff;--off:#f5f8fc;
+  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
+  --c-under:#60a5fa;
+  --c-healthy:#4ade80;
+  --c-over:#fbbf24;
+  --c-obese:#f97316;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.fu.vis{opacity:1;transform:none}
+.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}
+
+/* UTILITY BAR */
+.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
+.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
+.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
+.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
+.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
+.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
+.lw{display:flex;align-items:center;text-decoration:none}
+.lw svg{height:84px;width:auto}
+nav{display:flex;align-items:center;gap:.25rem}
+nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
+nav a:hover{background:var(--off);color:var(--nhs-blue)}
+nav a.act{color:var(--nhs-blue);font-weight:600}
+.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
+.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.04) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.05) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
+.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
+.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-green);background:rgba(0,127,59,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
+.htag .dot{width:6px;height:6px;background:var(--nhs-green);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,3.6vw,3.6rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--nhs-blue)}
+.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
+.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
+.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+
+/* ── HERO VISUAL — Growth Chart Card ──────────────── */
+.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:400px}
+
+.gc-card{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}
+.gc-card::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+
+/* Top bar */
+.gc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:2}
+.gc-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.gc-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80}
+.gc-ldot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:gclp 1.4s ease-in-out infinite}
+@keyframes gclp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+
+/* Child profile row */
+.gc-profile{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem;position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.7rem .9rem}
+.gc-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;transition:background .6s}
+.gc-pname{font-size:.85rem;font-weight:600;color:#fff;line-height:1.2}
+.gc-page{font-size:.65rem;color:rgba(255,255,255,.4);margin-top:.1rem}
+.gc-pbmi{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin-left:auto;line-height:1}
+.gc-pbmi-lbl{font-size:.58rem;color:rgba(255,255,255,.35);text-align:right;margin-top:.1rem}
+
+/* Chart area */
+.gc-chart-wrap{background:rgba(0,0,0,.3);border-radius:12px;padding:.7rem;border:1px solid rgba(255,255,255,.06);margin-bottom:.9rem;position:relative;z-index:2}
+.gc-chart-lbl{font-size:.58rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:.5rem}
+/* The canvas chart */
+#gcCanvas{display:block;width:100%;border-radius:6px}
+
+/* Category badge */
+.gc-cat{text-align:center;margin-bottom:.9rem;font-size:.74rem;font-weight:700;letter-spacing:.06em;padding:.4rem 1.1rem;border-radius:20px;display:inline-block;position:relative;left:50%;transform:translateX(-50%);z-index:2;transition:all .6s}
+
+/* Percentile row */
+.gc-pct-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;position:relative;z-index:2}
+.gc-pct{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.55rem;text-align:center}
+.gc-pct-v{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:#fff;line-height:1}
+.gc-pct-l{font-size:.58rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+
+/* Floating badges */
+.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
+.hbdot{width:7px;height:7px;border-radius:50%}
+.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
+.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
+@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* WAVE */
+.wave{line-height:0;overflow:hidden}
+.wave svg{display:block;width:100%}
+
+/* CALCULATOR */
+.csec{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.ccard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);position:relative;overflow:hidden}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua),var(--nhs-green))}
+.ctit{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--td);margin-bottom:.4rem}
+.csub{font-size:.88rem;color:var(--ts);margin-bottom:1.8rem;line-height:1.6}
+
+/* Age/sex note banner */
+.notice{background:rgba(0,94,184,.06);border:1.5px solid rgba(0,94,184,.15);border-radius:10px;padding:.9rem 1.1rem;font-size:.84rem;color:var(--tm);margin-bottom:1.6rem;display:flex;gap:.6rem;align-items:flex-start;line-height:1.55}
+.notice-ic{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+
+.fg{display:flex;flex-direction:column;gap:1.3rem}
+.fi{display:flex;flex-direction:column;gap:.5rem}
+.fi label{font-size:.85rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.4rem}
+
+/* Number stepper */
+.niw{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.niw:focus-within{border-color:var(--nhs-blue);box-shadow:0 0 0 3px rgba(0,94,184,.1)}
+.nb{background:var(--off);border:none;width:44px;height:44px;font-size:1.1rem;cursor:pointer;color:var(--tm);transition:background .15s,color .15s}
+.nb:hover{background:var(--nhs-blue);color:#fff}
+.ni{flex:1;border:none;outline:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--td);background:transparent;height:44px}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+
+/* Dual inputs */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.nw2{display:flex;flex-direction:column;gap:.3rem}
+.nlbl{font-size:.74rem;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.05em}
+
+/* Unit toggle */
+.unit-row{display:flex;gap:.6rem;margin-bottom:1.8rem}
+.utab{flex:1;padding:.6rem;border:1.5px solid var(--border);border-radius:8px;background:transparent;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;color:var(--ts);cursor:pointer;transition:all .18s;text-align:center}
+.utab.act{background:var(--nhs-blue);color:#fff;border-color:var(--nhs-blue);font-weight:600}
+.utab:not(.act):hover{border-color:var(--nhs-blue);color:var(--nhs-blue)}
+
+/* Sex selector */
+.seg{display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.sb{flex:1;padding:.7rem;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--ts);transition:background .18s,color .18s}
+.sb.act{background:var(--nhs-blue);color:#fff;font-weight:600}
+.sb:not(.act):hover{background:var(--off);color:var(--nhs-blue)}
+
+.csbtn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,var(--nhs-blue),var(--nhs-aqua));color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.5rem;box-shadow:0 4px 20px rgba(0,94,184,.3);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+.csbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
+.csbtn:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,94,184,.38)}
+.csbtn:hover::after{transform:translateX(100%)}
+
+/* RESULT PANEL */
+.rpanel{display:flex;flex-direction:column;gap:1.4rem}
+.defp{background:var(--off);border:1.5px solid var(--border);border-radius:24px;padding:2.2rem}
+.defp-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--td);margin-bottom:1.2rem}
+.dpi{display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;background:#fff;border-radius:12px;border:1.5px solid var(--border);transition:border-color .2s,box-shadow .2s;margin-bottom:.6rem}
+.dpi:hover{border-color:var(--nhs-lb);box-shadow:0 4px 14px rgba(0,94,184,.07)}
+.dpd{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.dpn{font-weight:600;font-size:.88rem;color:var(--td)}
+.dpr{font-size:.78rem;color:var(--ts);margin-left:auto}
+
+/* Result card */
+.rcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);display:none;flex-direction:column;gap:1.4rem}
+.rcard.show{display:flex;animation:rin .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rin{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+
+/* Percentile gauge bar */
+.pct-bar-outer{position:relative;margin-bottom:1.8rem}
+.pct-bar{display:flex;height:12px;border-radius:99px;overflow:hidden}
+.pb1{flex:2;background:var(--c-under)}
+.pb2{flex:5;background:var(--c-healthy)}
+.pb3{flex:2;background:var(--c-over)}
+.pb4{flex:2;background:var(--c-obese)}
+.pct-needle{position:absolute;top:-5px;width:4px;height:22px;background:var(--td);border-radius:2px;transform:translateX(-50%);transition:left 1s cubic-bezier(.34,1.2,.64,1);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.pct-needle::after{content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:6px solid var(--td)}
+.pct-bar-lbls{display:flex;font-size:.62rem;color:var(--ts);font-weight:600;margin-top:.3rem}
+
+/* Big BMI + percentile */
+.rnum-wrap{display:flex;justify-content:center;gap:2.5rem;padding:1rem 0;flex-wrap:wrap}
+.rnum-block{text-align:center}
+.rnum-v{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:700;line-height:1;color:var(--td)}
+.rnum-l{font-size:.72rem;color:var(--ts);margin-top:.3rem}
+
+/* Stats row */
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:.5rem}
+.rst{background:var(--off);border-radius:12px;padding:.9rem;text-align:center}
+.rstv{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--td);line-height:1}
+.rstl{font-size:.64rem;color:var(--ts);margin-top:.2rem}
+
+/* Category badge */
+.rcat{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.65rem 1.3rem;border-radius:12px;font-weight:700;font-size:.95rem;animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes badge-pop{from{transform:scale(.7)}to{transform:scale(1)}}
+
+/* Verdict */
+.rverd{background:var(--off);border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem}
+.rvi{font-size:1.5rem;flex-shrink:0}
+.rvt{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.rvd{font-size:.84rem;line-height:1.65;color:var(--tm)}
+
+/* Tips */
+.rtips{display:flex;flex-direction:column;gap:.7rem}
+.rti{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem 1rem;background:var(--off);border-radius:10px;font-size:.84rem;line-height:1.55;color:var(--tm);border-left:3px solid var(--nhs-blue)}
+
+/* GP note */
+.gp-note{background:rgba(0,127,59,.06);border:1.5px solid rgba(0,127,59,.2);border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:flex-start;gap:.8rem}
+.gp-ic{font-size:1.1rem;flex-shrink:0}
+.gp-t{font-size:.84rem;font-weight:600;color:var(--td);margin-bottom:.2rem}
+.gp-d{font-size:.8rem;color:var(--tm);line-height:1.55}
+
+.rdis{font-size:.74rem;color:var(--ts);line-height:1.6;padding:.8rem 1rem;background:rgba(0,94,184,.04);border-radius:8px}
+
+/* INFO */
+.info{background:var(--off);padding:4rem 0}
+.info-in{max-width:1200px;margin:0 auto;padding:0 2rem}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.ic{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.ic:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,94,184,.10);border-color:var(--nhs-lb)}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--nhs-blue),var(--nhs-aqua));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.ic:hover::before{transform:scaleX(1)}
+.ic-ic{font-size:1.4rem;margin-bottom:.5rem}
+.ic-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.35rem}
+.ic-d{font-size:.82rem;line-height:1.6;color:var(--tm)}
+
+/* EMERGENCY */
+.emerg{background:var(--td);padding:2.5rem 2rem}
+.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.ec{border-radius:16px;padding:2rem}
+.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
+.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
+.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
+.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+
+/* FOOTER */
+footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
+.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
+.flw svg{height:42px;width:auto;display:block}
+.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
+.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
+.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
+.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
+.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
+.fl a:hover{color:#fff}
+.hg{display:flex;flex-direction:column;gap:.4rem}
+.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
+.hd{color:rgba(255,255,255,.42)}
+.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+
+@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.csec{grid-template-columns:1fr}.igrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.igrid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}}
+@media(max-width:440px){.fi2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="ub">
+  <div class="inn">
+    <div class="ub-l">
+      <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
+      <span class="upill">NHS GP Practice · West London</span>
+    </div>
+    <div class="ub-r">      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hi">
+    <a href="index.html" class="lw">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+    </a>
+    <nav>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="health-information.html" class="act">Health Information</a>
+      <a href="news.html">News</a>
+      <a href="contact-us.html">Contact</a>
+      <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="bc"><a href="/">Home</a><span>›</span><a href="health-information.html">Health Information</a><span>›</span><span>BMI Calculator (Children)</span></div>
+      <div class="htag"><span class="dot"></span>Children's Health</div>
+      <h1>Child &amp; Teen<br><em>BMI Calculator</em></h1>
+      <p>Unlike adults, children's healthy weight range changes with age and sex. This calculator uses NHS centile charts to give you an age-adjusted result and explains what it means for your child's growth.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="#calculator" class="btn-p">Calculate now →</a>
+        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
+      </div>
+    </div>
+
+    <!-- Growth Chart Card -->
+    <div class="hv">
+      <div style="position:relative">
+        <div class="hbadge hb1"><span class="hbdot" style="background:var(--c-healthy)"></span>Ages 2–18 supported</div>
+        <div class="hbadge hb2"><span class="hbdot" style="background:var(--nhs-blue)"></span>NHS centile method</div>
+
+        <div class="gc-card">
+          <!-- Top bar -->
+          <div class="gc-top">
+            <span class="gc-lbl">Growth Chart · BMI-for-Age</span>
+            <span class="gc-live"><span class="gc-ldot"></span>Live</span>
+          </div>
+
+          <!-- Child profile -->
+          <div class="gc-profile">
+            <div class="gc-avatar" id="gcAvatar" style="background:rgba(74,222,128,.15)">🧒</div>
+            <div>
+              <div class="gc-pname" id="gcName">Alex, 9 yrs</div>
+              <div class="gc-page" id="gcSex">Male · 135cm · 30kg</div>
+            </div>
+            <div>
+              <div class="gc-pbmi" id="gcBMI">16.5</div>
+              <div class="gc-pbmi-lbl">BMI</div>
+            </div>
+          </div>
+
+          <!-- Chart canvas -->
+          <div class="gc-chart-wrap">
+            <div class="gc-chart-lbl">BMI Percentile Chart · Age 2–18</div>
+            <canvas id="gcCanvas" width="280" height="110"></canvas>
+          </div>
+
+          <!-- Category badge -->
+          <div class="gc-cat" id="gcCat" style="background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25)">Healthy Weight</div>
+
+          <!-- Percentile stats -->
+          <div class="gc-pct-row">
+            <div class="gc-pct">
+              <div class="gc-pct-v" id="gcPct" style="color:#4ade80">52nd</div>
+              <div class="gc-pct-l">Percentile</div>
+            </div>
+            <div class="gc-pct">
+              <div class="gc-pct-v" id="gcAge">9 yrs</div>
+              <div class="gc-pct-l">Age</div>
+            </div>
+            <div class="gc-pct">
+              <div class="gc-pct-v" id="gcRange">15–19</div>
+              <div class="gc-pct-l">Healthy range</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+
+<!-- CALCULATOR + RESULT -->
+<div class="csec fu" id="calculator">
+
+  <!-- Form -->
+  <div class="ccard">
+    <div class="ctit">📏 Child &amp; Teen BMI Calculator</div>
+    <p class="csub">For children and young people aged 2–17. Results are based on NHS UK90 centile charts and adjusted for age and sex.</p>
+
+    <div class="notice">
+      <span class="notice-ic">ℹ️</span>
+      <span>Child BMI is interpreted differently to adult BMI. A result is compared against other children of the same age and sex — the <strong>centile</strong> position matters more than the BMI number itself.</span>
+    </div>
+
+    <!-- Metric / Imperial toggle -->
+    <div class="unit-row">
+      <button class="utab act" id="tabMetric" onclick="setUnits('metric')">Metric (cm / kg)</button>
+      <button class="utab" id="tabImperial" onclick="setUnits('imperial')">Imperial (ft / lbs)</button>
+    </div>
+
+    <div class="fg">
+
+      <!-- Age -->
+      <div class="fi">
+        <label>🎂 Child's Age (years)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('cage',-1)">−</button>
+          <input class="ni" type="number" id="cage" value="10" min="2" max="17"/>
+          <button class="nb" onclick="step('cage',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Sex -->
+      <div class="fi">
+        <label>⚥ Sex assigned at birth</label>
+        <div class="seg">
+          <button class="sb act" id="sm" onclick="setSex('male')">Male</button>
+          <button class="sb" id="sf" onclick="setSex('female')">Female</button>
+        </div>
+      </div>
+
+      <!-- Height metric -->
+      <div class="fi" id="heightMetric">
+        <label>📏 Height (cm)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('htcm',-1)">−</button>
+          <input class="ni" type="number" id="htcm" value="140" min="70" max="200"/>
+          <button class="nb" onclick="step('htcm',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Height imperial -->
+      <div class="fi" id="heightImperial" style="display:none">
+        <label>📏 Height</label>
+        <div class="dual">
+          <div class="nw2"><div class="nlbl">Feet</div>
+            <div class="niw"><button class="nb" onclick="step('htft',-1)">−</button><input class="ni" type="number" id="htft" value="4" min="2" max="6"/><button class="nb" onclick="step('htft',1)">+</button></div>
+          </div>
+          <div class="nw2"><div class="nlbl">Inches</div>
+            <div class="niw"><button class="nb" onclick="step('htin',-1)">−</button><input class="ni" type="number" id="htin" value="7" min="0" max="11"/><button class="nb" onclick="step('htin',1)">+</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weight metric -->
+      <div class="fi" id="weightMetric">
+        <label>⚖️ Weight (kg)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('wtkg',-.5)">−</button>
+          <input class="ni" type="number" id="wtkg" value="34" min="5" max="150" step="0.5"/>
+          <button class="nb" onclick="step('wtkg',.5)">+</button>
+        </div>
+      </div>
+
+      <!-- Weight imperial -->
+      <div class="fi" id="weightImperial" style="display:none">
+        <label>⚖️ Weight (lbs)</label>
+        <div class="niw">
+          <button class="nb" onclick="step('wtlbs',-1)">−</button>
+          <input class="ni" type="number" id="wtlbs" value="75" min="11" max="330"/>
+          <button class="nb" onclick="step('wtlbs',1)">+</button>
+        </div>
+      </div>
+
+    </div>
+    <button class="csbtn" onclick="calcChildBMI()">Calculate →</button>
+    <p style="font-size:.75rem;color:var(--ts);margin-top:1rem;line-height:1.6">For children aged 2–17 only. For adults (18+) please use our <a href="bmi-calculator.html" style="color:var(--nhs-blue)">Adult BMI Calculator</a>. This tool is a guide only — always discuss results with your GP.</p>
+  </div>
+
+  <!-- Result panel -->
+  <div class="rpanel">
+
+    <!-- Default — centile explanation -->
+    <div class="defp" id="defp">
+      <div class="defp-t">How child BMI works</div>
+      <div class="dpi"><div class="dpd" style="background:var(--c-under)"></div><span class="dpn">Underweight</span><span class="dpr">Below 2nd centile</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--c-healthy)"></div><span class="dpn">Healthy weight</span><span class="dpr">2nd – 91st centile</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--c-over)"></div><span class="dpn">Overweight</span><span class="dpr">91st – 98th centile</span></div>
+      <div class="dpi"><div class="dpd" style="background:var(--c-obese)"></div><span class="dpn">Very overweight (obese)</span><span class="dpr">98th centile or above</span></div>
+      <p style="font-size:.78rem;color:var(--ts);margin-top:1rem;line-height:1.6">The centile shows how your child's BMI compares to other children of the same age and sex in the UK. A 50th centile means half of children have a higher BMI and half a lower one — it says nothing about height or muscularity.</p>
+    </div>
+
+    <!-- Result card -->
+    <div class="rcard" id="rcard">
+
+      <!-- Percentile bar -->
+      <div class="pct-bar-outer">
+        <div class="pct-bar">
+          <div class="pb1"></div><div class="pb2"></div><div class="pb3"></div><div class="pb4"></div>
+        </div>
+        <div class="pct-needle" id="pctNeedle" style="left:40%"></div>
+        <div class="pct-bar-lbls">
+          <div style="flex:2;text-align:center">Under</div>
+          <div style="flex:5;text-align:center">Healthy</div>
+          <div style="flex:2;text-align:center">Over</div>
+          <div style="flex:2;text-align:center">Obese</div>
+        </div>
+      </div>
+
+      <!-- Numbers -->
+      <div class="rnum-wrap">
+        <div class="rnum-block">
+          <div class="rnum-v" id="rBMI">—</div>
+          <div class="rnum-l">BMI (kg/m²)</div>
+        </div>
+        <div class="rnum-block">
+          <div class="rnum-v" id="rPct" style="color:var(--nhs-blue)">—</div>
+          <div class="rnum-l">Centile</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="rstats">
+        <div class="rst"><div class="rstv" id="rAge">—</div><div class="rstl">Age</div></div>
+        <div class="rst"><div class="rstv" id="rHt">—</div><div class="rstl">Height</div></div>
+        <div class="rst"><div class="rstv" id="rWt">—</div><div class="rstl">Weight</div></div>
+      </div>
+
+      <!-- Category badge -->
+      <div class="rcat" id="rCat"></div>
+
+      <!-- Verdict -->
+      <div class="rverd">
+        <div class="rvi" id="rIcon">💬</div>
+        <div><div class="rvt" id="rTitle"></div><div class="rvd" id="rDesc"></div></div>
+      </div>
+
+      <!-- GP note -->
+      <div class="gp-note">
+        <div class="gp-ic">🏥</div>
+        <div><div class="gp-t">Speak to your GP</div><div class="gp-d" id="rGP">Your GP can provide a full assessment in context of your child's growth trajectory, diet, activity level, and overall health.</div></div>
+      </div>
+
+      <!-- Tips -->
+      <div class="rtips" id="rtips"></div>
+
+      <div class="rdis">This result is a guide only and uses an approximate centile estimation. NHS centile charts involve sex-specific lookup tables — precise centiles require clinical assessment. This tool does not replace medical advice. Please speak to your GP.</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO SECTION -->
+<section class="info">
+  <div class="info-in">
+    <div style="text-align:center;max-width:680px;margin:0 auto">
+      <div style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-aqua);margin-bottom:.5rem">Supporting healthy growth</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">What <em style="font-style:normal;color:var(--nhs-blue)">matters most</em> for children's health</h2>
+      <p style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">Weight is just one part of the picture. These factors support healthy growth and long-term wellbeing.</p>
+    </div>
+    <div class="igrid fu">
+      <div class="ic">
+        <div class="ic-ic">🏃</div>
+        <div class="ic-t">Physical Activity</div>
+        <div class="ic-d">Children aged 5–17 should aim for at least 60 minutes of moderate-to-vigorous activity daily. This supports healthy weight, bone development, and mental wellbeing.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">🥦</div>
+        <div class="ic-t">Balanced Diet</div>
+        <div class="ic-d">Plenty of fruits, vegetables, wholegrains, and lean protein — alongside limiting sugary drinks and ultra-processed foods — supports healthy growth without restrictive dieting.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">📺</div>
+        <div class="ic-t">Screen Time</div>
+        <div class="ic-d">Excessive sedentary screen time is linked to increased snacking and reduced sleep quality. Balancing screen use with active play is encouraged by NHS guidelines.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">😴</div>
+        <div class="ic-t">Sleep</div>
+        <div class="ic-d">Children aged 6–12 need 9–12 hours of sleep per night; teens 8–10 hours. Poor sleep disrupts appetite-regulating hormones and can contribute to weight gain.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">💬</div>
+        <div class="ic-t">Body Image &amp; Wellbeing</div>
+        <div class="ic-d">How you discuss weight with children matters enormously. Focus on health, energy, and strength — not size or appearance — to support positive body image.</div>
+      </div>
+      <div class="ic">
+        <div class="ic-ic">👨‍⚕️</div>
+        <div class="ic-t">GP Assessment</div>
+        <div class="ic-d">If you're concerned about your child's weight or growth, your GP can review their growth trajectory over time — a single measurement is rarely the full picture.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMERGENCY -->
+<section class="emerg">
+  <div class="emerg-in">
+    <div class="ec e111">
+      <div class="el">Non-Emergency Medical Advice</div>
+      <div class="en">NHS 111</div>
+      <div class="ed">For urgent medical questions that aren't life-threatening — available 24 hours a day, 7 days a week online or by phone.</div>
+    </div>
+    <div class="ec e999">
+      <div class="el">Life-Threatening Emergency</div>
+      <div class="en">999</div>
+      <div class="ed">Call 999 immediately if a child is experiencing a medical emergency such as difficulty breathing, loss of consciousness, or severe allergic reaction.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi2">
+    <div>
+      <div class="flw">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
+      </div>
+      <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the health and wellbeing of our patients and their families.</p>
+      <div class="fadr">
+        36A Northcote Avenue, Southall, UB1 2AY<br>
+        <a href="tel:02085745136">0208 574 5136</a><br>        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Quick Links</div>
+      <ul class="fl">
+        <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
+        <li><a href="appointments.html">Appointments</a></li>
+        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+        <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Opening Hours</div>
+      <div class="hg">
+        <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
+        <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
+        <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Useful Links</div>
+      <ul class="fl">
+        <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
+        <li><a href="https://www.nhs.uk/" target="_blank">NHS Website</a></li>
+        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
+        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+        <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
+  </div>
+</footer>
+
+<script>
+/* ===== FADE UP ===== */
+var fo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08});
+document.querySelectorAll('.fu').forEach(function(el){fo.observe(el)});
+
+/* ===== GROWTH CHART CANVAS ANIMATION ===== */
+(function(){
+  var canvas=document.getElementById('gcCanvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width,H=canvas.height;
+
+  /* Age axis: 2–18, mapped to x=10..W-10
+     BMI axis: 10–35, mapped to y=H-8..8            */
+  function xOf(age){ return 10+(age-2)/(18-2)*(W-20); }
+  function yOf(bmi){ return (H-8)-(bmi-10)/(35-10)*(H-16); }
+
+  /* Approximate UK90 centile curves (male) — smoothed key points */
+  /* Format: [age, bmi] pairs for each centile */
+  var c2  =[[2,14.8],[4,14.5],[6,14.2],[8,14.5],[10,15.2],[12,16.2],[14,17.2],[16,18.0],[18,18.5]];
+  var c9  =[[2,15.6],[4,15.2],[6,14.9],[8,15.4],[10,16.3],[12,17.5],[14,18.8],[16,19.8],[18,20.5]];
+  var c25 =[[2,16.2],[4,15.8],[6,15.5],[8,16.1],[10,17.2],[12,18.6],[14,20.1],[16,21.2],[18,22.0]];
+  var c50 =[[2,16.8],[4,16.4],[6,16.1],[8,16.8],[10,18.0],[12,19.6],[14,21.3],[16,22.5],[18,23.5]];
+  var c75 =[[2,17.6],[4,17.2],[6,17.0],[8,17.8],[10,19.2],[12,21.0],[14,22.9],[16,24.2],[18,25.2]];
+  var c91 =[[2,18.5],[4,18.1],[6,17.9],[8,18.8],[10,20.4],[12,22.4],[14,24.5],[16,26.0],[18,27.0]];
+  var c98 =[[2,19.8],[4,19.4],[6,19.2],[8,20.3],[10,22.1],[12,24.4],[14,26.8],[16,28.4],[18,29.5]];
+
+  function drawCurve(pts,colour,lw,dash){
+    ctx.beginPath();
+    ctx.strokeStyle=colour;ctx.lineWidth=lw||1;
+    if(dash)ctx.setLineDash(dash); else ctx.setLineDash([]);
+    pts.forEach(function(p,i){
+      var x=xOf(p[0]),y=yOf(p[1]);
+      if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function drawZones(){
+    /* Fill zones between centile lines */
+    /* Underweight: below c2 */
+    ctx.beginPath();
+    c2.forEach(function(p,i){var x=xOf(p[0]),y=yOf(p[1]);if(i===0)ctx.moveTo(x,H-8);else ctx.lineTo(x,yOf(p[1]));});
+    ctx.lineTo(xOf(18),H-8);ctx.closePath();
+    ctx.fillStyle='rgba(96,165,250,.15)';ctx.fill();
+
+    /* Healthy: c2–c91 */
+    ctx.beginPath();
+    c91.forEach(function(p,i){var x=xOf(p[0]),y=yOf(p[1]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+    for(var i=c2.length-1;i>=0;i--){ctx.lineTo(xOf(c2[i][0]),yOf(c2[i][1]));}
+    ctx.closePath();ctx.fillStyle='rgba(74,222,128,.12)';ctx.fill();
+
+    /* Overweight: c91–c98 */
+    ctx.beginPath();
+    c98.forEach(function(p,i){var x=xOf(p[0]),y=yOf(p[1]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+    for(var i=c91.length-1;i>=0;i--){ctx.lineTo(xOf(c91[i][0]),yOf(c91[i][1]));}
+    ctx.closePath();ctx.fillStyle='rgba(251,191,36,.15)';ctx.fill();
+
+    /* Obese: above c98 */
+    ctx.beginPath();
+    c98.forEach(function(p,i){var x=xOf(p[0]),y=yOf(p[1]);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+    ctx.lineTo(xOf(18),8);ctx.lineTo(xOf(2),8);ctx.closePath();
+    ctx.fillStyle='rgba(249,115,22,.12)';ctx.fill();
+  }
+
+  function drawGrid(){
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=0.5;
+    /* vertical age lines */
+    for(var a=2;a<=18;a+=2){
+      ctx.beginPath();ctx.moveTo(xOf(a),0);ctx.lineTo(xOf(a),H);ctx.stroke();
+    }
+    /* horizontal bmi lines */
+    for(var b=10;b<=35;b+=5){
+      ctx.beginPath();ctx.moveTo(0,yOf(b));ctx.lineTo(W,yOf(b));ctx.stroke();
+    }
+  }
+
+  /* Axis labels */
+  function drawLabels(){
+    ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='bold 7px DM Sans,sans-serif';ctx.textAlign='center';
+    [2,6,10,14,18].forEach(function(a){ctx.fillText(a,xOf(a),H-1);});
+    ctx.textAlign='left';
+    [15,20,25,30].forEach(function(b){ctx.fillText(b,2,yOf(b)+3);});
+  }
+
+  /* Animated dot that travels along a path */
+  var dotAge=9, dotBMI=16.5, dotTargetAge=9, dotTargetBMI=16.5;
+  var dotX=xOf(dotAge),dotY=yOf(dotBMI);
+  var trailPts=[];
+
+  function lerp(a,b,t){return a+(b-a)*t;}
+
+  /* Demo profiles cycling */
+  var DEMOS=[
+    {name:'Alex, 9 yrs', sex:'Male',   age:9,  ht:'135cm',wt:'30kg',  bmi:16.5, pct:52,  cat:'Healthy Weight', bg:'rgba(74,222,128,.15)',col:'#4ade80',brd:'rgba(74,222,128,.25)',avatar:'🧒',range:'15–19'},
+    {name:'Sofia, 6 yrs',sex:'Female', age:6,  ht:'118cm',wt:'20kg',  bmi:14.4, pct:8,   cat:'Healthy Weight', bg:'rgba(74,222,128,.15)',col:'#4ade80',brd:'rgba(74,222,128,.25)',avatar:'👧',range:'13–18'},
+    {name:'Josh, 14 yrs',sex:'Male',   age:14, ht:'162cm',wt:'72kg',  bmi:27.4, pct:93,  cat:'Overweight',     bg:'rgba(251,191,36,.15)',col:'#fbbf24',brd:'rgba(251,191,36,.25)',avatar:'🧒',range:'18–24'},
+    {name:'Emma, 12 yrs',sex:'Female', age:12, ht:'152cm',wt:'39kg',  bmi:16.9, pct:33,  cat:'Healthy Weight', bg:'rgba(74,222,128,.15)',col:'#4ade80',brd:'rgba(74,222,128,.25)',avatar:'👧',range:'15–22'},
+    {name:'Tom, 16 yrs', sex:'Male',   age:16, ht:'176cm',wt:'98kg',  bmi:31.6, pct:99,  cat:'Very Overweight', bg:'rgba(249,115,22,.15)',col:'#fb923c',brd:'rgba(249,115,22,.25)',avatar:'🧒',range:'19–26'},
+    {name:'Aisha, 4 yrs',sex:'Female', age:4,  ht:'102cm',wt:'14.5kg',bmi:13.9, pct:5,   cat:'Healthy Weight', bg:'rgba(74,222,128,.15)',col:'#4ade80',brd:'rgba(74,222,128,.25)',avatar:'👧',range:'13–17'},
+  ];
+  var di=0;
+
+  function applyDemo(d){
+    dotTargetAge=d.age;dotTargetBMI=d.bmi;
+    document.getElementById('gcName').textContent=d.name;
+    document.getElementById('gcSex').textContent=d.sex+' · '+d.ht+' · '+d.wt;
+    animNum('gcBMI',parseFloat(document.getElementById('gcBMI').textContent)||16.5,d.bmi,800,1);
+    animNum('gcPct',parseInt(document.getElementById('gcPct').textContent)||52,d.pct,800,0,ordinal);
+    document.getElementById('gcAge').textContent=(d.age<10?d.age+' yrs':d.age+' yrs');
+    document.getElementById('gcRange').textContent=d.range;
+    document.getElementById('gcAvatar').textContent=d.avatar;
+    document.getElementById('gcAvatar').style.background=d.bg;
+    var cat=document.getElementById('gcCat');
+    cat.textContent=d.cat;cat.style.background=d.bg;cat.style.color=d.col;cat.style.border='1px solid '+d.brd;
+  }
+
+  function ordinal(n){
+    var s=['th','st','nd','rd'],v=n%100;
+    return n+(s[(v-20)%10]||s[v]||s[0]);
+  }
+
+  function animNum(id,from,to,dur,dec,fmt){
+    var el=document.getElementById(id);if(!el)return;
+    var s=null;
+    function t(ts){
+      if(!s)s=ts;var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
+      var v=from+(to-from)*e;
+      el.textContent=fmt?fmt(Math.round(v)):(dec?v.toFixed(dec):Math.round(v));
+      if(p<1)requestAnimationFrame(t);
+    }
+    requestAnimationFrame(t);
+  }
+
+  /* Main render loop */
+  var animFrame=0;
+  function render(){
+    animFrame++;
+    ctx.clearRect(0,0,W,H);
+    drawGrid();
+    drawZones();
+
+    /* Centile curves */
+    drawCurve(c2,  'rgba(96,165,250,.5)', 1);
+    drawCurve(c9,  'rgba(96,165,250,.3)', 0.7);
+    drawCurve(c25, 'rgba(74,222,128,.3)', 0.7);
+    drawCurve(c50, 'rgba(74,222,128,.6)', 1.2);
+    drawCurve(c75, 'rgba(74,222,128,.3)', 0.7);
+    drawCurve(c91, 'rgba(251,191,36,.5)', 1);
+    drawCurve(c98, 'rgba(249,115,22,.5)', 1);
+
+    /* Labels */
+    drawLabels();
+
+    /* Move dot toward target */
+    var tx=xOf(dotTargetAge),ty=yOf(dotTargetBMI);
+    dotX=lerp(dotX,tx,0.04);
+    dotY=lerp(dotY,ty,0.04);
+
+    /* Trail */
+    trailPts.push({x:dotX,y:dotY});
+    if(trailPts.length>40)trailPts.shift();
+
+    /* Draw trail */
+    if(trailPts.length>1){
+      ctx.beginPath();
+      trailPts.forEach(function(p,i){
+        ctx.lineWidth=0.8;
+        ctx.strokeStyle='rgba(255,255,255,'+(i/trailPts.length*0.4)+')';
+        if(i===0)ctx.moveTo(p.x,p.y);else{ctx.lineTo(p.x,p.y);ctx.stroke();ctx.beginPath();ctx.moveTo(p.x,p.y);}
+      });
+    }
+
+    /* Animated dot */
+    ctx.beginPath();
+    ctx.arc(dotX,dotY,4.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,0.95)';
+    ctx.shadowColor='#fff';ctx.shadowBlur=10;
+    ctx.fill();ctx.shadowBlur=0;
+
+    /* Inner dot colour */
+    ctx.beginPath();ctx.arc(dotX,dotY,2.5,0,Math.PI*2);
+    ctx.fillStyle='#1a1a2e';ctx.fill();
+
+    requestAnimationFrame(render);
+  }
+
+  applyDemo(DEMOS[0]);
+  render();
+  setInterval(function(){di=(di+1)%DEMOS.length;applyDemo(DEMOS[di]);},3200);
+})();
+
+/* ===== UNIT / SEX TOGGLE ===== */
+var units='metric',sex='male';
+function setUnits(u){
+  units=u;
+  document.getElementById('tabMetric').classList.toggle('act',u==='metric');
+  document.getElementById('tabImperial').classList.toggle('act',u==='imperial');
+  document.getElementById('heightMetric').style.display=u==='metric'?'':'none';
+  document.getElementById('heightImperial').style.display=u==='imperial'?'':'none';
+  document.getElementById('weightMetric').style.display=u==='metric'?'':'none';
+  document.getElementById('weightImperial').style.display=u==='imperial'?'':'none';
+}
+function setSex(s){
+  sex=s;
+  document.getElementById('sm').classList.toggle('act',s==='male');
+  document.getElementById('sf').classList.toggle('act',s==='female');
+}
+function step(id,d){
+  var el=document.getElementById(id);
+  var v=parseFloat(el.value)+d;
+  v=Math.min(Math.max(v,parseFloat(el.min)),parseFloat(el.max));
+  el.value=id==='wtkg'?v.toFixed(1):Math.round(v);
+}
+
+/* ===== CHILD BMI CALCULATOR ===== */
+/*  Approximate centile lookup using LMS method (simplified).
+    We use representative median (M) and SD approximations for UK90 charts.
+    This gives a reasonable centile estimate — sufficient for a patient-facing guide.
+    Exact clinical centiles require full LMS tables beyond scope here.          */
+
+/* Median BMI-for-age (50th centile) — male & female, ages 2–17 */
+var medBMI={
+  male:  [16.8,16.4,16.0,15.7,15.5,15.5,15.7,16.0,16.5,17.1,17.9,18.7,19.5,20.3,21.0,21.6],
+  female:[16.7,16.2,15.8,15.5,15.3,15.4,15.6,16.0,16.6,17.3,18.1,19.0,19.8,20.5,21.0,21.4]
+};
+/* Approximate SD (between 2nd and 98th spans ~2.4 SD units for child BMI) */
+var sdBMI={
+  male:  [1.6,1.5,1.4,1.4,1.4,1.4,1.5,1.6,1.8,2.0,2.2,2.4,2.6,2.7,2.8,2.8],
+  female:[1.6,1.5,1.5,1.4,1.4,1.5,1.5,1.7,1.9,2.1,2.3,2.6,2.7,2.8,2.9,2.9]
+};
+
+function normCDF(z){
+  /* Abramowitz & Stegun approximation */
+  var t=1/(1+0.2316419*Math.abs(z));
+  var d=0.3989423*Math.exp(-z*z/2);
+  var p=d*t*(0.3193815+t*(-0.3565638+t*(1.7814779+t*(-1.8212560+t*1.3302744))));
+  return z>0?1-p:p;
+}
+
+function calcChildBMI(){
+  var age=parseInt(document.getElementById('cage').value)||10;
+  var htM,wtKg,htStr,wtStr;
+
+  if(units==='metric'){
+    var cm=parseFloat(document.getElementById('htcm').value)||140;
+    htM=cm/100;htStr=cm+'cm';
+    wtKg=parseFloat(document.getElementById('wtkg').value)||34;
+    wtStr=wtKg.toFixed(1)+'kg';
+  } else {
+    var ft=parseFloat(document.getElementById('htft').value)||4;
+    var inp=parseFloat(document.getElementById('htin').value)||7;
+    htM=(ft*12+inp)*0.0254;htStr=ft+"'"+inp+'"';
+    wtKg=parseFloat(document.getElementById('wtlbs').value)*0.453592;
+    wtStr=document.getElementById('wtlbs').value+'lbs';
+  }
+
+  var bmi=wtKg/(htM*htM);
+  var bmiR=Math.round(bmi*10)/10;
+
+  /* Centile estimate */
+  var ageIdx=Math.min(Math.max(age-2,0),15);
+  var med=medBMI[sex][ageIdx];
+  var sd=sdBMI[sex][ageIdx];
+  var z=(bmi-med)/sd;
+  var pct=Math.round(normCDF(z)*100);
+  pct=Math.min(Math.max(pct,1),99);
+
+  /* Category using UK90 thresholds */
+  var cat,catColour,catBg,catBrd,icon,title,desc,gpNote,needleLeft;
+  var tips=[];
+
+  if(pct<2){
+    cat='Underweight';catColour='#2563eb';catBg='rgba(37,99,235,.1)';catBrd='rgba(37,99,235,.25)';
+    icon='⚠️';title='Your child\'s BMI suggests they may be underweight';
+    desc='A BMI below the 2nd centile may indicate inadequate nutrition or an underlying health condition. This does not cause panic — growth patterns vary — but a GP review is recommended.';
+    gpNote='Please book an appointment so your GP can review your child\'s growth chart over time and check for any underlying causes.';
+    tips=['🥛 Focus on nutrient-rich foods: dairy, eggs, beans, wholegrains, and healthy fats.','🍽️ Offer regular, balanced meals and healthy snacks — avoid pressure to eat.','📏 Track height growth too — a consistent pattern often matters more than a single number.'];
+    needleLeft=Math.max(2,pct)+'%';
+  } else if(pct<=91){
+    cat='Healthy Weight';catColour='#15803d';catBg='rgba(21,128,61,.1)';catBrd='rgba(21,128,61,.25)';
+    icon='✅';title='Your child\'s BMI is in the healthy range';
+    desc='A result between the 2nd and 91st centile is considered a healthy weight for their age and sex. Continue supporting healthy habits — active play, balanced meals, and good sleep.';
+    gpNote='No immediate action needed, but routine growth checks at school or with your GP are valuable for tracking trends over time.';
+    tips=['🏃 Encourage 60 minutes of active play or sport daily.','🥦 Keep meals varied with plenty of vegetables, wholegrains and protein.','📱 Balance screen time with outdoor and physical activities.'];
+    needleLeft=(5+pct/100*72)+'%';
+  } else if(pct<=98){
+    cat='Overweight';catColour='#b45309';catBg='rgba(180,83,9,.1)';catBrd='rgba(180,83,9,.25)';
+    icon='💛';title='Your child\'s BMI falls in the overweight range';
+    desc='A result between the 91st and 98th centile suggests the weight may be higher than ideal. This is not unusual and can be addressed gently through lifestyle habits — avoiding restrictive dieting in children is important.';
+    gpNote='A GP can review your child\'s growth trajectory and refer to a community weight management programme if appropriate.';
+    tips=['🚶 Build activity into everyday routines — walking to school, park visits, active play.','🍬 Gently reduce sugary drinks and ultra-processed snacks without making it a focus.','💬 Avoid commenting on weight with the child — focus on health and energy instead.','🥗 Cook together — involving children in meal preparation improves food choices long term.'];
+    needleLeft=(77+((pct-91)/7)*10)+'%';
+  } else {
+    cat='Very Overweight';catColour='#c2410c';catBg='rgba(194,65,12,.1)';catBrd='rgba(194,65,12,.25)';
+    icon='🔴';title='Your child\'s BMI is above the 98th centile';
+    desc='A result at or above the 98th centile is classified as very overweight (obese). This carries increased risk of health complications and warrants a GP review. Support and specialist referral is available.';
+    gpNote='Please book an appointment. Your GP can assess the full clinical picture and refer to CAMHS, dietetics, or a specialist weight management service if indicated.';
+    tips=['🏥 Book a GP appointment — professional support is available and effective.','🧸 Emotional and psychological support is often as important as dietary advice.','🏊 Low-impact activity such as swimming or cycling is a good starting point.','👨‍👩‍👧 Family-based approaches to lifestyle change are more effective than targeting only the child.'];
+    needleLeft='92%';
+  }
+
+  /* Needle mapping: 0-2% → 0-9%, 2-91% → 9-77%, 91-98% → 77-88%, 98-100% → 88-100% */
+  var nl;
+  if(pct<2)       nl=pct/2*9;
+  else if(pct<=91)nl=9+(pct-2)/89*68;
+  else if(pct<=98)nl=77+(pct-91)/7*11;
+  else            nl=88+(pct-98)/2*12;
+
+  /* Show results */
+  document.getElementById('defp').style.display='none';
+  var rc=document.getElementById('rcard');
+  rc.classList.add('show');
+
+  animNumR('rBMI',0,bmiR,900,1);
+  document.getElementById('rPct').textContent=ordinalR(pct);
+  document.getElementById('rAge').textContent=age+' yrs';
+  document.getElementById('rHt').textContent=htStr;
+  document.getElementById('rWt').textContent=wtStr;
+
+  var catEl=document.getElementById('rCat');
+  catEl.textContent='● '+cat;
+  catEl.style.background=catBg;catEl.style.color=catColour;catEl.style.border='1.5px solid '+catBrd;
+
+  document.getElementById('rIcon').textContent=icon;
+  document.getElementById('rTitle').textContent=title;
+  document.getElementById('rDesc').textContent=desc;
+  document.getElementById('rGP').textContent=gpNote;
+  document.getElementById('rtips').innerHTML=tips.map(function(t){return'<div class="rti">'+t+'</div>';}).join('');
+
+  setTimeout(function(){document.getElementById('pctNeedle').style.left=nl+'%';},200);
+  rc.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function ordinalR(n){
+  var s=['th','st','nd','rd'],v=n%100;
+  return n+(s[(v-20)%10]||s[v]||s[0]);
+}
+
+function animNumR(id,from,to,dur,dec){
+  var el=document.getElementById(id);if(!el)return;
+  var s=null;
+  function t(ts){
+    if(!s)s=ts;var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
+    var v=from+(to-from)*e;
+    el.textContent=dec?v.toFixed(dec):Math.round(v);
+    if(p<1)requestAnimationFrame(t);
+  }
+  requestAnimationFrame(t);
+}
+</script>
+</body>
+</html>
