@@ -206,6 +206,20 @@
       .footer-inner { grid-template-columns: 1fr; }
       nav { display: none; }
     }
+
+    @media (min-width: 300px) and (max-width: 500px) {
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 !important;
+        padding: 0 !important;
+
+      }
+
+      .lw svg {
+        height: 60px;
+        width: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -274,12 +288,12 @@
       </svg>
     </a>
     <nav>
-      <a href="/">Home</a>
-      <a href="news.html">News</a>
-      <a href="clinics-and-services.html">Services</a>
-      <a href="practice-policies-patient-information.html" class="active">Our Practice</a>
-      <a href="health-information.html">Health Info</a>
-      <a href="contact-us.html">Contact</a>
+      <a href="news.html" target="_blank">News</a>
+      <a href="clinics-and-services.html">Clinics &amp; Services</a>
+      <a href="practice-policies-patient-information.html">Our Practice</a>
+
+      <a href="health-information.html" target="_blank">Health Information</a>
+      <a href="contact-us.html">Contact Us</a>
       <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment</a>
     </nav>
   </div>
@@ -288,7 +302,7 @@
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
   <div class="inner">
-    <a href="/">Home</a>
+    <a href="index.html">Home</a>
     <span class="sep">›</span>
     <a href="practice-policies-patient-information.html">Our Practice</a>
     <span class="sep">›</span>

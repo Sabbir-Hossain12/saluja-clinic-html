@@ -1,1218 +1,2310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cancer Screening – Saluja Clinic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
-      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
-      --white:#ffffff; --off-white:#f5f8fc;
-      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
-      /* per-cancer accent colours */
-      --bowel:  #2d8a4e;
-      --breast: #c0497a;
-      --cervical:#5b4bb8;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cancer Screening – Saluja Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --nhs-warm-yellow: #FFB81C;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+            /* per-cancer accent colours */
+            --bowel: #2d8a4e;
+            --breast: #c0497a;
+            --cervical: #5b4bb8;
+        }
 
-    /* ── UTILITY BAR ─────────────────────────────────────── */
-    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
-    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}
-    .utility-bar a:hover{color:#fff}
-    .utility-bar .emer{display:flex;align-items:center;gap:1.5rem}
-    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-    /* ── HEADER ──────────────────────────────────────────── */
-    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
-    .logo-wrap svg{height:84px;width:auto}
-    nav{display:flex;align-items:center;gap:.25rem}
-    nav a{font-size:.88rem;font-weight:500;letter-spacing:.02em;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
-    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
-    .nav-cta{background:var(--nhs-blue)!important;color:var(--white)!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25);transition:background .2s,transform .15s!important}
-    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+        html {
+            scroll-behavior: smooth
+        }
 
-    /* ── PAGE BANNER ─────────────────────────────────────── */
-    .page-banner{background:var(--white);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3.2rem;position:relative;overflow:hidden}
-    .page-banner::before{content:'';position:absolute;top:-80px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
-    .page-banner::after{content:'';position:absolute;bottom:-60px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(0,159,187,.06) 0%,transparent 70%);pointer-events:none}
-    .page-banner-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
-    .breadcrumb a{color:var(--text-soft);text-decoration:none}.breadcrumb a:hover{color:var(--nhs-blue)}
-    .breadcrumb-sep{opacity:.4}
-    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,94,184,.07);border:1px solid rgba(0,94,184,.15);border-radius:20px;padding:.3rem .9rem;color:var(--nhs-blue);margin-bottom:1.1rem}
-    .page-tag span{width:6px;height:6px;background:var(--nhs-blue);border-radius:50%}
-    .page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:.9rem}
-    .page-banner h1 em{font-style:normal;color:var(--nhs-blue)}
-    .page-banner-sub{font-size:1rem;color:var(--text-mid);max-width:640px;line-height:1.7}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden
+        }
 
-    /* ── SCREENING COUNT STRIP ───────────────────────────── */
-    .count-strip{background:var(--nhs-blue);padding:0}
-    .count-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
-    .count-item{padding:1.8rem 1.6rem;text-align:center;border-right:1px solid rgba(255,255,255,.15);color:var(--white)}
-    .count-item:last-child{border-right:none}
-    .count-num{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;line-height:1;margin-bottom:.3rem}
-    .count-label{font-size:.85rem;font-weight:500;opacity:.85}
-    .count-sub{font-size:.74rem;opacity:.6;margin-top:.2rem}
+        /* ── UTILITY BAR ─────────────────────────────────────── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .85);
+            font-size: .78rem;
+            letter-spacing: .03em;
+            padding: .45rem 0
+        }
 
-    /* ── SECTION COMMON ──────────────────────────────────── */
-    .section-inner{max-width:1200px;margin:0 auto}
-    .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nhs-blue);margin-bottom:.6rem}
-    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
-    h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text-dark);margin-bottom:.6rem}
-    .section-lead{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
 
-    /* ── CANCER SECTIONS ─────────────────────────────────── */
-    .cancer-section{padding:5rem 2rem}
-    .cancer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
-    .cancer-inner.reverse{direction:rtl}
-    .cancer-inner.reverse>*{direction:ltr}
+        .utility-bar a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
 
-    /* Canvas cards */
-    .canvas-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:1.4rem;box-shadow:0 8px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
-    .canvas-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
-    .canvas-card.bowel::before{background:linear-gradient(90deg,var(--bowel),#82c99a)}
-    .canvas-card.breast::before{background:linear-gradient(90deg,var(--breast),#e8849a)}
-    .canvas-card.cervical::before{background:linear-gradient(90deg,var(--cervical),#a08cdf)}
-    .canvas-card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
-    .canvas-card-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--nhs-dark)}
-    .phase-badge{font-size:.71rem;font-weight:700;letter-spacing:.07em;padding:.22rem .75rem;border-radius:20px;transition:all .4s;text-transform:uppercase}
-    .phase-badge.bowel{background:rgba(45,138,78,.1);color:var(--bowel)}
-    .phase-badge.breast{background:rgba(192,73,122,.1);color:var(--breast)}
-    .phase-badge.cervical{background:rgba(91,75,184,.1);color:var(--cervical)}
-    canvas.anim{width:100%;height:auto;border-radius:10px;display:block;border:1px solid var(--border)}
+        .utility-bar a:hover {
+            color: #fff
+        }
 
-    /* Phase dots */
-    .phase-dots{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem}
-    .pdot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .4s,transform .4s}
-    .pdot.active.bowel{background:var(--bowel);transform:scale(1.4)}
-    .pdot.active.breast{background:var(--breast);transform:scale(1.4)}
-    .pdot.active.cervical{background:var(--cervical);transform:scale(1.4)}
+        .utility-bar .emer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem
+        }
 
-    /* Content side */
-    .cancer-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:20px;padding:.28rem .85rem;margin-bottom:1rem}
-    .cancer-tag.bowel{background:rgba(45,138,78,.1);color:var(--bowel)}
-    .cancer-tag.breast{background:rgba(192,73,122,.1);color:var(--breast)}
-    .cancer-tag.cervical{background:rgba(91,75,184,.1);color:var(--cervical)}
-    .cancer-tag span{width:6px;height:6px;border-radius:50%}
-    .cancer-tag.bowel span{background:var(--bowel)}
-    .cancer-tag.breast span{background:var(--breast)}
-    .cancer-tag.cervical span{background:var(--cervical)}
+        .util-pill {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 20px;
+            padding: .2rem .8rem
+        }
 
-    .cancer-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:600;color:var(--text-dark);line-height:1.15;margin-bottom:1rem}
+        /* ── HEADER ──────────────────────────────────────────── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, .1)
+        }
 
-    .symp-list{list-style:none;margin:1.2rem 0;display:flex;flex-direction:column;gap:.55rem}
-    .symp-list li{font-size:.88rem;color:var(--text-mid);padding-left:1.4rem;position:relative;line-height:1.65}
-    .symp-list li::before{content:'';position:absolute;left:.1rem;top:.5rem;width:7px;height:7px;border-radius:50%}
-    .symp-list.bowel li::before{background:var(--bowel)}
-    .symp-list.breast li::before{background:var(--breast)}
-    .symp-list.cervical li::before{background:var(--cervical)}
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px
+        }
 
-    .screening-box{border-radius:14px;padding:1.3rem 1.5rem;margin-top:1.4rem}
-    .screening-box.bowel{background:rgba(45,138,78,.06);border:1px solid rgba(45,138,78,.2)}
-    .screening-box.breast{background:rgba(192,73,122,.06);border:1px solid rgba(192,73,122,.2)}
-    .screening-box.cervical{background:rgba(91,75,184,.06);border:1px solid rgba(91,75,184,.2)}
-    .screening-box h4{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:.7rem}
-    .screening-box p,.screening-box li{font-size:.86rem;line-height:1.68;color:var(--text-mid)}
-    .screening-box ul{list-style:none;margin-top:.5rem;display:flex;flex-direction:column;gap:.35rem}
-    .screening-box ul li{padding-left:1.1rem;position:relative}
-    .screening-box ul li::before{content:'–';position:absolute;left:0;font-weight:700}
-    .screening-box.bowel ul li::before{color:var(--bowel)}
-    .screening-box.breast ul li::before{color:var(--breast)}
-    .screening-box.cervical ul li::before{color:var(--cervical)}
+        .logo-wrap svg {
+            height: 84px;
+            width: auto
+        }
 
-    .info-alert{display:flex;gap:.8rem;align-items:flex-start;border-radius:12px;padding:1rem 1.3rem;margin-top:1rem;font-size:.84rem;line-height:1.65;color:var(--text-mid)}
-    .info-alert.bowel{background:rgba(45,138,78,.06);border:1px solid rgba(45,138,78,.2)}
-    .info-alert.breast{background:rgba(192,73,122,.06);border:1px solid rgba(192,73,122,.2)}
-    .info-alert.cervical{background:rgba(91,75,184,.06);border:1px solid rgba(91,75,184,.2)}
-    .info-alert-icon{font-size:1.1rem;flex-shrink:0}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: .25rem
+        }
 
-    /* ── MACMILLAN BANNER ─────────────────────────────────── */
-    .macmillan{background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 2rem}
-    .macmillan-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
-    .macmillan-text h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--text-dark);margin-bottom:.4rem}
-    .macmillan-text p{font-size:.9rem;color:var(--text-mid);line-height:1.65}
-    .btn-bowel{background:var(--bowel);color:#fff;padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:filter .2s,transform .15s;box-shadow:0 4px 14px rgba(45,138,78,.3)}
-    .btn-bowel:hover{filter:brightness(1.1);transform:translateY(-2px)}
+        nav a {
+            font-size: .88rem;
+            font-weight: 500;
+            letter-spacing: .02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: .5rem .9rem;
+            border-radius: 6px;
+            transition: background .2s, color .2s
+        }
 
-    /* ── NHS APP BANNER ─────────────────────────────────── */
-    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
-    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
-    .app-inner h2{color:var(--white)}
-    .app-inner .section-lead{color:rgba(255,255,255,.8);max-width:540px}
-    .app-inner .section-tag{color:rgba(255,255,255,.6)}
-    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
-    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
-    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
-    .btn-white{background:var(--white);color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
-    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:var(--white);padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
-    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue)
+        }
 
-    /* ── EMERGENCY ───────────────────────────────────────── */
-    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
-    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .emerg-card{border-radius:16px;padding:2rem}
-    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
-    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
-    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
-    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
-    .emerg-card.urgent .emerg-number{color:#dc3545}
-    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
-    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: .55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: .5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, .25);
+            transition: background .2s, transform .15s !important
+        }
 
-    /* ── FOOTER ─────────────────────────────────────────── */
-    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
-    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
-    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
-    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
-    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
-    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}
-    .footer-links a:hover{color:#fff}
-    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
-    .hours-grid{display:grid;gap:.3rem}
-    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
-    .hour-day{opacity:.7}
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px)
+        }
 
-    /* ── ANIM ────────────────────────────────────────────── */
-    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-    .fade-up.visible{opacity:1;transform:translateY(0)}
+        /* ── PAGE BANNER ─────────────────────────────────────── */
+        .page-banner {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 3.5rem 2rem 3.2rem;
+            position: relative;
+            overflow: hidden
+        }
 
-    /* ── DIVIDER ─────────────────────────────────────────── */
-    .section-divider{max-width:1200px;margin:0 auto;height:1px;background:var(--border)}
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, .05) 0%, transparent 70%);
+            pointer-events: none
+        }
 
-    /* ── MOBILE ─────────────────────────────────────────── */
-    @media(max-width:960px){
-      .cancer-inner{grid-template-columns:1fr;gap:2.5rem}
-      .cancer-inner.reverse{direction:ltr}
-      .count-inner{grid-template-columns:1fr}
-      .app-inner{grid-template-columns:1fr}
-      .emergency-inner{grid-template-columns:1fr}
-      .footer-inner{grid-template-columns:1fr 1fr}
-      nav{display:none}
-    }
-    @media(max-width:600px){
-      .footer-inner{grid-template-columns:1fr}
-    }
-  </style>
+        .page-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -80px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 159, 187, .06) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .page-banner-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1
+        }
+
+        .breadcrumb {
+            font-size: .8rem;
+            color: var(--text-soft);
+            margin-bottom: .9rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .breadcrumb a {
+            color: var(--text-soft);
+            text-decoration: none
+        }
+
+        .breadcrumb a:hover {
+            color: var(--nhs-blue)
+        }
+
+        .breadcrumb-sep {
+            opacity: .4
+        }
+
+        .page-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: rgba(0, 94, 184, .07);
+            border: 1px solid rgba(0, 94, 184, .15);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            color: var(--nhs-blue);
+            margin-bottom: 1.1rem
+        }
+
+        .page-tag span {
+            width: 6px;
+            height: 6px;
+            background: var(--nhs-blue);
+            border-radius: 50%
+        }
+
+        .page-banner h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: .9rem
+        }
+
+        .page-banner h1 em {
+            font-style: normal;
+            color: var(--nhs-blue)
+        }
+
+        .page-banner-sub {
+            font-size: 1rem;
+            color: var(--text-mid);
+            max-width: 640px;
+            line-height: 1.7
+        }
+
+        /* ── SCREENING COUNT STRIP ───────────────────────────── */
+        .count-strip {
+            background: var(--nhs-blue);
+            padding: 0
+        }
+
+        .count-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:repeat(3, 1fr)
+        }
+
+        .count-item {
+            padding: 1.8rem 1.6rem;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, .15);
+            color: var(--white)
+        }
+
+        .count-item:last-child {
+            border-right: none
+        }
+
+        .count-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: .3rem
+        }
+
+        .count-label {
+            font-size: .85rem;
+            font-weight: 500;
+            opacity: .85
+        }
+
+        .count-sub {
+            font-size: .74rem;
+            opacity: .6;
+            margin-top: .2rem
+        }
+
+        /* ── SECTION COMMON ──────────────────────────────────── */
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .section-tag {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: .6rem
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: .6rem
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 640px
+        }
+
+        /* ── CANCER SECTIONS ─────────────────────────────────── */
+        .cancer-section {
+            padding: 5rem 2rem
+        }
+
+        .cancer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 4.5rem;
+            align-items: center
+        }
+
+        .cancer-inner.reverse {
+            direction: rtl
+        }
+
+        .cancer-inner.reverse > * {
+            direction: ltr
+        }
+
+        /* Canvas cards */
+        .canvas-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, .08);
+            position: relative;
+            overflow: hidden
+        }
+
+        .canvas-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px
+        }
+
+        .canvas-card.bowel::before {
+            background: linear-gradient(90deg, var(--bowel), #82c99a)
+        }
+
+        .canvas-card.breast::before {
+            background: linear-gradient(90deg, var(--breast), #e8849a)
+        }
+
+        .canvas-card.cervical::before {
+            background: linear-gradient(90deg, var(--cervical), #a08cdf)
+        }
+
+        .canvas-card-hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .9rem
+        }
+
+        .canvas-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--nhs-dark)
+        }
+
+        .phase-badge {
+            font-size: .71rem;
+            font-weight: 700;
+            letter-spacing: .07em;
+            padding: .22rem .75rem;
+            border-radius: 20px;
+            transition: all .4s;
+            text-transform: uppercase
+        }
+
+        .phase-badge.bowel {
+            background: rgba(45, 138, 78, .1);
+            color: var(--bowel)
+        }
+
+        .phase-badge.breast {
+            background: rgba(192, 73, 122, .1);
+            color: var(--breast)
+        }
+
+        .phase-badge.cervical {
+            background: rgba(91, 75, 184, .1);
+            color: var(--cervical)
+        }
+
+        canvas.anim {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            border: 1px solid var(--border)
+        }
+
+        /* Phase dots */
+        .phase-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            margin-top: .9rem
+        }
+
+        .pdot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background .4s, transform .4s
+        }
+
+        .pdot.active.bowel {
+            background: var(--bowel);
+            transform: scale(1.4)
+        }
+
+        .pdot.active.breast {
+            background: var(--breast);
+            transform: scale(1.4)
+        }
+
+        .pdot.active.cervical {
+            background: var(--cervical);
+            transform: scale(1.4)
+        }
+
+        /* Content side */
+        .cancer-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border-radius: 20px;
+            padding: .28rem .85rem;
+            margin-bottom: 1rem
+        }
+
+        .cancer-tag.bowel {
+            background: rgba(45, 138, 78, .1);
+            color: var(--bowel)
+        }
+
+        .cancer-tag.breast {
+            background: rgba(192, 73, 122, .1);
+            color: var(--breast)
+        }
+
+        .cancer-tag.cervical {
+            background: rgba(91, 75, 184, .1);
+            color: var(--cervical)
+        }
+
+        .cancer-tag span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%
+        }
+
+        .cancer-tag.bowel span {
+            background: var(--bowel)
+        }
+
+        .cancer-tag.breast span {
+            background: var(--breast)
+        }
+
+        .cancer-tag.cervical span {
+            background: var(--cervical)
+        }
+
+        .cancer-h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1rem
+        }
+
+        .symp-list {
+            list-style: none;
+            margin: 1.2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: .55rem
+        }
+
+        .symp-list li {
+            font-size: .88rem;
+            color: var(--text-mid);
+            padding-left: 1.4rem;
+            position: relative;
+            line-height: 1.65
+        }
+
+        .symp-list li::before {
+            content: '';
+            position: absolute;
+            left: .1rem;
+            top: .5rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .symp-list.bowel li::before {
+            background: var(--bowel)
+        }
+
+        .symp-list.breast li::before {
+            background: var(--breast)
+        }
+
+        .symp-list.cervical li::before {
+            background: var(--cervical)
+        }
+
+        .screening-box {
+            border-radius: 14px;
+            padding: 1.3rem 1.5rem;
+            margin-top: 1.4rem
+        }
+
+        .screening-box.bowel {
+            background: rgba(45, 138, 78, .06);
+            border: 1px solid rgba(45, 138, 78, .2)
+        }
+
+        .screening-box.breast {
+            background: rgba(192, 73, 122, .06);
+            border: 1px solid rgba(192, 73, 122, .2)
+        }
+
+        .screening-box.cervical {
+            background: rgba(91, 75, 184, .06);
+            border: 1px solid rgba(91, 75, 184, .2)
+        }
+
+        .screening-box h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: .7rem
+        }
+
+        .screening-box p, .screening-box li {
+            font-size: .86rem;
+            line-height: 1.68;
+            color: var(--text-mid)
+        }
+
+        .screening-box ul {
+            list-style: none;
+            margin-top: .5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .35rem
+        }
+
+        .screening-box ul li {
+            padding-left: 1.1rem;
+            position: relative
+        }
+
+        .screening-box ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            font-weight: 700
+        }
+
+        .screening-box.bowel ul li::before {
+            color: var(--bowel)
+        }
+
+        .screening-box.breast ul li::before {
+            color: var(--breast)
+        }
+
+        .screening-box.cervical ul li::before {
+            color: var(--cervical)
+        }
+
+        .info-alert {
+            display: flex;
+            gap: .8rem;
+            align-items: flex-start;
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin-top: 1rem;
+            font-size: .84rem;
+            line-height: 1.65;
+            color: var(--text-mid)
+        }
+
+        .info-alert.bowel {
+            background: rgba(45, 138, 78, .06);
+            border: 1px solid rgba(45, 138, 78, .2)
+        }
+
+        .info-alert.breast {
+            background: rgba(192, 73, 122, .06);
+            border: 1px solid rgba(192, 73, 122, .2)
+        }
+
+        .info-alert.cervical {
+            background: rgba(91, 75, 184, .06);
+            border: 1px solid rgba(91, 75, 184, .2)
+        }
+
+        .info-alert-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0
+        }
+
+        /* ── MACMILLAN BANNER ─────────────────────────────────── */
+        .macmillan {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 2rem
+        }
+
+        .macmillan-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem
+        }
+
+        .macmillan-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: .4rem
+        }
+
+        .macmillan-text p {
+            font-size: .9rem;
+            color: var(--text-mid);
+            line-height: 1.65
+        }
+
+        .btn-bowel {
+            background: var(--bowel);
+            color: #fff;
+            padding: .8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            transition: filter .2s, transform .15s;
+            box-shadow: 0 4px 14px rgba(45, 138, 78, .3)
+        }
+
+        .btn-bowel:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px)
+        }
+
+        /* ── NHS APP BANNER ─────────────────────────────────── */
+        .app-banner {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%);
+            padding: 4rem 2rem
+        }
+
+        .app-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr auto;
+            gap: 3rem;
+            align-items: center
+        }
+
+        .app-inner h2 {
+            color: var(--white)
+        }
+
+        .app-inner .section-lead {
+            color: rgba(255, 255, 255, .8);
+            max-width: 540px
+        }
+
+        .app-inner .section-tag {
+            color: rgba(255, 255, 255, .6)
+        }
+
+        .app-bullets {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem
+        }
+
+        .app-bullet {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: .92rem;
+            color: rgba(255, 255, 255, .88)
+        }
+
+        .app-bullet-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--nhs-light-blue);
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--nhs-blue);
+            padding: .85rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+            transition: transform .15s, box-shadow .15s;
+            white-space: nowrap;
+            display: inline-block
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25)
+        }
+
+        .btn-ghost {
+            border: 2px solid rgba(255, 255, 255, .5);
+            color: var(--white);
+            padding: .75rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: border-color .2s, background .2s;
+            white-space: nowrap;
+            display: inline-block
+        }
+
+        .btn-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, .1)
+        }
+
+        /* ── EMERGENCY ───────────────────────────────────────── */
+        .emergency {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 2rem
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(0, 94, 184, .05);
+            border: 1px solid rgba(0, 94, 184, .2)
+        }
+
+        .emerg-card.urgent {
+            background: rgba(220, 53, 69, .05);
+            border: 1px solid rgba(220, 53, 69, .2)
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1
+        }
+
+        .emerg-card.nhs111 .emerg-number {
+            color: var(--nhs-blue)
+        }
+
+        .emerg-card.urgent .emerg-number {
+            color: #dc3545
+        }
+
+        .emerg-label {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: .4rem
+        }
+
+        .emerg-desc {
+            font-size: .88rem;
+            color: var(--text-mid);
+            line-height: 1.6
+        }
+
+        /* ── FOOTER ─────────────────────────────────────────── */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .8);
+            padding: 3.5rem 2rem 2rem
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap: 3rem
+        }
+
+        .footer-tagline {
+            font-size: .88rem;
+            margin-top: .8rem;
+            line-height: 1.6;
+            opacity: .75
+        }
+
+        .footer-address {
+            font-size: .85rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+            opacity: .75
+        }
+
+        .footer-heading {
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, .75);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: color .2s
+        }
+
+        .footer-links a:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, .12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .8rem;
+            opacity: .6;
+            flex-wrap: wrap;
+            gap: .5rem
+        }
+
+        .hours-grid {
+            display: grid;
+            gap: .3rem
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-size: .84rem
+        }
+
+        .hour-day {
+            opacity: .7
+        }
+
+        /* ── ANIM ────────────────────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ── DIVIDER ─────────────────────────────────────────── */
+        .section-divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 1px;
+            background: var(--border)
+        }
+
+        /* ── MOBILE ─────────────────────────────────────────── */
+        @media (max-width: 960px) {
+            .cancer-inner {
+                grid-template-columns:1fr;
+                gap: 2.5rem
+            }
+
+            .cancer-inner.reverse {
+                direction: ltr
+            }
+
+            .count-inner {
+                grid-template-columns:1fr
+            }
+
+            .app-inner {
+                grid-template-columns:1fr
+            }
+
+            .emergency-inner {
+                grid-template-columns:1fr
+            }
+
+            .footer-inner {
+                grid-template-columns:1fr 1fr
+            }
+
+            nav {
+                display: none
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner {
+                grid-template-columns:1fr
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- ── UTILITY BAR ──────────────────────────────────────── -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="emer">
-      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
-      <span class="util-pill">NHS GP Practice · West London</span>
+    <div class="inner">
+        <div class="emer">
+            <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+            <span class="util-pill">NHS GP Practice · West London</span>
+        </div>
+        <div class="emer">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <span>|</span>
+            <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="emer">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <span>|</span>
-      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- ── HEADER ───────────────────────────────────────────── -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
-            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
-            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
-            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
-            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
-            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
-            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
-            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
-        </defs>
-        <rect width="720" height="160" fill="#ffffff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="index.html">Our Practice</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#team">Our Doctors</a>
-      <a href="index.html#reviews">Reviews</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- ── PAGE BANNER ──────────────────────────────────────── -->
 <div class="page-banner">
-  <div class="page-banner-inner">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span class="breadcrumb-sep">›</span>
-      <a href="#">Clinics &amp; Services</a>
-      <span class="breadcrumb-sep">›</span>
-      <span>Cancer Screening</span>
+    <div class="page-banner-inner">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="#">Clinics &amp; Services</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>Cancer Screening</span>
+        </div>
+        <div class="page-tag"><span></span> NHS Screening Programme</div>
+        <h1>Cancer <em>Screening</em></h1>
+        <p class="page-banner-sub">Early detection saves lives. Our practice participates in all three NHS cancer
+            screening programmes — bowel, breast, and cervical. Screening finds cancer before symptoms appear, when
+            treatment is most likely to succeed.</p>
     </div>
-    <div class="page-tag"><span></span> NHS Screening Programme</div>
-    <h1>Cancer <em>Screening</em></h1>
-    <p class="page-banner-sub">Early detection saves lives. Our practice participates in all three NHS cancer screening programmes — bowel, breast, and cervical. Screening finds cancer before symptoms appear, when treatment is most likely to succeed.</p>
-  </div>
 </div>
 
 <!-- ── STATS STRIP ───────────────────────────────────────── -->
 <div class="count-strip">
-  <div class="count-inner">
-    <div class="count-item">
-      <div class="count-num">3</div>
-      <div class="count-label">NHS Screening Programmes</div>
-      <div class="count-sub">Bowel · Breast · Cervical</div>
+    <div class="count-inner">
+        <div class="count-item">
+            <div class="count-num">3</div>
+            <div class="count-label">NHS Screening Programmes</div>
+            <div class="count-sub">Bowel · Breast · Cervical</div>
+        </div>
+        <div class="count-item">
+            <div class="count-num">1,400</div>
+            <div class="count-label">Lives saved per year</div>
+            <div class="count-sub">Breast screening programme alone</div>
+        </div>
+        <div class="count-item">
+            <div class="count-num">9 in 10</div>
+            <div class="count-label">Bowel cancers treatable</div>
+            <div class="count-sub">When caught at the earliest stage</div>
+        </div>
     </div>
-    <div class="count-item">
-      <div class="count-num">1,400</div>
-      <div class="count-label">Lives saved per year</div>
-      <div class="count-sub">Breast screening programme alone</div>
-    </div>
-    <div class="count-item">
-      <div class="count-num">9 in 10</div>
-      <div class="count-label">Bowel cancers treatable</div>
-      <div class="count-sub">When caught at the earliest stage</div>
-    </div>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
      BOWEL CANCER SCREENING
      ══════════════════════════════════════════════════════════ -->
 <section class="cancer-section" style="background:var(--white);" id="bowel">
-  <div class="cancer-inner">
+    <div class="cancer-inner">
 
-    <!-- Animation -->
-    <div class="fade-up">
-      <div class="canvas-card bowel">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">Bowel Cancer · Simulation</div>
-          <div class="phase-badge bowel" id="bowelPhase">Healthy Bowel</div>
+        <!-- Animation -->
+        <div class="fade-up">
+            <div class="canvas-card bowel">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">Bowel Cancer · Simulation</div>
+                    <div class="phase-badge bowel" id="bowelPhase">Healthy Bowel</div>
+                </div>
+                <canvas id="bowelCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="bowelDots">
+                    <div class="pdot bowel active" data-i="0"></div>
+                    <div class="pdot bowel" data-i="1"></div>
+                    <div class="pdot bowel" data-i="2"></div>
+                    <div class="pdot bowel" data-i="3"></div>
+                </div>
+            </div>
         </div>
-        <canvas id="bowelCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="bowelDots">
-          <div class="pdot bowel active" data-i="0"></div>
-          <div class="pdot bowel" data-i="1"></div>
-          <div class="pdot bowel" data-i="2"></div>
-          <div class="pdot bowel" data-i="3"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Content -->
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="cancer-tag bowel"><span></span> Bowel Cancer Screening</div>
-      <h2 class="cancer-h2">Bowel Cancer — <em style="font-style:normal;color:var(--bowel)">Know the Signs</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">Bowel cancer (colorectal cancer) affects the colon, rectum, or small bowel. It is the UK's fourth most common cancer and the second biggest cause of cancer death — yet it is highly treatable when caught early through screening.</p>
-      <ul class="symp-list bowel">
-        <li>Bleeding from the rectum or blood in stools</li>
-        <li>Change in bowel habits lasting more than 4–6 weeks (looser stools or diarrhoea)</li>
-        <li>A feeling of needing to strain even after passing stools</li>
-        <li>Unexplained weight loss or persistent abdominal pain</li>
-        <li>A lump in the abdomen, more commonly on the right side</li>
-        <li>Unexplained fatigue or breathlessness (anaemia from internal bleeding)</li>
-      </ul>
-      <div class="screening-box bowel">
-        <h4>🧪 Bowel Cancer Screening Programme</h4>
-        <p>The NHS sends a <strong>Faecal Immunochemical Test (FIT) kit</strong> to eligible patients by post. You complete the simple home test and return it — no clinic visit needed.</p>
-        <ul>
-          <li>Automatically invited by post from <strong>age 50–74</strong> every two years</li>
-          <li>Aged 75+ or under 50 with concerns? Request a kit free on <strong>0800 707 60 60</strong></li>
-          <li>If the test detects blood, you'll be referred for a colonoscopy</li>
-          <li>Ensure your GP holds your correct home address</li>
-        </ul>
-      </div>
-      <div class="info-alert bowel">
-        <div class="info-alert-icon">📦</div>
-        <div>If you have any concerns about bowel symptoms between screenings, do not wait — please book an appointment with your GP promptly.</div>
-      </div>
+        <!-- Content -->
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="cancer-tag bowel"><span></span> Bowel Cancer Screening</div>
+            <h2 class="cancer-h2">Bowel Cancer — <em style="font-style:normal;color:var(--bowel)">Know the Signs</em>
+            </h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">Bowel cancer
+                (colorectal cancer) affects the colon, rectum, or small bowel. It is the UK's fourth most common cancer
+                and the second biggest cause of cancer death — yet it is highly treatable when caught early through
+                screening.</p>
+            <ul class="symp-list bowel">
+                <li>Bleeding from the rectum or blood in stools</li>
+                <li>Change in bowel habits lasting more than 4–6 weeks (looser stools or diarrhoea)</li>
+                <li>A feeling of needing to strain even after passing stools</li>
+                <li>Unexplained weight loss or persistent abdominal pain</li>
+                <li>A lump in the abdomen, more commonly on the right side</li>
+                <li>Unexplained fatigue or breathlessness (anaemia from internal bleeding)</li>
+            </ul>
+            <div class="screening-box bowel">
+                <h4>🧪 Bowel Cancer Screening Programme</h4>
+                <p>The NHS sends a <strong>Faecal Immunochemical Test (FIT) kit</strong> to eligible patients by post.
+                    You complete the simple home test and return it — no clinic visit needed.</p>
+                <ul>
+                    <li>Automatically invited by post from <strong>age 50–74</strong> every two years</li>
+                    <li>Aged 75+ or under 50 with concerns? Request a kit free on <strong>0800 707 60 60</strong></li>
+                    <li>If the test detects blood, you'll be referred for a colonoscopy</li>
+                    <li>Ensure your GP holds your correct home address</li>
+                </ul>
+            </div>
+            <div class="info-alert bowel">
+                <div class="info-alert-icon">📦</div>
+                <div>If you have any concerns about bowel symptoms between screenings, do not wait — please book an
+                    appointment with your GP promptly.
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<div style="padding:0 2rem"><div class="section-divider"></div></div>
+<div style="padding:0 2rem">
+    <div class="section-divider"></div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════
      BREAST CANCER SCREENING
      ══════════════════════════════════════════════════════════ -->
 <section class="cancer-section" style="background:var(--off-white);" id="breast">
-  <div class="cancer-inner reverse">
+    <div class="cancer-inner reverse">
 
-    <!-- Content -->
-    <div class="fade-up">
-      <div class="cancer-tag breast"><span></span> Breast Screening</div>
-      <h2 class="cancer-h2">Breast Screening — <em style="font-style:normal;color:var(--breast)">Early Detection</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">The NHS National Breast Screening Programme, introduced in 1988, uses mammography (low-dose X-rays) to detect breast cancer early — often before any symptoms appear. It currently saves around <strong>1,400 lives per year</strong> in England alone.</p>
-      <p style="font-size:.9rem;line-height:1.72;color:var(--text-mid);margin-bottom:.5rem">Early detection frequently means simpler, more successful treatment with better outcomes.</p>
-      <div class="screening-box breast">
-        <h4>📅 Who Is Invited &amp; When?</h4>
-        <ul>
-          <li>All women aged <strong>50–70</strong> are routinely invited for a free mammogram every <strong>3 years</strong></li>
-          <li>Women must receive their <strong>first invitation before their 53rd birthday</strong></li>
-          <li>Invitations are sent by area on a rolling programme — not by birthday</li>
-          <li>Women over 70 can self-refer to continue screening every 3 years</li>
-          <li>Under 50 with concerns? Book an appointment with your GP</li>
-        </ul>
-      </div>
-      <div class="screening-box breast" style="margin-top:1rem">
-        <h4>🏥 What to Expect at a Mammogram</h4>
-        <ul>
-          <li>Each breast is gently compressed between two flat X-ray plates for a few seconds</li>
-          <li>Two X-ray images are taken of each breast from different angles</li>
-          <li>The appointment typically takes around <strong>30 minutes</strong></li>
-          <li>Results are sent by post within 2 weeks</li>
-        </ul>
-      </div>
-      <div class="info-alert breast">
-        <div class="info-alert-icon">ℹ️</div>
-        <div>Invitations depend on which GP practice you are registered with, not your birthday. Keep your contact details up to date at reception.</div>
-      </div>
-    </div>
-
-    <!-- Animation -->
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="canvas-card breast">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">Mammography · Simulation</div>
-          <div class="phase-badge breast" id="breastPhase">Breast Tissue</div>
+        <!-- Content -->
+        <div class="fade-up">
+            <div class="cancer-tag breast"><span></span> Breast Screening</div>
+            <h2 class="cancer-h2">Breast Screening — <em style="font-style:normal;color:var(--breast)">Early
+                Detection</em></h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">The NHS National
+                Breast Screening Programme, introduced in 1988, uses mammography (low-dose X-rays) to detect breast
+                cancer early — often before any symptoms appear. It currently saves around <strong>1,400 lives per
+                    year</strong> in England alone.</p>
+            <p style="font-size:.9rem;line-height:1.72;color:var(--text-mid);margin-bottom:.5rem">Early detection
+                frequently means simpler, more successful treatment with better outcomes.</p>
+            <div class="screening-box breast">
+                <h4>📅 Who Is Invited &amp; When?</h4>
+                <ul>
+                    <li>All women aged <strong>50–70</strong> are routinely invited for a free mammogram every <strong>3
+                        years</strong></li>
+                    <li>Women must receive their <strong>first invitation before their 53rd birthday</strong></li>
+                    <li>Invitations are sent by area on a rolling programme — not by birthday</li>
+                    <li>Women over 70 can self-refer to continue screening every 3 years</li>
+                    <li>Under 50 with concerns? Book an appointment with your GP</li>
+                </ul>
+            </div>
+            <div class="screening-box breast" style="margin-top:1rem">
+                <h4>🏥 What to Expect at a Mammogram</h4>
+                <ul>
+                    <li>Each breast is gently compressed between two flat X-ray plates for a few seconds</li>
+                    <li>Two X-ray images are taken of each breast from different angles</li>
+                    <li>The appointment typically takes around <strong>30 minutes</strong></li>
+                    <li>Results are sent by post within 2 weeks</li>
+                </ul>
+            </div>
+            <div class="info-alert breast">
+                <div class="info-alert-icon">ℹ️</div>
+                <div>Invitations depend on which GP practice you are registered with, not your birthday. Keep your
+                    contact details up to date at reception.
+                </div>
+            </div>
         </div>
-        <canvas id="breastCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="breastDots">
-          <div class="pdot breast active" data-i="0"></div>
-          <div class="pdot breast" data-i="1"></div>
-          <div class="pdot breast" data-i="2"></div>
-        </div>
-      </div>
-    </div>
 
-  </div>
+        <!-- Animation -->
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="canvas-card breast">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">Mammography · Simulation</div>
+                    <div class="phase-badge breast" id="breastPhase">Breast Tissue</div>
+                </div>
+                <canvas id="breastCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="breastDots">
+                    <div class="pdot breast active" data-i="0"></div>
+                    <div class="pdot breast" data-i="1"></div>
+                    <div class="pdot breast" data-i="2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
-<div style="padding:0 2rem"><div class="section-divider"></div></div>
+<div style="padding:0 2rem">
+    <div class="section-divider"></div>
+</div>
 
 <!-- ══════════════════════════════════════════════════════════
      CERVICAL CANCER SCREENING
      ══════════════════════════════════════════════════════════ -->
 <section class="cancer-section" style="background:var(--white);" id="cervical">
-  <div class="cancer-inner">
+    <div class="cancer-inner">
 
-    <!-- Animation -->
-    <div class="fade-up">
-      <div class="canvas-card cervical">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">Cervical Screening · Simulation</div>
-          <div class="phase-badge cervical" id="cervicalPhase">Normal Cells</div>
+        <!-- Animation -->
+        <div class="fade-up">
+            <div class="canvas-card cervical">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">Cervical Screening · Simulation</div>
+                    <div class="phase-badge cervical" id="cervicalPhase">Normal Cells</div>
+                </div>
+                <canvas id="cervicalCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="cervicalDots">
+                    <div class="pdot cervical active" data-i="0"></div>
+                    <div class="pdot cervical" data-i="1"></div>
+                    <div class="pdot cervical" data-i="2"></div>
+                    <div class="pdot cervical" data-i="3"></div>
+                </div>
+            </div>
         </div>
-        <canvas id="cervicalCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="cervicalDots">
-          <div class="pdot cervical active" data-i="0"></div>
-          <div class="pdot cervical" data-i="1"></div>
-          <div class="pdot cervical" data-i="2"></div>
-          <div class="pdot cervical" data-i="3"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Content -->
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="cancer-tag cervical"><span></span> Cervical Screening</div>
-      <h2 class="cancer-h2">Cervical Screening — <em style="font-style:normal;color:var(--cervical)">Prevention First</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">Cervical screening (the smear test) is not a test for cancer — it's a test to detect <strong>abnormal pre-cancerous cells</strong> in the cervix before they have a chance to become cancer. Most abnormalities are minor and resolve on their own or are easily treated.</p>
-      <ul class="symp-list cervical">
-        <li>For <strong>women aged 25–49</strong>: every 3 years</li>
-        <li>For <strong>women aged 50–64</strong>: every 5 years</li>
-        <li>More frequently if previous results showed abnormal changes</li>
-        <li>1 in 20 tests shows minor cell changes — the vast majority are not cancer</li>
-      </ul>
-      <div class="screening-box cervical">
-        <h4>🔬 What Happens at the Appointment?</h4>
-        <p>Our qualified practice nurses carry out cervical screening. The appointment takes approximately <strong>10 minutes</strong>.</p>
-        <ul>
-          <li>A small soft brush is used to gently collect cells from the cervix</li>
-          <li>Cells are sent to the lab to be checked under a microscope</li>
-          <li>You must have received an invitation letter before booking</li>
-          <li>Please book for a time when you are not menstruating</li>
-        </ul>
-      </div>
-      <div class="info-alert cervical">
-        <div class="info-alert-icon">📋</div>
-        <div>To book your cervical screening appointment, please call the surgery on <a href="tel:02085745136" style="color:var(--cervical);font-weight:700">0208 574 5136</a>. Ensure you have received your invitation letter beforehand.</div>
-      </div>
+        <!-- Content -->
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="cancer-tag cervical"><span></span> Cervical Screening</div>
+            <h2 class="cancer-h2">Cervical Screening — <em style="font-style:normal;color:var(--cervical)">Prevention
+                First</em></h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid);margin-bottom:.5rem">Cervical screening
+                (the smear test) is not a test for cancer — it's a test to detect <strong>abnormal pre-cancerous
+                    cells</strong> in the cervix before they have a chance to become cancer. Most abnormalities are
+                minor and resolve on their own or are easily treated.</p>
+            <ul class="symp-list cervical">
+                <li>For <strong>women aged 25–49</strong>: every 3 years</li>
+                <li>For <strong>women aged 50–64</strong>: every 5 years</li>
+                <li>More frequently if previous results showed abnormal changes</li>
+                <li>1 in 20 tests shows minor cell changes — the vast majority are not cancer</li>
+            </ul>
+            <div class="screening-box cervical">
+                <h4>🔬 What Happens at the Appointment?</h4>
+                <p>Our qualified practice nurses carry out cervical screening. The appointment takes approximately
+                    <strong>10 minutes</strong>.</p>
+                <ul>
+                    <li>A small soft brush is used to gently collect cells from the cervix</li>
+                    <li>Cells are sent to the lab to be checked under a microscope</li>
+                    <li>You must have received an invitation letter before booking</li>
+                    <li>Please book for a time when you are not menstruating</li>
+                </ul>
+            </div>
+            <div class="info-alert cervical">
+                <div class="info-alert-icon">📋</div>
+                <div>To book your cervical screening appointment, please call the surgery on <a href="tel:02085745136"
+                                                                                                style="color:var(--cervical);font-weight:700">0208
+                    574 5136</a>. Ensure you have received your invitation letter beforehand.
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- ── MACMILLAN SUPPORT ──────────────────────────────────── -->
 <div class="macmillan">
-  <div class="macmillan-inner">
-    <div class="macmillan-text">
-      <div class="section-tag">Support</div>
-      <h3>Questions About Cancer? Macmillan Can Help</h3>
-      <p>Macmillan Cancer Support provides free, expert information and emotional support for people living with or affected by cancer — or those with concerns.</p>
-      <p style="margin-top:.4rem">Call free: <strong>0808 808 0000</strong> · Monday–Friday, 9am–8pm &nbsp;|&nbsp; <a href="https://www.macmillan.org.uk" target="_blank" style="color:var(--nhs-blue)">macmillan.org.uk</a></p>
+    <div class="macmillan-inner">
+        <div class="macmillan-text">
+            <div class="section-tag">Support</div>
+            <h3>Questions About Cancer? Macmillan Can Help</h3>
+            <p>Macmillan Cancer Support provides free, expert information and emotional support for people living with
+                or affected by cancer — or those with concerns.</p>
+            <p style="margin-top:.4rem">Call free: <strong>0808 808 0000</strong> · Monday–Friday, 9am–8pm &nbsp;|&nbsp;
+                <a href="https://www.macmillan.org.uk" target="_blank"
+                   style="color:var(--nhs-blue)">macmillan.org.uk</a></p>
+        </div>
+        <a href="https://www.macmillan.org.uk" target="_blank" class="btn-bowel">↗ Visit Macmillan</a>
     </div>
-    <a href="https://www.macmillan.org.uk" target="_blank" class="btn-bowel">↗ Visit Macmillan</a>
-  </div>
 </div>
 
 <!-- ── NHS APP BANNER ─────────────────────────────────────── -->
 <div class="app-banner">
-  <div class="app-inner section-inner">
-    <div>
-      <div class="section-tag">Digital Access</div>
-      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
-      <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere. Our practice supports full NHS App integration for all patients.</p>
-      <div class="app-bullets">
-        <div class="app-bullet"><span class="app-bullet-dot"></span>View and manage screening invitations</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Book GP appointments online</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
-      </div>
+    <div class="app-inner section-inner">
+        <div>
+            <div class="section-tag">Digital Access</div>
+            <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+            <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere. Our practice
+                supports full NHS App integration for all patients.</p>
+            <div class="app-bullets">
+                <div class="app-bullet"><span class="app-bullet-dot"></span>View and manage screening invitations</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Book GP appointments online</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"
+                 style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
+                <defs>
+                    <linearGradient id="appCS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="appCT" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="appCS2" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="appCR" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="appSh">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="transparent"/>
+                <circle cx="80" cy="80" r="68" fill="url(#appCR)" filter="url(#appSh)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#appCS2)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#appCS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#appCT)">SALUJA
+                    CLINIC
+                </text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
+                <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+                <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register
+                    for Online Services</a>
+            </div>
+        </div>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
-        <defs>
-          <linearGradient id="appCS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
-            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
-            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="appCT" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
-            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
-            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
-            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="appCS2" cx="38%" cy="32%" r="65%">
-            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="appCR" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
-            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="appSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
-        </defs>
-        <rect width="720" height="160" fill="transparent"/>
-        <circle cx="80" cy="80" r="68" fill="url(#appCR)" filter="url(#appSh)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#appCS2)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#appCS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#appCT)">SALUJA CLINIC</text>
-      </svg>
-      <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
-        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
-        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- ── EMERGENCY ─────────────────────────────────────────── -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div>
-        <div class="emerg-label">Non-Emergency</div>
-        <div class="emerg-number">NHS 111</div>
-        <p class="emerg-desc">Available 24 hours a day, 365 days a year. For urgent medical advice when your GP is closed, or if you are worried about a cancer symptom.</p>
-      </div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24 hours a day, 365 days a year. For urgent medical advice when your GP
+                    is closed, or if you are worried about a cancer symptom.</p>
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Dial 999 immediately for any life-threatening emergency — chest pain, breathing
+                    difficulties, severe bleeding, or loss of consciousness.</p>
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div>
-        <div class="emerg-label">Life-Threatening Emergency</div>
-        <div class="emerg-number">999</div>
-        <p class="emerg-desc">Dial 999 immediately for any life-threatening emergency — chest pain, breathing difficulties, severe bleeding, or loss of consciousness.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer id="contact">
-  <div class="footer-inner">
-    <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">
+                SALUJA CLINIC
+            </div>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574
+                    5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉
+                    salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New
+                    Patient</a></li>
+                <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="health-information.html" target="_blank">Health Information</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+                <li><a href="https://www.macmillan.org.uk" target="_blank">Macmillan Cancer Support</a></li>
+                <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="health-information.html" target="_blank">Health Information</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-        <li><a href="https://www.macmillan.org.uk" target="_blank">Macmillan Cancer Support</a></li>
-        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <!-- ══════════════════════════════════════════════════════════
      JAVASCRIPT — THREE CANVAS ANIMATIONS
      ══════════════════════════════════════════════════════════ -->
 <script>
-/* ── Scroll fade-up ─────────────────────────────────────── */
-const obs = new IntersectionObserver(
-  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0.1 }
-);
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    /* ── Scroll fade-up ─────────────────────────────────────── */
+    const obs = new IntersectionObserver(
+        es => es.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }),
+        {threshold: 0.1}
+    );
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-/* ── Shared helpers ─────────────────────────────────────── */
-function ease(t){ return t<.5?2*t*t:-1+(4-2*t)*t; }
-function lerp(a,b,t){ return a+(b-a)*t; }
-function lerpCol(c1,c2,t){
-  const p=(s,i)=>parseInt(s.slice(i,i+2),16);
-  return `rgb(${Math.round(lerp(p(c1,0),p(c2,0),t))},${Math.round(lerp(p(c1,2),p(c2,2),t))},${Math.round(lerp(p(c1,4),p(c2,4),t))})`;
-}
-function updateDots(id,active,cls){
-  document.querySelectorAll(`#${id} .pdot`).forEach((d,i)=>{
-    d.classList.toggle('active',i===active);
-    d.classList.toggle(cls,true);
-  });
-}
+    /* ── Shared helpers ─────────────────────────────────────── */
+    function ease(t) {
+        return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
 
-/* ══════════════════════════════════════════════════════════
+    function lerp(a, b, t) {
+        return a + (b - a) * t;
+    }
+
+    function lerpCol(c1, c2, t) {
+        const p = (s, i) => parseInt(s.slice(i, i + 2), 16);
+        return `rgb(${Math.round(lerp(p(c1, 0), p(c2, 0), t))},${Math.round(lerp(p(c1, 2), p(c2, 2), t))},${Math.round(lerp(p(c1, 4), p(c2, 4), t))})`;
+    }
+
+    function updateDots(id, active, cls) {
+        document.querySelectorAll(`#${id} .pdot`).forEach((d, i) => {
+            d.classList.toggle('active', i === active);
+            d.classList.toggle(cls, true);
+        });
+    }
+
+    /* ══════════════════════════════════════════════════════════
    1. BOWEL CANCER ANIMATION
    Phases: healthy bowel cross-section → polyp grows → FIT test kit detects blood → early detection success
    ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('bowelCanvas');
-  const ctx=C.getContext('2d');
-  const W=500,H=300; C.width=W; C.height=H;
-  const CX=W/2, CY=H/2;
-  const OUTER=110, INNER=74; // bowel ring radii
-  const CYCLE=24; // total seconds
-  const PHASES=[
-    {name:'Healthy Bowel',    dur:6},
-    {name:'Polyp Forming',    dur:7},
-    {name:'FIT Test Detects', dur:6},
-    {name:'Early Detection',  dur:5},
-  ];
+    (function () {
+        const C = document.getElementById('bowelCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const CX = W / 2, CY = H / 2;
+        const OUTER = 110, INNER = 74; // bowel ring radii
+        const CYCLE = 24; // total seconds
+        const PHASES = [
+            {name: 'Healthy Bowel', dur: 6},
+            {name: 'Polyp Forming', dur: 7},
+            {name: 'FIT Test Detects', dur: 6},
+            {name: 'Early Detection', dur: 5},
+        ];
 
-  // Villi (finger-like projections) — stable geometry
-  const VILLI_N=20;
-  const villi=Array.from({length:VILLI_N},(_,i)=>{
-    const angle=(i/VILLI_N)*Math.PI*2;
-    return { angle, len:14+Math.sin(i*1.7)*4, wave:Math.random()*Math.PI*2, ws:0.03+Math.random()*.02 };
-  });
+        // Villi (finger-like projections) — stable geometry
+        const VILLI_N = 20;
+        const villi = Array.from({length: VILLI_N}, (_, i) => {
+            const angle = (i / VILLI_N) * Math.PI * 2;
+            return {
+                angle,
+                len: 14 + Math.sin(i * 1.7) * 4,
+                wave: Math.random() * Math.PI * 2,
+                ws: 0.03 + Math.random() * .02
+            };
+        });
 
-  // Blood particles (for FIT phase)
-  const BLOODS=Array.from({length:18},(_,i)=>({
-    angle:(i/18)*Math.PI*2, r:INNER*0.55+Math.random()*INNER*0.3,
-    vr:0.004*(Math.random()>.5?1:-1), a:Math.random()*Math.PI*2
-  }));
+        // Blood particles (for FIT phase)
+        const BLOODS = Array.from({length: 18}, (_, i) => ({
+            angle: (i / 18) * Math.PI * 2, r: INNER * 0.55 + Math.random() * INNER * 0.3,
+            vr: 0.004 * (Math.random() > .5 ? 1 : -1), a: Math.random() * Math.PI * 2
+        }));
 
-  // Polyp position (top-right of lumen)
-  const POLYP_ANGLE=-0.6;
+        // Polyp position (top-right of lumen)
+        const POLYP_ANGLE = -0.6;
 
-  let startTime=null;
-  let cumT=0;
-  let phaseIdx=0, phaseT=0;
+        let startTime = null;
+        let cumT = 0;
+        let phaseIdx = 0, phaseT = 0;
 
-  function getPhaseInfo(elapsed){
-    let c=elapsed%CYCLE, acc=0;
-    for(let i=0;i<PHASES.length;i++){
-      if(c<acc+PHASES[i].dur) return { idx:i, t:(c-acc)/PHASES[i].dur };
-      acc+=PHASES[i].dur;
-    }
-    return {idx:0,t:0};
-  }
+        function getPhaseInfo(elapsed) {
+            let c = elapsed % CYCLE, acc = 0;
+            for (let i = 0; i < PHASES.length; i++) {
+                if (c < acc + PHASES[i].dur) return {idx: i, t: (c - acc) / PHASES[i].dur};
+                acc += PHASES[i].dur;
+            }
+            return {idx: 0, t: 0};
+        }
 
-  function drawBowelWall(glow){
-    // Outer ring (muscle layer — pale pink/cream)
-    ctx.beginPath(); ctx.arc(CX,CY,OUTER,0,Math.PI*2);
-    const og=ctx.createRadialGradient(CX,CY,INNER*1.1,CX,CY,OUTER);
-    og.addColorStop(0,'#e8b8a0'); og.addColorStop(.5,'#f0c8b4'); og.addColorStop(1,'#d8a080');
-    ctx.fillStyle=og; ctx.fill();
-    // outer border
-    ctx.strokeStyle='rgba(180,90,50,.3)'; ctx.lineWidth=2; ctx.stroke();
+        function drawBowelWall(glow) {
+            // Outer ring (muscle layer — pale pink/cream)
+            ctx.beginPath();
+            ctx.arc(CX, CY, OUTER, 0, Math.PI * 2);
+            const og = ctx.createRadialGradient(CX, CY, INNER * 1.1, CX, CY, OUTER);
+            og.addColorStop(0, '#e8b8a0');
+            og.addColorStop(.5, '#f0c8b4');
+            og.addColorStop(1, '#d8a080');
+            ctx.fillStyle = og;
+            ctx.fill();
+            // outer border
+            ctx.strokeStyle = 'rgba(180,90,50,.3)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
 
-    // inner mucosal ring
-    ctx.beginPath(); ctx.arc(CX,CY,INNER+14,0,Math.PI*2);
-    const mg=ctx.createRadialGradient(CX,CY,INNER,CX,CY,INNER+14);
-    mg.addColorStop(0,'#e87070'); mg.addColorStop(1,'#c84040');
-    ctx.fillStyle=mg; ctx.fill();
+            // inner mucosal ring
+            ctx.beginPath();
+            ctx.arc(CX, CY, INNER + 14, 0, Math.PI * 2);
+            const mg = ctx.createRadialGradient(CX, CY, INNER, CX, CY, INNER + 14);
+            mg.addColorStop(0, '#e87070');
+            mg.addColorStop(1, '#c84040');
+            ctx.fillStyle = mg;
+            ctx.fill();
 
-    // lumen (central space)
-    ctx.beginPath(); ctx.arc(CX,CY,INNER,0,Math.PI*2);
-    const lg=ctx.createRadialGradient(CX,CY,0,CX,CY,INNER);
-    lg.addColorStop(0,'#fff8f6'); lg.addColorStop(.7,'#ffe0d8'); lg.addColorStop(1,'#ffd0c0');
-    ctx.fillStyle=lg; ctx.fill();
-  }
+            // lumen (central space)
+            ctx.beginPath();
+            ctx.arc(CX, CY, INNER, 0, Math.PI * 2);
+            const lg = ctx.createRadialGradient(CX, CY, 0, CX, CY, INNER);
+            lg.addColorStop(0, '#fff8f6');
+            lg.addColorStop(.7, '#ffe0d8');
+            lg.addColorStop(1, '#ffd0c0');
+            ctx.fillStyle = lg;
+            ctx.fill();
+        }
 
-  function drawVilli(wobble){
-    villi.forEach(v=>{
-      v.wave+=v.ws;
-      const wobX=Math.sin(v.wave)*2;
-      const innerX=CX+Math.cos(v.angle)*(INNER+1);
-      const innerY=CY+Math.sin(v.angle)*(INNER+1);
-      const tipX=CX+Math.cos(v.angle+.04+wobX*.01)*(INNER+v.len);
-      const tipY=CY+Math.sin(v.angle+.04+wobX*.01)*(INNER+v.len);
-      ctx.beginPath(); ctx.moveTo(innerX,innerY);
-      ctx.quadraticCurveTo(innerX+wobX,innerY+Math.cos(v.wave),tipX,tipY);
-      ctx.strokeStyle='rgba(200,60,60,.7)'; ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.stroke();
-      ctx.beginPath(); ctx.arc(tipX,tipY,2.2,0,Math.PI*2);
-      ctx.fillStyle='#d84040'; ctx.fill();
-    });
-  }
+        function drawVilli(wobble) {
+            villi.forEach(v => {
+                v.wave += v.ws;
+                const wobX = Math.sin(v.wave) * 2;
+                const innerX = CX + Math.cos(v.angle) * (INNER + 1);
+                const innerY = CY + Math.sin(v.angle) * (INNER + 1);
+                const tipX = CX + Math.cos(v.angle + .04 + wobX * .01) * (INNER + v.len);
+                const tipY = CY + Math.sin(v.angle + .04 + wobX * .01) * (INNER + v.len);
+                ctx.beginPath();
+                ctx.moveTo(innerX, innerY);
+                ctx.quadraticCurveTo(innerX + wobX, innerY + Math.cos(v.wave), tipX, tipY);
+                ctx.strokeStyle = 'rgba(200,60,60,.7)';
+                ctx.lineWidth = 2.2;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(tipX, tipY, 2.2, 0, Math.PI * 2);
+                ctx.fillStyle = '#d84040';
+                ctx.fill();
+            });
+        }
 
-  function drawPolyp(size, colour){
-    if(size<=0) return;
-    const baseX=CX+Math.cos(POLYP_ANGLE)*(INNER-2);
-    const baseY=CY+Math.sin(POLYP_ANGLE)*(INNER-2);
-    const tipX=CX+Math.cos(POLYP_ANGLE)*(INNER-2-size*28);
-    const tipY=CY+Math.sin(POLYP_ANGLE)*(INNER-2-size*28);
-    const bulge=size*16;
+        function drawPolyp(size, colour) {
+            if (size <= 0) return;
+            const baseX = CX + Math.cos(POLYP_ANGLE) * (INNER - 2);
+            const baseY = CY + Math.sin(POLYP_ANGLE) * (INNER - 2);
+            const tipX = CX + Math.cos(POLYP_ANGLE) * (INNER - 2 - size * 28);
+            const tipY = CY + Math.sin(POLYP_ANGLE) * (INNER - 2 - size * 28);
+            const bulge = size * 16;
 
-    ctx.beginPath();
-    ctx.moveTo(baseX-Math.sin(POLYP_ANGLE)*8,baseY+Math.cos(POLYP_ANGLE)*8);
-    ctx.quadraticCurveTo(tipX+Math.cos(POLYP_ANGLE)*bulge,tipY+Math.sin(POLYP_ANGLE)*bulge,tipX,tipY);
-    ctx.quadraticCurveTo(tipX-Math.cos(POLYP_ANGLE)*bulge,tipY-Math.sin(POLYP_ANGLE)*bulge,
-      baseX+Math.sin(POLYP_ANGLE)*8,baseY-Math.cos(POLYP_ANGLE)*8);
-    ctx.closePath();
-    ctx.fillStyle=colour; ctx.fill();
-    ctx.strokeStyle='rgba(140,30,30,.4)'; ctx.lineWidth=1.2; ctx.stroke();
-    // tip blob
-    ctx.beginPath(); ctx.arc(tipX,tipY,size*10,0,Math.PI*2);
-    ctx.fillStyle=colour; ctx.fill();
-    ctx.strokeStyle='rgba(140,30,30,.3)'; ctx.lineWidth=1; ctx.stroke();
-  }
+            ctx.beginPath();
+            ctx.moveTo(baseX - Math.sin(POLYP_ANGLE) * 8, baseY + Math.cos(POLYP_ANGLE) * 8);
+            ctx.quadraticCurveTo(tipX + Math.cos(POLYP_ANGLE) * bulge, tipY + Math.sin(POLYP_ANGLE) * bulge, tipX, tipY);
+            ctx.quadraticCurveTo(tipX - Math.cos(POLYP_ANGLE) * bulge, tipY - Math.sin(POLYP_ANGLE) * bulge,
+                baseX + Math.sin(POLYP_ANGLE) * 8, baseY - Math.cos(POLYP_ANGLE) * 8);
+            ctx.closePath();
+            ctx.fillStyle = colour;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(140,30,30,.4)';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            // tip blob
+            ctx.beginPath();
+            ctx.arc(tipX, tipY, size * 10, 0, Math.PI * 2);
+            ctx.fillStyle = colour;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(140,30,30,.3)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
 
-  function drawBloodParticles(alpha){
-    if(alpha<=0) return;
-    BLOODS.forEach(b=>{
-      b.a+=b.vr;
-      const bx=CX+Math.cos(b.a)*b.r;
-      const by=CY+Math.sin(b.a)*b.r;
-      ctx.beginPath(); ctx.arc(bx,by,3,0,Math.PI*2);
-      ctx.fillStyle=`rgba(180,30,30,${alpha*.8})`; ctx.fill();
-    });
-  }
+        function drawBloodParticles(alpha) {
+            if (alpha <= 0) return;
+            BLOODS.forEach(b => {
+                b.a += b.vr;
+                const bx = CX + Math.cos(b.a) * b.r;
+                const by = CY + Math.sin(b.a) * b.r;
+                ctx.beginPath();
+                ctx.arc(bx, by, 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(180,30,30,${alpha * .8})`;
+                ctx.fill();
+            });
+        }
 
-  function drawFITKit(progress){
-    if(progress<=0) return;
-    const kx=W*0.82, ky=H*0.55;
-    const p=Math.min(1,progress*1.5);
-    ctx.save(); ctx.globalAlpha=p;
-    // Kit box body
-    ctx.beginPath(); ctx.roundRect(kx-28,ky-36,56,72,8);
-    ctx.fillStyle='#f8f8f8'; ctx.fill();
-    ctx.strokeStyle='#aac4e0'; ctx.lineWidth=1.5; ctx.stroke();
-    // FIT label
-    ctx.fillStyle='#005EB8'; ctx.font='bold 9px "DM Sans",sans-serif';
-    ctx.textAlign='center'; ctx.fillText('FIT',kx,ky-18);
-    ctx.font='7px "DM Sans",sans-serif'; ctx.fillStyle='#666';
-    ctx.fillText('NHS Test Kit',kx,ky-6);
-    // Detection indicator
-    const detected = progress>0.6;
-    ctx.beginPath(); ctx.arc(kx,ky+20,12,0,Math.PI*2);
-    ctx.fillStyle = detected ? '#d43030' : '#e8e8e8'; ctx.fill();
-    ctx.strokeStyle='#bbb'; ctx.lineWidth=1; ctx.stroke();
-    if(detected){
-      ctx.fillStyle='#fff'; ctx.font='bold 10px sans-serif';
-      ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText('+',kx,ky+20);
-    }
-    ctx.restore();
-  }
+        function drawFITKit(progress) {
+            if (progress <= 0) return;
+            const kx = W * 0.82, ky = H * 0.55;
+            const p = Math.min(1, progress * 1.5);
+            ctx.save();
+            ctx.globalAlpha = p;
+            // Kit box body
+            ctx.beginPath();
+            ctx.roundRect(kx - 28, ky - 36, 56, 72, 8);
+            ctx.fillStyle = '#f8f8f8';
+            ctx.fill();
+            ctx.strokeStyle = '#aac4e0';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            // FIT label
+            ctx.fillStyle = '#005EB8';
+            ctx.font = 'bold 9px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('FIT', kx, ky - 18);
+            ctx.font = '7px "DM Sans",sans-serif';
+            ctx.fillStyle = '#666';
+            ctx.fillText('NHS Test Kit', kx, ky - 6);
+            // Detection indicator
+            const detected = progress > 0.6;
+            ctx.beginPath();
+            ctx.arc(kx, ky + 20, 12, 0, Math.PI * 2);
+            ctx.fillStyle = detected ? '#d43030' : '#e8e8e8';
+            ctx.fill();
+            ctx.strokeStyle = '#bbb';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            if (detected) {
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 10px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('+', kx, ky + 20);
+            }
+            ctx.restore();
+        }
 
-  function drawSuccessCheck(alpha){
-    if(alpha<=0) return;
-    ctx.save(); ctx.globalAlpha=alpha;
-    // Circle
-    ctx.beginPath(); ctx.arc(CX,CY,38,0,Math.PI*2);
-    ctx.fillStyle='rgba(45,138,78,.15)'; ctx.fill();
-    ctx.strokeStyle='#2d8a4e'; ctx.lineWidth=3; ctx.stroke();
-    // Tick
-    ctx.beginPath();
-    ctx.moveTo(CX-16,CY+2);
-    ctx.lineTo(CX-4,CY+16);
-    ctx.lineTo(CX+20,CY-14);
-    ctx.strokeStyle='#2d8a4e'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-    ctx.restore();
-  }
+        function drawSuccessCheck(alpha) {
+            if (alpha <= 0) return;
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            // Circle
+            ctx.beginPath();
+            ctx.arc(CX, CY, 38, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(45,138,78,.15)';
+            ctx.fill();
+            ctx.strokeStyle = '#2d8a4e';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            // Tick
+            ctx.beginPath();
+            ctx.moveTo(CX - 16, CY + 2);
+            ctx.lineTo(CX - 4, CY + 16);
+            ctx.lineTo(CX + 20, CY - 14);
+            ctx.strokeStyle = '#2d8a4e';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            ctx.restore();
+        }
 
-  function render(now){
-    if(!startTime) startTime=now;
-    const elapsed=(now-startTime)/1000;
-    const {idx,t}=getPhaseInfo(elapsed);
+        function render(now) {
+            if (!startTime) startTime = now;
+            const elapsed = (now - startTime) / 1000;
+            const {idx, t} = getPhaseInfo(elapsed);
 
-    if(idx!==phaseIdx){
-      phaseIdx=idx;
-      document.getElementById('bowelPhase').textContent=PHASES[idx].name;
-      updateDots('bowelDots',idx,'bowel');
-    }
+            if (idx !== phaseIdx) {
+                phaseIdx = idx;
+                document.getElementById('bowelPhase').textContent = PHASES[idx].name;
+                updateDots('bowelDots', idx, 'bowel');
+            }
 
-    ctx.clearRect(0,0,W,H);
-    // Background
-    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,H);
-    bg.addColorStop(0,'#f8f4f2'); bg.addColorStop(1,'#ede8e4');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-    // Label
-    ctx.save(); ctx.globalAlpha=.2; ctx.fillStyle='#2d8a4e';
-    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
-    ctx.fillText('BOWEL CROSS-SECTION',CX,H-10); ctx.restore();
+            ctx.clearRect(0, 0, W, H);
+            // Background
+            const bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, H);
+            bg.addColorStop(0, '#f8f4f2');
+            bg.addColorStop(1, '#ede8e4');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            // Label
+            ctx.save();
+            ctx.globalAlpha = .2;
+            ctx.fillStyle = '#2d8a4e';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('BOWEL CROSS-SECTION', CX, H - 10);
+            ctx.restore();
 
-    drawBowelWall();
-    drawVilli(true);
+            drawBowelWall();
+            drawVilli(true);
 
-    if(idx===0){
-      // Healthy — no polyp
-    } else if(idx===1){
-      // Polyp growing
-      const polypSize=ease(t);
-      drawPolyp(polypSize,`rgba(${lerp(200,160,t)},${lerp(60,20,t)},${lerp(60,20,t)},0.9)`);
-    } else if(idx===2){
-      // Polyp present + blood particles + FIT kit
-      drawPolyp(1,`rgba(160,20,20,.9)`);
-      drawBloodParticles(ease(t));
-      drawFITKit(t);
-    } else {
-      // idx===3: success
-      drawPolyp(1-ease(t),'rgba(160,20,20,.9)');
-      drawSuccessCheck(ease(t));
-    }
+            if (idx === 0) {
+                // Healthy — no polyp
+            } else if (idx === 1) {
+                // Polyp growing
+                const polypSize = ease(t);
+                drawPolyp(polypSize, `rgba(${lerp(200, 160, t)},${lerp(60, 20, t)},${lerp(60, 20, t)},0.9)`);
+            } else if (idx === 2) {
+                // Polyp present + blood particles + FIT kit
+                drawPolyp(1, `rgba(160, 20, 20, .9)`);
+                drawBloodParticles(ease(t));
+                drawFITKit(t);
+            } else {
+                // idx===3: success
+                drawPolyp(1 - ease(t), 'rgba(160,20,20,.9)');
+                drawSuccessCheck(ease(t));
+            }
 
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            requestAnimationFrame(render);
+        }
 
-/* ══════════════════════════════════════════════════════════
+        requestAnimationFrame(render);
+    })();
+
+    /* ══════════════════════════════════════════════════════════
    2. BREAST MAMMOGRAPHY ANIMATION
    Phases: breast tissue view → plates compress → X-ray scan → result
    ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('breastCanvas');
-  const ctx=C.getContext('2d');
-  const W=500,H=300; C.width=W; C.height=H;
-  const CX=W/2, CY=H/2;
-  const PHASES=[
-    {name:'Breast Tissue',  dur:6},
-    {name:'Compression',    dur:7},
-    {name:'X-Ray Scanning', dur:6},
-  ];
-  const CYCLE=19;
+    (function () {
+        const C = document.getElementById('breastCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const CX = W / 2, CY = H / 2;
+        const PHASES = [
+            {name: 'Breast Tissue', dur: 6},
+            {name: 'Compression', dur: 7},
+            {name: 'X-Ray Scanning', dur: 6},
+        ];
+        const CYCLE = 19;
 
-  // Breast tissue lobules (stable)
-  function s(n){let x=Math.sin(n+1)*10000;return x-Math.floor(x);}
-  const LOBULES=Array.from({length:18},(_,i)=>({
-    x:CX+(s(i)-.5)*150,
-    y:CY+(s(i+10)-.5)*100,
-    r:8+s(i+20)*14,
-    pulse:s(i+30)*Math.PI*2,
-    ps: 0.02+s(i+40)*.02
-  }));
-  const DUCTS=Array.from({length:7},(_,i)=>({
-    angle:(i/7)*Math.PI*1.8-0.4,
-    len:40+s(i+50)*30,
-    children:Array.from({length:3},(_,j)=>({a:s(i+j*7+60)*0.8-0.4,l:15+s(i+j+70)*15}))
-  }));
+        // Breast tissue lobules (stable)
+        function s(n) {
+            let x = Math.sin(n + 1) * 10000;
+            return x - Math.floor(x);
+        }
 
-  // Scan line
-  let scanY=-1;
-  let prevIdx=-1;
+        const LOBULES = Array.from({length: 18}, (_, i) => ({
+            x: CX + (s(i) - .5) * 150,
+            y: CY + (s(i + 10) - .5) * 100,
+            r: 8 + s(i + 20) * 14,
+            pulse: s(i + 30) * Math.PI * 2,
+            ps: 0.02 + s(i + 40) * .02
+        }));
+        const DUCTS = Array.from({length: 7}, (_, i) => ({
+            angle: (i / 7) * Math.PI * 1.8 - 0.4,
+            len: 40 + s(i + 50) * 30,
+            children: Array.from({length: 3}, (_, j) => ({
+                a: s(i + j * 7 + 60) * 0.8 - 0.4,
+                l: 15 + s(i + j + 70) * 15
+            }))
+        }));
 
-  function getPhase(elapsed){
-    let c=elapsed%CYCLE,acc=0;
-    for(let i=0;i<PHASES.length;i++){
-      if(c<acc+PHASES[i].dur) return{idx:i,t:(c-acc)/PHASES[i].dur};
-      acc+=PHASES[i].dur;
-    }
-    return{idx:0,t:0};
-  }
+        // Scan line
+        let scanY = -1;
+        let prevIdx = -1;
 
-  function drawBreastOutline(compress){
-    // Side-view breast silhouette (simple rounded shape)
-    const squeeze=compress*25;
-    ctx.beginPath();
-    ctx.moveTo(CX-80,CY+60);
-    ctx.bezierCurveTo(CX-80,CY-90+squeeze,CX+90,CY-90+squeeze,CX+90,CY+60);
-    ctx.bezierCurveTo(CX+90,CY+90,CX-80,CY+90,CX-80,CY+60);
-    ctx.closePath();
-    const g=ctx.createRadialGradient(CX,CY,0,CX,CY,120);
-    g.addColorStop(0,'#fde8e0'); g.addColorStop(.7,'#f8d0c0'); g.addColorStop(1,'#f0b8a0');
-    ctx.fillStyle=g; ctx.fill();
-    ctx.strokeStyle='rgba(200,130,100,.4)'; ctx.lineWidth=1.5; ctx.stroke();
-    return {top:CY-90+squeeze, bot:CY+60};
-  }
+        function getPhase(elapsed) {
+            let c = elapsed % CYCLE, acc = 0;
+            for (let i = 0; i < PHASES.length; i++) {
+                if (c < acc + PHASES[i].dur) return {idx: i, t: (c - acc) / PHASES[i].dur};
+                acc += PHASES[i].dur;
+            }
+            return {idx: 0, t: 0};
+        }
 
-  function drawTissue(compress){
-    const sq=compress*20;
-    LOBULES.forEach(l=>{
-      l.pulse+=l.ps;
-      const pr=Math.sin(l.pulse)*.5+.5;
-      ctx.beginPath(); ctx.arc(l.x,l.y+sq*.5,l.r*(1+pr*.08),0,Math.PI*2);
-      ctx.fillStyle=`rgba(240,160,140,${0.6+pr*.1})`; ctx.fill();
-      ctx.strokeStyle='rgba(200,100,80,.3)'; ctx.lineWidth=.8; ctx.stroke();
-    });
-    // Ducts (from nipple area)
-    const nx=CX+80, ny=CY;
-    DUCTS.forEach(d=>{
-      const ex=nx+Math.cos(d.angle)*d.len;
-      const ey=ny+Math.sin(d.angle)*d.len;
-      ctx.beginPath(); ctx.moveTo(nx,ny+sq*.3); ctx.lineTo(ex,ey+sq*.3);
-      ctx.strokeStyle='rgba(200,100,80,.35)'; ctx.lineWidth=1.4; ctx.stroke();
-      d.children.forEach(ch=>{
-        const cx2=ex+Math.cos(d.angle+ch.a)*ch.l;
-        const cy2=ey+Math.sin(d.angle+ch.a)*ch.l;
-        ctx.beginPath(); ctx.moveTo(ex,ey+sq*.3); ctx.lineTo(cx2,cy2+sq*.3);
-        ctx.strokeStyle='rgba(200,100,80,.22)'; ctx.lineWidth=1; ctx.stroke();
-      });
-    });
-    // nipple
-    ctx.beginPath(); ctx.arc(nx,ny+sq*.3,6,0,Math.PI*2);
-    ctx.fillStyle='#d88070'; ctx.fill();
-  }
+        function drawBreastOutline(compress) {
+            // Side-view breast silhouette (simple rounded shape)
+            const squeeze = compress * 25;
+            ctx.beginPath();
+            ctx.moveTo(CX - 80, CY + 60);
+            ctx.bezierCurveTo(CX - 80, CY - 90 + squeeze, CX + 90, CY - 90 + squeeze, CX + 90, CY + 60);
+            ctx.bezierCurveTo(CX + 90, CY + 90, CX - 80, CY + 90, CX - 80, CY + 60);
+            ctx.closePath();
+            const g = ctx.createRadialGradient(CX, CY, 0, CX, CY, 120);
+            g.addColorStop(0, '#fde8e0');
+            g.addColorStop(.7, '#f8d0c0');
+            g.addColorStop(1, '#f0b8a0');
+            ctx.fillStyle = g;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(200,130,100,.4)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            return {top: CY - 90 + squeeze, bot: CY + 60};
+        }
 
-  function drawPlates(compress){
-    if(compress<=0) return;
-    const plateH=12,squeeze=compress*70;
-    const topY=CY-90+22+squeeze*.2;
-    const botY=CY+60-14-squeeze*.2;
-    // Top plate
-    ctx.beginPath(); ctx.roundRect(CX-95,topY,190,plateH,4);
-    ctx.fillStyle='#dde8f8'; ctx.fill();
-    ctx.strokeStyle='#6a9ccc'; ctx.lineWidth=2; ctx.stroke();
-    // Bot plate
-    ctx.beginPath(); ctx.roundRect(CX-95,botY,190,plateH,4);
-    ctx.fillStyle='#dde8f8'; ctx.fill();
-    ctx.strokeStyle='#6a9ccc'; ctx.lineWidth=2; ctx.stroke();
-    // Pressure arrows
-    if(compress<.95){
-      const a=compress; ctx.save(); ctx.globalAlpha=a*.7;
-      ctx.fillStyle='#005EB8'; ctx.font='bold 14px sans-serif'; ctx.textAlign='center';
-      ctx.fillText('↓',CX-40,topY-3); ctx.fillText('↓',CX+40,topY-3);
-      ctx.fillText('↑',CX-40,botY+22); ctx.fillText('↑',CX+40,botY+22);
-      ctx.restore();
-    }
-  }
+        function drawTissue(compress) {
+            const sq = compress * 20;
+            LOBULES.forEach(l => {
+                l.pulse += l.ps;
+                const pr = Math.sin(l.pulse) * .5 + .5;
+                ctx.beginPath();
+                ctx.arc(l.x, l.y + sq * .5, l.r * (1 + pr * .08), 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(240,160,140,${0.6 + pr * .1})`;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(200,100,80,.3)';
+                ctx.lineWidth = .8;
+                ctx.stroke();
+            });
+            // Ducts (from nipple area)
+            const nx = CX + 80, ny = CY;
+            DUCTS.forEach(d => {
+                const ex = nx + Math.cos(d.angle) * d.len;
+                const ey = ny + Math.sin(d.angle) * d.len;
+                ctx.beginPath();
+                ctx.moveTo(nx, ny + sq * .3);
+                ctx.lineTo(ex, ey + sq * .3);
+                ctx.strokeStyle = 'rgba(200,100,80,.35)';
+                ctx.lineWidth = 1.4;
+                ctx.stroke();
+                d.children.forEach(ch => {
+                    const cx2 = ex + Math.cos(d.angle + ch.a) * ch.l;
+                    const cy2 = ey + Math.sin(d.angle + ch.a) * ch.l;
+                    ctx.beginPath();
+                    ctx.moveTo(ex, ey + sq * .3);
+                    ctx.lineTo(cx2, cy2 + sq * .3);
+                    ctx.strokeStyle = 'rgba(200,100,80,.22)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+            });
+            // nipple
+            ctx.beginPath();
+            ctx.arc(nx, ny + sq * .3, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#d88070';
+            ctx.fill();
+        }
 
-  function drawXRayScan(progress, bounds){
-    if(progress<=0) return;
-    const scanLine=bounds.top+(bounds.bot-bounds.top)*progress;
-    // Scan line glow
-    const sg=ctx.createLinearGradient(CX-100,scanLine-8,CX-100,scanLine+8);
-    sg.addColorStop(0,'rgba(0,159,187,0)');
-    sg.addColorStop(.5,'rgba(0,159,187,.7)');
-    sg.addColorStop(1,'rgba(0,159,187,0)');
-    ctx.fillStyle=sg;
-    ctx.fillRect(CX-95,scanLine-8,190,16);
-    // scan line
-    ctx.beginPath(); ctx.moveTo(CX-95,scanLine); ctx.lineTo(CX+95,scanLine);
-    ctx.strokeStyle='rgba(0,200,220,.9)'; ctx.lineWidth=2; ctx.stroke();
-    // Scanned area (slightly tinted)
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(CX-80,bounds.top+22); ctx.lineTo(CX+90,bounds.top+22);
-    ctx.lineTo(CX+90,scanLine); ctx.lineTo(CX-80,scanLine);
-    ctx.closePath();
-    ctx.fillStyle='rgba(0,100,180,.06)'; ctx.fill();
-    ctx.restore();
-    // XRAY label
-    ctx.save(); ctx.globalAlpha=.6;
-    ctx.fillStyle='#005EB8'; ctx.font='700 9px "DM Sans",sans-serif';
-    ctx.textAlign='left'; ctx.fillText('X-RAY',CX-90,scanLine-12);
-    ctx.restore();
-  }
+        function drawPlates(compress) {
+            if (compress <= 0) return;
+            const plateH = 12, squeeze = compress * 70;
+            const topY = CY - 90 + 22 + squeeze * .2;
+            const botY = CY + 60 - 14 - squeeze * .2;
+            // Top plate
+            ctx.beginPath();
+            ctx.roundRect(CX - 95, topY, 190, plateH, 4);
+            ctx.fillStyle = '#dde8f8';
+            ctx.fill();
+            ctx.strokeStyle = '#6a9ccc';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Bot plate
+            ctx.beginPath();
+            ctx.roundRect(CX - 95, botY, 190, plateH, 4);
+            ctx.fillStyle = '#dde8f8';
+            ctx.fill();
+            ctx.strokeStyle = '#6a9ccc';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Pressure arrows
+            if (compress < .95) {
+                const a = compress;
+                ctx.save();
+                ctx.globalAlpha = a * .7;
+                ctx.fillStyle = '#005EB8';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('↓', CX - 40, topY - 3);
+                ctx.fillText('↓', CX + 40, topY - 3);
+                ctx.fillText('↑', CX - 40, botY + 22);
+                ctx.fillText('↑', CX + 40, botY + 22);
+                ctx.restore();
+            }
+        }
 
-  function drawResult(alpha){
-    if(alpha<=0) return;
-    ctx.save(); ctx.globalAlpha=alpha;
-    ctx.beginPath(); ctx.roundRect(CX-55,CY-22,110,44,10);
-    ctx.fillStyle='rgba(45,138,78,.92)'; ctx.fill();
-    ctx.fillStyle='#fff'; ctx.font='700 12px "DM Sans",sans-serif';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('✓  CLEAR RESULT',CX,CY-4);
-    ctx.font='500 9px "DM Sans",sans-serif';
-    ctx.fillText('See you in 3 years',CX,CY+10);
-    ctx.restore();
-  }
+        function drawXRayScan(progress, bounds) {
+            if (progress <= 0) return;
+            const scanLine = bounds.top + (bounds.bot - bounds.top) * progress;
+            // Scan line glow
+            const sg = ctx.createLinearGradient(CX - 100, scanLine - 8, CX - 100, scanLine + 8);
+            sg.addColorStop(0, 'rgba(0,159,187,0)');
+            sg.addColorStop(.5, 'rgba(0,159,187,.7)');
+            sg.addColorStop(1, 'rgba(0,159,187,0)');
+            ctx.fillStyle = sg;
+            ctx.fillRect(CX - 95, scanLine - 8, 190, 16);
+            // scan line
+            ctx.beginPath();
+            ctx.moveTo(CX - 95, scanLine);
+            ctx.lineTo(CX + 95, scanLine);
+            ctx.strokeStyle = 'rgba(0,200,220,.9)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Scanned area (slightly tinted)
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(CX - 80, bounds.top + 22);
+            ctx.lineTo(CX + 90, bounds.top + 22);
+            ctx.lineTo(CX + 90, scanLine);
+            ctx.lineTo(CX - 80, scanLine);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(0,100,180,.06)';
+            ctx.fill();
+            ctx.restore();
+            // XRAY label
+            ctx.save();
+            ctx.globalAlpha = .6;
+            ctx.fillStyle = '#005EB8';
+            ctx.font = '700 9px "DM Sans",sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('X-RAY', CX - 90, scanLine - 12);
+            ctx.restore();
+        }
 
-  let st=null;
-  function render(now){
-    if(!st) st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
+        function drawResult(alpha) {
+            if (alpha <= 0) return;
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.beginPath();
+            ctx.roundRect(CX - 55, CY - 22, 110, 44, 10);
+            ctx.fillStyle = 'rgba(45,138,78,.92)';
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 12px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('✓  CLEAR RESULT', CX, CY - 4);
+            ctx.font = '500 9px "DM Sans",sans-serif';
+            ctx.fillText('See you in 3 years', CX, CY + 10);
+            ctx.restore();
+        }
 
-    if(idx!==prevIdx){
-      prevIdx=idx;
-      document.getElementById('breastPhase').textContent=PHASES[idx].name;
-      updateDots('breastDots',idx,'breast');
-    }
+        let st = null;
 
-    ctx.clearRect(0,0,W,H);
-    // bg
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#f8f0f4'); bg.addColorStop(1,'#ede0e8');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-    ctx.save(); ctx.globalAlpha=.15; ctx.fillStyle='#c0497a';
-    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
-    ctx.fillText('MAMMOGRAPHY SIMULATION',CX,H-10); ctx.restore();
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
 
-    const compress = idx===0 ? 0 : idx===1 ? ease(t) : 1;
-    const bounds=drawBreastOutline(compress);
-    drawTissue(compress);
-    drawPlates(compress);
+            if (idx !== prevIdx) {
+                prevIdx = idx;
+                document.getElementById('breastPhase').textContent = PHASES[idx].name;
+                updateDots('breastDots', idx, 'breast');
+            }
 
-    if(idx===2){
-      drawXRayScan(t,bounds);
-      if(t>.85) drawResult(ease((t-.85)/.15));
-    }
+            ctx.clearRect(0, 0, W, H);
+            // bg
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#f8f0f4');
+            bg.addColorStop(1, '#ede0e8');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.globalAlpha = .15;
+            ctx.fillStyle = '#c0497a';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('MAMMOGRAPHY SIMULATION', CX, H - 10);
+            ctx.restore();
 
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            const compress = idx === 0 ? 0 : idx === 1 ? ease(t) : 1;
+            const bounds = drawBreastOutline(compress);
+            drawTissue(compress);
+            drawPlates(compress);
 
-/* ══════════════════════════════════════════════════════════
+            if (idx === 2) {
+                drawXRayScan(t, bounds);
+                if (t > .85) drawResult(ease((t - .85) / .15));
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+    })();
+
+    /* ══════════════════════════════════════════════════════════
    3. CERVICAL SCREENING ANIMATION
    Phases: healthy cells grid → CIN (abnormal) cells appear → smear brush sweeps → sample sent (clear)
    ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('cervicalCanvas');
-  const ctx=C.getContext('2d');
-  const W=500,H=300; C.width=W; C.height=H;
-  const CX=W/2, CY=H/2;
-  const PHASES=[
-    {name:'Normal Cells',        dur:6},
-    {name:'Abnormal Changes',    dur:7},
-    {name:'Cervical Smear Test', dur:6},
-    {name:'Sample Analysed',     dur:5},
-  ];
-  const CYCLE=24;
+    (function () {
+        const C = document.getElementById('cervicalCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const CX = W / 2, CY = H / 2;
+        const PHASES = [
+            {name: 'Normal Cells', dur: 6},
+            {name: 'Abnormal Changes', dur: 7},
+            {name: 'Cervical Smear Test', dur: 6},
+            {name: 'Sample Analysed', dur: 5},
+        ];
+        const CYCLE = 24;
 
-  // Cervix os circle
-  const OS_R=85;
+        // Cervix os circle
+        const OS_R = 85;
 
-  // Cell grid inside the os
-  function s(n){let x=Math.sin(n+1)*10000;return x-Math.floor(x);}
-  const CELLS=[];
-  for(let i=0;i<30;i++){
-    const angle=s(i)*Math.PI*2;
-    const r=(0.2+s(i+10)*.7)*OS_R*.85;
-    CELLS.push({
-      x:CX+Math.cos(angle)*r,
-      y:CY+Math.sin(angle)*r,
-      base:6+s(i+20)*5,
-      abnormal: s(i+30)<0.28, // ~28% will be abnormal
-      pulse:s(i+40)*Math.PI*2,
-      ps:0.02+s(i+50)*.02,
-    });
-  }
+        // Cell grid inside the os
+        function s(n) {
+            let x = Math.sin(n + 1) * 10000;
+            return x - Math.floor(x);
+        }
 
-  // Smear brush geometry
-  const BRUSH_HEAD_W=22, BRUSH_HEAD_H=7, BRUSH_LEN=110;
+        const CELLS = [];
+        for (let i = 0; i < 30; i++) {
+            const angle = s(i) * Math.PI * 2;
+            const r = (0.2 + s(i + 10) * .7) * OS_R * .85;
+            CELLS.push({
+                x: CX + Math.cos(angle) * r,
+                y: CY + Math.sin(angle) * r,
+                base: 6 + s(i + 20) * 5,
+                abnormal: s(i + 30) < 0.28, // ~28% will be abnormal
+                pulse: s(i + 40) * Math.PI * 2,
+                ps: 0.02 + s(i + 50) * .02,
+            });
+        }
 
-  let st=null; let prevIdx=-1;
+        // Smear brush geometry
+        const BRUSH_HEAD_W = 22, BRUSH_HEAD_H = 7, BRUSH_LEN = 110;
 
-  function getPhase(elapsed){
-    let c=elapsed%CYCLE,acc=0;
-    for(let i=0;i<PHASES.length;i++){
-      if(c<acc+PHASES[i].dur) return{idx:i,t:(c-acc)/PHASES[i].dur};
-      acc+=PHASES[i].dur;
-    }
-    return{idx:0,t:0};
-  }
+        let st = null;
+        let prevIdx = -1;
 
-  function drawCervix(){
-    // Outer tissue
-    ctx.beginPath(); ctx.arc(CX,CY,OS_R+28,0,Math.PI*2);
-    const og=ctx.createRadialGradient(CX,CY,OS_R,CX,CY,OS_R+28);
-    og.addColorStop(0,'#e89080'); og.addColorStop(1,'#d07060');
-    ctx.fillStyle=og; ctx.fill();
+        function getPhase(elapsed) {
+            let c = elapsed % CYCLE, acc = 0;
+            for (let i = 0; i < PHASES.length; i++) {
+                if (c < acc + PHASES[i].dur) return {idx: i, t: (c - acc) / PHASES[i].dur};
+                acc += PHASES[i].dur;
+            }
+            return {idx: 0, t: 0};
+        }
 
-    // Inner mucosa ring
-    ctx.beginPath(); ctx.arc(CX,CY,OS_R+8,0,Math.PI*2);
-    const mg=ctx.createRadialGradient(CX,CY,OS_R-4,CX,CY,OS_R+8);
-    mg.addColorStop(0,'#f0a898'); mg.addColorStop(1,'#e08878');
-    ctx.fillStyle=mg; ctx.fill();
+        function drawCervix() {
+            // Outer tissue
+            ctx.beginPath();
+            ctx.arc(CX, CY, OS_R + 28, 0, Math.PI * 2);
+            const og = ctx.createRadialGradient(CX, CY, OS_R, CX, CY, OS_R + 28);
+            og.addColorStop(0, '#e89080');
+            og.addColorStop(1, '#d07060');
+            ctx.fillStyle = og;
+            ctx.fill();
 
-    // OS interior (lumen)
-    ctx.beginPath(); ctx.arc(CX,CY,OS_R,0,Math.PI*2);
-    const lg=ctx.createRadialGradient(CX,CY,0,CX,CY,OS_R);
-    lg.addColorStop(0,'#fff4f2'); lg.addColorStop(.6,'#ffe0da'); lg.addColorStop(1,'#ffd0c8');
-    ctx.fillStyle=lg; ctx.fill();
+            // Inner mucosa ring
+            ctx.beginPath();
+            ctx.arc(CX, CY, OS_R + 8, 0, Math.PI * 2);
+            const mg = ctx.createRadialGradient(CX, CY, OS_R - 4, CX, CY, OS_R + 8);
+            mg.addColorStop(0, '#f0a898');
+            mg.addColorStop(1, '#e08878');
+            ctx.fillStyle = mg;
+            ctx.fill();
 
-    // Ring texture lines
-    ctx.save(); ctx.globalAlpha=.12;
-    for(let i=0;i<8;i++){
-      const a=(i/8)*Math.PI*2;
-      ctx.beginPath(); ctx.moveTo(CX,CY);
-      ctx.lineTo(CX+Math.cos(a)*(OS_R+28),CY+Math.sin(a)*(OS_R+28));
-      ctx.strokeStyle='#c06050'; ctx.lineWidth=1; ctx.stroke();
-    }
-    ctx.restore();
-  }
+            // OS interior (lumen)
+            ctx.beginPath();
+            ctx.arc(CX, CY, OS_R, 0, Math.PI * 2);
+            const lg = ctx.createRadialGradient(CX, CY, 0, CX, CY, OS_R);
+            lg.addColorStop(0, '#fff4f2');
+            lg.addColorStop(.6, '#ffe0da');
+            lg.addColorStop(1, '#ffd0c8');
+            ctx.fillStyle = lg;
+            ctx.fill();
 
-  function drawCells(abnormalProgress, brushSwept){
-    CELLS.forEach((cell,i)=>{
-      cell.pulse+=cell.ps;
-      const p=Math.sin(cell.pulse)*.5+.5;
-      const r=cell.base*(1+p*.1);
+            // Ring texture lines
+            ctx.save();
+            ctx.globalAlpha = .12;
+            for (let i = 0; i < 8; i++) {
+                const a = (i / 8) * Math.PI * 2;
+                ctx.beginPath();
+                ctx.moveTo(CX, CY);
+                ctx.lineTo(CX + Math.cos(a) * (OS_R + 28), CY + Math.sin(a) * (OS_R + 28));
+                ctx.strokeStyle = '#c06050';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
 
-      let fill, nuc;
-      if(cell.abnormal && abnormalProgress>0){
-        const a=Math.min(1,abnormalProgress*2);
-        // abnormal: larger, irregular, darker
-        fill=`rgba(${lerp(230,160,a)},${lerp(130,40,a)},${lerp(130,40,a)},0.85)`;
-        nuc=`rgba(${lerp(160,80,a)},${lerp(60,10,a)},${lerp(60,10,a)},0.9)`;
-      } else {
-        fill=`rgba(240,180,170,0.8)`;
-        nuc=`rgba(200,100,90,0.7)`;
-      }
+        function drawCells(abnormalProgress, brushSwept) {
+            CELLS.forEach((cell, i) => {
+                cell.pulse += cell.ps;
+                const p = Math.sin(cell.pulse) * .5 + .5;
+                const r = cell.base * (1 + p * .1);
 
-      const sizeBoost = (cell.abnormal && abnormalProgress>0) ? lerp(1,1.5,Math.min(1,abnormalProgress*2)) : 1;
-      const cr = r*sizeBoost;
+                let fill, nuc;
+                if (cell.abnormal && abnormalProgress > 0) {
+                    const a = Math.min(1, abnormalProgress * 2);
+                    // abnormal: larger, irregular, darker
+                    fill = `rgba(${lerp(230, 160, a)},${lerp(130, 40, a)},${lerp(130, 40, a)},0.85)`;
+                    nuc = `rgba(${lerp(160, 80, a)},${lerp(60, 10, a)},${lerp(60, 10, a)},0.9)`;
+                } else {
+                    fill = `rgba(240, 180, 170, 0.8)`;
+                    nuc = `rgba(200, 100, 90, 0.7)`;
+                }
 
-      // Brush sweep: cells near brush Y get collected (fade alpha)
-      const swept = brushSwept>0 && Math.abs(cell.x-CX)<OS_R*.9 && cell.y > CY-OS_R*.6+brushSwept*(OS_R*1.2)-OS_R*.15 && cell.y < CY-OS_R*.6+brushSwept*(OS_R*1.2)+OS_R*.15;
-      ctx.save();
-      if(swept) ctx.globalAlpha=Math.max(0,.8-brushSwept*2);
+                const sizeBoost = (cell.abnormal && abnormalProgress > 0) ? lerp(1, 1.5, Math.min(1, abnormalProgress * 2)) : 1;
+                const cr = r * sizeBoost;
 
-      ctx.beginPath(); ctx.arc(cell.x,cell.y,cr,0,Math.PI*2);
-      ctx.fillStyle=fill; ctx.fill();
-      ctx.strokeStyle='rgba(180,80,70,.25)'; ctx.lineWidth=.8; ctx.stroke();
-      // nucleus
-      ctx.beginPath(); ctx.arc(cell.x,cell.y,cr*.38,0,Math.PI*2);
-      ctx.fillStyle=nuc; ctx.fill();
-      ctx.restore();
-    });
-  }
+                // Brush sweep: cells near brush Y get collected (fade alpha)
+                const swept = brushSwept > 0 && Math.abs(cell.x - CX) < OS_R * .9 && cell.y > CY - OS_R * .6 + brushSwept * (OS_R * 1.2) - OS_R * .15 && cell.y < CY - OS_R * .6 + brushSwept * (OS_R * 1.2) + OS_R * .15;
+                ctx.save();
+                if (swept) ctx.globalAlpha = Math.max(0, .8 - brushSwept * 2);
 
-  function drawBrush(progress){
-    if(progress<=0) return;
-    // Brush sweeps vertically from top to bottom of OS
-    const startY=CY-OS_R*.7;
-    const endY=CY+OS_R*.7;
-    const by=startY+(endY-startY)*Math.min(1,progress*1.2);
-    const bx=CX;
+                ctx.beginPath();
+                ctx.arc(cell.x, cell.y, cr, 0, Math.PI * 2);
+                ctx.fillStyle = fill;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(180,80,70,.25)';
+                ctx.lineWidth = .8;
+                ctx.stroke();
+                // nucleus
+                ctx.beginPath();
+                ctx.arc(cell.x, cell.y, cr * .38, 0, Math.PI * 2);
+                ctx.fillStyle = nuc;
+                ctx.fill();
+                ctx.restore();
+            });
+        }
 
-    ctx.save();
-    // Handle
-    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by-BRUSH_LEN);
-    ctx.strokeStyle='#8090b0'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.stroke();
-    // Head bristles
-    for(let i=-4;i<=4;i++){
-      ctx.beginPath(); ctx.moveTo(bx+i*BRUSH_HEAD_W/9*2,by);
-      ctx.lineTo(bx+i*BRUSH_HEAD_W/9*1.5,by+BRUSH_HEAD_H+Math.abs(i)*1.5);
-      ctx.strokeStyle=`rgba(91,75,184,${0.7+Math.random()*.3})`; ctx.lineWidth=2; ctx.lineCap='round'; ctx.stroke();
-    }
-    // Label
-    ctx.globalAlpha=.7; ctx.fillStyle='#5b4bb8'; ctx.font='600 9px "DM Sans",sans-serif';
-    ctx.textAlign='center'; ctx.fillText('CERVICAL BRUSH',bx,by-BRUSH_LEN-8);
-    ctx.restore();
-  }
+        function drawBrush(progress) {
+            if (progress <= 0) return;
+            // Brush sweeps vertically from top to bottom of OS
+            const startY = CY - OS_R * .7;
+            const endY = CY + OS_R * .7;
+            const by = startY + (endY - startY) * Math.min(1, progress * 1.2);
+            const bx = CX;
 
-  function drawResult(alpha){
-    if(alpha<=0) return;
-    ctx.save(); ctx.globalAlpha=alpha;
-    ctx.beginPath(); ctx.roundRect(CX-70,CY-26,140,52,10);
-    ctx.fillStyle='rgba(91,75,184,.92)'; ctx.fill();
-    ctx.fillStyle='#fff'; ctx.font='700 11px "DM Sans",sans-serif';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('✓  SAMPLE RECEIVED',CX,CY-8);
-    ctx.font='500 9px "DM Sans",sans-serif';
-    ctx.fillText('Lab results in 2 weeks',CX,CY+8);
-    ctx.restore();
-  }
+            ctx.save();
+            // Handle
+            ctx.beginPath();
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx, by - BRUSH_LEN);
+            ctx.strokeStyle = '#8090b0';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            // Head bristles
+            for (let i = -4; i <= 4; i++) {
+                ctx.beginPath();
+                ctx.moveTo(bx + i * BRUSH_HEAD_W / 9 * 2, by);
+                ctx.lineTo(bx + i * BRUSH_HEAD_W / 9 * 1.5, by + BRUSH_HEAD_H + Math.abs(i) * 1.5);
+                ctx.strokeStyle = `rgba(91,75,184,${0.7 + Math.random() * .3})`;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+            }
+            // Label
+            ctx.globalAlpha = .7;
+            ctx.fillStyle = '#5b4bb8';
+            ctx.font = '600 9px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('CERVICAL BRUSH', bx, by - BRUSH_LEN - 8);
+            ctx.restore();
+        }
 
-  function render(now){
-    if(!st) st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
+        function drawResult(alpha) {
+            if (alpha <= 0) return;
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.beginPath();
+            ctx.roundRect(CX - 70, CY - 26, 140, 52, 10);
+            ctx.fillStyle = 'rgba(91,75,184,.92)';
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 11px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('✓  SAMPLE RECEIVED', CX, CY - 8);
+            ctx.font = '500 9px "DM Sans",sans-serif';
+            ctx.fillText('Lab results in 2 weeks', CX, CY + 8);
+            ctx.restore();
+        }
 
-    if(idx!==prevIdx){
-      prevIdx=idx;
-      document.getElementById('cervicalPhase').textContent=PHASES[idx].name;
-      updateDots('cervicalDots',idx,'cervical');
-    }
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
 
-    ctx.clearRect(0,0,W,H);
-    // bg
-    const bg=ctx.createRadialGradient(CX,CY,0,CX,CY,200);
-    bg.addColorStop(0,'#f4f0fa'); bg.addColorStop(1,'#e8e0f4');
-    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-    ctx.save(); ctx.globalAlpha=.15; ctx.fillStyle='#5b4bb8';
-    ctx.font='600 10px "DM Sans",sans-serif'; ctx.textAlign='center';
-    ctx.fillText('CERVICAL CELLS · MICROSCOPE VIEW',CX,H-10); ctx.restore();
+            if (idx !== prevIdx) {
+                prevIdx = idx;
+                document.getElementById('cervicalPhase').textContent = PHASES[idx].name;
+                updateDots('cervicalDots', idx, 'cervical');
+            }
 
-    const abnProg = idx===0?0 : idx===1?ease(t) : 1;
-    const brushProg = idx===2?ease(t) : idx===3?1:0;
-    const resultAlpha = idx===3?ease(t):0;
+            ctx.clearRect(0, 0, W, H);
+            // bg
+            const bg = ctx.createRadialGradient(CX, CY, 0, CX, CY, 200);
+            bg.addColorStop(0, '#f4f0fa');
+            bg.addColorStop(1, '#e8e0f4');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.globalAlpha = .15;
+            ctx.fillStyle = '#5b4bb8';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('CERVICAL CELLS · MICROSCOPE VIEW', CX, H - 10);
+            ctx.restore();
 
-    drawCervix();
-    drawCells(abnProg, idx===2?ease(t):0);
-    drawBrush(brushProg);
-    if(idx===3) drawResult(resultAlpha);
+            const abnProg = idx === 0 ? 0 : idx === 1 ? ease(t) : 1;
+            const brushProg = idx === 2 ? ease(t) : idx === 3 ? 1 : 0;
+            const resultAlpha = idx === 3 ? ease(t) : 0;
 
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            drawCervix();
+            drawCells(abnProg, idx === 2 ? ease(t) : 0);
+            drawBrush(brushProg);
+            if (idx === 3) drawResult(resultAlpha);
+
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+    })();
 </script>
 </body>
 </html>

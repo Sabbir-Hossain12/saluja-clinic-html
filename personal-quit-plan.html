@@ -1,774 +1,2248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Personal Quit Plan – Saluja Clinic · West London GP Practice</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
-  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
-  --white:#fff;--off:#f5f8fc;
-  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
-  --quit-green:#4ade80;--quit-amber:#fbbf24;--quit-blue:#60a5fa;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
-.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
-.fu.vis{opacity:1;transform:none}
-.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Personal Quit Plan – Saluja Clinic · West London GP Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-lb: #41B6E6;
+            --white: #fff;
+            --off: #f5f8fc;
+            --td: #1a1a2e;
+            --tm: #3a3a5c;
+            --ts: #6b7a99;
+            --border: #d8e4f0;
+            --quit-green: #4ade80;
+            --quit-amber: #fbbf24;
+            --quit-blue: #60a5fa;
+        }
 
-/* UTILITY BAR */
-.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
-.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
-.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
-.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-/* HEADER */
-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
-.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
-.lw{display:flex;align-items:center;text-decoration:none}
-.lw svg{height:84px;width:auto}
-nav{display:flex;align-items:center;gap:.25rem}
-nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
-nav a:hover{background:var(--off);color:var(--nhs-blue)}
-nav a.act{color:var(--nhs-blue);font-weight:600}
-.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
-.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+        html {
+            scroll-behavior: smooth
+        }
 
-/* HERO */
-.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(0,127,59,.045) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
-.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
-.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
-.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
-.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-green);background:rgba(0,127,59,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
-.htag .dot{width:6px;height:6px;background:var(--nhs-green);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
-.hero h1 em{font-style:normal;color:var(--nhs-blue)}
-.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
-.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
-.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fff;
+            color: var(--td);
+            overflow-x: hidden
+        }
 
-/* ── HERO VISUAL — Quit Journey Card ──────────────── */
-.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:400px}
+        .fu {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity .6s ease, transform .6s ease
+        }
 
-.qj-card{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}
-.qj-card::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+        .fu.vis {
+            opacity: 1;
+            transform: none
+        }
 
-/* Top bar */
-.qj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:2}
-.qj-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-.qj-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--quit-green)}
-.qj-ldot{width:6px;height:6px;border-radius:50%;background:var(--quit-green);animation:qjlp 1.4s ease-in-out infinite}
-@keyframes qjlp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(74,222,128,0)}}
+        .fu.d1 {
+            transition-delay: .1s
+        }
 
-/* Days free big display */
-.qj-days-row{display:flex;align-items:flex-end;gap:1rem;margin-bottom:1rem;position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.9rem 1.1rem}
-.qj-days-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:700;color:#fff;line-height:1;transition:color .5s}
-.qj-days-unit{font-size:.75rem;color:rgba(255,255,255,.4);padding-bottom:.5rem}
-.qj-days-right{flex:1;display:flex;flex-direction:column;gap:.3rem;align-items:flex-end}
-.qj-since{font-size:.68rem;color:rgba(255,255,255,.35);text-align:right}
-.qj-smoked{font-size:.62rem;font-weight:700;color:var(--quit-green);text-align:right}
+        .fu.d2 {
+            transition-delay: .2s
+        }
 
-/* Savings row */
-.qj-savings{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem;position:relative;z-index:2}
-.qj-sav{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.55rem .8rem}
-.qj-sav-v{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;line-height:1;transition:color .5s}
-.qj-sav-l{font-size:.58rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+        .fu.d3 {
+            transition-delay: .3s
+        }
 
-/* Health timeline */
-.qj-timeline{position:relative;z-index:2;margin-bottom:.9rem}
-.qj-tl-hdr{font-size:.58rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:.6rem}
-.qj-milestones{display:flex;flex-direction:column;gap:.4rem}
-.qj-ms{display:flex;align-items:center;gap:.7rem;padding:.4rem .6rem;border-radius:8px;transition:background .4s}
-.qj-ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:all .5s}
-.qj-ms-dot.unlocked{box-shadow:0 0 8px currentColor}
-.qj-ms-text{font-size:.68rem;line-height:1.3;flex:1;transition:color .4s}
-.qj-ms-time{font-size:.6rem;font-weight:700;flex-shrink:0;transition:color .4s}
+        /* UTILITY BAR */
+        .ub {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .85);
+            font-size: .78rem;
+            padding: .45rem 0
+        }
 
-/* Floating badges */
-.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
-.hbdot{width:7px;height:7px;border-radius:50%}
-.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
-.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
-@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+        .ub .inn {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
 
-/* WAVE */
-.wave{line-height:0;overflow:hidden}
-.wave svg{display:block;width:100%}
+        .ub a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
 
-/* PLAN BUILDER */
-.psec{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
-.pcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);position:relative;overflow:hidden}
-.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--nhs-green),var(--nhs-blue),var(--nhs-aqua))}
-.ptit{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--td);margin-bottom:.4rem}
-.psub{font-size:.88rem;color:var(--ts);margin-bottom:1.8rem;line-height:1.6}
+        .ub a:hover {
+            color: #fff
+        }
 
-.fg{display:flex;flex-direction:column;gap:1.4rem}
-.fi{display:flex;flex-direction:column;gap:.5rem}
-.fi label{font-size:.85rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.4rem}
+        .ub-l, .ub-r {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem
+        }
 
-/* Stepper */
-.niw{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
-.niw:focus-within{border-color:var(--nhs-blue);box-shadow:0 0 0 3px rgba(0,94,184,.1)}
-.nb{background:var(--off);border:none;width:44px;height:44px;font-size:1.1rem;cursor:pointer;color:var(--tm);transition:background .15s,color .15s}
-.nb:hover{background:var(--nhs-blue);color:#fff}
-.ni{flex:1;border:none;outline:none;text-align:center;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--td);background:transparent;height:44px}
-input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+        .upill {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 20px;
+            padding: .2rem .8rem
+        }
 
-/* Select styled */
-.sel-wrap{position:relative}
-.sel-wrap select{width:100%;padding:.7rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--td);background:#fff;appearance:none;cursor:pointer;transition:border-color .2s,box-shadow .2s;outline:none}
-.sel-wrap select:focus{border-color:var(--nhs-blue);box-shadow:0 0 0 3px rgba(0,94,184,.1)}
-.sel-wrap::after{content:'▾';position:absolute;right:1rem;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ts);font-size:.8rem}
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fff;
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 20px rgba(0, 94, 184, .10)
+        }
 
-/* Range slider */
-.rng-row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ts);margin-bottom:.3rem}
-input[type=range]{width:100%;height:6px;appearance:none;background:var(--border);border-radius:99px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:var(--nhs-blue);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,94,184,.3);cursor:pointer;transition:transform .15s}
-input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
-.rng-val{text-align:center;font-weight:700;font-size:1rem;color:var(--nhs-blue)}
+        .hi {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px
+        }
 
-/* Checkbox rows */
-.chk-row{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;background:var(--off);border-radius:10px;border:1.5px solid var(--border);cursor:pointer;transition:border-color .2s}
-.chk-row:hover{border-color:var(--nhs-lb)}
-.chk-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--nhs-blue);cursor:pointer}
-.chk-lbl{font-size:.88rem;color:var(--td)}
+        .lw {
+            display: flex;
+            align-items: center;
+            text-decoration: none
+        }
 
-.psbtn{width:100%;padding:1rem;border:none;border-radius:12px;background:linear-gradient(135deg,var(--nhs-green),var(--nhs-blue));color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.5rem;box-shadow:0 4px 20px rgba(0,127,59,.3);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
-.psbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
-.psbtn:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,127,59,.38)}
-.psbtn:hover::after{transform:translateX(100%)}
+        .lw svg {
+            height: 84px;
+            width: auto
+        }
 
-/* RESULT PANEL */
-.rpanel{display:flex;flex-direction:column;gap:1.4rem}
-.defp{background:var(--off);border:1.5px solid var(--border);border-radius:24px;padding:2.2rem}
-.defp-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--td);margin-bottom:1.2rem}
-.ms-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem}
-.ms-item{display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 1rem;background:#fff;border-radius:12px;border:1.5px solid var(--border);transition:border-color .2s,box-shadow .2s}
-.ms-item:hover{border-color:var(--nhs-lb);box-shadow:0 4px 14px rgba(0,94,184,.07)}
-.ms-ic{font-size:1rem;flex-shrink:0;margin-top:.05rem}
-.ms-t{font-size:.86rem;font-weight:600;color:var(--td);margin-bottom:.15rem}
-.ms-d{font-size:.78rem;color:var(--ts);line-height:1.4}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: .25rem
+        }
 
-/* Result card */
-.rcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);display:none;flex-direction:column;gap:1.4rem}
-.rcard.show{display:flex;animation:rin .5s cubic-bezier(.34,1.56,.64,1)}
-@keyframes rin{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+        nav a {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--tm);
+            text-decoration: none;
+            padding: .5rem .9rem;
+            border-radius: 6px;
+            transition: background .2s, color .2s
+        }
 
-/* Savings summary */
-.sav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
-.sav-box{background:var(--off);border-radius:14px;padding:1.1rem;text-align:center}
-.sav-v{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;line-height:1;color:var(--nhs-green)}
-.sav-l{font-size:.68rem;color:var(--ts);margin-top:.25rem}
+        nav a:hover {
+            background: var(--off);
+            color: var(--nhs-blue)
+        }
 
-/* Timeline */
-.tl{display:flex;flex-direction:column;gap:0;position:relative;padding-left:1.2rem}
-.tl::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--nhs-green),var(--nhs-blue),var(--nhs-aqua))}
-.tl-item{position:relative;padding:.8rem 1rem .8rem 1.4rem;border-radius:12px;margin-bottom:.6rem;transition:background .2s}
-.tl-item:hover{background:var(--off)}
-.tl-dot{position:absolute;left:-1.2rem;top:1.05rem;width:14px;height:14px;border-radius:50%;border:2px solid #fff;flex-shrink:0;box-shadow:0 0 0 2px currentColor}
-.tl-time{font-size:.7rem;font-weight:700;color:var(--nhs-blue);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.06em}
-.tl-t{font-size:.9rem;font-weight:600;color:var(--td);margin-bottom:.2rem}
-.tl-d{font-size:.8rem;color:var(--tm);line-height:1.55}
+        nav a.act {
+            color: var(--nhs-blue);
+            font-weight: 600
+        }
 
-/* Strategies */
-.strat{display:flex;flex-direction:column;gap:.7rem}
-.strat-item{display:flex;align-items:flex-start;gap:.8rem;padding:.9rem 1rem;background:var(--off);border-radius:12px;border-left:3px solid var(--nhs-blue);font-size:.84rem;line-height:1.55;color:var(--tm)}
-.strat-ic{font-size:1rem;flex-shrink:0}
+        .ncta {
+            background: var(--nhs-blue) !important;
+            color: #fff !important;
+            padding: .55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: .5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, .25)
+        }
 
-/* GP support box */
-.gp-box{background:rgba(0,127,59,.06);border:1.5px solid rgba(0,127,59,.2);border-radius:12px;padding:1rem 1.2rem;display:flex;gap:.8rem;align-items:flex-start}
-.gp-ic{font-size:1.1rem;flex-shrink:0}
-.gp-t{font-size:.85rem;font-weight:600;color:var(--td);margin-bottom:.2rem}
-.gp-d{font-size:.8rem;color:var(--tm);line-height:1.55}
+        .ncta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px)
+        }
 
-.rdis{font-size:.74rem;color:var(--ts);line-height:1.6;padding:.8rem 1rem;background:rgba(0,94,184,.04);border-radius:8px}
+        /* HERO */
+        .hero {
+            background: #fff;
+            padding: 4.5rem 2rem 3.5rem;
+            position: relative;
+            overflow: hidden
+        }
 
-/* INFO */
-.info{background:var(--off);padding:4rem 0}
-.info-in{max-width:1200px;margin:0 auto;padding:0 2rem}
-.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
-.ic{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
-.ic:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,94,184,.10);border-color:var(--nhs-lb)}
-.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--nhs-green),var(--nhs-blue));transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.ic:hover::before{transform:scaleX(1)}
-.ic-ic{font-size:1.4rem;margin-bottom:.5rem}
-.ic-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.35rem}
-.ic-d{font-size:.82rem;line-height:1.6;color:var(--tm)}
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -160px;
+            width: 680px;
+            height: 680px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 127, 59, .045) 0%, transparent 70%);
+            pointer-events: none
+        }
 
-/* EMERGENCY */
-.emerg{background:var(--td);padding:2.5rem 2rem}
-.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.ec{border-radius:16px;padding:2rem}
-.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
-.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
-.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
-.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
-.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -100px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, .05) 0%, transparent 70%);
+            pointer-events: none
+        }
 
-/* FOOTER */
-footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
-.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
-.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
-.flw svg{height:42px;width:auto;display:block}
-.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
-.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
-.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
-.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
-.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
-.fl a:hover{color:#fff}
-.hg{display:flex;flex-direction:column;gap:.4rem}
-.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
-.hd{color:rgba(255,255,255,.42)}
-.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+        .hero-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2
+        }
 
-@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.psec{grid-template-columns:1fr}.igrid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.igrid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}}
-@media(max-width:440px){.fi2{grid-template-columns:1fr}}
-</style>
+        .bc {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .8rem;
+            color: var(--ts);
+            margin-bottom: 1rem;
+            flex-wrap: wrap
+        }
+
+        .bc a {
+            color: var(--ts);
+            text-decoration: none
+        }
+
+        .bc a:hover {
+            color: var(--nhs-blue)
+        }
+
+        .htag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--nhs-green);
+            background: rgba(0, 127, 59, .07);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            margin-bottom: 1.2rem
+        }
+
+        .htag .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--nhs-green);
+            border-radius: 50%;
+            animation: pdot 1.6s ease-in-out infinite
+        }
+
+        @keyframes pdot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: .3;
+                transform: scale(1.8)
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.2rem
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--nhs-blue)
+        }
+
+        .hero p {
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: var(--tm);
+            margin-bottom: 2rem;
+            max-width: 500px
+        }
+
+        .btn-p {
+            background: var(--nhs-blue);
+            color: #fff;
+            padding: .85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 94, 184, .3);
+            transition: background .2s, transform .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .btn-p:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-2px)
+        }
+
+        .btn-o {
+            border: 2px solid var(--nhs-blue);
+            color: var(--nhs-blue);
+            padding: .8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: background .2s, color .2s, transform .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .btn-o:hover {
+            background: var(--nhs-blue);
+            color: #fff;
+            transform: translateY(-2px)
+        }
+
+        /* ── HERO VISUAL — Quit Journey Card ──────────────── */
+        .hv {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px
+        }
+
+        .qj-card {
+            width: 340px;
+            background: linear-gradient(158deg, #0c1a34, #001848);
+            border-radius: 24px;
+            padding: 1.6rem;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .06);
+            position: relative;
+            overflow: hidden
+        }
+
+        .qj-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background-image: linear-gradient(rgba(255, 255, 255, .02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .02) 1px, transparent 1px);
+            background-size: 22px 22px;
+            pointer-events: none
+        }
+
+        /* Top bar */
+        .qj-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.1rem;
+            position: relative;
+            z-index: 2
+        }
+
+        .qj-lbl {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .3)
+        }
+
+        .qj-live {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--quit-green)
+        }
+
+        .qj-ldot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--quit-green);
+            animation: qjlp 1.4s ease-in-out infinite
+        }
+
+        @keyframes qjlp {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, .5)
+            }
+            50% {
+                opacity: .5;
+                box-shadow: 0 0 0 5px rgba(74, 222, 128, 0)
+            }
+        }
+
+        /* Days free big display */
+        .qj-days-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 14px;
+            padding: .9rem 1.1rem
+        }
+
+        .qj-days-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            transition: color .5s
+        }
+
+        .qj-days-unit {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .4);
+            padding-bottom: .5rem
+        }
+
+        .qj-days-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+            align-items: flex-end
+        }
+
+        .qj-since {
+            font-size: .68rem;
+            color: rgba(255, 255, 255, .35);
+            text-align: right
+        }
+
+        .qj-smoked {
+            font-size: .62rem;
+            font-weight: 700;
+            color: var(--quit-green);
+            text-align: right
+        }
+
+        /* Savings row */
+        .qj-savings {
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: .6rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2
+        }
+
+        .qj-sav {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 10px;
+            padding: .55rem .8rem
+        }
+
+        .qj-sav-v {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1;
+            transition: color .5s
+        }
+
+        .qj-sav-l {
+            font-size: .58rem;
+            color: rgba(255, 255, 255, .35);
+            margin-top: .1rem
+        }
+
+        /* Health timeline */
+        .qj-timeline {
+            position: relative;
+            z-index: 2;
+            margin-bottom: .9rem
+        }
+
+        .qj-tl-hdr {
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: rgba(255, 255, 255, .3);
+            text-transform: uppercase;
+            margin-bottom: .6rem
+        }
+
+        .qj-milestones {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem
+        }
+
+        .qj-ms {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            padding: .4rem .6rem;
+            border-radius: 8px;
+            transition: background .4s
+        }
+
+        .qj-ms-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: all .5s
+        }
+
+        .qj-ms-dot.unlocked {
+            box-shadow: 0 0 8px currentColor
+        }
+
+        .qj-ms-text {
+            font-size: .68rem;
+            line-height: 1.3;
+            flex: 1;
+            transition: color .4s
+        }
+
+        .qj-ms-time {
+            font-size: .6rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: color .4s
+        }
+
+        /* Floating badges */
+        .hbadge {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: .5rem .9rem;
+            box-shadow: 0 4px 18px rgba(0, 94, 184, .10);
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--td);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            white-space: nowrap;
+            z-index: 10
+        }
+
+        .hbdot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .hb1 {
+            top: -12px;
+            right: -24px;
+            animation: hbf 5s ease-in-out infinite
+        }
+
+        .hb2 {
+            bottom: 14px;
+            left: -34px;
+            animation: hbs 5.5s ease-in-out infinite
+        }
+
+        @keyframes hbf {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        @keyframes hbs {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(8px)
+            }
+        }
+
+        /* WAVE */
+        .wave {
+            line-height: 0;
+            overflow: hidden
+        }
+
+        .wave svg {
+            display: block;
+            width: 100%
+        }
+
+        /* PLAN BUILDER */
+        .psec {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 3.5rem;
+            align-items: start
+        }
+
+        .pcard {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.4rem;
+            box-shadow: 0 8px 40px rgba(0, 94, 184, .07);
+            position: relative;
+            overflow: hidden
+        }
+
+        .pcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nhs-green), var(--nhs-blue), var(--nhs-aqua))
+        }
+
+        .ptit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .4rem
+        }
+
+        .psub {
+            font-size: .88rem;
+            color: var(--ts);
+            margin-bottom: 1.8rem;
+            line-height: 1.6
+        }
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .fi {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem
+        }
+
+        .fi label {
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--td);
+            display: flex;
+            align-items: center;
+            gap: .4rem
+        }
+
+        /* Stepper */
+        .niw {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color .2s, box-shadow .2s
+        }
+
+        .niw:focus-within {
+            border-color: var(--nhs-blue);
+            box-shadow: 0 0 0 3px rgba(0, 94, 184, .1)
+        }
+
+        .nb {
+            background: var(--off);
+            border: none;
+            width: 44px;
+            height: 44px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--tm);
+            transition: background .15s, color .15s
+        }
+
+        .nb:hover {
+            background: var(--nhs-blue);
+            color: #fff
+        }
+
+        .ni {
+            flex: 1;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--td);
+            background: transparent;
+            height: 44px
+        }
+
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none
+        }
+
+        /* Select styled */
+        .sel-wrap {
+            position: relative
+        }
+
+        .sel-wrap select {
+            width: 100%;
+            padding: .7rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .9rem;
+            color: var(--td);
+            background: #fff;
+            appearance: none;
+            cursor: pointer;
+            transition: border-color .2s, box-shadow .2s;
+            outline: none
+        }
+
+        .sel-wrap select:focus {
+            border-color: var(--nhs-blue);
+            box-shadow: 0 0 0 3px rgba(0, 94, 184, .1)
+        }
+
+        .sel-wrap::after {
+            content: '▾';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--ts);
+            font-size: .8rem
+        }
+
+        /* Range slider */
+        .rng-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: .74rem;
+            color: var(--ts);
+            margin-bottom: .3rem
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 6px;
+            appearance: none;
+            background: var(--border);
+            border-radius: 99px;
+            outline: none;
+            cursor: pointer
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--nhs-blue);
+            border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(0, 94, 184, .3);
+            cursor: pointer;
+            transition: transform .15s
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2)
+        }
+
+        .rng-val {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--nhs-blue)
+        }
+
+        /* Checkbox rows */
+        .chk-row {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .75rem 1rem;
+            background: var(--off);
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            transition: border-color .2s
+        }
+
+        .chk-row:hover {
+            border-color: var(--nhs-lb)
+        }
+
+        .chk-row input[type=checkbox] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--nhs-blue);
+            cursor: pointer
+        }
+
+        .chk-lbl {
+            font-size: .88rem;
+            color: var(--td)
+        }
+
+        .psbtn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--nhs-green), var(--nhs-blue));
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 127, 59, .3);
+            transition: transform .18s, box-shadow .18s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .psbtn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
+            transform: translateX(-100%);
+            transition: transform .5s
+        }
+
+        .psbtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0, 127, 59, .38)
+        }
+
+        .psbtn:hover::after {
+            transform: translateX(100%)
+        }
+
+        /* RESULT PANEL */
+        .rpanel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .defp {
+            background: var(--off);
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.2rem
+        }
+
+        .defp-t {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: 1.2rem
+        }
+
+        .ms-list {
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+            margin-bottom: 1rem
+        }
+
+        .ms-item {
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem;
+            padding: .8rem 1rem;
+            background: #fff;
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            transition: border-color .2s, box-shadow .2s
+        }
+
+        .ms-item:hover {
+            border-color: var(--nhs-lb);
+            box-shadow: 0 4px 14px rgba(0, 94, 184, .07)
+        }
+
+        .ms-ic {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: .05rem
+        }
+
+        .ms-t {
+            font-size: .86rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .15rem
+        }
+
+        .ms-d {
+            font-size: .78rem;
+            color: var(--ts);
+            line-height: 1.4
+        }
+
+        /* Result card */
+        .rcard {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.4rem;
+            box-shadow: 0 8px 40px rgba(0, 94, 184, .07);
+            display: none;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .rcard.show {
+            display: flex;
+            animation: rin .5s cubic-bezier(.34, 1.56, .64, 1)
+        }
+
+        @keyframes rin {
+            from {
+                opacity: 0;
+                transform: scale(.92) translateY(16px)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* Savings summary */
+        .sav-grid {
+            display: grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap: .8rem
+        }
+
+        .sav-box {
+            background: var(--off);
+            border-radius: 14px;
+            padding: 1.1rem;
+            text-align: center
+        }
+
+        .sav-v {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--nhs-green)
+        }
+
+        .sav-l {
+            font-size: .68rem;
+            color: var(--ts);
+            margin-top: .25rem
+        }
+
+        /* Timeline */
+        .tl {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            padding-left: 1.2rem
+        }
+
+        .tl::before {
+            content: '';
+            position: absolute;
+            left: .5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--nhs-green), var(--nhs-blue), var(--nhs-aqua))
+        }
+
+        .tl-item {
+            position: relative;
+            padding: .8rem 1rem .8rem 1.4rem;
+            border-radius: 12px;
+            margin-bottom: .6rem;
+            transition: background .2s
+        }
+
+        .tl-item:hover {
+            background: var(--off)
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -1.2rem;
+            top: 1.05rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px currentColor
+        }
+
+        .tl-time {
+            font-size: .7rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            margin-bottom: .2rem;
+            text-transform: uppercase;
+            letter-spacing: .06em
+        }
+
+        .tl-t {
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .2rem
+        }
+
+        .tl-d {
+            font-size: .8rem;
+            color: var(--tm);
+            line-height: 1.55
+        }
+
+        /* Strategies */
+        .strat {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem
+        }
+
+        .strat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem;
+            padding: .9rem 1rem;
+            background: var(--off);
+            border-radius: 12px;
+            border-left: 3px solid var(--nhs-blue);
+            font-size: .84rem;
+            line-height: 1.55;
+            color: var(--tm)
+        }
+
+        .strat-ic {
+            font-size: 1rem;
+            flex-shrink: 0
+        }
+
+        /* GP support box */
+        .gp-box {
+            background: rgba(0, 127, 59, .06);
+            border: 1.5px solid rgba(0, 127, 59, .2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            gap: .8rem;
+            align-items: flex-start
+        }
+
+        .gp-ic {
+            font-size: 1.1rem;
+            flex-shrink: 0
+        }
+
+        .gp-t {
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .2rem
+        }
+
+        .gp-d {
+            font-size: .8rem;
+            color: var(--tm);
+            line-height: 1.55
+        }
+
+        .rdis {
+            font-size: .74rem;
+            color: var(--ts);
+            line-height: 1.6;
+            padding: .8rem 1rem;
+            background: rgba(0, 94, 184, .04);
+            border-radius: 8px
+        }
+
+        /* INFO */
+        .info {
+            background: var(--off);
+            padding: 4rem 0
+        }
+
+        .info-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem
+        }
+
+        .igrid {
+            display: grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 2.5rem
+        }
+
+        .ic {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform .25s, box-shadow .25s, border-color .25s
+        }
+
+        .ic:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0, 94, 184, .10);
+            border-color: var(--nhs-lb)
+        }
+
+        .ic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nhs-green), var(--nhs-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
+        }
+
+        .ic:hover::before {
+            transform: scaleX(1)
+        }
+
+        .ic-ic {
+            font-size: 1.4rem;
+            margin-bottom: .5rem
+        }
+
+        .ic-t {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .35rem
+        }
+
+        .ic-d {
+            font-size: .82rem;
+            line-height: 1.6;
+            color: var(--tm)
+        }
+
+        /* EMERGENCY */
+        .emerg {
+            background: var(--td);
+            padding: 2.5rem 2rem
+        }
+
+        .emerg-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 2rem
+        }
+
+        .ec {
+            border-radius: 16px;
+            padding: 2rem
+        }
+
+        .e111 {
+            background: rgba(0, 94, 184, .35);
+            border: 1.5px solid rgba(65, 182, 230, .3)
+        }
+
+        .e999 {
+            background: rgba(180, 0, 0, .35);
+            border: 1.5px solid rgba(255, 100, 100, .3)
+        }
+
+        .el {
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: .3rem
+        }
+
+        .en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: .5rem
+        }
+
+        .ed {
+            font-size: .85rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .7)
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .8);
+            padding: 3.5rem 2rem 0
+        }
+
+        .fi2 {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .12)
+        }
+
+        .flw {
+            display: inline-block;
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px 14px 4px;
+            margin-bottom: 1rem
+        }
+
+        .flw svg {
+            height: 42px;
+            width: auto;
+            display: block
+        }
+
+        .ftag {
+            font-size: .88rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 1rem
+        }
+
+        .fadr {
+            font-size: .85rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .65)
+        }
+
+        .fadr a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
+
+        .fh {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .38);
+            margin-bottom: 1rem
+        }
+
+        .fl {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem
+        }
+
+        .fl a {
+            color: rgba(255, 255, 255, .7);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: color .2s
+        }
+
+        .fl a:hover {
+            color: #fff
+        }
+
+        .hg {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem
+        }
+
+        .hr2 {
+            display: flex;
+            justify-content: space-between;
+            font-size: .83rem;
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .hd {
+            color: rgba(255, 255, 255, .42)
+        }
+
+        .fb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: .5rem;
+            font-size: .74rem;
+            color: rgba(255, 255, 255, .35)
+        }
+
+        @media (max-width: 960px) {
+            .hero-in {
+                grid-template-columns:1fr
+            }
+
+            .hv {
+                display: none
+            }
+
+            .psec {
+                grid-template-columns:1fr
+            }
+
+            .igrid {
+                grid-template-columns:1fr 1fr
+            }
+        }
+
+        @media (max-width: 640px) {
+            .igrid {
+                grid-template-columns:1fr
+            }
+
+            .fi2 {
+                grid-template-columns:1fr 1fr
+            }
+
+            .emerg-in {
+                grid-template-columns:1fr
+            }
+
+            nav {
+                display: none
+            }
+        }
+
+        @media (max-width: 440px) {
+            .fi2 {
+                grid-template-columns:1fr
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="ub">
-  <div class="inn">
-    <div class="ub-l">
-      <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
-      <span class="upill">NHS GP Practice · West London</span>
+    <div class="inn">
+        <div class="ub-l">
+            <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
+            <span class="upill">NHS GP Practice · West London</span>
+        </div>
+        <div class="ub-r">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="ub-r">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="hi">
-    <a href="index.html" class="lw">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
-    </a>
-    <nav>
-      <a href="practice-policies-patient-information.html">Our Practice</a>
-      <a href="clinics-and-services.html">Clinics &amp; Services</a>
-      <a href="health-information.html" class="act">Health Information</a>
-      <a href="news.html">News</a>
-      <a href="contact-us.html">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="hi">
+        <a href="index.html" class="lw">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160">
+                <defs>
+                    <linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                        <stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/>
+                        <stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/>
+                        <stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/>
+                        <stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/>
+                        <stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/>
+                    </linearGradient>
+                    <linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="cSh" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="sh" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="cTS">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#cSh)"/>
+                <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700"
+                      font-style="normal" text-anchor="middle" fill="url(#cS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)"
+                      filter="url(#cTS)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-in">
-    <div>
-      <div class="bc"><a href="/">Home</a><span>›</span><a href="health-information.html">Health Information</a><span>›</span><span>Personal Quit Plan</span></div>
-      <div class="htag"><span class="dot"></span>Stop Smoking</div>
-      <h1>Your personal<br><em>Quit Plan</em></h1>
-      <p>Stopping smoking is one of the most impactful things you can do for your health. This tool builds a personalised quit plan based on your smoking habits, triggers, and motivations — and shows you exactly what your body and bank account stand to gain.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="#planner" class="btn-p">Build my plan →</a>
-        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
-      </div>
-    </div>
-
-    <!-- Quit Journey Card -->
-    <div class="hv">
-      <div style="position:relative">
-        <div class="hbadge hb1"><span class="hbdot" style="background:var(--quit-green)"></span>NHS Stop Smoking Support</div>
-        <div class="hbadge hb2"><span class="hbdot" style="background:var(--quit-amber)"></span>3× more likely to succeed</div>
-
-        <div class="qj-card">
-          <div class="qj-top">
-            <span class="qj-lbl">Quit Journey Tracker</span>
-            <span class="qj-live"><span class="qj-ldot"></span>Smoke-Free</span>
-          </div>
-
-          <!-- Days counter -->
-          <div class="qj-days-row">
-            <div class="qj-days-num" id="qjDays">0</div>
-            <div class="qj-days-unit">days<br>smoke-free</div>
-            <div class="qj-days-right">
-              <div class="qj-since" id="qjSince">Journey just begun</div>
-              <div class="qj-smoked" id="qjCigs">0 cigarettes avoided</div>
+    <div class="hero-in">
+        <div>
+            <div class="bc"><a href="index.html">Home</a><span>›</span><a href="health-information.html">Health
+                Information</a><span>›</span><span>Personal Quit Plan</span></div>
+            <div class="htag"><span class="dot"></span>Stop Smoking</div>
+            <h1>Your personal<br><em>Quit Plan</em></h1>
+            <p>Stopping smoking is one of the most impactful things you can do for your health. This tool builds a
+                personalised quit plan based on your smoking habits, triggers, and motivations — and shows you exactly
+                what your body and bank account stand to gain.</p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+                <a href="#planner" class="btn-p">Build my plan →</a>
+                <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
             </div>
-          </div>
-
-          <!-- Savings -->
-          <div class="qj-savings">
-            <div class="qj-sav">
-              <div class="qj-sav-v" id="qjMoney" style="color:var(--quit-amber)">£0</div>
-              <div class="qj-sav-l">Money saved</div>
-            </div>
-            <div class="qj-sav">
-              <div class="qj-sav-v" id="qjMins" style="color:var(--quit-blue)">+0 min</div>
-              <div class="qj-sav-l">Life regained</div>
-            </div>
-          </div>
-
-          <!-- Health timeline -->
-          <div class="qj-timeline">
-            <div class="qj-tl-hdr">Health milestones</div>
-            <div class="qj-milestones" id="qjMilestones"></div>
-          </div>
         </div>
-      </div>
+
+        <!-- Quit Journey Card -->
+        <div class="hv">
+            <div style="position:relative">
+                <div class="hbadge hb1"><span class="hbdot" style="background:var(--quit-green)"></span>NHS Stop Smoking
+                    Support
+                </div>
+                <div class="hbadge hb2"><span class="hbdot" style="background:var(--quit-amber)"></span>3× more likely
+                    to succeed
+                </div>
+
+                <div class="qj-card">
+                    <div class="qj-top">
+                        <span class="qj-lbl">Quit Journey Tracker</span>
+                        <span class="qj-live"><span class="qj-ldot"></span>Smoke-Free</span>
+                    </div>
+
+                    <!-- Days counter -->
+                    <div class="qj-days-row">
+                        <div class="qj-days-num" id="qjDays">0</div>
+                        <div class="qj-days-unit">days<br>smoke-free</div>
+                        <div class="qj-days-right">
+                            <div class="qj-since" id="qjSince">Journey just begun</div>
+                            <div class="qj-smoked" id="qjCigs">0 cigarettes avoided</div>
+                        </div>
+                    </div>
+
+                    <!-- Savings -->
+                    <div class="qj-savings">
+                        <div class="qj-sav">
+                            <div class="qj-sav-v" id="qjMoney" style="color:var(--quit-amber)">£0</div>
+                            <div class="qj-sav-l">Money saved</div>
+                        </div>
+                        <div class="qj-sav">
+                            <div class="qj-sav-v" id="qjMins" style="color:var(--quit-blue)">+0 min</div>
+                            <div class="qj-sav-l">Life regained</div>
+                        </div>
+                    </div>
+
+                    <!-- Health timeline -->
+                    <div class="qj-timeline">
+                        <div class="qj-tl-hdr">Health milestones</div>
+                        <div class="qj-milestones" id="qjMilestones"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- Wave -->
-<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+<div class="wave">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+    </svg>
+</div>
 
 <!-- PLAN BUILDER -->
 <div class="psec fu" id="planner">
 
-  <!-- Form -->
-  <div class="pcard">
-    <div class="ptit">🚭 Build Your Quit Plan</div>
-    <p class="psub">Answer a few questions and we'll generate a personalised plan with your health gains, money saved, and strategies matched to your triggers.</p>
+    <!-- Form -->
+    <div class="pcard">
+        <div class="ptit">🚭 Build Your Quit Plan</div>
+        <p class="psub">Answer a few questions and we'll generate a personalised plan with your health gains, money
+            saved, and strategies matched to your triggers.</p>
 
-    <div class="fg">
+        <div class="fg">
 
-      <div class="fi">
-        <label>🚬 How many cigarettes do you smoke per day?</label>
-        <div class="niw">
-          <button class="nb" onclick="step('cigs',-1)">−</button>
-          <input class="ni" type="number" id="cigs" value="15" min="1" max="80"/>
-          <button class="nb" onclick="step('cigs',1)">+</button>
+            <div class="fi">
+                <label>🚬 How many cigarettes do you smoke per day?</label>
+                <div class="niw">
+                    <button class="nb" onclick="step('cigs',-1)">−</button>
+                    <input class="ni" type="number" id="cigs" value="15" min="1" max="80"/>
+                    <button class="nb" onclick="step('cigs',1)">+</button>
+                </div>
+            </div>
+
+            <div class="fi">
+                <label>💷 How much do you spend on cigarettes per week? (£)</label>
+                <div class="niw">
+                    <button class="nb" onclick="step('spend',-1)">−</button>
+                    <input class="ni" type="number" id="spend" value="50" min="1" max="300"/>
+                    <button class="nb" onclick="step('spend',1)">+</button>
+                </div>
+            </div>
+
+            <div class="fi">
+                <label>📅 How long have you smoked?</label>
+                <div class="sel-wrap">
+                    <select id="years">
+                        <option value="1">Less than 1 year</option>
+                        <option value="3">1–5 years</option>
+                        <option value="8">5–10 years</option>
+                        <option value="15" selected>10–20 years</option>
+                        <option value="25">20–30 years</option>
+                        <option value="35">Over 30 years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fi">
+                <label>⏰ When do you smoke most? (select all that apply)</label>
+                <label class="chk-row"><input type="checkbox" id="trig1" value="morning"> <span class="chk-lbl">☕ First thing in the morning</span></label>
+                <label class="chk-row"><input type="checkbox" id="trig2" value="stress"> <span class="chk-lbl">😤 When stressed or anxious</span></label>
+                <label class="chk-row"><input type="checkbox" id="trig3" value="social"> <span class="chk-lbl">🍺 Socially (pubs, breaks)</span></label>
+                <label class="chk-row"><input type="checkbox" id="trig4" value="bored"> <span class="chk-lbl">😐 When bored</span></label>
+                <label class="chk-row"><input type="checkbox" id="trig5" value="after"> <span class="chk-lbl">🍽️ After meals</span></label>
+            </div>
+
+            <div class="fi">
+                <label>🎯 What motivates you most to quit?</label>
+                <div class="sel-wrap">
+                    <select id="motivation">
+                        <option value="health">My health</option>
+                        <option value="family">My family / children</option>
+                        <option value="money">Saving money</option>
+                        <option value="fitness">Fitness / sport</option>
+                        <option value="pregnancy">Pregnancy</option>
+                        <option value="appearance">Appearance / smell</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fi">
+                <label>💊 Have you tried to quit before?</label>
+                <div class="sel-wrap">
+                    <select id="attempts">
+                        <option value="0">No, this is my first attempt</option>
+                        <option value="1" selected>Yes, once before</option>
+                        <option value="3">Yes, 2–4 times</option>
+                        <option value="5">Yes, 5 or more times</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
-      </div>
-
-      <div class="fi">
-        <label>💷 How much do you spend on cigarettes per week? (£)</label>
-        <div class="niw">
-          <button class="nb" onclick="step('spend',-1)">−</button>
-          <input class="ni" type="number" id="spend" value="50" min="1" max="300"/>
-          <button class="nb" onclick="step('spend',1)">+</button>
-        </div>
-      </div>
-
-      <div class="fi">
-        <label>📅 How long have you smoked?</label>
-        <div class="sel-wrap">
-          <select id="years">
-            <option value="1">Less than 1 year</option>
-            <option value="3">1–5 years</option>
-            <option value="8">5–10 years</option>
-            <option value="15" selected>10–20 years</option>
-            <option value="25">20–30 years</option>
-            <option value="35">Over 30 years</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="fi">
-        <label>⏰ When do you smoke most? (select all that apply)</label>
-        <label class="chk-row"><input type="checkbox" id="trig1" value="morning"> <span class="chk-lbl">☕ First thing in the morning</span></label>
-        <label class="chk-row"><input type="checkbox" id="trig2" value="stress"> <span class="chk-lbl">😤 When stressed or anxious</span></label>
-        <label class="chk-row"><input type="checkbox" id="trig3" value="social"> <span class="chk-lbl">🍺 Socially (pubs, breaks)</span></label>
-        <label class="chk-row"><input type="checkbox" id="trig4" value="bored"> <span class="chk-lbl">😐 When bored</span></label>
-        <label class="chk-row"><input type="checkbox" id="trig5" value="after"> <span class="chk-lbl">🍽️ After meals</span></label>
-      </div>
-
-      <div class="fi">
-        <label>🎯 What motivates you most to quit?</label>
-        <div class="sel-wrap">
-          <select id="motivation">
-            <option value="health">My health</option>
-            <option value="family">My family / children</option>
-            <option value="money">Saving money</option>
-            <option value="fitness">Fitness / sport</option>
-            <option value="pregnancy">Pregnancy</option>
-            <option value="appearance">Appearance / smell</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="fi">
-        <label>💊 Have you tried to quit before?</label>
-        <div class="sel-wrap">
-          <select id="attempts">
-            <option value="0">No, this is my first attempt</option>
-            <option value="1" selected>Yes, once before</option>
-            <option value="3">Yes, 2–4 times</option>
-            <option value="5">Yes, 5 or more times</option>
-          </select>
-        </div>
-      </div>
-
-    </div>
-    <button class="psbtn" onclick="buildPlan()">Generate My Quit Plan →</button>
-  </div>
-
-  <!-- Result panel -->
-  <div class="rpanel">
-
-    <!-- Default — health milestones preview -->
-    <div class="defp" id="defp">
-      <div class="defp-t">What happens when you stop</div>
-      <div class="ms-list">
-        <div class="ms-item"><div class="ms-ic">💓</div><div><div class="ms-t">20 minutes</div><div class="ms-d">Heart rate drops back to normal levels</div></div></div>
-        <div class="ms-item"><div class="ms-ic">🫁</div><div><div class="ms-t">8 hours</div><div class="ms-d">Carbon monoxide levels in blood halve</div></div></div>
-        <div class="ms-item"><div class="ms-ic">❤️</div><div><div class="ms-t">48 hours</div><div class="ms-d">Carbon monoxide cleared; nerve endings begin to regrow</div></div></div>
-        <div class="ms-item"><div class="ms-ic">🏃</div><div><div class="ms-t">72 hours</div><div class="ms-d">Breathing becomes easier; bronchial tubes relax</div></div></div>
-        <div class="ms-item"><div class="ms-ic">🫀</div><div><div class="ms-t">1 year</div><div class="ms-d">Risk of heart disease halves compared to a smoker</div></div></div>
-        <div class="ms-item"><div class="ms-ic">🎯</div><div><div class="ms-t">10 years</div><div class="ms-d">Risk of lung cancer falls to half that of a smoker</div></div></div>
-      </div>
-      <p style="font-size:.78rem;color:var(--ts);line-height:1.6">Source: NHS Stop Smoking guidance. Exact timelines vary between individuals.</p>
+        <button class="psbtn" onclick="buildPlan()">Generate My Quit Plan →</button>
     </div>
 
-    <!-- Result card -->
-    <div class="rcard" id="rcard">
+    <!-- Result panel -->
+    <div class="rpanel">
 
-      <!-- Savings grid -->
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--td);margin-bottom:.8rem">💰 Your savings after one year</div>
-      <div class="sav-grid">
-        <div class="sav-box"><div class="sav-v" id="rSavYear">£0</div><div class="sav-l">After 1 year</div></div>
-        <div class="sav-box"><div class="sav-v" id="rSav5">£0</div><div class="sav-l">After 5 years</div></div>
-        <div class="sav-box"><div class="sav-v" id="rCigsYear">0</div><div class="sav-l">Cigarettes avoided / yr</div></div>
-      </div>
-
-      <!-- Health timeline -->
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--td);margin-bottom:.8rem;margin-top:.4rem">🫁 Your health recovery timeline</div>
-      <div class="tl" id="rTimeline"></div>
-
-      <!-- Strategies -->
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--td);margin-bottom:.8rem">🧠 Strategies for your triggers</div>
-      <div class="strat" id="rStrat"></div>
-
-      <!-- Motivation box -->
-      <div class="gp-box" id="rMotiv">
-        <div class="gp-ic">🎯</div>
-        <div><div class="gp-t" id="rMotivTitle"></div><div class="gp-d" id="rMotivDesc"></div></div>
-      </div>
-
-      <!-- GP support -->
-      <div class="gp-box" style="background:rgba(0,94,184,.05);border-color:rgba(0,94,184,.2)">
-        <div class="gp-ic">🏥</div>
-        <div>
-          <div class="gp-t">NHS Stop Smoking Support — free from your GP</div>
-          <div class="gp-d">Patients who use NHS Stop Smoking services are <strong>3× more likely to quit successfully</strong> than those going it alone. Your GP can prescribe Champix (varenicline), Zyban, or NRT, and refer you to a local Stop Smoking service. Book a consultation to discuss your options.</div>
+        <!-- Default — health milestones preview -->
+        <div class="defp" id="defp">
+            <div class="defp-t">What happens when you stop</div>
+            <div class="ms-list">
+                <div class="ms-item">
+                    <div class="ms-ic">💓</div>
+                    <div>
+                        <div class="ms-t">20 minutes</div>
+                        <div class="ms-d">Heart rate drops back to normal levels</div>
+                    </div>
+                </div>
+                <div class="ms-item">
+                    <div class="ms-ic">🫁</div>
+                    <div>
+                        <div class="ms-t">8 hours</div>
+                        <div class="ms-d">Carbon monoxide levels in blood halve</div>
+                    </div>
+                </div>
+                <div class="ms-item">
+                    <div class="ms-ic">❤️</div>
+                    <div>
+                        <div class="ms-t">48 hours</div>
+                        <div class="ms-d">Carbon monoxide cleared; nerve endings begin to regrow</div>
+                    </div>
+                </div>
+                <div class="ms-item">
+                    <div class="ms-ic">🏃</div>
+                    <div>
+                        <div class="ms-t">72 hours</div>
+                        <div class="ms-d">Breathing becomes easier; bronchial tubes relax</div>
+                    </div>
+                </div>
+                <div class="ms-item">
+                    <div class="ms-ic">🫀</div>
+                    <div>
+                        <div class="ms-t">1 year</div>
+                        <div class="ms-d">Risk of heart disease halves compared to a smoker</div>
+                    </div>
+                </div>
+                <div class="ms-item">
+                    <div class="ms-ic">🎯</div>
+                    <div>
+                        <div class="ms-t">10 years</div>
+                        <div class="ms-d">Risk of lung cancer falls to half that of a smoker</div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:.78rem;color:var(--ts);line-height:1.6">Source: NHS Stop Smoking guidance. Exact
+                timelines vary between individuals.</p>
         </div>
-      </div>
 
-      <a href="https://salujaclinic.webgp.com/" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem;border-radius:12px;background:linear-gradient(135deg,var(--nhs-green),var(--nhs-blue));color:#fff;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 20px rgba(0,127,59,.3)">Book a Stop Smoking appointment →</a>
+        <!-- Result card -->
+        <div class="rcard" id="rcard">
 
-      <div class="rdis">This plan is for guidance only and does not replace clinical advice. Quitting smoking is one of the hardest things to do — please speak to your GP for personalised medical support including prescription treatments.</div>
+            <!-- Savings grid -->
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--td);margin-bottom:.8rem">
+                💰 Your savings after one year
+            </div>
+            <div class="sav-grid">
+                <div class="sav-box">
+                    <div class="sav-v" id="rSavYear">£0</div>
+                    <div class="sav-l">After 1 year</div>
+                </div>
+                <div class="sav-box">
+                    <div class="sav-v" id="rSav5">£0</div>
+                    <div class="sav-l">After 5 years</div>
+                </div>
+                <div class="sav-box">
+                    <div class="sav-v" id="rCigsYear">0</div>
+                    <div class="sav-l">Cigarettes avoided / yr</div>
+                </div>
+            </div>
+
+            <!-- Health timeline -->
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--td);margin-bottom:.8rem;margin-top:.4rem">
+                🫁 Your health recovery timeline
+            </div>
+            <div class="tl" id="rTimeline"></div>
+
+            <!-- Strategies -->
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--td);margin-bottom:.8rem">
+                🧠 Strategies for your triggers
+            </div>
+            <div class="strat" id="rStrat"></div>
+
+            <!-- Motivation box -->
+            <div class="gp-box" id="rMotiv">
+                <div class="gp-ic">🎯</div>
+                <div>
+                    <div class="gp-t" id="rMotivTitle"></div>
+                    <div class="gp-d" id="rMotivDesc"></div>
+                </div>
+            </div>
+
+            <!-- GP support -->
+            <div class="gp-box" style="background:rgba(0,94,184,.05);border-color:rgba(0,94,184,.2)">
+                <div class="gp-ic">🏥</div>
+                <div>
+                    <div class="gp-t">NHS Stop Smoking Support — free from your GP</div>
+                    <div class="gp-d">Patients who use NHS Stop Smoking services are <strong>3× more likely to quit
+                        successfully</strong> than those going it alone. Your GP can prescribe Champix (varenicline),
+                        Zyban, or NRT, and refer you to a local Stop Smoking service. Book a consultation to discuss
+                        your options.
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://salujaclinic.webgp.com/" target="_blank"
+               style="display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem;border-radius:12px;background:linear-gradient(135deg,var(--nhs-green),var(--nhs-blue));color:#fff;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 20px rgba(0,127,59,.3)">Book
+                a Stop Smoking appointment →</a>
+
+            <div class="rdis">This plan is for guidance only and does not replace clinical advice. Quitting smoking is
+                one of the hardest things to do — please speak to your GP for personalised medical support including
+                prescription treatments.
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- INFO SECTION -->
 <section class="info">
-  <div class="info-in">
-    <div style="text-align:center;max-width:680px;margin:0 auto">
-      <div style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-green);margin-bottom:.5rem">NHS Stop Smoking</div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">Support options that <em style="font-style:normal;color:var(--nhs-blue)">really work</em></h2>
-      <p style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">Stopping smoking is easier with the right help. These evidence-based approaches significantly increase your chances of long-term success.</p>
+    <div class="info-in">
+        <div style="text-align:center;max-width:680px;margin:0 auto">
+            <div style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--nhs-green);margin-bottom:.5rem">
+                NHS Stop Smoking
+            </div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">
+                Support options that <em style="font-style:normal;color:var(--nhs-blue)">really work</em></h2>
+            <p style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">Stopping smoking
+                is easier with the right help. These evidence-based approaches significantly increase your chances of
+                long-term success.</p>
+        </div>
+        <div class="igrid fu">
+            <div class="ic">
+                <div class="ic-ic">💊</div>
+                <div class="ic-t">Prescription Medication</div>
+                <div class="ic-d">Varenicline (Champix) and bupropion (Zyban) are prescription medicines that reduce
+                    cravings and withdrawal. Both are available on the NHS and significantly improve quit rates.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">🩹</div>
+                <div class="ic-t">Nicotine Replacement Therapy</div>
+                <div class="ic-d">Patches, gum, lozenges, inhalers and nasal sprays are all available on NHS
+                    prescription. Combining two forms of NRT is more effective than using one alone.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">💬</div>
+                <div class="ic-t">Behavioural Support</div>
+                <div class="ic-d">One-to-one or group Stop Smoking sessions are free via the NHS. A dedicated advisor
+                    helps identify triggers and build coping strategies — this doubles your chances of success.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">📱</div>
+                <div class="ic-t">NHS Quit Smoking App</div>
+                <div class="ic-d">The free NHS Quit Smoking app tracks your progress, calculates savings, and sends
+                    motivational alerts at the moments cravings typically strike — available on iOS and Android.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">🧘</div>
+                <div class="ic-t">Mindfulness &amp; Stress Management</div>
+                <div class="ic-d">Stress is one of the most common triggers for relapse. Mindfulness-based techniques
+                    and breathing exercises help interrupt the urge-to-smoke cycle within seconds.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">👨‍⚕️</div>
+                <div class="ic-t">GP Review &amp; Referral</div>
+                <div class="ic-d">Your GP can provide a tailored Stop Smoking plan, prescribe medication, review your
+                    cardiovascular risk, and refer to specialist services — all in a single consultation.
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="igrid fu">
-      <div class="ic">
-        <div class="ic-ic">💊</div>
-        <div class="ic-t">Prescription Medication</div>
-        <div class="ic-d">Varenicline (Champix) and bupropion (Zyban) are prescription medicines that reduce cravings and withdrawal. Both are available on the NHS and significantly improve quit rates.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">🩹</div>
-        <div class="ic-t">Nicotine Replacement Therapy</div>
-        <div class="ic-d">Patches, gum, lozenges, inhalers and nasal sprays are all available on NHS prescription. Combining two forms of NRT is more effective than using one alone.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">💬</div>
-        <div class="ic-t">Behavioural Support</div>
-        <div class="ic-d">One-to-one or group Stop Smoking sessions are free via the NHS. A dedicated advisor helps identify triggers and build coping strategies — this doubles your chances of success.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">📱</div>
-        <div class="ic-t">NHS Quit Smoking App</div>
-        <div class="ic-d">The free NHS Quit Smoking app tracks your progress, calculates savings, and sends motivational alerts at the moments cravings typically strike — available on iOS and Android.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">🧘</div>
-        <div class="ic-t">Mindfulness &amp; Stress Management</div>
-        <div class="ic-d">Stress is one of the most common triggers for relapse. Mindfulness-based techniques and breathing exercises help interrupt the urge-to-smoke cycle within seconds.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">👨‍⚕️</div>
-        <div class="ic-t">GP Review &amp; Referral</div>
-        <div class="ic-d">Your GP can provide a tailored Stop Smoking plan, prescribe medication, review your cardiovascular risk, and refer to specialist services — all in a single consultation.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- EMERGENCY -->
 <section class="emerg">
-  <div class="emerg-in">
-    <div class="ec e111">
-      <div class="el">Non-Emergency Medical Advice</div>
-      <div class="en">NHS 111</div>
-      <div class="ed">For urgent medical questions that aren't life-threatening — available 24 hours a day, 7 days a week online or by phone.</div>
+    <div class="emerg-in">
+        <div class="ec e111">
+            <div class="el">Non-Emergency Medical Advice</div>
+            <div class="en">NHS 111</div>
+            <div class="ed">For urgent medical questions that aren't life-threatening — available 24 hours a day, 7 days
+                a week online or by phone.
+            </div>
+        </div>
+        <div class="ec e999">
+            <div class="el">Life-Threatening Emergency</div>
+            <div class="en">999</div>
+            <div class="ed">Call 999 immediately for chest pain, difficulty breathing, or any other life-threatening
+                emergency — do not wait.
+            </div>
+        </div>
     </div>
-    <div class="ec e999">
-      <div class="el">Life-Threatening Emergency</div>
-      <div class="en">999</div>
-      <div class="ed">Call 999 immediately for chest pain, difficulty breathing, or any other life-threatening emergency — do not wait.</div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="fi2">
-    <div>
-      <div class="flw">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
-      </div>
-      <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the health and wellbeing of our patients.</p>
-      <div class="fadr">
-        36A Northcote Avenue, Southall, UB1 2AY<br>
-        <a href="tel:02085745136">0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      </div>
+    <div class="fi2">
+        <div>
+            <div class="flw">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160">
+                    <defs>
+                        <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                            <stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/>
+                            <stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/>
+                            <stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/>
+                            <stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/>
+                            <stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/>
+                            <stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/>
+                        </linearGradient>
+                        <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#c8c8c8"/>
+                            <stop offset="10%" stop-color="#f0f0f0"/>
+                            <stop offset="25%" stop-color="#b0b0b0"/>
+                            <stop offset="40%" stop-color="#ffffff"/>
+                            <stop offset="55%" stop-color="#909090"/>
+                            <stop offset="70%" stop-color="#e0e0e0"/>
+                            <stop offset="85%" stop-color="#a8a8a8"/>
+                            <stop offset="100%" stop-color="#d0d0d0"/>
+                        </linearGradient>
+                        <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+                            <stop offset="0%" stop-color="#3a3a3a"/>
+                            <stop offset="40%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000000"/>
+                        </radialGradient>
+                        <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#666666"/>
+                            <stop offset="30%" stop-color="#222222"/>
+                            <stop offset="70%" stop-color="#444444"/>
+                            <stop offset="100%" stop-color="#111111"/>
+                        </linearGradient>
+                        <filter id="fsh" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                        </filter>
+                        <filter id="fTS">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                            <feOffset dx="0" dy="1" result="offsetBlur"/>
+                            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                        </filter>
+                    </defs>
+                    <rect width="720" height="160" fill="#ffffff"/>
+                    <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/>
+                    <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+                    <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90"
+                          font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)"
+                          filter="url(#fTS)">SALUJA CLINIC
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                          opacity="0.08">SALUJA CLINIC
+                    </text>
+                </svg>
+            </div>
+            <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the health and
+                wellbeing of our patients.</p>
+            <div class="fadr">
+                36A Northcote Avenue, Southall, UB1 2AY<br>
+                <a href="tel:02085745136">0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            </div>
+        </div>
+        <div>
+            <div class="fh">Quick Links</div>
+            <ul class="fl">
+                <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+                <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="fh">Opening Hours</div>
+            <div class="hg">
+                <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
+                <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
+                <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="fh">Useful Links</div>
+            <ul class="fl">
+                <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.nhs.uk/better-health/quit-smoking/" target="_blank">NHS Quit Smoking</a></li>
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="fh">Quick Links</div>
-      <ul class="fl">
-        <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
-        <li><a href="appointments.html">Appointments</a></li>
-        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
-        <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
-        <li><a href="contact-us.html">Contact Us</a></li>
-      </ul>
+    <div class="fb">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="fh">Opening Hours</div>
-      <div class="hg">
-        <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
-        <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
-        <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="fh">Useful Links</div>
-      <ul class="fl">
-        <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.nhs.uk/better-health/quit-smoking/" target="_blank">NHS Quit Smoking</a></li>
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="fb">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-/* ===== FADE UP ===== */
-var fo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08});
-document.querySelectorAll('.fu').forEach(function(el){fo.observe(el)});
-
-/* ===== HERO CARD — animated quit journey ===== */
-(function(){
-  /* Milestones: [minutesSmokeFree, icon, label, colour] */
-  var MS=[
-    [20,   '💓','Heart rate normalises','#f87171'],
-    [480,  '🫁','CO levels halving','#fb923c'],
-    [1440, '❤️','Nicotine clearing','#fbbf24'],
-    [4320, '🏃','Breathing easier','#4ade80'],
-    [10080,'👃','Taste & smell return','#34d399'],
-    [43200,'🧠','Cravings ease significantly','#60a5fa'],
-  ];
-
-  function renderMilestones(minsFree){
-    var html='';
-    MS.forEach(function(m){
-      var unlocked=minsFree>=m[0];
-      var col=unlocked?m[3]:'rgba(255,255,255,.18)';
-      html+='<div class="qj-ms" style="background:'+(unlocked?'rgba(255,255,255,.04)':'transparent')+'">'
-        +'<div class="qj-ms-dot'+(unlocked?' unlocked':'')+'" style="background:'+col+';color:'+col+'"></div>'
-        +'<div class="qj-ms-text" style="color:'+(unlocked?'rgba(255,255,255,.85)':'rgba(255,255,255,.28)')+'">'+m[2]+'</div>'
-        +'<div class="qj-ms-time" style="color:'+col+'">'+m[1]+'</div>'
-        +'</div>';
+    /* ===== FADE UP ===== */
+    var fo = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+            if (e.isIntersecting) e.target.classList.add('vis')
+        })
+    }, {threshold: 0.08});
+    document.querySelectorAll('.fu').forEach(function (el) {
+        fo.observe(el)
     });
-    document.getElementById('qjMilestones').innerHTML=html;
-  }
 
-  /* Demo profiles cycling */
-  var DEMOS=[
-    {days:0,  cigs:20, ppdCost:14, label:'Day one — the journey begins'},
-    {days:3,  cigs:20, ppdCost:14, label:'3 days in — past the worst'},
-    {days:14, cigs:15, ppdCost:11, label:'2 weeks — cravings easing'},
-    {days:30, cigs:20, ppdCost:14, label:'1 month — huge achievement'},
-    {days:90, cigs:25, ppdCost:17, label:'3 months — incredible progress'},
-    {days:365,cigs:20, ppdCost:14, label:'1 year — a new life'},
-  ];
-  var di=0;
+    /* ===== HERO CARD — animated quit journey ===== */
+    (function () {
+        /* Milestones: [minutesSmokeFree, icon, label, colour] */
+        var MS = [
+            [20, '💓', 'Heart rate normalises', '#f87171'],
+            [480, '🫁', 'CO levels halving', '#fb923c'],
+            [1440, '❤️', 'Nicotine clearing', '#fbbf24'],
+            [4320, '🏃', 'Breathing easier', '#4ade80'],
+            [10080, '👃', 'Taste & smell return', '#34d399'],
+            [43200, '🧠', 'Cravings ease significantly', '#60a5fa'],
+        ];
 
-  function minsFromDays(d){return d*24*60;}
+        function renderMilestones(minsFree) {
+            var html = '';
+            MS.forEach(function (m) {
+                var unlocked = minsFree >= m[0];
+                var col = unlocked ? m[3] : 'rgba(255,255,255,.18)';
+                html += '<div class="qj-ms" style="background:' + (unlocked ? 'rgba(255,255,255,.04)' : 'transparent') + '">'
+                    + '<div class="qj-ms-dot' + (unlocked ? ' unlocked' : '') + '" style="background:' + col + ';color:' + col + '"></div>'
+                    + '<div class="qj-ms-text" style="color:' + (unlocked ? 'rgba(255,255,255,.85)' : 'rgba(255,255,255,.28)') + '">' + m[2] + '</div>'
+                    + '<div class="qj-ms-time" style="color:' + col + '">' + m[1] + '</div>'
+                    + '</div>';
+            });
+            document.getElementById('qjMilestones').innerHTML = html;
+        }
 
-  function applyDemo(d){
-    var mins=minsFromDays(d.days);
-    var cigsAvoided=d.days*d.cigs;
-    var moneySaved=(d.days/7)*d.ppdCost;
-    /* ~11 mins life regained per cigarette not smoked (NHS estimate) */
-    var lifeMin=cigsAvoided*11;
+        /* Demo profiles cycling */
+        var DEMOS = [
+            {days: 0, cigs: 20, ppdCost: 14, label: 'Day one — the journey begins'},
+            {days: 3, cigs: 20, ppdCost: 14, label: '3 days in — past the worst'},
+            {days: 14, cigs: 15, ppdCost: 11, label: '2 weeks — cravings easing'},
+            {days: 30, cigs: 20, ppdCost: 14, label: '1 month — huge achievement'},
+            {days: 90, cigs: 25, ppdCost: 17, label: '3 months — incredible progress'},
+            {days: 365, cigs: 20, ppdCost: 14, label: '1 year — a new life'},
+        ];
+        var di = 0;
 
-    animNum('qjDays',parseInt(document.getElementById('qjDays').textContent)||0,d.days,900,0);
-    document.getElementById('qjSince').textContent=d.label;
-    document.getElementById('qjCigs').textContent=cigsAvoided.toLocaleString()+' cigarettes avoided';
-    animStr('qjMoney','£'+(moneySaved).toFixed(0),800);
-    animStr('qjMins','+'+formatMins(lifeMin),800);
-    document.getElementById('qjDays').style.color=d.days>=90?'#4ade80':d.days>=14?'#fbbf24':'#fff';
-    renderMilestones(mins);
-  }
+        function minsFromDays(d) {
+            return d * 24 * 60;
+        }
 
-  function formatMins(m){
-    if(m<60)return m+' min';
-    if(m<1440)return Math.round(m/60)+' hrs';
-    return Math.round(m/1440)+' days';
-  }
+        function applyDemo(d) {
+            var mins = minsFromDays(d.days);
+            var cigsAvoided = d.days * d.cigs;
+            var moneySaved = (d.days / 7) * d.ppdCost;
+            /* ~11 mins life regained per cigarette not smoked (NHS estimate) */
+            var lifeMin = cigsAvoided * 11;
 
-  function animNum(id,from,to,dur){
-    var el=document.getElementById(id);if(!el)return;
-    var s=null;
-    function t(ts){if(!s)s=ts;var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(t);}
-    requestAnimationFrame(t);
-  }
+            animNum('qjDays', parseInt(document.getElementById('qjDays').textContent) || 0, d.days, 900, 0);
+            document.getElementById('qjSince').textContent = d.label;
+            document.getElementById('qjCigs').textContent = cigsAvoided.toLocaleString() + ' cigarettes avoided';
+            animStr('qjMoney', '£' + (moneySaved).toFixed(0), 800);
+            animStr('qjMins', '+' + formatMins(lifeMin), 800);
+            document.getElementById('qjDays').style.color = d.days >= 90 ? '#4ade80' : d.days >= 14 ? '#fbbf24' : '#fff';
+            renderMilestones(mins);
+        }
 
-  function animStr(id,val,delay){
-    setTimeout(function(){var el=document.getElementById(id);if(el)el.textContent=val;},delay);
-  }
+        function formatMins(m) {
+            if (m < 60) return m + ' min';
+            if (m < 1440) return Math.round(m / 60) + ' hrs';
+            return Math.round(m / 1440) + ' days';
+        }
 
-  applyDemo(DEMOS[0]);
-  setInterval(function(){di=(di+1)%DEMOS.length;applyDemo(DEMOS[di]);},3000);
-})();
+        function animNum(id, from, to, dur) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var s = null;
 
-/* ===== FORM HELPERS ===== */
-function step(id,d){
-  var el=document.getElementById(id);
-  var v=parseInt(el.value)+d;
-  v=Math.min(Math.max(v,parseInt(el.min)),parseInt(el.max));
-  el.value=v;
-}
+            function t(ts) {
+                if (!s) s = ts;
+                var p = Math.min((ts - s) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(from + (to - from) * e);
+                if (p < 1) requestAnimationFrame(t);
+            }
 
-/* ===== PLAN BUILDER ===== */
-function buildPlan(){
-  var cigsPerDay=parseInt(document.getElementById('cigs').value)||15;
-  var spendPerWeek=parseFloat(document.getElementById('spend').value)||50;
-  var yearsSmoked=parseInt(document.getElementById('years').value)||15;
-  var motivation=document.getElementById('motivation').value;
-  var attempts=parseInt(document.getElementById('attempts').value)||0;
+            requestAnimationFrame(t);
+        }
 
-  var triggers=[];
-  if(document.getElementById('trig1').checked)triggers.push('morning');
-  if(document.getElementById('trig2').checked)triggers.push('stress');
-  if(document.getElementById('trig3').checked)triggers.push('social');
-  if(document.getElementById('trig4').checked)triggers.push('bored');
-  if(document.getElementById('trig5').checked)triggers.push('after');
+        function animStr(id, val, delay) {
+            setTimeout(function () {
+                var el = document.getElementById(id);
+                if (el) el.textContent = val;
+            }, delay);
+        }
 
-  /* Savings */
-  var savYear=spendPerWeek*52;
-  var sav5=savYear*5;
-  var cigsYear=cigsPerDay*365;
-  /* Life regained: ~11 mins per cigarette */
-  var lifeDaysYear=Math.round(cigsYear*11/1440);
+        applyDemo(DEMOS[0]);
+        setInterval(function () {
+            di = (di + 1) % DEMOS.length;
+            applyDemo(DEMOS[di]);
+        }, 3000);
+    })();
 
-  /* Timeline — conditional on years smoked */
-  var tlItems=[
-    {time:'20 minutes',col:'#f87171',t:'Heart rate returns to normal',d:'Blood pressure and heart rate drop back to resting levels within 20 minutes of your last cigarette.'},
-    {time:'8 hours',col:'#fb923c',t:'Carbon monoxide halves',d:'The CO level in your blood halves, and oxygen levels start to recover — you may notice breathing feels slightly easier.'},
-    {time:'48 hours',col:'#fbbf24',t:'Senses of taste and smell begin recovering',d:'All carbon monoxide is cleared from your body. Damaged nerve endings start to regrow, bringing back taste and smell.'},
-    {time:'72 hours',col:'#a3e635',t:'Bronchial tubes relax',d:'Airways widen making it noticeably easier to breathe. Many people feel a surge of energy around this point.'},
-    {time:'2–12 weeks',col:'#4ade80',t:'Circulation improves significantly',d:'Physical activity becomes easier. Your lungs are clearing out mucus — you may cough more briefly before improving.'},
-    {time:'1 year',col:'#34d399',t:'Heart disease risk halves',d:'Your risk of a heart attack falls to half that of someone still smoking — a remarkable achievement after just one year.'},
-  ];
-  if(yearsSmoked>=10){
-    tlItems.push({time:'10 years',col:'#60a5fa',t:'Lung cancer risk halves',d:'Your risk of lung cancer falls to half that of a smoker, and risk of throat and mouth cancer continues to decline.'});
-  }
-  if(yearsSmoked>=15){
-    tlItems.push({time:'15 years',col:'#a78bfa',t:'Heart disease risk matches a non-smoker',d:'Your risk of coronary heart disease is now the same as someone who has never smoked. An extraordinary outcome.'});
-  }
+    /* ===== FORM HELPERS ===== */
+    function step(id, d) {
+        var el = document.getElementById(id);
+        var v = parseInt(el.value) + d;
+        v = Math.min(Math.max(v, parseInt(el.min)), parseInt(el.max));
+        el.value = v;
+    }
 
-  /* Trigger strategies */
-  var stratMap={
-    morning:  {ic:'☕',t:'The morning cigarette is often the hardest habit to break. Try changing your routine immediately — shower first, take a different route, or have your coffee in a different room.'},
-    stress:   {ic:'🧘',t:'Stress triggers: Practice the 4-7-8 breathing technique when a craving hits. Inhale for 4 seconds, hold for 7, exhale for 8. Most cravings pass within 3–5 minutes.'},
-    social:   {ic:'🍺',t:'Social triggers: Avoid smoking areas in the early weeks. Let friends and colleagues know you\'re quitting — most will be supportive. Plan an activity with your hands (a drink, phone, fidget ring).'},
-    bored:    {ic:'📱',t:'Boredom triggers: Keep your hands busy. Download a game, carry a stress ball, or text someone. A short walk — even 2 minutes — breaks the mental loop.'},
-    after:    {ic:'🍽️',t:'After meals: Get up and move immediately after eating — even a 5-minute walk changes the pattern. Brush your teeth or chew sugar-free gum as a replacement ritual.'},
-  };
+    /* ===== PLAN BUILDER ===== */
+    function buildPlan() {
+        var cigsPerDay = parseInt(document.getElementById('cigs').value) || 15;
+        var spendPerWeek = parseFloat(document.getElementById('spend').value) || 50;
+        var yearsSmoked = parseInt(document.getElementById('years').value) || 15;
+        var motivation = document.getElementById('motivation').value;
+        var attempts = parseInt(document.getElementById('attempts').value) || 0;
 
-  var motivMap={
-    health:     {t:'Your health is your motivation', d:'You\'re making the single most impactful change possible for your long-term health. Every day smoke-free reduces your risk of heart disease, stroke, lung cancer and COPD — benefits that build for years.'},
-    family:     {t:'Your family drives you forward', d:'Second-hand smoke affects everyone you live with — especially children. Quitting protects them too, and gives you more quality years together. Your family will notice the difference within weeks.'},
-    money:      {t:'The financial motivation is real', d:'You\'ll save £'+savYear.toLocaleString()+' in your first year alone — that\'s £'+sav5.toLocaleString()+' over five years. Many people use their savings for a holiday, home improvement, or a meaningful goal.'},
-    fitness:    {t:'Fitness is your driving force', d:'Within 2–12 weeks your lung capacity improves significantly and endurance increases. Many former smokers report dramatic improvements in sport and exercise performance within a few months of quitting.'},
-    pregnancy:  {t:'Quitting for your pregnancy', d:'Stopping smoking is the best thing you can do for your baby\'s development. NHS Stop Smoking midwives offer dedicated support — speak to your GP or midwife today for fast-track referral.'},
-    appearance: {t:'Looking and feeling better', d:'Within weeks of quitting, skin tone improves as blood flow increases. The persistent smell of smoke on clothes, hair and breath disappears completely. Teeth begin to whiten and gum health improves.'},
-  };
+        var triggers = [];
+        if (document.getElementById('trig1').checked) triggers.push('morning');
+        if (document.getElementById('trig2').checked) triggers.push('stress');
+        if (document.getElementById('trig3').checked) triggers.push('social');
+        if (document.getElementById('trig4').checked) triggers.push('bored');
+        if (document.getElementById('trig5').checked) triggers.push('after');
 
-  /* Render result */
-  document.getElementById('defp').style.display='none';
-  var rc=document.getElementById('rcard');rc.classList.add('show');
+        /* Savings */
+        var savYear = spendPerWeek * 52;
+        var sav5 = savYear * 5;
+        var cigsYear = cigsPerDay * 365;
+        /* Life regained: ~11 mins per cigarette */
+        var lifeDaysYear = Math.round(cigsYear * 11 / 1440);
 
-  document.getElementById('rSavYear').textContent='£'+savYear.toLocaleString();
-  document.getElementById('rSav5').textContent='£'+sav5.toLocaleString();
-  document.getElementById('rCigsYear').textContent=cigsYear.toLocaleString();
+        /* Timeline — conditional on years smoked */
+        var tlItems = [
+            {
+                time: '20 minutes',
+                col: '#f87171',
+                t: 'Heart rate returns to normal',
+                d: 'Blood pressure and heart rate drop back to resting levels within 20 minutes of your last cigarette.'
+            },
+            {
+                time: '8 hours',
+                col: '#fb923c',
+                t: 'Carbon monoxide halves',
+                d: 'The CO level in your blood halves, and oxygen levels start to recover — you may notice breathing feels slightly easier.'
+            },
+            {
+                time: '48 hours',
+                col: '#fbbf24',
+                t: 'Senses of taste and smell begin recovering',
+                d: 'All carbon monoxide is cleared from your body. Damaged nerve endings start to regrow, bringing back taste and smell.'
+            },
+            {
+                time: '72 hours',
+                col: '#a3e635',
+                t: 'Bronchial tubes relax',
+                d: 'Airways widen making it noticeably easier to breathe. Many people feel a surge of energy around this point.'
+            },
+            {
+                time: '2–12 weeks',
+                col: '#4ade80',
+                t: 'Circulation improves significantly',
+                d: 'Physical activity becomes easier. Your lungs are clearing out mucus — you may cough more briefly before improving.'
+            },
+            {
+                time: '1 year',
+                col: '#34d399',
+                t: 'Heart disease risk halves',
+                d: 'Your risk of a heart attack falls to half that of someone still smoking — a remarkable achievement after just one year.'
+            },
+        ];
+        if (yearsSmoked >= 10) {
+            tlItems.push({
+                time: '10 years',
+                col: '#60a5fa',
+                t: 'Lung cancer risk halves',
+                d: 'Your risk of lung cancer falls to half that of a smoker, and risk of throat and mouth cancer continues to decline.'
+            });
+        }
+        if (yearsSmoked >= 15) {
+            tlItems.push({
+                time: '15 years',
+                col: '#a78bfa',
+                t: 'Heart disease risk matches a non-smoker',
+                d: 'Your risk of coronary heart disease is now the same as someone who has never smoked. An extraordinary outcome.'
+            });
+        }
 
-  /* Timeline */
-  var tlHtml='';
-  var tlCols=['#f87171','#fb923c','#fbbf24','#a3e635','#4ade80','#34d399','#60a5fa','#a78bfa'];
-  tlItems.forEach(function(it,i){
-    tlHtml+='<div class="tl-item"><div class="tl-dot" style="background:'+it.col+';color:'+it.col+'"></div>'
-      +'<div class="tl-time">'+it.time+'</div>'
-      +'<div class="tl-t">'+it.t+'</div>'
-      +'<div class="tl-d">'+it.d+'</div></div>';
-  });
-  document.getElementById('rTimeline').innerHTML=tlHtml;
+        /* Trigger strategies */
+        var stratMap = {
+            morning: {
+                ic: '☕',
+                t: 'The morning cigarette is often the hardest habit to break. Try changing your routine immediately — shower first, take a different route, or have your coffee in a different room.'
+            },
+            stress: {
+                ic: '🧘',
+                t: 'Stress triggers: Practice the 4-7-8 breathing technique when a craving hits. Inhale for 4 seconds, hold for 7, exhale for 8. Most cravings pass within 3–5 minutes.'
+            },
+            social: {
+                ic: '🍺',
+                t: 'Social triggers: Avoid smoking areas in the early weeks. Let friends and colleagues know you\'re quitting — most will be supportive. Plan an activity with your hands (a drink, phone, fidget ring).'
+            },
+            bored: {
+                ic: '📱',
+                t: 'Boredom triggers: Keep your hands busy. Download a game, carry a stress ball, or text someone. A short walk — even 2 minutes — breaks the mental loop.'
+            },
+            after: {
+                ic: '🍽️',
+                t: 'After meals: Get up and move immediately after eating — even a 5-minute walk changes the pattern. Brush your teeth or chew sugar-free gum as a replacement ritual.'
+            },
+        };
 
-  /* Strategies */
-  var stratHtml='';
-  if(triggers.length===0){
-    stratHtml='<div class="strat-item"><div class="strat-ic">💡</div>Keep a craving diary for the first week to identify when urges are strongest — then use the right strategy for each trigger.</div>';
-  } else {
-    triggers.forEach(function(tr){
-      if(stratMap[tr])stratHtml+='<div class="strat-item"><div class="strat-ic">'+stratMap[tr].ic+'</div>'+stratMap[tr].t+'</div>';
-    });
-  }
-  /* Always add NRT tip */
-  stratHtml+='<div class="strat-item"><div class="strat-ic">🩹</div>Use your NRT or prescription medication consistently in the first 12 weeks — this is when relapse risk is highest. Don\'t wait until a craving is severe before using it.</div>';
-  if(attempts>=3){
-    stratHtml+='<div class="strat-item"><div class="strat-ic">💊</div>You\'ve tried before — that\'s not failure, that\'s experience. People who\'ve tried multiple times often succeed on a later attempt, especially with a structured plan and GP support. Ask us about Varenicline or combination NRT.</div>';
-  }
-  document.getElementById('rStrat').innerHTML=stratHtml;
+        var motivMap = {
+            health: {
+                t: 'Your health is your motivation',
+                d: 'You\'re making the single most impactful change possible for your long-term health. Every day smoke-free reduces your risk of heart disease, stroke, lung cancer and COPD — benefits that build for years.'
+            },
+            family: {
+                t: 'Your family drives you forward',
+                d: 'Second-hand smoke affects everyone you live with — especially children. Quitting protects them too, and gives you more quality years together. Your family will notice the difference within weeks.'
+            },
+            money: {
+                t: 'The financial motivation is real',
+                d: 'You\'ll save £' + savYear.toLocaleString() + ' in your first year alone — that\'s £' + sav5.toLocaleString() + ' over five years. Many people use their savings for a holiday, home improvement, or a meaningful goal.'
+            },
+            fitness: {
+                t: 'Fitness is your driving force',
+                d: 'Within 2–12 weeks your lung capacity improves significantly and endurance increases. Many former smokers report dramatic improvements in sport and exercise performance within a few months of quitting.'
+            },
+            pregnancy: {
+                t: 'Quitting for your pregnancy',
+                d: 'Stopping smoking is the best thing you can do for your baby\'s development. NHS Stop Smoking midwives offer dedicated support — speak to your GP or midwife today for fast-track referral.'
+            },
+            appearance: {
+                t: 'Looking and feeling better',
+                d: 'Within weeks of quitting, skin tone improves as blood flow increases. The persistent smell of smoke on clothes, hair and breath disappears completely. Teeth begin to whiten and gum health improves.'
+            },
+        };
 
-  /* Motivation */
-  var motiv=motivMap[motivation]||motivMap['health'];
-  document.getElementById('rMotivTitle').textContent=motiv.t;
-  document.getElementById('rMotivDesc').textContent=motiv.d;
+        /* Render result */
+        document.getElementById('defp').style.display = 'none';
+        var rc = document.getElementById('rcard');
+        rc.classList.add('show');
 
-  /* Scroll to result */
-  setTimeout(function(){rc.scrollIntoView({behavior:'smooth',block:'start'});},100);
-}
+        document.getElementById('rSavYear').textContent = '£' + savYear.toLocaleString();
+        document.getElementById('rSav5').textContent = '£' + sav5.toLocaleString();
+        document.getElementById('rCigsYear').textContent = cigsYear.toLocaleString();
+
+        /* Timeline */
+        var tlHtml = '';
+        var tlCols = ['#f87171', '#fb923c', '#fbbf24', '#a3e635', '#4ade80', '#34d399', '#60a5fa', '#a78bfa'];
+        tlItems.forEach(function (it, i) {
+            tlHtml += '<div class="tl-item"><div class="tl-dot" style="background:' + it.col + ';color:' + it.col + '"></div>'
+                + '<div class="tl-time">' + it.time + '</div>'
+                + '<div class="tl-t">' + it.t + '</div>'
+                + '<div class="tl-d">' + it.d + '</div></div>';
+        });
+        document.getElementById('rTimeline').innerHTML = tlHtml;
+
+        /* Strategies */
+        var stratHtml = '';
+        if (triggers.length === 0) {
+            stratHtml = '<div class="strat-item"><div class="strat-ic">💡</div>Keep a craving diary for the first week to identify when urges are strongest — then use the right strategy for each trigger.</div>';
+        } else {
+            triggers.forEach(function (tr) {
+                if (stratMap[tr]) stratHtml += '<div class="strat-item"><div class="strat-ic">' + stratMap[tr].ic + '</div>' + stratMap[tr].t + '</div>';
+            });
+        }
+        /* Always add NRT tip */
+        stratHtml += '<div class="strat-item"><div class="strat-ic">🩹</div>Use your NRT or prescription medication consistently in the first 12 weeks — this is when relapse risk is highest. Don\'t wait until a craving is severe before using it.</div>';
+        if (attempts >= 3) {
+            stratHtml += '<div class="strat-item"><div class="strat-ic">💊</div>You\'ve tried before — that\'s not failure, that\'s experience. People who\'ve tried multiple times often succeed on a later attempt, especially with a structured plan and GP support. Ask us about Varenicline or combination NRT.</div>';
+        }
+        document.getElementById('rStrat').innerHTML = stratHtml;
+
+        /* Motivation */
+        var motiv = motivMap[motivation] || motivMap['health'];
+        document.getElementById('rMotivTitle').textContent = motiv.t;
+        document.getElementById('rMotivDesc').textContent = motiv.d;
+
+        /* Scroll to result */
+        setTimeout(function () {
+            rc.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }, 100);
+    }
 </script>
 </body>
 </html>

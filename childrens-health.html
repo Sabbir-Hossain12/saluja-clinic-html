@@ -1,726 +1,1997 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Children's Health – Saluja Clinic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nhs-blue:        #005EB8;
-      --nhs-dark:        #003087;
-      --nhs-aqua:        #009FBB;
-      --nhs-green:       #007F3B;
-      --nhs-light-blue:  #41B6E6;
-      --nhs-warm-yellow: #FFB81C;
-      --white:           #ffffff;
-      --off-white:       #f5f8fc;
-      --text-dark:       #1a1a2e;
-      --text-mid:        #3a3a5c;
-      --text-soft:       #6b7a99;
-      --border:          #d8e4f0;
-      /* Child-friendly accent palette */
-      --child-coral:     #FF6B6B;
-      --child-yellow:    #FFD93D;
-      --child-mint:      #6BCB77;
-      --child-purple:    #9B59B6;
-      --child-orange:    #FF9F43;
-      --child-sky:       #4EC9F0;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Children's Health – Saluja Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --nhs-warm-yellow: #FFB81C;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+            /* Child-friendly accent palette */
+            --child-coral: #FF6B6B;
+            --child-yellow: #FFD93D;
+            --child-mint: #6BCB77;
+            --child-purple: #9B59B6;
+            --child-orange: #FF9F43;
+            --child-sky: #4EC9F0;
+        }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── UTILITY BAR ─────────────────────────────────────── */
-    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
-    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
-    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .utility-bar a:hover { color: #fff; }
-    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
-    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── HEADER ──────────────────────────────────────────── */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
-    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
-    .logo-wrap svg { height: 84px; width: auto; }
-    nav { display: flex; align-items: center; gap: 0.25rem; }
-    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
-    nav a.active { color: var(--nhs-blue); background: rgba(0,94,184,0.07); }
-    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
-    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    /* ── BREADCRUMB ──────────────────────────────────────── */
-    .breadcrumb { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 0.65rem 0; }
-    .breadcrumb-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); }
-    .breadcrumb a { color: var(--nhs-blue); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb-sep { opacity: 0.45; }
+        /* ── UTILITY BAR ─────────────────────────────────────── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            padding: 0.45rem 0;
+        }
 
-    /* ── PAGE HERO ───────────────────────────────────────── */
-    .page-hero {
-      background: linear-gradient(160deg, #f0f7ff 0%, #fef9ec 50%, #f0fff5 100%);
-      padding: 4.5rem 2rem 0; position: relative; overflow: hidden;
-    }
-    /* Floating background blobs */
-    .page-hero::before {
-      content: ''; position: absolute; top: -60px; right: -100px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,217,61,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .page-hero::after {
-      content: ''; position: absolute; bottom: 0; left: -60px;
-      width: 360px; height: 360px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(107,203,119,0.10) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .page-hero-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
-      padding-bottom: 4rem;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--nhs-blue);
-      background: rgba(0,94,184,0.08); border-radius: 20px;
-      padding: 0.3rem 0.9rem; margin-bottom: 1.2rem;
-    }
-    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; }
-    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.8vw, 3.6rem); font-weight: 600; line-height: 1.12; color: var(--text-dark); margin-bottom: 1.2rem; }
-    h1 em { font-style: normal; color: var(--nhs-blue); }
-    .hero-sub { font-size: 1.05rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 1.8rem; max-width: 500px; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,94,184,0.35); }
-    .btn-outline { border: 2px solid var(--nhs-blue); color: var(--nhs-blue); padding: 0.8rem 1.6rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, color 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-outline:hover { background: var(--nhs-blue); color: var(--white); transform: translateY(-2px); }
-    .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .hero-stat-item { display: flex; flex-direction: column; gap: 0.15rem; }
-    .hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 700; color: var(--nhs-blue); line-height: 1; }
-    .hero-stat-label { font-size: 0.78rem; color: var(--text-soft); font-weight: 500; }
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
 
-    /* ── QUICK ACCESS ─────────────────────────────────────── */
-    .quick-access { background: var(--nhs-blue); padding: 0; }
-    .qa-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
-    .qa-item { padding: 1.8rem 1.2rem; text-align: center; text-decoration: none; color: var(--white); border-right: 1px solid rgba(255,255,255,0.15); transition: background 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.65rem; }
-    .qa-item:last-child { border-right: none; }
-    .qa-item:hover { background: rgba(255,255,255,0.12); }
-    .qa-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .qa-item:hover .qa-icon { background: rgba(255,255,255,0.25); }
-    .qa-icon svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 1.8; }
-    .qa-label { font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em; }
-    .qa-desc { font-size: 0.75rem; opacity: 0.75; }
+        .utility-bar a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
 
-    /* ── SECTION COMMON ──────────────────────────────────── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nhs-blue); margin-bottom: 0.6rem; }
-    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 600; color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem; }
-    .section-lead { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; max-width: 640px; }
+        .utility-bar a:hover {
+            color: #fff;
+        }
 
-    /* ── ANIMATION 1: HERO SVG ───────────────────────────── */
-    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-    .hero-anim-wrap { position: relative; width: 420px; height: 420px; }
+        .utility-bar .emer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-    /* Floating shapes background */
-    @keyframes float-a { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-12px) rotate(3deg)} 66%{transform:translateY(-6px) rotate(-2deg)} }
-    @keyframes float-b { 0%,100%{transform:translateY(0) rotate(0deg)} 33%{transform:translateY(-8px) rotate(-4deg)} 66%{transform:translateY(-14px) rotate(2deg)} }
-    @keyframes float-c { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-10px) scale(1.05)} }
-    @keyframes float-d { 0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-6px) rotate(5deg)} 75%{transform:translateY(-12px) rotate(-3deg)} }
-    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    @keyframes spin-slow-r { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
-    @keyframes bounce-in { 0%{transform:scale(0.6) translateY(20px); opacity:0} 60%{transform:scale(1.08) translateY(-4px); opacity:1} 100%{transform:scale(1) translateY(0)} }
-    @keyframes star-twinkle { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:0.5; transform:scale(0.7)} }
-    @keyframes pulse-glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(0,94,184,0.3))} 50%{filter:drop-shadow(0 0 14px rgba(0,94,184,0.6))} }
-    @keyframes wiggle { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+        .util-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+        }
 
-    /* ── ANIMATION 2: BOUNCING BALL DIVIDER ──────────────── */
-    .ball-divider {
-      background: var(--off-white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 1.4rem 0; overflow: hidden; position: relative;
-    }
-    .ball-track { position: relative; max-width: 1200px; margin: 0 auto; height: 40px; }
-    .bouncing-ball {
-      position: absolute; top: 50%; left: 0;
-      width: 22px; height: 22px; border-radius: 50%;
-      transform: translateY(-50%);
-      animation: ball-travel 5s linear infinite, ball-squish 0.4s ease infinite;
-    }
-    .bouncing-ball:nth-child(1) { background: var(--child-coral); animation-delay: 0s; }
-    .bouncing-ball:nth-child(2) { background: var(--child-yellow); animation-delay: -1.25s; width:18px; height:18px; }
-    .bouncing-ball:nth-child(3) { background: var(--child-mint); animation-delay: -2.5s; width:20px; height:20px; }
-    .bouncing-ball:nth-child(4) { background: var(--child-purple); animation-delay: -3.75s; width:16px; height:16px; }
-    @keyframes ball-travel {
-      0%   { left: -30px; top: 80%; }
-      10%  { top: 20%; }
-      20%  { top: 80%; }
-      30%  { top: 20%; }
-      40%  { top: 80%; }
-      50%  { top: 20%; }
-      60%  { top: 80%; }
-      70%  { top: 20%; }
-      80%  { top: 80%; }
-      90%  { top: 20%; }
-      100% { left: calc(100% + 30px); top: 80%; }
-    }
-    @keyframes ball-squish {
-      0%,100%{ transform: translateY(-50%) scaleY(1) scaleX(1); }
-      50%    { transform: translateY(-50%) scaleY(0.85) scaleX(1.15); }
-    }
+        /* ── HEADER ──────────────────────────────────────────── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, 0.10);
+        }
 
-    /* ── AGE STAGES SECTION ──────────────────────────────── */
-    .stages-section { background: var(--white); }
-    .stages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-top: 3rem; }
-    .stage-card {
-      border-radius: 22px; padding: 2.2rem;
-      border: 1px solid var(--border);
-      position: relative; overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-      cursor: default;
-    }
-    .stage-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.10); }
-    .stage-card.newborn { background: linear-gradient(135deg, #fff5f5 0%, #fff 100%); border-color: rgba(255,107,107,0.25); }
-    .stage-card.toddler { background: linear-gradient(135deg, #fffbf0 0%, #fff 100%); border-color: rgba(255,217,61,0.3); }
-    .stage-card.child   { background: linear-gradient(135deg, #f0fff4 0%, #fff 100%); border-color: rgba(107,203,119,0.25); }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
 
-    /* Age band colour bar at top */
-    .stage-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
-    .stage-card.newborn::before { background: linear-gradient(90deg, var(--child-coral), var(--child-orange)); }
-    .stage-card.toddler::before { background: linear-gradient(90deg, var(--child-yellow), var(--nhs-warm-yellow)); }
-    .stage-card.child::before   { background: linear-gradient(90deg, var(--child-mint), var(--nhs-aqua)); }
+        .logo-wrap svg {
+            height: 84px;
+            width: auto;
+        }
 
-    .stage-age-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      border-radius: 20px; padding: 0.25rem 0.7rem; margin-bottom: 1.2rem;
-    }
-    .stage-card.newborn .stage-age-badge { color: var(--child-coral); background: rgba(255,107,107,0.1); }
-    .stage-card.toddler .stage-age-badge { color: #c89000; background: rgba(255,217,61,0.18); }
-    .stage-card.child   .stage-age-badge { color: var(--nhs-green); background: rgba(107,203,119,0.12); }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
 
-    .stage-emoji { font-size: 2.8rem; margin-bottom: 0.8rem; display: block; animation: float-c 3.5s ease-in-out infinite; }
-    .stage-card.toddler .stage-emoji { animation-delay: -1.2s; }
-    .stage-card.child .stage-emoji   { animation-delay: -2.4s; }
+        nav a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    .stage-title { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.6rem; }
-    .stage-desc  { font-size: 0.9rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 1.4rem; }
-    .stage-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .stage-links a {
-      font-size: 0.88rem; font-weight: 600; color: var(--nhs-blue);
-      text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.45rem 0.7rem; border-radius: 8px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .stage-links a:hover { background: rgba(0,94,184,0.07); transform: translateX(3px); }
-    .stage-links a::before { content: '→'; opacity: 0.5; transition: opacity 0.2s; }
-    .stage-links a:hover::before { opacity: 1; }
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue);
+        }
 
-    /* ── ANIMATION 3: MILESTONE TIMELINE ─────────────────── */
-    .milestones-section {
-      background: linear-gradient(160deg, #eef6ff 0%, #f5fff8 100%);
-      position: relative; overflow: hidden;
-    }
-    .milestones-section::before {
-      content: ''; position: absolute; top: -100px; left: -100px;
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,94,184,0.05) 0%, transparent 70%);
-    }
-    .milestone-timeline {
-      position: relative; margin-top: 3.5rem;
-      display: flex; gap: 0; align-items: flex-start;
-    }
-    .milestone-track {
-      position: absolute; top: 28px; left: 28px; right: 28px; height: 4px;
-      background: var(--border); border-radius: 4px; z-index: 0;
-    }
-    .milestone-track-fill {
-      height: 100%; border-radius: 4px;
-      background: linear-gradient(90deg, var(--child-coral), var(--child-yellow), var(--child-mint), var(--nhs-blue));
-      width: 0; transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    .milestone-track-fill.animate { width: 100%; }
+        nav a.active {
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.07);
+        }
 
-    .milestone-steps { display: flex; width: 100%; justify-content: space-between; position: relative; z-index: 1; }
-    .milestone-step { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; flex: 1; }
-    .milestone-dot {
-      width: 56px; height: 56px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      border: 3px solid var(--border);
-      background: var(--white);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      opacity: 0; transform: scale(0.5);
-    }
-    .milestone-dot.pop { opacity: 1; transform: scale(1); }
-    .milestone-step:nth-child(1) .milestone-dot { border-color: var(--child-coral); background: #fff5f5; transition-delay: 0.0s; }
-    .milestone-step:nth-child(2) .milestone-dot { border-color: var(--child-orange); background: #fff8f0; transition-delay: 0.25s; }
-    .milestone-step:nth-child(3) .milestone-dot { border-color: var(--child-yellow); background: #fffdf0; transition-delay: 0.5s; }
-    .milestone-step:nth-child(4) .milestone-dot { border-color: var(--child-mint); background: #f0fff4; transition-delay: 0.75s; }
-    .milestone-step:nth-child(5) .milestone-dot { border-color: var(--nhs-blue); background: #f0f7ff; transition-delay: 1.0s; }
-    .milestone-dot.pop { animation: dot-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-    @keyframes dot-pop { 0%{transform:scale(0.5); opacity:0} 60%{transform:scale(1.15)} 100%{transform:scale(1); opacity:1} }
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s !important;
+        }
 
-    .milestone-label { text-align: center; }
-    .milestone-age { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 700; color: var(--text-dark); }
-    .milestone-title { font-size: 0.78rem; font-weight: 600; color: var(--text-soft); letter-spacing: 0.04em; }
-    .milestone-card {
-      background: var(--white); border-radius: 14px;
-      padding: 1rem 0.8rem; border: 1px solid var(--border);
-      text-align: center; font-size: 0.82rem; line-height: 1.55; color: var(--text-mid);
-      box-shadow: 0 2px 12px rgba(0,94,184,0.06);
-      opacity: 0; transform: translateY(14px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      margin-top: 0.6rem;
-    }
-    .milestone-card.show { opacity: 1; transform: translateY(0); }
-    .milestone-step:nth-child(1) .milestone-card { transition-delay: 0.1s; }
-    .milestone-step:nth-child(2) .milestone-card { transition-delay: 0.35s; }
-    .milestone-step:nth-child(3) .milestone-card { transition-delay: 0.6s; }
-    .milestone-step:nth-child(4) .milestone-card { transition-delay: 0.85s; }
-    .milestone-step:nth-child(5) .milestone-card { transition-delay: 1.1s; }
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px);
+        }
 
-    /* ── ANIMATION 4: COMMON CONDITIONS ──────────────────── */
-    .conditions-section { background: var(--white); }
-    .conditions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; margin-top: 3rem; }
-    .condition-card {
-      background: var(--off-white); border-radius: 18px; padding: 1.6rem;
-      border: 1px solid var(--border);
-      transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
-      position: relative; overflow: hidden; text-align: center;
-    }
-    .condition-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 12px 32px rgba(0,0,0,0.10); background: var(--white); }
-    .condition-icon-wrap {
-      width: 60px; height: 60px; border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 1rem; font-size: 1.8rem;
-      transition: transform 0.3s;
-    }
-    .condition-card:hover .condition-icon-wrap { transform: scale(1.2) rotate(8deg); }
-    .condition-name { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.4rem; }
-    .condition-desc { font-size: 0.82rem; line-height: 1.6; color: var(--text-mid); }
-    /* colour variants */
-    .condition-card:nth-child(1) .condition-icon-wrap { background: rgba(255,107,107,0.12); }
-    .condition-card:nth-child(2) .condition-icon-wrap { background: rgba(255,159,67,0.12); }
-    .condition-card:nth-child(3) .condition-icon-wrap { background: rgba(255,217,61,0.15); }
-    .condition-card:nth-child(4) .condition-icon-wrap { background: rgba(107,203,119,0.12); }
-    .condition-card:nth-child(5) .condition-icon-wrap { background: rgba(0,94,184,0.08); }
-    .condition-card:nth-child(6) .condition-icon-wrap { background: rgba(155,89,182,0.10); }
-    .condition-card:nth-child(7) .condition-icon-wrap { background: rgba(0,159,187,0.10); }
-    .condition-card:nth-child(8) .condition-icon-wrap { background: rgba(255,107,107,0.09); }
+        /* ── BREADCRUMB ──────────────────────────────────────── */
+        .breadcrumb {
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            padding: 0.65rem 0;
+        }
 
-    /* ── ANIMATION 5: FLOATING STARS RESOURCES ───────────── */
-    .resources-section {
-      background: linear-gradient(135deg,
-        #FF6B6B 0%,
-        #FF9F43 16%,
-        #FFD93D 32%,
-        #6BCB77 48%,
-        #4EC9F0 64%,
-        #005EB8 80%,
-        #9B59B6 100%);
-      position: relative; overflow: hidden; padding: 5rem 2rem;
-    }
-    .resources-section .section-tag { color: rgba(255,255,255,0.75); }
-    .resources-section h2 { color: var(--white); text-shadow: 0 2px 12px rgba(0,0,0,0.18); }
-    .resources-section .section-lead { color: rgba(255,255,255,0.88); }
+        .breadcrumb-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-soft);
+        }
 
-    /* Floating star particles */
-    .star-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .star-p {
-      position: absolute; border-radius: 50%;
-      animation: star-float linear infinite;
-    }
-    @keyframes star-float {
-      0%   { transform: translateY(100%) rotate(0deg); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-    }
+        .breadcrumb a {
+            color: var(--nhs-blue);
+            text-decoration: none;
+        }
 
-    .resources-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; position: relative; z-index: 1; }
-    .resource-card {
-      background: rgba(255,255,255,0.10); backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.18); border-radius: 18px;
-      padding: 2rem; text-decoration: none; color: var(--white);
-      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-      display: flex; gap: 1.2rem; align-items: flex-start;
-    }
-    .resource-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
-    .resource-card-icon {
-      width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
-      background: rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
-    }
-    .resource-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .resource-card-desc { font-size: 0.88rem; line-height: 1.65; opacity: 0.82; }
-    .resource-card-arrow { margin-top: 0.8rem; font-size: 0.82rem; font-weight: 700; opacity: 0.7; display: flex; align-items: center; gap: 0.3rem; }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
 
-    /* ── WHEN TO SEE A GP ────────────────────────────────── */
-    .gp-section { background: var(--off-white); }
-    .gp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
-    .gp-box { border-radius: 18px; padding: 2rem; }
-    .gp-box.urgent { background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); }
-    .gp-box.routine { background: rgba(0,127,59,0.05); border: 1px solid rgba(0,127,59,0.18); }
-    .gp-box-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700;
-      margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem;
-    }
-    .gp-box.urgent .gp-box-title { color: #b91c2c; }
-    .gp-box.routine .gp-box-title { color: var(--nhs-green); }
-    .gp-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .gp-list li { font-size: 0.9rem; color: var(--text-mid); padding-left: 1.3rem; position: relative; line-height: 1.6; }
-    .gp-box.urgent  .gp-list li::before { content: '!'; position: absolute; left: 0; font-weight: 700; color: #dc3545; }
-    .gp-box.routine .gp-list li::before { content: '✓'; position: absolute; left: 0; font-weight: 700; color: var(--nhs-green); }
+        .breadcrumb-sep {
+            opacity: 0.45;
+        }
 
-    /* ── ABOUT LINKS ─────────────────────────────────────── */
-    .about-section { background: var(--white); padding: 4rem 2rem; }
-    .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.5rem; }
-    .about-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; text-decoration: none; color: var(--text-dark); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; gap: 0.5rem; }
-    .about-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,94,184,0.10); border-color: rgba(0,94,184,0.3); }
-    .about-card-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(0,94,184,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
-    .about-card-icon svg { width: 22px; height: 22px; stroke: var(--nhs-blue); fill: none; stroke-width: 1.7; }
-    .about-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 600; color: var(--text-dark); }
-    .about-card-desc { font-size: 0.86rem; color: var(--text-mid); line-height: 1.6; }
-    .about-card-arrow { margin-top: auto; font-size: 0.82rem; font-weight: 600; color: var(--nhs-blue); }
+        /* ── PAGE HERO ───────────────────────────────────────── */
+        .page-hero {
+            background: linear-gradient(160deg, #f0f7ff 0%, #fef9ec 50%, #f0fff5 100%);
+            padding: 4.5rem 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* ── EMERGENCY ───────────────────────────────────────── */
-    .emergency { background: var(--white); border-top: 1px solid var(--border); padding: 3rem 2rem; }
-    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .emerg-card { border-radius: 16px; padding: 2rem; display: flex; gap: 1.2rem; align-items: flex-start; }
-    .emerg-card.nhs111 { background: rgba(0,94,184,0.05); border: 1px solid rgba(0,94,184,0.2); }
-    .emerg-card.urgent { background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); }
-    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
-    .emerg-card.nhs111 .emerg-number { color: var(--nhs-blue); }
-    .emerg-card.urgent .emerg-number { color: #dc3545; }
-    .emerg-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .emerg-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+        /* Floating background blobs */
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 217, 61, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 2rem; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
-    .footer-tagline { font-size: 0.88rem; margin-top: 0.8rem; line-height: 1.6; opacity: 0.75; }
-    .footer-address { font-size: 0.85rem; margin-top: 1rem; line-height: 1.8; opacity: 0.75; }
-    .footer-heading { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-bottom { max-width: 1200px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; opacity: 0.6; flex-wrap: wrap; gap: 0.5rem; }
-    .hours-grid { display: grid; gap: 0.3rem; }
-    .hour-row { display: flex; justify-content: space-between; gap: 1.5rem; font-size: 0.84rem; }
-    .hour-day { opacity: 0.7; }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -60px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(107, 203, 119, 0.10) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── FADE UP ─────────────────────────────────────────── */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .page-hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding-bottom: 4rem;
+        }
 
-    /* ── MOBILE ──────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .page-hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .stages-grid { grid-template-columns: 1fr; }
-      .conditions-grid { grid-template-columns: 1fr 1fr; }
-      .resources-grid { grid-template-columns: 1fr; }
-      .gp-grid { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; }
-      .emergency-inner { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .qa-inner { grid-template-columns: repeat(3, 1fr); }
-      nav { display: none; }
-      .milestone-timeline { flex-direction: column; gap: 1rem; }
-      .milestone-track { display: none; }
-      .milestone-steps { flex-direction: column; gap: 1rem; }
-      .milestone-step { flex-direction: row; align-items: center; gap: 1rem; }
-    }
-    @media (max-width: 600px) {
-      .conditions-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { grid-template-columns: 1fr; }
-      .qa-inner { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.08);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-tag span {
+            width: 6px;
+            height: 6px;
+            background: var(--nhs-blue);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 3.8vw, 3.6rem);
+            font-weight: 600;
+            line-height: 1.12;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--nhs-blue);
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            margin-bottom: 1.8rem;
+            max-width: 500px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--nhs-blue);
+            color: var(--white);
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 94, 184, 0.3);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(0, 94, 184, 0.35);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--nhs-blue);
+            color: var(--nhs-blue);
+            padding: 0.8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--nhs-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .hero-stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            font-weight: 500;
+        }
+
+        /* ── QUICK ACCESS ─────────────────────────────────────── */
+        .quick-access {
+            background: var(--nhs-blue);
+            padding: 0;
+        }
+
+        .qa-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .qa-item {
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--white);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            transition: background 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .qa-item:last-child {
+            border-right: none;
+        }
+
+        .qa-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .qa-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .qa-item:hover .qa-icon {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .qa-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .qa-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .qa-desc {
+            font-size: 0.75rem;
+            opacity: 0.75;
+        }
+
+        /* ── SECTION COMMON ──────────────────────────────────── */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: 0.6rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 640px;
+        }
+
+        /* ── ANIMATION 1: HERO SVG ───────────────────────────── */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-anim-wrap {
+            position: relative;
+            width: 420px;
+            height: 420px;
+        }
+
+        /* Floating shapes background */
+        @keyframes float-a {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg)
+            }
+            33% {
+                transform: translateY(-12px) rotate(3deg)
+            }
+            66% {
+                transform: translateY(-6px) rotate(-2deg)
+            }
+        }
+
+        @keyframes float-b {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg)
+            }
+            33% {
+                transform: translateY(-8px) rotate(-4deg)
+            }
+            66% {
+                transform: translateY(-14px) rotate(2deg)
+            }
+        }
+
+        @keyframes float-c {
+            0%, 100% {
+                transform: translateY(0) scale(1)
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05)
+            }
+        }
+
+        @keyframes float-d {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg)
+            }
+            25% {
+                transform: translateY(-6px) rotate(5deg)
+            }
+            75% {
+                transform: translateY(-12px) rotate(-3deg)
+            }
+        }
+
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes spin-slow-r {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(-360deg)
+            }
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0.6) translateY(20px);
+                opacity: 0
+            }
+            60% {
+                transform: scale(1.08) translateY(-4px);
+                opacity: 1
+            }
+            100% {
+                transform: scale(1) translateY(0)
+            }
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.7)
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 4px rgba(0, 94, 184, 0.3))
+            }
+            50% {
+                filter: drop-shadow(0 0 14px rgba(0, 94, 184, 0.6))
+            }
+        }
+
+        @keyframes wiggle {
+            0%, 100% {
+                transform: rotate(-3deg)
+            }
+            50% {
+                transform: rotate(3deg)
+            }
+        }
+
+        /* ── ANIMATION 2: BOUNCING BALL DIVIDER ──────────────── */
+        .ball-divider {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.4rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ball-track {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 40px;
+        }
+
+        .bouncing-ball {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            animation: ball-travel 5s linear infinite, ball-squish 0.4s ease infinite;
+        }
+
+        .bouncing-ball:nth-child(1) {
+            background: var(--child-coral);
+            animation-delay: 0s;
+        }
+
+        .bouncing-ball:nth-child(2) {
+            background: var(--child-yellow);
+            animation-delay: -1.25s;
+            width: 18px;
+            height: 18px;
+        }
+
+        .bouncing-ball:nth-child(3) {
+            background: var(--child-mint);
+            animation-delay: -2.5s;
+            width: 20px;
+            height: 20px;
+        }
+
+        .bouncing-ball:nth-child(4) {
+            background: var(--child-purple);
+            animation-delay: -3.75s;
+            width: 16px;
+            height: 16px;
+        }
+
+        @keyframes ball-travel {
+            0% {
+                left: -30px;
+                top: 80%;
+            }
+            10% {
+                top: 20%;
+            }
+            20% {
+                top: 80%;
+            }
+            30% {
+                top: 20%;
+            }
+            40% {
+                top: 80%;
+            }
+            50% {
+                top: 20%;
+            }
+            60% {
+                top: 80%;
+            }
+            70% {
+                top: 20%;
+            }
+            80% {
+                top: 80%;
+            }
+            90% {
+                top: 20%;
+            }
+            100% {
+                left: calc(100% + 30px);
+                top: 80%;
+            }
+        }
+
+        @keyframes ball-squish {
+            0%, 100% {
+                transform: translateY(-50%) scaleY(1) scaleX(1);
+            }
+            50% {
+                transform: translateY(-50%) scaleY(0.85) scaleX(1.15);
+            }
+        }
+
+        /* ── AGE STAGES SECTION ──────────────────────────────── */
+        .stages-section {
+            background: var(--white);
+        }
+
+        .stages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 3rem;
+        }
+
+        .stage-card {
+            border-radius: 22px;
+            padding: 2.2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: default;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+        }
+
+        .stage-card.newborn {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            border-color: rgba(255, 107, 107, 0.25);
+        }
+
+        .stage-card.toddler {
+            background: linear-gradient(135deg, #fffbf0 0%, #fff 100%);
+            border-color: rgba(255, 217, 61, 0.3);
+        }
+
+        .stage-card.child {
+            background: linear-gradient(135deg, #f0fff4 0%, #fff 100%);
+            border-color: rgba(107, 203, 119, 0.25);
+        }
+
+        /* Age band colour bar at top */
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .stage-card.newborn::before {
+            background: linear-gradient(90deg, var(--child-coral), var(--child-orange));
+        }
+
+        .stage-card.toddler::before {
+            background: linear-gradient(90deg, var(--child-yellow), var(--nhs-warm-yellow));
+        }
+
+        .stage-card.child::before {
+            background: linear-gradient(90deg, var(--child-mint), var(--nhs-aqua));
+        }
+
+        .stage-age-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 20px;
+            padding: 0.25rem 0.7rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .stage-card.newborn .stage-age-badge {
+            color: var(--child-coral);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .stage-card.toddler .stage-age-badge {
+            color: #c89000;
+            background: rgba(255, 217, 61, 0.18);
+        }
+
+        .stage-card.child .stage-age-badge {
+            color: var(--nhs-green);
+            background: rgba(107, 203, 119, 0.12);
+        }
+
+        .stage-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            animation: float-c 3.5s ease-in-out infinite;
+        }
+
+        .stage-card.toddler .stage-emoji {
+            animation-delay: -1.2s;
+        }
+
+        .stage-card.child .stage-emoji {
+            animation-delay: -2.4s;
+        }
+
+        .stage-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .stage-desc {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            margin-bottom: 1.4rem;
+        }
+
+        .stage-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stage-links a {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 8px;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .stage-links a:hover {
+            background: rgba(0, 94, 184, 0.07);
+            transform: translateX(3px);
+        }
+
+        .stage-links a::before {
+            content: '→';
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .stage-links a:hover::before {
+            opacity: 1;
+        }
+
+        /* ── ANIMATION 3: MILESTONE TIMELINE ─────────────────── */
+        .milestones-section {
+            background: linear-gradient(160deg, #eef6ff 0%, #f5fff8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .milestones-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, 0.05) 0%, transparent 70%);
+        }
+
+        .milestone-timeline {
+            position: relative;
+            margin-top: 3.5rem;
+            display: flex;
+            gap: 0;
+            align-items: flex-start;
+        }
+
+        .milestone-track {
+            position: absolute;
+            top: 28px;
+            left: 28px;
+            right: 28px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 4px;
+            z-index: 0;
+        }
+
+        .milestone-track-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--child-coral), var(--child-yellow), var(--child-mint), var(--nhs-blue));
+            width: 0;
+            transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .milestone-track-fill.animate {
+            width: 100%;
+        }
+
+        .milestone-steps {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        .milestone-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .milestone-dot {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 3px solid var(--border);
+            background: var(--white);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .milestone-dot.pop {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .milestone-step:nth-child(1) .milestone-dot {
+            border-color: var(--child-coral);
+            background: #fff5f5;
+            transition-delay: 0.0s;
+        }
+
+        .milestone-step:nth-child(2) .milestone-dot {
+            border-color: var(--child-orange);
+            background: #fff8f0;
+            transition-delay: 0.25s;
+        }
+
+        .milestone-step:nth-child(3) .milestone-dot {
+            border-color: var(--child-yellow);
+            background: #fffdf0;
+            transition-delay: 0.5s;
+        }
+
+        .milestone-step:nth-child(4) .milestone-dot {
+            border-color: var(--child-mint);
+            background: #f0fff4;
+            transition-delay: 0.75s;
+        }
+
+        .milestone-step:nth-child(5) .milestone-dot {
+            border-color: var(--nhs-blue);
+            background: #f0f7ff;
+            transition-delay: 1.0s;
+        }
+
+        .milestone-dot.pop {
+            animation: dot-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes dot-pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0
+            }
+            60% {
+                transform: scale(1.15)
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .milestone-label {
+            text-align: center;
+        }
+
+        .milestone-age {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .milestone-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            letter-spacing: 0.04em;
+        }
+
+        .milestone-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 1rem 0.8rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: var(--text-mid);
+            box-shadow: 0 2px 12px rgba(0, 94, 184, 0.06);
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            margin-top: 0.6rem;
+        }
+
+        .milestone-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .milestone-step:nth-child(1) .milestone-card {
+            transition-delay: 0.1s;
+        }
+
+        .milestone-step:nth-child(2) .milestone-card {
+            transition-delay: 0.35s;
+        }
+
+        .milestone-step:nth-child(3) .milestone-card {
+            transition-delay: 0.6s;
+        }
+
+        .milestone-step:nth-child(4) .milestone-card {
+            transition-delay: 0.85s;
+        }
+
+        .milestone-step:nth-child(5) .milestone-card {
+            transition-delay: 1.1s;
+        }
+
+        /* ── ANIMATION 4: COMMON CONDITIONS ──────────────────── */
+        .conditions-section {
+            background: var(--white);
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.3rem;
+            margin-top: 3rem;
+        }
+
+        .condition-card {
+            background: var(--off-white);
+            border-radius: 18px;
+            padding: 1.6rem;
+            border: 1px solid var(--border);
+            transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .condition-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10);
+            background: var(--white);
+        }
+
+        .condition-icon-wrap {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
+
+        .condition-card:hover .condition-icon-wrap {
+            transform: scale(1.2) rotate(8deg);
+        }
+
+        .condition-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .condition-desc {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: var(--text-mid);
+        }
+
+        /* colour variants */
+        .condition-card:nth-child(1) .condition-icon-wrap {
+            background: rgba(255, 107, 107, 0.12);
+        }
+
+        .condition-card:nth-child(2) .condition-icon-wrap {
+            background: rgba(255, 159, 67, 0.12);
+        }
+
+        .condition-card:nth-child(3) .condition-icon-wrap {
+            background: rgba(255, 217, 61, 0.15);
+        }
+
+        .condition-card:nth-child(4) .condition-icon-wrap {
+            background: rgba(107, 203, 119, 0.12);
+        }
+
+        .condition-card:nth-child(5) .condition-icon-wrap {
+            background: rgba(0, 94, 184, 0.08);
+        }
+
+        .condition-card:nth-child(6) .condition-icon-wrap {
+            background: rgba(155, 89, 182, 0.10);
+        }
+
+        .condition-card:nth-child(7) .condition-icon-wrap {
+            background: rgba(0, 159, 187, 0.10);
+        }
+
+        .condition-card:nth-child(8) .condition-icon-wrap {
+            background: rgba(255, 107, 107, 0.09);
+        }
+
+        /* ── ANIMATION 5: FLOATING STARS RESOURCES ───────────── */
+        .resources-section {
+            background: linear-gradient(135deg,
+            #FF6B6B 0%,
+            #FF9F43 16%,
+            #FFD93D 32%,
+            #6BCB77 48%,
+            #4EC9F0 64%,
+            #005EB8 80%,
+            #9B59B6 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 2rem;
+        }
+
+        .resources-section .section-tag {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .resources-section h2 {
+            color: var(--white);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+        }
+
+        .resources-section .section-lead {
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        /* Floating star particles */
+        .star-field {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star-p {
+            position: absolute;
+            border-radius: 50%;
+            animation: star-float linear infinite;
+        }
+
+        @keyframes star-float {
+            0% {
+                transform: translateY(100%) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .resource-card:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .resource-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .resource-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .resource-card-desc {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            opacity: 0.82;
+        }
+
+        .resource-card-arrow {
+            margin-top: 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ── WHEN TO SEE A GP ────────────────────────────────── */
+        .gp-section {
+            background: var(--off-white);
+        }
+
+        .gp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gp-box {
+            border-radius: 18px;
+            padding: 2rem;
+        }
+
+        .gp-box.urgent {
+            background: rgba(220, 53, 69, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .gp-box.routine {
+            background: rgba(0, 127, 59, 0.05);
+            border: 1px solid rgba(0, 127, 59, 0.18);
+        }
+
+        .gp-box-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .gp-box.urgent .gp-box-title {
+            color: #b91c2c;
+        }
+
+        .gp-box.routine .gp-box-title {
+            color: var(--nhs-green);
+        }
+
+        .gp-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .gp-list li {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            padding-left: 1.3rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .gp-box.urgent .gp-list li::before {
+            content: '!';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: #dc3545;
+        }
+
+        .gp-box.routine .gp-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--nhs-green);
+        }
+
+        /* ── ABOUT LINKS ─────────────────────────────────────── */
+        .about-section {
+            background: var(--white);
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.4rem;
+            margin-top: 2.5rem;
+        }
+
+        .about-card {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .about-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0, 94, 184, 0.10);
+            border-color: rgba(0, 94, 184, 0.3);
+        }
+
+        .about-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(0, 94, 184, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--nhs-blue);
+            fill: none;
+            stroke-width: 1.7;
+        }
+
+        .about-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.18rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .about-card-desc {
+            font-size: 0.86rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .about-card-arrow {
+            margin-top: auto;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+        }
+
+        /* ── EMERGENCY ───────────────────────────────────────── */
+        .emergency {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(0, 94, 184, 0.05);
+            border: 1px solid rgba(0, 94, 184, 0.2);
+        }
+
+        .emerg-card.urgent {
+            background: rgba(220, 53, 69, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .emerg-card.nhs111 .emerg-number {
+            color: var(--nhs-blue);
+        }
+
+        .emerg-card.urgent .emerg-number {
+            color: #dc3545;
+        }
+
+        .emerg-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .emerg-desc {
+            font-size: 0.88rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3.5rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            margin-top: 0.8rem;
+            line-height: 1.6;
+            opacity: 0.75;
+        }
+
+        .footer-address {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+            opacity: 0.75;
+        }
+
+        .footer-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-size: 0.84rem;
+        }
+
+        .hour-day {
+            opacity: 0.7;
+        }
+
+        /* ── FADE UP ─────────────────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── MOBILE ──────────────────────────────────────────── */
+        @media (max-width: 900px) {
+            .page-hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .stages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .conditions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .emergency-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .qa-inner {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            nav {
+                display: none;
+            }
+
+            .milestone-timeline {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .milestone-track {
+                display: none;
+            }
+
+            .milestone-steps {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .milestone-step {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .conditions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .qa-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 300px) and (max-width: 500px) {
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="emer">
-      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
-      <span class="util-pill">NHS GP Practice · West London</span>
+    <div class="inner">
+        <div class="emer">
+            <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+            <span class="util-pill">NHS GP Practice · West London</span>
+        </div>
+        <div class="emer">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <span>|</span>
+            <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="emer">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <span>|</span>
-      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#ffffff"/>
-            <stop offset="15%"  stop-color="#d0d0d0"/>
-            <stop offset="30%"  stop-color="#f8f8f8"/>
-            <stop offset="50%"  stop-color="#a0a0a0"/>
-            <stop offset="65%"  stop-color="#e8e8e8"/>
-            <stop offset="80%"  stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#c8c8c8"/>
-            <stop offset="10%"  stop-color="#f0f0f0"/>
-            <stop offset="25%"  stop-color="#b0b0b0"/>
-            <stop offset="40%"  stop-color="#ffffff"/>
-            <stop offset="55%"  stop-color="#909090"/>
-            <stop offset="70%"  stop-color="#e0e0e0"/>
-            <stop offset="85%"  stop-color="#a8a8a8"/>
-            <stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
-            <stop offset="0%"  stop-color="#3a3a3a"/>
-            <stop offset="40%" stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#666666"/>
-            <stop offset="30%"  stop-color="#222222"/>
-            <stop offset="70%"  stop-color="#444444"/>
-            <stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-          <filter id="textSheen">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <rect width="720" height="160" fill="#ffffff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="#">News</a>
-      <a href="surgery-clinics.html">Clinics &amp; Services</a>
-      <a href="#">Our Practice</a>
-      <a href="childrens-health.html" class="active">Health Info</a>
-      <a href="#">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="nav-cta">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="nav-cta">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <div class="breadcrumb-inner">
-    <a href="index.html">Home</a>
-    <span class="breadcrumb-sep">›</span>
-    <a href="#">Health Information</a>
-    <span class="breadcrumb-sep">›</span>
-    <span>Children's Health</span>
-  </div>
+    <div class="breadcrumb-inner">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="#">Health Information</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Children's Health</span>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
      HERO with ANIMATION 1: Floating Paediatric Scene
      ═══════════════════════════════════════════════════════ -->
 <div class="page-hero">
-  <div class="page-hero-inner">
+    <div class="page-hero-inner">
 
-    <!-- LEFT: copy -->
-    <div>
-      <div class="hero-tag"><span></span>Paediatric Care &amp; Family Health</div>
-      <h1>Children's<br><em>Health</em> &amp; Wellbeing</h1>
-      <p class="hero-sub">A trusted guide to common childhood illnesses, conditions and development for parents and carers in West London. We're here for every stage of your child's journey.</p>
-      <div class="hero-actions">
-        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-primary">↗ Book Appointment</a>
-        <a href="tel:02085745136" class="btn-outline">📞 Call 0208 574 5136</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat-item"><span class="hero-stat-num">0–15</span><span class="hero-stat-label">Years covered</span></div>
-        <div class="hero-stat-item"><span class="hero-stat-num">5</span><span class="hero-stat-label">Age milestones</span></div>
-        <div class="hero-stat-item"><span class="hero-stat-num">1976</span><span class="hero-stat-label">Est. West London</span></div>
-      </div>
-    </div>
+        <!-- LEFT: copy -->
+        <div>
+            <div class="hero-tag"><span></span>Paediatric Care &amp; Family Health</div>
+            <h1>Children's<br><em>Health</em> &amp; Wellbeing</h1>
+            <p class="hero-sub">A trusted guide to common childhood illnesses, conditions and development for parents
+                and carers in West London. We're here for every stage of your child's journey.</p>
+            <div class="hero-actions">
+                <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-primary">↗ Book Appointment</a>
+                <a href="tel:02085745136" class="btn-outline">📞 Call 0208 574 5136</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat-item"><span class="hero-stat-num">0–15</span><span class="hero-stat-label">Years covered</span>
+                </div>
+                <div class="hero-stat-item"><span class="hero-stat-num">5</span><span class="hero-stat-label">Age milestones</span>
+                </div>
+                <div class="hero-stat-item"><span class="hero-stat-num">1976</span><span class="hero-stat-label">Est. West London</span>
+                </div>
+            </div>
+        </div>
 
-    <!-- RIGHT: Animated SVG scene -->
-    <div class="hero-visual">
-      <div class="hero-anim-wrap">
-        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="420" height="420" style="overflow:visible;">
-          <defs>
-            <filter id="h-glow">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="h-shadow">
-              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.12)"/>
-            </filter>
-            <radialGradient id="bgCirc" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#e8f4ff"/>
-              <stop offset="100%" stop-color="#f5fbff"/>
-            </radialGradient>
-          </defs>
+        <!-- RIGHT: Animated SVG scene -->
+        <div class="hero-visual">
+            <div class="hero-anim-wrap">
+                <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="420" height="420"
+                     style="overflow:visible;">
+                    <defs>
+                        <filter id="h-glow">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="h-shadow">
+                            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.12)"/>
+                        </filter>
+                        <radialGradient id="bgCirc" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#e8f4ff"/>
+                            <stop offset="100%" stop-color="#f5fbff"/>
+                        </radialGradient>
+                    </defs>
 
-          <!-- ── BACKGROUND CIRCLE ── -->
-          <circle cx="210" cy="210" r="185" fill="url(#bgCirc)" filter="url(#h-shadow)"/>
-          <circle cx="210" cy="210" r="185" fill="none" stroke="rgba(0,94,184,0.1)" stroke-width="1"/>
+                    <!-- ── BACKGROUND CIRCLE ── -->
+                    <circle cx="210" cy="210" r="185" fill="url(#bgCirc)" filter="url(#h-shadow)"/>
+                    <circle cx="210" cy="210" r="185" fill="none" stroke="rgba(0,94,184,0.1)" stroke-width="1"/>
 
-          <!-- ── FLOATING CLOUDS (background) ── -->
-          <g style="animation: float-a 7s ease-in-out infinite; transform-origin: 70px 80px;">
-            <ellipse cx="70" cy="80" rx="30" ry="16" fill="rgba(255,255,255,0.9)"/>
-            <ellipse cx="85" cy="74" rx="18" ry="14" fill="rgba(255,255,255,0.9)"/>
-            <ellipse cx="56" cy="74" rx="14" ry="12" fill="rgba(255,255,255,0.9)"/>
-          </g>
-          <g style="animation: float-b 8.5s ease-in-out infinite; transform-origin: 330px 100px;">
-            <ellipse cx="330" cy="100" rx="24" ry="13" fill="rgba(255,255,255,0.85)"/>
-            <ellipse cx="343" cy="95" rx="14" ry="11" fill="rgba(255,255,255,0.85)"/>
-            <ellipse cx="318" cy="95" rx="12" ry="10" fill="rgba(255,255,255,0.85)"/>
-          </g>
+                    <!-- ── FLOATING CLOUDS (background) ── -->
+                    <g style="animation: float-a 7s ease-in-out infinite; transform-origin: 70px 80px;">
+                        <ellipse cx="70" cy="80" rx="30" ry="16" fill="rgba(255,255,255,0.9)"/>
+                        <ellipse cx="85" cy="74" rx="18" ry="14" fill="rgba(255,255,255,0.9)"/>
+                        <ellipse cx="56" cy="74" rx="14" ry="12" fill="rgba(255,255,255,0.9)"/>
+                    </g>
+                    <g style="animation: float-b 8.5s ease-in-out infinite; transform-origin: 330px 100px;">
+                        <ellipse cx="330" cy="100" rx="24" ry="13" fill="rgba(255,255,255,0.85)"/>
+                        <ellipse cx="343" cy="95" rx="14" ry="11" fill="rgba(255,255,255,0.85)"/>
+                        <ellipse cx="318" cy="95" rx="12" ry="10" fill="rgba(255,255,255,0.85)"/>
+                    </g>
 
-          <!-- ── RAINBOW ARC ── -->
-          <g style="animation: float-c 6s ease-in-out infinite; transform-origin: 210px 250px;">
-            <path d="M 100 300 Q 210 150 320 300" fill="none" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
-            <path d="M 110 300 Q 210 165 310 300" fill="none" stroke="#FFD93D" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
-            <path d="M 120 300 Q 210 178 300 300" fill="none" stroke="#6BCB77" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
-            <path d="M 130 300 Q 210 190 290 300" fill="none" stroke="#4EC9F0" stroke-width="3.5" stroke-linecap="round" opacity="0.4"/>
-          </g>
+                    <!-- ── RAINBOW ARC ── -->
+                    <g style="animation: float-c 6s ease-in-out infinite; transform-origin: 210px 250px;">
+                        <path d="M 100 300 Q 210 150 320 300" fill="none" stroke="#FF6B6B" stroke-width="5"
+                              stroke-linecap="round" opacity="0.35"/>
+                        <path d="M 110 300 Q 210 165 310 300" fill="none" stroke="#FFD93D" stroke-width="4"
+                              stroke-linecap="round" opacity="0.4"/>
+                        <path d="M 120 300 Q 210 178 300 300" fill="none" stroke="#6BCB77" stroke-width="4"
+                              stroke-linecap="round" opacity="0.38"/>
+                        <path d="M 130 300 Q 210 190 290 300" fill="none" stroke="#4EC9F0" stroke-width="3.5"
+                              stroke-linecap="round" opacity="0.4"/>
+                    </g>
 
-          <!-- ── STETHOSCOPE (centre piece, floating) ── -->
-          <g style="animation: float-a 4.5s ease-in-out infinite; transform-origin:210px 210px;" filter="url(#h-shadow)">
-            <!-- main circle of stethoscope -->
-            <circle cx="210" cy="210" r="70" fill="white" stroke="rgba(0,94,184,0.12)" stroke-width="2"/>
-            <!-- stethoscope body -->
-            <path d="M 178 185 Q 168 175, 168 210 Q 168 240, 200 248 Q 232 256, 248 240 Q 262 224, 252 210" fill="none" stroke="#005EB8" stroke-width="5" stroke-linecap="round"/>
-            <!-- earpiece left -->
-            <line x1="178" y1="185" x2="172" y2="174" stroke="#005EB8" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="170" cy="171" r="5" fill="#005EB8"/>
-            <!-- earpiece right -->
-            <line x1="252" y1="210" x2="260" y2="200" stroke="#005EB8" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="262" cy="197" r="5" fill="#005EB8"/>
-            <!-- chest piece -->
-            <circle cx="200" cy="249" r="14" fill="#005EB8" opacity="0.9" filter="url(#h-glow)"/>
-            <circle cx="200" cy="249" r="9" fill="white" opacity="0.4"/>
-            <!-- sparkle on chest piece -->
-            <circle cx="204" cy="245" r="2.5" fill="white" opacity="0.8"/>
-          </g>
+                    <!-- ── STETHOSCOPE (centre piece, floating) ── -->
+                    <g style="animation: float-a 4.5s ease-in-out infinite; transform-origin:210px 210px;"
+                       filter="url(#h-shadow)">
+                        <!-- main circle of stethoscope -->
+                        <circle cx="210" cy="210" r="70" fill="white" stroke="rgba(0,94,184,0.12)" stroke-width="2"/>
+                        <!-- stethoscope body -->
+                        <path d="M 178 185 Q 168 175, 168 210 Q 168 240, 200 248 Q 232 256, 248 240 Q 262 224, 252 210"
+                              fill="none" stroke="#005EB8" stroke-width="5" stroke-linecap="round"/>
+                        <!-- earpiece left -->
+                        <line x1="178" y1="185" x2="172" y2="174" stroke="#005EB8" stroke-width="4"
+                              stroke-linecap="round"/>
+                        <circle cx="170" cy="171" r="5" fill="#005EB8"/>
+                        <!-- earpiece right -->
+                        <line x1="252" y1="210" x2="260" y2="200" stroke="#005EB8" stroke-width="4"
+                              stroke-linecap="round"/>
+                        <circle cx="262" cy="197" r="5" fill="#005EB8"/>
+                        <!-- chest piece -->
+                        <circle cx="200" cy="249" r="14" fill="#005EB8" opacity="0.9" filter="url(#h-glow)"/>
+                        <circle cx="200" cy="249" r="9" fill="white" opacity="0.4"/>
+                        <!-- sparkle on chest piece -->
+                        <circle cx="204" cy="245" r="2.5" fill="white" opacity="0.8"/>
+                    </g>
 
-          <!-- ── FLOATING ITEMS AROUND THE SCENE ── -->
+                    <!-- ── FLOATING ITEMS AROUND THE SCENE ── -->
 
-          <!-- 🌡 Thermometer (top-right) -->
-          <g style="animation: float-b 5s ease-in-out infinite; transform-origin:320px 130px;">
-            <rect x="312" y="108" width="16" height="44" rx="8" fill="#FFD93D" stroke="#e6b800" stroke-width="1.5"/>
-            <circle cx="320" cy="156" r="12" fill="#FF6B6B" stroke="#cc4444" stroke-width="1.5"/>
-            <rect x="316" y="116" width="8" height="30" rx="4" fill="rgba(255,107,107,0.4)"/>
-            <line x1="323" y1="126" x2="326" y2="126" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
-            <line x1="323" y1="132" x2="326" y2="132" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
-            <line x1="323" y1="138" x2="326" y2="138" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
-          </g>
+                    <!-- 🌡 Thermometer (top-right) -->
+                    <g style="animation: float-b 5s ease-in-out infinite; transform-origin:320px 130px;">
+                        <rect x="312" y="108" width="16" height="44" rx="8" fill="#FFD93D" stroke="#e6b800"
+                              stroke-width="1.5"/>
+                        <circle cx="320" cy="156" r="12" fill="#FF6B6B" stroke="#cc4444" stroke-width="1.5"/>
+                        <rect x="316" y="116" width="8" height="30" rx="4" fill="rgba(255,107,107,0.4)"/>
+                        <line x1="323" y1="126" x2="326" y2="126" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="323" y1="132" x2="326" y2="132" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                        <line x1="323" y1="138" x2="326" y2="138" stroke="rgba(0,0,0,0.2)" stroke-width="1.5"/>
+                    </g>
 
-          <!-- 💊 Pill / Tablet (top-left) -->
-          <g style="animation: float-d 6.5s ease-in-out infinite; transform-origin:100px 145px;">
-            <ellipse cx="100" cy="145" rx="24" ry="13" fill="white" stroke="rgba(0,94,184,0.2)" stroke-width="1.5" transform="rotate(-30,100,145)"/>
-            <path d="M 80.5 133.5 Q 100 142, 119.5 156.5" stroke="rgba(0,94,184,0.2)" stroke-width="1.5" fill="none"/>
-            <ellipse cx="100" cy="145" rx="24" ry="13" fill="#4EC9F0" opacity="0.45" clip-path="url(#pill-left)" transform="rotate(-30,100,145)"/>
-            <circle cx="100" cy="145" r="5" fill="rgba(0,94,184,0.15)"/>
-          </g>
+                    <!-- 💊 Pill / Tablet (top-left) -->
+                    <g style="animation: float-d 6.5s ease-in-out infinite; transform-origin:100px 145px;">
+                        <ellipse cx="100" cy="145" rx="24" ry="13" fill="white" stroke="rgba(0,94,184,0.2)"
+                                 stroke-width="1.5" transform="rotate(-30,100,145)"/>
+                        <path d="M 80.5 133.5 Q 100 142, 119.5 156.5" stroke="rgba(0,94,184,0.2)" stroke-width="1.5"
+                              fill="none"/>
+                        <ellipse cx="100" cy="145" rx="24" ry="13" fill="#4EC9F0" opacity="0.45"
+                                 clip-path="url(#pill-left)" transform="rotate(-30,100,145)"/>
+                        <circle cx="100" cy="145" r="5" fill="rgba(0,94,184,0.15)"/>
+                    </g>
 
-          <!-- 🩹 Plaster / Bandage (bottom-right) -->
-          <g style="animation: float-a 5.8s ease-in-out infinite 1s; transform-origin:305px 295px;">
-            <rect x="285" y="285" width="40" height="20" rx="5" fill="#FFD93D" stroke="#e6b800" stroke-width="1.5" transform="rotate(-15,305,295)"/>
-            <rect x="292" y="288" width="26" height="14" rx="3" fill="rgba(255,255,255,0.7)" transform="rotate(-15,305,295)"/>
-            <line x1="299" y1="291" x2="299" y2="300" stroke="#FFB81C" stroke-width="1.5" transform="rotate(-15,305,295)"/>
-            <line x1="303" y1="291" x2="303" y2="300" stroke="#FFB81C" stroke-width="1.5" transform="rotate(-15,305,295)"/>
-            <line x1="307" y1="291" x2="307" y2="300" stroke="#FFB81C" stroke-width="1.5" transform="rotate(-15,305,295)"/>
-          </g>
+                    <!-- 🩹 Plaster / Bandage (bottom-right) -->
+                    <g style="animation: float-a 5.8s ease-in-out infinite 1s; transform-origin:305px 295px;">
+                        <rect x="285" y="285" width="40" height="20" rx="5" fill="#FFD93D" stroke="#e6b800"
+                              stroke-width="1.5" transform="rotate(-15,305,295)"/>
+                        <rect x="292" y="288" width="26" height="14" rx="3" fill="rgba(255,255,255,0.7)"
+                              transform="rotate(-15,305,295)"/>
+                        <line x1="299" y1="291" x2="299" y2="300" stroke="#FFB81C" stroke-width="1.5"
+                              transform="rotate(-15,305,295)"/>
+                        <line x1="303" y1="291" x2="303" y2="300" stroke="#FFB81C" stroke-width="1.5"
+                              transform="rotate(-15,305,295)"/>
+                        <line x1="307" y1="291" x2="307" y2="300" stroke="#FFB81C" stroke-width="1.5"
+                              transform="rotate(-15,305,295)"/>
+                    </g>
 
-          <!-- ⭐ Stars scattered -->
-          <g style="animation: star-twinkle 1.8s ease-in-out infinite 0s;">
-            <polygon points="55,150 57.5,157 65,157 59,161.5 61.5,169 55,164.5 48.5,169 51,161.5 45,157 52.5,157" fill="#FFD93D" opacity="0.8"/>
-          </g>
-          <g style="animation: star-twinkle 2.4s ease-in-out infinite 0.6s;">
-            <polygon points="350,170 351.5,175 357,175 352.5,178 354,183 350,180 346,183 347.5,178 343,175 348.5,175" fill="#FF6B6B" opacity="0.7"/>
-          </g>
-          <g style="animation: star-twinkle 2.1s ease-in-out infinite 1.2s;">
-            <polygon points="90,290 92,296 98,296 93,300 95,306 90,302 85,306 87,300 82,296 88,296" fill="#6BCB77" opacity="0.75"/>
-          </g>
-          <g style="animation: star-twinkle 1.6s ease-in-out infinite 0.3s;">
-            <polygon points="340,60 341,64 345,64 342,66.5 343,70.5 340,68 337,70.5 338,66.5 335,64 339,64" fill="#9B59B6" opacity="0.65"/>
-          </g>
+                    <!-- ⭐ Stars scattered -->
+                    <g style="animation: star-twinkle 1.8s ease-in-out infinite 0s;">
+                        <polygon
+                                points="55,150 57.5,157 65,157 59,161.5 61.5,169 55,164.5 48.5,169 51,161.5 45,157 52.5,157"
+                                fill="#FFD93D" opacity="0.8"/>
+                    </g>
+                    <g style="animation: star-twinkle 2.4s ease-in-out infinite 0.6s;">
+                        <polygon
+                                points="350,170 351.5,175 357,175 352.5,178 354,183 350,180 346,183 347.5,178 343,175 348.5,175"
+                                fill="#FF6B6B" opacity="0.7"/>
+                    </g>
+                    <g style="animation: star-twinkle 2.1s ease-in-out infinite 1.2s;">
+                        <polygon points="90,290 92,296 98,296 93,300 95,306 90,302 85,306 87,300 82,296 88,296"
+                                 fill="#6BCB77" opacity="0.75"/>
+                    </g>
+                    <g style="animation: star-twinkle 1.6s ease-in-out infinite 0.3s;">
+                        <polygon points="340,60 341,64 345,64 342,66.5 343,70.5 340,68 337,70.5 338,66.5 335,64 339,64"
+                                 fill="#9B59B6" opacity="0.65"/>
+                    </g>
 
-          <!-- 💛 Heart (bottom-left) -->
-          <g style="animation: float-c 4.2s ease-in-out infinite 0.7s; transform-origin:100px 295px;">
-            <path d="M100 290 C100 290, 84 278, 84 269 C84 261, 90 257, 96 260 C98 261, 100 265, 100 265 C100 265, 102 261, 104 260 C110 257, 116 261, 116 269 C116 278, 100 290, 100 290Z" fill="#FF6B6B" opacity="0.8"/>
-          </g>
+                    <!-- 💛 Heart (bottom-left) -->
+                    <g style="animation: float-c 4.2s ease-in-out infinite 0.7s; transform-origin:100px 295px;">
+                        <path d="M100 290 C100 290, 84 278, 84 269 C84 261, 90 257, 96 260 C98 261, 100 265, 100 265 C100 265, 102 261, 104 260 C110 257, 116 261, 116 269 C116 278, 100 290, 100 290Z"
+                              fill="#FF6B6B" opacity="0.8"/>
+                    </g>
 
-          <!-- ➕ Mini cross symbols -->
-          <g style="animation: float-b 7s ease-in-out infinite 2s; transform-origin:355px 240px;" opacity="0.5">
-            <rect x="350" y="237" width="10" height="6" rx="2" fill="#005EB8"/>
-            <rect x="353" y="234" width="4" height="12" rx="2" fill="#005EB8"/>
-          </g>
-          <g style="animation: float-d 6s ease-in-out infinite 1s; transform-origin:60px 210px;" opacity="0.45">
-            <rect x="55" y="207" width="10" height="6" rx="2" fill="#009FBB"/>
-            <rect x="58" y="204" width="4" height="12" rx="2" fill="#009FBB"/>
-          </g>
+                    <!-- ➕ Mini cross symbols -->
+                    <g style="animation: float-b 7s ease-in-out infinite 2s; transform-origin:355px 240px;"
+                       opacity="0.5">
+                        <rect x="350" y="237" width="10" height="6" rx="2" fill="#005EB8"/>
+                        <rect x="353" y="234" width="4" height="12" rx="2" fill="#005EB8"/>
+                    </g>
+                    <g style="animation: float-d 6s ease-in-out infinite 1s; transform-origin:60px 210px;"
+                       opacity="0.45">
+                        <rect x="55" y="207" width="10" height="6" rx="2" fill="#009FBB"/>
+                        <rect x="58" y="204" width="4" height="12" rx="2" fill="#009FBB"/>
+                    </g>
 
-          <!-- Sparkle dots -->
-          <circle cx="155" cy="90" r="4" fill="#FFD93D" style="animation:star-twinkle 2.5s infinite 0.4s;" opacity="0.9"/>
-          <circle cx="275" cy="75" r="3" fill="#4EC9F0" style="animation:star-twinkle 2s infinite 1s;" opacity="0.85"/>
-          <circle cx="360" cy="300" r="3.5" fill="#6BCB77" style="animation:star-twinkle 1.9s infinite 0.2s;" opacity="0.8"/>
-          <circle cx="55" cy="310" r="3" fill="#FF9F43" style="animation:star-twinkle 2.3s infinite 0.8s;" opacity="0.8"/>
-          <circle cx="170" cy="350" r="2.5" fill="#9B59B6" style="animation:star-twinkle 2.8s infinite 1.5s;" opacity="0.7"/>
-          <circle cx="250" cy="360" r="3" fill="#FF6B6B" style="animation:star-twinkle 2.1s infinite 0.6s;" opacity="0.75"/>
+                    <!-- Sparkle dots -->
+                    <circle cx="155" cy="90" r="4" fill="#FFD93D" style="animation:star-twinkle 2.5s infinite 0.4s;"
+                            opacity="0.9"/>
+                    <circle cx="275" cy="75" r="3" fill="#4EC9F0" style="animation:star-twinkle 2s infinite 1s;"
+                            opacity="0.85"/>
+                    <circle cx="360" cy="300" r="3.5" fill="#6BCB77" style="animation:star-twinkle 1.9s infinite 0.2s;"
+                            opacity="0.8"/>
+                    <circle cx="55" cy="310" r="3" fill="#FF9F43" style="animation:star-twinkle 2.3s infinite 0.8s;"
+                            opacity="0.8"/>
+                    <circle cx="170" cy="350" r="2.5" fill="#9B59B6" style="animation:star-twinkle 2.8s infinite 1.5s;"
+                            opacity="0.7"/>
+                    <circle cx="250" cy="360" r="3" fill="#FF6B6B" style="animation:star-twinkle 2.1s infinite 0.6s;"
+                            opacity="0.75"/>
 
-        </svg>
-      </div>
-    </div>
+                </svg>
+            </div>
+        </div>
 
-  </div><!-- /page-hero-inner -->
+    </div><!-- /page-hero-inner -->
 </div><!-- /page-hero -->
 
 <!-- QUICK ACCESS BAR -->
 <div class="quick-access">
-  <div class="qa-inner">
-    <a href="https://salujaclinic.webgp.com/" target="_blank" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-      <span class="qa-label">Book Appointment</span>
-      <span class="qa-desc">For your child</span>
-    </a>
-    <a href="tel:02085745136" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.46 16z"/></svg></div>
-      <span class="qa-label">Call the Surgery</span>
-      <span class="qa-desc">0208 574 5136</span>
-    </a>
-    <a href="#milestones" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <span class="qa-label">Development</span>
-      <span class="qa-desc">Milestones guide</span>
-    </a>
-    <a href="https://www.nhs.uk/conditions/baby/" target="_blank" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-      <span class="qa-label">NHS Guidance</span>
-      <span class="qa-desc">Baby &amp; child advice</span>
-    </a>
-    <a href="https://111.nhs.uk" target="_blank" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg></div>
-      <span class="qa-label">NHS 111</span>
-      <span class="qa-desc">Urgent out-of-hours</span>
-    </a>
-  </div>
+    <div class="qa-inner">
+        <a href="https://salujaclinic.webgp.com/" target="_blank" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+            </div>
+            <span class="qa-label">Book Appointment</span>
+            <span class="qa-desc">For your child</span>
+        </a>
+        <a href="tel:02085745136" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.46 16z"/>
+                </svg>
+            </div>
+            <span class="qa-label">Call the Surgery</span>
+            <span class="qa-desc">0208 574 5136</span>
+        </a>
+        <a href="#milestones" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+            </div>
+            <span class="qa-label">Development</span>
+            <span class="qa-desc">Milestones guide</span>
+        </a>
+        <a href="https://www.nhs.uk/conditions/baby/" target="_blank" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <span class="qa-label">NHS Guidance</span>
+            <span class="qa-desc">Baby &amp; child advice</span>
+        </a>
+        <a href="https://111.nhs.uk" target="_blank" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/>
+                </svg>
+            </div>
+            <span class="qa-label">NHS 111</span>
+            <span class="qa-desc">Urgent out-of-hours</span>
+        </a>
+    </div>
 </div>
 
 
@@ -728,55 +1999,75 @@
      AGE STAGE CARDS
      ═══════════════════════════════════════════════════════ -->
 <section class="stages-section" id="stages">
-  <div class="section-inner">
-    <div class="section-tag fade-up">By Age Group</div>
-    <h2 class="fade-up">Health Guidance<br>At Every Stage</h2>
-    <p class="section-lead fade-up">From newborns through to teenagers — our team supports families across every age and stage of childhood development.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">By Age Group</div>
+        <h2 class="fade-up">Health Guidance<br>At Every Stage</h2>
+        <p class="section-lead fade-up">From newborns through to teenagers — our team supports families across every age
+            and stage of childhood development.</p>
 
-    <div class="stages-grid" style="margin-top:3rem;">
+        <div class="stages-grid" style="margin-top:3rem;">
 
-      <div class="stage-card newborn fade-up">
-        <div class="stage-age-badge">Ages 0–5</div>
-        <span class="stage-emoji">👶</span>
-        <div class="stage-title">Birth to Five</div>
-        <p class="stage-desc">Your NHS guide to parenting in the early years — from newborn care and vaccinations to weaning, sleep, and your baby's first milestones.</p>
-        <ul class="stage-links">
-          <li><a href="http://www.nhs.uk/Planners/birthtofive/Pages/Babyessentialshub.aspx" target="_blank">Baby Essentials</a></li>
-          <li><a href="http://www.nhs.uk/Planners/birthtofive/Pages/Healthanddevthub.aspx" target="_blank">Health &amp; Development</a></li>
-          <li><a href="http://www.nhs.uk/planners/birthtofive/Pages/Youandyourlifehub.aspx" target="_blank">You &amp; Your Life</a></li>
-          <li><a href="planning-a-family.html" target="_blank">Planning a Family</a></li>
-          <li><a href="http://www.ealingccg.nhs.uk/media/122482/nhs-north-west-london-ccg-parents-guide-booklet-fin-web.pdf" target="_blank">Your Child's Health Leaflet (PDF)</a></li>
-        </ul>
-      </div>
+            <div class="stage-card newborn fade-up">
+                <div class="stage-age-badge">Ages 0–5</div>
+                <span class="stage-emoji">👶</span>
+                <div class="stage-title">Birth to Five</div>
+                <p class="stage-desc">Your NHS guide to parenting in the early years — from newborn care and
+                    vaccinations to weaning, sleep, and your baby's first milestones.</p>
+                <ul class="stage-links">
+                    <li><a href="http://www.nhs.uk/Planners/birthtofive/Pages/Babyessentialshub.aspx" target="_blank">Baby
+                        Essentials</a></li>
+                    <li><a href="http://www.nhs.uk/Planners/birthtofive/Pages/Healthanddevthub.aspx" target="_blank">Health
+                        &amp; Development</a></li>
+                    <li><a href="http://www.nhs.uk/planners/birthtofive/Pages/Youandyourlifehub.aspx" target="_blank">You
+                        &amp; Your Life</a></li>
+                    <li><a href="planning-a-family.html" target="_blank">Planning a Family</a></li>
+                    <li>
+                        <a href="http://www.ealingccg.nhs.uk/media/122482/nhs-north-west-london-ccg-parents-guide-booklet-fin-web.pdf"
+                           target="_blank">Your Child's Health Leaflet (PDF)</a></li>
+                </ul>
+            </div>
 
-      <div class="stage-card toddler fade-up" style="animation-delay:0.1s;">
-        <div class="stage-age-badge">Ages 6–15</div>
-        <span class="stage-emoji">🧒</span>
-        <div class="stage-title">Child Health 6–15</div>
-        <p class="stage-desc">Supporting older children through school years — nutrition, mental health, puberty, physical activity and managing common illnesses at home.</p>
-        <ul class="stage-links">
-          <li><a href="https://www.nhs.uk/live-well/healthy-weight/childrens-weight/healthy-weight-children-and-young-people/" target="_blank">Healthy Weight for Children</a></li>
-          <li><a href="https://www.nhs.uk/mental-health/children-and-young-adults/" target="_blank">Children's Mental Health</a></li>
-          <li><a href="https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-children-and-young-people/" target="_blank">Physical Activity Guidance</a></li>
-          <li><a href="https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eat-well-as-you-get-older/" target="_blank">Healthy Eating for Kids</a></li>
-        </ul>
-      </div>
+            <div class="stage-card toddler fade-up" style="animation-delay:0.1s;">
+                <div class="stage-age-badge">Ages 6–15</div>
+                <span class="stage-emoji">🧒</span>
+                <div class="stage-title">Child Health 6–15</div>
+                <p class="stage-desc">Supporting older children through school years — nutrition, mental health,
+                    puberty, physical activity and managing common illnesses at home.</p>
+                <ul class="stage-links">
+                    <li>
+                        <a href="https://www.nhs.uk/live-well/healthy-weight/childrens-weight/healthy-weight-children-and-young-people/"
+                           target="_blank">Healthy Weight for Children</a></li>
+                    <li><a href="https://www.nhs.uk/mental-health/children-and-young-adults/" target="_blank">Children's
+                        Mental Health</a></li>
+                    <li>
+                        <a href="https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-children-and-young-people/"
+                           target="_blank">Physical Activity Guidance</a></li>
+                    <li>
+                        <a href="https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eat-well-as-you-get-older/"
+                           target="_blank">Healthy Eating for Kids</a></li>
+                </ul>
+            </div>
 
-      <div class="stage-card child fade-up" style="animation-delay:0.2s;">
-        <div class="stage-age-badge">Local Support</div>
-        <span class="stage-emoji">🏘️</span>
-        <div class="stage-title">Children &amp; Community</div>
-        <p class="stage-desc">Local support services, community centres and children's resources available across the Southall and West London area for families in need.</p>
-        <ul class="stage-links">
-          <li><a href="children-young-people.html" target="_blank">Children &amp; Young People Support</a></li>
-          <li><a href="children-community-centres.html" target="_blank">Community Centres</a></li>
-          <li><a href="https://www.ealing.gov.uk/info/201107/children_and_families" target="_blank">Ealing Children &amp; Families</a></li>
-          <li><a href="https://www.nhs.uk/service-search/other-services/Health-visiting-service/LocationSearch/7615" target="_blank">Find a Health Visitor</a></li>
-        </ul>
-      </div>
+            <div class="stage-card child fade-up" style="animation-delay:0.2s;">
+                <div class="stage-age-badge">Local Support</div>
+                <span class="stage-emoji">🏘️</span>
+                <div class="stage-title">Children &amp; Community</div>
+                <p class="stage-desc">Local support services, community centres and children's resources available
+                    across the Southall and West London area for families in need.</p>
+                <ul class="stage-links">
+                    <li><a href="children-young-people.html" target="_blank">Children &amp; Young People Support</a>
+                    </li>
+                    <li><a href="children-community-centres.html" target="_blank">Community Centres</a></li>
+                    <li><a href="https://www.ealing.gov.uk/info/201107/children_and_families" target="_blank">Ealing
+                        Children &amp; Families</a></li>
+                    <li>
+                        <a href="https://www.nhs.uk/service-search/other-services/Health-visiting-service/LocationSearch/7615"
+                           target="_blank">Find a Health Visitor</a></li>
+                </ul>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 
 
@@ -784,12 +2075,12 @@
      ANIMATION 2: BOUNCING BALL DIVIDER
      ═══════════════════════════════════════════════════════ -->
 <div class="ball-divider">
-  <div class="ball-track">
-    <div class="bouncing-ball"></div>
-    <div class="bouncing-ball"></div>
-    <div class="bouncing-ball"></div>
-    <div class="bouncing-ball"></div>
-  </div>
+    <div class="ball-track">
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+    </div>
 </div>
 
 
@@ -797,80 +2088,81 @@
      ANIMATION 3: MILESTONE TIMELINE
      ═══════════════════════════════════════════════════════ -->
 <section class="milestones-section" id="milestones">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Development Journey</div>
-    <h2 class="fade-up">Key Health Milestones<br>for Your Child</h2>
-    <p class="section-lead fade-up">Your child will be offered a series of NHS health checks, reviews and vaccinations at each of these key stages. Our team is here to support you through all of them.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">Development Journey</div>
+        <h2 class="fade-up">Key Health Milestones<br>for Your Child</h2>
+        <p class="section-lead fade-up">Your child will be offered a series of NHS health checks, reviews and
+            vaccinations at each of these key stages. Our team is here to support you through all of them.</p>
 
-    <div class="milestone-timeline" id="milestoneTimeline">
-      <div class="milestone-track">
-        <div class="milestone-track-fill" id="milestoneFill"></div>
-      </div>
-      <div class="milestone-steps">
+        <div class="milestone-timeline" id="milestoneTimeline">
+            <div class="milestone-track">
+                <div class="milestone-track-fill" id="milestoneFill"></div>
+            </div>
+            <div class="milestone-steps">
 
-        <div class="milestone-step">
-          <div class="milestone-dot" id="md0">👶</div>
-          <div class="milestone-label">
-            <div class="milestone-age">Newborn</div>
-            <div class="milestone-title">0–8 weeks</div>
-          </div>
-          <div class="milestone-card" id="mc0">
-            <strong>Newborn checks</strong><br>
-            Heel prick test, hearing screen, first immunisations at 8 weeks.
-          </div>
+                <div class="milestone-step">
+                    <div class="milestone-dot" id="md0">👶</div>
+                    <div class="milestone-label">
+                        <div class="milestone-age">Newborn</div>
+                        <div class="milestone-title">0–8 weeks</div>
+                    </div>
+                    <div class="milestone-card" id="mc0">
+                        <strong>Newborn checks</strong><br>
+                        Heel prick test, hearing screen, first immunisations at 8 weeks.
+                    </div>
+                </div>
+
+                <div class="milestone-step">
+                    <div class="milestone-dot" id="md1">🍼</div>
+                    <div class="milestone-label">
+                        <div class="milestone-age">Baby</div>
+                        <div class="milestone-title">8 wks – 1 yr</div>
+                    </div>
+                    <div class="milestone-card" id="mc1">
+                        <strong>Vaccinations &amp; reviews</strong><br>
+                        8, 12, 16 week jabs. 6–8 month health &amp; development review.
+                    </div>
+                </div>
+
+                <div class="milestone-step">
+                    <div class="milestone-dot" id="md2">🧸</div>
+                    <div class="milestone-label">
+                        <div class="milestone-age">Toddler</div>
+                        <div class="milestone-title">1 – 3 years</div>
+                    </div>
+                    <div class="milestone-card" id="mc2">
+                        <strong>2–2½ year review</strong><br>
+                        Walking, talking, MMR booster. Dental registration.
+                    </div>
+                </div>
+
+                <div class="milestone-step">
+                    <div class="milestone-dot" id="md3">🎒</div>
+                    <div class="milestone-label">
+                        <div class="milestone-age">Pre-school</div>
+                        <div class="milestone-title">3 – 5 years</div>
+                    </div>
+                    <div class="milestone-card" id="mc3">
+                        <strong>Pre-school boosters</strong><br>
+                        4–5 year immunisations. Vision screen. School readiness.
+                    </div>
+                </div>
+
+                <div class="milestone-step">
+                    <div class="milestone-dot" id="md4">📚</div>
+                    <div class="milestone-label">
+                        <div class="milestone-age">School Age</div>
+                        <div class="milestone-title">5 – 15 years</div>
+                    </div>
+                    <div class="milestone-card" id="mc4">
+                        <strong>School programmes</strong><br>
+                        Flu nasal spray, HPV vaccine (11–13), Men ACWY. Annual health checks.
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-        <div class="milestone-step">
-          <div class="milestone-dot" id="md1">🍼</div>
-          <div class="milestone-label">
-            <div class="milestone-age">Baby</div>
-            <div class="milestone-title">8 wks – 1 yr</div>
-          </div>
-          <div class="milestone-card" id="mc1">
-            <strong>Vaccinations &amp; reviews</strong><br>
-            8, 12, 16 week jabs. 6–8 month health &amp; development review.
-          </div>
-        </div>
-
-        <div class="milestone-step">
-          <div class="milestone-dot" id="md2">🧸</div>
-          <div class="milestone-label">
-            <div class="milestone-age">Toddler</div>
-            <div class="milestone-title">1 – 3 years</div>
-          </div>
-          <div class="milestone-card" id="mc2">
-            <strong>2–2½ year review</strong><br>
-            Walking, talking, MMR booster. Dental registration.
-          </div>
-        </div>
-
-        <div class="milestone-step">
-          <div class="milestone-dot" id="md3">🎒</div>
-          <div class="milestone-label">
-            <div class="milestone-age">Pre-school</div>
-            <div class="milestone-title">3 – 5 years</div>
-          </div>
-          <div class="milestone-card" id="mc3">
-            <strong>Pre-school boosters</strong><br>
-            4–5 year immunisations. Vision screen. School readiness.
-          </div>
-        </div>
-
-        <div class="milestone-step">
-          <div class="milestone-dot" id="md4">📚</div>
-          <div class="milestone-label">
-            <div class="milestone-age">School Age</div>
-            <div class="milestone-title">5 – 15 years</div>
-          </div>
-          <div class="milestone-card" id="mc4">
-            <strong>School programmes</strong><br>
-            Flu nasal spray, HPV vaccine (11–13), Men ACWY. Annual health checks.
-          </div>
-        </div>
-
-      </div>
     </div>
-  </div>
 </section>
 
 
@@ -878,12 +2170,15 @@
      BOUNCING BALL DIVIDER 2
      ═══════════════════════════════════════════════════════ -->
 <div class="ball-divider" style="background: var(--white);">
-  <div class="ball-track">
-    <div class="bouncing-ball" style="background:var(--child-sky); animation-delay:-0.5s;"></div>
-    <div class="bouncing-ball" style="background:var(--child-mint); animation-delay:-1.8s; width:18px; height:18px;"></div>
-    <div class="bouncing-ball" style="background:var(--child-orange); animation-delay:-3.1s; width:14px; height:14px;"></div>
-    <div class="bouncing-ball" style="background:var(--nhs-blue); animation-delay:-4.4s; width:20px; height:20px;"></div>
-  </div>
+    <div class="ball-track">
+        <div class="bouncing-ball" style="background:var(--child-sky); animation-delay:-0.5s;"></div>
+        <div class="bouncing-ball"
+             style="background:var(--child-mint); animation-delay:-1.8s; width:18px; height:18px;"></div>
+        <div class="bouncing-ball"
+             style="background:var(--child-orange); animation-delay:-3.1s; width:14px; height:14px;"></div>
+        <div class="bouncing-ball"
+             style="background:var(--nhs-blue); animation-delay:-4.4s; width:20px; height:20px;"></div>
+    </div>
 </div>
 
 
@@ -891,63 +2186,72 @@
      ANIMATION 4: COMMON CONDITIONS CARDS
      ═══════════════════════════════════════════════════════ -->
 <section class="conditions-section" id="conditions">
-  <div class="section-inner">
-    <div class="section-tag fade-up">What to Look For</div>
-    <h2 class="fade-up">Common Childhood<br>Illnesses &amp; Conditions</h2>
-    <p class="section-lead fade-up">Most childhood illnesses are mild and resolve at home with rest and fluids. Here is a guide to the most common conditions and when to seek help.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">What to Look For</div>
+        <h2 class="fade-up">Common Childhood<br>Illnesses &amp; Conditions</h2>
+        <p class="section-lead fade-up">Most childhood illnesses are mild and resolve at home with rest and fluids. Here
+            is a guide to the most common conditions and when to seek help.</p>
 
-    <div class="conditions-grid">
+        <div class="conditions-grid">
 
-      <div class="condition-card fade-up">
-        <div class="condition-icon-wrap">🤒</div>
-        <div class="condition-name">Fever</div>
-        <p class="condition-desc">A temperature of 38°C or above. Use paracetamol or ibuprofen, keep hydrated. Seek help if under 3 months, or fever lasts over 5 days.</p>
-      </div>
+            <div class="condition-card fade-up">
+                <div class="condition-icon-wrap">🤒</div>
+                <div class="condition-name">Fever</div>
+                <p class="condition-desc">A temperature of 38°C or above. Use paracetamol or ibuprofen, keep hydrated.
+                    Seek help if under 3 months, or fever lasts over 5 days.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.07s;">
-        <div class="condition-icon-wrap">😮‍💨</div>
-        <div class="condition-name">Croup</div>
-        <p class="condition-desc">A barking cough with a high-pitched noise when breathing. Usually worse at night. Seek urgent care if breathing is laboured or lips turn blue.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.07s;">
+                <div class="condition-icon-wrap">😮‍💨</div>
+                <div class="condition-name">Croup</div>
+                <p class="condition-desc">A barking cough with a high-pitched noise when breathing. Usually worse at
+                    night. Seek urgent care if breathing is laboured or lips turn blue.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.14s;">
-        <div class="condition-icon-wrap">👂</div>
-        <div class="condition-name">Ear Infection</div>
-        <p class="condition-desc">Pain in the ear, pulling at the ear, or fluid discharge. Often follows a cold. Most resolve in 3 days — book a GP appointment if persistent.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.14s;">
+                <div class="condition-icon-wrap">👂</div>
+                <div class="condition-name">Ear Infection</div>
+                <p class="condition-desc">Pain in the ear, pulling at the ear, or fluid discharge. Often follows a cold.
+                    Most resolve in 3 days — book a GP appointment if persistent.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.21s;">
-        <div class="condition-icon-wrap">🤧</div>
-        <div class="condition-name">Common Cold</div>
-        <p class="condition-desc">Runny nose, sneezing, mild fever. Rest and fluids are key. Avoid antibiotics unless a GP recommends them — colds are viral.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.21s;">
+                <div class="condition-icon-wrap">🤧</div>
+                <div class="condition-name">Common Cold</div>
+                <p class="condition-desc">Runny nose, sneezing, mild fever. Rest and fluids are key. Avoid antibiotics
+                    unless a GP recommends them — colds are viral.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.07s;">
-        <div class="condition-icon-wrap">🔴</div>
-        <div class="condition-name">Rashes &amp; Spots</div>
-        <p class="condition-desc">Chickenpox, hand-foot-mouth, heat rash and impetigo are all common. Do the glass test for any non-fading rash — this may indicate meningitis.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.07s;">
+                <div class="condition-icon-wrap">🔴</div>
+                <div class="condition-name">Rashes &amp; Spots</div>
+                <p class="condition-desc">Chickenpox, hand-foot-mouth, heat rash and impetigo are all common. Do the
+                    glass test for any non-fading rash — this may indicate meningitis.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.14s;">
-        <div class="condition-icon-wrap">🤢</div>
-        <div class="condition-name">Tummy Bug</div>
-        <p class="condition-desc">Vomiting and diarrhoea are usually caused by a virus. Keep up fluids with small sips. Seek help if a child under 1 is affected or symptoms last over 2 days.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.14s;">
+                <div class="condition-icon-wrap">🤢</div>
+                <div class="condition-name">Tummy Bug</div>
+                <p class="condition-desc">Vomiting and diarrhoea are usually caused by a virus. Keep up fluids with
+                    small sips. Seek help if a child under 1 is affected or symptoms last over 2 days.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.21s;">
-        <div class="condition-icon-wrap">😮</div>
-        <div class="condition-name">Asthma</div>
-        <p class="condition-desc">Wheezing, breathlessness and a tight chest. If your child has been diagnosed, ensure their inhaler is always accessible and their asthma plan is up to date.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.21s;">
+                <div class="condition-icon-wrap">😮</div>
+                <div class="condition-name">Asthma</div>
+                <p class="condition-desc">Wheezing, breathlessness and a tight chest. If your child has been diagnosed,
+                    ensure their inhaler is always accessible and their asthma plan is up to date.</p>
+            </div>
 
-      <div class="condition-card fade-up" style="animation-delay:0.28s;">
-        <div class="condition-icon-wrap">💊</div>
-        <div class="condition-name">Allergies</div>
-        <p class="condition-desc">Food allergies, hay fever and eczema are increasingly common in children. Speak to your GP about testing, management plans and referrals.</p>
-      </div>
+            <div class="condition-card fade-up" style="animation-delay:0.28s;">
+                <div class="condition-icon-wrap">💊</div>
+                <div class="condition-name">Allergies</div>
+                <p class="condition-desc">Food allergies, hay fever and eczema are increasingly common in children.
+                    Speak to your GP about testing, management plans and referrals.</p>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 
 
@@ -956,292 +2260,342 @@
      ═══════════════════════════════════════════════════════ -->
 <section class="resources-section" id="resources">
 
-  <!-- Star field particles -->
-  <div class="star-field" id="starField"></div>
+    <!-- Star field particles -->
+    <div class="star-field" id="starField"></div>
 
-  <div class="section-inner" style="position:relative; z-index:1;">
-    <div class="section-tag fade-up">Useful Resources</div>
-    <h2 class="fade-up" style="color:white;">Guides &amp; Resources<br>for Parents &amp; Carers</h2>
-    <p class="section-lead fade-up">Trusted NHS and local resources to help you support your child's health and development at every stage.</p>
+    <div class="section-inner" style="position:relative; z-index:1;">
+        <div class="section-tag fade-up">Useful Resources</div>
+        <h2 class="fade-up" style="color:white;">Guides &amp; Resources<br>for Parents &amp; Carers</h2>
+        <p class="section-lead fade-up">Trusted NHS and local resources to help you support your child's health and
+            development at every stage.</p>
 
-    <div class="resources-grid">
+        <div class="resources-grid">
 
-      <a href="http://www.ealingccg.nhs.uk/media/122482/nhs-north-west-london-ccg-parents-guide-booklet-fin-web.pdf" target="_blank" class="resource-card fade-up">
-        <div class="resource-card-icon">📋</div>
-        <div>
-          <div class="resource-card-title">Your Child's Health Leaflet</div>
-          <p class="resource-card-desc">A comprehensive NHS North West London guide for parents covering everything from newborn care to common illnesses and when to seek help.</p>
-          <div class="resource-card-arrow">↗ Download PDF</div>
+            <a href="http://www.ealingccg.nhs.uk/media/122482/nhs-north-west-london-ccg-parents-guide-booklet-fin-web.pdf"
+               target="_blank" class="resource-card fade-up">
+                <div class="resource-card-icon">📋</div>
+                <div>
+                    <div class="resource-card-title">Your Child's Health Leaflet</div>
+                    <p class="resource-card-desc">A comprehensive NHS North West London guide for parents covering
+                        everything from newborn care to common illnesses and when to seek help.</p>
+                    <div class="resource-card-arrow">↗ Download PDF</div>
+                </div>
+            </a>
+
+            <a href="https://www.nhs.uk/conditions/baby/" target="_blank" class="resource-card fade-up"
+               style="animation-delay:0.1s;">
+                <div class="resource-card-icon">👶</div>
+                <div>
+                    <div class="resource-card-title">NHS Birth to Five Guide</div>
+                    <p class="resource-card-desc">Baby essentials, health and development milestones, feeding, sleep and
+                        the early years — all in one place from the NHS.</p>
+                    <div class="resource-card-arrow">↗ Visit NHS.uk</div>
+                </div>
+            </a>
+
+            <a href="https://www.nhs.uk/live-well/healthy-weight/childrens-weight/" target="_blank"
+               class="resource-card fade-up" style="animation-delay:0.15s;">
+                <div class="resource-card-icon">🏃</div>
+                <div>
+                    <div class="resource-card-title">Child Health 6–15</div>
+                    <p class="resource-card-desc">NHS guidance for parents of school-age children covering nutrition,
+                        physical activity, emotional wellbeing and puberty.</p>
+                    <div class="resource-card-arrow">↗ Visit NHS.uk</div>
+                </div>
+            </a>
+
+            <a href="children-young-people.html" target="_blank" class="resource-card fade-up"
+               style="animation-delay:0.2s;">
+                <div class="resource-card-icon">🏘️</div>
+                <div>
+                    <div class="resource-card-title">Local Support — West London</div>
+                    <p class="resource-card-desc">Children and young people's services, community centres and family
+                        support resources available locally in Southall and Ealing.</p>
+                    <div class="resource-card-arrow">↗ Explore local services</div>
+                </div>
+            </a>
+
         </div>
-      </a>
-
-      <a href="https://www.nhs.uk/conditions/baby/" target="_blank" class="resource-card fade-up" style="animation-delay:0.1s;">
-        <div class="resource-card-icon">👶</div>
-        <div>
-          <div class="resource-card-title">NHS Birth to Five Guide</div>
-          <p class="resource-card-desc">Baby essentials, health and development milestones, feeding, sleep and the early years — all in one place from the NHS.</p>
-          <div class="resource-card-arrow">↗ Visit NHS.uk</div>
-        </div>
-      </a>
-
-      <a href="https://www.nhs.uk/live-well/healthy-weight/childrens-weight/" target="_blank" class="resource-card fade-up" style="animation-delay:0.15s;">
-        <div class="resource-card-icon">🏃</div>
-        <div>
-          <div class="resource-card-title">Child Health 6–15</div>
-          <p class="resource-card-desc">NHS guidance for parents of school-age children covering nutrition, physical activity, emotional wellbeing and puberty.</p>
-          <div class="resource-card-arrow">↗ Visit NHS.uk</div>
-        </div>
-      </a>
-
-      <a href="children-young-people.html" target="_blank" class="resource-card fade-up" style="animation-delay:0.2s;">
-        <div class="resource-card-icon">🏘️</div>
-        <div>
-          <div class="resource-card-title">Local Support — West London</div>
-          <p class="resource-card-desc">Children and young people's services, community centres and family support resources available locally in Southall and Ealing.</p>
-          <div class="resource-card-arrow">↗ Explore local services</div>
-        </div>
-      </a>
-
     </div>
-  </div>
 </section>
 
 
 <!-- WHEN TO SEE A GP -->
 <section class="gp-section" id="when-to-see-gp">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Guidance for Parents</div>
-    <h2 class="fade-up">When Should I Bring<br>My Child to the GP?</h2>
-    <p class="section-lead fade-up">Most childhood illnesses can be managed at home. Here is a general guide — always trust your parental instinct and call 999 or go to A&amp;E in an emergency.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">Guidance for Parents</div>
+        <h2 class="fade-up">When Should I Bring<br>My Child to the GP?</h2>
+        <p class="section-lead fade-up">Most childhood illnesses can be managed at home. Here is a general guide —
+            always trust your parental instinct and call 999 or go to A&amp;E in an emergency.</p>
 
-    <div class="gp-grid">
-      <div class="gp-box urgent fade-up">
-        <div class="gp-box-title">⚠️ See a GP Urgently (or call 111)</div>
-        <ul class="gp-list">
-          <li>Your child is under 3 months and has a temperature of 38°C or above</li>
-          <li>High fever that does not respond to paracetamol or ibuprofen</li>
-          <li>A rash that does not fade when pressed with a glass</li>
-          <li>Persistent vomiting or severe abdominal pain</li>
-          <li>Difficulty breathing, persistent wheeze or stridor</li>
-          <li>Unusual drowsiness, limpness or unresponsiveness</li>
-          <li>Seizure or fitting (call 999)</li>
-          <li>A bulging fontanelle (soft spot) in a baby</li>
-          <li>Signs of dehydration — no wet nappies, sunken eyes, dry mouth</li>
-          <li>Any symptoms that seriously worry you as a parent</li>
-        </ul>
-      </div>
+        <div class="gp-grid">
+            <div class="gp-box urgent fade-up">
+                <div class="gp-box-title">⚠️ See a GP Urgently (or call 111)</div>
+                <ul class="gp-list">
+                    <li>Your child is under 3 months and has a temperature of 38°C or above</li>
+                    <li>High fever that does not respond to paracetamol or ibuprofen</li>
+                    <li>A rash that does not fade when pressed with a glass</li>
+                    <li>Persistent vomiting or severe abdominal pain</li>
+                    <li>Difficulty breathing, persistent wheeze or stridor</li>
+                    <li>Unusual drowsiness, limpness or unresponsiveness</li>
+                    <li>Seizure or fitting (call 999)</li>
+                    <li>A bulging fontanelle (soft spot) in a baby</li>
+                    <li>Signs of dehydration — no wet nappies, sunken eyes, dry mouth</li>
+                    <li>Any symptoms that seriously worry you as a parent</li>
+                </ul>
+            </div>
 
-      <div class="gp-box routine fade-up" style="animation-delay:0.1s;">
-        <div class="gp-box-title">✅ Routine GP Appointment</div>
-        <ul class="gp-list">
-          <li>Ear ache or ear discharge lasting more than 3 days</li>
-          <li>A cough lasting more than 3 weeks</li>
-          <li>Recurring tummy aches or constipation</li>
-          <li>Skin conditions such as eczema, impetigo or persistent rashes</li>
-          <li>Concerns about your child's growth or development</li>
-          <li>Behavioural or emotional health concerns</li>
-          <li>Recurrent throat infections or tonsilitis</li>
-          <li>Concerns about vision or hearing</li>
-          <li>Requesting referrals to paediatric specialists</li>
-          <li>Asthma or allergy review and medication management</li>
-        </ul>
-      </div>
+            <div class="gp-box routine fade-up" style="animation-delay:0.1s;">
+                <div class="gp-box-title">✅ Routine GP Appointment</div>
+                <ul class="gp-list">
+                    <li>Ear ache or ear discharge lasting more than 3 days</li>
+                    <li>A cough lasting more than 3 weeks</li>
+                    <li>Recurring tummy aches or constipation</li>
+                    <li>Skin conditions such as eczema, impetigo or persistent rashes</li>
+                    <li>Concerns about your child's growth or development</li>
+                    <li>Behavioural or emotional health concerns</li>
+                    <li>Recurrent throat infections or tonsilitis</li>
+                    <li>Concerns about vision or hearing</li>
+                    <li>Requesting referrals to paediatric specialists</li>
+                    <li>Asthma or allergy review and medication management</li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 
 <!-- ABOUT SURGERY LINKS -->
 <section class="about-section">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Our Practice</div>
-    <h2 class="fade-up">About Our Surgery</h2>
-    <div class="about-grid">
-      <a href="practice-policies-patient-information/meet-the-team.html" class="about-card fade-up">
-        <div class="about-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div class="about-card-title">Meet the Team</div>
-        <p class="about-card-desc">Our GPs, nurses and healthcare assistants are experienced in children's health and developmental medicine.</p>
-        <div class="about-card-arrow">View team →</div>
-      </a>
-      <a href="care-quality-commission.html" class="about-card fade-up" style="animation-delay:0.1s;">
-        <div class="about-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-        <div class="about-card-title">Care Quality Commission</div>
-        <p class="about-card-desc">Saluja Clinic is regulated by the CQC. View our latest inspection rating and full report.</p>
-        <div class="about-card-arrow">View CQC report →</div>
-      </a>
-      <a href="new-patients.html" class="about-card fade-up" style="animation-delay:0.2s;">
-        <div class="about-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
-        <div class="about-card-title">New Patients</div>
-        <p class="about-card-desc">Register as a new patient at Saluja Clinic. Find out if you are within our catchment area.</p>
-        <div class="about-card-arrow">Register now →</div>
-      </a>
+    <div class="section-inner">
+        <div class="section-tag fade-up">Our Practice</div>
+        <h2 class="fade-up">About Our Surgery</h2>
+        <div class="about-grid">
+            <a href="practice-policies-patient-information/meet-the-team.html" class="about-card fade-up">
+                <div class="about-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="about-card-title">Meet the Team</div>
+                <p class="about-card-desc">Our GPs, nurses and healthcare assistants are experienced in children's
+                    health and developmental medicine.</p>
+                <div class="about-card-arrow">View team →</div>
+            </a>
+            <a href="care-quality-commission.html" class="about-card fade-up" style="animation-delay:0.1s;">
+                <div class="about-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                        <polyline points="9 12 11 14 15 10"/>
+                    </svg>
+                </div>
+                <div class="about-card-title">Care Quality Commission</div>
+                <p class="about-card-desc">Saluja Clinic is regulated by the CQC. View our latest inspection rating and
+                    full report.</p>
+                <div class="about-card-arrow">View CQC report →</div>
+            </a>
+            <a href="new-patients.html" class="about-card fade-up" style="animation-delay:0.2s;">
+                <div class="about-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <line x1="19" y1="8" x2="19" y2="14"/>
+                        <line x1="22" y1="11" x2="16" y2="11"/>
+                    </svg>
+                </div>
+                <div class="about-card-title">New Patients</div>
+                <p class="about-card-desc">Register as a new patient at Saluja Clinic. Find out if you are within our
+                    catchment area.</p>
+                <div class="about-card-arrow">Register now →</div>
+            </a>
+        </div>
     </div>
-  </div>
 </section>
 
 
 <!-- EMERGENCY / OOH -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div>
-        <div class="emerg-label">Non-Emergency</div>
-        <div class="emerg-number">NHS 111</div>
-        <p class="emerg-desc">Available 24 hours a day, 365 days a year. Call 111 if you are worried about your child but it is not an emergency — they can direct you to the right care.</p>
-      </div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24 hours a day, 365 days a year. Call 111 if you are worried about your
+                    child but it is not an emergency — they can direct you to the right care.</p>
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Call 999 immediately if your child is not breathing, has a seizure, loses
+                    consciousness, or you believe their life is at risk. Do not drive — call first.</p>
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div>
-        <div class="emerg-label">Life-Threatening Emergency</div>
-        <div class="emerg-number">999</div>
-        <p class="emerg-desc">Call 999 immediately if your child is not breathing, has a seizure, loses consciousness, or you believe their life is at risk. Do not drive — call first.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" aria-label="Saluja Clinic Home" style="display:inline-block;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="320" height="71" style="display:block;">
-          <defs>
-            <linearGradient id="ftrChromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#ffffff"/>
-              <stop offset="15%"  stop-color="#d0d0d0"/>
-              <stop offset="30%"  stop-color="#f8f8f8"/>
-              <stop offset="50%"  stop-color="#a0a0a0"/>
-              <stop offset="65%"  stop-color="#e8e8e8"/>
-              <stop offset="80%"  stop-color="#b0b0b0"/>
-              <stop offset="100%" stop-color="#d8d8d8"/>
-            </linearGradient>
-            <linearGradient id="ftrChromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#c8c8c8"/>
-              <stop offset="10%"  stop-color="#f0f0f0"/>
-              <stop offset="25%"  stop-color="#b0b0b0"/>
-              <stop offset="40%"  stop-color="#ffffff"/>
-              <stop offset="55%"  stop-color="#909090"/>
-              <stop offset="70%"  stop-color="#e0e0e0"/>
-              <stop offset="85%"  stop-color="#a8a8a8"/>
-              <stop offset="100%" stop-color="#d0d0d0"/>
-            </linearGradient>
-            <radialGradient id="ftrCircleShine" cx="38%" cy="32%" r="65%">
-              <stop offset="0%"  stop-color="#3a3a3a"/>
-              <stop offset="40%" stop-color="#1a1a1a"/>
-              <stop offset="100%" stop-color="#000000"/>
-            </radialGradient>
-            <linearGradient id="ftrCircleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stop-color="#666666"/>
-              <stop offset="30%"  stop-color="#222222"/>
-              <stop offset="70%"  stop-color="#444444"/>
-              <stop offset="100%" stop-color="#111111"/>
-            </linearGradient>
-            <filter id="ftrShadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-            <filter id="ftrTextSheen">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-              <feOffset dx="0" dy="1" result="offsetBlur"/>
-              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-            </filter>
-          </defs>
-          <rect width="720" height="160" fill="transparent"/>
-          <circle cx="80" cy="80" r="68" fill="url(#ftrCircleRim)" filter="url(#ftrShadow)"/>
-          <circle cx="80" cy="80" r="63" fill="url(#ftrCircleShine)"/>
-          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#ftrChromeS)">S</text>
-          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#ftrChromeText)" filter="url(#ftrTextSheen)">SALUJA CLINIC</text>
-          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-        </svg>
-      </a>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" aria-label="Saluja Clinic Home" style="display:inline-block;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="320" height="71"
+                     style="display:block;">
+                    <defs>
+                        <linearGradient id="ftrChromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="15%" stop-color="#d0d0d0"/>
+                            <stop offset="30%" stop-color="#f8f8f8"/>
+                            <stop offset="50%" stop-color="#a0a0a0"/>
+                            <stop offset="65%" stop-color="#e8e8e8"/>
+                            <stop offset="80%" stop-color="#b0b0b0"/>
+                            <stop offset="100%" stop-color="#d8d8d8"/>
+                        </linearGradient>
+                        <linearGradient id="ftrChromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#c8c8c8"/>
+                            <stop offset="10%" stop-color="#f0f0f0"/>
+                            <stop offset="25%" stop-color="#b0b0b0"/>
+                            <stop offset="40%" stop-color="#ffffff"/>
+                            <stop offset="55%" stop-color="#909090"/>
+                            <stop offset="70%" stop-color="#e0e0e0"/>
+                            <stop offset="85%" stop-color="#a8a8a8"/>
+                            <stop offset="100%" stop-color="#d0d0d0"/>
+                        </linearGradient>
+                        <radialGradient id="ftrCircleShine" cx="38%" cy="32%" r="65%">
+                            <stop offset="0%" stop-color="#3a3a3a"/>
+                            <stop offset="40%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000000"/>
+                        </radialGradient>
+                        <linearGradient id="ftrCircleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#666666"/>
+                            <stop offset="30%" stop-color="#222222"/>
+                            <stop offset="70%" stop-color="#444444"/>
+                            <stop offset="100%" stop-color="#111111"/>
+                        </linearGradient>
+                        <filter id="ftrShadow">
+                            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                        </filter>
+                        <filter id="ftrTextSheen">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                            <feOffset dx="0" dy="1" result="offsetBlur"/>
+                            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                        </filter>
+                    </defs>
+                    <rect width="720" height="160" fill="transparent"/>
+                    <circle cx="80" cy="80" r="68" fill="url(#ftrCircleRim)" filter="url(#ftrShadow)"/>
+                    <circle cx="80" cy="80" r="63" fill="url(#ftrCircleShine)"/>
+                    <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                          text-anchor="middle" fill="url(#ftrChromeS)">S
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start"
+                          fill="url(#ftrChromeText)" filter="url(#ftrTextSheen)">SALUJA CLINIC
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                          opacity="0.08">SALUJA CLINIC
+                    </text>
+                </svg>
+            </a>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉
+                    salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New
+                    Patient</a></li>
+                <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="health-information.html" target="_blank">Health Information</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+                <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
+                <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="health-information.html" target="_blank">Health Information</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-        <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
-        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-  /* ── Scroll fade-up ──────────────────────────────────── */
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    /* ── Scroll fade-up ──────────────────────────────────── */
+    const observer = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }),
+        {threshold: 0.1}
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  /* ── Milestone timeline animation ───────────────────── */
-  const milestoneObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Animate the track fill
-        const fill = document.getElementById('milestoneFill');
-        if (fill) fill.classList.add('animate');
-        // Pop dots and show cards with stagger
-        for (let i = 0; i < 5; i++) {
-          const dot  = document.getElementById('md' + i);
-          const card = document.getElementById('mc' + i);
-          if (dot)  setTimeout(() => dot.classList.add('pop'),  i * 250);
-          if (card) setTimeout(() => card.classList.add('show'), i * 250 + 150);
-        }
-        milestoneObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.25 });
+    /* ── Milestone timeline animation ───────────────────── */
+    const milestoneObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate the track fill
+                const fill = document.getElementById('milestoneFill');
+                if (fill) fill.classList.add('animate');
+                // Pop dots and show cards with stagger
+                for (let i = 0; i < 5; i++) {
+                    const dot = document.getElementById('md' + i);
+                    const card = document.getElementById('mc' + i);
+                    if (dot) setTimeout(() => dot.classList.add('pop'), i * 250);
+                    if (card) setTimeout(() => card.classList.add('show'), i * 250 + 150);
+                }
+                milestoneObserver.unobserve(entry.target);
+            }
+        });
+    }, {threshold: 0.25});
 
-  const timeline = document.getElementById('milestoneTimeline');
-  if (timeline) milestoneObserver.observe(timeline);
+    const timeline = document.getElementById('milestoneTimeline');
+    if (timeline) milestoneObserver.observe(timeline);
 
-  /* ── Star field for resources section ───────────────── */
-  const starField = document.getElementById('starField');
-  if (starField) {
-    const colours = ['#FFD93D','#FF6B6B','#6BCB77','#4EC9F0','#9B59B6','#FF9F43','#ffffff'];
-    for (let i = 0; i < 28; i++) {
-      const s = document.createElement('div');
-      s.className = 'star-p';
-      const size  = Math.random() * 8 + 3;
-      const left  = Math.random() * 100;
-      const dur   = Math.random() * 12 + 8;
-      const delay = Math.random() * -20;
-      const colour = colours[Math.floor(Math.random() * colours.length)];
-      s.style.cssText = `
+    /* ── Star field for resources section ───────────────── */
+    const starField = document.getElementById('starField');
+    if (starField) {
+        const colours = ['#FFD93D', '#FF6B6B', '#6BCB77', '#4EC9F0', '#9B59B6', '#FF9F43', '#ffffff'];
+        for (let i = 0; i < 28; i++) {
+            const s = document.createElement('div');
+            s.className = 'star-p';
+            const size = Math.random() * 8 + 3;
+            const left = Math.random() * 100;
+            const dur = Math.random() * 12 + 8;
+            const delay = Math.random() * -20;
+            const colour = colours[Math.floor(Math.random() * colours.length)];
+            s.style.cssText = `
         width:${size}px; height:${size}px;
         left:${left}%;
         animation-duration:${dur}s;
@@ -1250,9 +2604,9 @@
         opacity:0.55;
         border-radius:${Math.random() > 0.5 ? '50%' : '3px'};
       `;
-      starField.appendChild(s);
+            starField.appendChild(s);
+        }
     }
-  }
 </script>
 
 </body>

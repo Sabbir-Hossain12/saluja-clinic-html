@@ -1,874 +1,2377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Your Mind Plan – Saluja Clinic · West London GP Practice</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --nhs-blue:#005EB8;--nhs-dark:#003087;--nhs-aqua:#009FBB;
-  --nhs-green:#007F3B;--nhs-lb:#41B6E6;
-  --white:#fff;--off:#f5f8fc;
-  --td:#1a1a2e;--tm:#3a3a5c;--ts:#6b7a99;--border:#d8e4f0;
-  --mind-purple:#7c3aed;--mind-teal:#0891b2;--mind-rose:#e11d48;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--td);overflow-x:hidden}
-.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
-.fu.vis{opacity:1;transform:none}
-.fu.d1{transition-delay:.1s}.fu.d2{transition-delay:.2s}.fu.d3{transition-delay:.3s}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Your Mind Plan – Saluja Clinic · West London GP Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-lb: #41B6E6;
+            --white: #fff;
+            --off: #f5f8fc;
+            --td: #1a1a2e;
+            --tm: #3a3a5c;
+            --ts: #6b7a99;
+            --border: #d8e4f0;
+            --mind-purple: #7c3aed;
+            --mind-teal: #0891b2;
+            --mind-rose: #e11d48;
+        }
 
-/* UTILITY BAR */
-.ub{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;padding:.45rem 0}
-.ub .inn{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-.ub a{color:rgba(255,255,255,.85);text-decoration:none}.ub a:hover{color:#fff}
-.ub-l,.ub-r{display:flex;align-items:center;gap:1.4rem}
-.upill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-/* HEADER */
-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 20px rgba(0,94,184,.10)}
-.hi{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
-.lw{display:flex;align-items:center;text-decoration:none}
-.lw svg{height:84px;width:auto}
-nav{display:flex;align-items:center;gap:.25rem}
-nav a{font-size:.88rem;font-weight:500;color:var(--tm);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
-nav a:hover{background:var(--off);color:var(--nhs-blue)}
-nav a.act{color:var(--nhs-blue);font-weight:600}
-.ncta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
-.ncta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+        html {
+            scroll-behavior: smooth
+        }
 
-/* HERO */
-.hero{background:#fff;padding:4.5rem 2rem 3.5rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;right:-160px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.04) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
-.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
-.bc{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ts);margin-bottom:1rem;flex-wrap:wrap}
-.bc a{color:var(--ts);text-decoration:none}.bc a:hover{color:var(--nhs-blue)}
-.htag{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mind-purple);background:rgba(124,58,237,.07);border-radius:20px;padding:.3rem .9rem;margin-bottom:1.2rem}
-.htag .dot{width:6px;height:6px;background:var(--mind-purple);border-radius:50%;animation:pdot 1.6s ease-in-out infinite}
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.8)}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,3.8vw,3.8rem);font-weight:600;line-height:1.1;margin-bottom:1.2rem}
-.hero h1 em{font-style:normal;color:var(--nhs-blue)}
-.hero p{font-size:1.02rem;line-height:1.75;color:var(--tm);margin-bottom:2rem;max-width:500px}
-.btn-p{background:var(--nhs-blue);color:#fff;padding:.85rem 1.8rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,.3);transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-p:hover{background:var(--nhs-dark);transform:translateY(-2px)}
-.btn-o{border:2px solid var(--nhs-blue);color:var(--nhs-blue);padding:.8rem 1.6rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-o:hover{background:var(--nhs-blue);color:#fff;transform:translateY(-2px)}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fff;
+            color: var(--td);
+            overflow-x: hidden
+        }
 
-/* ── HERO VISUAL — Wellbeing Dashboard Card ───────── */
-.hv{position:relative;display:flex;justify-content:center;align-items:center;min-height:400px}
+        .fu {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity .6s ease, transform .6s ease
+        }
 
-.wb-card{width:340px;background:linear-gradient(158deg,#0c1a34,#001848);border-radius:24px;padding:1.6rem;box-shadow:0 18px 60px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}
-.wb-card::before{content:'';position:absolute;inset:0;border-radius:24px;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:22px 22px;pointer-events:none}
+        .fu.vis {
+            opacity: 1;
+            transform: none
+        }
 
-.wb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;position:relative;z-index:2}
-.wb-lbl{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
-.wb-live{display:flex;align-items:center;gap:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a78bfa}
-.wb-ldot{width:6px;height:6px;border-radius:50%;background:#a78bfa;animation:wblp 1.4s ease-in-out infinite}
-@keyframes wblp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(167,139,250,.5)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(167,139,250,0)}}
+        .fu.d1 {
+            transition-delay: .1s
+        }
 
-/* Mood status row */
-.wb-mood{display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem;position:relative;z-index:2;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.7rem .9rem}
-.wb-emoji{font-size:2rem;line-height:1;transition:all .5s}
-.wb-mood-text{flex:1}
-.wb-mood-title{font-size:.9rem;font-weight:600;color:#fff;line-height:1.2}
-.wb-mood-sub{font-size:.65rem;color:rgba(255,255,255,.4);margin-top:.15rem}
-.wb-score{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1;margin-left:auto}
+        .fu.d2 {
+            transition-delay: .2s
+        }
 
-/* Radar canvas */
-.wb-radar-wrap{background:rgba(0,0,0,.28);border-radius:12px;padding:.6rem;border:1px solid rgba(255,255,255,.06);margin-bottom:.9rem;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-.wb-radar-lbl{font-size:.58rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:.4rem;align-self:flex-start}
-#wbCanvas{display:block}
+        .fu.d3 {
+            transition-delay: .3s
+        }
 
-/* Progress bars */
-.wb-bars{display:flex;flex-direction:column;gap:.45rem;position:relative;z-index:2}
-.wb-bar-row{display:flex;align-items:center;gap:.6rem}
-.wb-bar-name{font-size:.62rem;font-weight:600;color:rgba(255,255,255,.45);width:54px;flex-shrink:0}
-.wb-bar-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
-.wb-bar-fill{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.34,1.2,.64,1)}
-.wb-bar-val{font-size:.6rem;font-weight:700;color:rgba(255,255,255,.35);width:22px;text-align:right;flex-shrink:0}
+        /* UTILITY BAR */
+        .ub {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .85);
+            font-size: .78rem;
+            padding: .45rem 0
+        }
 
-/* Floating badges */
-.hbadge{position:absolute;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.5rem .9rem;box-shadow:0 4px 18px rgba(0,94,184,.10);font-size:.75rem;font-weight:600;color:var(--td);display:flex;align-items:center;gap:.5rem;white-space:nowrap;z-index:10}
-.hbdot{width:7px;height:7px;border-radius:50%}
-.hb1{top:-12px;right:-24px;animation:hbf 5s ease-in-out infinite}
-.hb2{bottom:14px;left:-34px;animation:hbs 5.5s ease-in-out infinite}
-@keyframes hbf{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes hbs{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+        .ub .inn {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
 
-/* WAVE */
-.wave{line-height:0;overflow:hidden}
-.wave svg{display:block;width:100%}
+        .ub a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
 
-/* QUIZ SECTION */
-.qsec{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+        .ub a:hover {
+            color: #fff
+        }
 
-.qcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);position:relative;overflow:hidden}
-.qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--mind-purple),var(--nhs-blue),var(--nhs-aqua))}
-.qtit{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--td);margin-bottom:.4rem}
-.qsub{font-size:.88rem;color:var(--ts);margin-bottom:2rem;line-height:1.6}
+        .ub-l, .ub-r {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem
+        }
 
-/* Progress bar */
-.qprog-wrap{margin-bottom:1.8rem}
-.qprog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
-.qprog-lbl{font-size:.78rem;font-weight:600;color:var(--ts)}
-.qprog-num{font-size:.78rem;font-weight:600;color:var(--nhs-blue)}
-.qprog-track{width:100%;height:6px;background:var(--border);border-radius:99px;overflow:hidden}
-.qprog-fill{height:100%;background:linear-gradient(90deg,var(--mind-purple),var(--nhs-blue));border-radius:99px;transition:width .4s ease}
+        .upill {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 20px;
+            padding: .2rem .8rem
+        }
 
-/* Question */
-.qblock{display:none;flex-direction:column;gap:1.2rem}
-.qblock.show{display:flex;animation:qin .3s ease}
-@keyframes qin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
-.qq{font-size:1rem;font-weight:600;color:var(--td);line-height:1.5}
-.qopts{display:flex;flex-direction:column;gap:.7rem}
-.qopt{display:flex;align-items:center;gap:.8rem;padding:.85rem 1.1rem;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;background:#fff}
-.qopt:hover{border-color:var(--nhs-blue);background:rgba(0,94,184,.03)}
-.qopt.sel{border-color:var(--nhs-blue);background:rgba(0,94,184,.06)}
-.qopt-dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all .2s}
-.qopt.sel .qopt-dot{border-color:var(--nhs-blue);background:var(--nhs-blue)}
-.qopt-lbl{font-size:.9rem;color:var(--td)}
-.qopt-sc{font-size:.75rem;color:var(--ts);margin-left:auto}
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #fff;
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 20px rgba(0, 94, 184, .10)
+        }
 
-.qnav{display:flex;gap:.8rem;margin-top:1.5rem}
-.qbtn{flex:1;padding:.9rem;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .18s}
-.qbtn-prev{background:var(--off);color:var(--tm);border:1.5px solid var(--border)}
-.qbtn-prev:hover{background:var(--border)}
-.qbtn-next{background:var(--nhs-blue);color:#fff;box-shadow:0 3px 14px rgba(0,94,184,.3)}
-.qbtn-next:hover{background:var(--nhs-dark);transform:translateY(-1px)}
-.qbtn-next:disabled{opacity:.4;cursor:not-allowed;transform:none}
+        .hi {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px
+        }
 
-/* RESULT PANEL */
-.rpanel{display:flex;flex-direction:column;gap:1.4rem}
-.defp{background:var(--off);border:1.5px solid var(--border);border-radius:24px;padding:2.2rem}
-.defp-t{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--td);margin-bottom:1.2rem}
+        .lw {
+            display: flex;
+            align-items: center;
+            text-decoration: none
+        }
 
-/* Areas covered */
-.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem}
-.area{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:.9rem;transition:transform .2s,box-shadow .2s,border-color .2s}
-.area:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,94,184,.08);border-color:var(--nhs-lb)}
-.area-ic{font-size:1.1rem;margin-bottom:.3rem}
-.area-t{font-size:.84rem;font-weight:600;color:var(--td)}
-.area-d{font-size:.74rem;color:var(--ts);line-height:1.4;margin-top:.15rem}
+        .lw svg {
+            height: 84px;
+            width: auto
+        }
 
-/* Result card */
-.rcard{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:2.4rem;box-shadow:0 8px 40px rgba(0,94,184,.07);display:none;flex-direction:column;gap:1.4rem}
-.rcard.show{display:flex;animation:rin .5s cubic-bezier(.34,1.56,.64,1)}
-@keyframes rin{from{opacity:0;transform:scale(.92) translateY(16px)}to{opacity:1;transform:none}}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: .25rem
+        }
 
-/* Score ring */
-.ring-wrap{display:flex;justify-content:center;padding:.5rem 0 .8rem}
-.ring-svg{overflow:visible}
+        nav a {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--tm);
+            text-decoration: none;
+            padding: .5rem .9rem;
+            border-radius: 6px;
+            transition: background .2s, color .2s
+        }
 
-/* Score breakdown bars */
-.score-breakdown{display:flex;flex-direction:column;gap:.7rem}
-.sb-row{display:flex;align-items:center;gap:.8rem}
-.sb-name{font-size:.82rem;font-weight:600;color:var(--td);width:90px;flex-shrink:0}
-.sb-track{flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden}
-.sb-fill{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.34,1.2,.64,1)}
-.sb-val{font-size:.78rem;font-weight:700;color:var(--ts);width:28px;text-align:right;flex-shrink:0}
+        nav a:hover {
+            background: var(--off);
+            color: var(--nhs-blue)
+        }
 
-/* Category badge */
-.rcat{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.65rem 1.3rem;border-radius:12px;font-weight:700;font-size:.95rem;animation:badge-pop .4s cubic-bezier(.34,1.56,.64,1)}
-@keyframes badge-pop{from{transform:scale(.7)}to{transform:scale(1)}}
+        nav a.act {
+            color: var(--nhs-blue);
+            font-weight: 600
+        }
 
-.rverd{background:var(--off);border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:.8rem}
-.rvi{font-size:1.5rem;flex-shrink:0}
-.rvt{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
-.rvd{font-size:.84rem;line-height:1.65;color:var(--tm)}
+        .ncta {
+            background: var(--nhs-blue) !important;
+            color: #fff !important;
+            padding: .55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: .5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, .25)
+        }
 
-/* Resources */
-.rres{display:flex;flex-direction:column;gap:.7rem}
-.rr{display:flex;align-items:flex-start;gap:.8rem;padding:.9rem 1rem;background:var(--off);border-radius:12px;border:1.5px solid var(--border);transition:border-color .2s,box-shadow .2s;text-decoration:none}
-.rr:hover{border-color:var(--nhs-lb);box-shadow:0 4px 14px rgba(0,94,184,.07)}
-.rr-ic{font-size:1.2rem;flex-shrink:0}
-.rr-t{font-size:.88rem;font-weight:600;color:var(--td)}
-.rr-d{font-size:.78rem;color:var(--ts);margin-top:.15rem;line-height:1.4}
+        .ncta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px)
+        }
 
-.rdis{font-size:.74rem;color:var(--ts);line-height:1.6;padding:.8rem 1rem;background:rgba(0,94,184,.04);border-radius:8px}
+        /* HERO */
+        .hero {
+            background: #fff;
+            padding: 4.5rem 2rem 3.5rem;
+            position: relative;
+            overflow: hidden
+        }
 
-/* INFO */
-.info{background:var(--off);padding:4rem 0}
-.info-in{max-width:1200px;margin:0 auto;padding:0 2rem}
-.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
-.ic{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
-.ic:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,94,184,.10);border-color:var(--nhs-lb)}
-.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mind-purple),var(--nhs-blue));transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.ic:hover::before{transform:scaleX(1)}
-.ic-ic{font-size:1.4rem;margin-bottom:.5rem}
-.ic-t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.35rem}
-.ic-d{font-size:.82rem;line-height:1.6;color:var(--tm)}
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -160px;
+            width: 680px;
+            height: 680px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 58, 237, .04) 0%, transparent 70%);
+            pointer-events: none
+        }
 
-/* EMERGENCY */
-.emerg{background:var(--td);padding:2.5rem 2rem}
-.emerg-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.ec{border-radius:16px;padding:2rem}
-.e111{background:rgba(0,94,184,.35);border:1.5px solid rgba(65,182,230,.3)}
-.e999{background:rgba(180,0,0,.35);border:1.5px solid rgba(255,100,100,.3)}
-.el{font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
-.en{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.5rem}
-.ed{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.7)}
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -100px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, .05) 0%, transparent 70%);
+            pointer-events: none
+        }
 
-/* FOOTER */
-footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 0}
-.fi2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
-.flw{display:inline-block;background:#fff;border-radius:10px;padding:6px 14px 4px;margin-bottom:1rem}
-.flw svg{height:42px;width:auto;display:block}
-.ftag{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.65);margin-bottom:1rem}
-.fadr{font-size:.85rem;line-height:1.8;color:rgba(255,255,255,.65)}
-.fadr a{color:rgba(255,255,255,.85);text-decoration:none}
-.fh{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
-.fl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.fl a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;transition:color .2s}
-.fl a:hover{color:#fff}
-.hg{display:flex;flex-direction:column;gap:.4rem}
-.hr2{display:flex;justify-content:space-between;font-size:.83rem;color:rgba(255,255,255,.7)}
-.hd{color:rgba(255,255,255,.42)}
-.fb{max-width:1200px;margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:rgba(255,255,255,.35)}
+        .hero-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2
+        }
 
-@media(max-width:960px){.hero-in{grid-template-columns:1fr}.hv{display:none}.qsec{grid-template-columns:1fr}.igrid{grid-template-columns:1fr 1fr}.area-grid{grid-template-columns:1fr}}
-@media(max-width:640px){.igrid{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.emerg-in{grid-template-columns:1fr}nav{display:none}}
-@media(max-width:440px){.fi2{grid-template-columns:1fr}}
-</style>
+        .bc {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .8rem;
+            color: var(--ts);
+            margin-bottom: 1rem;
+            flex-wrap: wrap
+        }
+
+        .bc a {
+            color: var(--ts);
+            text-decoration: none
+        }
+
+        .bc a:hover {
+            color: var(--nhs-blue)
+        }
+
+        .htag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--mind-purple);
+            background: rgba(124, 58, 237, .07);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            margin-bottom: 1.2rem
+        }
+
+        .htag .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--mind-purple);
+            border-radius: 50%;
+            animation: pdot 1.6s ease-in-out infinite
+        }
+
+        @keyframes pdot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: .3;
+                transform: scale(1.8)
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.2rem
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--nhs-blue)
+        }
+
+        .hero p {
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: var(--tm);
+            margin-bottom: 2rem;
+            max-width: 500px
+        }
+
+        .btn-p {
+            background: var(--nhs-blue);
+            color: #fff;
+            padding: .85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 94, 184, .3);
+            transition: background .2s, transform .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .btn-p:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-2px)
+        }
+
+        .btn-o {
+            border: 2px solid var(--nhs-blue);
+            color: var(--nhs-blue);
+            padding: .8rem 1.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .95rem;
+            text-decoration: none;
+            transition: background .2s, color .2s, transform .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .btn-o:hover {
+            background: var(--nhs-blue);
+            color: #fff;
+            transform: translateY(-2px)
+        }
+
+        /* ── HERO VISUAL — Wellbeing Dashboard Card ───────── */
+        .hv {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px
+        }
+
+        .wb-card {
+            width: 340px;
+            background: linear-gradient(158deg, #0c1a34, #001848);
+            border-radius: 24px;
+            padding: 1.6rem;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .06);
+            position: relative;
+            overflow: hidden
+        }
+
+        .wb-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background-image: linear-gradient(rgba(255, 255, 255, .02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .02) 1px, transparent 1px);
+            background-size: 22px 22px;
+            pointer-events: none
+        }
+
+        .wb-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.1rem;
+            position: relative;
+            z-index: 2
+        }
+
+        .wb-lbl {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .3)
+        }
+
+        .wb-live {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #a78bfa
+        }
+
+        .wb-ldot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #a78bfa;
+            animation: wblp 1.4s ease-in-out infinite
+        }
+
+        @keyframes wblp {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(167, 139, 250, .5)
+            }
+            50% {
+                opacity: .5;
+                box-shadow: 0 0 0 5px rgba(167, 139, 250, 0)
+            }
+        }
+
+        /* Mood status row */
+        .wb-mood {
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+            margin-bottom: 1.1rem;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 12px;
+            padding: .7rem .9rem
+        }
+
+        .wb-emoji {
+            font-size: 2rem;
+            line-height: 1;
+            transition: all .5s
+        }
+
+        .wb-mood-text {
+            flex: 1
+        }
+
+        .wb-mood-title {
+            font-size: .9rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.2
+        }
+
+        .wb-mood-sub {
+            font-size: .65rem;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .15rem
+        }
+
+        .wb-score {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-left: auto
+        }
+
+        /* Radar canvas */
+        .wb-radar-wrap {
+            background: rgba(0, 0, 0, .28);
+            border-radius: 12px;
+            padding: .6rem;
+            border: 1px solid rgba(255, 255, 255, .06);
+            margin-bottom: .9rem;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .wb-radar-lbl {
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: rgba(255, 255, 255, .3);
+            text-transform: uppercase;
+            margin-bottom: .4rem;
+            align-self: flex-start
+        }
+
+        #wbCanvas {
+            display: block
+        }
+
+        /* Progress bars */
+        .wb-bars {
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+            position: relative;
+            z-index: 2
+        }
+
+        .wb-bar-row {
+            display: flex;
+            align-items: center;
+            gap: .6rem
+        }
+
+        .wb-bar-name {
+            font-size: .62rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .45);
+            width: 54px;
+            flex-shrink: 0
+        }
+
+        .wb-bar-track {
+            flex: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 99px;
+            overflow: hidden
+        }
+
+        .wb-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 1s cubic-bezier(.34, 1.2, .64, 1)
+        }
+
+        .wb-bar-val {
+            font-size: .6rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .35);
+            width: 22px;
+            text-align: right;
+            flex-shrink: 0
+        }
+
+        /* Floating badges */
+        .hbadge {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: .5rem .9rem;
+            box-shadow: 0 4px 18px rgba(0, 94, 184, .10);
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--td);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            white-space: nowrap;
+            z-index: 10
+        }
+
+        .hbdot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .hb1 {
+            top: -12px;
+            right: -24px;
+            animation: hbf 5s ease-in-out infinite
+        }
+
+        .hb2 {
+            bottom: 14px;
+            left: -34px;
+            animation: hbs 5.5s ease-in-out infinite
+        }
+
+        @keyframes hbf {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        @keyframes hbs {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(8px)
+            }
+        }
+
+        /* WAVE */
+        .wave {
+            line-height: 0;
+            overflow: hidden
+        }
+
+        .wave svg {
+            display: block;
+            width: 100%
+        }
+
+        /* QUIZ SECTION */
+        .qsec {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 3.5rem;
+            align-items: start
+        }
+
+        .qcard {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.4rem;
+            box-shadow: 0 8px 40px rgba(0, 94, 184, .07);
+            position: relative;
+            overflow: hidden
+        }
+
+        .qcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--mind-purple), var(--nhs-blue), var(--nhs-aqua))
+        }
+
+        .qtit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .4rem
+        }
+
+        .qsub {
+            font-size: .88rem;
+            color: var(--ts);
+            margin-bottom: 2rem;
+            line-height: 1.6
+        }
+
+        /* Progress bar */
+        .qprog-wrap {
+            margin-bottom: 1.8rem
+        }
+
+        .qprog-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem
+        }
+
+        .qprog-lbl {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--ts)
+        }
+
+        .qprog-num {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--nhs-blue)
+        }
+
+        .qprog-track {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden
+        }
+
+        .qprog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--mind-purple), var(--nhs-blue));
+            border-radius: 99px;
+            transition: width .4s ease
+        }
+
+        /* Question */
+        .qblock {
+            display: none;
+            flex-direction: column;
+            gap: 1.2rem
+        }
+
+        .qblock.show {
+            display: flex;
+            animation: qin .3s ease
+        }
+
+        @keyframes qin {
+            from {
+                opacity: 0;
+                transform: translateX(14px)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .qq {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--td);
+            line-height: 1.5
+        }
+
+        .qopts {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem
+        }
+
+        .qopt {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .85rem 1.1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .2s;
+            background: #fff
+        }
+
+        .qopt:hover {
+            border-color: var(--nhs-blue);
+            background: rgba(0, 94, 184, .03)
+        }
+
+        .qopt.sel {
+            border-color: var(--nhs-blue);
+            background: rgba(0, 94, 184, .06)
+        }
+
+        .qopt-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            flex-shrink: 0;
+            transition: all .2s
+        }
+
+        .qopt.sel .qopt-dot {
+            border-color: var(--nhs-blue);
+            background: var(--nhs-blue)
+        }
+
+        .qopt-lbl {
+            font-size: .9rem;
+            color: var(--td)
+        }
+
+        .qopt-sc {
+            font-size: .75rem;
+            color: var(--ts);
+            margin-left: auto
+        }
+
+        .qnav {
+            display: flex;
+            gap: .8rem;
+            margin-top: 1.5rem
+        }
+
+        .qbtn {
+            flex: 1;
+            padding: .9rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s
+        }
+
+        .qbtn-prev {
+            background: var(--off);
+            color: var(--tm);
+            border: 1.5px solid var(--border)
+        }
+
+        .qbtn-prev:hover {
+            background: var(--border)
+        }
+
+        .qbtn-next {
+            background: var(--nhs-blue);
+            color: #fff;
+            box-shadow: 0 3px 14px rgba(0, 94, 184, .3)
+        }
+
+        .qbtn-next:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-1px)
+        }
+
+        .qbtn-next:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        /* RESULT PANEL */
+        .rpanel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .defp {
+            background: var(--off);
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.2rem
+        }
+
+        .defp-t {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: 1.2rem
+        }
+
+        /* Areas covered */
+        .area-grid {
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: .8rem;
+            margin-bottom: 1rem
+        }
+
+        .area {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: .9rem;
+            transition: transform .2s, box-shadow .2s, border-color .2s
+        }
+
+        .area:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 94, 184, .08);
+            border-color: var(--nhs-lb)
+        }
+
+        .area-ic {
+            font-size: 1.1rem;
+            margin-bottom: .3rem
+        }
+
+        .area-t {
+            font-size: .84rem;
+            font-weight: 600;
+            color: var(--td)
+        }
+
+        .area-d {
+            font-size: .74rem;
+            color: var(--ts);
+            line-height: 1.4;
+            margin-top: .15rem
+        }
+
+        /* Result card */
+        .rcard {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            padding: 2.4rem;
+            box-shadow: 0 8px 40px rgba(0, 94, 184, .07);
+            display: none;
+            flex-direction: column;
+            gap: 1.4rem
+        }
+
+        .rcard.show {
+            display: flex;
+            animation: rin .5s cubic-bezier(.34, 1.56, .64, 1)
+        }
+
+        @keyframes rin {
+            from {
+                opacity: 0;
+                transform: scale(.92) translateY(16px)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* Score ring */
+        .ring-wrap {
+            display: flex;
+            justify-content: center;
+            padding: .5rem 0 .8rem
+        }
+
+        .ring-svg {
+            overflow: visible
+        }
+
+        /* Score breakdown bars */
+        .score-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem
+        }
+
+        .sb-row {
+            display: flex;
+            align-items: center;
+            gap: .8rem
+        }
+
+        .sb-name {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--td);
+            width: 90px;
+            flex-shrink: 0
+        }
+
+        .sb-track {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden
+        }
+
+        .sb-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 1s cubic-bezier(.34, 1.2, .64, 1)
+        }
+
+        .sb-val {
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--ts);
+            width: 28px;
+            text-align: right;
+            flex-shrink: 0
+        }
+
+        /* Category badge */
+        .rcat {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            padding: .65rem 1.3rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .95rem;
+            animation: badge-pop .4s cubic-bezier(.34, 1.56, .64, 1)
+        }
+
+        @keyframes badge-pop {
+            from {
+                transform: scale(.7)
+            }
+            to {
+                transform: scale(1)
+            }
+        }
+
+        .rverd {
+            background: var(--off);
+            border-radius: 14px;
+            padding: 1.2rem 1.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem
+        }
+
+        .rvi {
+            font-size: 1.5rem;
+            flex-shrink: 0
+        }
+
+        .rvt {
+            font-weight: 700;
+            font-size: .95rem;
+            margin-bottom: .3rem
+        }
+
+        .rvd {
+            font-size: .84rem;
+            line-height: 1.65;
+            color: var(--tm)
+        }
+
+        /* Resources */
+        .rres {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem
+        }
+
+        .rr {
+            display: flex;
+            align-items: flex-start;
+            gap: .8rem;
+            padding: .9rem 1rem;
+            background: var(--off);
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            transition: border-color .2s, box-shadow .2s;
+            text-decoration: none
+        }
+
+        .rr:hover {
+            border-color: var(--nhs-lb);
+            box-shadow: 0 4px 14px rgba(0, 94, 184, .07)
+        }
+
+        .rr-ic {
+            font-size: 1.2rem;
+            flex-shrink: 0
+        }
+
+        .rr-t {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--td)
+        }
+
+        .rr-d {
+            font-size: .78rem;
+            color: var(--ts);
+            margin-top: .15rem;
+            line-height: 1.4
+        }
+
+        .rdis {
+            font-size: .74rem;
+            color: var(--ts);
+            line-height: 1.6;
+            padding: .8rem 1rem;
+            background: rgba(0, 94, 184, .04);
+            border-radius: 8px
+        }
+
+        /* INFO */
+        .info {
+            background: var(--off);
+            padding: 4rem 0
+        }
+
+        .info-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem
+        }
+
+        .igrid {
+            display: grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 2.5rem
+        }
+
+        .ic {
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform .25s, box-shadow .25s, border-color .25s
+        }
+
+        .ic:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0, 94, 184, .10);
+            border-color: var(--nhs-lb)
+        }
+
+        .ic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mind-purple), var(--nhs-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
+        }
+
+        .ic:hover::before {
+            transform: scaleX(1)
+        }
+
+        .ic-ic {
+            font-size: 1.4rem;
+            margin-bottom: .5rem
+        }
+
+        .ic-t {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--td);
+            margin-bottom: .35rem
+        }
+
+        .ic-d {
+            font-size: .82rem;
+            line-height: 1.6;
+            color: var(--tm)
+        }
+
+        /* EMERGENCY */
+        .emerg {
+            background: var(--td);
+            padding: 2.5rem 2rem
+        }
+
+        .emerg-in {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 2rem
+        }
+
+        .ec {
+            border-radius: 16px;
+            padding: 2rem
+        }
+
+        .e111 {
+            background: rgba(0, 94, 184, .35);
+            border: 1.5px solid rgba(65, 182, 230, .3)
+        }
+
+        .e999 {
+            background: rgba(180, 0, 0, .35);
+            border: 1.5px solid rgba(255, 100, 100, .3)
+        }
+
+        .el {
+            font-size: .74rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: .3rem
+        }
+
+        .en {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: .5rem
+        }
+
+        .ed {
+            font-size: .85rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .7)
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .8);
+            padding: 3.5rem 2rem 0
+        }
+
+        .fi2 {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .12)
+        }
+
+        .flw {
+            display: inline-block;
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px 14px 4px;
+            margin-bottom: 1rem
+        }
+
+        .flw svg {
+            height: 42px;
+            width: auto;
+            display: block
+        }
+
+        .ftag {
+            font-size: .88rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 1rem
+        }
+
+        .fadr {
+            font-size: .85rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .65)
+        }
+
+        .fadr a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
+
+        .fh {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .38);
+            margin-bottom: 1rem
+        }
+
+        .fl {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem
+        }
+
+        .fl a {
+            color: rgba(255, 255, 255, .7);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: color .2s
+        }
+
+        .fl a:hover {
+            color: #fff
+        }
+
+        .hg {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem
+        }
+
+        .hr2 {
+            display: flex;
+            justify-content: space-between;
+            font-size: .83rem;
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .hd {
+            color: rgba(255, 255, 255, .42)
+        }
+
+        .fb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: .5rem;
+            font-size: .74rem;
+            color: rgba(255, 255, 255, .35)
+        }
+
+        @media (max-width: 960px) {
+            .hero-in {
+                grid-template-columns:1fr
+            }
+
+            .hv {
+                display: none
+            }
+
+            .qsec {
+                grid-template-columns:1fr
+            }
+
+            .igrid {
+                grid-template-columns:1fr 1fr
+            }
+
+            .area-grid {
+                grid-template-columns:1fr
+            }
+        }
+
+        @media (max-width: 640px) {
+            .igrid {
+                grid-template-columns:1fr
+            }
+
+            .fi2 {
+                grid-template-columns:1fr 1fr
+            }
+
+            .emerg-in {
+                grid-template-columns:1fr
+            }
+
+            nav {
+                display: none
+            }
+        }
+
+        @media (max-width: 440px) {
+            .fi2 {
+                grid-template-columns:1fr
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="ub">
-  <div class="inn">
-    <div class="ub-l">
-      <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
-      <span class="upill">NHS GP Practice · West London</span>
+    <div class="inn">
+        <div class="ub-l">
+            <span>📞 <a href="tel:02085745136">0208 574 5136</a> | Mon–Fri 08:00–18:30</span>
+            <span class="upill">NHS GP Practice · West London</span>
+        </div>
+        <div class="ub-r">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="ub-r">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <a href="https://111.nhs.uk/" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="hi">
-    <a href="index.html" class="lw">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="cSh" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="cTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/><circle cx="80" cy="80" r="63" fill="url(#cSh)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#cS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)" filter="url(#cTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
-    </a>
-    <nav>
-      <a href="practice-policies-patient-information.html">Our Practice</a>
-      <a href="clinics-and-services.html">Clinics &amp; Services</a>
-      <a href="health-information.html" class="act">Health Information</a>
-      <a href="news.html">News</a>
-      <a href="contact-us.html">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="hi">
+        <a href="index.html" class="lw">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160">
+                <defs>
+                    <linearGradient id="cS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                        <stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/>
+                        <stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/>
+                        <stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/>
+                        <stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/>
+                        <stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/>
+                    </linearGradient>
+                    <linearGradient id="cT" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="cSh" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="cRm" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="sh" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="cTS">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#cRm)" filter="url(#sh)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#cSh)"/>
+                <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700"
+                      font-style="normal" text-anchor="middle" fill="url(#cS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#cT)"
+                      filter="url(#cTS)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="ncta">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-in">
-    <div>
-      <div class="bc"><a href="/">Home</a><span>›</span><a href="health-information.html">Health Information</a><span>›</span><span>Your Mind Plan</span></div>
-      <div class="htag"><span class="dot"></span>Mental Wellbeing</div>
-      <h1>Take care of<br>your <em>mental health</em></h1>
-      <p>Your Mind Plan is a short wellbeing check that takes just a few minutes. Based on your answers, it generates personalised advice, tools, and local support — all grounded in NHS guidance.</p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="#quiz" class="btn-p">Start my Mind Plan →</a>
-        <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
-      </div>
-    </div>
-
-    <!-- Wellbeing Dashboard Card -->
-    <div class="hv">
-      <div style="position:relative">
-        <div class="hbadge hb1"><span class="hbdot" style="background:#a78bfa"></span>5 areas of wellbeing</div>
-        <div class="hbadge hb2"><span class="hbdot" style="background:var(--nhs-blue)"></span>NHS-backed advice</div>
-
-        <div class="wb-card">
-          <div class="wb-top">
-            <span class="wb-lbl">Wellbeing Dashboard</span>
-            <span class="wb-live"><span class="wb-ldot"></span>Monitoring</span>
-          </div>
-
-          <!-- Mood row -->
-          <div class="wb-mood">
-            <div class="wb-emoji" id="wbEmoji">😐</div>
-            <div class="wb-mood-text">
-              <div class="wb-mood-title" id="wbTitle">Feeling okay</div>
-              <div class="wb-mood-sub" id="wbSub">Mild stress · Sleep disrupted</div>
+    <div class="hero-in">
+        <div>
+            <div class="bc"><a href="index.html">Home</a><span>›</span><a href="health-information.html">Health
+                Information</a><span>›</span><span>Your Mind Plan</span></div>
+            <div class="htag"><span class="dot"></span>Mental Wellbeing</div>
+            <h1>Take care of<br>your <em>mental health</em></h1>
+            <p>Your Mind Plan is a short wellbeing check that takes just a few minutes. Based on your answers, it
+                generates personalised advice, tools, and local support — all grounded in NHS guidance.</p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+                <a href="#quiz" class="btn-p">Start my Mind Plan →</a>
+                <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-o">Speak to a GP</a>
             </div>
-            <div>
-              <div class="wb-score" id="wbScore" style="color:#a78bfa">62</div>
-            </div>
-          </div>
-
-          <!-- Radar chart -->
-          <div class="wb-radar-wrap">
-            <div class="wb-radar-lbl">Wellbeing Radar · 5 Dimensions</div>
-            <canvas id="wbCanvas" width="240" height="130"></canvas>
-          </div>
-
-          <!-- Progress bars -->
-          <div class="wb-bars">
-            <div class="wb-bar-row">
-              <div class="wb-bar-name">Mood</div>
-              <div class="wb-bar-track"><div class="wb-bar-fill" id="barMood" style="width:62%;background:#a78bfa"></div></div>
-              <div class="wb-bar-val" id="valMood">62</div>
-            </div>
-            <div class="wb-bar-row">
-              <div class="wb-bar-name">Sleep</div>
-              <div class="wb-bar-track"><div class="wb-bar-fill" id="barSleep" style="width:48%;background:#60a5fa"></div></div>
-              <div class="wb-bar-val" id="valSleep">48</div>
-            </div>
-            <div class="wb-bar-row">
-              <div class="wb-bar-name">Energy</div>
-              <div class="wb-bar-track"><div class="wb-bar-fill" id="barEnergy" style="width:55%;background:#4ade80"></div></div>
-              <div class="wb-bar-val" id="valEnergy">55</div>
-            </div>
-            <div class="wb-bar-row">
-              <div class="wb-bar-name">Anxiety</div>
-              <div class="wb-bar-track"><div class="wb-bar-fill" id="barAnxiety" style="width:71%;background:#fbbf24"></div></div>
-              <div class="wb-bar-val" id="valAnxiety">71</div>
-            </div>
-            <div class="wb-bar-row">
-              <div class="wb-bar-name">Connection</div>
-              <div class="wb-bar-track"><div class="wb-bar-fill" id="barConnect" style="width:58%;background:#34d399"></div></div>
-              <div class="wb-bar-val" id="valConnect">58</div>
-            </div>
-          </div>
         </div>
-      </div>
+
+        <!-- Wellbeing Dashboard Card -->
+        <div class="hv">
+            <div style="position:relative">
+                <div class="hbadge hb1"><span class="hbdot" style="background:#a78bfa"></span>5 areas of wellbeing</div>
+                <div class="hbadge hb2"><span class="hbdot" style="background:var(--nhs-blue)"></span>NHS-backed advice
+                </div>
+
+                <div class="wb-card">
+                    <div class="wb-top">
+                        <span class="wb-lbl">Wellbeing Dashboard</span>
+                        <span class="wb-live"><span class="wb-ldot"></span>Monitoring</span>
+                    </div>
+
+                    <!-- Mood row -->
+                    <div class="wb-mood">
+                        <div class="wb-emoji" id="wbEmoji">😐</div>
+                        <div class="wb-mood-text">
+                            <div class="wb-mood-title" id="wbTitle">Feeling okay</div>
+                            <div class="wb-mood-sub" id="wbSub">Mild stress · Sleep disrupted</div>
+                        </div>
+                        <div>
+                            <div class="wb-score" id="wbScore" style="color:#a78bfa">62</div>
+                        </div>
+                    </div>
+
+                    <!-- Radar chart -->
+                    <div class="wb-radar-wrap">
+                        <div class="wb-radar-lbl">Wellbeing Radar · 5 Dimensions</div>
+                        <canvas id="wbCanvas" width="240" height="130"></canvas>
+                    </div>
+
+                    <!-- Progress bars -->
+                    <div class="wb-bars">
+                        <div class="wb-bar-row">
+                            <div class="wb-bar-name">Mood</div>
+                            <div class="wb-bar-track">
+                                <div class="wb-bar-fill" id="barMood" style="width:62%;background:#a78bfa"></div>
+                            </div>
+                            <div class="wb-bar-val" id="valMood">62</div>
+                        </div>
+                        <div class="wb-bar-row">
+                            <div class="wb-bar-name">Sleep</div>
+                            <div class="wb-bar-track">
+                                <div class="wb-bar-fill" id="barSleep" style="width:48%;background:#60a5fa"></div>
+                            </div>
+                            <div class="wb-bar-val" id="valSleep">48</div>
+                        </div>
+                        <div class="wb-bar-row">
+                            <div class="wb-bar-name">Energy</div>
+                            <div class="wb-bar-track">
+                                <div class="wb-bar-fill" id="barEnergy" style="width:55%;background:#4ade80"></div>
+                            </div>
+                            <div class="wb-bar-val" id="valEnergy">55</div>
+                        </div>
+                        <div class="wb-bar-row">
+                            <div class="wb-bar-name">Anxiety</div>
+                            <div class="wb-bar-track">
+                                <div class="wb-bar-fill" id="barAnxiety" style="width:71%;background:#fbbf24"></div>
+                            </div>
+                            <div class="wb-bar-val" id="valAnxiety">71</div>
+                        </div>
+                        <div class="wb-bar-row">
+                            <div class="wb-bar-name">Connection</div>
+                            <div class="wb-bar-track">
+                                <div class="wb-bar-fill" id="barConnect" style="width:58%;background:#34d399"></div>
+                            </div>
+                            <div class="wb-bar-val" id="valConnect">58</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- Wave -->
-<div class="wave"><svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/></svg></div>
+<div class="wave">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,10 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+    </svg>
+</div>
 
 <!-- QUIZ + RESULTS -->
 <div class="qsec fu" id="quiz">
 
-  <!-- Quiz card -->
-  <div class="qcard">
-    <div class="qtit">🧠 Your Mind Plan Quiz</div>
-    <p class="qsub">Answer 10 quick questions honestly — there are no right or wrong answers. Your responses generate a personalised plan.</p>
+    <!-- Quiz card -->
+    <div class="qcard">
+        <div class="qtit">🧠 Your Mind Plan Quiz</div>
+        <p class="qsub">Answer 10 quick questions honestly — there are no right or wrong answers. Your responses
+            generate a personalised plan.</p>
 
-    <!-- Progress bar -->
-    <div class="qprog-wrap">
-      <div class="qprog-row">
-        <span class="qprog-lbl">Progress</span>
-        <span class="qprog-num" id="progNum">Question 1 of 10</span>
-      </div>
-      <div class="qprog-track"><div class="qprog-fill" id="progFill" style="width:10%"></div></div>
+        <!-- Progress bar -->
+        <div class="qprog-wrap">
+            <div class="qprog-row">
+                <span class="qprog-lbl">Progress</span>
+                <span class="qprog-num" id="progNum">Question 1 of 10</span>
+            </div>
+            <div class="qprog-track">
+                <div class="qprog-fill" id="progFill" style="width:10%"></div>
+            </div>
+        </div>
+
+        <!-- Questions -->
+        <div id="qArea"></div>
+
+        <!-- Nav buttons -->
+        <div class="qnav" id="qnav">
+            <button class="qbtn qbtn-prev" id="btnPrev" onclick="qPrev()" style="display:none">← Back</button>
+            <button class="qbtn qbtn-next" id="btnNext" onclick="qNext()" disabled>Next →</button>
+        </div>
     </div>
 
-    <!-- Questions -->
-    <div id="qArea"></div>
+    <!-- Results panel -->
+    <div class="rpanel">
 
-    <!-- Nav buttons -->
-    <div class="qnav" id="qnav">
-      <button class="qbtn qbtn-prev" id="btnPrev" onclick="qPrev()" style="display:none">← Back</button>
-      <button class="qbtn qbtn-next" id="btnNext" onclick="qNext()" disabled>Next →</button>
+        <!-- Default — areas covered -->
+        <div class="defp" id="defp">
+            <div class="defp-t">What Your Mind Plan covers</div>
+            <div class="area-grid">
+                <div class="area">
+                    <div class="area-ic">😔</div>
+                    <div class="area-t">Mood &amp; feelings</div>
+                    <div class="area-d">How you've been feeling day-to-day over the past two weeks</div>
+                </div>
+                <div class="area">
+                    <div class="area-ic">😴</div>
+                    <div class="area-t">Sleep</div>
+                    <div class="area-d">The quality and quantity of your sleep and its impact on daily life</div>
+                </div>
+                <div class="area">
+                    <div class="area-ic">⚡</div>
+                    <div class="area-t">Energy &amp; motivation</div>
+                    <div class="area-d">Whether low energy or lack of drive is affecting your routine</div>
+                </div>
+                <div class="area">
+                    <div class="area-ic">😰</div>
+                    <div class="area-t">Anxiety &amp; worry</div>
+                    <div class="area-d">Feeling anxious, on edge, or unable to stop worrying</div>
+                </div>
+                <div class="area">
+                    <div class="area-ic">🤝</div>
+                    <div class="area-t">Connection</div>
+                    <div class="area-d">How supported and connected you feel to people around you</div>
+                </div>
+                <div class="area">
+                    <div class="area-ic">🌿</div>
+                    <div class="area-t">Lifestyle factors</div>
+                    <div class="area-d">Exercise, alcohol, and other habits that affect mental health</div>
+                </div>
+            </div>
+            <p style="font-size:.78rem;color:var(--ts);line-height:1.6">This quiz is based on validated screening tools
+                (PHQ-4, GAD-2, Warwick-Edinburgh) and NHS Talking Therapies guidance.</p>
+        </div>
+
+        <!-- Result card (hidden until quiz complete) -->
+        <div class="rcard" id="rcard">
+
+            <!-- Score ring -->
+            <div class="ring-wrap">
+                <svg class="ring-svg" width="160" height="160" id="ringSvg">
+                    <circle cx="80" cy="80" r="64" fill="none" stroke="rgba(0,94,184,.1)" stroke-width="12"/>
+                    <circle cx="80" cy="80" r="64" fill="none" stroke="url(#ringGrad)" stroke-width="12"
+                            stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"
+                            id="ringArc" transform="rotate(-90 80 80)"
+                            style="transition:stroke-dashoffset 1.4s cubic-bezier(.34,1.2,.64,1)"/>
+                    <defs>
+                        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#7c3aed"/>
+                            <stop offset="100%" stop-color="#005EB8"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="80" y="74" font-family="Cormorant Garamond,serif" font-size="38" font-weight="700"
+                          fill="#1a1a2e" text-anchor="middle" id="ringScore">—
+                    </text>
+                    <text x="80" y="93" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7a99"
+                          text-anchor="middle">/100
+                    </text>
+                    <text x="80" y="110" font-family="DM Sans,sans-serif" font-size="10" font-weight="600"
+                          fill="#6b7a99" text-anchor="middle">WELLBEING
+                    </text>
+                </svg>
+            </div>
+
+            <!-- Category -->
+            <div class="rcat" id="rCat"></div>
+
+            <!-- Score breakdown -->
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.6rem">
+                Score breakdown
+            </div>
+            <div class="score-breakdown" id="scoreBreakdown"></div>
+
+            <!-- Verdict -->
+            <div class="rverd">
+                <div class="rvi" id="rIcon">💬</div>
+                <div>
+                    <div class="rvt" id="rTitle"></div>
+                    <div class="rvd" id="rDesc"></div>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.4rem">
+                Personalised resources
+            </div>
+            <div class="rres" id="rRes"></div>
+
+            <!-- Retake -->
+            <button onclick="retakeQuiz()"
+                    style="padding:.75rem;border:1.5px solid var(--border);border-radius:10px;background:transparent;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;color:var(--ts);cursor:pointer;transition:all .2s">
+                ↺ Retake quiz
+            </button>
+
+            <div class="rdis">This quiz provides general wellbeing guidance only and does not constitute a clinical
+                diagnosis. If you are experiencing significant mental health difficulties, please speak to your GP or
+                call NHS 111. If you are in crisis, call 999 or the Samaritans on 116 123.
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- Results panel -->
-  <div class="rpanel">
-
-    <!-- Default — areas covered -->
-    <div class="defp" id="defp">
-      <div class="defp-t">What Your Mind Plan covers</div>
-      <div class="area-grid">
-        <div class="area"><div class="area-ic">😔</div><div class="area-t">Mood &amp; feelings</div><div class="area-d">How you've been feeling day-to-day over the past two weeks</div></div>
-        <div class="area"><div class="area-ic">😴</div><div class="area-t">Sleep</div><div class="area-d">The quality and quantity of your sleep and its impact on daily life</div></div>
-        <div class="area"><div class="area-ic">⚡</div><div class="area-t">Energy &amp; motivation</div><div class="area-d">Whether low energy or lack of drive is affecting your routine</div></div>
-        <div class="area"><div class="area-ic">😰</div><div class="area-t">Anxiety &amp; worry</div><div class="area-d">Feeling anxious, on edge, or unable to stop worrying</div></div>
-        <div class="area"><div class="area-ic">🤝</div><div class="area-t">Connection</div><div class="area-d">How supported and connected you feel to people around you</div></div>
-        <div class="area"><div class="area-ic">🌿</div><div class="area-t">Lifestyle factors</div><div class="area-d">Exercise, alcohol, and other habits that affect mental health</div></div>
-      </div>
-      <p style="font-size:.78rem;color:var(--ts);line-height:1.6">This quiz is based on validated screening tools (PHQ-4, GAD-2, Warwick-Edinburgh) and NHS Talking Therapies guidance.</p>
-    </div>
-
-    <!-- Result card (hidden until quiz complete) -->
-    <div class="rcard" id="rcard">
-
-      <!-- Score ring -->
-      <div class="ring-wrap">
-        <svg class="ring-svg" width="160" height="160" id="ringSvg">
-          <circle cx="80" cy="80" r="64" fill="none" stroke="rgba(0,94,184,.1)" stroke-width="12"/>
-          <circle cx="80" cy="80" r="64" fill="none" stroke="url(#ringGrad)" stroke-width="12"
-            stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"
-            id="ringArc" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1.4s cubic-bezier(.34,1.2,.64,1)"/>
-          <defs>
-            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#7c3aed"/>
-              <stop offset="100%" stop-color="#005EB8"/>
-            </linearGradient>
-          </defs>
-          <text x="80" y="74" font-family="Cormorant Garamond,serif" font-size="38" font-weight="700" fill="#1a1a2e" text-anchor="middle" id="ringScore">—</text>
-          <text x="80" y="93" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7a99" text-anchor="middle">/100</text>
-          <text x="80" y="110" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#6b7a99" text-anchor="middle">WELLBEING</text>
-        </svg>
-      </div>
-
-      <!-- Category -->
-      <div class="rcat" id="rCat"></div>
-
-      <!-- Score breakdown -->
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.6rem">Score breakdown</div>
-      <div class="score-breakdown" id="scoreBreakdown"></div>
-
-      <!-- Verdict -->
-      <div class="rverd">
-        <div class="rvi" id="rIcon">💬</div>
-        <div><div class="rvt" id="rTitle"></div><div class="rvd" id="rDesc"></div></div>
-      </div>
-
-      <!-- Resources -->
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--td);margin-bottom:.4rem">Personalised resources</div>
-      <div class="rres" id="rRes"></div>
-
-      <!-- Retake -->
-      <button onclick="retakeQuiz()" style="padding:.75rem;border:1.5px solid var(--border);border-radius:10px;background:transparent;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;color:var(--ts);cursor:pointer;transition:all .2s">↺ Retake quiz</button>
-
-      <div class="rdis">This quiz provides general wellbeing guidance only and does not constitute a clinical diagnosis. If you are experiencing significant mental health difficulties, please speak to your GP or call NHS 111. If you are in crisis, call 999 or the Samaritans on 116 123.</div>
-    </div>
-  </div>
 </div>
 
 <!-- INFO SECTION -->
 <section class="info">
-  <div class="info-in">
-    <div style="text-align:center;max-width:680px;margin:0 auto">
-      <div style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mind-purple);margin-bottom:.5rem">Five ways to wellbeing</div>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">Evidence-based steps to <em style="font-style:normal;color:var(--nhs-blue)">better mental health</em></h2>
-      <p style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">The NHS Five Ways to Wellbeing are evidence-based actions that meaningfully improve mental health and happiness.</p>
+    <div class="info-in">
+        <div style="text-align:center;max-width:680px;margin:0 auto">
+            <div style="font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mind-purple);margin-bottom:.5rem">
+                Five ways to wellbeing
+            </div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--td);margin-bottom:.6rem">
+                Evidence-based steps to <em style="font-style:normal;color:var(--nhs-blue)">better mental health</em>
+            </h2>
+            <p style="color:var(--tm);font-size:.95rem;line-height:1.7;max-width:580px;margin:0 auto">The NHS Five Ways
+                to Wellbeing are evidence-based actions that meaningfully improve mental health and happiness.</p>
+        </div>
+        <div class="igrid fu">
+            <div class="ic">
+                <div class="ic-ic">🤝</div>
+                <div class="ic-t">Connect</div>
+                <div class="ic-d">Strong social connections are one of the most protective factors for mental health.
+                    Invest time in relationships with family, friends, and your community.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">🏃</div>
+                <div class="ic-t">Be Active</div>
+                <div class="ic-d">Even 30 minutes of brisk walking can significantly reduce symptoms of depression and
+                    anxiety. Exercise is as effective as medication for mild-to-moderate depression.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">👀</div>
+                <div class="ic-t">Take Notice</div>
+                <div class="ic-d">Mindfulness and being present in the moment helps interrupt cycles of rumination and
+                    worry. Even brief moments of awareness during daily life are beneficial.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">📚</div>
+                <div class="ic-t">Keep Learning</div>
+                <div class="ic-d">Learning new skills builds confidence and a sense of purpose. It doesn't have to be
+                    formal — a new hobby, recipe, or language all count.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">🎁</div>
+                <div class="ic-t">Give</div>
+                <div class="ic-d">Acts of kindness and giving — however small — have a measurable positive impact on the
+                    giver's own mental wellbeing, not just the recipient's.
+                </div>
+            </div>
+            <div class="ic">
+                <div class="ic-ic">💊</div>
+                <div class="ic-t">Seek Support</div>
+                <div class="ic-d">Talking therapies (CBT, counselling) are highly effective and available free on the
+                    NHS. Your GP can refer you to NHS Talking Therapies — you can also self-refer.
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="igrid fu">
-      <div class="ic">
-        <div class="ic-ic">🤝</div>
-        <div class="ic-t">Connect</div>
-        <div class="ic-d">Strong social connections are one of the most protective factors for mental health. Invest time in relationships with family, friends, and your community.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">🏃</div>
-        <div class="ic-t">Be Active</div>
-        <div class="ic-d">Even 30 minutes of brisk walking can significantly reduce symptoms of depression and anxiety. Exercise is as effective as medication for mild-to-moderate depression.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">👀</div>
-        <div class="ic-t">Take Notice</div>
-        <div class="ic-d">Mindfulness and being present in the moment helps interrupt cycles of rumination and worry. Even brief moments of awareness during daily life are beneficial.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">📚</div>
-        <div class="ic-t">Keep Learning</div>
-        <div class="ic-d">Learning new skills builds confidence and a sense of purpose. It doesn't have to be formal — a new hobby, recipe, or language all count.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">🎁</div>
-        <div class="ic-t">Give</div>
-        <div class="ic-d">Acts of kindness and giving — however small — have a measurable positive impact on the giver's own mental wellbeing, not just the recipient's.</div>
-      </div>
-      <div class="ic">
-        <div class="ic-ic">💊</div>
-        <div class="ic-t">Seek Support</div>
-        <div class="ic-d">Talking therapies (CBT, counselling) are highly effective and available free on the NHS. Your GP can refer you to NHS Talking Therapies — you can also self-refer.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- EMERGENCY -->
 <section class="emerg">
-  <div class="emerg-in">
-    <div class="ec e111">
-      <div class="el">Mental Health Crisis Support</div>
-      <div class="en">NHS 111</div>
-      <div class="ed">Press option 2 for 24/7 mental health crisis support. You can also speak to a GP via our online consultation service for non-urgent concerns.</div>
+    <div class="emerg-in">
+        <div class="ec e111">
+            <div class="el">Mental Health Crisis Support</div>
+            <div class="en">NHS 111</div>
+            <div class="ed">Press option 2 for 24/7 mental health crisis support. You can also speak to a GP via our
+                online consultation service for non-urgent concerns.
+            </div>
+        </div>
+        <div class="ec e999">
+            <div class="el">Immediate Risk to Life</div>
+            <div class="en">999 / 116 123</div>
+            <div class="ed">Call 999 if you or someone else is in immediate danger. Samaritans are available 24/7 on 116
+                123 — free, confidential, and always listening.
+            </div>
+        </div>
     </div>
-    <div class="ec e999">
-      <div class="el">Immediate Risk to Life</div>
-      <div class="en">999 / 116 123</div>
-      <div class="ed">Call 999 if you or someone else is in immediate danger. Samaritans are available 24/7 on 116 123 — free, confidential, and always listening.</div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="fi2">
-    <div>
-      <div class="flw">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"><defs><linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="1"/><stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/><stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/><stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/><stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/><stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/><stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/></linearGradient><linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient><radialGradient id="fCS" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/></radialGradient><linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/><stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/></linearGradient><filter id="fsh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter><filter id="fTS"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter></defs><rect width="720" height="160" fill="#ffffff"/><circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/><circle cx="80" cy="80" r="63" fill="url(#fCS)"/><text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)" filter="url(#fTS)">SALUJA CLINIC</text><text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text></svg>
-      </div>
-      <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the physical and mental health of our community.</p>
-      <div class="fadr">
-        36A Northcote Avenue, Southall, UB1 2AY<br>
-        <a href="tel:02085745136">0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      </div>
+    <div class="fi2">
+        <div>
+            <div class="flw">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160">
+                    <defs>
+                        <linearGradient id="fS" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                            <stop offset="15%" stop-color="#d0d0d0" stop-opacity="1"/>
+                            <stop offset="30%" stop-color="#f8f8f8" stop-opacity="1"/>
+                            <stop offset="50%" stop-color="#a0a0a0" stop-opacity="1"/>
+                            <stop offset="65%" stop-color="#e8e8e8" stop-opacity="1"/>
+                            <stop offset="80%" stop-color="#b0b0b0" stop-opacity="1"/>
+                            <stop offset="100%" stop-color="#d8d8d8" stop-opacity="1"/>
+                        </linearGradient>
+                        <linearGradient id="fT" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#c8c8c8"/>
+                            <stop offset="10%" stop-color="#f0f0f0"/>
+                            <stop offset="25%" stop-color="#b0b0b0"/>
+                            <stop offset="40%" stop-color="#ffffff"/>
+                            <stop offset="55%" stop-color="#909090"/>
+                            <stop offset="70%" stop-color="#e0e0e0"/>
+                            <stop offset="85%" stop-color="#a8a8a8"/>
+                            <stop offset="100%" stop-color="#d0d0d0"/>
+                        </linearGradient>
+                        <radialGradient id="fCS" cx="38%" cy="32%" r="65%">
+                            <stop offset="0%" stop-color="#3a3a3a"/>
+                            <stop offset="40%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000000"/>
+                        </radialGradient>
+                        <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#666666"/>
+                            <stop offset="30%" stop-color="#222222"/>
+                            <stop offset="70%" stop-color="#444444"/>
+                            <stop offset="100%" stop-color="#111111"/>
+                        </linearGradient>
+                        <filter id="fsh" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                        </filter>
+                        <filter id="fTS">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                            <feOffset dx="0" dy="1" result="offsetBlur"/>
+                            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                        </filter>
+                    </defs>
+                    <rect width="720" height="160" fill="#ffffff"/>
+                    <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fsh)"/>
+                    <circle cx="80" cy="80" r="63" fill="url(#fCS)"/>
+                    <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90"
+                          font-weight="700" font-style="normal" text-anchor="middle" fill="url(#fS)">S
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fT)"
+                          filter="url(#fTS)">SALUJA CLINIC
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                          opacity="0.08">SALUJA CLINIC
+                    </text>
+                </svg>
+            </div>
+            <p class="ftag">Serving West London since 1976 — a trusted NHS GP practice committed to the physical and
+                mental health of our community.</p>
+            <div class="fadr">
+                36A Northcote Avenue, Southall, UB1 2AY<br>
+                <a href="tel:02085745136">0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            </div>
+        </div>
+        <div>
+            <div class="fh">Quick Links</div>
+            <ul class="fl">
+                <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+                <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="fh">Opening Hours</div>
+            <div class="hg">
+                <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
+                <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
+                <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="fh">Useful Links</div>
+            <ul class="fl">
+                <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.nhs.uk/mental-health/" target="_blank">NHS Mental Health</a></li>
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
+                <li><a href="https://www.samaritans.org/" target="_blank">Samaritans</a></li>
+                <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="fh">Quick Links</div>
-      <ul class="fl">
-        <li><a href="practice-policies-patient-information.html">Our Practice</a></li>
-        <li><a href="appointments.html">Appointments</a></li>
-        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
-        <li><a href="try-the-new-nhs-app.html">NHS App</a></li>
-        <li><a href="contact-us.html">Contact Us</a></li>
-      </ul>
+    <div class="fb">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="fh">Opening Hours</div>
-      <div class="hg">
-        <div class="hr2"><span>Mon – Fri</span><span>08:00 – 18:30</span></div>
-        <div class="hr2"><span class="hd">Saturday</span><span class="hd">Closed</span></div>
-        <div class="hr2"><span class="hd">Sunday</span><span class="hd">Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="fh">Useful Links</div>
-      <ul class="fl">
-        <li><a href="https://111.nhs.uk/" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.nhs.uk/mental-health/" target="_blank">NHS Mental Health</a></li>
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Online Consultation</a></li>
-        <li><a href="https://www.samaritans.org/" target="_blank">Samaritans</a></li>
-        <li><a href="friends-and-family-test.html">Friends &amp; Family Test</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="fb">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-/* ===== FADE UP ===== */
-var fo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.08});
-document.querySelectorAll('.fu').forEach(function(el){fo.observe(el)});
-
-/* ===== HERO WELLBEING RADAR ANIMATION ===== */
-(function(){
-  var cv=document.getElementById('wbCanvas');if(!cv)return;
-  var ctx=cv.getContext('2d');
-  var W=cv.width,H=cv.height;
-  var cx=W/2,cy=H/2+5,R=50;
-  var AXES=5;
-  var labels=['Mood','Sleep','Energy','Anxiety','Connection'];
-  var cols=['#a78bfa','#60a5fa','#4ade80','#fbbf24','#34d399'];
-
-  /* Demo states cycling */
-  var DEMOS=[
-    {emoji:'😔',title:'Feeling low',sub:'Low mood · Poor sleep',score:38,vals:[0.3,0.4,0.25,0.7,0.35],col:'#60a5fa'},
-    {emoji:'😐',title:'Feeling okay',sub:'Mild stress · Sleep disrupted',score:62,vals:[0.62,0.48,0.55,0.71,0.58],col:'#a78bfa'},
-    {emoji:'😰',title:'Anxious',sub:'High anxiety · Restless',score:44,vals:[0.42,0.35,0.48,0.88,0.40],col:'#fbbf24'},
-    {emoji:'😊',title:'Doing well',sub:'Good mood · Rested',score:81,vals:[0.85,0.80,0.78,0.22,0.88],col:'#4ade80'},
-    {emoji:'😴',title:'Exhausted',sub:'Very tired · Low energy',score:50,vals:[0.50,0.25,0.20,0.60,0.55],col:'#60a5fa'},
-  ];
-  var di=0;
-
-  /* Current animated values */
-  var cur=[0.62,0.48,0.55,0.71,0.58];
-  var target=[0.62,0.48,0.55,0.71,0.58];
-
-  function lerp(a,b,t){return a+(b-a)*t;}
-
-  function drawRadar(){
-    ctx.clearRect(0,0,W,H);
-
-    /* Grid rings */
-    for(var r=1;r<=4;r++){
-      var rr=R*(r/4);
-      ctx.beginPath();
-      for(var i=0;i<AXES;i++){
-        var a=i*Math.PI*2/AXES-Math.PI/2;
-        var px=cx+rr*Math.cos(a),py=cy+rr*Math.sin(a);
-        if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
-      }
-      ctx.closePath();
-      ctx.strokeStyle=r===2?'rgba(255,255,255,.12)':'rgba(255,255,255,.06)';
-      ctx.lineWidth=r===2?1:0.5;
-      ctx.stroke();
-    }
-
-    /* Axis lines */
-    for(var i=0;i<AXES;i++){
-      var a=i*Math.PI*2/AXES-Math.PI/2;
-      ctx.beginPath();ctx.moveTo(cx,cy);
-      ctx.lineTo(cx+R*Math.cos(a),cy+R*Math.sin(a));
-      ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=0.8;ctx.stroke();
-    }
-
-    /* Filled shape */
-    ctx.beginPath();
-    for(var i=0;i<AXES;i++){
-      var a=i*Math.PI*2/AXES-Math.PI/2;
-      var v=cur[i]*R;
-      var px=cx+v*Math.cos(a),py=cy+v*Math.sin(a);
-      if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
-    }
-    ctx.closePath();
-    ctx.fillStyle='rgba(124,58,237,.18)';ctx.fill();
-    ctx.strokeStyle='rgba(167,139,250,.7)';ctx.lineWidth=1.5;ctx.stroke();
-
-    /* Dots on vertices */
-    for(var i=0;i<AXES;i++){
-      var a=i*Math.PI*2/AXES-Math.PI/2;
-      var v=cur[i]*R;
-      var px=cx+v*Math.cos(a),py=cy+v*Math.sin(a);
-      ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);
-      ctx.fillStyle=cols[i];ctx.shadowColor=cols[i];ctx.shadowBlur=6;ctx.fill();ctx.shadowBlur=0;
-    }
-
-    /* Labels */
-    ctx.font='bold 7.5px DM Sans,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-    for(var i=0;i<AXES;i++){
-      var a=i*Math.PI*2/AXES-Math.PI/2;
-      var lx=cx+(R+14)*Math.cos(a),ly=cy+(R+14)*Math.sin(a);
-      ctx.fillStyle=cols[i];ctx.fillText(labels[i],lx,ly);
-    }
-
-    /* Animate toward target */
-    var done=true;
-    for(var i=0;i<AXES;i++){
-      cur[i]=lerp(cur[i],target[i],0.05);
-      if(Math.abs(cur[i]-target[i])>0.005)done=false;
-    }
-
-    requestAnimationFrame(drawRadar);
-  }
-
-  function animBar(id,valId,from,to,dur,col){
-    var el=document.getElementById(id);
-    var vl=document.getElementById(valId);
-    if(!el||!vl)return;
-    var s=null;
-    var fromW=from*100,toW=to*100;
-    function t(ts){
-      if(!s)s=ts;var p=Math.min((ts-s)/dur,1),e=1-Math.pow(1-p,3);
-      var v=fromW+(toW-fromW)*e;
-      el.style.width=v+'%';
-      vl.textContent=Math.round(v);
-      if(p<1)requestAnimationFrame(t);
-    }
-    requestAnimationFrame(t);
-  }
-
-  function animScore(from,to){
-    var el=document.getElementById('wbScore');if(!el)return;
-    var s=null;
-    function t(ts){
-      if(!s)s=ts;var p=Math.min((ts-s)/800,1),e=1-Math.pow(1-p,3);
-      el.textContent=Math.round(from+(to-from)*e);
-      if(p<1)requestAnimationFrame(t);
-    }
-    requestAnimationFrame(t);
-  }
-
-  function applyDemo(d){
-    target=d.vals.slice();
-    var prevScore=parseInt(document.getElementById('wbScore').textContent)||62;
-    animScore(prevScore,d.score);
-    document.getElementById('wbScore').style.color=d.col;
-    document.getElementById('wbEmoji').textContent=d.emoji;
-    document.getElementById('wbTitle').textContent=d.title;
-    document.getElementById('wbSub').textContent=d.sub;
-    var barIds=[['barMood','valMood'],['barSleep','valSleep'],['barEnergy','valEnergy'],['barAnxiety','valAnxiety'],['barConnect','valConnect']];
-    barIds.forEach(function(pair,i){
-      var prevW=parseFloat(document.getElementById(pair[0]).style.width)/100||cur[i];
-      animBar(pair[0],pair[1],prevW,d.vals[i],900,cols[i]);
+    /* ===== FADE UP ===== */
+    var fo = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+            if (e.isIntersecting) e.target.classList.add('vis')
+        })
+    }, {threshold: 0.08});
+    document.querySelectorAll('.fu').forEach(function (el) {
+        fo.observe(el)
     });
-  }
 
-  drawRadar();
-  applyDemo(DEMOS[0]);
-  setInterval(function(){di=(di+1)%DEMOS.length;applyDemo(DEMOS[di]);},3400);
-})();
+    /* ===== HERO WELLBEING RADAR ANIMATION ===== */
+    (function () {
+        var cv = document.getElementById('wbCanvas');
+        if (!cv) return;
+        var ctx = cv.getContext('2d');
+        var W = cv.width, H = cv.height;
+        var cx = W / 2, cy = H / 2 + 5, R = 50;
+        var AXES = 5;
+        var labels = ['Mood', 'Sleep', 'Energy', 'Anxiety', 'Connection'];
+        var cols = ['#a78bfa', '#60a5fa', '#4ade80', '#fbbf24', '#34d399'];
 
-/* ===== QUIZ ===== */
-var QUESTIONS=[
-  {q:'Over the past 2 weeks, how often have you felt down, depressed, or hopeless?',cat:'mood',opts:[
-    {l:'Not at all',sc:0},{l:'Several days',sc:1},{l:'More than half the days',sc:2},{l:'Nearly every day',sc:3}]},
-  {q:'Over the past 2 weeks, how often have you had little interest or pleasure in doing things?',cat:'mood',opts:[
-    {l:'Not at all',sc:0},{l:'Several days',sc:1},{l:'More than half the days',sc:2},{l:'Nearly every day',sc:3}]},
-  {q:'Over the past 2 weeks, how often have you felt nervous, anxious, or on edge?',cat:'anxiety',opts:[
-    {l:'Not at all',sc:0},{l:'Several days',sc:1},{l:'More than half the days',sc:2},{l:'Nearly every day',sc:3}]},
-  {q:'Over the past 2 weeks, how often have you been unable to stop or control worrying?',cat:'anxiety',opts:[
-    {l:'Not at all',sc:0},{l:'Several days',sc:1},{l:'More than half the days',sc:2},{l:'Nearly every day',sc:3}]},
-  {q:'How would you describe your sleep over the past 2 weeks?',cat:'sleep',opts:[
-    {l:'Sleeping well most nights',sc:0},{l:'Occasional poor nights',sc:1},{l:'Regularly poor — waking or restless',sc:2},{l:'Very poor — affecting daily life',sc:3}]},
-  {q:'How would you describe your energy levels day-to-day?',cat:'energy',opts:[
-    {l:'Good energy most days',sc:0},{l:'Occasionally tired',sc:1},{l:'Often tired, low motivation',sc:2},{l:'Exhausted or unable to function',sc:3}]},
-  {q:'How connected do you feel to friends, family, or your community?',cat:'connection',opts:[
-    {l:'Very connected and supported',sc:0},{l:'Somewhat connected',sc:1},{l:'Feeling quite isolated',sc:2},{l:'Very lonely or cut off',sc:3}]},
-  {q:'How often do you do physical activity (walking, sport, exercise)?',cat:'lifestyle',opts:[
-    {l:'Most days',sc:0},{l:'A few times a week',sc:1},{l:'Rarely — once a week or less',sc:2},{l:'Not at all',sc:3}]},
-  {q:'How confident do you feel in managing day-to-day stresses and challenges?',cat:'mood',opts:[
-    {l:'Very confident',sc:0},{l:'Fairly confident',sc:1},{l:'Not very confident',sc:2},{l:'Not confident at all',sc:3}]},
-  {q:'Have you recently felt that things are hopeless or that nothing will improve?',cat:'mood',opts:[
-    {l:'No, things feel manageable',sc:0},{l:'Occasionally',sc:1},{l:'Fairly often',sc:2},{l:'Yes, most of the time',sc:3}]},
-];
+        /* Demo states cycling */
+        var DEMOS = [
+            {
+                emoji: '😔',
+                title: 'Feeling low',
+                sub: 'Low mood · Poor sleep',
+                score: 38,
+                vals: [0.3, 0.4, 0.25, 0.7, 0.35],
+                col: '#60a5fa'
+            },
+            {
+                emoji: '😐',
+                title: 'Feeling okay',
+                sub: 'Mild stress · Sleep disrupted',
+                score: 62,
+                vals: [0.62, 0.48, 0.55, 0.71, 0.58],
+                col: '#a78bfa'
+            },
+            {
+                emoji: '😰',
+                title: 'Anxious',
+                sub: 'High anxiety · Restless',
+                score: 44,
+                vals: [0.42, 0.35, 0.48, 0.88, 0.40],
+                col: '#fbbf24'
+            },
+            {
+                emoji: '😊',
+                title: 'Doing well',
+                sub: 'Good mood · Rested',
+                score: 81,
+                vals: [0.85, 0.80, 0.78, 0.22, 0.88],
+                col: '#4ade80'
+            },
+            {
+                emoji: '😴',
+                title: 'Exhausted',
+                sub: 'Very tired · Low energy',
+                score: 50,
+                vals: [0.50, 0.25, 0.20, 0.60, 0.55],
+                col: '#60a5fa'
+            },
+        ];
+        var di = 0;
 
-var qIdx=0;
-var answers=new Array(QUESTIONS.length).fill(null);
+        /* Current animated values */
+        var cur = [0.62, 0.48, 0.55, 0.71, 0.58];
+        var target = [0.62, 0.48, 0.55, 0.71, 0.58];
 
-function renderQ(){
-  var q=QUESTIONS[qIdx];
-  var pct=((qIdx+1)/QUESTIONS.length*100)+'%';
-  document.getElementById('progFill').style.width=pct;
-  document.getElementById('progNum').textContent='Question '+(qIdx+1)+' of '+QUESTIONS.length;
+        function lerp(a, b, t) {
+            return a + (b - a) * t;
+        }
 
-  var html='<div class="qblock show"><div class="qq">'+q.q+'</div><div class="qopts">';
-  q.opts.forEach(function(o,i){
-    var sel=answers[qIdx]===i?' sel':'';
-    html+='<div class="qopt'+sel+'" onclick="pickOpt('+i+')"><div class="qopt-dot"></div><div class="qopt-lbl">'+o.l+'</div></div>';
-  });
-  html+='</div></div>';
-  document.getElementById('qArea').innerHTML=html;
+        function drawRadar() {
+            ctx.clearRect(0, 0, W, H);
 
-  document.getElementById('btnPrev').style.display=qIdx>0?'':'none';
-  var btnNext=document.getElementById('btnNext');
-  btnNext.disabled=answers[qIdx]===null;
-  btnNext.textContent=qIdx===QUESTIONS.length-1?'See my plan →':'Next →';
-}
+            /* Grid rings */
+            for (var r = 1; r <= 4; r++) {
+                var rr = R * (r / 4);
+                ctx.beginPath();
+                for (var i = 0; i < AXES; i++) {
+                    var a = i * Math.PI * 2 / AXES - Math.PI / 2;
+                    var px = cx + rr * Math.cos(a), py = cy + rr * Math.sin(a);
+                    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = r === 2 ? 'rgba(255,255,255,.12)' : 'rgba(255,255,255,.06)';
+                ctx.lineWidth = r === 2 ? 1 : 0.5;
+                ctx.stroke();
+            }
 
-function pickOpt(i){
-  answers[qIdx]=i;
-  document.querySelectorAll('.qopt').forEach(function(el,j){
-    el.classList.toggle('sel',j===i);
-    el.querySelector('.qopt-dot').style.background=j===i?'var(--nhs-blue)':'';
-  });
-  document.getElementById('btnNext').disabled=false;
-}
+            /* Axis lines */
+            for (var i = 0; i < AXES; i++) {
+                var a = i * Math.PI * 2 / AXES - Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+                ctx.strokeStyle = 'rgba(255,255,255,.08)';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+            }
 
-function qNext(){
-  if(answers[qIdx]===null)return;
-  if(qIdx===QUESTIONS.length-1){showResult();return;}
-  qIdx++;renderQ();
-}
+            /* Filled shape */
+            ctx.beginPath();
+            for (var i = 0; i < AXES; i++) {
+                var a = i * Math.PI * 2 / AXES - Math.PI / 2;
+                var v = cur[i] * R;
+                var px = cx + v * Math.cos(a), py = cy + v * Math.sin(a);
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(124,58,237,.18)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(167,139,250,.7)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
 
-function qPrev(){
-  if(qIdx>0){qIdx--;renderQ();}
-}
+            /* Dots on vertices */
+            for (var i = 0; i < AXES; i++) {
+                var a = i * Math.PI * 2 / AXES - Math.PI / 2;
+                var v = cur[i] * R;
+                var px = cx + v * Math.cos(a), py = cy + v * Math.sin(a);
+                ctx.beginPath();
+                ctx.arc(px, py, 3, 0, Math.PI * 2);
+                ctx.fillStyle = cols[i];
+                ctx.shadowColor = cols[i];
+                ctx.shadowBlur = 6;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
 
-function retakeQuiz(){
-  qIdx=0;answers=new Array(QUESTIONS.length).fill(null);
-  document.getElementById('rcard').classList.remove('show');
-  document.getElementById('defp').style.display='';
-  document.getElementById('qnav').style.display='';
-  document.getElementById('progFill').style.width='10%';
-  renderQ();
-  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
-}
+            /* Labels */
+            ctx.font = 'bold 7.5px DM Sans,sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (var i = 0; i < AXES; i++) {
+                var a = i * Math.PI * 2 / AXES - Math.PI / 2;
+                var lx = cx + (R + 14) * Math.cos(a), ly = cy + (R + 14) * Math.sin(a);
+                ctx.fillStyle = cols[i];
+                ctx.fillText(labels[i], lx, ly);
+            }
 
-function showResult(){
-  /* Calculate scores per category */
-  var cats={mood:0,anxiety:0,sleep:0,energy:0,connection:0,lifestyle:0};
-  var maxes={mood:0,anxiety:0,sleep:0,energy:0,connection:0,lifestyle:0};
-  QUESTIONS.forEach(function(q,i){
-    cats[q.cat]+=answers[i]||0;
-    maxes[q.cat]+=3;
-  });
+            /* Animate toward target */
+            var done = true;
+            for (var i = 0; i < AXES; i++) {
+                cur[i] = lerp(cur[i], target[i], 0.05);
+                if (Math.abs(cur[i] - target[i]) > 0.005) done = false;
+            }
 
-  /* Convert to 0-100 (inverted: 0 answered = 100 score) */
-  var scores={};
-  var catNames=Object.keys(cats);
-  var totalRaw=0,totalMax=0;
-  catNames.forEach(function(c){
-    if(maxes[c]>0){scores[c]=Math.round((1-cats[c]/maxes[c])*100);}
-    totalRaw+=cats[c];totalMax+=maxes[c];
-  });
-  var overall=Math.round((1-totalRaw/totalMax)*100);
+            requestAnimationFrame(drawRadar);
+        }
 
-  /* Category result */
-  var cat,catCol,catBg,catBrd,icon,title,desc;
-  if(overall>=75){
-    cat='Thriving';catCol='#15803d';catBg='rgba(21,128,61,.1)';catBrd='rgba(21,128,61,.25)';
-    icon='✅';title='Your wellbeing score is strong';
-    desc='Your answers suggest you are in a good place mentally. Continue with the habits that are working for you, and keep an eye out for any changes — early awareness is one of the best tools for maintaining good mental health.';
-  } else if(overall>=50){
-    cat='Managing';catCol='#7c3aed';catBg='rgba(124,58,237,.1)';catBrd='rgba(124,58,237,.25)';
-    icon='💛';title='You are managing, but some areas need attention';
-    desc='Your score suggests you are coping day-to-day, but some areas — particularly those highlighted below — may benefit from additional support or small changes. The resources below are a good starting point.';
-  } else if(overall>=30){
-    cat='Struggling';catCol='#b45309';catBg='rgba(180,83,9,.1)';catBrd='rgba(180,83,9,.25)';
-    icon='🟠';title='Your score suggests you may be struggling';
-    desc='Several areas of your wellbeing appear to be under strain. This is a signal worth taking seriously. Talking therapies and GP support are highly effective — please use the resources below and consider booking an appointment.';
-  } else {
-    cat='Needs Support';catCol='#c2410c';catBg='rgba(194,65,12,.1)';catBrd='rgba(194,65,12,.25)';
-    icon='🔴';title='Your score indicates significant distress';
-    desc='Your answers suggest significant difficulties across several areas of mental health. Please reach out for support — speaking to your GP is a very important next step. You do not have to manage this alone.';
-  }
+        function animBar(id, valId, from, to, dur, col) {
+            var el = document.getElementById(id);
+            var vl = document.getElementById(valId);
+            if (!el || !vl) return;
+            var s = null;
+            var fromW = from * 100, toW = to * 100;
 
-  /* Resources based on lowest scoring areas */
-  var sortedCats=catNames.filter(function(c){return maxes[c]>0;}).sort(function(a,b){return scores[a]-scores[b];});
-  var resources=[];
-  if(scores.mood<50||scores.anxiety<50){
-    resources.push({ic:'💬',t:'NHS Talking Therapies',d:'Free CBT, counselling and other therapies. Self-refer online — no GP referral needed.',url:'https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/nhs-talking-therapies/'});
-  }
-  if(scores.sleep<50){
-    resources.push({ic:'😴',t:'NHS Sleep Self-Help Guide',d:'Evidence-based sleep hygiene techniques and cognitive approaches to insomnia.',url:'https://www.nhs.uk/every-mind-matters/mental-health-issues/sleep/'});
-  }
-  if(scores.energy<50||scores.mood<50){
-    resources.push({ic:'🧠',t:'Every Mind Matters',d:'NHS-backed personalised mental health tips, tools, and a free Mind Plan.',url:'https://www.nhs.uk/every-mind-matters/'});
-  }
-  if(scores.connection<60){
-    resources.push({ic:'🤝',t:'Mental Health Foundation: Loneliness',d:'Practical advice and local resources for reducing loneliness and building connection.',url:'https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/loneliness'});
-  }
-  resources.push({ic:'🏥',t:'Book a GP Appointment',d:'Your GP can discuss your results, provide a clinical assessment, and refer to specialist services.',url:'https://salujaclinic.webgp.com/'});
+            function t(ts) {
+                if (!s) s = ts;
+                var p = Math.min((ts - s) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+                var v = fromW + (toW - fromW) * e;
+                el.style.width = v + '%';
+                vl.textContent = Math.round(v);
+                if (p < 1) requestAnimationFrame(t);
+            }
 
-  /* Hide quiz nav */
-  document.getElementById('qnav').style.display='none';
+            requestAnimationFrame(t);
+        }
 
-  /* Show result card */
-  document.getElementById('defp').style.display='none';
-  var rc=document.getElementById('rcard');rc.classList.add('show');
+        function animScore(from, to) {
+            var el = document.getElementById('wbScore');
+            if (!el) return;
+            var s = null;
 
-  /* Ring animation */
-  var circumference=2*Math.PI*64;
-  var offset=circumference*(1-overall/100);
-  setTimeout(function(){
-    document.getElementById('ringArc').style.strokeDashoffset=offset;
-    document.getElementById('ringScore').textContent=overall;
-  },200);
+            function t(ts) {
+                if (!s) s = ts;
+                var p = Math.min((ts - s) / 800, 1), e = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(from + (to - from) * e);
+                if (p < 1) requestAnimationFrame(t);
+            }
 
-  /* Category badge */
-  var catEl=document.getElementById('rCat');
-  catEl.textContent='● '+cat;
-  catEl.style.background=catBg;catEl.style.color=catCol;catEl.style.border='1.5px solid '+catBrd;
+            requestAnimationFrame(t);
+        }
 
-  /* Breakdown bars */
-  var bdColors={mood:'#a78bfa',anxiety:'#fbbf24',sleep:'#60a5fa',energy:'#4ade80',connection:'#34d399',lifestyle:'#38bdf8'};
-  var bdLabels={mood:'Mood',anxiety:'Anxiety',sleep:'Sleep',energy:'Energy',connection:'Connection',lifestyle:'Lifestyle'};
-  var bdHtml='';
-  catNames.filter(function(c){return maxes[c]>0;}).forEach(function(c){
-    bdHtml+='<div class="sb-row"><div class="sb-name">'+bdLabels[c]+'</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:'+bdColors[c]+'" data-w="'+scores[c]+'"></div></div><div class="sb-val">'+scores[c]+'</div></div>';
-  });
-  document.getElementById('scoreBreakdown').innerHTML=bdHtml;
-  setTimeout(function(){
-    document.querySelectorAll('.sb-fill').forEach(function(el){el.style.width=el.getAttribute('data-w')+'%';});
-  },300);
+        function applyDemo(d) {
+            target = d.vals.slice();
+            var prevScore = parseInt(document.getElementById('wbScore').textContent) || 62;
+            animScore(prevScore, d.score);
+            document.getElementById('wbScore').style.color = d.col;
+            document.getElementById('wbEmoji').textContent = d.emoji;
+            document.getElementById('wbTitle').textContent = d.title;
+            document.getElementById('wbSub').textContent = d.sub;
+            var barIds = [['barMood', 'valMood'], ['barSleep', 'valSleep'], ['barEnergy', 'valEnergy'], ['barAnxiety', 'valAnxiety'], ['barConnect', 'valConnect']];
+            barIds.forEach(function (pair, i) {
+                var prevW = parseFloat(document.getElementById(pair[0]).style.width) / 100 || cur[i];
+                animBar(pair[0], pair[1], prevW, d.vals[i], 900, cols[i]);
+            });
+        }
 
-  document.getElementById('rIcon').textContent=icon;
-  document.getElementById('rTitle').textContent=title;
-  document.getElementById('rDesc').textContent=desc;
-  /* Render resource links */
-  var resHtml='';
-  resources.forEach(function(r){
-    resHtml+='<a href="'+r.url+'" target="_blank" rel="noopener" style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;background:var(--off);border:1px solid var(--border);border-radius:.6rem;text-decoration:none;color:var(--td);transition:box-shadow .2s">'
-      +'<span style="font-size:1.4rem;line-height:1">'+r.ic+'</span>'
-      +'<div><div style="font-weight:600;font-size:.9rem;margin-bottom:.2rem;color:var(--nhs-dark)">'+r.t+'</div>'
-      +'<div style="font-size:.8rem;color:var(--ts);line-height:1.4">'+r.d+'</div></div></a>';
-  });
-  document.getElementById('rRes').innerHTML=resHtml;
-}
+        drawRadar();
+        applyDemo(DEMOS[0]);
+        setInterval(function () {
+            di = (di + 1) % DEMOS.length;
+            applyDemo(DEMOS[di]);
+        }, 3400);
+    })();
 
-renderQ();
+    /* ===== QUIZ ===== */
+    var QUESTIONS = [
+        {
+            q: 'Over the past 2 weeks, how often have you felt down, depressed, or hopeless?', cat: 'mood', opts: [
+                {l: 'Not at all', sc: 0}, {l: 'Several days', sc: 1}, {
+                    l: 'More than half the days',
+                    sc: 2
+                }, {l: 'Nearly every day', sc: 3}]
+        },
+        {
+            q: 'Over the past 2 weeks, how often have you had little interest or pleasure in doing things?',
+            cat: 'mood',
+            opts: [
+                {l: 'Not at all', sc: 0}, {l: 'Several days', sc: 1}, {
+                    l: 'More than half the days',
+                    sc: 2
+                }, {l: 'Nearly every day', sc: 3}]
+        },
+        {
+            q: 'Over the past 2 weeks, how often have you felt nervous, anxious, or on edge?', cat: 'anxiety', opts: [
+                {l: 'Not at all', sc: 0}, {l: 'Several days', sc: 1}, {
+                    l: 'More than half the days',
+                    sc: 2
+                }, {l: 'Nearly every day', sc: 3}]
+        },
+        {
+            q: 'Over the past 2 weeks, how often have you been unable to stop or control worrying?',
+            cat: 'anxiety',
+            opts: [
+                {l: 'Not at all', sc: 0}, {l: 'Several days', sc: 1}, {
+                    l: 'More than half the days',
+                    sc: 2
+                }, {l: 'Nearly every day', sc: 3}]
+        },
+        {
+            q: 'How would you describe your sleep over the past 2 weeks?', cat: 'sleep', opts: [
+                {l: 'Sleeping well most nights', sc: 0}, {
+                    l: 'Occasional poor nights',
+                    sc: 1
+                }, {l: 'Regularly poor — waking or restless', sc: 2}, {l: 'Very poor — affecting daily life', sc: 3}]
+        },
+        {
+            q: 'How would you describe your energy levels day-to-day?', cat: 'energy', opts: [
+                {l: 'Good energy most days', sc: 0}, {
+                    l: 'Occasionally tired',
+                    sc: 1
+                }, {l: 'Often tired, low motivation', sc: 2}, {l: 'Exhausted or unable to function', sc: 3}]
+        },
+        {
+            q: 'How connected do you feel to friends, family, or your community?', cat: 'connection', opts: [
+                {l: 'Very connected and supported', sc: 0}, {
+                    l: 'Somewhat connected',
+                    sc: 1
+                }, {l: 'Feeling quite isolated', sc: 2}, {l: 'Very lonely or cut off', sc: 3}]
+        },
+        {
+            q: 'How often do you do physical activity (walking, sport, exercise)?', cat: 'lifestyle', opts: [
+                {l: 'Most days', sc: 0}, {l: 'A few times a week', sc: 1}, {
+                    l: 'Rarely — once a week or less',
+                    sc: 2
+                }, {l: 'Not at all', sc: 3}]
+        },
+        {
+            q: 'How confident do you feel in managing day-to-day stresses and challenges?', cat: 'mood', opts: [
+                {l: 'Very confident', sc: 0}, {l: 'Fairly confident', sc: 1}, {
+                    l: 'Not very confident',
+                    sc: 2
+                }, {l: 'Not confident at all', sc: 3}]
+        },
+        {
+            q: 'Have you recently felt that things are hopeless or that nothing will improve?', cat: 'mood', opts: [
+                {l: 'No, things feel manageable', sc: 0}, {l: 'Occasionally', sc: 1}, {
+                    l: 'Fairly often',
+                    sc: 2
+                }, {l: 'Yes, most of the time', sc: 3}]
+        },
+    ];
+
+    var qIdx = 0;
+    var answers = new Array(QUESTIONS.length).fill(null);
+
+    function renderQ() {
+        var q = QUESTIONS[qIdx];
+        var pct = ((qIdx + 1) / QUESTIONS.length * 100) + '%';
+        document.getElementById('progFill').style.width = pct;
+        document.getElementById('progNum').textContent = 'Question ' + (qIdx + 1) + ' of ' + QUESTIONS.length;
+
+        var html = '<div class="qblock show"><div class="qq">' + q.q + '</div><div class="qopts">';
+        q.opts.forEach(function (o, i) {
+            var sel = answers[qIdx] === i ? ' sel' : '';
+            html += '<div class="qopt' + sel + '" onclick="pickOpt(' + i + ')"><div class="qopt-dot"></div><div class="qopt-lbl">' + o.l + '</div></div>';
+        });
+        html += '</div></div>';
+        document.getElementById('qArea').innerHTML = html;
+
+        document.getElementById('btnPrev').style.display = qIdx > 0 ? '' : 'none';
+        var btnNext = document.getElementById('btnNext');
+        btnNext.disabled = answers[qIdx] === null;
+        btnNext.textContent = qIdx === QUESTIONS.length - 1 ? 'See my plan →' : 'Next →';
+    }
+
+    function pickOpt(i) {
+        answers[qIdx] = i;
+        document.querySelectorAll('.qopt').forEach(function (el, j) {
+            el.classList.toggle('sel', j === i);
+            el.querySelector('.qopt-dot').style.background = j === i ? 'var(--nhs-blue)' : '';
+        });
+        document.getElementById('btnNext').disabled = false;
+    }
+
+    function qNext() {
+        if (answers[qIdx] === null) return;
+        if (qIdx === QUESTIONS.length - 1) {
+            showResult();
+            return;
+        }
+        qIdx++;
+        renderQ();
+    }
+
+    function qPrev() {
+        if (qIdx > 0) {
+            qIdx--;
+            renderQ();
+        }
+    }
+
+    function retakeQuiz() {
+        qIdx = 0;
+        answers = new Array(QUESTIONS.length).fill(null);
+        document.getElementById('rcard').classList.remove('show');
+        document.getElementById('defp').style.display = '';
+        document.getElementById('qnav').style.display = '';
+        document.getElementById('progFill').style.width = '10%';
+        renderQ();
+        document.getElementById('quiz').scrollIntoView({behavior: 'smooth'});
+    }
+
+    function showResult() {
+        /* Calculate scores per category */
+        var cats = {mood: 0, anxiety: 0, sleep: 0, energy: 0, connection: 0, lifestyle: 0};
+        var maxes = {mood: 0, anxiety: 0, sleep: 0, energy: 0, connection: 0, lifestyle: 0};
+        QUESTIONS.forEach(function (q, i) {
+            cats[q.cat] += answers[i] || 0;
+            maxes[q.cat] += 3;
+        });
+
+        /* Convert to 0-100 (inverted: 0 answered = 100 score) */
+        var scores = {};
+        var catNames = Object.keys(cats);
+        var totalRaw = 0, totalMax = 0;
+        catNames.forEach(function (c) {
+            if (maxes[c] > 0) {
+                scores[c] = Math.round((1 - cats[c] / maxes[c]) * 100);
+            }
+            totalRaw += cats[c];
+            totalMax += maxes[c];
+        });
+        var overall = Math.round((1 - totalRaw / totalMax) * 100);
+
+        /* Category result */
+        var cat, catCol, catBg, catBrd, icon, title, desc;
+        if (overall >= 75) {
+            cat = 'Thriving';
+            catCol = '#15803d';
+            catBg = 'rgba(21,128,61,.1)';
+            catBrd = 'rgba(21,128,61,.25)';
+            icon = '✅';
+            title = 'Your wellbeing score is strong';
+            desc = 'Your answers suggest you are in a good place mentally. Continue with the habits that are working for you, and keep an eye out for any changes — early awareness is one of the best tools for maintaining good mental health.';
+        } else if (overall >= 50) {
+            cat = 'Managing';
+            catCol = '#7c3aed';
+            catBg = 'rgba(124,58,237,.1)';
+            catBrd = 'rgba(124,58,237,.25)';
+            icon = '💛';
+            title = 'You are managing, but some areas need attention';
+            desc = 'Your score suggests you are coping day-to-day, but some areas — particularly those highlighted below — may benefit from additional support or small changes. The resources below are a good starting point.';
+        } else if (overall >= 30) {
+            cat = 'Struggling';
+            catCol = '#b45309';
+            catBg = 'rgba(180,83,9,.1)';
+            catBrd = 'rgba(180,83,9,.25)';
+            icon = '🟠';
+            title = 'Your score suggests you may be struggling';
+            desc = 'Several areas of your wellbeing appear to be under strain. This is a signal worth taking seriously. Talking therapies and GP support are highly effective — please use the resources below and consider booking an appointment.';
+        } else {
+            cat = 'Needs Support';
+            catCol = '#c2410c';
+            catBg = 'rgba(194,65,12,.1)';
+            catBrd = 'rgba(194,65,12,.25)';
+            icon = '🔴';
+            title = 'Your score indicates significant distress';
+            desc = 'Your answers suggest significant difficulties across several areas of mental health. Please reach out for support — speaking to your GP is a very important next step. You do not have to manage this alone.';
+        }
+
+        /* Resources based on lowest scoring areas */
+        var sortedCats = catNames.filter(function (c) {
+            return maxes[c] > 0;
+        }).sort(function (a, b) {
+            return scores[a] - scores[b];
+        });
+        var resources = [];
+        if (scores.mood < 50 || scores.anxiety < 50) {
+            resources.push({
+                ic: '💬',
+                t: 'NHS Talking Therapies',
+                d: 'Free CBT, counselling and other therapies. Self-refer online — no GP referral needed.',
+                url: 'https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/nhs-talking-therapies/'
+            });
+        }
+        if (scores.sleep < 50) {
+            resources.push({
+                ic: '😴',
+                t: 'NHS Sleep Self-Help Guide',
+                d: 'Evidence-based sleep hygiene techniques and cognitive approaches to insomnia.',
+                url: 'https://www.nhs.uk/every-mind-matters/mental-health-issues/sleep/'
+            });
+        }
+        if (scores.energy < 50 || scores.mood < 50) {
+            resources.push({
+                ic: '🧠',
+                t: 'Every Mind Matters',
+                d: 'NHS-backed personalised mental health tips, tools, and a free Mind Plan.',
+                url: 'https://www.nhs.uk/every-mind-matters/'
+            });
+        }
+        if (scores.connection < 60) {
+            resources.push({
+                ic: '🤝',
+                t: 'Mental Health Foundation: Loneliness',
+                d: 'Practical advice and local resources for reducing loneliness and building connection.',
+                url: 'https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/loneliness'
+            });
+        }
+        resources.push({
+            ic: '🏥',
+            t: 'Book a GP Appointment',
+            d: 'Your GP can discuss your results, provide a clinical assessment, and refer to specialist services.',
+            url: 'https://salujaclinic.webgp.com/'
+        });
+
+        /* Hide quiz nav */
+        document.getElementById('qnav').style.display = 'none';
+
+        /* Show result card */
+        document.getElementById('defp').style.display = 'none';
+        var rc = document.getElementById('rcard');
+        rc.classList.add('show');
+
+        /* Ring animation */
+        var circumference = 2 * Math.PI * 64;
+        var offset = circumference * (1 - overall / 100);
+        setTimeout(function () {
+            document.getElementById('ringArc').style.strokeDashoffset = offset;
+            document.getElementById('ringScore').textContent = overall;
+        }, 200);
+
+        /* Category badge */
+        var catEl = document.getElementById('rCat');
+        catEl.textContent = '● ' + cat;
+        catEl.style.background = catBg;
+        catEl.style.color = catCol;
+        catEl.style.border = '1.5px solid ' + catBrd;
+
+        /* Breakdown bars */
+        var bdColors = {
+            mood: '#a78bfa',
+            anxiety: '#fbbf24',
+            sleep: '#60a5fa',
+            energy: '#4ade80',
+            connection: '#34d399',
+            lifestyle: '#38bdf8'
+        };
+        var bdLabels = {
+            mood: 'Mood',
+            anxiety: 'Anxiety',
+            sleep: 'Sleep',
+            energy: 'Energy',
+            connection: 'Connection',
+            lifestyle: 'Lifestyle'
+        };
+        var bdHtml = '';
+        catNames.filter(function (c) {
+            return maxes[c] > 0;
+        }).forEach(function (c) {
+            bdHtml += '<div class="sb-row"><div class="sb-name">' + bdLabels[c] + '</div><div class="sb-track"><div class="sb-fill" style="width:0%;background:' + bdColors[c] + '" data-w="' + scores[c] + '"></div></div><div class="sb-val">' + scores[c] + '</div></div>';
+        });
+        document.getElementById('scoreBreakdown').innerHTML = bdHtml;
+        setTimeout(function () {
+            document.querySelectorAll('.sb-fill').forEach(function (el) {
+                el.style.width = el.getAttribute('data-w') + '%';
+            });
+        }, 300);
+
+        document.getElementById('rIcon').textContent = icon;
+        document.getElementById('rTitle').textContent = title;
+        document.getElementById('rDesc').textContent = desc;
+        /* Render resource links */
+        var resHtml = '';
+        resources.forEach(function (r) {
+            resHtml += '<a href="' + r.url + '" target="_blank" rel="noopener" style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;background:var(--off);border:1px solid var(--border);border-radius:.6rem;text-decoration:none;color:var(--td);transition:box-shadow .2s">'
+                + '<span style="font-size:1.4rem;line-height:1">' + r.ic + '</span>'
+                + '<div><div style="font-weight:600;font-size:.9rem;margin-bottom:.2rem;color:var(--nhs-dark)">' + r.t + '</div>'
+                + '<div style="font-size:.8rem;color:var(--ts);line-height:1.4">' + r.d + '</div></div></a>';
+        });
+        document.getElementById('rRes').innerHTML = resHtml;
+    }
+
+    renderQ();
 </script>
 </body>
 </html>

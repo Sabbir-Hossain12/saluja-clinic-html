@@ -1,1032 +1,2009 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us – Saluja Clinic · West London GP Practice</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact Us – Saluja Clinic · West London GP Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
 
-  <style>
-    /* ── NHS Colour Palette ─────────────────────────────── */
-    :root {
-      --nhs-blue:        #005EB8;
-      --nhs-dark:        #003087;
-      --nhs-aqua:        #009FBB;
-      --nhs-green:       #007F3B;
-      --nhs-light-blue:  #41B6E6;
-      --nhs-warm-yellow: #FFB81C;
-      --white:           #ffffff;
-      --off-white:       #f5f8fc;
-      --text-dark:       #1a1a2e;
-      --text-mid:        #3a3a5c;
-      --text-soft:       #6b7a99;
-      --border:          #d8e4f0;
-    }
+    <style>
+        /* ── NHS Colour Palette ─────────────────────────────── */
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --nhs-warm-yellow: #FFB81C;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+        }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── FADE-UP ANIMATION ───────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── TOP UTILITY BAR ─────────────────────────────────── */
-    .utility-bar {
-      background: var(--nhs-dark);
-      color: rgba(255,255,255,0.85);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      padding: 0.45rem 0;
-    }
-    .utility-bar .inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 0.4rem;
-    }
-    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .utility-bar a:hover { color: #fff; }
-    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
-    .util-pill {
-      background: rgba(255,255,255,0.12);
-      border-radius: 20px;
-      padding: 0.2rem 0.8rem;
-    }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    /* ── HEADER ──────────────────────────────────────────── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--white);
-      border-bottom: 3px solid var(--nhs-blue);
-      box-shadow: 0 2px 24px rgba(0,94,184,0.10);
-    }
-    .header-inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 100px;
-    }
-    .logo-wrap svg { height: 84px; width: auto; }
+        /* ── FADE-UP ANIMATION ───────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
 
-    nav { display: flex; align-items: center; gap: 0.25rem; }
-    nav a {
-      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
-      color: var(--text-mid); text-decoration: none;
-      padding: 0.5rem 0.9rem; border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
-    }
-    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
-    nav a.active { color: var(--nhs-blue); background: rgba(0,94,184,0.07); font-weight: 600; }
-    .nav-cta {
-      background: var(--nhs-blue) !important; color: var(--white) !important;
-      padding: 0.55rem 1.2rem !important; border-radius: 8px !important;
-      margin-left: 0.5rem;
-      box-shadow: 0 2px 10px rgba(0,94,184,0.25);
-      transition: background 0.2s, transform 0.15s !important;
-    }
-    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* ── PAGE HERO BANNER ────────────────────────────────── */
-    .page-hero {
-      background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 60%, var(--nhs-aqua) 100%);
-      padding: 4rem 2rem 4.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .page-hero::before {
-      content: '';
-      position: absolute; top: -100px; right: -100px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .page-hero::after {
-      content: '';
-      position: absolute; bottom: -80px; left: -60px;
-      width: 380px; height: 380px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(65,182,230,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .page-hero-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
-    }
-    .page-hero-breadcrumb {
-      font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.65);
-      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
-    }
-    .page-hero-breadcrumb a { color: rgba(255,255,255,0.65); text-decoration: none; }
-    .page-hero-breadcrumb a:hover { color: #fff; }
-    .page-hero-breadcrumb .sep { opacity: 0.4; }
-    .page-hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.75);
-      background: rgba(255,255,255,0.12); border-radius: 20px;
-      padding: 0.3rem 0.9rem; margin-bottom: 1rem;
-    }
-    .page-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      font-weight: 600; line-height: 1.1;
-      color: var(--white); margin-bottom: 1rem;
-    }
-    .page-hero-sub {
-      font-size: 1rem; line-height: 1.7;
-      color: rgba(255,255,255,0.8); max-width: 520px;
-    }
-    .hero-quick-pills {
-      display: flex; flex-direction: column; gap: 1rem;
-    }
-    .hero-pill {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 14px;
-      padding: 1rem 1.4rem;
-      display: flex; align-items: center; gap: 0.9rem;
-      min-width: 240px;
-    }
-    .hero-pill-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .hero-pill-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.8; }
-    .hero-pill-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.15rem; }
-    .hero-pill-value { font-size: 0.92rem; font-weight: 600; color: #fff; }
-    .hero-pill-link { text-decoration: none; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.15s; }
-    .hero-pill-link:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
-    .hero-pill-icon-econsult { background: rgba(0,0,0,0.18) !important; width: 64px !important; overflow: visible; }
+        /* ── TOP UTILITY BAR ─────────────────────────────────── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            padding: 0.45rem 0;
+        }
 
-    /* ── SECTION COMMON ──────────────────────────────────── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-tag {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--nhs-blue);
-      margin-bottom: 0.6rem;
-    }
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-      font-weight: 600; color: var(--text-dark); line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    .section-lead { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; max-width: 640px; }
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
 
-    /* ── CONTACT CARDS ───────────────────────────────────── */
-    .contact-cards-section { background: var(--off-white); padding: 4rem 2rem; }
-    .contact-cards-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .contact-card {
-      background: var(--white); border-radius: 18px;
-      padding: 2rem 1.6rem; border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0,94,184,0.07);
-      transition: transform 0.22s, box-shadow 0.22s;
-      position: relative; overflow: hidden;
-      display: flex; flex-direction: column;
-    }
-    .contact-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(0,94,184,0.14); }
-    .contact-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    }
-    .card-phone::before    { background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
-    .card-email::before    { background: linear-gradient(90deg, var(--nhs-aqua), var(--nhs-green)); }
-    .card-address::before  { background: linear-gradient(90deg, var(--nhs-green), var(--nhs-blue)); }
-    .card-hours::before    { background: linear-gradient(90deg, var(--nhs-warm-yellow), #e09000); }
-    .card-econsult::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
+        .utility-bar a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
 
-    /* ── CONTINUOUS CARD ICON ANIMATIONS ─────────────────── */
-    @keyframes anim-ring {
-      0%,100%  { transform: rotate(0deg); }
-      8%       { transform: rotate(14deg); }
-      16%      { transform: rotate(-12deg); }
-      24%      { transform: rotate(9deg); }
-      32%      { transform: rotate(-5deg); }
-      40%      { transform: rotate(0deg); }
-    }
-    @keyframes anim-float {
-      0%,100% { transform: translateY(0) scale(1); }
-      30%     { transform: translateY(-6px) scale(1.08); }
-      60%     { transform: translateY(-2px) scale(1.03); }
-    }
-    @keyframes anim-pin {
-      0%,100% { transform: translateY(0); }
-      20%     { transform: translateY(-8px); }
-      40%     { transform: translateY(-2px); }
-      60%     { transform: translateY(-5px); }
-      80%     { transform: translateY(-1px); }
-    }
-    @keyframes anim-tick {
-      0%,100% { transform: rotate(0deg); }
-      25%     { transform: rotate(8deg); }
-      75%     { transform: rotate(-8deg); }
-    }
-    @keyframes anim-pulse {
-      0%,100% { transform: scale(1); opacity: 1; }
-      40%     { transform: scale(1.18); opacity: 0.9; }
-      70%     { transform: scale(1.08); opacity: 0.95; }
-    }
-    .card-phone   .contact-card-icon svg { animation: anim-ring  3.5s ease-in-out infinite; }
-    .card-email   .contact-card-icon svg { animation: anim-float 3s ease-in-out infinite; }
-    .card-address .contact-card-icon svg { animation: anim-pin   3.2s ease-in-out infinite; }
-    .card-hours   .contact-card-icon svg { animation: anim-tick  2.5s ease-in-out infinite; }
-    .card-econsult .contact-card-icon    { animation: anim-pulse 2.8s ease-in-out infinite; }
+        .utility-bar a:hover {
+            color: #fff;
+        }
 
-    .contact-card-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: rgba(0,94,184,0.08);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-    }
-    .contact-card-icon svg { width: 26px; height: 26px; stroke: var(--nhs-blue); fill: none; stroke-width: 1.7; }
-    .card-hours .contact-card-icon { background: rgba(255,184,28,0.12); }
-    .card-hours .contact-card-icon svg { stroke: #b07000; }
+        .utility-bar .emer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-    .contact-card-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.5rem;
-    }
-    .contact-card-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 600; color: var(--text-dark);
-      line-height: 1.3; margin-bottom: 0.6rem;
-    }
-    .contact-card-sub {
-      font-size: 0.84rem; color: var(--text-mid); line-height: 1.6; flex: 1;
-    }
-    .contact-card-action {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      margin-top: 1.2rem; font-size: 0.84rem; font-weight: 600;
-      color: var(--nhs-blue); text-decoration: none;
-      transition: gap 0.2s;
-    }
-    .contact-card:hover .contact-card-action { gap: 0.7rem; }
-    .mini-hours { display: grid; gap: 0.25rem; margin-top: 0.4rem; }
-    .mini-hour-row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.82rem; }
-    .mini-hour-day { color: var(--text-soft); }
-    .mini-hour-time { font-weight: 600; color: var(--text-dark); }
-    .closed { color: var(--text-soft); font-weight: 400; }
+        .util-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+        }
 
-    /* ── MAP + METHODS LAYOUT ────────────────────────────── */
-    .contact-main { background: var(--white); padding: 5rem 2rem; }
-    .contact-main-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
-    }
-    .map-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nhs-blue); margin-bottom: 0.6rem; }
-    .map-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.8rem;
-    }
-    .map-lead { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.6rem; }
+        /* ── HEADER ──────────────────────────────────────────── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, 0.10);
+        }
 
-    .map-embed {
-      border-radius: 18px; overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 6px 28px rgba(0,94,184,0.1);
-      height: 340px;
-    }
-    .map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
 
-    .directions-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; }
-    .dir-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.65rem 1.2rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600; text-decoration: none;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
-    }
-    .dir-btn.primary { background: var(--nhs-blue); color: #fff; box-shadow: 0 3px 12px rgba(0,94,184,0.25); }
-    .dir-btn.primary:hover { background: var(--nhs-dark); transform: translateY(-1px); }
-    .dir-btn.secondary { border: 2px solid var(--border); color: var(--text-mid); background: var(--white); }
-    .dir-btn.secondary:hover { border-color: var(--nhs-blue); color: var(--nhs-blue); transform: translateY(-1px); }
+        .logo-wrap svg {
+            height: 84px;
+            width: auto;
+        }
 
-    .transport-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.6rem;
-    }
-    .transport-item {
-      background: var(--off-white); border-radius: 12px;
-      padding: 1rem 1.1rem; border: 1px solid var(--border);
-      display: flex; align-items: flex-start; gap: 0.7rem;
-    }
-    .transport-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
-    .transport-name { font-size: 0.82rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.2rem; }
-    .transport-detail { font-size: 0.78rem; color: var(--text-soft); line-height: 1.4; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
 
-    /* Contact methods */
-    .method-item {
-      background: var(--white); border: 1px solid var(--border); border-radius: 16px;
-      padding: 1.1rem 1.3rem; margin-bottom: 0.8rem;
-      display: flex; gap: 1rem; align-items: flex-start;
-      transition: box-shadow 0.2s, transform 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .method-item:hover { box-shadow: 0 8px 28px rgba(0,94,184,0.1); transform: translateY(-2px); }
-    .method-item::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 4px; border-radius: 4px 0 0 4px;
-    }
-    .method-phone::before    { background: var(--nhs-blue); }
-    .method-online::before   { background: var(--nhs-aqua); }
-    .method-inperson::before { background: var(--nhs-green); }
-    .method-email::before    { background: var(--nhs-warm-yellow); }
+        nav a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    .method-icon-wrap {
-      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .method-phone .method-icon-wrap    { background: rgba(0,94,184,0.08); }
-    .method-online .method-icon-wrap   { background: rgba(0,159,187,0.09); }
-    .method-inperson .method-icon-wrap { background: rgba(0,127,59,0.08); }
-    .method-email .method-icon-wrap    { background: rgba(255,184,28,0.12); }
-    .method-icon-wrap svg { width: 24px; height: 24px; fill: none; stroke-width: 1.7; }
-    .method-phone .method-icon-wrap svg    { stroke: var(--nhs-blue); }
-    .method-online .method-icon-wrap svg   { stroke: var(--nhs-aqua); }
-    .method-inperson .method-icon-wrap svg { stroke: var(--nhs-green); }
-    .method-email .method-icon-wrap svg    { stroke: #b07000; }
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue);
+        }
 
-    .method-content { flex: 1; }
-    .method-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem;
-    }
-    .method-desc { font-size: 0.83rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 0.6rem; }
-    .method-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.85rem; font-weight: 600; text-decoration: none;
-      border-radius: 7px; padding: 0.45rem 1rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .method-phone .method-link    { background: rgba(0,94,184,0.09); color: var(--nhs-blue); }
-    .method-phone .method-link:hover { background: var(--nhs-blue); color: #fff; }
-    .method-online .method-link   { background: rgba(0,159,187,0.09); color: var(--nhs-aqua); }
-    .method-online .method-link:hover { background: var(--nhs-aqua); color: #fff; }
-    .method-inperson .method-link { background: rgba(0,127,59,0.09); color: var(--nhs-green); }
-    .method-inperson .method-link:hover { background: var(--nhs-green); color: #fff; }
-    .method-email .method-link    { background: rgba(255,184,28,0.12); color: #9a6000; }
-    .method-email .method-link:hover { background: var(--nhs-warm-yellow); color: #fff; }
+        nav a.active {
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.07);
+            font-weight: 600;
+        }
 
-    .info-banner-strip {
-      background: rgba(0,94,184,0.05); border: 1px solid rgba(0,94,184,0.15);
-      border-radius: 12px; padding: 0.75rem 1rem;
-      display: flex; align-items: flex-start; gap: 0.7rem;
-      font-size: 0.83rem; color: var(--text-mid); line-height: 1.5; margin-top: 0.4rem;
-    }
-    .info-banner-strip strong { color: var(--text-dark); }
-    .info-banner-full {
-      max-width: 100%; border-radius: 14px;
-      padding: 1.1rem 1.6rem; font-size: 0.9rem;
-    }
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s !important;
+        }
 
-    /* ── STROBE LIGHT ANIMATION ──────────────────────────── */
-    @keyframes strobe-glow {
-      0%,100% { opacity: 1; filter: drop-shadow(0 0 6px #ff2020) drop-shadow(0 0 14px #ff4444); }
-      45%     { opacity: 0.15; filter: drop-shadow(0 0 2px #ff2020); }
-      50%     { opacity: 1; filter: drop-shadow(0 0 8px #ff2020) drop-shadow(0 0 18px #ff4444); }
-      95%     { opacity: 0.15; filter: drop-shadow(0 0 2px #ff2020); }
-    }
-    @keyframes strobe-beam {
-      0%,100% { opacity: 0.9; }
-      45%     { opacity: 0.05; }
-      50%     { opacity: 0.9; }
-      95%     { opacity: 0.05; }
-    }
-    .strobe-icon { animation: strobe-glow 1.1s ease-in-out infinite; flex-shrink: 0; }
-    .strobe-beam { animation: strobe-beam 1.1s ease-in-out infinite; }
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px);
+        }
 
-    /* ── FLASHING RED EMERGENCY LABEL ───────────────────── */
-    @keyframes flash-red {
-      0%,100% { color: #cc0000; text-shadow: 0 0 8px rgba(204,0,0,0.5); }
-      50%     { color: #ff1a1a; text-shadow: 0 0 16px rgba(255,26,26,0.8); }
-    }
-    .emerg-label-urgent {
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 0.4rem;
-      animation: flash-red 1.2s ease-in-out infinite;
-    }
+        /* ── PAGE HERO BANNER ────────────────────────────────── */
+        .page-hero {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 60%, var(--nhs-aqua) 100%);
+            padding: 4rem 2rem 4.5rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* ── ONLINE SERVICES ─────────────────────────────────── */
-    .online-services-section { background: var(--off-white); padding: 4rem 2rem; }
-    .online-services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;
-    }
-    .os-card {
-      background: var(--white); border-radius: 18px;
-      padding: 2rem 1.8rem; border: 1px solid var(--border);
-      box-shadow: 0 3px 16px rgba(0,94,184,0.06);
-      transition: transform 0.22s, box-shadow 0.22s;
-      position: relative; overflow: hidden;
-    }
-    .os-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,94,184,0.12); }
-    .os-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
-    }
-    .os-badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(0,94,184,0.08); border-radius: 20px;
-      padding: 0.25rem 0.75rem; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase; color: var(--nhs-blue);
-      margin-bottom: 1rem;
-    }
-    .os-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem;
-    }
-    .os-desc { font-size: 0.87rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 1.4rem; }
-    .os-link {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.65rem 1.2rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600; text-decoration: none;
-      background: var(--nhs-blue); color: #fff;
-      box-shadow: 0 3px 12px rgba(0,94,184,0.25);
-      transition: background 0.2s, transform 0.15s;
-    }
-    .os-link:hover { background: var(--nhs-dark); transform: translateY(-1px); }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
 
-    /* ── EMERGENCY ───────────────────────────────────────── */
-    .emergency {
-      background: var(--white); border-top: 1px solid var(--border); padding: 3rem 2rem;
-    }
-    .emergency-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-    }
-    .emerg-card { border-radius: 16px; padding: 2rem; display: flex; gap: 1.2rem; align-items: flex-start; }
-    .emerg-card.nhs111 { background: rgba(0,94,184,0.05); border: 1px solid rgba(0,94,184,0.2); }
-    .emerg-card.urgent { background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); }
-    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
-    .emerg-card.nhs111 .emerg-number { color: var(--nhs-blue); }
-    .emerg-card.urgent .emerg-number { color: #dc3545; }
-    .emerg-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .emerg-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -60px;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(65, 182, 230, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── NHS APP BANNER ─────────────────────────────────── */
-    .app-banner { background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%); padding: 4rem 2rem; }
-    .app-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
-    }
-    .app-inner h2 { color: var(--white); }
-    .app-inner .section-lead { color: rgba(255,255,255,0.8); max-width: 540px; }
-    .app-inner .section-tag { color: rgba(255,255,255,0.6); }
-    .app-bullets { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
-    .app-bullet { display: flex; align-items: center; gap: 0.8rem; font-size: 0.92rem; color: rgba(255,255,255,0.88); }
-    .app-bullet-dot { width: 8px; height: 8px; background: var(--nhs-light-blue); border-radius: 50%; flex-shrink: 0; }
-    .app-cta-wrap { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-    .btn-white {
-      background: var(--white); color: var(--nhs-blue);
-      padding: 0.85rem 2rem; border-radius: 10px;
-      font-weight: 700; font-size: 0.95rem; text-decoration: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      transition: transform 0.15s, box-shadow 0.15s; white-space: nowrap;
-    }
-    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
-    .btn-ghost {
-      border: 2px solid rgba(255,255,255,0.5); color: var(--white);
-      padding: 0.75rem 1.8rem; border-radius: 10px;
-      font-weight: 600; font-size: 0.9rem; text-decoration: none;
-      transition: border-color 0.2s, background 0.2s; white-space: nowrap;
-    }
-    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+        .page-hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
 
-    /* ── FOOTER ─────────────────────────────────────────── */
-    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 2rem; }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
-    }
-    .footer-tagline { font-size: 0.88rem; margin-top: 0.8rem; line-height: 1.6; opacity: 0.75; }
-    .footer-address { font-size: 0.85rem; margin-top: 1rem; line-height: 1.8; opacity: 0.75; }
-    .footer-heading { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-bottom {
-      max-width: 1200px; margin: 2.5rem auto 0;
-      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12);
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem; opacity: 0.6; flex-wrap: wrap; gap: 0.5rem;
-    }
-    .hours-grid { display: grid; gap: 0.3rem; }
-    .hour-row { display: flex; justify-content: space-between; gap: 1.5rem; font-size: 0.84rem; }
-    .hour-day { opacity: 0.7; }
+        .page-hero-breadcrumb {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .contact-cards-grid { grid-template-columns: repeat(3, 1fr); }
-      .contact-main-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .online-services-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-    }
-    @media (max-width: 720px) {
-      .page-hero-inner { grid-template-columns: 1fr; }
-      .hero-quick-pills { display: none; }
-      .contact-cards-grid { grid-template-columns: 1fr; }
-      .online-services-grid { grid-template-columns: 1fr; }
-      .emergency-inner { grid-template-columns: 1fr; }
-      .app-inner { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; }
-      .transport-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+        .page-hero-breadcrumb a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+        }
+
+        .page-hero-breadcrumb a:hover {
+            color: #fff;
+        }
+
+        .page-hero-breadcrumb .sep {
+            opacity: 0.4;
+        }
+
+        .page-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .page-hero-sub {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 520px;
+        }
+
+        .hero-quick-pills {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hero-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            min-width: 240px;
+        }
+
+        .hero-pill-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hero-pill-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .hero-pill-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.15rem;
+        }
+
+        .hero-pill-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .hero-pill-link {
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
+        }
+
+        .hero-pill-link:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .hero-pill-icon-econsult {
+            background: rgba(0, 0, 0, 0.18) !important;
+            width: 64px !important;
+            overflow: visible;
+        }
+
+        /* ── SECTION COMMON ──────────────────────────────────── */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: 0.6rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 640px;
+        }
+
+        /* ── CONTACT CARDS ───────────────────────────────────── */
+        .contact-cards-section {
+            background: var(--off-white);
+            padding: 4rem 2rem;
+        }
+
+        .contact-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 2rem 1.6rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 94, 184, 0.07);
+            transition: transform 0.22s, box-shadow 0.22s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 36px rgba(0, 94, 184, 0.14);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .card-phone::before {
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .card-email::before {
+            background: linear-gradient(90deg, var(--nhs-aqua), var(--nhs-green));
+        }
+
+        .card-address::before {
+            background: linear-gradient(90deg, var(--nhs-green), var(--nhs-blue));
+        }
+
+        .card-hours::before {
+            background: linear-gradient(90deg, var(--nhs-warm-yellow), #e09000);
+        }
+
+        .card-econsult::before {
+            background: linear-gradient(90deg, #16a34a, #4ade80);
+        }
+
+        /* ── CONTINUOUS CARD ICON ANIMATIONS ─────────────────── */
+        @keyframes anim-ring {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            8% {
+                transform: rotate(14deg);
+            }
+            16% {
+                transform: rotate(-12deg);
+            }
+            24% {
+                transform: rotate(9deg);
+            }
+            32% {
+                transform: rotate(-5deg);
+            }
+            40% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes anim-float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            30% {
+                transform: translateY(-6px) scale(1.08);
+            }
+            60% {
+                transform: translateY(-2px) scale(1.03);
+            }
+        }
+
+        @keyframes anim-pin {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            20% {
+                transform: translateY(-8px);
+            }
+            40% {
+                transform: translateY(-2px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+            80% {
+                transform: translateY(-1px);
+            }
+        }
+
+        @keyframes anim-tick {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(8deg);
+            }
+            75% {
+                transform: rotate(-8deg);
+            }
+        }
+
+        @keyframes anim-pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            40% {
+                transform: scale(1.18);
+                opacity: 0.9;
+            }
+            70% {
+                transform: scale(1.08);
+                opacity: 0.95;
+            }
+        }
+
+        .card-phone .contact-card-icon svg {
+            animation: anim-ring 3.5s ease-in-out infinite;
+        }
+
+        .card-email .contact-card-icon svg {
+            animation: anim-float 3s ease-in-out infinite;
+        }
+
+        .card-address .contact-card-icon svg {
+            animation: anim-pin 3.2s ease-in-out infinite;
+        }
+
+        .card-hours .contact-card-icon svg {
+            animation: anim-tick 2.5s ease-in-out infinite;
+        }
+
+        .card-econsult .contact-card-icon {
+            animation: anim-pulse 2.8s ease-in-out infinite;
+        }
+
+        .contact-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(0, 94, 184, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-card-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--nhs-blue);
+            fill: none;
+            stroke-width: 1.7;
+        }
+
+        .card-hours .contact-card-icon {
+            background: rgba(255, 184, 28, 0.12);
+        }
+
+        .card-hours .contact-card-icon svg {
+            stroke: #b07000;
+        }
+
+        .contact-card-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 0.6rem;
+        }
+
+        .contact-card-sub {
+            font-size: 0.84rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .contact-card-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.2rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+            text-decoration: none;
+            transition: gap 0.2s;
+        }
+
+        .contact-card:hover .contact-card-action {
+            gap: 0.7rem;
+        }
+
+        .mini-hours {
+            display: grid;
+            gap: 0.25rem;
+            margin-top: 0.4rem;
+        }
+
+        .mini-hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+        }
+
+        .mini-hour-day {
+            color: var(--text-soft);
+        }
+
+        .mini-hour-time {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .closed {
+            color: var(--text-soft);
+            font-weight: 400;
+        }
+
+        /* ── MAP + METHODS LAYOUT ────────────────────────────── */
+        .contact-main {
+            background: var(--white);
+            padding: 5rem 2rem;
+        }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .map-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: 0.6rem;
+        }
+
+        .map-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .map-lead {
+            font-size: 0.95rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            margin-bottom: 1.6rem;
+        }
+
+        .map-embed {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 28px rgba(0, 94, 184, 0.1);
+            height: 340px;
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .directions-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+
+        .dir-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .dir-btn.primary {
+            background: var(--nhs-blue);
+            color: #fff;
+            box-shadow: 0 3px 12px rgba(0, 94, 184, 0.25);
+        }
+
+        .dir-btn.primary:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-1px);
+        }
+
+        .dir-btn.secondary {
+            border: 2px solid var(--border);
+            color: var(--text-mid);
+            background: var(--white);
+        }
+
+        .dir-btn.secondary:hover {
+            border-color: var(--nhs-blue);
+            color: var(--nhs-blue);
+            transform: translateY(-1px);
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1.6rem;
+        }
+
+        .transport-item {
+            background: var(--off-white);
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+        }
+
+        .transport-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .transport-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .transport-detail {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            line-height: 1.4;
+        }
+
+        /* Contact methods */
+        .method-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.1rem 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-item:hover {
+            box-shadow: 0 8px 28px rgba(0, 94, 184, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .method-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .method-phone::before {
+            background: var(--nhs-blue);
+        }
+
+        .method-online::before {
+            background: var(--nhs-aqua);
+        }
+
+        .method-inperson::before {
+            background: var(--nhs-green);
+        }
+
+        .method-email::before {
+            background: var(--nhs-warm-yellow);
+        }
+
+        .method-icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .method-phone .method-icon-wrap {
+            background: rgba(0, 94, 184, 0.08);
+        }
+
+        .method-online .method-icon-wrap {
+            background: rgba(0, 159, 187, 0.09);
+        }
+
+        .method-inperson .method-icon-wrap {
+            background: rgba(0, 127, 59, 0.08);
+        }
+
+        .method-email .method-icon-wrap {
+            background: rgba(255, 184, 28, 0.12);
+        }
+
+        .method-icon-wrap svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke-width: 1.7;
+        }
+
+        .method-phone .method-icon-wrap svg {
+            stroke: var(--nhs-blue);
+        }
+
+        .method-online .method-icon-wrap svg {
+            stroke: var(--nhs-aqua);
+        }
+
+        .method-inperson .method-icon-wrap svg {
+            stroke: var(--nhs-green);
+        }
+
+        .method-email .method-icon-wrap svg {
+            stroke: #b07000;
+        }
+
+        .method-content {
+            flex: 1;
+        }
+
+        .method-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .method-desc {
+            font-size: 0.83rem;
+            color: var(--text-mid);
+            line-height: 1.5;
+            margin-bottom: 0.6rem;
+        }
+
+        .method-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 7px;
+            padding: 0.45rem 1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .method-phone .method-link {
+            background: rgba(0, 94, 184, 0.09);
+            color: var(--nhs-blue);
+        }
+
+        .method-phone .method-link:hover {
+            background: var(--nhs-blue);
+            color: #fff;
+        }
+
+        .method-online .method-link {
+            background: rgba(0, 159, 187, 0.09);
+            color: var(--nhs-aqua);
+        }
+
+        .method-online .method-link:hover {
+            background: var(--nhs-aqua);
+            color: #fff;
+        }
+
+        .method-inperson .method-link {
+            background: rgba(0, 127, 59, 0.09);
+            color: var(--nhs-green);
+        }
+
+        .method-inperson .method-link:hover {
+            background: var(--nhs-green);
+            color: #fff;
+        }
+
+        .method-email .method-link {
+            background: rgba(255, 184, 28, 0.12);
+            color: #9a6000;
+        }
+
+        .method-email .method-link:hover {
+            background: var(--nhs-warm-yellow);
+            color: #fff;
+        }
+
+        .info-banner-strip {
+            background: rgba(0, 94, 184, 0.05);
+            border: 1px solid rgba(0, 94, 184, 0.15);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.83rem;
+            color: var(--text-mid);
+            line-height: 1.5;
+            margin-top: 0.4rem;
+        }
+
+        .info-banner-strip strong {
+            color: var(--text-dark);
+        }
+
+        .info-banner-full {
+            max-width: 100%;
+            border-radius: 14px;
+            padding: 1.1rem 1.6rem;
+            font-size: 0.9rem;
+        }
+
+        /* ── STROBE LIGHT ANIMATION ──────────────────────────── */
+        @keyframes strobe-glow {
+            0%, 100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 6px #ff2020) drop-shadow(0 0 14px #ff4444);
+            }
+            45% {
+                opacity: 0.15;
+                filter: drop-shadow(0 0 2px #ff2020);
+            }
+            50% {
+                opacity: 1;
+                filter: drop-shadow(0 0 8px #ff2020) drop-shadow(0 0 18px #ff4444);
+            }
+            95% {
+                opacity: 0.15;
+                filter: drop-shadow(0 0 2px #ff2020);
+            }
+        }
+
+        @keyframes strobe-beam {
+            0%, 100% {
+                opacity: 0.9;
+            }
+            45% {
+                opacity: 0.05;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            95% {
+                opacity: 0.05;
+            }
+        }
+
+        .strobe-icon {
+            animation: strobe-glow 1.1s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .strobe-beam {
+            animation: strobe-beam 1.1s ease-in-out infinite;
+        }
+
+        /* ── FLASHING RED EMERGENCY LABEL ───────────────────── */
+        @keyframes flash-red {
+            0%, 100% {
+                color: #cc0000;
+                text-shadow: 0 0 8px rgba(204, 0, 0, 0.5);
+            }
+            50% {
+                color: #ff1a1a;
+                text-shadow: 0 0 16px rgba(255, 26, 26, 0.8);
+            }
+        }
+
+        .emerg-label-urgent {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            animation: flash-red 1.2s ease-in-out infinite;
+        }
+
+        /* ── ONLINE SERVICES ─────────────────────────────────── */
+        .online-services-section {
+            background: var(--off-white);
+            padding: 4rem 2rem;
+        }
+
+        .online-services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .os-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 2rem 1.8rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 3px 16px rgba(0, 94, 184, 0.06);
+            transition: transform 0.22s, box-shadow 0.22s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .os-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(0, 94, 184, 0.12);
+        }
+
+        .os-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .os-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 94, 184, 0.08);
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: 1rem;
+        }
+
+        .os-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .os-desc {
+            font-size: 0.87rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+            margin-bottom: 1.4rem;
+        }
+
+        .os-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.65rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            background: var(--nhs-blue);
+            color: #fff;
+            box-shadow: 0 3px 12px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .os-link:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ── EMERGENCY ───────────────────────────────────────── */
+        .emergency {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(0, 94, 184, 0.05);
+            border: 1px solid rgba(0, 94, 184, 0.2);
+        }
+
+        .emerg-card.urgent {
+            background: rgba(220, 53, 69, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .emerg-card.nhs111 .emerg-number {
+            color: var(--nhs-blue);
+        }
+
+        .emerg-card.urgent .emerg-number {
+            color: #dc3545;
+        }
+
+        .emerg-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .emerg-desc {
+            font-size: 0.88rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ── NHS APP BANNER ─────────────────────────────────── */
+        .app-banner {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%);
+            padding: 4rem 2rem;
+        }
+
+        .app-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-inner h2 {
+            color: var(--white);
+        }
+
+        .app-inner .section-lead {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 540px;
+        }
+
+        .app-inner .section-tag {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .app-bullets {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .app-bullet {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .app-bullet-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--nhs-light-blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .app-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--nhs-blue);
+            padding: 0.85rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s, box-shadow 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-ghost {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            padding: 0.75rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ── FOOTER ─────────────────────────────────────────── */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3.5rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            margin-top: 0.8rem;
+            line-height: 1.6;
+            opacity: 0.75;
+        }
+
+        .footer-address {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+            opacity: 0.75;
+        }
+
+        .footer-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-size: 0.84rem;
+        }
+
+        .hour-day {
+            opacity: 0.7;
+        }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .contact-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-main-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .online-services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .page-hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-quick-pills {
+                display: none;
+            }
+
+            .contact-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .online-services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .emergency-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .app-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+
+
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="emer">
-      <span>🚨 Emergency? Call <strong>999</strong></span>
-      <span class="util-pill">Non-emergency: <strong>NHS 111</strong></span>
+    <div class="inner">
+        <div class="emer">
+            <span>🚨 Emergency? Call <strong>999</strong></span>
+            <span class="util-pill">Non-emergency: <strong>NHS 111</strong></span>
+        </div>
+        <div style="display:flex;gap:1.5rem;">
+            <a href="tel:02085745136">📞 0208 574 5136</a>
+            <span>Mon–Fri &nbsp;08:00–18:30</span>
+        </div>
     </div>
-    <div style="display:flex;gap:1.5rem;">
-      <a href="tel:02085745136">📞 0208 574 5136</a>
-      <span>Mon–Fri &nbsp;08:00–18:30</span>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" style="text-decoration:none;">
-      <svg viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#e8e8e8"/><stop offset="25%" stop-color="#ffffff"/>
-            <stop offset="50%" stop-color="#b0b0b0"/><stop offset="75%" stop-color="#d8d8d8"/>
-            <stop offset="100%" stop-color="#888888"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="30%" stop-color="#f0f0f0"/>
-            <stop offset="60%" stop-color="#a0a0a0"/><stop offset="100%" stop-color="#c0c0c0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="35%" cy="30%" r="65%">
-            <stop offset="0%" stop-color="#555555"/><stop offset="40%" stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
-            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
-          </filter>
-          <filter id="textSheen">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <rect width="720" height="160" fill="#ffffff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="news.html" target="_blank">News</a>
-      <a href="clinics-and-services.html">Clinics &amp; Services</a>
-      <a href="practice-policies-patient-information.html">Our Practice</a>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" style="text-decoration:none;">
+            <svg viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#e8e8e8"/>
+                        <stop offset="25%" stop-color="#ffffff"/>
+                        <stop offset="50%" stop-color="#b0b0b0"/>
+                        <stop offset="75%" stop-color="#d8d8d8"/>
+                        <stop offset="100%" stop-color="#888888"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="30%" stop-color="#f0f0f0"/>
+                        <stop offset="60%" stop-color="#a0a0a0"/>
+                        <stop offset="100%" stop-color="#c0c0c0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="35%" cy="30%" r="65%">
+                        <stop offset="0%" stop-color="#555555"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
 
-      <a href="health-information.html" target="_blank">Health Information</a>
-      <a href="contact-us.html">Contact Us</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
-    </nav>
-  </div>
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="fade-up">
-      <div class="page-hero-breadcrumb">
-        <a href="/">Home</a>
-        <span class="sep">›</span>
-        <span style="color:rgba(255,255,255,0.9);">Contact Us</span>
-      </div>
-      <div class="page-hero-tag">📞 Get in Touch</div>
-      <h1>Contact<br><span style="color:rgba(255,255,255,0.72);">Saluja Clinic</span></h1>
-      <p class="page-hero-sub">We're here Monday to Friday, 8:00am–6:30pm. Whether you need to book an appointment, have a general query, or simply need to find us — we're ready to help.</p>
+    <div class="page-hero-inner">
+        <div class="fade-up">
+            <div class="page-hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">›</span>
+                <span style="color:rgba(255,255,255,0.9);">Contact Us</span>
+            </div>
+            <div class="page-hero-tag">📞 Get in Touch</div>
+            <h1>Contact<br><span style="color:rgba(255,255,255,0.72);">Saluja Clinic</span></h1>
+            <p class="page-hero-sub">We're here Monday to Friday, 8:00am–6:30pm. Whether you need to book an
+                appointment, have a general query, or simply need to find us — we're ready to help.</p>
+        </div>
+        <div class="hero-quick-pills fade-up" style="animation-delay:0.15s">
+            <div class="hero-pill">
+                <div class="hero-pill-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="hero-pill-label">Phone</div>
+                    <div class="hero-pill-value">0208 574 5136</div>
+                </div>
+            </div>
+            <div class="hero-pill">
+                <div class="hero-pill-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="hero-pill-label">Opening Hours</div>
+                    <div class="hero-pill-value">Mon–Fri · 08:00–18:30</div>
+                </div>
+            </div>
+            <div class="hero-pill">
+                <div class="hero-pill-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="hero-pill-label">Address</div>
+                    <div class="hero-pill-value">36A Northcote Ave, Southall</div>
+                </div>
+            </div>
+            <a href="mailto:salujaclinic@nhs.net" class="hero-pill hero-pill-link">
+                <div class="hero-pill-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="hero-pill-label">NHS Email</div>
+                    <div class="hero-pill-value">salujaclinic@nhs.net</div>
+                </div>
+            </a>
+            <!-- eConsult pill -->
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="hero-pill hero-pill-link">
+                <div class="hero-pill-icon hero-pill-icon-econsult">
+                    <!-- eConsult logo wordmark SVG -->
+                    <svg viewBox="0 0 64 32" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:24px;">
+                        <rect width="64" height="32" rx="4" fill="rgba(255,255,255,0.15)"/>
+                        <!-- 'e' letterform -->
+                        <text x="4" y="23" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="700"
+                              fill="#4ade80" letter-spacing="-0.5">e
+                        </text>
+                        <!-- 'Consult' text -->
+                        <text x="17" y="23" font-family="'DM Sans', Arial, sans-serif" font-size="13" font-weight="600"
+                              fill="#ffffff" letter-spacing="0">Consult
+                        </text>
+                        <!-- small pulse line accent -->
+                        <polyline points="4,28 10,28 13,24 16,31 19,26 22,28 28,28" fill="none" stroke="#4ade80"
+                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="hero-pill-label">Online Consultation</div>
+                    <div class="hero-pill-value">Submit eConsult</div>
+                </div>
+            </a>
+        </div>
     </div>
-    <div class="hero-quick-pills fade-up" style="animation-delay:0.15s">
-      <div class="hero-pill">
-        <div class="hero-pill-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div>
-          <div class="hero-pill-label">Phone</div>
-          <div class="hero-pill-value">0208 574 5136</div>
-        </div>
-      </div>
-      <div class="hero-pill">
-        <div class="hero-pill-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div>
-          <div class="hero-pill-label">Opening Hours</div>
-          <div class="hero-pill-value">Mon–Fri · 08:00–18:30</div>
-        </div>
-      </div>
-      <div class="hero-pill">
-        <div class="hero-pill-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <div class="hero-pill-label">Address</div>
-          <div class="hero-pill-value">36A Northcote Ave, Southall</div>
-        </div>
-      </div>
-      <a href="mailto:salujaclinic@nhs.net" class="hero-pill hero-pill-link">
-        <div class="hero-pill-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <div class="hero-pill-label">NHS Email</div>
-          <div class="hero-pill-value">salujaclinic@nhs.net</div>
-        </div>
-      </a>
-      <!-- eConsult pill -->
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="hero-pill hero-pill-link">
-        <div class="hero-pill-icon hero-pill-icon-econsult">
-          <!-- eConsult logo wordmark SVG -->
-          <svg viewBox="0 0 64 32" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:24px;">
-            <rect width="64" height="32" rx="4" fill="rgba(255,255,255,0.15)"/>
-            <!-- 'e' letterform -->
-            <text x="4" y="23" font-family="'DM Sans', Arial, sans-serif" font-size="18" font-weight="700" fill="#4ade80" letter-spacing="-0.5">e</text>
-            <!-- 'Consult' text -->
-            <text x="17" y="23" font-family="'DM Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#ffffff" letter-spacing="0">Consult</text>
-            <!-- small pulse line accent -->
-            <polyline points="4,28 10,28 13,24 16,31 19,26 22,28 28,28" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="hero-pill-label">Online Consultation</div>
-          <div class="hero-pill-value">Submit eConsult</div>
-        </div>
-      </a>
-    </div>
-  </div>
 </div>
 
 <!-- CONTACT INFO CARDS -->
 <section class="contact-cards-section">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Get in Touch</div>
-    <h2 class="fade-up">All the Ways to Reach Us</h2>
-    <div class="contact-cards-grid">
+    <div class="section-inner">
+        <div class="section-tag fade-up">Get in Touch</div>
+        <h2 class="fade-up">All the Ways to Reach Us</h2>
+        <div class="contact-cards-grid">
 
-      <div class="contact-card card-phone fade-up">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="contact-card-label">Telephone</div>
-        <div class="contact-card-value">0208 574 5136</div>
-        <div class="contact-card-sub">Call us Monday to Friday between 8:00am and 6:30pm. For urgent advice outside these hours, call NHS 111.</div>
-        <a href="tel:02085745136" class="contact-card-action">Call now →</a>
-      </div>
+            <div class="contact-card card-phone fade-up">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">Telephone</div>
+                <div class="contact-card-value">0208 574 5136</div>
+                <div class="contact-card-sub">Call us Monday to Friday between 8:00am and 6:30pm. For urgent advice
+                    outside these hours, call NHS 111.
+                </div>
+                <a href="tel:02085745136" class="contact-card-action">Call now →</a>
+            </div>
 
-      <div class="contact-card card-email fade-up" style="animation-delay:0.1s">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="contact-card-label">Email</div>
-        <div class="contact-card-value" style="font-size:1.05rem;"><a href="mailto:salujaclinic@nhs.net" style="color:inherit;text-decoration:none;">salujaclinic@nhs.net</a></div>
-        <div class="contact-card-sub">For non-urgent admin enquiries. Please allow up to 2 working days for a reply. Do not use email for emergencies.</div>
-        <a href="mailto:salujaclinic@nhs.net" class="contact-card-action" style="color:var(--nhs-green);">Send email →</a>
-      </div>
+            <div class="contact-card card-email fade-up" style="animation-delay:0.1s">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">Email</div>
+                <div class="contact-card-value" style="font-size:1.05rem;"><a href="mailto:salujaclinic@nhs.net"
+                                                                              style="color:inherit;text-decoration:none;">salujaclinic@nhs.net</a>
+                </div>
+                <div class="contact-card-sub">For non-urgent admin enquiries. Please allow up to 2 working days for a
+                    reply. Do not use email for emergencies.
+                </div>
+                <a href="mailto:salujaclinic@nhs.net" class="contact-card-action" style="color:var(--nhs-green);">Send
+                    email →</a>
+            </div>
 
-      <div class="contact-card card-address fade-up" style="animation-delay:0.2s">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="contact-card-label">Address</div>
-        <div class="contact-card-value">36A Northcote Avenue,<br>Southall, UB1 2AY</div>
-        <div class="contact-card-sub">Located in Southall, West London. Accessible by bus and a short walk from Southall rail station.</div>
-        <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank" class="contact-card-action" style="color:var(--nhs-green);">Get directions →</a>
-      </div>
+            <div class="contact-card card-address fade-up" style="animation-delay:0.2s">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">Address</div>
+                <div class="contact-card-value">36A Northcote Avenue,<br>Southall, UB1 2AY</div>
+                <div class="contact-card-sub">Located in Southall, West London. Accessible by bus and a short walk from
+                    Southall rail station.
+                </div>
+                <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank"
+                   class="contact-card-action" style="color:var(--nhs-green);">Get directions →</a>
+            </div>
 
-      <div class="contact-card card-hours fade-up" style="animation-delay:0.3s">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="contact-card-label">Opening Hours</div>
-        <div class="contact-card-value">Mon–Fri · 08:00–18:30</div>
-        <div class="mini-hours">
-          <div class="mini-hour-row"><span class="mini-hour-day">Monday</span><span class="mini-hour-time">08:00–18:30</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Tuesday</span><span class="mini-hour-time">08:00–18:30</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Wednesday</span><span class="mini-hour-time">08:00–18:30</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Thursday</span><span class="mini-hour-time">08:00–18:30</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Friday</span><span class="mini-hour-time">08:00–18:30</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Saturday</span><span class="mini-hour-time closed">Closed</span></div>
-          <div class="mini-hour-row"><span class="mini-hour-day">Sunday</span><span class="mini-hour-time closed">Closed</span></div>
-        </div>
-      </div>
+            <div class="contact-card card-hours fade-up" style="animation-delay:0.3s">
+                <div class="contact-card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">Opening Hours</div>
+                <div class="contact-card-value">Mon–Fri · 08:00–18:30</div>
+                <div class="mini-hours">
+                    <div class="mini-hour-row"><span class="mini-hour-day">Monday</span><span class="mini-hour-time">08:00–18:30</span>
+                    </div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Tuesday</span><span class="mini-hour-time">08:00–18:30</span>
+                    </div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Wednesday</span><span class="mini-hour-time">08:00–18:30</span>
+                    </div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Thursday</span><span class="mini-hour-time">08:00–18:30</span>
+                    </div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Friday</span><span class="mini-hour-time">08:00–18:30</span>
+                    </div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Saturday</span><span
+                            class="mini-hour-time closed">Closed</span></div>
+                    <div class="mini-hour-row"><span class="mini-hour-day">Sunday</span><span
+                            class="mini-hour-time closed">Closed</span></div>
+                </div>
+            </div>
 
-      <div class="contact-card card-econsult fade-up" style="animation-delay:0.4s">
-        <div class="contact-card-icon" style="background:rgba(22,163,74,0.10); width:64px; height:52px; border-radius:14px;">
-          <svg viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" style="width:58px;height:auto;">
-            <text x="2" y="26" font-family="'DM Sans',Arial,sans-serif" font-size="22" font-weight="800" fill="#16a34a" letter-spacing="-1">e</text>
-            <text x="18" y="26" font-family="'DM Sans',Arial,sans-serif" font-size="16" font-weight="600" fill="#1a1a2e" letter-spacing="0.2">Consult</text>
-            <polyline points="2,32 9,32 13,27 17,34 21,29 25,32 32,32" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="contact-card-label">Online Consultation</div>
-        <div class="contact-card-value">Submit eConsult</div>
-        <div class="contact-card-sub">Use our online consultation system any time — 24/7. We aim to respond by the next working day. No need to call.</div>
-        <a href="https://salujaclinic.webgp.com/" target="_blank" class="contact-card-action" style="color:#16a34a;">Start eConsult →</a>
-      </div>
+            <div class="contact-card card-econsult fade-up" style="animation-delay:0.4s">
+                <div class="contact-card-icon"
+                     style="background:rgba(22,163,74,0.10); width:64px; height:52px; border-radius:14px;">
+                    <svg viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" style="width:58px;height:auto;">
+                        <text x="2" y="26" font-family="'DM Sans',Arial,sans-serif" font-size="22" font-weight="800"
+                              fill="#16a34a" letter-spacing="-1">e
+                        </text>
+                        <text x="18" y="26" font-family="'DM Sans',Arial,sans-serif" font-size="16" font-weight="600"
+                              fill="#1a1a2e" letter-spacing="0.2">Consult
+                        </text>
+                        <polyline points="2,32 9,32 13,27 17,34 21,29 25,32 32,32" fill="none" stroke="#16a34a"
+                                  stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="contact-card-label">Online Consultation</div>
+                <div class="contact-card-value">Submit eConsult</div>
+                <div class="contact-card-sub">Use our online consultation system any time — 24/7. We aim to respond by
+                    the next working day. No need to call.
+                </div>
+                <a href="https://salujaclinic.webgp.com/" target="_blank" class="contact-card-action"
+                   style="color:#16a34a;">Start eConsult →</a>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- MAP + CONTACT METHODS -->
 <section class="contact-main">
-  <div class="section-inner">
-    <div class="contact-main-grid">
+    <div class="section-inner">
+        <div class="contact-main-grid">
 
-      <!-- Map & Directions -->
-      <div class="fade-up">
-        <div class="map-tag">Find Us</div>
-        <div class="map-title">Getting to Saluja Clinic</div>
-        <p class="map-lead">We are on Northcote Avenue in Southall, UB1 2AY — minutes from Southall rail station with excellent bus links across West London.</p>
+            <!-- Map & Directions -->
+            <div class="fade-up">
+                <div class="map-tag">Find Us</div>
+                <div class="map-title">Getting to Saluja Clinic</div>
+                <p class="map-lead">We are on Northcote Avenue in Southall, UB1 2AY — minutes from Southall rail station
+                    with excellent bus links across West London.</p>
 
-        <div class="map-embed">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.3!2d-0.3756!3d51.5149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s36A+Northcote+Ave%2C+Southall+UB1+2AY%2C+UK!5e0!3m2!1sen!2suk!4v1"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
+                <div class="map-embed">
+                    <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.3!2d-0.3756!3d51.5149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s36A+Northcote+Ave%2C+Southall+UB1+2AY%2C+UK!5e0!3m2!1sen!2suk!4v1"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
 
-        <div class="directions-links">
-          <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank" class="dir-btn primary">
-            📍 Open in Google Maps
-          </a>
-          <a href="https://maps.apple.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank" class="dir-btn secondary">
-            🗺 Apple Maps
-          </a>
-        </div>
+                <div class="directions-links">
+                    <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank"
+                       class="dir-btn primary">
+                        📍 Open in Google Maps
+                    </a>
+                    <a href="https://maps.apple.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank"
+                       class="dir-btn secondary">
+                        🗺 Apple Maps
+                    </a>
+                </div>
 
-        <div class="transport-grid">
-          <div class="transport-item">
-            <div class="transport-icon">🚆</div>
-            <div>
-              <div class="transport-name">Southall Station</div>
-              <div class="transport-detail">~8 min walk · Elizabeth line &amp; GWR</div>
+                <div class="transport-grid">
+                    <div class="transport-item">
+                        <div class="transport-icon">🚆</div>
+                        <div>
+                            <div class="transport-name">Southall Station</div>
+                            <div class="transport-detail">~8 min walk · Elizabeth line &amp; GWR</div>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-icon">🚌</div>
+                        <div>
+                            <div class="transport-name">Bus Routes</div>
+                            <div class="transport-detail">Routes 105, 195, 207, 427 nearby</div>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-icon">🅿️</div>
+                        <div>
+                            <div class="transport-name">Parking</div>
+                            <div class="transport-detail">Street parking on Northcote Avenue</div>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-icon">♿</div>
+                        <div>
+                            <div class="transport-name">Accessibility</div>
+                            <div class="transport-detail">Step-free access available at the practice</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="transport-item">
-            <div class="transport-icon">🚌</div>
-            <div>
-              <div class="transport-name">Bus Routes</div>
-              <div class="transport-detail">Routes 105, 195, 207, 427 nearby</div>
+
+            <!-- Contact Methods -->
+            <div class="fade-up" style="animation-delay:0.15s">
+                <div class="map-tag">Contact Methods</div>
+                <div class="map-title">How to Get in Touch</div>
+                <p class="map-lead" style="margin-bottom:2rem;">There are several ways to reach us. For medical matters
+                    use phone or online consultation; for admin queries, email is fine.</p>
+
+                <div class="method-item method-phone">
+                    <div class="method-icon-wrap">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <div class="method-content">
+                        <div class="method-title">Call the Practice</div>
+                        <div class="method-desc">Speak directly to our reception team for appointments, prescriptions,
+                            test results and medical questions. Open Mon–Fri 8:00am–6:30pm.
+                        </div>
+                        <a href="tel:02085745136" class="method-link">📞 0208 574 5136</a>
+                    </div>
+                </div>
+
+                <div class="method-item method-online">
+                    <div class="method-icon-wrap">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8m-4-4v4"/>
+                        </svg>
+                    </div>
+                    <div class="method-content">
+                        <div class="method-title">Online Consultation</div>
+                        <div class="method-desc">Submit a consultation request at any time via our online system. We aim
+                            to respond by the next working day. Ideal for non-urgent medical questions.
+                        </div>
+                        <a href="https://salujaclinic.webgp.com/" target="_blank" class="method-link">↗ Start online
+                            consultation</a>
+                    </div>
+                </div>
+
+                <div class="method-item method-inperson">
+                    <div class="method-icon-wrap">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="method-content">
+                        <div class="method-title">Visit Us in Person</div>
+                        <div class="method-desc">Come in during opening hours and our reception team will assist with
+                            appointments, forms, and general enquiries. No appointment needed for admin.
+                        </div>
+                        <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank"
+                           class="method-link">📍 36A Northcote Avenue, Southall, UB1 2AY</a>
+                    </div>
+                </div>
+
+                <div class="method-item method-email">
+                    <div class="method-icon-wrap">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="method-content">
+                        <div class="method-title">Email Reception</div>
+                        <div class="method-desc">For non-urgent administrative queries only. Please allow up to 2
+                            working days for a response. Never use email for urgent or medical matters.
+                        </div>
+                        <a href="mailto:salujaclinic@nhs.net" class="method-link">✉ salujaclinic@nhs.net</a>
+                    </div>
+                </div>
+
+            </div><!-- end right column -->
+        </div><!-- end contact-main-grid -->
+
+        <!-- FULL-WIDTH EMERGENCY BANNER -->
+        <div class="info-banner-strip info-banner-full fade-up" style="margin-top:2rem;">
+            <!-- Animated strobe light SVG -->
+            <svg class="strobe-icon" viewBox="0 0 36 42" xmlns="http://www.w3.org/2000/svg" width="36" height="42"
+                 style="flex-shrink:0;">
+                <!-- mounting base -->
+                <rect x="13" y="34" width="10" height="5" rx="2" fill="#cc0000"/>
+                <!-- housing dome -->
+                <ellipse cx="18" cy="22" rx="11" ry="12" fill="#cc0000"/>
+                <ellipse cx="18" cy="22" rx="8" ry="9" fill="#ff2222"/>
+                <!-- lens highlight -->
+                <ellipse cx="15" cy="18" rx="3" ry="2" fill="rgba(255,255,255,0.35)" transform="rotate(-20,15,18)"/>
+                <!-- light beams -->
+                <g class="strobe-beam" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+                    <line x1="18" y1="4" x2="18" y2="1"/>
+                    <line x1="28" y1="7" x2="30" y2="5"/>
+                    <line x1="32" y1="16" x2="35" y2="15"/>
+                    <line x1="8" y1="7" x2="6" y2="5"/>
+                    <line x1="4" y1="16" x2="1" y2="15"/>
+                    <line x1="30" y1="25" x2="33" y2="27"/>
+                    <line x1="6" y1="25" x2="3" y2="27"/>
+                </g>
+            </svg>
+            <div><strong>In a medical emergency, always call 999.</strong> For urgent advice when the surgery is closed,
+                call <strong>NHS 111</strong> — free, 24 hours a day, 365 days a year.
             </div>
-          </div>
-          <div class="transport-item">
-            <div class="transport-icon">🅿️</div>
-            <div>
-              <div class="transport-name">Parking</div>
-              <div class="transport-detail">Street parking on Northcote Avenue</div>
-            </div>
-          </div>
-          <div class="transport-item">
-            <div class="transport-icon">♿</div>
-            <div>
-              <div class="transport-name">Accessibility</div>
-              <div class="transport-detail">Step-free access available at the practice</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact Methods -->
-      <div class="fade-up" style="animation-delay:0.15s">
-        <div class="map-tag">Contact Methods</div>
-        <div class="map-title">How to Get in Touch</div>
-        <p class="map-lead" style="margin-bottom:2rem;">There are several ways to reach us. For medical matters use phone or online consultation; for admin queries, email is fine.</p>
-
-        <div class="method-item method-phone">
-          <div class="method-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="method-content">
-            <div class="method-title">Call the Practice</div>
-            <div class="method-desc">Speak directly to our reception team for appointments, prescriptions, test results and medical questions. Open Mon–Fri 8:00am–6:30pm.</div>
-            <a href="tel:02085745136" class="method-link">📞 0208 574 5136</a>
-          </div>
         </div>
 
-        <div class="method-item method-online">
-          <div class="method-icon-wrap">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
-          </div>
-          <div class="method-content">
-            <div class="method-title">Online Consultation</div>
-            <div class="method-desc">Submit a consultation request at any time via our online system. We aim to respond by the next working day. Ideal for non-urgent medical questions.</div>
-            <a href="https://salujaclinic.webgp.com/" target="_blank" class="method-link">↗ Start online consultation</a>
-          </div>
-        </div>
-
-        <div class="method-item method-inperson">
-          <div class="method-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          </div>
-          <div class="method-content">
-            <div class="method-title">Visit Us in Person</div>
-            <div class="method-desc">Come in during opening hours and our reception team will assist with appointments, forms, and general enquiries. No appointment needed for admin.</div>
-            <a href="https://maps.google.com/?q=36A+Northcote+Avenue+Southall+UB1+2AY" target="_blank" class="method-link">📍 36A Northcote Avenue, Southall, UB1 2AY</a>
-          </div>
-        </div>
-
-        <div class="method-item method-email">
-          <div class="method-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="method-content">
-            <div class="method-title">Email Reception</div>
-            <div class="method-desc">For non-urgent administrative queries only. Please allow up to 2 working days for a response. Never use email for urgent or medical matters.</div>
-            <a href="mailto:salujaclinic@nhs.net" class="method-link">✉ salujaclinic@nhs.net</a>
-          </div>
-        </div>
-
-      </div><!-- end right column -->
-    </div><!-- end contact-main-grid -->
-
-    <!-- FULL-WIDTH EMERGENCY BANNER -->
-    <div class="info-banner-strip info-banner-full fade-up" style="margin-top:2rem;">
-      <!-- Animated strobe light SVG -->
-      <svg class="strobe-icon" viewBox="0 0 36 42" xmlns="http://www.w3.org/2000/svg" width="36" height="42" style="flex-shrink:0;">
-        <!-- mounting base -->
-        <rect x="13" y="34" width="10" height="5" rx="2" fill="#cc0000"/>
-        <!-- housing dome -->
-        <ellipse cx="18" cy="22" rx="11" ry="12" fill="#cc0000"/>
-        <ellipse cx="18" cy="22" rx="8" ry="9" fill="#ff2222"/>
-        <!-- lens highlight -->
-        <ellipse cx="15" cy="18" rx="3" ry="2" fill="rgba(255,255,255,0.35)" transform="rotate(-20,15,18)"/>
-        <!-- light beams -->
-        <g class="strobe-beam" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
-          <line x1="18" y1="4"  x2="18" y2="1"/>
-          <line x1="28" y1="7"  x2="30" y2="5"/>
-          <line x1="32" y1="16" x2="35" y2="15"/>
-          <line x1="8"  y1="7"  x2="6"  y2="5"/>
-          <line x1="4"  y1="16" x2="1"  y2="15"/>
-          <line x1="30" y1="25" x2="33" y2="27"/>
-          <line x1="6"  y1="25" x2="3"  y2="27"/>
-        </g>
-      </svg>
-      <div><strong>In a medical emergency, always call 999.</strong> For urgent advice when the surgery is closed, call <strong>NHS 111</strong> — free, 24 hours a day, 365 days a year.</div>
-    </div>
-
-  </div><!-- end section-inner -->
+    </div><!-- end section-inner -->
 </section><!-- end contact-main -->
 
 <!-- ONLINE SERVICES -->
 <section class="online-services-section">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Digital Services</div>
-    <h2 class="fade-up">Manage Your Care Online</h2>
-    <p class="section-lead fade-up">You can do a lot without needing to call us. Use our online services 24/7 for appointments, prescriptions and your medical records.</p>
-    <div class="online-services-grid">
+    <div class="section-inner">
+        <div class="section-tag fade-up">Digital Services</div>
+        <h2 class="fade-up">Manage Your Care Online</h2>
+        <p class="section-lead fade-up">You can do a lot without needing to call us. Use our online services 24/7 for
+            appointments, prescriptions and your medical records.</p>
+        <div class="online-services-grid">
 
-      <div class="os-card fade-up">
-        <div class="os-badge">📅 Appointments</div>
-        <div class="os-title">Book a Consultation Online</div>
-        <p class="os-desc">Submit a consultation request through our online system. We aim to respond to all online requests by the next working day. Available at any time, even outside surgery hours.</p>
-        <a href="https://salujaclinic.webgp.com/" target="_blank" class="os-link">↗ Book Online Consultation</a>
-      </div>
+            <div class="os-card fade-up">
+                <div class="os-badge">📅 Appointments</div>
+                <div class="os-title">Book a Consultation Online</div>
+                <p class="os-desc">Submit a consultation request through our online system. We aim to respond to all
+                    online requests by the next working day. Available at any time, even outside surgery hours.</p>
+                <a href="https://salujaclinic.webgp.com/" target="_blank" class="os-link">↗ Book Online Consultation</a>
+            </div>
 
-      <div class="os-card fade-up" style="animation-delay:0.12s">
-        <div class="os-badge">📱 NHS App</div>
-        <div class="os-title">Download the NHS App</div>
-        <p class="os-desc">Register for the NHS App to manage appointments, view your medical records, request repeat prescriptions, and message your care team — all from your phone.</p>
-        <a href="https://www.nhs.uk/nhs-app/" target="_blank" class="os-link">↗ Get the NHS App</a>
-      </div>
+            <div class="os-card fade-up" style="animation-delay:0.12s">
+                <div class="os-badge">📱 NHS App</div>
+                <div class="os-title">Download the NHS App</div>
+                <p class="os-desc">Register for the NHS App to manage appointments, view your medical records, request
+                    repeat prescriptions, and message your care team — all from your phone.</p>
+                <a href="https://www.nhs.uk/nhs-app/" target="_blank" class="os-link">↗ Get the NHS App</a>
+            </div>
 
-      <div class="os-card fade-up" style="animation-delay:0.24s">
-        <div class="os-badge">🔐 Online Services</div>
-        <div class="os-title">NHS Login &amp; Online Access</div>
-        <p class="os-desc">Register for NHS online services to access your full health record, manage repeat prescriptions, and stay in control of your care — securely, from any device.</p>
-        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank" class="os-link">↗ Register for NHS Online</a>
-      </div>
+            <div class="os-card fade-up" style="animation-delay:0.24s">
+                <div class="os-badge">🔐 Online Services</div>
+                <div class="os-title">NHS Login &amp; Online Access</div>
+                <p class="os-desc">Register for NHS online services to access your full health record, manage repeat
+                    prescriptions, and stay in control of your care — securely, from any device.</p>
+                <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank" class="os-link">↗
+                    Register for NHS Online</a>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- NHS APP BANNER -->
 <div class="app-banner">
-  <div class="app-inner section-inner">
-    <div>
-      <div class="section-tag">Digital Access</div>
-      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
-      <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere. Our practice supports full NHS App integration for all patients.</p>
-      <div class="app-bullets">
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Manage and book GP appointments online</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions instantly</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Update your personal and contact details</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
-      </div>
+    <div class="app-inner section-inner">
+        <div>
+            <div class="section-tag">Digital Access</div>
+            <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+            <p class="section-lead">Register for the NHS App to manage your health anytime, anywhere. Our practice
+                supports full NHS App integration for all patients.</p>
+            <div class="app-bullets">
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Manage and book GP appointments online</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions instantly</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Update your personal and contact details
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+            </div>
+        </div>
+        <div class="app-cta-wrap">
+            <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+            <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register
+                for Online Services</a>
+        </div>
     </div>
-    <div class="app-cta-wrap">
-      <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
-      <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
-    </div>
-  </div>
 </div>
 
 <!-- EMERGENCY / OOH -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div>
-        <div class="emerg-label">Non-Emergency</div>
-        <div class="emerg-number">NHS 111</div>
-        <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobiles. For urgent medical advice when your GP is closed.</p>
-      </div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobiles.
+                    For urgent medical advice when your GP is closed.</p>
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label-urgent">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of
+                    consciousness, severe bleeding, or any life-threatening condition.</p>
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div>
-        <div class="emerg-label-urgent">Life-Threatening Emergency</div>
-        <div class="emerg-number">999</div>
-        <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, severe bleeding, or any life-threatening condition.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.05em;">SALUJA CLINIC</div>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.05em;">
+                SALUJA CLINIC
+            </div>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉
+                    salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New
+                    Patient</a></li>
+                <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="health-information.html">Health Information</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+                <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+                <li><a href="contact-us.html">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="health-information.html">Health Information</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
-        <li><a href="contact-us.html">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.1 }
-  );
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }),
+        {threshold: 0.1}
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>

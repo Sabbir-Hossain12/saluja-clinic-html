@@ -1,1034 +1,2153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minor Surgery – Saluja Clinic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nhs-blue:        #005EB8;
-      --nhs-dark:        #003087;
-      --nhs-aqua:        #009FBB;
-      --nhs-green:       #007F3B;
-      --nhs-light-blue:  #41B6E6;
-      --nhs-warm-yellow: #FFB81C;
-      --nhs-red:         #DA291C;
-      --white:           #ffffff;
-      --off-white:       #f5f8fc;
-      --text-dark:       #1a1a2e;
-      --text-mid:        #3a3a5c;
-      --text-soft:       #6b7a99;
-      --border:          #d8e4f0;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Minor Surgery – Saluja Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --nhs-warm-yellow: #FFB81C;
+            --nhs-red: #DA291C;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+        }
 
-    /* ── UTILITY BAR ── */
-    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
-    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
-    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .utility-bar a:hover { color: #fff; }
-    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
-    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── HEADER ── */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
-    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
-    .logo-wrap svg { height: 84px; width: auto; }
-    nav { display: flex; align-items: center; gap: 0.25rem; }
-    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
-    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
-    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── PAGE HERO (WHITE) ── */
-    .page-hero {
-      position: relative;
-      background: var(--white);
-      border-bottom: 3px solid var(--border);
-      overflow: hidden;
-      padding: 5rem 2rem 0;
-      min-height: 460px;
-      display: flex; align-items: flex-end;
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,94,184,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,94,184,0.035) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: grid-drift 24s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes grid-drift { 0%{transform:translateX(0) translateY(0)} 100%{transform:translateX(60px) translateY(60px)} }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    .orb {
-      position: absolute; border-radius: 50%; pointer-events: none;
-      animation: orb-float var(--dur,8s) ease-in-out infinite var(--delay,0s);
-    }
-    .orb-1 { width:500px;height:500px;top:-180px;right:-80px;--dur:10s;
-      background:radial-gradient(circle,rgba(0,94,184,0.05) 0%,transparent 70%); }
-    .orb-2 { width:300px;height:300px;bottom:-80px;left:5%;--dur:7s;--delay:-3s;
-      background:radial-gradient(circle,rgba(0,159,187,0.06) 0%,transparent 70%); }
-    @keyframes orb-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+        /* ── UTILITY BAR ── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            padding: 0.45rem 0;
+        }
 
-    .hero-content-wrap {
-      position: relative; z-index: 2;
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 480px; gap: 2rem; align-items: flex-end;
-    }
-    .hero-text-col { padding-bottom: 4.5rem; }
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
 
-    .hero-breadcrumb {
-      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-soft); font-weight: 600; margin-bottom: 1.2rem;
-      display: flex; align-items: center; gap: 0.5rem;
-      animation: hero-item-in 0.8s ease both;
-    }
-    .hero-breadcrumb a { color: var(--nhs-blue); text-decoration: none; transition: color 0.2s; }
-    .hero-breadcrumb a:hover { color: var(--nhs-dark); }
-    .hero-breadcrumb span { opacity: 0.45; }
+        .utility-bar a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
 
-    .page-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
-      font-weight: 600; line-height: 1.1;
-      color: var(--text-dark); margin-bottom: 1.2rem;
-      animation: hero-item-in 0.9s ease 0.1s both;
-    }
-    .page-hero h1 em { font-style: normal; color: var(--nhs-blue); }
+        .utility-bar a:hover {
+            color: #fff;
+        }
 
-    .hero-strapline {
-      font-size: 1.05rem; line-height: 1.7; color: var(--text-mid);
-      max-width: 520px; margin-bottom: 2rem;
-      animation: hero-item-in 0.9s ease 0.2s both;
-    }
+        .utility-bar .emer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-    .hero-pills {
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-      animation: hero-item-in 0.9s ease 0.3s both;
-    }
-    .hero-pill {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--off-white); border: 1px solid var(--border);
-      border-radius: 30px; padding: 0.4rem 1rem;
-      font-size: 0.8rem; font-weight: 600; color: var(--text-mid);
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
-    }
-    .hero-pill:hover { background: rgba(0,94,184,0.07); border-color: var(--nhs-blue); color: var(--nhs-blue); transform: translateY(-2px); }
-    .hero-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--nhs-blue); }
+        .util-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+        }
 
-    @keyframes hero-item-in { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        /* ── HEADER ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, 0.10);
+        }
 
-    /* ── SURGICAL ILLUSTRATION ── */
-    .hero-illustration {
-      position: relative;
-      display: flex; align-items: flex-end; justify-content: center;
-      animation: hero-item-in 1s ease 0.4s both;
-      padding-bottom: 0;
-    }
-    .surgical-scene {
-      width: 100%; max-width: 480px;
-    }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
 
-    /* Scene animation keyframes */
-    @keyframes arm-enter { from{transform:translateX(80px) translateY(-20px);opacity:0} to{transform:translateX(0) translateY(0);opacity:1} }
-    @keyframes tool-hover { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
-    @keyframes glove-pulse { 0%,100%{filter:drop-shadow(0 4px 12px rgba(0,94,184,0.15))} 50%{filter:drop-shadow(0 6px 20px rgba(0,94,184,0.28))} }
-    @keyframes cross-pulse { 0%,100%{opacity:0.9;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.92)} }
-    @keyframes lamp-glow { 0%,100%{opacity:0.85} 50%{opacity:1} }
-    @keyframes tray-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-    @keyframes droplet { 0%{transform:translateY(0);opacity:1} 100%{transform:translateY(16px);opacity:0} }
-    @keyframes scan-line { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
-    @keyframes heartbeat-trace {
-      0%   { stroke-dashoffset: 400; }
-      100% { stroke-dashoffset: 0; }
-    }
-    @keyframes badge-pop { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
-    @keyframes instrument-glint {
-      0%,90%,100% { opacity: 0; }
-      95% { opacity: 1; }
-    }
+        .logo-wrap svg {
+            height: 84px;
+            width: auto;
+        }
 
-    /* ── QUICK ACCESS ── */
-    .quick-access { background: var(--nhs-blue); padding: 0; }
-    .qa-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
-    .qa-item { padding: 1.8rem 1.2rem; text-align: center; text-decoration: none; color: var(--white); border-right: 1px solid rgba(255,255,255,0.15); transition: background 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.65rem; }
-    .qa-item:last-child { border-right: none; }
-    .qa-item:hover { background: rgba(255,255,255,0.12); }
-    .qa-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .qa-item:hover .qa-icon { background: rgba(255,255,255,0.25); }
-    .qa-icon svg { width: 24px; height: 24px; stroke: #fff; fill: none; stroke-width: 1.8; }
-    .qa-label { font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em; }
-    .qa-desc { font-size: 0.75rem; opacity: 0.75; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
 
-    /* ── SECTIONS ── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--nhs-blue); margin-bottom: 0.6rem; }
-    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 600; color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem; }
-    .section-lead { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; max-width: 660px; }
+        nav a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    /* ── INTRO STRIP ── */
-    .intro-strip { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 2.5rem 2rem; }
-    .intro-strip-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
-    .intro-strip-text { flex: 1; font-size: 0.97rem; color: var(--text-mid); line-height: 1.75; }
-    .btn-primary { background: var(--nhs-blue); color: var(--white); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,94,184,0.3); transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary:hover { background: var(--nhs-dark); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,94,184,0.35); }
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue);
+        }
 
-    /* ── NOT COSMETIC BANNER ── */
-    .notice-banner {
-      display: flex; align-items: flex-start; gap: 1rem;
-      background: rgba(255,184,28,0.08); border: 1px solid rgba(255,184,28,0.35);
-      border-radius: 14px; padding: 1.2rem 1.6rem;
-      font-size: 0.9rem; color: var(--text-mid); line-height: 1.65;
-      margin-top: 2rem;
-    }
-    .notice-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.05rem; }
-    .notice-banner strong { color: var(--text-dark); }
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s !important;
+        }
 
-    /* ── PROCEDURES GRID ── */
-    .procedures-section { background: var(--white); padding: 5rem 2rem; }
-    .proc-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem;
-    }
-    .proc-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 20px;
-      padding: 2rem; box-shadow: 0 2px 16px rgba(0,94,184,0.06);
-      position: relative; overflow: hidden;
-      transition: transform 0.22s, box-shadow 0.22s;
-    }
-    .proc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,94,184,0.12); }
-    .proc-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
-    }
-    .proc-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: rgba(0,94,184,0.08);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-    }
-    .proc-icon svg { width: 26px; height: 26px; stroke: var(--nhs-blue); fill: none; stroke-width: 1.7; }
-    .proc-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem;
-    }
-    .proc-desc { font-size: 0.86rem; line-height: 1.7; color: var(--text-mid); }
-    .proc-tag {
-      display: inline-block; margin-top: 0.9rem;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      background: rgba(0,94,184,0.07); color: var(--nhs-blue);
-      border-radius: 20px; padding: 0.2rem 0.7rem;
-    }
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px);
+        }
 
-    /* ── WHAT TO EXPECT ── */
-    .expect-section { background: var(--off-white); padding: 5rem 2rem; }
-    .steps-timeline {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;
-    }
-    .step-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 20px;
-      padding: 2rem; position: relative; overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,94,184,0.06);
-      transition: transform 0.22s, box-shadow 0.22s;
-    }
-    .step-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,94,184,0.11); }
-    .step-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
-    }
-    .step-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; font-weight: 700; line-height: 1;
-      color: rgba(0,94,184,0.12); margin-bottom: 0.6rem;
-    }
-    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.7rem; }
-    .step-body { font-size: 0.88rem; line-height: 1.75; color: var(--text-mid); }
-    .step-body strong { color: var(--text-dark); }
+        /* ── PAGE HERO (WHITE) ── */
+        .page-hero {
+            position: relative;
+            background: var(--white);
+            border-bottom: 3px solid var(--border);
+            overflow: hidden;
+            padding: 5rem 2rem 0;
+            min-height: 460px;
+            display: flex;
+            align-items: flex-end;
+        }
 
-    /* ── AFTERCARE SECTION ── */
-    .aftercare-section { background: var(--white); padding: 5rem 2rem; }
-    .aftercare-grid {
-      display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: start; margin-top: 3rem;
-    }
-    .aftercare-list { display: flex; flex-direction: column; gap: 1rem; }
-    .aftercare-item {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1.2rem 1.4rem; background: var(--off-white);
-      border: 1px solid var(--border); border-radius: 14px;
-      font-size: 0.88rem; line-height: 1.7; color: var(--text-mid);
-    }
-    .aftercare-icon {
-      width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-      background: rgba(0,94,184,0.08);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .aftercare-icon svg { width: 18px; height: 18px; stroke: var(--nhs-blue); fill: none; stroke-width: 2; }
-    .aftercare-item strong { color: var(--text-dark); display: block; margin-bottom: 0.2rem; font-size: 0.9rem; }
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 94, 184, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 94, 184, 0.035) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-drift 24s linear infinite;
+            pointer-events: none;
+        }
 
-    .contact-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 20px;
-      padding: 2rem; box-shadow: 0 4px 24px rgba(0,94,184,0.08);
-      position: relative; overflow: hidden;
-    }
-    .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
-    .contact-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1rem; }
-    .contact-card p { font-size: 0.88rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 1rem; }
-    .contact-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 0; border-top: 1px solid var(--border); font-size: 0.9rem; }
-    .contact-row a { color: var(--nhs-blue); font-weight: 600; text-decoration: none; }
-    .contact-row a:hover { text-decoration: underline; }
-    .alert-banner { display: flex; align-items: flex-start; gap: 0.8rem; background: rgba(218,41,28,0.05); border: 1px solid rgba(218,41,28,0.2); border-radius: 12px; padding: 1rem 1.3rem; font-size: 0.85rem; color: var(--text-mid); line-height: 1.65; margin-top: 1rem; }
+        @keyframes grid-drift {
+            0% {
+                transform: translateX(0) translateY(0)
+            }
+            100% {
+                transform: translateX(60px) translateY(60px)
+            }
+        }
 
-    /* ── APPOINTMENT BANNER ── */
-    .appt-banner { background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue)); padding: 4rem 2rem; }
-    .appt-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
-    .appt-inner h2 { color: #fff; margin-bottom: 0.5rem; }
-    .appt-inner p { font-size: 0.97rem; color: rgba(255,255,255,0.75); max-width: 500px; }
-    .appt-cta { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
-    .btn-white { background: #fff; color: var(--nhs-blue); padding: 0.85rem 1.8rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); white-space: nowrap; display: inline-block; }
-    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
-    .btn-ghost { border: 2px solid rgba(255,255,255,0.5); color: var(--white); padding: 0.75rem 1.8rem; border-radius: 10px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; display: inline-block; }
-    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: orb-float var(--dur, 8s) ease-in-out infinite var(--delay, 0s);
+        }
 
-    /* ── APP BANNER ── */
-    .app-banner { background: var(--nhs-dark); padding: 4rem 2rem; }
-    .app-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
-    .app-inner h2 { color: #fff; margin-bottom: 0.6rem; }
-    .app-inner .section-lead { color: rgba(255,255,255,0.75); }
-    .app-bullets { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.4rem; }
-    .app-bullet { display: flex; align-items: center; gap: 0.7rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
-    .app-bullet-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--nhs-light-blue); flex-shrink: 0; }
-    .app-cta-wrap { display: flex; flex-direction: column; gap: 0.8rem; }
-    .app-banner .section-tag { color: var(--nhs-light-blue); }
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -180px;
+            right: -80px;
+            --dur: 10s;
+            background: radial-gradient(circle, rgba(0, 94, 184, 0.05) 0%, transparent 70%);
+        }
 
-    /* ── EMERGENCY ── */
-    .emergency { background: var(--white); border-top: 1px solid var(--border); padding: 3rem 2rem; }
-    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .emerg-card { border-radius: 16px; padding: 2rem; display: flex; gap: 1.2rem; align-items: flex-start; }
-    .emerg-card.nhs111 { background: rgba(0,94,184,0.05); border: 1px solid rgba(0,94,184,0.2); }
-    .emerg-card.urgent { background: rgba(220,53,69,0.05); border: 1px solid rgba(220,53,69,0.2); }
-    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
-    .emerg-card.nhs111 .emerg-number { color: var(--nhs-blue); }
-    .emerg-card.urgent .emerg-number { color: #dc3545; }
-    .emerg-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
-    .emerg-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -80px;
+            left: 5%;
+            --dur: 7s;
+            --delay: -3s;
+            background: radial-gradient(circle, rgba(0, 159, 187, 0.06) 0%, transparent 70%);
+        }
 
-    /* ── FOOTER ── */
-    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 2rem; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
-    .footer-tagline { font-size: 0.88rem; margin-top: 0.8rem; line-height: 1.6; opacity: 0.75; }
-    .footer-address { font-size: 0.85rem; margin-top: 1rem; line-height: 1.8; opacity: 0.75; }
-    .footer-heading { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-bottom { max-width: 1200px; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; opacity: 0.6; flex-wrap: wrap; gap: 0.5rem; }
-    .hours-grid { display: grid; gap: 0.3rem; }
-    .hour-row { display: flex; justify-content: space-between; gap: 1.5rem; font-size: 0.84rem; }
-    .hour-day { opacity: 0.7; }
+        @keyframes orb-float {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-18px)
+            }
+        }
 
-    /* ── ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .hero-content-wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 2rem;
+            align-items: flex-end;
+        }
 
-    /* ── MOBILE ── */
-    @media (max-width: 960px) {
-      .hero-content-wrap { grid-template-columns: 1fr; }
-      .hero-illustration { display: none; }
-      .proc-grid { grid-template-columns: 1fr 1fr; }
-      .steps-timeline { grid-template-columns: 1fr; }
-      .aftercare-grid { grid-template-columns: 1fr; }
-      .app-inner { grid-template-columns: 1fr; }
-      .app-cta-wrap { flex-direction: row; }
-      .emergency-inner { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      nav { display: none; }
-      .appt-inner { flex-direction: column; }
-    }
-    @media (max-width: 600px) {
-      .qa-inner { grid-template-columns: repeat(2,1fr); }
-      .proc-grid { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; }
-    }
-  </style>
+        .hero-text-col {
+            padding-bottom: 4.5rem;
+        }
+
+        .hero-breadcrumb {
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: hero-item-in 0.8s ease both;
+        }
+
+        .hero-breadcrumb a {
+            color: var(--nhs-blue);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .hero-breadcrumb a:hover {
+            color: var(--nhs-dark);
+        }
+
+        .hero-breadcrumb span {
+            opacity: 0.45;
+        }
+
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            animation: hero-item-in 0.9s ease 0.1s both;
+        }
+
+        .page-hero h1 em {
+            font-style: normal;
+            color: var(--nhs-blue);
+        }
+
+        .hero-strapline {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            max-width: 520px;
+            margin-bottom: 2rem;
+            animation: hero-item-in 0.9s ease 0.2s both;
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            animation: hero-item-in 0.9s ease 0.3s both;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .hero-pill:hover {
+            background: rgba(0, 94, 184, 0.07);
+            border-color: var(--nhs-blue);
+            color: var(--nhs-blue);
+            transform: translateY(-2px);
+        }
+
+        .hero-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--nhs-blue);
+        }
+
+        @keyframes hero-item-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ── SURGICAL ILLUSTRATION ── */
+        .hero-illustration {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            animation: hero-item-in 1s ease 0.4s both;
+            padding-bottom: 0;
+        }
+
+        .surgical-scene {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* Scene animation keyframes */
+        @keyframes arm-enter {
+            from {
+                transform: translateX(80px) translateY(-20px);
+                opacity: 0
+            }
+            to {
+                transform: translateX(0) translateY(0);
+                opacity: 1
+            }
+        }
+
+        @keyframes tool-hover {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-3px)
+            }
+        }
+
+        @keyframes glove-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 4px 12px rgba(0, 94, 184, 0.15))
+            }
+            50% {
+                filter: drop-shadow(0 6px 20px rgba(0, 94, 184, 0.28))
+            }
+        }
+
+        @keyframes cross-pulse {
+            0%, 100% {
+                opacity: 0.9;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.92)
+            }
+        }
+
+        @keyframes lamp-glow {
+            0%, 100% {
+                opacity: 0.85
+            }
+            50% {
+                opacity: 1
+            }
+        }
+
+        @keyframes tray-bob {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-4px)
+            }
+        }
+
+        @keyframes droplet {
+            0% {
+                transform: translateY(0);
+                opacity: 1
+            }
+            100% {
+                transform: translateY(16px);
+                opacity: 0
+            }
+        }
+
+        @keyframes scan-line {
+            0% {
+                transform: translateX(-100%)
+            }
+            100% {
+                transform: translateX(200%)
+            }
+        }
+
+        @keyframes heartbeat-trace {
+            0% {
+                stroke-dashoffset: 400;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes badge-pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0
+            }
+            60% {
+                transform: scale(1.1)
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        @keyframes instrument-glint {
+            0%, 90%, 100% {
+                opacity: 0;
+            }
+            95% {
+                opacity: 1;
+            }
+        }
+
+        /* ── QUICK ACCESS ── */
+        .quick-access {
+            background: var(--nhs-blue);
+            padding: 0;
+        }
+
+        .qa-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .qa-item {
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--white);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            transition: background 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .qa-item:last-child {
+            border-right: none;
+        }
+
+        .qa-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .qa-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .qa-item:hover .qa-icon {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .qa-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .qa-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .qa-desc {
+            font-size: 0.75rem;
+            opacity: 0.75;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: 0.6rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 660px;
+        }
+
+        /* ── INTRO STRIP ── */
+        .intro-strip {
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+        }
+
+        .intro-strip-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .intro-strip-text {
+            flex: 1;
+            font-size: 0.97rem;
+            color: var(--text-mid);
+            line-height: 1.75;
+        }
+
+        .btn-primary {
+            background: var(--nhs-blue);
+            color: var(--white);
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 94, 184, 0.3);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--nhs-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(0, 94, 184, 0.35);
+        }
+
+        /* ── NOT COSMETIC BANNER ── */
+        .notice-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: rgba(255, 184, 28, 0.08);
+            border: 1px solid rgba(255, 184, 28, 0.35);
+            border-radius: 14px;
+            padding: 1.2rem 1.6rem;
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+            margin-top: 2rem;
+        }
+
+        .notice-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        .notice-banner strong {
+            color: var(--text-dark);
+        }
+
+        /* ── PROCEDURES GRID ── */
+        .procedures-section {
+            background: var(--white);
+            padding: 5rem 2rem;
+        }
+
+        .proc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .proc-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 2px 16px rgba(0, 94, 184, 0.06);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.22s, box-shadow 0.22s;
+        }
+
+        .proc-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(0, 94, 184, 0.12);
+        }
+
+        .proc-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .proc-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(0, 94, 184, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .proc-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--nhs-blue);
+            fill: none;
+            stroke-width: 1.7;
+        }
+
+        .proc-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .proc-desc {
+            font-size: 0.86rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+        }
+
+        .proc-tag {
+            display: inline-block;
+            margin-top: 0.9rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(0, 94, 184, 0.07);
+            color: var(--nhs-blue);
+            border-radius: 20px;
+            padding: 0.2rem 0.7rem;
+        }
+
+        /* ── WHAT TO EXPECT ── */
+        .expect-section {
+            background: var(--off-white);
+            padding: 5rem 2rem;
+        }
+
+        .steps-timeline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 94, 184, 0.06);
+            transition: transform 0.22s, box-shadow 0.22s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0, 94, 184, 0.11);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .step-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: rgba(0, 94, 184, 0.12);
+            margin-bottom: 0.6rem;
+        }
+
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.7rem;
+        }
+
+        .step-body {
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--text-mid);
+        }
+
+        .step-body strong {
+            color: var(--text-dark);
+        }
+
+        /* ── AFTERCARE SECTION ── */
+        .aftercare-section {
+            background: var(--white);
+            padding: 5rem 2rem;
+        }
+
+        .aftercare-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .aftercare-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .aftercare-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem 1.4rem;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+        }
+
+        .aftercare-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: rgba(0, 94, 184, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .aftercare-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--nhs-blue);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .aftercare-item strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 24px rgba(0, 94, 184, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .contact-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            margin-bottom: 1rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .contact-row a {
+            color: var(--nhs-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .contact-row a:hover {
+            text-decoration: underline;
+        }
+
+        .alert-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            background: rgba(218, 41, 28, 0.05);
+            border: 1px solid rgba(218, 41, 28, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            font-size: 0.85rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+            margin-top: 1rem;
+        }
+
+        /* ── APPOINTMENT BANNER ── */
+        .appt-banner {
+            background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue));
+            padding: 4rem 2rem;
+        }
+
+        .appt-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .appt-inner h2 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .appt-inner p {
+            font-size: 0.97rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 500px;
+        }
+
+        .appt-cta {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--nhs-blue);
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-ghost {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            padding: 0.75rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .btn-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ── APP BANNER ── */
+        .app-banner {
+            background: var(--nhs-dark);
+            padding: 4rem 2rem;
+        }
+
+        .app-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-inner h2 {
+            color: #fff;
+            margin-bottom: 0.6rem;
+        }
+
+        .app-inner .section-lead {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .app-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1.4rem;
+        }
+
+        .app-bullet {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .app-bullet-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--nhs-light-blue);
+            flex-shrink: 0;
+        }
+
+        .app-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .app-banner .section-tag {
+            color: var(--nhs-light-blue);
+        }
+
+        /* ── EMERGENCY ── */
+        .emergency {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(0, 94, 184, 0.05);
+            border: 1px solid rgba(0, 94, 184, 0.2);
+        }
+
+        .emerg-card.urgent {
+            background: rgba(220, 53, 69, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .emerg-card.nhs111 .emerg-number {
+            color: var(--nhs-blue);
+        }
+
+        .emerg-card.urgent .emerg-number {
+            color: #dc3545;
+        }
+
+        .emerg-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .emerg-desc {
+            font-size: 0.88rem;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3.5rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            margin-top: 0.8rem;
+            line-height: 1.6;
+            opacity: 0.75;
+        }
+
+        .footer-address {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+            opacity: 0.75;
+        }
+
+        .footer-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            gap: 0.3rem;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-size: 0.84rem;
+        }
+
+        .hour-day {
+            opacity: 0.7;
+        }
+
+        /* ── ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 960px) {
+            .hero-content-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-illustration {
+                display: none;
+            }
+
+            .proc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .steps-timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .aftercare-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .app-cta-wrap {
+                flex-direction: row;
+            }
+
+            .emergency-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .appt-inner {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .qa-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .proc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (min-width: 300px) and (max-width: 500px) {
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="emer">
-      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
-      <span class="util-pill">NHS GP Practice · West London</span>
+    <div class="inner">
+        <div class="emer">
+            <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+            <span class="util-pill">NHS GP Practice · West London</span>
+        </div>
+        <div class="emer">
+            <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">salujaclinic@nhs.net</a>
+            <span>|</span>
+            <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="emer">
-      <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">salujaclinic@nhs.net</a>
-      <span>|</span>
-      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"  stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
-            <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
-            <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"  stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
-            <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
-            <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
-            <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
-            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
-            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-          <filter id="textSheen">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <rect width="720" height="160" fill="#ffffff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="index.html">Our Practice</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#team">Our Doctors</a>
-      <a href="index.html#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="hero-grid"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-  <div class="hero-content-wrap">
-    <!-- Left: text -->
-    <div class="hero-text-col">
-      <div class="hero-breadcrumb">
-        <a href="index.html">Home</a>
-        <span>›</span>
-        <span>Clinics &amp; Services</span>
-        <span>›</span>
-        <span style="color:var(--text-mid)">Minor Surgery</span>
-      </div>
-      <h1>Minor <em>Surgery</em></h1>
-      <p class="hero-strapline">Small operations performed safely and efficiently right here at the practice. Quick recovery, expert care — no hospital referral needed for most procedures.</p>
-      <div class="hero-pills">
-        <a href="#procedures" class="hero-pill"><span class="hero-pill-dot"></span>Procedures</a>
-        <a href="#expect" class="hero-pill"><span class="hero-pill-dot"></span>What to Expect</a>
-        <a href="#aftercare" class="hero-pill"><span class="hero-pill-dot"></span>Aftercare</a>
-        <a href="#book" class="hero-pill"><span class="hero-pill-dot"></span>Book Appointment</a>
-      </div>
+    <div class="hero-content-wrap">
+        <!-- Left: text -->
+        <div class="hero-text-col">
+            <div class="hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span>Clinics &amp; Services</span>
+                <span>›</span>
+                <span style="color:var(--text-mid)">Minor Surgery</span>
+            </div>
+            <h1>Minor <em>Surgery</em></h1>
+            <p class="hero-strapline">Small operations performed safely and efficiently right here at the practice.
+                Quick recovery, expert care — no hospital referral needed for most procedures.</p>
+            <div class="hero-pills">
+                <a href="#procedures" class="hero-pill"><span class="hero-pill-dot"></span>Procedures</a>
+                <a href="#expect" class="hero-pill"><span class="hero-pill-dot"></span>What to Expect</a>
+                <a href="#aftercare" class="hero-pill"><span class="hero-pill-dot"></span>Aftercare</a>
+                <a href="#book" class="hero-pill"><span class="hero-pill-dot"></span>Book Appointment</a>
+            </div>
+        </div>
+
+        <!-- Right: animated surgical illustration -->
+        <div class="hero-illustration">
+            <svg class="surgical-scene" viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f0f6ff"/>
+                        <stop offset="100%" stop-color="#e8f0fa"/>
+                    </linearGradient>
+                    <linearGradient id="tableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#dce8f5"/>
+                        <stop offset="100%" stop-color="#c8d8ee"/>
+                    </linearGradient>
+                    <linearGradient id="gloveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#a8c8f0"/>
+                        <stop offset="100%" stop-color="#7aace0"/>
+                    </linearGradient>
+                    <linearGradient id="lampGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#e8f4ff"/>
+                        <stop offset="100%" stop-color="#c8dff5"/>
+                    </linearGradient>
+                    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fce8d8"/>
+                        <stop offset="100%" stop-color="#f5d8c0"/>
+                    </linearGradient>
+                    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fffde0" stop-opacity="0.7"/>
+                        <stop offset="100%" stop-color="#fffde0" stop-opacity="0"/>
+                    </radialGradient>
+                    <radialGradient id="spotGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="rgba(255,253,200,0.45)"/>
+                        <stop offset="100%" stop-color="rgba(255,253,200,0)"/>
+                    </radialGradient>
+                    <filter id="softShadow">
+                        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#3060a033" flood-opacity="1"/>
+                    </filter>
+                    <filter id="glowFilter">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                    <clipPath id="armClip">
+                        <rect x="0" y="0" width="480" height="400"/>
+                    </clipPath>
+                    <mask id="trayMask">
+                        <rect width="480" height="400" fill="white"/>
+                    </mask>
+                </defs>
+
+                <!-- Scene background -->
+                <rect width="480" height="400" fill="url(#bgGrad)" rx="24"/>
+
+                <!-- Subtle grid lines (OR floor) -->
+                <g opacity="0.18" stroke="#8ab4dc" stroke-width="0.5">
+                    <line x1="0" y1="320" x2="480" y2="320"/>
+                    <line x1="0" y1="360" x2="480" y2="360"/>
+                    <line x1="80" y1="310" x2="80" y2="400"/>
+                    <line x1="160" y1="310" x2="160" y2="400"/>
+                    <line x1="240" y1="310" x2="240" y2="400"/>
+                    <line x1="320" y1="310" x2="320" y2="400"/>
+                    <line x1="400" y1="310" x2="400" y2="400"/>
+                </g>
+
+                <!-- Surgical lamp arm + head (top centre) -->
+                <g style="animation: lamp-glow 2.5s ease-in-out infinite;">
+                    <!-- Arm -->
+                    <rect x="218" y="0" width="12" height="60" rx="4" fill="#c8daf0"/>
+                    <rect x="208" y="55" width="32" height="8" rx="3" fill="#b8cce4"/>
+                    <!-- Lamp housing -->
+                    <ellipse cx="224" cy="85" rx="42" ry="28" fill="url(#lampGrad)" stroke="#b0c8e4"
+                             stroke-width="1.5"/>
+                    <ellipse cx="224" cy="85" rx="34" ry="20" fill="#ddeeff" opacity="0.9"/>
+                    <!-- Lamp lens -->
+                    <ellipse cx="224" cy="87" rx="24" ry="14" fill="#fffde8" opacity="0.95"/>
+                    <!-- Reflectors -->
+                    <ellipse cx="214" cy="84" rx="6" ry="4" fill="white" opacity="0.4"/>
+                    <ellipse cx="232" cy="84" rx="6" ry="4" fill="white" opacity="0.3"/>
+                </g>
+
+                <!-- Lamp glow cone -->
+                <ellipse cx="224" cy="260" rx="90" ry="20" fill="url(#spotGlow)"
+                         style="animation: lamp-glow 2.5s ease-in-out infinite;"/>
+
+                <!-- Surgical tray (right side) -->
+                <g style="animation: tray-bob 3s ease-in-out infinite;">
+                    <!-- Tray stand -->
+                    <rect x="380" y="240" width="6" height="80" rx="3" fill="#b8cce4"/>
+                    <rect x="365" y="316" width="36" height="6" rx="3" fill="#a8bcd8"/>
+                    <!-- Tray surface -->
+                    <rect x="350" y="220" width="96" height="28" rx="6" fill="#dceaf8" stroke="#b8cce4"
+                          stroke-width="1"/>
+                    <rect x="354" y="224" width="88" height="20" rx="4" fill="#e8f2fc"/>
+                    <!-- Instruments on tray -->
+                    <!-- Scalpel -->
+                    <line x1="360" y1="234" x2="400" y2="234" stroke="#8aa8d0" stroke-width="2.5"
+                          stroke-linecap="round"/>
+                    <polygon points="400,231 410,234 400,237" fill="#a0b8d8"/>
+                    <!-- Forceps -->
+                    <line x1="365" y1="240" x2="392" y2="240" stroke="#8aa8d0" stroke-width="1.8"
+                          stroke-linecap="round"/>
+                    <line x1="368" y1="240" x2="394" y2="237" stroke="#8aa8d0" stroke-width="1.2"
+                          stroke-linecap="round"/>
+                    <!-- Swab -->
+                    <ellipse cx="426" cy="234" rx="9" ry="5" fill="#f0f8ff" stroke="#c0d4ee" stroke-width="1"/>
+                    <!-- Instrument glint -->
+                    <line x1="362" y1="233" x2="368" y2="233" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                          style="animation: instrument-glint 3s ease-in-out infinite;"/>
+                </g>
+
+                <!-- Examination table / patient surface -->
+                <rect x="40" y="290" width="340" height="24" rx="8" fill="url(#tableGrad)" filter="url(#softShadow)"/>
+                <rect x="44" y="294" width="332" height="6" rx="3" fill="#e8f2fc" opacity="0.6"/>
+                <!-- Table legs -->
+                <rect x="80" y="314" width="10" height="50" rx="3" fill="#b8cce4"/>
+                <rect x="330" y="314" width="10" height="50" rx="3" fill="#b8cce4"/>
+                <!-- Table base -->
+                <rect x="60" y="360" width="50" height="8" rx="3" fill="#a8bcd4"/>
+                <rect x="310" y="360" width="50" height="8" rx="3" fill="#a8bcd4"/>
+
+                <!-- Patient arm on table -->
+                <g>
+                    <!-- Forearm -->
+                    <rect x="100" y="268" width="200" height="26" rx="13" fill="url(#skinGrad)" stroke="#e0c8a8"
+                          stroke-width="1"/>
+                    <!-- Wrist/hand hint -->
+                    <ellipse cx="300" cy="281" rx="16" ry="13" fill="url(#skinGrad)" stroke="#e0c8a8" stroke-width="1"/>
+                    <!-- Knuckle hints -->
+                    <circle cx="308" cy="274" r="4" fill="#f5d8c0" stroke="#e0c8a8" stroke-width="0.8"/>
+                    <circle cx="314" cy="278" r="3.5" fill="#f5d8c0" stroke="#e0c8a8" stroke-width="0.8"/>
+                    <!-- Skin marking (pre-op dot) -->
+                    <circle cx="200" cy="278" r="4" fill="none" stroke="#9b6fa8" stroke-width="1.5"
+                            stroke-dasharray="3,2"/>
+                </g>
+
+                <!-- Sterile drape -->
+                <rect x="40" y="284" width="340" height="12" rx="4" fill="#e0eeff" opacity="0.7"/>
+                <line x1="40" y1="289" x2="380" y2="289" stroke="#c8d8f0" stroke-width="0.8"/>
+
+                <!-- Doctor's gloved hand + instrument (animated in) -->
+                <g clip-path="url(#armClip)" style="animation: arm-enter 1s cubic-bezier(0.34,1.56,0.64,1) 0.6s both;">
+                    <g style="animation: tool-hover 2.8s ease-in-out infinite; animation-delay: 1.6s;">
+                        <g style="animation: glove-pulse 2.8s ease-in-out infinite; animation-delay: 1.6s;"
+                           filter="url(#softShadow)">
+                            <!-- Glove wrist/cuff -->
+                            <rect x="155" y="152" width="54" height="22" rx="6" fill="#c8daf0" stroke="#b0c8e4"
+                                  stroke-width="1"/>
+                            <!-- Stripe on cuff -->
+                            <rect x="155" y="162" width="54" height="4" rx="1" fill="#b0c8e4" opacity="0.5"/>
+                            <!-- Palm -->
+                            <rect x="158" y="170" width="48" height="52" rx="10" fill="url(#gloveGrad)" stroke="#90b8e0"
+                                  stroke-width="1"/>
+                            <!-- Thumb -->
+                            <ellipse cx="156" cy="195" rx="10" ry="18" fill="url(#gloveGrad)" stroke="#90b8e0"
+                                     stroke-width="1" transform="rotate(-12,156,195)"/>
+                            <!-- Fingers group -->
+                            <rect x="164" y="148" width="12" height="30" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0"
+                                  stroke-width="1"/>
+                            <rect x="180" y="142" width="12" height="36" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0"
+                                  stroke-width="1"/>
+                            <rect x="196" y="144" width="12" height="34" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0"
+                                  stroke-width="1"/>
+                            <!-- Knuckle highlights -->
+                            <ellipse cx="170" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
+                            <ellipse cx="186" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
+                            <ellipse cx="202" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
+                            <!-- Scalpel handle held in hand -->
+                            <rect x="180" y="215" width="8" height="46" rx="3" fill="#90a8c8" stroke="#7898b8"
+                                  stroke-width="1"/>
+                            <!-- Scalpel grip texture -->
+                            <line x1="182" y1="222" x2="186" y2="222" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
+                            <line x1="182" y1="228" x2="186" y2="228" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
+                            <line x1="182" y1="234" x2="186" y2="234" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
+                            <!-- Scalpel blade -->
+                            <polygon points="181,260 187,260 192,272 176,272" fill="#d0dcea" stroke="#a0b8d0"
+                                     stroke-width="0.8"/>
+                            <line x1="192" y1="272" x2="176" y2="272" stroke="#c0d0e4" stroke-width="1.5"
+                                  stroke-linecap="round"/>
+                            <!-- Blade glint -->
+                            <line x1="178" y1="264" x2="182" y2="268" stroke="white" stroke-width="1.5"
+                                  stroke-linecap="round" opacity="0.8"
+                                  style="animation: instrument-glint 2.5s ease-in-out infinite;"/>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- NHS cross badge -->
+                <g style="animation: badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.4s both;"
+                   transform="translate(20,20)">
+                    <rect x="0" y="0" width="52" height="52" rx="14" fill="#005EB8" filter="url(#softShadow)"/>
+                    <rect x="20" y="8" width="12" height="36" rx="3" fill="white"/>
+                    <rect x="8" y="20" width="36" height="12" rx="3" fill="white"/>
+                </g>
+
+                <!-- Floating status labels -->
+                <g style="animation: badge-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 1.8s both;"
+                   transform="translate(310,30)">
+                    <rect x="0" y="0" width="130" height="34" rx="10" fill="white" stroke="#d8e4f0" stroke-width="1"
+                          filter="url(#softShadow)"/>
+                    <circle cx="18" cy="17" r="6" fill="#007F3B"/>
+                    <circle cx="18" cy="17" r="3" fill="white"/>
+                    <text x="32" y="22" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600"
+                          fill="#1a1a2e">Sterile Field Active
+                    </text>
+                </g>
+
+                <g style="animation: badge-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 2s both;"
+                   transform="translate(310,76)">
+                    <rect x="0" y="0" width="130" height="34" rx="10" fill="white" stroke="#d8e4f0" stroke-width="1"
+                          filter="url(#softShadow)"/>
+                    <circle cx="18" cy="17" r="6" fill="#005EB8"/>
+                    <circle cx="18" cy="17" r="3" fill="white"/>
+                    <text x="32" y="22" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600"
+                          fill="#1a1a2e">Local Anaesthetic
+                    </text>
+                </g>
+
+                <!-- Animated heartbeat monitor line (bottom right) -->
+                <g transform="translate(310, 200)">
+                    <rect x="0" y="0" width="130" height="60" rx="10" fill="#0a1628" opacity="0.88"/>
+                    <rect x="4" y="4" width="122" height="52" rx="7" fill="#0d1e38" opacity="0.5"/>
+                    <text x="10" y="16" font-family="'DM Sans',sans-serif" font-size="8" fill="#41B6E6"
+                          letter-spacing="1">PULSE ♥ 72
+                    </text>
+                    <!-- ECG trace -->
+                    <polyline
+                            points="8,40 20,40 26,40 30,28 34,52 37,20 40,56 43,40 60,40 66,40 70,28 74,52 77,20 80,56 83,40 122,40"
+                            fill="none" stroke="#41B6E6" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-dasharray="200" stroke-dashoffset="200"
+                            style="animation: heartbeat-trace 2s linear infinite;"/>
+                    <!-- SpO2 -->
+                    <text x="10" y="56" font-family="'DM Sans',sans-serif" font-size="8" fill="#00c8a8"
+                          letter-spacing="1">SpO₂ 99%
+                    </text>
+                </g>
+
+                <!-- Droplet animation (anaesthetic drip) -->
+                <g style="animation: droplet 2s ease-in infinite;">
+                    <ellipse cx="185" cy="270" rx="2" ry="3" fill="#a0c4e8" opacity="0.7"/>
+                </g>
+                <g style="animation: droplet 2s ease-in infinite; animation-delay: 1s;">
+                    <ellipse cx="185" cy="270" rx="2" ry="3" fill="#a0c4e8" opacity="0.5"/>
+                </g>
+            </svg>
+        </div>
     </div>
-
-    <!-- Right: animated surgical illustration -->
-    <div class="hero-illustration">
-      <svg class="surgical-scene" viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#f0f6ff"/>
-            <stop offset="100%" stop-color="#e8f0fa"/>
-          </linearGradient>
-          <linearGradient id="tableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#dce8f5"/>
-            <stop offset="100%" stop-color="#c8d8ee"/>
-          </linearGradient>
-          <linearGradient id="gloveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#a8c8f0"/>
-            <stop offset="100%" stop-color="#7aace0"/>
-          </linearGradient>
-          <linearGradient id="lampGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#e8f4ff"/>
-            <stop offset="100%" stop-color="#c8dff5"/>
-          </linearGradient>
-          <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#fce8d8"/>
-            <stop offset="100%" stop-color="#f5d8c0"/>
-          </linearGradient>
-          <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#fffde0" stop-opacity="0.7"/>
-            <stop offset="100%" stop-color="#fffde0" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="spotGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(255,253,200,0.45)"/>
-            <stop offset="100%" stop-color="rgba(255,253,200,0)"/>
-          </radialGradient>
-          <filter id="softShadow"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#3060a033" flood-opacity="1"/></filter>
-          <filter id="glowFilter"><feGaussianBlur stdDeviation="4" result="blur"/><feComposite in="SourceGraphic" in2="blur" operator="over"/></filter>
-          <clipPath id="armClip"><rect x="0" y="0" width="480" height="400"/></clipPath>
-          <mask id="trayMask"><rect width="480" height="400" fill="white"/></mask>
-        </defs>
-
-        <!-- Scene background -->
-        <rect width="480" height="400" fill="url(#bgGrad)" rx="24"/>
-
-        <!-- Subtle grid lines (OR floor) -->
-        <g opacity="0.18" stroke="#8ab4dc" stroke-width="0.5">
-          <line x1="0" y1="320" x2="480" y2="320"/>
-          <line x1="0" y1="360" x2="480" y2="360"/>
-          <line x1="80" y1="310" x2="80" y2="400"/>
-          <line x1="160" y1="310" x2="160" y2="400"/>
-          <line x1="240" y1="310" x2="240" y2="400"/>
-          <line x1="320" y1="310" x2="320" y2="400"/>
-          <line x1="400" y1="310" x2="400" y2="400"/>
-        </g>
-
-        <!-- Surgical lamp arm + head (top centre) -->
-        <g style="animation: lamp-glow 2.5s ease-in-out infinite;">
-          <!-- Arm -->
-          <rect x="218" y="0" width="12" height="60" rx="4" fill="#c8daf0"/>
-          <rect x="208" y="55" width="32" height="8" rx="3" fill="#b8cce4"/>
-          <!-- Lamp housing -->
-          <ellipse cx="224" cy="85" rx="42" ry="28" fill="url(#lampGrad)" stroke="#b0c8e4" stroke-width="1.5"/>
-          <ellipse cx="224" cy="85" rx="34" ry="20" fill="#ddeeff" opacity="0.9"/>
-          <!-- Lamp lens -->
-          <ellipse cx="224" cy="87" rx="24" ry="14" fill="#fffde8" opacity="0.95"/>
-          <!-- Reflectors -->
-          <ellipse cx="214" cy="84" rx="6" ry="4" fill="white" opacity="0.4"/>
-          <ellipse cx="232" cy="84" rx="6" ry="4" fill="white" opacity="0.3"/>
-        </g>
-
-        <!-- Lamp glow cone -->
-        <ellipse cx="224" cy="260" rx="90" ry="20" fill="url(#spotGlow)" style="animation: lamp-glow 2.5s ease-in-out infinite;"/>
-
-        <!-- Surgical tray (right side) -->
-        <g style="animation: tray-bob 3s ease-in-out infinite;">
-          <!-- Tray stand -->
-          <rect x="380" y="240" width="6" height="80" rx="3" fill="#b8cce4"/>
-          <rect x="365" y="316" width="36" height="6" rx="3" fill="#a8bcd8"/>
-          <!-- Tray surface -->
-          <rect x="350" y="220" width="96" height="28" rx="6" fill="#dceaf8" stroke="#b8cce4" stroke-width="1"/>
-          <rect x="354" y="224" width="88" height="20" rx="4" fill="#e8f2fc"/>
-          <!-- Instruments on tray -->
-          <!-- Scalpel -->
-          <line x1="360" y1="234" x2="400" y2="234" stroke="#8aa8d0" stroke-width="2.5" stroke-linecap="round"/>
-          <polygon points="400,231 410,234 400,237" fill="#a0b8d8"/>
-          <!-- Forceps -->
-          <line x1="365" y1="240" x2="392" y2="240" stroke="#8aa8d0" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="368" y1="240" x2="394" y2="237" stroke="#8aa8d0" stroke-width="1.2" stroke-linecap="round"/>
-          <!-- Swab -->
-          <ellipse cx="426" cy="234" rx="9" ry="5" fill="#f0f8ff" stroke="#c0d4ee" stroke-width="1"/>
-          <!-- Instrument glint -->
-          <line x1="362" y1="233" x2="368" y2="233" stroke="white" stroke-width="1.5" stroke-linecap="round" style="animation: instrument-glint 3s ease-in-out infinite;"/>
-        </g>
-
-        <!-- Examination table / patient surface -->
-        <rect x="40" y="290" width="340" height="24" rx="8" fill="url(#tableGrad)" filter="url(#softShadow)"/>
-        <rect x="44" y="294" width="332" height="6" rx="3" fill="#e8f2fc" opacity="0.6"/>
-        <!-- Table legs -->
-        <rect x="80" y="314" width="10" height="50" rx="3" fill="#b8cce4"/>
-        <rect x="330" y="314" width="10" height="50" rx="3" fill="#b8cce4"/>
-        <!-- Table base -->
-        <rect x="60" y="360" width="50" height="8" rx="3" fill="#a8bcd4"/>
-        <rect x="310" y="360" width="50" height="8" rx="3" fill="#a8bcd4"/>
-
-        <!-- Patient arm on table -->
-        <g>
-          <!-- Forearm -->
-          <rect x="100" y="268" width="200" height="26" rx="13" fill="url(#skinGrad)" stroke="#e0c8a8" stroke-width="1"/>
-          <!-- Wrist/hand hint -->
-          <ellipse cx="300" cy="281" rx="16" ry="13" fill="url(#skinGrad)" stroke="#e0c8a8" stroke-width="1"/>
-          <!-- Knuckle hints -->
-          <circle cx="308" cy="274" r="4" fill="#f5d8c0" stroke="#e0c8a8" stroke-width="0.8"/>
-          <circle cx="314" cy="278" r="3.5" fill="#f5d8c0" stroke="#e0c8a8" stroke-width="0.8"/>
-          <!-- Skin marking (pre-op dot) -->
-          <circle cx="200" cy="278" r="4" fill="none" stroke="#9b6fa8" stroke-width="1.5" stroke-dasharray="3,2"/>
-        </g>
-
-        <!-- Sterile drape -->
-        <rect x="40" y="284" width="340" height="12" rx="4" fill="#e0eeff" opacity="0.7"/>
-        <line x1="40" y1="289" x2="380" y2="289" stroke="#c8d8f0" stroke-width="0.8"/>
-
-        <!-- Doctor's gloved hand + instrument (animated in) -->
-        <g clip-path="url(#armClip)" style="animation: arm-enter 1s cubic-bezier(0.34,1.56,0.64,1) 0.6s both;">
-          <g style="animation: tool-hover 2.8s ease-in-out infinite; animation-delay: 1.6s;">
-            <g style="animation: glove-pulse 2.8s ease-in-out infinite; animation-delay: 1.6s;" filter="url(#softShadow)">
-              <!-- Glove wrist/cuff -->
-              <rect x="155" y="152" width="54" height="22" rx="6" fill="#c8daf0" stroke="#b0c8e4" stroke-width="1"/>
-              <!-- Stripe on cuff -->
-              <rect x="155" y="162" width="54" height="4" rx="1" fill="#b0c8e4" opacity="0.5"/>
-              <!-- Palm -->
-              <rect x="158" y="170" width="48" height="52" rx="10" fill="url(#gloveGrad)" stroke="#90b8e0" stroke-width="1"/>
-              <!-- Thumb -->
-              <ellipse cx="156" cy="195" rx="10" ry="18" fill="url(#gloveGrad)" stroke="#90b8e0" stroke-width="1" transform="rotate(-12,156,195)"/>
-              <!-- Fingers group -->
-              <rect x="164" y="148" width="12" height="30" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0" stroke-width="1"/>
-              <rect x="180" y="142" width="12" height="36" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0" stroke-width="1"/>
-              <rect x="196" y="144" width="12" height="34" rx="6" fill="url(#gloveGrad)" stroke="#90b8e0" stroke-width="1"/>
-              <!-- Knuckle highlights -->
-              <ellipse cx="170" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
-              <ellipse cx="186" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
-              <ellipse cx="202" cy="174" rx="4" ry="2" fill="white" opacity="0.35"/>
-              <!-- Scalpel handle held in hand -->
-              <rect x="180" y="215" width="8" height="46" rx="3" fill="#90a8c8" stroke="#7898b8" stroke-width="1"/>
-              <!-- Scalpel grip texture -->
-              <line x1="182" y1="222" x2="186" y2="222" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
-              <line x1="182" y1="228" x2="186" y2="228" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
-              <line x1="182" y1="234" x2="186" y2="234" stroke="#7898b8" stroke-width="1" opacity="0.6"/>
-              <!-- Scalpel blade -->
-              <polygon points="181,260 187,260 192,272 176,272" fill="#d0dcea" stroke="#a0b8d0" stroke-width="0.8"/>
-              <line x1="192" y1="272" x2="176" y2="272" stroke="#c0d0e4" stroke-width="1.5" stroke-linecap="round"/>
-              <!-- Blade glint -->
-              <line x1="178" y1="264" x2="182" y2="268" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.8" style="animation: instrument-glint 2.5s ease-in-out infinite;"/>
-            </g>
-          </g>
-        </g>
-
-        <!-- NHS cross badge -->
-        <g style="animation: badge-pop 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.4s both;" transform="translate(20,20)">
-          <rect x="0" y="0" width="52" height="52" rx="14" fill="#005EB8" filter="url(#softShadow)"/>
-          <rect x="20" y="8" width="12" height="36" rx="3" fill="white"/>
-          <rect x="8" y="20" width="36" height="12" rx="3" fill="white"/>
-        </g>
-
-        <!-- Floating status labels -->
-        <g style="animation: badge-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 1.8s both;" transform="translate(310,30)">
-          <rect x="0" y="0" width="130" height="34" rx="10" fill="white" stroke="#d8e4f0" stroke-width="1" filter="url(#softShadow)"/>
-          <circle cx="18" cy="17" r="6" fill="#007F3B"/>
-          <circle cx="18" cy="17" r="3" fill="white"/>
-          <text x="32" y="22" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">Sterile Field Active</text>
-        </g>
-
-        <g style="animation: badge-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 2s both;" transform="translate(310,76)">
-          <rect x="0" y="0" width="130" height="34" rx="10" fill="white" stroke="#d8e4f0" stroke-width="1" filter="url(#softShadow)"/>
-          <circle cx="18" cy="17" r="6" fill="#005EB8"/>
-          <circle cx="18" cy="17" r="3" fill="white"/>
-          <text x="32" y="22" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">Local Anaesthetic</text>
-        </g>
-
-        <!-- Animated heartbeat monitor line (bottom right) -->
-        <g transform="translate(310, 200)">
-          <rect x="0" y="0" width="130" height="60" rx="10" fill="#0a1628" opacity="0.88"/>
-          <rect x="4" y="4" width="122" height="52" rx="7" fill="#0d1e38" opacity="0.5"/>
-          <text x="10" y="16" font-family="'DM Sans',sans-serif" font-size="8" fill="#41B6E6" letter-spacing="1">PULSE  ♥ 72</text>
-          <!-- ECG trace -->
-          <polyline
-            points="8,40 20,40 26,40 30,28 34,52 37,20 40,56 43,40 60,40 66,40 70,28 74,52 77,20 80,56 83,40 122,40"
-            fill="none" stroke="#41B6E6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-            stroke-dasharray="200" stroke-dashoffset="200"
-            style="animation: heartbeat-trace 2s linear infinite;"/>
-          <!-- SpO2 -->
-          <text x="10" y="56" font-family="'DM Sans',sans-serif" font-size="8" fill="#00c8a8" letter-spacing="1">SpO₂  99%</text>
-        </g>
-
-        <!-- Droplet animation (anaesthetic drip) -->
-        <g style="animation: droplet 2s ease-in infinite;">
-          <ellipse cx="185" cy="270" rx="2" ry="3" fill="#a0c4e8" opacity="0.7"/>
-        </g>
-        <g style="animation: droplet 2s ease-in infinite; animation-delay: 1s;">
-          <ellipse cx="185" cy="270" rx="2" ry="3" fill="#a0c4e8" opacity="0.5"/>
-        </g>
-      </svg>
-    </div>
-  </div>
 </div>
 
 <!-- QUICK ACCESS -->
 <div class="quick-access">
-  <div class="qa-inner">
-    <a href="https://salujaclinic.webgp.com/" class="qa-item" target="_blank">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-      <div class="qa-label">Book Appointment</div>
-      <div class="qa-desc">Online or by phone</div>
-    </a>
-    <a href="#procedures" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <div class="qa-label">Procedures</div>
-      <div class="qa-desc">What we offer</div>
-    </a>
-    <a href="#expect" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="qa-label">What to Expect</div>
-      <div class="qa-desc">Before &amp; during</div>
-    </a>
-    <a href="#aftercare" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <div class="qa-label">Aftercare</div>
-      <div class="qa-desc">Recovery guidance</div>
-    </a>
-    <a href="#contact" class="qa-item">
-      <div class="qa-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <div class="qa-label">Contact Us</div>
-      <div class="qa-desc">0208 574 5136</div>
-    </a>
-  </div>
+    <div class="qa-inner">
+        <a href="https://salujaclinic.webgp.com/" class="qa-item" target="_blank">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+            </div>
+            <div class="qa-label">Book Appointment</div>
+            <div class="qa-desc">Online or by phone</div>
+        </a>
+        <a href="#procedures" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+            <div class="qa-label">Procedures</div>
+            <div class="qa-desc">What we offer</div>
+        </a>
+        <a href="#expect" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+            <div class="qa-label">What to Expect</div>
+            <div class="qa-desc">Before &amp; during</div>
+        </a>
+        <a href="#aftercare" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+            </div>
+            <div class="qa-label">Aftercare</div>
+            <div class="qa-desc">Recovery guidance</div>
+        </a>
+        <a href="#contact" class="qa-item">
+            <div class="qa-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+            </div>
+            <div class="qa-label">Contact Us</div>
+            <div class="qa-desc">0208 574 5136</div>
+        </a>
+    </div>
 </div>
 
 <!-- INTRO STRIP -->
 <div class="intro-strip">
-  <div class="intro-strip-inner">
-    <p class="intro-strip-text">Certain small surgical procedures can be performed safely at the practice, avoiding the need for a hospital visit. Recovery is usually quick and most patients return to normal activities within a few days. You will first need to see a GP for diagnosis and referral before an appointment is made for your procedure. <strong>Please note: we do not offer minor surgery for cosmetic purposes.</strong></p>
-    <div style="flex-shrink:0">
-      <a href="https://salujaclinic.webgp.com/" class="btn-primary" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Book a Consultation
-      </a>
+    <div class="intro-strip-inner">
+        <p class="intro-strip-text">Certain small surgical procedures can be performed safely at the practice, avoiding
+            the need for a hospital visit. Recovery is usually quick and most patients return to normal activities
+            within a few days. You will first need to see a GP for diagnosis and referral before an appointment is made
+            for your procedure. <strong>Please note: we do not offer minor surgery for cosmetic purposes.</strong></p>
+        <div style="flex-shrink:0">
+            <a href="https://salujaclinic.webgp.com/" class="btn-primary" target="_blank">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                Book a Consultation
+            </a>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- PROCEDURES -->
 <section class="procedures-section" id="procedures">
-  <div class="section-inner">
-    <div class="section-tag fade-up">What We Offer</div>
-    <h2 class="fade-up">Procedures Available<br>at the Practice</h2>
-    <p class="section-lead fade-up">Our GPs are trained and equipped to carry out a range of minor surgical procedures on-site, meaning faster treatment and a more comfortable experience for patients.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">What We Offer</div>
+        <h2 class="fade-up">Procedures Available<br>at the Practice</h2>
+        <p class="section-lead fade-up">Our GPs are trained and equipped to carry out a range of minor surgical
+            procedures on-site, meaning faster treatment and a more comfortable experience for patients.</p>
 
-    <div class="notice-banner fade-up">
-      <span class="notice-icon">⚠️</span>
-      <span><strong>Important:</strong> Minor surgery at Saluja Clinic is available for clinical and diagnostic purposes only. We do not perform minor surgery for cosmetic reasons. All procedures require a prior GP consultation for diagnosis and referral.</span>
+        <div class="notice-banner fade-up">
+            <span class="notice-icon">⚠️</span>
+            <span><strong>Important:</strong> Minor surgery at Saluja Clinic is available for clinical and diagnostic purposes only. We do not perform minor surgery for cosmetic reasons. All procedures require a prior GP consultation for diagnosis and referral.</span>
+        </div>
+
+        <div class="proc-grid">
+            <!-- Cryotherapy -->
+            <div class="proc-card fade-up">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Cryotherapy</div>
+                <p class="proc-desc">Treatment using liquid nitrogen to freeze and destroy abnormal tissue. Commonly
+                    used for warts, verrucae, and certain benign skin lesions. Quick and effective with minimal recovery
+                    time.</p>
+                <span class="proc-tag">Skin Treatment</span>
+            </div>
+
+            <!-- Excision of skin lesions -->
+            <div class="proc-card fade-up" style="animation-delay:0.08s">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Excision of Skin Lesions</div>
+                <p class="proc-desc">Surgical removal of suspicious, symptomatic, or bothersome skin lesions under local
+                    anaesthetic. Removed tissue is sent for histological analysis where clinically indicated.</p>
+                <span class="proc-tag">Excision</span>
+            </div>
+
+            <!-- Sebaceous Cyst -->
+            <div class="proc-card fade-up" style="animation-delay:0.16s">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="4"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Sebaceous Cyst Removal</div>
+                <p class="proc-desc">Removal of blocked sebaceous glands that have formed into cysts beneath the skin.
+                    Performed under local anaesthetic with a small incision. Usually heals quickly with minimal
+                    scarring.</p>
+                <span class="proc-tag">Cyst Removal</span>
+            </div>
+
+            <!-- Mole removal -->
+            <div class="proc-card fade-up" style="animation-delay:0.08s">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Mole &amp; Lesion Biopsy</div>
+                <p class="proc-desc">Where a mole or pigmented lesion requires further investigation, a biopsy or
+                    excision can be performed to allow pathological examination. This is carried out for diagnostic
+                    purposes, not cosmetic removal.</p>
+                <span class="proc-tag">Biopsy / Diagnostic</span>
+            </div>
+
+            <!-- Ingrown toenail -->
+            <div class="proc-card fade-up" style="animation-delay:0.16s">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22V12M12 12C12 6 6 2 6 2s0 4 3 7M12 12c0-6 6-10 6-10s0 4-3 7"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Ingrown Toenail Treatment</div>
+                <p class="proc-desc">Surgical correction of ingrowing toenails, which may include partial or total nail
+                    avulsion under local anaesthetic. A highly effective procedure with excellent long-term outcomes
+                    when conserv­ative management has failed.</p>
+                <span class="proc-tag">Nail Procedure</span>
+            </div>
+
+            <!-- Suturing & wound care -->
+            <div class="proc-card fade-up" style="animation-delay:0.24s">
+                <div class="proc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
+                </div>
+                <div class="proc-name">Wound Closure &amp; Suturing</div>
+                <p class="proc-desc">Closure of lacerations and wounds requiring sutures. Our GP team ensures clean
+                    closure to minimise infection risk and optimise healing. Sutures are removed at a follow-up
+                    appointment once healing is confirmed.</p>
+                <span class="proc-tag">Wound Care</span>
+            </div>
+        </div>
     </div>
-
-    <div class="proc-grid">
-      <!-- Cryotherapy -->
-      <div class="proc-card fade-up">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07L19.07 4.93"/></svg>
-        </div>
-        <div class="proc-name">Cryotherapy</div>
-        <p class="proc-desc">Treatment using liquid nitrogen to freeze and destroy abnormal tissue. Commonly used for warts, verrucae, and certain benign skin lesions. Quick and effective with minimal recovery time.</p>
-        <span class="proc-tag">Skin Treatment</span>
-      </div>
-
-      <!-- Excision of skin lesions -->
-      <div class="proc-card fade-up" style="animation-delay:0.08s">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <div class="proc-name">Excision of Skin Lesions</div>
-        <p class="proc-desc">Surgical removal of suspicious, symptomatic, or bothersome skin lesions under local anaesthetic. Removed tissue is sent for histological analysis where clinically indicated.</p>
-        <span class="proc-tag">Excision</span>
-      </div>
-
-      <!-- Sebaceous Cyst -->
-      <div class="proc-card fade-up" style="animation-delay:0.16s">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-        </div>
-        <div class="proc-name">Sebaceous Cyst Removal</div>
-        <p class="proc-desc">Removal of blocked sebaceous glands that have formed into cysts beneath the skin. Performed under local anaesthetic with a small incision. Usually heals quickly with minimal scarring.</p>
-        <span class="proc-tag">Cyst Removal</span>
-      </div>
-
-      <!-- Mole removal -->
-      <div class="proc-card fade-up" style="animation-delay:0.08s">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        </div>
-        <div class="proc-name">Mole &amp; Lesion Biopsy</div>
-        <p class="proc-desc">Where a mole or pigmented lesion requires further investigation, a biopsy or excision can be performed to allow pathological examination. This is carried out for diagnostic purposes, not cosmetic removal.</p>
-        <span class="proc-tag">Biopsy / Diagnostic</span>
-      </div>
-
-      <!-- Ingrown toenail -->
-      <div class="proc-card fade-up" style="animation-delay:0.16s">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 6 6 2 6 2s0 4 3 7M12 12c0-6 6-10 6-10s0 4-3 7"/></svg>
-        </div>
-        <div class="proc-name">Ingrown Toenail Treatment</div>
-        <p class="proc-desc">Surgical correction of ingrowing toenails, which may include partial or total nail avulsion under local anaesthetic. A highly effective procedure with excellent long-term outcomes when conserv­ative management has failed.</p>
-        <span class="proc-tag">Nail Procedure</span>
-      </div>
-
-      <!-- Suturing & wound care -->
-      <div class="proc-card fade-up" style="animation-delay:0.24s">
-        <div class="proc-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        </div>
-        <div class="proc-name">Wound Closure &amp; Suturing</div>
-        <p class="proc-desc">Closure of lacerations and wounds requiring sutures. Our GP team ensures clean closure to minimise infection risk and optimise healing. Sutures are removed at a follow-up appointment once healing is confirmed.</p>
-        <span class="proc-tag">Wound Care</span>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- WHAT TO EXPECT -->
 <section class="expect-section" id="expect">
-  <div class="section-inner">
-    <div class="section-tag fade-up">The Process</div>
-    <h2 class="fade-up">What to Expect</h2>
-    <p class="section-lead fade-up">Minor surgery at the practice follows a clear two-step pathway designed to ensure your safety, comfort, and confidence throughout.</p>
-    <div class="steps-timeline">
+    <div class="section-inner">
+        <div class="section-tag fade-up">The Process</div>
+        <h2 class="fade-up">What to Expect</h2>
+        <p class="section-lead fade-up">Minor surgery at the practice follows a clear two-step pathway designed to
+            ensure your safety, comfort, and confidence throughout.</p>
+        <div class="steps-timeline">
 
-      <div class="step-card fade-up">
-        <div class="step-num">01</div>
-        <div class="step-title">Initial GP Consultation</div>
-        <p class="step-body">Before any surgical procedure, you must first see one of our GPs for a <strong>diagnostic consultation</strong>. The doctor will examine the area, confirm the clinical indication, and explain the recommended procedure, including its risks and benefits. You'll have the opportunity to ask questions and give informed consent.</p>
-      </div>
+            <div class="step-card fade-up">
+                <div class="step-num">01</div>
+                <div class="step-title">Initial GP Consultation</div>
+                <p class="step-body">Before any surgical procedure, you must first see one of our GPs for a <strong>diagnostic
+                    consultation</strong>. The doctor will examine the area, confirm the clinical indication, and
+                    explain the recommended procedure, including its risks and benefits. You'll have the opportunity to
+                    ask questions and give informed consent.</p>
+            </div>
 
-      <div class="step-card fade-up" style="animation-delay:0.1s">
-        <div class="step-num">02</div>
-        <div class="step-title">Preparation &amp; What to Bring</div>
-        <p class="step-body">Once referred for surgery, you'll be given a <strong>dedicated appointment</strong>. Please wear comfortable, loose clothing that allows easy access to the area being treated. Avoid alcohol for 24 hours beforehand and let us know about any medications, allergies, or blood-thinning drugs you are taking.</p>
-      </div>
+            <div class="step-card fade-up" style="animation-delay:0.1s">
+                <div class="step-num">02</div>
+                <div class="step-title">Preparation &amp; What to Bring</div>
+                <p class="step-body">Once referred for surgery, you'll be given a <strong>dedicated appointment</strong>.
+                    Please wear comfortable, loose clothing that allows easy access to the area being treated. Avoid
+                    alcohol for 24 hours beforehand and let us know about any medications, allergies, or blood-thinning
+                    drugs you are taking.</p>
+            </div>
 
-      <div class="step-card fade-up" style="animation-delay:0.05s">
-        <div class="step-num">03</div>
-        <div class="step-title">The Procedure</div>
-        <p class="step-body">Procedures are carried out under <strong>local anaesthetic</strong>, so the area will be numb and you should feel no pain — only mild pressure. The treatment room is prepared to clinical standards. Most minor procedures take between <strong>15 and 45 minutes</strong> from preparation to completion, depending on complexity.</p>
-      </div>
+            <div class="step-card fade-up" style="animation-delay:0.05s">
+                <div class="step-num">03</div>
+                <div class="step-title">The Procedure</div>
+                <p class="step-body">Procedures are carried out under <strong>local anaesthetic</strong>, so the area
+                    will be numb and you should feel no pain — only mild pressure. The treatment room is prepared to
+                    clinical standards. Most minor procedures take between <strong>15 and 45 minutes</strong> from
+                    preparation to completion, depending on complexity.</p>
+            </div>
 
-      <div class="step-card fade-up" style="animation-delay:0.15s">
-        <div class="step-num">04</div>
-        <div class="step-title">Leaving the Practice</div>
-        <p class="step-body">You'll receive <strong>verbal and written aftercare instructions</strong> before you leave. Most patients can drive or travel home independently, though we recommend bringing someone with you if you feel anxious. The anaesthetic will wear off within a few hours — mild discomfort afterwards is normal and manageable with over-the-counter pain relief.</p>
-      </div>
+            <div class="step-card fade-up" style="animation-delay:0.15s">
+                <div class="step-num">04</div>
+                <div class="step-title">Leaving the Practice</div>
+                <p class="step-body">You'll receive <strong>verbal and written aftercare instructions</strong> before
+                    you leave. Most patients can drive or travel home independently, though we recommend bringing
+                    someone with you if you feel anxious. The anaesthetic will wear off within a few hours — mild
+                    discomfort afterwards is normal and manageable with over-the-counter pain relief.</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- AFTERCARE -->
 <section class="aftercare-section" id="aftercare">
-  <div class="section-inner">
-    <div class="section-tag fade-up">Recovery</div>
-    <h2 class="fade-up">Aftercare &amp; Recovery</h2>
-    <p class="section-lead fade-up">Following your procedure, careful aftercare is important to ensure the best possible healing outcome and reduce the risk of infection or complications.</p>
+    <div class="section-inner">
+        <div class="section-tag fade-up">Recovery</div>
+        <h2 class="fade-up">Aftercare &amp; Recovery</h2>
+        <p class="section-lead fade-up">Following your procedure, careful aftercare is important to ensure the best
+            possible healing outcome and reduce the risk of infection or complications.</p>
 
-    <div class="aftercare-grid">
-      <div class="aftercare-list">
-        <div class="aftercare-item fade-up">
-          <div class="aftercare-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div>
-            <strong>Keep the area clean and dry</strong>
-            For the first 24–48 hours, avoid wetting the wound. Keep the dressing clean and dry, and follow the specific instructions given at your appointment.
-          </div>
-        </div>
-        <div class="aftercare-item fade-up" style="animation-delay:0.08s">
-          <div class="aftercare-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
-          <div>
-            <strong>Dressing changes</strong>
-            Your GP will advise you on how often to change your dressing. In most cases a nurse appointment can be arranged at the practice for this purpose. Do not remove sutures yourself.
-          </div>
-        </div>
-        <div class="aftercare-item fade-up" style="animation-delay:0.12s">
-          <div class="aftercare-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-          <div>
-            <strong>Signs of infection to watch for</strong>
-            Contact us promptly if you notice increasing redness, swelling, warmth, discharge, or if you develop a fever. Early treatment of infection is important.
-          </div>
-        </div>
-        <div class="aftercare-item fade-up" style="animation-delay:0.16s">
-          <div class="aftercare-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg></div>
-          <div>
-            <strong>Pain management</strong>
-            Mild discomfort for 24–48 hours post-procedure is normal. Paracetamol or ibuprofen (if appropriate for you) can be taken as directed. Avoid aspirin unless prescribed, as it may increase bleeding.
-          </div>
-        </div>
-        <div class="aftercare-item fade-up" style="animation-delay:0.2s">
-          <div class="aftercare-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div>
-            <strong>Suture removal</strong>
-            If your procedure involved sutures, a follow-up appointment will be arranged for their removal — usually between 5 and 14 days, depending on the site and procedure type.
-          </div>
-        </div>
-      </div>
+        <div class="aftercare-grid">
+            <div class="aftercare-list">
+                <div class="aftercare-item fade-up">
+                    <div class="aftercare-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Keep the area clean and dry</strong>
+                        For the first 24–48 hours, avoid wetting the wound. Keep the dressing clean and dry, and follow
+                        the specific instructions given at your appointment.
+                    </div>
+                </div>
+                <div class="aftercare-item fade-up" style="animation-delay:0.08s">
+                    <div class="aftercare-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 9h6M9 12h6M9 15h4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Dressing changes</strong>
+                        Your GP will advise you on how often to change your dressing. In most cases a nurse appointment
+                        can be arranged at the practice for this purpose. Do not remove sutures yourself.
+                    </div>
+                </div>
+                <div class="aftercare-item fade-up" style="animation-delay:0.12s">
+                    <div class="aftercare-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Signs of infection to watch for</strong>
+                        Contact us promptly if you notice increasing redness, swelling, warmth, discharge, or if you
+                        develop a fever. Early treatment of infection is important.
+                    </div>
+                </div>
+                <div class="aftercare-item fade-up" style="animation-delay:0.16s">
+                    <div class="aftercare-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Pain management</strong>
+                        Mild discomfort for 24–48 hours post-procedure is normal. Paracetamol or ibuprofen (if
+                        appropriate for you) can be taken as directed. Avoid aspirin unless prescribed, as it may
+                        increase bleeding.
+                    </div>
+                </div>
+                <div class="aftercare-item fade-up" style="animation-delay:0.2s">
+                    <div class="aftercare-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Suture removal</strong>
+                        If your procedure involved sutures, a follow-up appointment will be arranged for their removal —
+                        usually between 5 and 14 days, depending on the site and procedure type.
+                    </div>
+                </div>
+            </div>
 
-      <div>
-        <div class="contact-card fade-up">
-          <div class="contact-card-title">When to Contact Us</div>
-          <p>If you have any concerns following your procedure, please don't hesitate to get in touch with the practice. Our team is here to support your recovery.</p>
-          <div class="contact-row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--nhs-blue)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <a href="tel:02085745136">0208 574 5136</a> — Mon–Fri 08:00–18:30
-          </div>
-          <div class="contact-row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--nhs-blue)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-          </div>
-          <div class="alert-banner" style="margin-top:1.4rem">
-            <span style="font-size:1.1rem;flex-shrink:0">🚨</span>
-            <span>If you experience <strong>heavy or uncontrolled bleeding</strong>, signs of a serious allergic reaction, or feel unwell after your procedure, call <strong>999</strong> or go to your nearest A&amp;E immediately.</span>
-          </div>
+            <div>
+                <div class="contact-card fade-up">
+                    <div class="contact-card-title">When to Contact Us</div>
+                    <p>If you have any concerns following your procedure, please don't hesitate to get in touch with the
+                        practice. Our team is here to support your recovery.</p>
+                    <div class="contact-row">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--nhs-blue)"
+                             stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.2 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l.41-.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <a href="tel:02085745136">0208 574 5136</a> — Mon–Fri 08:00–18:30
+                    </div>
+                    <div class="contact-row">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--nhs-blue)"
+                             stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+                    </div>
+                    <div class="alert-banner" style="margin-top:1.4rem">
+                        <span style="font-size:1.1rem;flex-shrink:0">🚨</span>
+                        <span>If you experience <strong>heavy or uncontrolled bleeding</strong>, signs of a serious allergic reaction, or feel unwell after your procedure, call <strong>999</strong> or go to your nearest A&amp;E immediately.</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <!-- APPOINTMENT BANNER -->
 <div class="appt-banner" id="book">
-  <div class="appt-inner">
-    <div>
-      <h2>Ready to Book?</h2>
-      <p>Start with a GP consultation to discuss your condition and determine whether minor surgery is the right option for you. We're here to guide you through the process.</p>
+    <div class="appt-inner">
+        <div>
+            <h2>Ready to Book?</h2>
+            <p>Start with a GP consultation to discuss your condition and determine whether minor surgery is the right
+                option for you. We're here to guide you through the process.</p>
+        </div>
+        <div class="appt-cta">
+            <a href="https://salujaclinic.webgp.com/" class="btn-white" target="_blank">↗ Book Online</a>
+            <a href="tel:02085745136" class="btn-ghost">📞 Call 0208 574 5136</a>
+        </div>
     </div>
-    <div class="appt-cta">
-      <a href="https://salujaclinic.webgp.com/" class="btn-white" target="_blank">↗ Book Online</a>
-      <a href="tel:02085745136" class="btn-ghost">📞 Call 0208 574 5136</a>
-    </div>
-  </div>
 </div>
 
 <!-- NHS APP BANNER -->
 <div class="app-banner">
-  <div class="app-inner section-inner">
-    <div>
-      <div class="section-tag">Digital Access</div>
-      <h2>Manage Your Care<br>With the NHS App</h2>
-      <p class="section-lead">Book and manage your appointments, view results, and stay on top of your health — all from your phone.</p>
-      <div class="app-bullets">
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Book and manage GP appointments online</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions instantly</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
-      </div>
+    <div class="app-inner section-inner">
+        <div>
+            <div class="section-tag">Digital Access</div>
+            <h2>Manage Your Care<br>With the NHS App</h2>
+            <p class="section-lead">Book and manage your appointments, view results, and stay on top of your health —
+                all from your phone.</p>
+            <div class="app-bullets">
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Book and manage GP appointments online</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Request repeat prescriptions instantly</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Message healthcare services securely</div>
+            </div>
+        </div>
+        <div class="app-cta-wrap">
+            <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+            <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register
+                for Online Services</a>
+        </div>
     </div>
-    <div class="app-cta-wrap">
-      <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
-      <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
-    </div>
-  </div>
 </div>
 
 <!-- EMERGENCY -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div>
-        <div class="emerg-label">Non-Emergency</div>
-        <div class="emerg-number">NHS 111</div>
-        <p class="emerg-desc">Available 24 hours a day, 365 days a year. For urgent medical advice when your GP is closed.</p>
-      </div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24 hours a day, 365 days a year. For urgent medical advice when your GP
+                    is closed.</p>
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Dial 999 immediately for uncontrolled bleeding, loss of consciousness, chest pain,
+                    or any life-threatening condition.</p>
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div>
-        <div class="emerg-label">Life-Threatening Emergency</div>
-        <div class="emerg-number">999</div>
-        <p class="emerg-desc">Dial 999 immediately for uncontrolled bleeding, loss of consciousness, chest pain, or any life-threatening condition.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" style="display:inline-block;margin-bottom:0.4rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="360" height="80">
-          <defs>
-            <linearGradient id="fCS" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
-              <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
-              <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
-              <stop offset="100%" stop-color="#d8d8d8"/>
-            </linearGradient>
-            <linearGradient id="fCT" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
-              <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
-              <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
-              <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-            </linearGradient>
-            <radialGradient id="fCS2" cx="38%" cy="32%" r="65%">
-              <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/>
-              <stop offset="100%" stop-color="#000000"/>
-            </radialGradient>
-            <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
-              <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-            </linearGradient>
-            <filter id="fS2"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-          </defs>
-          <rect width="720" height="160" fill="transparent"/>
-          <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fS2)"/>
-          <circle cx="80" cy="80" r="63" fill="url(#fCS2)"/>
-          <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fCS)">S</text>
-          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fCT)">SALUJA CLINIC</text>
-          <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-        </svg>
-      </a>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" style="display:inline-block;margin-bottom:0.4rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="360" height="80">
+                    <defs>
+                        <linearGradient id="fCS" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="15%" stop-color="#d0d0d0"/>
+                            <stop offset="30%" stop-color="#f8f8f8"/>
+                            <stop offset="50%" stop-color="#a0a0a0"/>
+                            <stop offset="65%" stop-color="#e8e8e8"/>
+                            <stop offset="80%" stop-color="#b0b0b0"/>
+                            <stop offset="100%" stop-color="#d8d8d8"/>
+                        </linearGradient>
+                        <linearGradient id="fCT" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#c8c8c8"/>
+                            <stop offset="10%" stop-color="#f0f0f0"/>
+                            <stop offset="25%" stop-color="#b0b0b0"/>
+                            <stop offset="40%" stop-color="#ffffff"/>
+                            <stop offset="55%" stop-color="#909090"/>
+                            <stop offset="70%" stop-color="#e0e0e0"/>
+                            <stop offset="85%" stop-color="#a8a8a8"/>
+                            <stop offset="100%" stop-color="#d0d0d0"/>
+                        </linearGradient>
+                        <radialGradient id="fCS2" cx="38%" cy="32%" r="65%">
+                            <stop offset="0%" stop-color="#3a3a3a"/>
+                            <stop offset="40%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000000"/>
+                        </radialGradient>
+                        <linearGradient id="fCR" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#666666"/>
+                            <stop offset="30%" stop-color="#222222"/>
+                            <stop offset="70%" stop-color="#444444"/>
+                            <stop offset="100%" stop-color="#111111"/>
+                        </linearGradient>
+                        <filter id="fS2">
+                            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                        </filter>
+                    </defs>
+                    <rect width="720" height="160" fill="transparent"/>
+                    <circle cx="80" cy="80" r="68" fill="url(#fCR)" filter="url(#fS2)"/>
+                    <circle cx="80" cy="80" r="63" fill="url(#fCS2)"/>
+                    <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                          text-anchor="middle" fill="url(#fCS)">S
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fCT)">
+                        SALUJA CLINIC
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                          opacity="0.08">SALUJA CLINIC
+                    </text>
+                </svg>
+            </a>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136" style="color:rgba(255,255,255,0.85);text-decoration:none;">📞 0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,0.85);text-decoration:none;">✉
+                    salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New
+                    Patient</a></li>
+                <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="health-information.html" target="_blank">Health Information</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+                <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
+                <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="health-information.html" target="_blank">Health Information</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-        <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
-        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible')), 400);
+    const obs = new IntersectionObserver(
+        entries => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }),
+        {threshold: 0, rootMargin: '0px 0px -40px 0px'}
+    );
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible')), 400);
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) {
+                e.preventDefault();
+                t.scrollIntoView({behavior: 'smooth'});
+            }
+        });
     });
-  });
 </script>
 </body>
 </html>

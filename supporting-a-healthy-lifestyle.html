@@ -1,1271 +1,2728 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Supporting a Healthy Lifestyle – Saluja Clinic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --nhs-blue:#005EB8; --nhs-dark:#003087; --nhs-aqua:#009FBB;
-      --nhs-green:#007F3B; --nhs-light-blue:#41B6E6; --nhs-warm-yellow:#FFB81C;
-      --white:#fff; --off-white:#f5f8fc;
-      --text-dark:#1a1a2e; --text-mid:#3a3a5c; --text-soft:#6b7a99; --border:#d8e4f0;
-      --col-exercise:#1a7a40;
-      --col-alcohol:#8e44ad;
-      --col-smoking:#c0392b;
-      --col-weight:#e67e22;
-      --col-sexual:#2471a3;
-      --col-lgs:#e8500a;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text-dark);overflow-x:hidden}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Supporting a Healthy Lifestyle – Saluja Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --nhs-warm-yellow: #FFB81C;
+            --white: #fff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+            --col-exercise: #1a7a40;
+            --col-alcohol: #8e44ad;
+            --col-smoking: #c0392b;
+            --col-weight: #e67e22;
+            --col-sexual: #2471a3;
+            --col-lgs: #e8500a;
+        }
 
-    /* UTILITY BAR */
-    .utility-bar{background:var(--nhs-dark);color:rgba(255,255,255,.85);font-size:.78rem;letter-spacing:.03em;padding:.45rem 0}
-    .utility-bar .inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem}
-    .utility-bar a{color:rgba(255,255,255,.85);text-decoration:none}.utility-bar a:hover{color:#fff}
-    .row{display:flex;align-items:center;gap:1.5rem}
-    .util-pill{background:rgba(255,255,255,.12);border-radius:20px;padding:.2rem .8rem}
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-    /* HEADER */
-    header{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--nhs-blue);box-shadow:0 2px 24px rgba(0,94,184,.1)}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100px}
-    .logo-wrap svg{height:84px;width:auto}
-    nav{display:flex;align-items:center;gap:.25rem}
-    nav a{font-size:.88rem;font-weight:500;color:var(--text-mid);text-decoration:none;padding:.5rem .9rem;border-radius:6px;transition:background .2s,color .2s}
-    nav a:hover{background:var(--off-white);color:var(--nhs-blue)}
-    .nav-cta{background:var(--nhs-blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:8px!important;margin-left:.5rem;box-shadow:0 2px 10px rgba(0,94,184,.25)}
-    .nav-cta:hover{background:var(--nhs-dark)!important;transform:translateY(-1px)}
+        html {
+            scroll-behavior: smooth
+        }
 
-    /* PAGE BANNER */
-    .page-banner{background:var(--white);border-bottom:1px solid var(--border);padding:3.5rem 2rem 3.2rem;position:relative;overflow:hidden}
-    .page-banner::before{content:'';position:absolute;top:-80px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,94,184,.05) 0%,transparent 70%);pointer-events:none}
-    .page-banner::after{content:'';position:absolute;bottom:-60px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(26,122,64,.06) 0%,transparent 70%);pointer-events:none}
-    .page-banner-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-    .breadcrumb{font-size:.8rem;color:var(--text-soft);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
-    .breadcrumb a{color:var(--text-soft);text-decoration:none}.breadcrumb a:hover{color:var(--nhs-blue)}
-    .breadcrumb-sep{opacity:.4}
-    .page-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(26,122,64,.08);border:1px solid rgba(26,122,64,.2);border-radius:20px;padding:.3rem .9rem;color:var(--col-exercise);margin-bottom:1.1rem}
-    .page-tag span{width:6px;height:6px;background:var(--col-exercise);border-radius:50%}
-    .page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;line-height:1.1;color:var(--text-dark);margin-bottom:.9rem}
-    .page-banner h1 em{font-style:normal;color:var(--col-exercise)}
-    .page-banner-sub{font-size:1rem;color:var(--text-mid);max-width:680px;line-height:1.7}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden
+        }
 
-    /* DR ANGAD FEATURE */
-    .sem-feature{background:linear-gradient(135deg,#0a3d20 0%,#1a5c30 55%,#2d7a48 100%);padding:4rem 2rem;position:relative;overflow:hidden}
-    .sem-feature::before{content:'';position:absolute;top:-100px;right:-100px;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
-    .sem-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
-    .sem-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:.3rem .9rem;color:rgba(255,255,255,.9);margin-bottom:1rem}
-    .sem-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:#fff;line-height:1.15;margin-bottom:1rem}
-    .sem-h2 em{font-style:normal;color:#7ee8a2}
-    .sem-p{font-size:.95rem;line-height:1.78;color:rgba(255,255,255,.82);margin-bottom:1.2rem}
-    .sem-quals{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem}
-    .sem-qual{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:.25rem .65rem;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.9)}
-    .sem-cta{display:inline-flex;align-items:center;gap:.5rem;background:#7ee8a2;color:#0a3d20;padding:.85rem 1.8rem;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;transition:filter .2s,transform .15s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
-    .sem-cta:hover{filter:brightness(1.07);transform:translateY(-2px)}
-    .sem-canvas-wrap{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:1.2rem;backdrop-filter:blur(4px)}
-    .sem-canvas-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:.8rem}
+        /* UTILITY BAR */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .85);
+            font-size: .78rem;
+            letter-spacing: .03em;
+            padding: .45rem 0
+        }
 
-    /* LGS BANNER */
-    .lgs-banner{background:linear-gradient(135deg,#e8500a 0%,#f07020 60%,#f8a030 100%);padding:3.5rem 2rem;position:relative;overflow:hidden}
-    .lgs-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-    .lgs-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;position:relative;z-index:1}
-    .lgs-tag{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.6rem}
-    .lgs-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;color:#fff;line-height:1.15;margin-bottom:.8rem}
-    .lgs-p{font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.72;max-width:580px;margin-bottom:.5rem}
-    .lgs-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-    .lgs-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;font-weight:600;color:#fff}
-    .lgs-ctas{display:flex;flex-direction:column;gap:.9rem;align-items:center}
-    .btn-lgs{background:#fff;color:var(--col-lgs);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
-    .btn-lgs:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .btn-lgs-ghost{border:2px solid rgba(255,255,255,.5);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap;display:inline-block;transition:background .2s,border-color .2s}
-    .btn-lgs-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .4rem
+        }
 
-    /* SECTION SHARED */
-    .section-inner{max-width:1200px;margin:0 auto}
-    .section-tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--nhs-blue);margin-bottom:.6rem}
-    h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:600;color:var(--text-dark);line-height:1.2;margin-bottom:1rem}
-    .section-lead{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px}
-    .section-divider{max-width:1200px;margin:0 auto;height:1px;background:var(--border)}
+        .utility-bar a {
+            color: rgba(255, 255, 255, .85);
+            text-decoration: none
+        }
 
-    /* TWO-COL */
-    .two-col{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
-    .two-col.rev{direction:rtl}.two-col.rev>*{direction:ltr}
+        .utility-bar a:hover {
+            color: #fff
+        }
 
-    /* CANVAS CARDS */
-    .canvas-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:1.4rem;box-shadow:0 8px 40px rgba(0,0,0,.08);position:relative;overflow:hidden}
-    .canvas-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
-    .canvas-card.exercise::before{background:linear-gradient(90deg,var(--col-exercise),#58d68d)}
-    .canvas-card.alcohol::before{background:linear-gradient(90deg,var(--col-alcohol),#bb8fce)}
-    .canvas-card.smoking::before{background:linear-gradient(90deg,var(--col-smoking),#e88080)}
-    .canvas-card.weight::before{background:linear-gradient(90deg,var(--col-weight),#f5b942)}
-    .canvas-card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
-    .canvas-card-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--nhs-dark)}
-    .phase-badge{font-size:.71rem;font-weight:700;letter-spacing:.07em;padding:.22rem .75rem;border-radius:20px;transition:all .4s;text-transform:uppercase}
-    .phase-badge.exercise{background:rgba(26,122,64,.1);color:var(--col-exercise)}
-    .phase-badge.alcohol{background:rgba(142,68,173,.1);color:var(--col-alcohol)}
-    .phase-badge.smoking{background:rgba(192,57,43,.1);color:var(--col-smoking)}
-    .phase-badge.weight{background:rgba(230,126,34,.1);color:var(--col-weight)}
-    canvas.anim{width:100%;height:auto;border-radius:10px;display:block;border:1px solid var(--border)}
-    .phase-dots{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem}
-    .pdot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .4s,transform .4s}
-    .pdot.active.exercise{background:var(--col-exercise);transform:scale(1.4)}
-    .pdot.active.alcohol{background:var(--col-alcohol);transform:scale(1.4)}
-    .pdot.active.smoking{background:var(--col-smoking);transform:scale(1.4)}
-    .pdot.active.weight{background:var(--col-weight);transform:scale(1.4)}
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem
+        }
 
-    /* TOPIC CONTENT */
-    .topic-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:20px;padding:.28rem .85rem;margin-bottom:1rem}
-    .topic-tag span{width:6px;height:6px;border-radius:50%}
-    .topic-tag.exercise{background:rgba(26,122,64,.1);color:var(--col-exercise)}.topic-tag.exercise span{background:var(--col-exercise)}
-    .topic-tag.alcohol{background:rgba(142,68,173,.1);color:var(--col-alcohol)}.topic-tag.alcohol span{background:var(--col-alcohol)}
-    .topic-tag.smoking{background:rgba(192,57,43,.1);color:var(--col-smoking)}.topic-tag.smoking span{background:var(--col-smoking)}
-    .topic-tag.weight{background:rgba(230,126,34,.1);color:var(--col-weight)}.topic-tag.weight span{background:var(--col-weight)}
-    .topic-tag.sexual{background:rgba(36,113,163,.1);color:var(--col-sexual)}.topic-tag.sexual span{background:var(--col-sexual)}
-    .topic-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:600;color:var(--text-dark);line-height:1.15;margin-bottom:1rem}
-    .info-list{list-style:none;margin:.9rem 0;display:flex;flex-direction:column;gap:.5rem}
-    .info-list li{font-size:.88rem;color:var(--text-mid);padding-left:1.4rem;position:relative;line-height:1.65}
-    .info-list li::before{content:'';position:absolute;left:.1rem;top:.52rem;width:7px;height:7px;border-radius:50%}
-    .info-list.exercise li::before{background:var(--col-exercise)}
-    .info-list.alcohol li::before{background:var(--col-alcohol)}
-    .info-list.smoking li::before{background:var(--col-smoking)}
-    .info-list.weight li::before{background:var(--col-weight)}
-    .info-list.sexual li::before{background:var(--col-sexual)}
-    .info-box{border-radius:14px;padding:1.3rem 1.5rem;margin-top:1.2rem}
-    .info-box.exercise{background:rgba(26,122,64,.06);border:1px solid rgba(26,122,64,.2)}
-    .info-box.alcohol{background:rgba(142,68,173,.06);border:1px solid rgba(142,68,173,.2)}
-    .info-box.smoking{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2)}
-    .info-box.weight{background:rgba(230,126,34,.06);border:1px solid rgba(230,126,34,.2)}
-    .info-box.sexual{background:rgba(36,113,163,.06);border:1px solid rgba(36,113,163,.2)}
-    .info-box h4{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:.6rem}
-    .info-box p,.info-box li{font-size:.86rem;line-height:1.68;color:var(--text-mid)}
-    .info-box ul{list-style:none;margin-top:.5rem;display:flex;flex-direction:column;gap:.35rem}
-    .info-box ul li{padding-left:1.1rem;position:relative}
-    .info-box ul li::before{content:'–';position:absolute;left:0;font-weight:700;color:var(--nhs-blue)}
-    .alert-strip{display:flex;gap:.8rem;align-items:flex-start;border-radius:12px;padding:1rem 1.3rem;margin-top:1rem;font-size:.84rem;line-height:1.65;color:var(--text-mid)}
-    .alert-strip.positive{background:rgba(0,127,59,.06);border:1px solid rgba(0,127,59,.2)}
-    .alert-strip.info{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.18)}
-    .alert-strip.urgent{background:rgba(192,57,43,.05);border:1px solid rgba(192,57,43,.2)}
-    .alert-icon{font-size:1.1rem;flex-shrink:0}
+        .util-pill {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 20px;
+            padding: .2rem .8rem
+        }
 
-    /* SEXUAL HEALTH MINI GRID */
-    .sh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.4rem}
-    .sh-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center;transition:transform .2s,box-shadow .2s}
-    .sh-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,94,184,.1)}
-    .sh-icon{font-size:1.8rem;margin-bottom:.5rem;display:block}
-    .sh-name{font-size:.82rem;font-weight:700;color:var(--text-dark)}
-    .sh-desc{font-size:.76rem;color:var(--text-soft);margin-top:.2rem;line-height:1.5}
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, .1)
+        }
 
-    /* NHS APP */
-    .app-banner{background:linear-gradient(135deg,var(--nhs-dark) 0%,var(--nhs-blue) 100%);padding:4rem 2rem}
-    .app-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
-    .app-inner h2{color:#fff}
-    .app-inner .section-lead{color:rgba(255,255,255,.8)}
-    .app-inner .section-tag{color:rgba(255,255,255,.6)}
-    .app-bullets{margin-top:1.5rem;display:flex;flex-direction:column;gap:.6rem}
-    .app-bullet{display:flex;align-items:center;gap:.8rem;font-size:.92rem;color:rgba(255,255,255,.88)}
-    .app-bullet-dot{width:8px;height:8px;background:var(--nhs-light-blue);border-radius:50%;flex-shrink:0}
-    .btn-white{background:#fff;color:var(--nhs-blue);padding:.85rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s,box-shadow .15s;white-space:nowrap;display:inline-block}
-    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .btn-ghost{border:2px solid rgba(255,255,255,.5);color:#fff;padding:.75rem 1.8rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;transition:border-color .2s,background .2s;white-space:nowrap;display:inline-block}
-    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px
+        }
 
-    /* EMERGENCY */
-    .emergency{background:var(--white);border-top:1px solid var(--border);padding:3rem 2rem}
-    .emergency-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .emerg-card{border-radius:16px;padding:2rem}
-    .emerg-card.nhs111{background:rgba(0,94,184,.05);border:1px solid rgba(0,94,184,.2)}
-    .emerg-card.urgent{background:rgba(220,53,69,.05);border:1px solid rgba(220,53,69,.2)}
-    .emerg-number{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
-    .emerg-card.nhs111 .emerg-number{color:var(--nhs-blue)}
-    .emerg-card.urgent .emerg-number{color:#dc3545}
-    .emerg-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
-    .emerg-desc{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+        .logo-wrap svg {
+            height: 84px;
+            width: auto
+        }
 
-    /* FOOTER */
-    footer{background:var(--nhs-dark);color:rgba(255,255,255,.8);padding:3.5rem 2rem 2rem}
-    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
-    .footer-tagline{font-size:.88rem;margin-top:.8rem;line-height:1.6;opacity:.75}
-    .footer-address{font-size:.85rem;margin-top:1rem;line-height:1.8;opacity:.75}
-    .footer-heading{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
-    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-    .footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.88rem;transition:color .2s}.footer-links a:hover{color:#fff}
-    .footer-bottom{max-width:1200px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;opacity:.6;flex-wrap:wrap;gap:.5rem}
-    .hours-grid{display:grid;gap:.3rem}
-    .hour-row{display:flex;justify-content:space-between;gap:1.5rem;font-size:.84rem}
-    .hour-day{opacity:.7}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: .25rem
+        }
 
-    /* ANIMATIONS */
-    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-    .fade-up.visible{opacity:1;transform:translateY(0)}
+        nav a {
+            font-size: .88rem;
+            font-weight: 500;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: .5rem .9rem;
+            border-radius: 6px;
+            transition: background .2s, color .2s
+        }
 
-    @media(max-width:960px){
-      .two-col,.two-col.rev,.sem-inner,.lgs-inner,.app-inner{grid-template-columns:1fr;direction:ltr;gap:2.5rem}
-      .sh-grid{grid-template-columns:1fr 1fr}
-      .emergency-inner{grid-template-columns:1fr}
-      .footer-inner{grid-template-columns:1fr 1fr}
-      nav{display:none}
-    }
-    @media(max-width:600px){
-      .sh-grid,.footer-inner{grid-template-columns:1fr}
-    }
-  </style>
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue)
+        }
+
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: #fff !important;
+            padding: .55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: .5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, .25)
+        }
+
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px)
+        }
+
+        /* PAGE BANNER */
+        .page-banner {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 3.5rem 2rem 3.2rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, .05) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .page-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -80px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(26, 122, 64, .06) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .page-banner-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1
+        }
+
+        .breadcrumb {
+            font-size: .8rem;
+            color: var(--text-soft);
+            margin-bottom: .9rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .breadcrumb a {
+            color: var(--text-soft);
+            text-decoration: none
+        }
+
+        .breadcrumb a:hover {
+            color: var(--nhs-blue)
+        }
+
+        .breadcrumb-sep {
+            opacity: .4
+        }
+
+        .page-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: rgba(26, 122, 64, .08);
+            border: 1px solid rgba(26, 122, 64, .2);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            color: var(--col-exercise);
+            margin-bottom: 1.1rem
+        }
+
+        .page-tag span {
+            width: 6px;
+            height: 6px;
+            background: var(--col-exercise);
+            border-radius: 50%
+        }
+
+        .page-banner h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: .9rem
+        }
+
+        .page-banner h1 em {
+            font-style: normal;
+            color: var(--col-exercise)
+        }
+
+        .page-banner-sub {
+            font-size: 1rem;
+            color: var(--text-mid);
+            max-width: 680px;
+            line-height: 1.7
+        }
+
+        /* DR ANGAD FEATURE */
+        .sem-feature {
+            background: linear-gradient(135deg, #0a3d20 0%, #1a5c30 55%, #2d7a48 100%);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .sem-feature::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, .05) 0%, transparent 70%)
+        }
+
+        .sem-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1
+        }
+
+        .sem-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            color: rgba(255, 255, 255, .9);
+            margin-bottom: 1rem
+        }
+
+        .sem-h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 1rem
+        }
+
+        .sem-h2 em {
+            font-style: normal;
+            color: #7ee8a2
+        }
+
+        .sem-p {
+            font-size: .95rem;
+            line-height: 1.78;
+            color: rgba(255, 255, 255, .82);
+            margin-bottom: 1.2rem
+        }
+
+        .sem-quals {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+            margin-bottom: 1.4rem
+        }
+
+        .sem-qual {
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 6px;
+            padding: .25rem .65rem;
+            font-size: .75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .9)
+        }
+
+        .sem-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: #7ee8a2;
+            color: #0a3d20;
+            padding: .85rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: filter .2s, transform .15s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .2)
+        }
+
+        .sem-cta:hover {
+            filter: brightness(1.07);
+            transform: translateY(-2px)
+        }
+
+        .sem-canvas-wrap {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 20px;
+            padding: 1.2rem;
+            backdrop-filter: blur(4px)
+        }
+
+        .sem-canvas-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: .95rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .8);
+            margin-bottom: .8rem
+        }
+
+        /* LGS BANNER */
+        .lgs-banner {
+            background: linear-gradient(135deg, #e8500a 0%, #f07020 60%, #f8a030 100%);
+            padding: 3.5rem 2rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .lgs-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+        }
+
+        .lgs-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr auto;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1
+        }
+
+        .lgs-tag {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: .6rem
+        }
+
+        .lgs-h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: .8rem
+        }
+
+        .lgs-p {
+            font-size: .95rem;
+            color: rgba(255, 255, 255, .85);
+            line-height: 1.72;
+            max-width: 580px;
+            margin-bottom: .5rem
+        }
+
+        .lgs-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 1rem
+        }
+
+        .lgs-pill {
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: .3rem .9rem;
+            font-size: .78rem;
+            font-weight: 600;
+            color: #fff
+        }
+
+        .lgs-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+            align-items: center
+        }
+
+        .btn-lgs {
+            background: #fff;
+            color: var(--col-lgs);
+            padding: .85rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+            transition: transform .15s, box-shadow .15s;
+            white-space: nowrap;
+            display: inline-block
+        }
+
+        .btn-lgs:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25)
+        }
+
+        .btn-lgs-ghost {
+            border: 2px solid rgba(255, 255, 255, .5);
+            color: #fff;
+            padding: .75rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            white-space: nowrap;
+            display: inline-block;
+            transition: background .2s, border-color .2s
+        }
+
+        .btn-lgs-ghost:hover {
+            background: rgba(255, 255, 255, .1);
+            border-color: #fff
+        }
+
+        /* SECTION SHARED */
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .section-tag {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            margin-bottom: .6rem
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem
+        }
+
+        .section-lead {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 640px
+        }
+
+        .section-divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 1px;
+            background: var(--border)
+        }
+
+        /* TWO-COL */
+        .two-col {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 4.5rem;
+            align-items: center
+        }
+
+        .two-col.rev {
+            direction: rtl
+        }
+
+        .two-col.rev > * {
+            direction: ltr
+        }
+
+        /* CANVAS CARDS */
+        .canvas-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, .08);
+            position: relative;
+            overflow: hidden
+        }
+
+        .canvas-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px
+        }
+
+        .canvas-card.exercise::before {
+            background: linear-gradient(90deg, var(--col-exercise), #58d68d)
+        }
+
+        .canvas-card.alcohol::before {
+            background: linear-gradient(90deg, var(--col-alcohol), #bb8fce)
+        }
+
+        .canvas-card.smoking::before {
+            background: linear-gradient(90deg, var(--col-smoking), #e88080)
+        }
+
+        .canvas-card.weight::before {
+            background: linear-gradient(90deg, var(--col-weight), #f5b942)
+        }
+
+        .canvas-card-hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .9rem
+        }
+
+        .canvas-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--nhs-dark)
+        }
+
+        .phase-badge {
+            font-size: .71rem;
+            font-weight: 700;
+            letter-spacing: .07em;
+            padding: .22rem .75rem;
+            border-radius: 20px;
+            transition: all .4s;
+            text-transform: uppercase
+        }
+
+        .phase-badge.exercise {
+            background: rgba(26, 122, 64, .1);
+            color: var(--col-exercise)
+        }
+
+        .phase-badge.alcohol {
+            background: rgba(142, 68, 173, .1);
+            color: var(--col-alcohol)
+        }
+
+        .phase-badge.smoking {
+            background: rgba(192, 57, 43, .1);
+            color: var(--col-smoking)
+        }
+
+        .phase-badge.weight {
+            background: rgba(230, 126, 34, .1);
+            color: var(--col-weight)
+        }
+
+        canvas.anim {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            border: 1px solid var(--border)
+        }
+
+        .phase-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            margin-top: .9rem
+        }
+
+        .pdot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background .4s, transform .4s
+        }
+
+        .pdot.active.exercise {
+            background: var(--col-exercise);
+            transform: scale(1.4)
+        }
+
+        .pdot.active.alcohol {
+            background: var(--col-alcohol);
+            transform: scale(1.4)
+        }
+
+        .pdot.active.smoking {
+            background: var(--col-smoking);
+            transform: scale(1.4)
+        }
+
+        .pdot.active.weight {
+            background: var(--col-weight);
+            transform: scale(1.4)
+        }
+
+        /* TOPIC CONTENT */
+        .topic-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border-radius: 20px;
+            padding: .28rem .85rem;
+            margin-bottom: 1rem
+        }
+
+        .topic-tag span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%
+        }
+
+        .topic-tag.exercise {
+            background: rgba(26, 122, 64, .1);
+            color: var(--col-exercise)
+        }
+
+        .topic-tag.exercise span {
+            background: var(--col-exercise)
+        }
+
+        .topic-tag.alcohol {
+            background: rgba(142, 68, 173, .1);
+            color: var(--col-alcohol)
+        }
+
+        .topic-tag.alcohol span {
+            background: var(--col-alcohol)
+        }
+
+        .topic-tag.smoking {
+            background: rgba(192, 57, 43, .1);
+            color: var(--col-smoking)
+        }
+
+        .topic-tag.smoking span {
+            background: var(--col-smoking)
+        }
+
+        .topic-tag.weight {
+            background: rgba(230, 126, 34, .1);
+            color: var(--col-weight)
+        }
+
+        .topic-tag.weight span {
+            background: var(--col-weight)
+        }
+
+        .topic-tag.sexual {
+            background: rgba(36, 113, 163, .1);
+            color: var(--col-sexual)
+        }
+
+        .topic-tag.sexual span {
+            background: var(--col-sexual)
+        }
+
+        .topic-h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1rem
+        }
+
+        .info-list {
+            list-style: none;
+            margin: .9rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem
+        }
+
+        .info-list li {
+            font-size: .88rem;
+            color: var(--text-mid);
+            padding-left: 1.4rem;
+            position: relative;
+            line-height: 1.65
+        }
+
+        .info-list li::before {
+            content: '';
+            position: absolute;
+            left: .1rem;
+            top: .52rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .info-list.exercise li::before {
+            background: var(--col-exercise)
+        }
+
+        .info-list.alcohol li::before {
+            background: var(--col-alcohol)
+        }
+
+        .info-list.smoking li::before {
+            background: var(--col-smoking)
+        }
+
+        .info-list.weight li::before {
+            background: var(--col-weight)
+        }
+
+        .info-list.sexual li::before {
+            background: var(--col-sexual)
+        }
+
+        .info-box {
+            border-radius: 14px;
+            padding: 1.3rem 1.5rem;
+            margin-top: 1.2rem
+        }
+
+        .info-box.exercise {
+            background: rgba(26, 122, 64, .06);
+            border: 1px solid rgba(26, 122, 64, .2)
+        }
+
+        .info-box.alcohol {
+            background: rgba(142, 68, 173, .06);
+            border: 1px solid rgba(142, 68, 173, .2)
+        }
+
+        .info-box.smoking {
+            background: rgba(192, 57, 43, .06);
+            border: 1px solid rgba(192, 57, 43, .2)
+        }
+
+        .info-box.weight {
+            background: rgba(230, 126, 34, .06);
+            border: 1px solid rgba(230, 126, 34, .2)
+        }
+
+        .info-box.sexual {
+            background: rgba(36, 113, 163, .06);
+            border: 1px solid rgba(36, 113, 163, .2)
+        }
+
+        .info-box h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: .6rem
+        }
+
+        .info-box p, .info-box li {
+            font-size: .86rem;
+            line-height: 1.68;
+            color: var(--text-mid)
+        }
+
+        .info-box ul {
+            list-style: none;
+            margin-top: .5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .35rem
+        }
+
+        .info-box ul li {
+            padding-left: 1.1rem;
+            position: relative
+        }
+
+        .info-box ul li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: var(--nhs-blue)
+        }
+
+        .alert-strip {
+            display: flex;
+            gap: .8rem;
+            align-items: flex-start;
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin-top: 1rem;
+            font-size: .84rem;
+            line-height: 1.65;
+            color: var(--text-mid)
+        }
+
+        .alert-strip.positive {
+            background: rgba(0, 127, 59, .06);
+            border: 1px solid rgba(0, 127, 59, .2)
+        }
+
+        .alert-strip.info {
+            background: rgba(0, 94, 184, .05);
+            border: 1px solid rgba(0, 94, 184, .18)
+        }
+
+        .alert-strip.urgent {
+            background: rgba(192, 57, 43, .05);
+            border: 1px solid rgba(192, 57, 43, .2)
+        }
+
+        .alert-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0
+        }
+
+        /* SEXUAL HEALTH MINI GRID */
+        .sh-grid {
+            display: grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.4rem
+        }
+
+        .sh-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .sh-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(0, 94, 184, .1)
+        }
+
+        .sh-icon {
+            font-size: 1.8rem;
+            margin-bottom: .5rem;
+            display: block
+        }
+
+        .sh-name {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        .sh-desc {
+            font-size: .76rem;
+            color: var(--text-soft);
+            margin-top: .2rem;
+            line-height: 1.5
+        }
+
+        /* NHS APP */
+        .app-banner {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, var(--nhs-blue) 100%);
+            padding: 4rem 2rem
+        }
+
+        .app-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr auto;
+            gap: 3rem;
+            align-items: center
+        }
+
+        .app-inner h2 {
+            color: #fff
+        }
+
+        .app-inner .section-lead {
+            color: rgba(255, 255, 255, .8)
+        }
+
+        .app-inner .section-tag {
+            color: rgba(255, 255, 255, .6)
+        }
+
+        .app-bullets {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem
+        }
+
+        .app-bullet {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: .92rem;
+            color: rgba(255, 255, 255, .88)
+        }
+
+        .app-bullet-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--nhs-light-blue);
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--nhs-blue);
+            padding: .85rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: .95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+            transition: transform .15s, box-shadow .15s;
+            white-space: nowrap;
+            display: inline-block
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .25)
+        }
+
+        .btn-ghost {
+            border: 2px solid rgba(255, 255, 255, .5);
+            color: #fff;
+            padding: .75rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: border-color .2s, background .2s;
+            white-space: nowrap;
+            display: inline-block
+        }
+
+        .btn-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, .1)
+        }
+
+        /* EMERGENCY */
+        .emergency {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:1fr 1fr;
+            gap: 2rem
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(0, 94, 184, .05);
+            border: 1px solid rgba(0, 94, 184, .2)
+        }
+
+        .emerg-card.urgent {
+            background: rgba(220, 53, 69, .05);
+            border: 1px solid rgba(220, 53, 69, .2)
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1
+        }
+
+        .emerg-card.nhs111 .emerg-number {
+            color: var(--nhs-blue)
+        }
+
+        .emerg-card.urgent .emerg-number {
+            color: #dc3545
+        }
+
+        .emerg-label {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: .4rem
+        }
+
+        .emerg-desc {
+            font-size: .88rem;
+            color: var(--text-mid);
+            line-height: 1.6
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, .8);
+            padding: 3.5rem 2rem 2rem
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns:2fr 1fr 1fr 1fr;
+            gap: 3rem
+        }
+
+        .footer-tagline {
+            font-size: .88rem;
+            margin-top: .8rem;
+            line-height: 1.6;
+            opacity: .75
+        }
+
+        .footer-address {
+            font-size: .85rem;
+            margin-top: 1rem;
+            line-height: 1.8;
+            opacity: .75
+        }
+
+        .footer-heading {
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, .75);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: color .2s
+        }
+
+        .footer-links a:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, .12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .8rem;
+            opacity: .6;
+            flex-wrap: wrap;
+            gap: .5rem
+        }
+
+        .hours-grid {
+            display: grid;
+            gap: .3rem
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            font-size: .84rem
+        }
+
+        .hour-day {
+            opacity: .7
+        }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @media (max-width: 960px) {
+            .two-col, .two-col.rev, .sem-inner, .lgs-inner, .app-inner {
+                grid-template-columns:1fr;
+                direction: ltr;
+                gap: 2.5rem
+            }
+
+            .sh-grid {
+                grid-template-columns:1fr 1fr
+            }
+
+            .emergency-inner {
+                grid-template-columns:1fr
+            }
+
+            .footer-inner {
+                grid-template-columns:1fr 1fr
+            }
+
+            nav {
+                display: none
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sh-grid, .footer-inner {
+                grid-template-columns:1fr
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="row">
-      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
-      <span class="util-pill">NHS GP Practice · West London</span>
+    <div class="inner">
+        <div class="row">
+            <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+            <span class="util-pill">NHS GP Practice · West London</span>
+        </div>
+        <div class="row">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <span>|</span>
+            <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="row">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <span>|</span>
-      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/></radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
-          <filter id="shadow"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/></filter>
-          <filter id="textSheen"><feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/><feOffset dx="0" dy="1" result="offsetBlur"/><feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/></filter>
-        </defs>
-        <rect width="720" height="160" fill="#fff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="index.html">Our Practice</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#team">Our Doctors</a>
-      <a href="index.html#reviews">Reviews</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#fff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666"/>
+                        <stop offset="30%" stop-color="#222"/>
+                        <stop offset="70%" stop-color="#444"/>
+                        <stop offset="100%" stop-color="#111"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#fff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- PAGE BANNER -->
 <div class="page-banner">
-  <div class="page-banner-inner">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span class="breadcrumb-sep">›</span>
-      <a href="#">Clinics &amp; Services</a>
-      <span class="breadcrumb-sep">›</span>
-      <span>Supporting a Healthy Lifestyle</span>
+    <div class="page-banner-inner">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="#">Clinics &amp; Services</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>Supporting a Healthy Lifestyle</span>
+        </div>
+        <div class="page-tag"><span></span> Lifestyle &amp; Wellbeing Services</div>
+        <h1>Supporting a <em>Healthy Lifestyle</em></h1>
+        <p class="page-banner-sub">From stopping smoking and managing weight to getting more active and cutting back on
+            alcohol — our practice offers a full range of clinics and services to help you live well. Every small change
+            matters, and we're here to support you every step of the way.</p>
     </div>
-    <div class="page-tag"><span></span> Lifestyle &amp; Wellbeing Services</div>
-    <h1>Supporting a <em>Healthy Lifestyle</em></h1>
-    <p class="page-banner-sub">From stopping smoking and managing weight to getting more active and cutting back on alcohol — our practice offers a full range of clinics and services to help you live well. Every small change matters, and we're here to support you every step of the way.</p>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      DR ANGAD — SPORTS & EXERCISE MEDICINE
 ══════════════════════════════════════════ -->
 <div class="sem-feature" id="exercise">
-  <div class="sem-inner">
-    <div class="fade-up">
-      <div class="sem-tag">🏃 Special Clinical Interest</div>
-      <h2 class="sem-h2">Dr Angad Saluja — <em>Sports &amp; Exercise Medicine</em></h2>
-      <p class="sem-p">Dr Angad Saluja has a specialist interest in <strong style="color:#7ee8a2">Sports and Exercise Medicine</strong> — the branch of medicine focused on physical fitness, the treatment and prevention of sport-related injuries, and the broader role of exercise in health and disease management.</p>
-      <p class="sem-p">Exercise is medicine. From managing type 2 diabetes and cardiovascular risk to supporting mental health, musculoskeletal pain, and healthy ageing — physical activity is one of the most powerful tools in preventive healthcare. Dr Angad is passionate about working with patients to find the right level and type of activity for their individual circumstances.</p>
-      <div class="sem-quals">
-        <span class="sem-qual">GP Partner</span>
-        <span class="sem-qual">Sports &amp; Exercise Medicine</span>
-        <span class="sem-qual">3rd Dan Black Belt — Taekwondo</span>
-        <span class="sem-qual">Medical Director, UNTIL</span>
-        <span class="sem-qual">CMO, De Silva Taekwondo</span>
-      </div>
-      <a href="https://salujaclinic.webgp.com/" class="sem-cta" target="_blank">
-        💬 Book a Lifestyle Consultation with Dr Angad
-      </a>
-    </div>
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="sem-canvas-wrap">
-        <div class="sem-canvas-title">Exercise &amp; Heart Health · Live Monitor</div>
-        <canvas id="exerciseCanvas" class="anim" width="500" height="300" style="border-color:rgba(255,255,255,.12)"></canvas>
-        <div class="phase-dots" id="exerciseDots" style="margin-top:.9rem">
-          <div class="pdot exercise active"></div>
-          <div class="pdot exercise"></div>
-          <div class="pdot exercise"></div>
-          <div class="pdot exercise"></div>
+    <div class="sem-inner">
+        <div class="fade-up">
+            <div class="sem-tag">🏃 Special Clinical Interest</div>
+            <h2 class="sem-h2">Dr Angad Saluja — <em>Sports &amp; Exercise Medicine</em></h2>
+            <p class="sem-p">Dr Angad Saluja has a specialist interest in <strong style="color:#7ee8a2">Sports and
+                Exercise Medicine</strong> — the branch of medicine focused on physical fitness, the treatment and
+                prevention of sport-related injuries, and the broader role of exercise in health and disease management.
+            </p>
+            <p class="sem-p">Exercise is medicine. From managing type 2 diabetes and cardiovascular risk to supporting
+                mental health, musculoskeletal pain, and healthy ageing — physical activity is one of the most powerful
+                tools in preventive healthcare. Dr Angad is passionate about working with patients to find the right
+                level and type of activity for their individual circumstances.</p>
+            <div class="sem-quals">
+                <span class="sem-qual">GP Partner</span>
+                <span class="sem-qual">Sports &amp; Exercise Medicine</span>
+                <span class="sem-qual">3rd Dan Black Belt — Taekwondo</span>
+                <span class="sem-qual">Medical Director, UNTIL</span>
+                <span class="sem-qual">CMO, De Silva Taekwondo</span>
+            </div>
+            <a href="https://salujaclinic.webgp.com/" class="sem-cta" target="_blank">
+                💬 Book a Lifestyle Consultation with Dr Angad
+            </a>
         </div>
-        <div style="font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);text-align:center;margin-top:.5rem;letter-spacing:.06em">PHASE: <span id="exercisePhaseLabel">AT REST</span></div>
-      </div>
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="sem-canvas-wrap">
+                <div class="sem-canvas-title">Exercise &amp; Heart Health · Live Monitor</div>
+                <canvas id="exerciseCanvas" class="anim" width="500" height="300"
+                        style="border-color:rgba(255,255,255,.12)"></canvas>
+                <div class="phase-dots" id="exerciseDots" style="margin-top:.9rem">
+                    <div class="pdot exercise active"></div>
+                    <div class="pdot exercise"></div>
+                    <div class="pdot exercise"></div>
+                    <div class="pdot exercise"></div>
+                </div>
+                <div style="font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);text-align:center;margin-top:.5rem;letter-spacing:.06em">
+                    PHASE: <span id="exercisePhaseLabel">AT REST</span></div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      LET'S GO SOUTHALL PARTNERSHIP
 ══════════════════════════════════════════ -->
 <div class="lgs-banner">
-  <div class="lgs-inner">
-    <div class="fade-up">
-      <div class="lgs-tag">🤝 Community Partnership · INT Network Lead</div>
-      <h2 class="lgs-h2">Let's Go Southall — Get Active in Your Community</h2>
-      <p class="lgs-p">Saluja Clinic is proud to serve as the <strong>Integrated Neighbourhood Team (INT) Network Lead</strong> for <strong>Let's Go Southall</strong> — a community movement bringing together local organisations, charities and volunteers to get Southall more physically active.</p>
-      <p class="lgs-p">Let's Go Southall offers free and low-cost activities for all ages and abilities across the borough. Whether you want to try something new, get back into exercise, or simply explore your community — there's something for everyone.</p>
-      <div class="lgs-pills">
-        <span class="lgs-pill">🚲 Let's Ride Southall</span>
-        <span class="lgs-pill">🏃 ParkRun</span>
-        <span class="lgs-pill">🏋️ The Great Outdoor Gym</span>
-        <span class="lgs-pill">🎁 Free Bike Giveaway</span>
-        <span class="lgs-pill">🔧 Free Bike Workshop</span>
-        <span class="lgs-pill">🗺️ Interactive Activity Map</span>
-      </div>
+    <div class="lgs-inner">
+        <div class="fade-up">
+            <div class="lgs-tag">🤝 Community Partnership · INT Network Lead</div>
+            <h2 class="lgs-h2">Let's Go Southall — Get Active in Your Community</h2>
+            <p class="lgs-p">Saluja Clinic is proud to serve as the <strong>Integrated Neighbourhood Team (INT) Network
+                Lead</strong> for <strong>Let's Go Southall</strong> — a community movement bringing together local
+                organisations, charities and volunteers to get Southall more physically active.</p>
+            <p class="lgs-p">Let's Go Southall offers free and low-cost activities for all ages and abilities across the
+                borough. Whether you want to try something new, get back into exercise, or simply explore your community
+                — there's something for everyone.</p>
+            <div class="lgs-pills">
+                <span class="lgs-pill">🚲 Let's Ride Southall</span>
+                <span class="lgs-pill">🏃 ParkRun</span>
+                <span class="lgs-pill">🏋️ The Great Outdoor Gym</span>
+                <span class="lgs-pill">🎁 Free Bike Giveaway</span>
+                <span class="lgs-pill">🔧 Free Bike Workshop</span>
+                <span class="lgs-pill">🗺️ Interactive Activity Map</span>
+            </div>
+        </div>
+        <div class="lgs-ctas fade-up" style="animation-delay:.12s">
+            <a href="https://letsgosouthall.org.uk" class="btn-lgs" target="_blank">↗ Visit Let's Go Southall</a>
+            <a href="https://letsgosouthall.org.uk/get-active/" class="btn-lgs-ghost" target="_blank">Find Activities
+                Near You</a>
+            <a href="https://letsgosouthall.org.uk/whats-on/" class="btn-lgs-ghost" target="_blank">What's On This
+                Week</a>
+        </div>
     </div>
-    <div class="lgs-ctas fade-up" style="animation-delay:.12s">
-      <a href="https://letsgosouthall.org.uk" class="btn-lgs" target="_blank">↗ Visit Let's Go Southall</a>
-      <a href="https://letsgosouthall.org.uk/get-active/" class="btn-lgs-ghost" target="_blank">Find Activities Near You</a>
-      <a href="https://letsgosouthall.org.uk/whats-on/" class="btn-lgs-ghost" target="_blank">What's On This Week</a>
-    </div>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
      ALCOHOL ADVICE
 ══════════════════════════════════════════ -->
 <section style="padding:5rem 2rem;background:var(--white)" id="alcohol">
-  <div class="two-col">
-    <div class="fade-up">
-      <div class="canvas-card alcohol">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">Alcohol Units · Weekly Tracker</div>
-          <div class="phase-badge alcohol" id="alcoholPhase">Safe Limits</div>
+    <div class="two-col">
+        <div class="fade-up">
+            <div class="canvas-card alcohol">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">Alcohol Units · Weekly Tracker</div>
+                    <div class="phase-badge alcohol" id="alcoholPhase">Safe Limits</div>
+                </div>
+                <canvas id="alcoholCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="alcoholDots">
+                    <div class="pdot alcohol active"></div>
+                    <div class="pdot alcohol"></div>
+                    <div class="pdot alcohol"></div>
+                    <div class="pdot alcohol"></div>
+                </div>
+            </div>
         </div>
-        <canvas id="alcoholCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="alcoholDots">
-          <div class="pdot alcohol active"></div>
-          <div class="pdot alcohol"></div>
-          <div class="pdot alcohol"></div>
-          <div class="pdot alcohol"></div>
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="topic-tag alcohol"><span></span> Alcohol Advice</div>
+            <h2 class="topic-h2">Alcohol — <em style="font-style:normal;color:var(--col-alcohol)">Know Your Limits</em>
+            </h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">The NHS advises that both men and women
+                should not regularly drink more than <strong>14 units of alcohol per week</strong> — and if you do drink
+                that much, to spread it over 3 or more days rather than consuming it all at once. "Regularly" means
+                drinking this amount most weeks.</p>
+            <div class="info-box alcohol">
+                <h4>🍺 How Many Units Is That?</h4>
+                <ul>
+                    <li>A pint of regular-strength beer (4%) ≈ <strong>2.3 units</strong></li>
+                    <li>A large glass of wine 250ml (13%) ≈ <strong>3.25 units</strong></li>
+                    <li>A single measure of spirits 25ml (40%) ≈ <strong>1 unit</strong></li>
+                    <li>A bottle of wine ≈ <strong>9–10 units</strong></li>
+                    <li>The 14-unit weekly guideline = roughly 6 pints of average-strength lager</li>
+                </ul>
+            </div>
+            <ul class="info-list alcohol" style="margin-top:1rem">
+                <li>Regularly exceeding limits raises risk of liver disease, cancer, heart disease and stroke</li>
+                <li>Alcohol can affect sleep, mental health and weight</li>
+                <li>Aim for several alcohol-free days each week</li>
+                <li>If you're concerned about your drinking, our GPs can help — confidentially</li>
+            </ul>
+            <div class="alert-strip info" style="margin-top:1rem">
+                <div class="alert-icon">💬</div>
+                <div>Speak to your GP about cutting down. Free support is also available via <a
+                        href="https://www.drinkaware.co.uk" target="_blank"
+                        style="color:var(--col-alcohol);font-weight:700">Drinkaware.co.uk</a> and NHS alcohol support
+                    services.
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="topic-tag alcohol"><span></span> Alcohol Advice</div>
-      <h2 class="topic-h2">Alcohol — <em style="font-style:normal;color:var(--col-alcohol)">Know Your Limits</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">The NHS advises that both men and women should not regularly drink more than <strong>14 units of alcohol per week</strong> — and if you do drink that much, to spread it over 3 or more days rather than consuming it all at once. "Regularly" means drinking this amount most weeks.</p>
-      <div class="info-box alcohol">
-        <h4>🍺 How Many Units Is That?</h4>
-        <ul>
-          <li>A pint of regular-strength beer (4%) ≈ <strong>2.3 units</strong></li>
-          <li>A large glass of wine 250ml (13%) ≈ <strong>3.25 units</strong></li>
-          <li>A single measure of spirits 25ml (40%) ≈ <strong>1 unit</strong></li>
-          <li>A bottle of wine ≈ <strong>9–10 units</strong></li>
-          <li>The 14-unit weekly guideline = roughly 6 pints of average-strength lager</li>
-        </ul>
-      </div>
-      <ul class="info-list alcohol" style="margin-top:1rem">
-        <li>Regularly exceeding limits raises risk of liver disease, cancer, heart disease and stroke</li>
-        <li>Alcohol can affect sleep, mental health and weight</li>
-        <li>Aim for several alcohol-free days each week</li>
-        <li>If you're concerned about your drinking, our GPs can help — confidentially</li>
-      </ul>
-      <div class="alert-strip info" style="margin-top:1rem">
-        <div class="alert-icon">💬</div>
-        <div>Speak to your GP about cutting down. Free support is also available via <a href="https://www.drinkaware.co.uk" target="_blank" style="color:var(--col-alcohol);font-weight:700">Drinkaware.co.uk</a> and NHS alcohol support services.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<div style="padding:0 2rem"><div class="section-divider"></div></div>
+<div style="padding:0 2rem">
+    <div class="section-divider"></div>
+</div>
 
 <!-- ══════════════════════════════════════════
      SMOKING CESSATION
 ══════════════════════════════════════════ -->
 <section style="padding:5rem 2rem;background:var(--off-white)" id="smoking">
-  <div class="two-col rev">
-    <div class="fade-up">
-      <div class="topic-tag smoking"><span></span> Smoking Cessation</div>
-      <h2 class="topic-h2">Stop Smoking — <em style="font-style:normal;color:var(--col-smoking)">We Can Help</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Stopping smoking is one of the best things you can do for your health — and your chances of success are <strong>significantly higher</strong> with professional support. If you don't pay for prescriptions, the process is entirely free.</p>
-      <div class="info-box smoking">
-        <h4>⏱️ What Happens When You Stop</h4>
-        <ul>
-          <li><strong>20 minutes:</strong> Blood pressure and heart rate return to normal</li>
-          <li><strong>8 hours:</strong> Carbon monoxide levels halve; oxygen levels normalise</li>
-          <li><strong>48 hours:</strong> All carbon monoxide cleared; taste and smell improve</li>
-          <li><strong>72 hours:</strong> Breathing becomes easier; energy levels increase</li>
-          <li><strong>1 month:</strong> Skin, lungs and circulation begin to improve</li>
-          <li><strong>1 year:</strong> Risk of heart attack halved vs a smoker</li>
-          <li><strong>10 years:</strong> Risk of lung cancer halved vs a smoker</li>
-        </ul>
-      </div>
-      <div class="info-box smoking" style="margin-top:1rem">
-        <h4>🩺 How We Help at Saluja Clinic</h4>
-        <ul>
-          <li>Ask reception to refer you to our <strong>Quit Smoking Programme</strong></li>
-          <li>Prescriptions for nicotine replacement therapy (NRT) — patches, gum, inhalers</li>
-          <li>Varenicline (Champix) and bupropion available on prescription where appropriate</li>
-          <li>Support from a Healthcare Assistant who knows your medical background</li>
-          <li>Monitoring your health improvements to keep you motivated</li>
-        </ul>
-      </div>
-      <div class="alert-strip positive" style="margin-top:1rem">
-        <div class="alert-icon">✅</div>
-        <div>Call us on <a href="tel:02085745136" style="color:var(--col-smoking);font-weight:700">0208 574 5136</a> and ask to be referred to the Quit Smoking Programme. One of our Healthcare Assistants will be in contact with you shortly.</div>
-      </div>
-    </div>
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="canvas-card smoking">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">Lungs · Recovery Timeline</div>
-          <div class="phase-badge smoking" id="smokingPhase">Smoker's Lungs</div>
+    <div class="two-col rev">
+        <div class="fade-up">
+            <div class="topic-tag smoking"><span></span> Smoking Cessation</div>
+            <h2 class="topic-h2">Stop Smoking — <em style="font-style:normal;color:var(--col-smoking)">We Can Help</em>
+            </h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Stopping smoking is one of the best
+                things you can do for your health — and your chances of success are <strong>significantly
+                    higher</strong> with professional support. If you don't pay for prescriptions, the process is
+                entirely free.</p>
+            <div class="info-box smoking">
+                <h4>⏱️ What Happens When You Stop</h4>
+                <ul>
+                    <li><strong>20 minutes:</strong> Blood pressure and heart rate return to normal</li>
+                    <li><strong>8 hours:</strong> Carbon monoxide levels halve; oxygen levels normalise</li>
+                    <li><strong>48 hours:</strong> All carbon monoxide cleared; taste and smell improve</li>
+                    <li><strong>72 hours:</strong> Breathing becomes easier; energy levels increase</li>
+                    <li><strong>1 month:</strong> Skin, lungs and circulation begin to improve</li>
+                    <li><strong>1 year:</strong> Risk of heart attack halved vs a smoker</li>
+                    <li><strong>10 years:</strong> Risk of lung cancer halved vs a smoker</li>
+                </ul>
+            </div>
+            <div class="info-box smoking" style="margin-top:1rem">
+                <h4>🩺 How We Help at Saluja Clinic</h4>
+                <ul>
+                    <li>Ask reception to refer you to our <strong>Quit Smoking Programme</strong></li>
+                    <li>Prescriptions for nicotine replacement therapy (NRT) — patches, gum, inhalers</li>
+                    <li>Varenicline (Champix) and bupropion available on prescription where appropriate</li>
+                    <li>Support from a Healthcare Assistant who knows your medical background</li>
+                    <li>Monitoring your health improvements to keep you motivated</li>
+                </ul>
+            </div>
+            <div class="alert-strip positive" style="margin-top:1rem">
+                <div class="alert-icon">✅</div>
+                <div>Call us on <a href="tel:02085745136" style="color:var(--col-smoking);font-weight:700">0208 574
+                    5136</a> and ask to be referred to the Quit Smoking Programme. One of our Healthcare Assistants will
+                    be in contact with you shortly.
+                </div>
+            </div>
         </div>
-        <canvas id="smokingCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="smokingDots">
-          <div class="pdot smoking active"></div>
-          <div class="pdot smoking"></div>
-          <div class="pdot smoking"></div>
-          <div class="pdot smoking"></div>
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="canvas-card smoking">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">Lungs · Recovery Timeline</div>
+                    <div class="phase-badge smoking" id="smokingPhase">Smoker's Lungs</div>
+                </div>
+                <canvas id="smokingCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="smokingDots">
+                    <div class="pdot smoking active"></div>
+                    <div class="pdot smoking"></div>
+                    <div class="pdot smoking"></div>
+                    <div class="pdot smoking"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<div style="padding:0 2rem"><div class="section-divider"></div></div>
+<div style="padding:0 2rem">
+    <div class="section-divider"></div>
+</div>
 
 <!-- ══════════════════════════════════════════
      WEIGHT MANAGEMENT
 ══════════════════════════════════════════ -->
 <section style="padding:5rem 2rem;background:var(--white)" id="weight">
-  <div class="two-col">
-    <div class="fade-up">
-      <div class="canvas-card weight">
-        <div class="canvas-card-hdr">
-          <div class="canvas-card-title">BMI &amp; Waist · Health Gauge</div>
-          <div class="phase-badge weight" id="weightPhase">Understanding BMI</div>
+    <div class="two-col">
+        <div class="fade-up">
+            <div class="canvas-card weight">
+                <div class="canvas-card-hdr">
+                    <div class="canvas-card-title">BMI &amp; Waist · Health Gauge</div>
+                    <div class="phase-badge weight" id="weightPhase">Understanding BMI</div>
+                </div>
+                <canvas id="weightCanvas" class="anim" width="500" height="300"></canvas>
+                <div class="phase-dots" id="weightDots">
+                    <div class="pdot weight active"></div>
+                    <div class="pdot weight"></div>
+                    <div class="pdot weight"></div>
+                    <div class="pdot weight"></div>
+                </div>
+            </div>
         </div>
-        <canvas id="weightCanvas" class="anim" width="500" height="300"></canvas>
-        <div class="phase-dots" id="weightDots">
-          <div class="pdot weight active"></div>
-          <div class="pdot weight"></div>
-          <div class="pdot weight"></div>
-          <div class="pdot weight"></div>
+        <div class="fade-up" style="animation-delay:.12s">
+            <div class="topic-tag weight"><span></span> Weight Management</div>
+            <h2 class="topic-h2">Weight &amp; Diet — <em style="font-style:normal;color:var(--col-weight)">Personalised
+                Support</em></h2>
+            <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Maintaining a healthy weight reduces risk
+                of type 2 diabetes, heart disease, stroke, and several cancers. We offer personalised support — from 1:1
+                health trainer sessions to nurse-led appointments and referrals to specialist weight management
+                services.</p>
+            <div class="info-box weight">
+                <h4>📏 Waist Measurement Matters</h4>
+                <p>BMI gives a useful guide, but <strong>waist circumference</strong> is an independent marker of
+                    metabolic risk. Tummy fat (visceral fat) is more dangerous than fat elsewhere in the body.</p>
+                <ul>
+                    <li><strong>Men:</strong> healthy waist &lt;94cm (37"); increased risk &gt;102cm (40")</li>
+                    <li><strong>Women:</strong> healthy waist &lt;80cm (32"); increased risk &gt;88cm (35")</li>
+                    <li>South Asian men and women may have lower thresholds — speak to your GP</li>
+                </ul>
+            </div>
+            <ul class="info-list weight" style="margin-top:1rem">
+                <li>1:1 Health Trainer sessions for lifestyle change and healthy eating</li>
+                <li>Nurse-led weight management appointments</li>
+                <li>Referral to specialist weight loss services where appropriate</li>
+                <li>Prescriptions for weight management medication (Wegovy/Ozempic) if clinically appropriate</li>
+                <li>Small changes matter — even 5–10% weight loss has meaningful health benefits</li>
+            </ul>
+            <div class="alert-strip info" style="margin-top:1rem">
+                <div class="alert-icon">💡</div>
+                <div>Book an appointment with one of our nurses or healthcare assistants to discuss weight management.
+                    There is no judgement — only practical, evidence-based support.
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="fade-up" style="animation-delay:.12s">
-      <div class="topic-tag weight"><span></span> Weight Management</div>
-      <h2 class="topic-h2">Weight &amp; Diet — <em style="font-style:normal;color:var(--col-weight)">Personalised Support</em></h2>
-      <p style="font-size:.95rem;line-height:1.78;color:var(--text-mid)">Maintaining a healthy weight reduces risk of type 2 diabetes, heart disease, stroke, and several cancers. We offer personalised support — from 1:1 health trainer sessions to nurse-led appointments and referrals to specialist weight management services.</p>
-      <div class="info-box weight">
-        <h4>📏 Waist Measurement Matters</h4>
-        <p>BMI gives a useful guide, but <strong>waist circumference</strong> is an independent marker of metabolic risk. Tummy fat (visceral fat) is more dangerous than fat elsewhere in the body.</p>
-        <ul>
-          <li><strong>Men:</strong> healthy waist &lt;94cm (37"); increased risk &gt;102cm (40")</li>
-          <li><strong>Women:</strong> healthy waist &lt;80cm (32"); increased risk &gt;88cm (35")</li>
-          <li>South Asian men and women may have lower thresholds — speak to your GP</li>
-        </ul>
-      </div>
-      <ul class="info-list weight" style="margin-top:1rem">
-        <li>1:1 Health Trainer sessions for lifestyle change and healthy eating</li>
-        <li>Nurse-led weight management appointments</li>
-        <li>Referral to specialist weight loss services where appropriate</li>
-        <li>Prescriptions for weight management medication (Wegovy/Ozempic) if clinically appropriate</li>
-        <li>Small changes matter — even 5–10% weight loss has meaningful health benefits</li>
-      </ul>
-      <div class="alert-strip info" style="margin-top:1rem">
-        <div class="alert-icon">💡</div>
-        <div>Book an appointment with one of our nurses or healthcare assistants to discuss weight management. There is no judgement — only practical, evidence-based support.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<div style="padding:0 2rem"><div class="section-divider"></div></div>
+<div style="padding:0 2rem">
+    <div class="section-divider"></div>
+</div>
 
 <!-- SEXUAL HEALTH MINI SECTION -->
 <section style="padding:5rem 2rem;background:var(--off-white)" id="sexual-health">
-  <div class="section-inner fade-up">
-    <div class="topic-tag sexual"><span></span> Sexual Health &amp; Chlamydia Screening</div>
-    <h2 style="margin-bottom:.8rem">Sexual Health — <em style="font-style:normal;color:var(--col-sexual)">Free &amp; Confidential</em></h2>
-    <p class="section-lead" style="margin-bottom:2rem">A full range of confidential sexual health services are freely available at Saluja Clinic, as well as referrals to specialist GUM (genitourinary medicine) clinics. Chlamydia screening is available through your local GUM clinic.</p>
-    <div class="sh-grid">
-      <div class="sh-card">
-        <span class="sh-icon">💊</span>
-        <div class="sh-name">Contraception</div>
-        <div class="sh-desc">Full contraception advice, prescriptions &amp; fittings</div>
-      </div>
-      <div class="sh-card">
-        <span class="sh-icon">⚡</span>
-        <div class="sh-name">Emergency Contraception</div>
-        <div class="sh-desc">Free emergency contraception — act within 72–120 hours</div>
-      </div>
-      <div class="sh-card">
-        <span class="sh-icon">🔬</span>
-        <div class="sh-name">STI Advice &amp; Referral</div>
-        <div class="sh-desc">Confidential testing referrals to NW London Sexual Health</div>
-      </div>
-      <div class="sh-card">
-        <span class="sh-icon">🧫</span>
-        <div class="sh-name">Chlamydia Screening</div>
-        <div class="sh-desc">Available via local GUM clinic — no GP referral needed</div>
-      </div>
-      <div class="sh-card">
-        <span class="sh-icon">🩺</span>
-        <div class="sh-name">Cervical Screening</div>
-        <div class="sh-desc">Smear tests carried out by our qualified nurses</div>
-      </div>
-      <div class="sh-card">
-        <span class="sh-icon">🤝</span>
-        <div class="sh-name">Unplanned Pregnancy</div>
-        <div class="sh-desc">Non-judgemental advice and onward referral support</div>
-      </div>
+    <div class="section-inner fade-up">
+        <div class="topic-tag sexual"><span></span> Sexual Health &amp; Chlamydia Screening</div>
+        <h2 style="margin-bottom:.8rem">Sexual Health — <em style="font-style:normal;color:var(--col-sexual)">Free &amp;
+            Confidential</em></h2>
+        <p class="section-lead" style="margin-bottom:2rem">A full range of confidential sexual health services are
+            freely available at Saluja Clinic, as well as referrals to specialist GUM (genitourinary medicine) clinics.
+            Chlamydia screening is available through your local GUM clinic.</p>
+        <div class="sh-grid">
+            <div class="sh-card">
+                <span class="sh-icon">💊</span>
+                <div class="sh-name">Contraception</div>
+                <div class="sh-desc">Full contraception advice, prescriptions &amp; fittings</div>
+            </div>
+            <div class="sh-card">
+                <span class="sh-icon">⚡</span>
+                <div class="sh-name">Emergency Contraception</div>
+                <div class="sh-desc">Free emergency contraception — act within 72–120 hours</div>
+            </div>
+            <div class="sh-card">
+                <span class="sh-icon">🔬</span>
+                <div class="sh-name">STI Advice &amp; Referral</div>
+                <div class="sh-desc">Confidential testing referrals to NW London Sexual Health</div>
+            </div>
+            <div class="sh-card">
+                <span class="sh-icon">🧫</span>
+                <div class="sh-name">Chlamydia Screening</div>
+                <div class="sh-desc">Available via local GUM clinic — no GP referral needed</div>
+            </div>
+            <div class="sh-card">
+                <span class="sh-icon">🩺</span>
+                <div class="sh-name">Cervical Screening</div>
+                <div class="sh-desc">Smear tests carried out by our qualified nurses</div>
+            </div>
+            <div class="sh-card">
+                <span class="sh-icon">🤝</span>
+                <div class="sh-name">Unplanned Pregnancy</div>
+                <div class="sh-desc">Non-judgemental advice and onward referral support</div>
+            </div>
+        </div>
+        <div class="alert-strip info" style="margin-top:1.5rem">
+            <div class="alert-icon">🔒</div>
+            <div>All sexual health appointments are completely confidential. Call us on <a href="tel:02085745136"
+                                                                                           style="color:var(--col-sexual);font-weight:700">0208
+                574 5136</a> or book online. NW London Sexual Health line: <strong>0800 756 7570</strong> &nbsp;|&nbsp;
+                <a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank" style="color:var(--col-sexual)">nwlondonsexualhealth.nhs.uk</a>
+            </div>
+        </div>
     </div>
-    <div class="alert-strip info" style="margin-top:1.5rem">
-      <div class="alert-icon">🔒</div>
-      <div>All sexual health appointments are completely confidential. Call us on <a href="tel:02085745136" style="color:var(--col-sexual);font-weight:700">0208 574 5136</a> or book online. NW London Sexual Health line: <strong>0800 756 7570</strong> &nbsp;|&nbsp; <a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank" style="color:var(--col-sexual)">nwlondonsexualhealth.nhs.uk</a></div>
-    </div>
-  </div>
 </section>
 
 <!-- NHS APP BANNER -->
 <div class="app-banner">
-  <div class="app-inner section-inner">
-    <div>
-      <div class="section-tag">Digital Access</div>
-      <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
-      <p class="section-lead">Track your health, book appointments, and manage your lifestyle goals.</p>
-      <div class="app-bullets">
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Book lifestyle and wellbeing appointments</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Access the NHS smoking cessation tools</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results</div>
-        <div class="app-bullet"><span class="app-bullet-dot"></span>Check your BMI and health scores</div>
-      </div>
+    <div class="app-inner section-inner">
+        <div>
+            <div class="section-tag">Digital Access</div>
+            <h2>The NHS App — Your Health,<br>At Your Fingertips</h2>
+            <p class="section-lead">Track your health, book appointments, and manage your lifestyle goals.</p>
+            <div class="app-bullets">
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Book lifestyle and wellbeing appointments
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Access the NHS smoking cessation tools</div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>View your medical records and test results
+                </div>
+                <div class="app-bullet"><span class="app-bullet-dot"></span>Check your BMI and health scores</div>
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160"
+                 style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
+                <defs>
+                    <linearGradient id="aCS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="aCT" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#fff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="aCS2" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000"/>
+                    </radialGradient>
+                    <linearGradient id="aCR" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666"/>
+                        <stop offset="30%" stop-color="#222"/>
+                        <stop offset="70%" stop-color="#444"/>
+                        <stop offset="100%" stop-color="#111"/>
+                    </linearGradient>
+                    <filter id="aSh">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="transparent"/>
+                <circle cx="80" cy="80" r="68" fill="url(#aCR)" filter="url(#aSh)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#aCS2)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#aCS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#aCT)">SALUJA
+                    CLINIC
+                </text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
+                <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
+                <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register
+                    for Online Services</a>
+            </div>
+        </div>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" style="height:72px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))">
-        <defs>
-          <linearGradient id="aCS" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="15%" stop-color="#d0d0d0"/><stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/><stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/><stop offset="100%" stop-color="#d8d8d8"/></linearGradient>
-          <linearGradient id="aCT" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/><stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#fff"/><stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/><stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/></linearGradient>
-          <radialGradient id="aCS2" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000"/></radialGradient>
-          <linearGradient id="aCR" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#666"/><stop offset="30%" stop-color="#222"/><stop offset="70%" stop-color="#444"/><stop offset="100%" stop-color="#111"/></linearGradient>
-          <filter id="aSh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000044"/></filter>
-        </defs>
-        <rect width="720" height="160" fill="transparent"/>
-        <circle cx="80" cy="80" r="68" fill="url(#aCR)" filter="url(#aSh)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#aCS2)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#aCS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#aCT)">SALUJA CLINIC</text>
-      </svg>
-      <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
-        <a href="https://www.nhs.uk/nhs-app/" class="btn-white" target="_blank">↗ Download the NHS App</a>
-        <a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" class="btn-ghost" target="_blank">Register for Online Services</a>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- EMERGENCY -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div>
-        <div class="emerg-label">Non-Emergency</div>
-        <div class="emerg-number">NHS 111</div>
-        <p class="emerg-desc">Available 24/7, free from all phones. For urgent medical advice when your GP is closed, or if you have a concern about any lifestyle-related health symptom.</p>
-      </div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24/7, free from all phones. For urgent medical advice when your GP is
+                    closed, or if you have a concern about any lifestyle-related health symptom.</p>
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Call 999 immediately for chest pain, stroke symptoms, severe breathing difficulty,
+                    loss of consciousness, or any life-threatening emergency.</p>
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div>
-        <div class="emerg-label">Life-Threatening Emergency</div>
-        <div class="emerg-number">999</div>
-        <p class="emerg-desc">Call 999 immediately for chest pain, stroke symptoms, severe breathing difficulty, loss of consciousness, or any life-threatening emergency.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="footer-inner">
-    <div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">SALUJA CLINIC</div>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:.05em">
+                SALUJA CLINIC
+            </div>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136" style="color:rgba(255,255,255,.85);text-decoration:none">📞 0208 574
+                    5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net" style="color:rgba(255,255,255,.85);text-decoration:none">✉
+                    salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://letsgosouthall.org.uk" target="_blank">Let's Go Southall</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="https://www.drinkaware.co.uk" target="_blank">Drinkaware</a></li>
+                <li><a href="https://smokefree.nhs.uk" target="_blank">NHS Smokefree</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank">NW London Sexual Health</a></li>
+                <li><a href="https://letsgosouthall.org.uk/get-active/" target="_blank">Get Active — Southall</a></li>
+                <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="https://letsgosouthall.org.uk" target="_blank">Let's Go Southall</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="https://www.drinkaware.co.uk" target="_blank">Drinkaware</a></li>
-        <li><a href="https://smokefree.nhs.uk" target="_blank">NHS Smokefree</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.nwlondonsexualhealth.nhs.uk/" target="_blank">NW London Sexual Health</a></li>
-        <li><a href="https://letsgosouthall.org.uk/get-active/" target="_blank">Get Active — Southall</a></li>
-        <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <!-- ══════════════════════════════════════════════════════════
      CANVAS ANIMATIONS
 ══════════════════════════════════════════════════════════ -->
 <script>
-const fadeObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
-document.querySelectorAll('.fade-up').forEach(el=>fadeObs.observe(el));
-function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
-function lerp(a,b,t){return a+(b-a)*t;}
-function sr(n){let x=Math.sin(n+1)*10000;return x-Math.floor(x);}
-function cycleFn(durs){const tot=durs.reduce((a,b)=>a+b,0);return t=>{let c=t%tot,acc=0;for(let i=0;i<durs.length;i++){if(c<acc+durs[i])return{idx:i,t:(c-acc)/durs[i]};acc+=durs[i];}return{idx:0,t:0};};}
-function setUI(bId,dId,dotCls,labels,idx){
-  if(bId)document.getElementById(bId).textContent=labels[idx];
-  document.querySelectorAll('#'+dId+' .pdot').forEach((d,i)=>{d.classList.toggle('active',i===idx);d.classList.add(dotCls);});
-}
+    const fadeObs = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+    }), {threshold: .08});
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
-/* ══════════════════════════════════════════════════════════
+    function ease(t) {
+        return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function lerp(a, b, t) {
+        return a + (b - a) * t;
+    }
+
+    function sr(n) {
+        let x = Math.sin(n + 1) * 10000;
+        return x - Math.floor(x);
+    }
+
+    function cycleFn(durs) {
+        const tot = durs.reduce((a, b) => a + b, 0);
+        return t => {
+            let c = t % tot, acc = 0;
+            for (let i = 0; i < durs.length; i++) {
+                if (c < acc + durs[i]) return {idx: i, t: (c - acc) / durs[i]};
+                acc += durs[i];
+            }
+            return {idx: 0, t: 0};
+        };
+    }
+
+    function setUI(bId, dId, dotCls, labels, idx) {
+        if (bId) document.getElementById(bId).textContent = labels[idx];
+        document.querySelectorAll('#' + dId + ' .pdot').forEach((d, i) => {
+            d.classList.toggle('active', i === idx);
+            d.classList.add(dotCls);
+        });
+    }
+
+    /* ══════════════════════════════════════════════════════════
    1. EXERCISE / HEART RATE MONITOR
    Phases: At rest → warm-up → aerobic exercise → recovery & benefits
 ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('exerciseCanvas');const ctx=C.getContext('2d');
-  const W=500,H=300;C.width=W;C.height=H;
-  const LABELS=['At Rest','Warming Up','Aerobic Exercise','Recovery — Benefits!'];
-  const getPhase=cycleFn([6,6,8,6]);
-  let st=null,lastIdx=-1;
+    (function () {
+        const C = document.getElementById('exerciseCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const LABELS = ['At Rest', 'Warming Up', 'Aerobic Exercise', 'Recovery — Benefits!'];
+        const getPhase = cycleFn([6, 6, 8, 6]);
+        let st = null, lastIdx = -1;
 
-  // ECG-style waveform buffer
-  const BUF_LEN=W;
-  const buf=new Float32Array(BUF_LEN);
-  let bufPos=0;
+        // ECG-style waveform buffer
+        const BUF_LEN = W;
+        const buf = new Float32Array(BUF_LEN);
+        let bufPos = 0;
 
-  // Running figure state
-  let strideT=0;
+        // Running figure state
+        let strideT = 0;
 
-  function ecgSample(bpm,t){
-    // Simplified PQRST-ish wave
-    const period=60/bpm;
-    const phase=(t%period)/period;
-    if(phase<0.08) return Math.sin(phase/0.08*Math.PI)*0.15;           // P wave
-    if(phase<0.15) return -Math.sin((phase-0.08)/0.07*Math.PI)*0.1;    // PQ
-    if(phase<0.18) return -0.12;                                         // Q
-    if(phase<0.20) return 0.92;                                          // R spike
-    if(phase<0.23) return -0.18;                                         // S
-    if(phase<0.40) return Math.sin((phase-0.23)/0.17*Math.PI)*0.22;     // T wave
-    return 0;
-  }
+        function ecgSample(bpm, t) {
+            // Simplified PQRST-ish wave
+            const period = 60 / bpm;
+            const phase = (t % period) / period;
+            if (phase < 0.08) return Math.sin(phase / 0.08 * Math.PI) * 0.15;           // P wave
+            if (phase < 0.15) return -Math.sin((phase - 0.08) / 0.07 * Math.PI) * 0.1;    // PQ
+            if (phase < 0.18) return -0.12;                                         // Q
+            if (phase < 0.20) return 0.92;                                          // R spike
+            if (phase < 0.23) return -0.18;                                         // S
+            if (phase < 0.40) return Math.sin((phase - 0.23) / 0.17 * Math.PI) * 0.22;     // T wave
+            return 0;
+        }
 
-  function drawRunner(cx,cy,stride,speed,alpha){
-    ctx.save();ctx.globalAlpha=alpha;ctx.translate(cx,cy);
-    const s=stride; // limb swing
-    // body
-    ctx.beginPath();ctx.ellipse(0,-28,8,14,.1,0,Math.PI*2);
-    ctx.fillStyle='#7ee8a2';ctx.fill();
-    // head
-    ctx.beginPath();ctx.arc(2,-48,10,0,Math.PI*2);
-    ctx.fillStyle='#fde8c8';ctx.fill();
-    ctx.strokeStyle='rgba(0,0,0,.15)';ctx.lineWidth=1;ctx.stroke();
-    // arms
-    ctx.strokeStyle='#7ee8a2';ctx.lineWidth=5;ctx.lineCap='round';
-    ctx.beginPath();ctx.moveTo(-4,-36);ctx.lineTo(-16+Math.sin(s)*14,-24+Math.cos(s)*4);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(4,-36);ctx.lineTo(16-Math.sin(s)*14,-24-Math.cos(s)*4);ctx.stroke();
-    // legs
-    ctx.strokeStyle='#4a9060';ctx.lineWidth=6;
-    ctx.beginPath();ctx.moveTo(-4,-14);ctx.lineTo(-12+Math.sin(s)*18,6-Math.cos(s)*8);ctx.lineTo(-14+Math.sin(s)*10,22);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(4,-14);ctx.lineTo(12-Math.sin(s)*18,6+Math.cos(s)*8);ctx.lineTo(14-Math.sin(s)*10,22);ctx.stroke();
-    ctx.restore();
-  }
+        function drawRunner(cx, cy, stride, speed, alpha) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.translate(cx, cy);
+            const s = stride; // limb swing
+            // body
+            ctx.beginPath();
+            ctx.ellipse(0, -28, 8, 14, .1, 0, Math.PI * 2);
+            ctx.fillStyle = '#7ee8a2';
+            ctx.fill();
+            // head
+            ctx.beginPath();
+            ctx.arc(2, -48, 10, 0, Math.PI * 2);
+            ctx.fillStyle = '#fde8c8';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(0,0,0,.15)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            // arms
+            ctx.strokeStyle = '#7ee8a2';
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(-4, -36);
+            ctx.lineTo(-16 + Math.sin(s) * 14, -24 + Math.cos(s) * 4);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(4, -36);
+            ctx.lineTo(16 - Math.sin(s) * 14, -24 - Math.cos(s) * 4);
+            ctx.stroke();
+            // legs
+            ctx.strokeStyle = '#4a9060';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(-4, -14);
+            ctx.lineTo(-12 + Math.sin(s) * 18, 6 - Math.cos(s) * 8);
+            ctx.lineTo(-14 + Math.sin(s) * 10, 22);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(4, -14);
+            ctx.lineTo(12 - Math.sin(s) * 18, 6 + Math.cos(s) * 8);
+            ctx.lineTo(14 - Math.sin(s) * 10, 22);
+            ctx.stroke();
+            ctx.restore();
+        }
 
-  function drawBenefits(alpha){
-    if(alpha<=0)return;
-    const items=[['❤️','Stronger heart',80,60],['🫁','Better lungs',240,60],['🧠','Mental clarity',80,160],['💪','More energy',240,160],['⚖️','Weight control',160,220]];
-    ctx.save();
-    items.forEach(([ic,txt,x,y],i)=>{
-      const a=Math.min(1,(alpha*5-i*.7));
-      if(a<=0)return;
-      ctx.save();ctx.globalAlpha=ease(a);
-      ctx.beginPath();ctx.arc(x,y,28,0,Math.PI*2);
-      ctx.fillStyle='rgba(126,232,162,.15)';ctx.fill();
-      ctx.strokeStyle='rgba(126,232,162,.4)';ctx.lineWidth=1.5;ctx.stroke();
-      ctx.font='18px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(ic,x,y-6);
-      ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='600 8px "DM Sans",sans-serif';ctx.fillText(txt,x,y+12);
-      ctx.restore();
-    });
-    ctx.restore();
-  }
+        function drawBenefits(alpha) {
+            if (alpha <= 0) return;
+            const items = [['❤️', 'Stronger heart', 80, 60], ['🫁', 'Better lungs', 240, 60], ['🧠', 'Mental clarity', 80, 160], ['💪', 'More energy', 240, 160], ['⚖️', 'Weight control', 160, 220]];
+            ctx.save();
+            items.forEach(([ic, txt, x, y], i) => {
+                const a = Math.min(1, (alpha * 5 - i * .7));
+                if (a <= 0) return;
+                ctx.save();
+                ctx.globalAlpha = ease(a);
+                ctx.beginPath();
+                ctx.arc(x, y, 28, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(126,232,162,.15)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(126,232,162,.4)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.font = '18px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(ic, x, y - 6);
+                ctx.fillStyle = 'rgba(255,255,255,.7)';
+                ctx.font = '600 8px "DM Sans",sans-serif';
+                ctx.fillText(txt, x, y + 12);
+                ctx.restore();
+            });
+            ctx.restore();
+        }
 
-  function render(now){
-    if(!st)st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
-    if(idx!==lastIdx){lastIdx=idx;document.getElementById('exercisePhaseLabel').textContent=LABELS[idx];setUI(null,'exerciseDots','exercise',LABELS,idx);}
-    ctx.clearRect(0,0,W,H);
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
+            if (idx !== lastIdx) {
+                lastIdx = idx;
+                document.getElementById('exercisePhaseLabel').textContent = LABELS[idx];
+                setUI(null, 'exerciseDots', 'exercise', LABELS, idx);
+            }
+            ctx.clearRect(0, 0, W, H);
 
-    // Dark green background for this canvas
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#0d2e18');bg.addColorStop(1,'#0a2012');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+            // Dark green background for this canvas
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#0d2e18');
+            bg.addColorStop(1, '#0a2012');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
 
-    // Grid lines
-    ctx.save();ctx.globalAlpha=.08;ctx.strokeStyle='#7ee8a2';ctx.lineWidth=.8;
-    for(let y=0;y<H;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-    for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-    ctx.restore();
+            // Grid lines
+            ctx.save();
+            ctx.globalAlpha = .08;
+            ctx.strokeStyle = '#7ee8a2';
+            ctx.lineWidth = .8;
+            for (let y = 0; y < H; y += 30) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(W, y);
+                ctx.stroke();
+            }
+            for (let x = 0; x < W; x += 40) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, H);
+                ctx.stroke();
+            }
+            ctx.restore();
 
-    // BPM per phase
-    const targetBPM=idx===0?62:idx===1?95:idx===2?148:75;
-    const bpm=lerp(idx>0?[62,95,148,75][idx-1]:62, targetBPM, ease(t));
+            // BPM per phase
+            const targetBPM = idx === 0 ? 62 : idx === 1 ? 95 : idx === 2 ? 148 : 75;
+            const bpm = lerp(idx > 0 ? [62, 95, 148, 75][idx - 1] : 62, targetBPM, ease(t));
 
-    // Fill ECG buffer
-    for(let i=0;i<4;i++){
-      buf[bufPos%BUF_LEN]=ecgSample(bpm,elapsed+i*0.004);
-      bufPos++;
-    }
+            // Fill ECG buffer
+            for (let i = 0; i < 4; i++) {
+                buf[bufPos % BUF_LEN] = ecgSample(bpm, elapsed + i * 0.004);
+                bufPos++;
+            }
 
-    // Draw ECG
-    const traceY=H*0.52;
-    const amp=60;
-    ctx.save();
-    ctx.beginPath();
-    for(let i=0;i<BUF_LEN;i++){
-      const bufI=(bufPos-BUF_LEN+i+BUF_LEN)%BUF_LEN;
-      const x=i;const y=traceY-buf[bufI]*amp;
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    }
-    // Glow
-    ctx.strokeStyle='rgba(126,232,162,.15)';ctx.lineWidth=8;ctx.stroke();
-    ctx.strokeStyle='#7ee8a2';ctx.lineWidth=2;ctx.stroke();
-    // Leading dot
-    const leadY=traceY-buf[(bufPos-1+BUF_LEN)%BUF_LEN]*amp;
-    ctx.beginPath();ctx.arc(W-1,leadY,4,0,Math.PI*2);
-    ctx.fillStyle='#7ee8a2';ctx.fill();
-    ctx.restore();
+            // Draw ECG
+            const traceY = H * 0.52;
+            const amp = 60;
+            ctx.save();
+            ctx.beginPath();
+            for (let i = 0; i < BUF_LEN; i++) {
+                const bufI = (bufPos - BUF_LEN + i + BUF_LEN) % BUF_LEN;
+                const x = i;
+                const y = traceY - buf[bufI] * amp;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            // Glow
+            ctx.strokeStyle = 'rgba(126,232,162,.15)';
+            ctx.lineWidth = 8;
+            ctx.stroke();
+            ctx.strokeStyle = '#7ee8a2';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Leading dot
+            const leadY = traceY - buf[(bufPos - 1 + BUF_LEN) % BUF_LEN] * amp;
+            ctx.beginPath();
+            ctx.arc(W - 1, leadY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = '#7ee8a2';
+            ctx.fill();
+            ctx.restore();
 
-    // BPM readout
-    ctx.save();
-    ctx.fillStyle='rgba(126,232,162,.9)';ctx.font='700 32px "DM Sans",sans-serif';ctx.textAlign='left';
-    ctx.fillText(Math.round(bpm),12,36);
-    ctx.fillStyle='rgba(126,232,162,.5)';ctx.font='600 11px "DM Sans",sans-serif';
-    ctx.fillText('BPM',12,52);
-    // Phase label
-    ctx.textAlign='right';ctx.fillStyle='rgba(126,232,162,.55)';ctx.font='700 9px "DM Sans",sans-serif';
-    ctx.fillText(LABELS[idx],W-12,18);
-    ctx.restore();
+            // BPM readout
+            ctx.save();
+            ctx.fillStyle = 'rgba(126,232,162,.9)';
+            ctx.font = '700 32px "DM Sans",sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(Math.round(bpm), 12, 36);
+            ctx.fillStyle = 'rgba(126,232,162,.5)';
+            ctx.font = '600 11px "DM Sans",sans-serif';
+            ctx.fillText('BPM', 12, 52);
+            // Phase label
+            ctx.textAlign = 'right';
+            ctx.fillStyle = 'rgba(126,232,162,.55)';
+            ctx.font = '700 9px "DM Sans",sans-serif';
+            ctx.fillText(LABELS[idx], W - 12, 18);
+            ctx.restore();
 
-    // Running figure
-    strideT+=idx===0?0.01:idx===1?0.04:idx===2?0.09:0.03;
-    const runAlpha=idx===0?.35:idx===3?.5:1;
-    const runX=idx===3?W*.5:W*.75;
-    drawRunner(runX,H*.35,strideT*2,bpm/80,runAlpha);
+            // Running figure
+            strideT += idx === 0 ? 0.01 : idx === 1 ? 0.04 : idx === 2 ? 0.09 : 0.03;
+            const runAlpha = idx === 0 ? .35 : idx === 3 ? .5 : 1;
+            const runX = idx === 3 ? W * .5 : W * .75;
+            drawRunner(runX, H * .35, strideT * 2, bpm / 80, runAlpha);
 
-    // Speed lines (exercise phase)
-    if(idx===2){
-      ctx.save();ctx.globalAlpha=ease(t)*.3;ctx.strokeStyle='#7ee8a2';ctx.lineWidth=1;
-      for(let i=0;i<6;i++){const ly=H*.2+i*18;ctx.beginPath();ctx.moveTo(runX-55,ly);ctx.lineTo(runX-35,ly);ctx.stroke();}
-      ctx.restore();
-    }
+            // Speed lines (exercise phase)
+            if (idx === 2) {
+                ctx.save();
+                ctx.globalAlpha = ease(t) * .3;
+                ctx.strokeStyle = '#7ee8a2';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < 6; i++) {
+                    const ly = H * .2 + i * 18;
+                    ctx.beginPath();
+                    ctx.moveTo(runX - 55, ly);
+                    ctx.lineTo(runX - 35, ly);
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
 
-    if(idx===3)drawBenefits(ease(t));
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            if (idx === 3) drawBenefits(ease(t));
+            requestAnimationFrame(render);
+        }
 
-/* ══════════════════════════════════════════════════════════
+        requestAnimationFrame(render);
+    })();
+
+    /* ══════════════════════════════════════════════════════════
    2. ALCOHOL UNITS TRACKER
    Phases: Safe limits display → weekly bar chart building → liver stress → cutting down
 ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('alcoholCanvas');const ctx=C.getContext('2d');
-  const W=500,H=300;C.width=W;C.height=H;
-  const LABELS=['NHS Safe Limits','Weekly Units (Over Limit)','Effect on the Liver','Cutting Down — Benefits'];
-  const getPhase=cycleFn([6,7,6,7]);
-  let st=null,lastIdx=-1;
+    (function () {
+        const C = document.getElementById('alcoholCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const LABELS = ['NHS Safe Limits', 'Weekly Units (Over Limit)', 'Effect on the Liver', 'Cutting Down — Benefits'];
+        const getPhase = cycleFn([6, 7, 6, 7]);
+        let st = null, lastIdx = -1;
 
-  const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const OVER_UNITS=[3,2,5,2,8,12,6]; // over-limit week
-  const SAFE_UNITS=[1,0,2,1,2,3,1];  // safe week
-  const LIMIT_LINE=14/7; // 2 units/day
+        const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const OVER_UNITS = [3, 2, 5, 2, 8, 12, 6]; // over-limit week
+        const SAFE_UNITS = [1, 0, 2, 1, 2, 3, 1];  // safe week
+        const LIMIT_LINE = 14 / 7; // 2 units/day
 
-  function drawUnitGlass(x,y,units,col,label,maxU=6){
-    const h=70,w=28,fillH=h*(Math.min(units,maxU)/maxU);
-    ctx.beginPath();ctx.roundRect(x-w/2,y-h,w,h,4);
-    ctx.fillStyle='rgba(255,255,255,.1)';ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1.5;ctx.stroke();
-    if(fillH>0){
-      ctx.beginPath();ctx.roundRect(x-w/2+2,y-fillH+2,w-4,fillH-2,3);
-      ctx.fillStyle=col;ctx.fill();
-    }
-    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='600 9px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText(label,x,y+14);
-    ctx.fillText(units+'u',x,y-h-6);
-  }
+        function drawUnitGlass(x, y, units, col, label, maxU = 6) {
+            const h = 70, w = 28, fillH = h * (Math.min(units, maxU) / maxU);
+            ctx.beginPath();
+            ctx.roundRect(x - w / 2, y - h, w, h, 4);
+            ctx.fillStyle = 'rgba(255,255,255,.1)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255,255,255,.2)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            if (fillH > 0) {
+                ctx.beginPath();
+                ctx.roundRect(x - w / 2 + 2, y - fillH + 2, w - 4, fillH - 2, 3);
+                ctx.fillStyle = col;
+                ctx.fill();
+            }
+            ctx.fillStyle = 'rgba(255,255,255,.7)';
+            ctx.font = '600 9px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, x, y + 14);
+            ctx.fillText(units + 'u', x, y - h - 6);
+        }
 
-  function drawBarChart(units, progress, limitY){
-    const barW=42,gap=14,startX=40;
-    DAYS.forEach((d,i)=>{
-      const u=units[i];
-      const maxH=H*.6;
-      const bH=(u/14)*maxH;
-      const bX=startX+i*(barW+gap);
-      const bY=H-50;
-      const fillP=Math.min(1,(progress*(DAYS.length+1)-i));
-      if(fillP<=0)return;
-      const isOver=u*7>14;
-      ctx.beginPath();ctx.roundRect(bX,bY-bH*ease(fillP),barW,bH*ease(fillP),4);
-      ctx.fillStyle=isOver?'rgba(192,57,43,.8)':'rgba(142,68,173,.7)';
-      ctx.fill();
-      // day label
-      ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='600 9px "DM Sans",sans-serif';ctx.textAlign='center';
-      ctx.fillText(d,bX+barW/2,H-36);
-      if(fillP>=.5){
-        ctx.fillStyle='#fff';ctx.font='700 9px "DM Sans",sans-serif';
-        ctx.fillText(u+'u',bX+barW/2,bY-bH*ease(fillP)-6);
-      }
-    });
-    // 14-unit total line
-    const totalU=units.reduce((a,b)=>a+b,0);
-    const totalH=(14/14)*H*.6;
-    ctx.save();ctx.globalAlpha=.55;
-    ctx.setLineDash([5,4]);ctx.strokeStyle='#f5b942';ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(35,H-50-totalH*.5);ctx.lineTo(W-20,H-50-totalH*.5);ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle='#f5b942';ctx.font='600 8px "DM Sans",sans-serif';ctx.textAlign='left';
-    ctx.fillText('14 units/week NHS limit',38,H-50-totalH*.5-5);
-    ctx.restore();
-    // Total badge
-    ctx.beginPath();ctx.roundRect(W-80,12,68,32,8);
-    ctx.fillStyle=totalU>14?'rgba(192,57,43,.85)':'rgba(142,68,173,.85)';ctx.fill();
-    ctx.fillStyle='#fff';ctx.font='700 13px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('Total: '+totalU+'u',W-46,24);
-    ctx.font='600 8px "DM Sans",sans-serif';
-    ctx.fillText(totalU>14?'⚠ Over limit':'✓ Within limit',W-46,36);
-  }
+        function drawBarChart(units, progress, limitY) {
+            const barW = 42, gap = 14, startX = 40;
+            DAYS.forEach((d, i) => {
+                const u = units[i];
+                const maxH = H * .6;
+                const bH = (u / 14) * maxH;
+                const bX = startX + i * (barW + gap);
+                const bY = H - 50;
+                const fillP = Math.min(1, (progress * (DAYS.length + 1) - i));
+                if (fillP <= 0) return;
+                const isOver = u * 7 > 14;
+                ctx.beginPath();
+                ctx.roundRect(bX, bY - bH * ease(fillP), barW, bH * ease(fillP), 4);
+                ctx.fillStyle = isOver ? 'rgba(192,57,43,.8)' : 'rgba(142,68,173,.7)';
+                ctx.fill();
+                // day label
+                ctx.fillStyle = 'rgba(255,255,255,.65)';
+                ctx.font = '600 9px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(d, bX + barW / 2, H - 36);
+                if (fillP >= .5) {
+                    ctx.fillStyle = '#fff';
+                    ctx.font = '700 9px "DM Sans",sans-serif';
+                    ctx.fillText(u + 'u', bX + barW / 2, bY - bH * ease(fillP) - 6);
+                }
+            });
+            // 14-unit total line
+            const totalU = units.reduce((a, b) => a + b, 0);
+            const totalH = (14 / 14) * H * .6;
+            ctx.save();
+            ctx.globalAlpha = .55;
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#f5b942';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(35, H - 50 - totalH * .5);
+            ctx.lineTo(W - 20, H - 50 - totalH * .5);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#f5b942';
+            ctx.font = '600 8px "DM Sans",sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('14 units/week NHS limit', 38, H - 50 - totalH * .5 - 5);
+            ctx.restore();
+            // Total badge
+            ctx.beginPath();
+            ctx.roundRect(W - 80, 12, 68, 32, 8);
+            ctx.fillStyle = totalU > 14 ? 'rgba(192,57,43,.85)' : 'rgba(142,68,173,.85)';
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 13px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Total: ' + totalU + 'u', W - 46, 24);
+            ctx.font = '600 8px "DM Sans",sans-serif';
+            ctx.fillText(totalU > 14 ? '⚠ Over limit' : '✓ Within limit', W - 46, 36);
+        }
 
-  function drawLiver(stress,elapsed){
-    const lx=W/2,ly=H/2+10;
-    // Pulsing
-    const pulse=Math.sin(elapsed*2)*.05;
-    ctx.beginPath();
-    ctx.moveTo(lx-60,ly-10);
-    ctx.bezierCurveTo(lx-65,ly-50,lx+10,ly-65,lx+55,ly-20);
-    ctx.bezierCurveTo(lx+75,ly+10,lx+50,ly+50,lx+10,ly+50);
-    ctx.bezierCurveTo(lx-30,ly+50,lx-60,ly+30,lx-60,ly-10);
-    ctx.closePath();
-    const r1=lerp(200,160,stress),g1=lerp(120,60,stress),b1=lerp(100,60,stress);
-    const lg=ctx.createRadialGradient(lx-10,ly-10,0,lx,ly,70);
-    lg.addColorStop(0,`rgba(${r1+20},${g1+20},${b1+20},.92)`);
-    lg.addColorStop(1,`rgba(${r1-20},${g1-20},${b1-20},.85)`);
-    ctx.fillStyle=lg;ctx.fill();
-    ctx.strokeStyle=`rgba(${r1-40},${g1-40},${b1-40},.4)`;ctx.lineWidth=2;ctx.stroke();
-    // Inflammation spots (stress)
-    if(stress>0.3){
-      for(let i=0;i<6;i++){
-        const sx=lx+(sr(i)-.5)*80,sy=ly+(sr(i+10)-.5)*50;
-        ctx.save();ctx.globalAlpha=ease((stress-.3)/.7)*(Math.sin(elapsed*3+i)*.3+.6)*.7;
-        ctx.beginPath();ctx.arc(sx,sy,4+stress*4,0,Math.PI*2);
-        ctx.fillStyle='rgba(255,80,60,.7)';ctx.fill();ctx.restore();
-      }
-    }
-    // Label
-    ctx.fillStyle=`rgba(${r1+40},${g1+40},${b1+40},.8)`;ctx.font='700 11px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('LIVER',lx,ly+4);
-    const stressLabel=stress<.3?'Healthy':'At Risk';
-    ctx.fillStyle=stress>.3?'rgba(255,100,80,.8)':'rgba(100,220,120,.8)';ctx.font='600 9px "DM Sans",sans-serif';
-    ctx.fillText(stressLabel,lx,ly+18);
-  }
+        function drawLiver(stress, elapsed) {
+            const lx = W / 2, ly = H / 2 + 10;
+            // Pulsing
+            const pulse = Math.sin(elapsed * 2) * .05;
+            ctx.beginPath();
+            ctx.moveTo(lx - 60, ly - 10);
+            ctx.bezierCurveTo(lx - 65, ly - 50, lx + 10, ly - 65, lx + 55, ly - 20);
+            ctx.bezierCurveTo(lx + 75, ly + 10, lx + 50, ly + 50, lx + 10, ly + 50);
+            ctx.bezierCurveTo(lx - 30, ly + 50, lx - 60, ly + 30, lx - 60, ly - 10);
+            ctx.closePath();
+            const r1 = lerp(200, 160, stress), g1 = lerp(120, 60, stress), b1 = lerp(100, 60, stress);
+            const lg = ctx.createRadialGradient(lx - 10, ly - 10, 0, lx, ly, 70);
+            lg.addColorStop(0, `rgba(${r1 + 20},${g1 + 20},${b1 + 20},.92)`);
+            lg.addColorStop(1, `rgba(${r1 - 20},${g1 - 20},${b1 - 20},.85)`);
+            ctx.fillStyle = lg;
+            ctx.fill();
+            ctx.strokeStyle = `rgba(${r1 - 40},${g1 - 40},${b1 - 40},.4)`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Inflammation spots (stress)
+            if (stress > 0.3) {
+                for (let i = 0; i < 6; i++) {
+                    const sx = lx + (sr(i) - .5) * 80, sy = ly + (sr(i + 10) - .5) * 50;
+                    ctx.save();
+                    ctx.globalAlpha = ease((stress - .3) / .7) * (Math.sin(elapsed * 3 + i) * .3 + .6) * .7;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 4 + stress * 4, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,80,60,.7)';
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+            // Label
+            ctx.fillStyle = `rgba(${r1 + 40},${g1 + 40},${b1 + 40},.8)`;
+            ctx.font = '700 11px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('LIVER', lx, ly + 4);
+            const stressLabel = stress < .3 ? 'Healthy' : 'At Risk';
+            ctx.fillStyle = stress > .3 ? 'rgba(255,100,80,.8)' : 'rgba(100,220,120,.8)';
+            ctx.font = '600 9px "DM Sans",sans-serif';
+            ctx.fillText(stressLabel, lx, ly + 18);
+        }
 
-  function render(now){
-    if(!st)st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
-    if(idx!==lastIdx){lastIdx=idx;setUI('alcoholPhase','alcoholDots','alcohol',LABELS,idx);}
-    ctx.clearRect(0,0,W,H);
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#1e0a2e');bg.addColorStop(1,'#140620');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#bb8fce';ctx.font='600 10px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('ALCOHOL UNITS TRACKER',W/2,H-10);ctx.restore();
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
+            if (idx !== lastIdx) {
+                lastIdx = idx;
+                setUI('alcoholPhase', 'alcoholDots', 'alcohol', LABELS, idx);
+            }
+            ctx.clearRect(0, 0, W, H);
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#1e0a2e');
+            bg.addColorStop(1, '#140620');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.globalAlpha = .12;
+            ctx.fillStyle = '#bb8fce';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('ALCOHOL UNITS TRACKER', W / 2, H - 10);
+            ctx.restore();
 
-    if(idx===0){
-      // Show the three drink types with unit counts
-      const drinks=[['🍺','Pint (4%)',2.3,'rgba(200,150,50,.8)'],['🍷','Wine 250ml',3.25,'rgba(160,40,80,.8)'],['🥃','Single spirit',1,'rgba(180,130,60,.8)']];
-      ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='700 10px "DM Sans",sans-serif';ctx.textAlign='center';
-      ctx.fillText('NHS Limit: 14 units/week · spread over ≥3 days',W/2,22);
-      drinks.forEach(([ic,lbl,u,col],i)=>{
-        const dx=90+i*160,dy=H*.55;
-        drawUnitGlass(dx,dy,u*ease(t),col,lbl,4);
-        ctx.font='22px sans-serif';ctx.textAlign='center';ctx.fillText(ic,dx,dy-85);
-      });
-    } else if(idx===1){
-      drawBarChart(OVER_UNITS,ease(t));
-    } else if(idx===2){
-      drawLiver(ease(t),elapsed);
-      ctx.save();ctx.globalAlpha=ease(t)*.75;
-      ctx.fillStyle='rgba(255,100,80,.8)';ctx.font='700 11px "DM Sans",sans-serif';ctx.textAlign='center';
-      ctx.fillText('Regular excess alcohol stresses the liver',W/2,H-26);ctx.restore();
-    } else {
-      drawBarChart(SAFE_UNITS,ease(t));
-    }
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            if (idx === 0) {
+                // Show the three drink types with unit counts
+                const drinks = [['🍺', 'Pint (4%)', 2.3, 'rgba(200,150,50,.8)'], ['🍷', 'Wine 250ml', 3.25, 'rgba(160,40,80,.8)'], ['🥃', 'Single spirit', 1, 'rgba(180,130,60,.8)']];
+                ctx.fillStyle = 'rgba(255,255,255,.7)';
+                ctx.font = '700 10px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('NHS Limit: 14 units/week · spread over ≥3 days', W / 2, 22);
+                drinks.forEach(([ic, lbl, u, col], i) => {
+                    const dx = 90 + i * 160, dy = H * .55;
+                    drawUnitGlass(dx, dy, u * ease(t), col, lbl, 4);
+                    ctx.font = '22px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(ic, dx, dy - 85);
+                });
+            } else if (idx === 1) {
+                drawBarChart(OVER_UNITS, ease(t));
+            } else if (idx === 2) {
+                drawLiver(ease(t), elapsed);
+                ctx.save();
+                ctx.globalAlpha = ease(t) * .75;
+                ctx.fillStyle = 'rgba(255,100,80,.8)';
+                ctx.font = '700 11px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Regular excess alcohol stresses the liver', W / 2, H - 26);
+                ctx.restore();
+            } else {
+                drawBarChart(SAFE_UNITS, ease(t));
+            }
+            requestAnimationFrame(render);
+        }
 
-/* ══════════════════════════════════════════════════════════
+        requestAnimationFrame(render);
+    })();
+
+    /* ══════════════════════════════════════════════════════════
    3. SMOKING — LUNGS CLEARING OVER TIME
    Phases: Smoker's lungs → 24h after quitting → 1 month → 1 year — healthy pink
 ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('smokingCanvas');const ctx=C.getContext('2d');
-  const W=500,H=300;C.width=W;C.height=H;
-  const LABELS=["Smoker's Lungs","24 Hours After Quitting","1 Month Later","1 Year — Healthy Lungs!"];
-  const getPhase=cycleFn([6,6,7,7]);
-  let st=null,lastIdx=-1;
+    (function () {
+        const C = document.getElementById('smokingCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const LABELS = ["Smoker's Lungs", "24 Hours After Quitting", "1 Month Later", "1 Year — Healthy Lungs!"];
+        const getPhase = cycleFn([6, 6, 7, 7]);
+        let st = null, lastIdx = -1;
 
-  // Particles — tar/smoke in unhealthy, clean O2 in healthy
-  const PARTS=Array.from({length:22},(_,i)=>({
-    x:sr(i)*W*.6+W*.2, y:sr(i+10)*(H*.5)+H*.15,
-    vx:(sr(i+20)-.5)*.6, vy:(sr(i+30)-.5)*.4,
-    r:2+sr(i+40)*4, t:sr(i+50)*Math.PI*2,
-  }));
+        // Particles — tar/smoke in unhealthy, clean O2 in healthy
+        const PARTS = Array.from({length: 22}, (_, i) => ({
+            x: sr(i) * W * .6 + W * .2, y: sr(i + 10) * (H * .5) + H * .15,
+            vx: (sr(i + 20) - .5) * .6, vy: (sr(i + 30) - .5) * .4,
+            r: 2 + sr(i + 40) * 4, t: sr(i + 50) * Math.PI * 2,
+        }));
 
-  function drawLung(side,health,elapsed){
-    // side: -1=left, 1=right
-    const cx=W*.5+(side<0?-70:70), cy=H*.48;
-    const rx=55,ry=75;
-    // Tar colour → healthy pink
-    const r=Math.round(lerp(80,240,health));
-    const g=Math.round(lerp(60,160,health));
-    const b=Math.round(lerp(60,150,health));
-    ctx.beginPath();
-    // Lung shape (lobe)
-    ctx.moveTo(cx,cy-ry);
-    ctx.bezierCurveTo(cx+side*rx,cy-ry,cx+side*rx,cy-ry*.3,cx+side*rx*.9,cy);
-    ctx.bezierCurveTo(cx+side*rx,cy+ry*.4,cx+side*rx*.3,cy+ry,cx,cy+ry*.9);
-    ctx.bezierCurveTo(cx-side*rx*.3,cy+ry,cx-side*rx*.5,cy+ry*.4,cx,cy-ry);
-    ctx.closePath();
-    const lg=ctx.createRadialGradient(cx,cy-10,0,cx,cy,ry);
-    lg.addColorStop(0,`rgba(${r+30},${g+30},${b+30},.9)`);
-    lg.addColorStop(.7,`rgba(${r},${g},${b},.85)`);
-    lg.addColorStop(1,`rgba(${r-30},${g-20},${b-20},.7)`);
-    ctx.fillStyle=lg;ctx.fill();
-    ctx.strokeStyle=`rgba(${r-40},${g-30},${b-30},.4)`;ctx.lineWidth=2;ctx.stroke();
-    // Bronchi
-    ctx.save();ctx.globalAlpha=.35;
-    ctx.strokeStyle=`rgba(${r-20},${g-20},${b-20},.7)`;ctx.lineWidth=3;ctx.lineCap='round';
-    ctx.beginPath();ctx.moveTo(cx,cy-ry+8);ctx.lineTo(cx,cy);
-    ctx.bezierCurveTo(cx,cy+20,cx+side*25,cy+30,cx+side*28,cy+45);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(cx,cy-10);
-    ctx.bezierCurveTo(cx+side*10,cy+10,cx+side*30,cy+5,cx+side*35,cy+18);ctx.stroke();
-    ctx.restore();
-    // Tar overlay (unhealthy)
-    if(health<.8){
-      ctx.save();ctx.globalAlpha=(1-health)*.55;
-      ctx.beginPath();
-      ctx.moveTo(cx,cy-ry);
-      ctx.bezierCurveTo(cx+side*rx,cy-ry,cx+side*rx,cy-ry*.3,cx+side*rx*.9,cy);
-      ctx.bezierCurveTo(cx+side*rx,cy+ry*.4,cx+side*rx*.3,cy+ry,cx,cy+ry*.9);
-      ctx.bezierCurveTo(cx-side*rx*.3,cy+ry,cx-side*rx*.5,cy+ry*.4,cx,cy-ry);
-      ctx.closePath();
-      ctx.fillStyle='rgba(30,20,10,.6)';ctx.fill();ctx.restore();
-    }
-    // Sparkles when healthy
-    if(health>.8){
-      for(let s=0;s<5;s++){
-        const sa=(s/5)*Math.PI*2+elapsed;
-        const sr2=rx*.5+Math.sin(elapsed+s)*8;
-        ctx.save();ctx.globalAlpha=(health-.8)/.2*(Math.sin(elapsed*2+s)*.5+.5)*.8;
-        ctx.fillStyle='#ffe4f0';ctx.font='10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-        ctx.fillText('✦',cx+Math.cos(sa)*sr2,cy+Math.sin(sa)*sr2*.6);ctx.restore();
-      }
-    }
-  }
+        function drawLung(side, health, elapsed) {
+            // side: -1=left, 1=right
+            const cx = W * .5 + (side < 0 ? -70 : 70), cy = H * .48;
+            const rx = 55, ry = 75;
+            // Tar colour → healthy pink
+            const r = Math.round(lerp(80, 240, health));
+            const g = Math.round(lerp(60, 160, health));
+            const b = Math.round(lerp(60, 150, health));
+            ctx.beginPath();
+            // Lung shape (lobe)
+            ctx.moveTo(cx, cy - ry);
+            ctx.bezierCurveTo(cx + side * rx, cy - ry, cx + side * rx, cy - ry * .3, cx + side * rx * .9, cy);
+            ctx.bezierCurveTo(cx + side * rx, cy + ry * .4, cx + side * rx * .3, cy + ry, cx, cy + ry * .9);
+            ctx.bezierCurveTo(cx - side * rx * .3, cy + ry, cx - side * rx * .5, cy + ry * .4, cx, cy - ry);
+            ctx.closePath();
+            const lg = ctx.createRadialGradient(cx, cy - 10, 0, cx, cy, ry);
+            lg.addColorStop(0, `rgba(${r + 30},${g + 30},${b + 30},.9)`);
+            lg.addColorStop(.7, `rgba(${r},${g},${b},.85)`);
+            lg.addColorStop(1, `rgba(${r - 30},${g - 20},${b - 20},.7)`);
+            ctx.fillStyle = lg;
+            ctx.fill();
+            ctx.strokeStyle = `rgba(${r - 40},${g - 30},${b - 30},.4)`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Bronchi
+            ctx.save();
+            ctx.globalAlpha = .35;
+            ctx.strokeStyle = `rgba(${r - 20},${g - 20},${b - 20},.7)`;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - ry + 8);
+            ctx.lineTo(cx, cy);
+            ctx.bezierCurveTo(cx, cy + 20, cx + side * 25, cy + 30, cx + side * 28, cy + 45);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 10);
+            ctx.bezierCurveTo(cx + side * 10, cy + 10, cx + side * 30, cy + 5, cx + side * 35, cy + 18);
+            ctx.stroke();
+            ctx.restore();
+            // Tar overlay (unhealthy)
+            if (health < .8) {
+                ctx.save();
+                ctx.globalAlpha = (1 - health) * .55;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - ry);
+                ctx.bezierCurveTo(cx + side * rx, cy - ry, cx + side * rx, cy - ry * .3, cx + side * rx * .9, cy);
+                ctx.bezierCurveTo(cx + side * rx, cy + ry * .4, cx + side * rx * .3, cy + ry, cx, cy + ry * .9);
+                ctx.bezierCurveTo(cx - side * rx * .3, cy + ry, cx - side * rx * .5, cy + ry * .4, cx, cy - ry);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(30,20,10,.6)';
+                ctx.fill();
+                ctx.restore();
+            }
+            // Sparkles when healthy
+            if (health > .8) {
+                for (let s = 0; s < 5; s++) {
+                    const sa = (s / 5) * Math.PI * 2 + elapsed;
+                    const sr2 = rx * .5 + Math.sin(elapsed + s) * 8;
+                    ctx.save();
+                    ctx.globalAlpha = (health - .8) / .2 * (Math.sin(elapsed * 2 + s) * .5 + .5) * .8;
+                    ctx.fillStyle = '#ffe4f0';
+                    ctx.font = '10px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('✦', cx + Math.cos(sa) * sr2, cy + Math.sin(sa) * sr2 * .6);
+                    ctx.restore();
+                }
+            }
+        }
 
-  function drawTrachea(health){
-    const tx=W*.5;
-    ctx.save();ctx.globalAlpha=.5;
-    ctx.strokeStyle=`rgba(${Math.round(lerp(120,220,health))},${Math.round(lerp(80,160,health))},${Math.round(lerp(80,160,health))},.8)`;
-    ctx.lineWidth=10;ctx.lineCap='round';
-    ctx.beginPath();ctx.moveTo(tx,H*.2);ctx.lineTo(tx,H*.36);
-    ctx.bezierCurveTo(tx-5,H*.4,tx-35,H*.42,tx-60,H*.44);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(tx,H*.36);
-    ctx.bezierCurveTo(tx+5,H*.4,tx+35,H*.42,tx+60,H*.44);ctx.stroke();
-    ctx.restore();
-  }
+        function drawTrachea(health) {
+            const tx = W * .5;
+            ctx.save();
+            ctx.globalAlpha = .5;
+            ctx.strokeStyle = `rgba(${Math.round(lerp(120, 220, health))},${Math.round(lerp(80, 160, health))},${Math.round(lerp(80, 160, health))},.8)`;
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(tx, H * .2);
+            ctx.lineTo(tx, H * .36);
+            ctx.bezierCurveTo(tx - 5, H * .4, tx - 35, H * .42, tx - 60, H * .44);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(tx, H * .36);
+            ctx.bezierCurveTo(tx + 5, H * .4, tx + 35, H * .42, tx + 60, H * .44);
+            ctx.stroke();
+            ctx.restore();
+        }
 
-  function drawSmoke(alpha,elapsed){
-    if(alpha<=0)return;
-    ctx.save();ctx.globalAlpha=alpha*.5;
-    for(let i=0;i<8;i++){
-      const sx=W*.5+(sr(i)-.5)*80,sy=H*.13+(sr(i+10)*.06)-((elapsed*.3+sr(i)*3)%1)*H*.15;
-      const sr2=Math.min(1,(elapsed*.2+sr(i)*2)%1);
-      ctx.beginPath();ctx.arc(sx,sy,6+sr2*12,0,Math.PI*2);
-      ctx.fillStyle=`rgba(60,50,50,${alpha*.4})`;ctx.fill();
-    }
-    ctx.restore();
-  }
+        function drawSmoke(alpha, elapsed) {
+            if (alpha <= 0) return;
+            ctx.save();
+            ctx.globalAlpha = alpha * .5;
+            for (let i = 0; i < 8; i++) {
+                const sx = W * .5 + (sr(i) - .5) * 80,
+                    sy = H * .13 + (sr(i + 10) * .06) - ((elapsed * .3 + sr(i) * 3) % 1) * H * .15;
+                const sr2 = Math.min(1, (elapsed * .2 + sr(i) * 2) % 1);
+                ctx.beginPath();
+                ctx.arc(sx, sy, 6 + sr2 * 12, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(60,50,50,${alpha * .4})`;
+                ctx.fill();
+            }
+            ctx.restore();
+        }
 
-  function drawTimeline(idx,t){
-    const milestones=['Day 0','24 hrs','1 month','1 year'];
-    const colors=['#c0392b','#e67e22','#f5b942','#27ae60'];
-    ctx.save();ctx.globalAlpha=.7;
-    milestones.forEach((m,i)=>{
-      const x=50+i*130;
-      ctx.beginPath();ctx.arc(x,H-26,7,0,Math.PI*2);
-      ctx.fillStyle=i<=idx?colors[i]:colors[i]+'44';ctx.fill();
-      ctx.fillStyle=i<=idx?colors[i]:'rgba(255,255,255,.3)';
-      ctx.font='600 8px "DM Sans",sans-serif';ctx.textAlign='center';ctx.fillText(m,x,H-12);
-      if(i<milestones.length-1){
-        ctx.beginPath();ctx.moveTo(x+8,H-26);ctx.lineTo(x+122,H-26);
-        ctx.strokeStyle=i<idx?colors[i]+'88':'rgba(255,255,255,.15)';ctx.lineWidth=1.5;ctx.stroke();
-      }
-    });
-    ctx.restore();
-  }
+        function drawTimeline(idx, t) {
+            const milestones = ['Day 0', '24 hrs', '1 month', '1 year'];
+            const colors = ['#c0392b', '#e67e22', '#f5b942', '#27ae60'];
+            ctx.save();
+            ctx.globalAlpha = .7;
+            milestones.forEach((m, i) => {
+                const x = 50 + i * 130;
+                ctx.beginPath();
+                ctx.arc(x, H - 26, 7, 0, Math.PI * 2);
+                ctx.fillStyle = i <= idx ? colors[i] : colors[i] + '44';
+                ctx.fill();
+                ctx.fillStyle = i <= idx ? colors[i] : 'rgba(255,255,255,.3)';
+                ctx.font = '600 8px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(m, x, H - 12);
+                if (i < milestones.length - 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + 8, H - 26);
+                    ctx.lineTo(x + 122, H - 26);
+                    ctx.strokeStyle = i < idx ? colors[i] + '88' : 'rgba(255,255,255,.15)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+            });
+            ctx.restore();
+        }
 
-  function render(now){
-    if(!st)st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
-    if(idx!==lastIdx){lastIdx=idx;setUI('smokingPhase','smokingDots','smoking',LABELS,idx);}
-    ctx.clearRect(0,0,W,H);
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#1e0808');bg.addColorStop(1,'#120404');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#e88080';ctx.font='600 10px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('LUNG HEALTH OVER TIME AFTER QUITTING',W/2,14);ctx.restore();
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
+            if (idx !== lastIdx) {
+                lastIdx = idx;
+                setUI('smokingPhase', 'smokingDots', 'smoking', LABELS, idx);
+            }
+            ctx.clearRect(0, 0, W, H);
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#1e0808');
+            bg.addColorStop(1, '#120404');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.globalAlpha = .12;
+            ctx.fillStyle = '#e88080';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('LUNG HEALTH OVER TIME AFTER QUITTING', W / 2, 14);
+            ctx.restore();
 
-    const health=idx===0?0:idx===1?lerp(0,.3,ease(t)):idx===2?lerp(.3,.65,ease(t)):lerp(.65,1,ease(t));
-    const smokeAlpha=idx===0?1:idx===1?lerp(1,0,ease(t)):0;
+            const health = idx === 0 ? 0 : idx === 1 ? lerp(0, .3, ease(t)) : idx === 2 ? lerp(.3, .65, ease(t)) : lerp(.65, 1, ease(t));
+            const smokeAlpha = idx === 0 ? 1 : idx === 1 ? lerp(1, 0, ease(t)) : 0;
 
-    drawSmoke(smokeAlpha,elapsed);
-    drawTrachea(health);
-    drawLung(-1,health,elapsed);
-    drawLung(1,health,elapsed);
-    drawTimeline(idx,t);
+            drawSmoke(smokeAlpha, elapsed);
+            drawTrachea(health);
+            drawLung(-1, health, elapsed);
+            drawLung(1, health, elapsed);
+            drawTimeline(idx, t);
 
-    // Health score badge
-    const score=Math.round(health*100);
-    ctx.beginPath();ctx.roundRect(W-90,14,78,36,10);
-    ctx.fillStyle=`rgba(${lerp(180,39,health)},${lerp(50,174,health)},${lerp(50,96,health)},.85)`;ctx.fill();
-    ctx.fillStyle='#fff';ctx.font='700 14px "DM Sans",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('Health: '+score+'%',W-51,26);
-    ctx.font='600 8px "DM Sans",sans-serif';
-    ctx.fillText(idx===3?'✓ Recovered!':idx===0?'Seek help':'Improving…',W-51,38);
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            // Health score badge
+            const score = Math.round(health * 100);
+            ctx.beginPath();
+            ctx.roundRect(W - 90, 14, 78, 36, 10);
+            ctx.fillStyle = `rgba(${lerp(180, 39, health)},${lerp(50, 174, health)},${lerp(50, 96, health)},.85)`;
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 14px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Health: ' + score + '%', W - 51, 26);
+            ctx.font = '600 8px "DM Sans",sans-serif';
+            ctx.fillText(idx === 3 ? '✓ Recovered!' : idx === 0 ? 'Seek help' : 'Improving…', W - 51, 38);
+            requestAnimationFrame(render);
+        }
 
-/* ══════════════════════════════════════════════════════════
+        requestAnimationFrame(render);
+    })();
+
+    /* ══════════════════════════════════════════════════════════
    4. WEIGHT — BMI GAUGE + WAIST MEASUREMENT
    Phases: BMI dial animation → Waist measurement → Health trainer → Goal achieved
 ══════════════════════════════════════════════════════════ */
-(function(){
-  const C=document.getElementById('weightCanvas');const ctx=C.getContext('2d');
-  const W=500,H=300;C.width=W;C.height=H;
-  const LABELS=['Understanding BMI','Waist Measurement','Support Available','Healthy Goal Reached'];
-  const getPhase=cycleFn([6,6,7,7]);
-  let st=null,lastIdx=-1;
+    (function () {
+        const C = document.getElementById('weightCanvas');
+        const ctx = C.getContext('2d');
+        const W = 500, H = 300;
+        C.width = W;
+        C.height = H;
+        const LABELS = ['Understanding BMI', 'Waist Measurement', 'Support Available', 'Healthy Goal Reached'];
+        const getPhase = cycleFn([6, 6, 7, 7]);
+        let st = null, lastIdx = -1;
 
-  function drawBMIGauge(bmi,progress){
-    const cx=W*.38,cy=H*.55,r=85;
-    const startA=Math.PI*.75,endA=Math.PI*2.25;
-    const zones=[
-      {min:0,max:18.5,col:'#3498db',label:'Underweight'},
-      {min:18.5,max:25,col:'#27ae60',label:'Healthy'},
-      {min:25,max:30,col:'#f5b942',label:'Overweight'},
-      {min:30,max:40,col:'#e67e22',label:'Obese'},
-      {min:40,max:50,col:'#c0392b',label:'Obese II'},
-    ];
-    const bmiToAngle=b=>{const norm=(b-10)/40;return startA+(endA-startA)*Math.min(1,Math.max(0,norm));};
-    // Track segments
-    zones.forEach(z=>{
-      const a0=bmiToAngle(z.min),a1=bmiToAngle(z.max);
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a0,a1);ctx.closePath();
-      ctx.fillStyle=z.col+'33';ctx.fill();
-      ctx.beginPath();ctx.arc(cx,cy,r-14,a0,a1);
-      ctx.strokeStyle=z.col;ctx.lineWidth=14;ctx.lineCap='butt';ctx.stroke();
-      // Zone label (small)
-      const midA=(a0+a1)/2;
-      ctx.save();ctx.globalAlpha=.7;
-      ctx.fillStyle=z.col;ctx.font='600 7px "DM Sans",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(z.label,cx+Math.cos(midA)*(r-7),cy+Math.sin(midA)*(r-7));
-      ctx.restore();
-    });
-    // Needle
-    const needleA=bmiToAngle(lerp(10,bmi,ease(progress)));
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(needleA);
-    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(r-18,0);
-    ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.lineCap='round';ctx.stroke();
-    ctx.restore();
-    ctx.beginPath();ctx.arc(cx,cy,8,0,Math.PI*2);
-    ctx.fillStyle='#fff';ctx.fill();
-    // BMI value
-    ctx.fillStyle='#fff';ctx.font='700 22px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText(bmi.toFixed(1),cx,cy+28);
-    ctx.fillStyle='rgba(255,255,255,.55)';ctx.font='600 9px "DM Sans",sans-serif';
-    ctx.fillText('BMI',cx,cy+42);
-  }
+        function drawBMIGauge(bmi, progress) {
+            const cx = W * .38, cy = H * .55, r = 85;
+            const startA = Math.PI * .75, endA = Math.PI * 2.25;
+            const zones = [
+                {min: 0, max: 18.5, col: '#3498db', label: 'Underweight'},
+                {min: 18.5, max: 25, col: '#27ae60', label: 'Healthy'},
+                {min: 25, max: 30, col: '#f5b942', label: 'Overweight'},
+                {min: 30, max: 40, col: '#e67e22', label: 'Obese'},
+                {min: 40, max: 50, col: '#c0392b', label: 'Obese II'},
+            ];
+            const bmiToAngle = b => {
+                const norm = (b - 10) / 40;
+                return startA + (endA - startA) * Math.min(1, Math.max(0, norm));
+            };
+            // Track segments
+            zones.forEach(z => {
+                const a0 = bmiToAngle(z.min), a1 = bmiToAngle(z.max);
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, a0, a1);
+                ctx.closePath();
+                ctx.fillStyle = z.col + '33';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx, cy, r - 14, a0, a1);
+                ctx.strokeStyle = z.col;
+                ctx.lineWidth = 14;
+                ctx.lineCap = 'butt';
+                ctx.stroke();
+                // Zone label (small)
+                const midA = (a0 + a1) / 2;
+                ctx.save();
+                ctx.globalAlpha = .7;
+                ctx.fillStyle = z.col;
+                ctx.font = '600 7px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(z.label, cx + Math.cos(midA) * (r - 7), cy + Math.sin(midA) * (r - 7));
+                ctx.restore();
+            });
+            // Needle
+            const needleA = bmiToAngle(lerp(10, bmi, ease(progress)));
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(needleA);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(r - 18, 0);
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            ctx.restore();
+            ctx.beginPath();
+            ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            // BMI value
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 22px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(bmi.toFixed(1), cx, cy + 28);
+            ctx.fillStyle = 'rgba(255,255,255,.55)';
+            ctx.font = '600 9px "DM Sans",sans-serif';
+            ctx.fillText('BMI', cx, cy + 42);
+        }
 
-  function drawWaistMeasure(progress,gender){
-    const cx=W*.55,cy=H*.5;
-    ctx.save();ctx.globalAlpha=ease(progress);
-    // Torso silhouette
-    ctx.beginPath();ctx.ellipse(cx,cy,36,55,0,0,Math.PI*2);
-    ctx.fillStyle='rgba(230,180,140,.7)';ctx.fill();
-    // Measuring tape
-    const tapeY=cy+8;
-    ctx.strokeStyle='#f5b942';ctx.lineWidth=8;ctx.lineCap='round';
-    ctx.beginPath();ctx.arc(cx,tapeY,38,Math.PI*.1,Math.PI*.9,false);ctx.stroke();
-    ctx.strokeStyle='rgba(200,120,20,.6)';ctx.lineWidth=6;ctx.stroke();
-    // Tick marks
-    ctx.save();ctx.globalAlpha=.4;
-    for(let t2=0;t2<8;t2++){
-      const ta=Math.PI*.1+t2*(Math.PI*.8/7);
-      const ix=cx+Math.cos(ta)*38,iy=tapeY+Math.sin(ta)*38;
-      const ox=cx+Math.cos(ta)*44,oy=tapeY+Math.sin(ta)*44;
-      ctx.beginPath();ctx.moveTo(ix,iy);ctx.lineTo(ox,oy);
-      ctx.strokeStyle='#f5b942';ctx.lineWidth=1.5;ctx.stroke();
-    }
-    ctx.restore();
-    // Measurement label
-    const waist=gender==='M'?88:76;
-    ctx.fillStyle='#f5b942';ctx.font='700 11px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText(waist+'cm waist',cx,cy+72);
-    // Target badge
-    const healthy=gender==='M'?'< 94cm':' < 80cm';
-    ctx.beginPath();ctx.roundRect(cx-44,cy+84,88,22,8);
-    ctx.fillStyle='rgba(39,174,96,.8)';ctx.fill();
-    ctx.fillStyle='#fff';ctx.font='700 9px "DM Sans",sans-serif';
-    ctx.fillText('Target '+healthy,cx,cy+99);
-    ctx.restore();
-  }
+        function drawWaistMeasure(progress, gender) {
+            const cx = W * .55, cy = H * .5;
+            ctx.save();
+            ctx.globalAlpha = ease(progress);
+            // Torso silhouette
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, 36, 55, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(230,180,140,.7)';
+            ctx.fill();
+            // Measuring tape
+            const tapeY = cy + 8;
+            ctx.strokeStyle = '#f5b942';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.arc(cx, tapeY, 38, Math.PI * .1, Math.PI * .9, false);
+            ctx.stroke();
+            ctx.strokeStyle = 'rgba(200,120,20,.6)';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+            // Tick marks
+            ctx.save();
+            ctx.globalAlpha = .4;
+            for (let t2 = 0; t2 < 8; t2++) {
+                const ta = Math.PI * .1 + t2 * (Math.PI * .8 / 7);
+                const ix = cx + Math.cos(ta) * 38, iy = tapeY + Math.sin(ta) * 38;
+                const ox = cx + Math.cos(ta) * 44, oy = tapeY + Math.sin(ta) * 44;
+                ctx.beginPath();
+                ctx.moveTo(ix, iy);
+                ctx.lineTo(ox, oy);
+                ctx.strokeStyle = '#f5b942';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+            ctx.restore();
+            // Measurement label
+            const waist = gender === 'M' ? 88 : 76;
+            ctx.fillStyle = '#f5b942';
+            ctx.font = '700 11px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(waist + 'cm waist', cx, cy + 72);
+            // Target badge
+            const healthy = gender === 'M' ? '< 94cm' : ' < 80cm';
+            ctx.beginPath();
+            ctx.roundRect(cx - 44, cy + 84, 88, 22, 8);
+            ctx.fillStyle = 'rgba(39,174,96,.8)';
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = '700 9px "DM Sans",sans-serif';
+            ctx.fillText('Target ' + healthy, cx, cy + 99);
+            ctx.restore();
+        }
 
-  function drawHealthTrainer(progress){
-    ctx.save();ctx.globalAlpha=ease(progress);
-    // Simple figure
-    const fx=W*.25,fy=H*.5;
-    ctx.beginPath();ctx.arc(fx,fy-55,16,0,Math.PI*2);
-    ctx.fillStyle='#5dade2';ctx.fill();
-    ctx.beginPath();ctx.roundRect(fx-14,fy-37,28,38,4);
-    ctx.fillStyle='#2471a3';ctx.fill();
-    // clipboard
-    ctx.beginPath();ctx.roundRect(fx+12,fy-38,22,30,3);
-    ctx.fillStyle='#f5f5f5';ctx.fill();ctx.strokeStyle='#aac';ctx.lineWidth=1;ctx.stroke();
-    [0,1,2].forEach(i=>{
-      ctx.beginPath();ctx.rect(fx+15,fy-33+i*8,16,3);
-      ctx.fillStyle=`rgba(0,94,184,${.15+i*.08})`;ctx.fill();
-    });
-    // Support speech bubble
-    const bubs=['🥗 Diet plan','🏃 Activity goals','📊 Track progress'];
-    bubs.forEach((b,i)=>{
-      const ba=Math.min(1,(progress*4-i*.8));
-      if(ba<=0)return;
-      ctx.save();ctx.globalAlpha=ease(ba);
-      ctx.beginPath();ctx.roundRect(W*.38,H*.2+i*46,W*.28,34,8);
-      ctx.fillStyle='rgba(36,113,163,.12)';ctx.fill();ctx.strokeStyle='rgba(36,113,163,.3)';ctx.lineWidth=1;ctx.stroke();
-      ctx.fillStyle='#2471a3';ctx.font='600 9px "DM Sans",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(b,W*.38+W*.14,H*.2+i*46+17);ctx.restore();
-    });
-    ctx.fillStyle='rgba(36,113,163,.8)';ctx.font='700 9px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('Health Trainer',fx,fy+18);
-    ctx.restore();
-  }
+        function drawHealthTrainer(progress) {
+            ctx.save();
+            ctx.globalAlpha = ease(progress);
+            // Simple figure
+            const fx = W * .25, fy = H * .5;
+            ctx.beginPath();
+            ctx.arc(fx, fy - 55, 16, 0, Math.PI * 2);
+            ctx.fillStyle = '#5dade2';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.roundRect(fx - 14, fy - 37, 28, 38, 4);
+            ctx.fillStyle = '#2471a3';
+            ctx.fill();
+            // clipboard
+            ctx.beginPath();
+            ctx.roundRect(fx + 12, fy - 38, 22, 30, 3);
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fill();
+            ctx.strokeStyle = '#aac';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            [0, 1, 2].forEach(i => {
+                ctx.beginPath();
+                ctx.rect(fx + 15, fy - 33 + i * 8, 16, 3);
+                ctx.fillStyle = `rgba(0,94,184,${.15 + i * .08})`;
+                ctx.fill();
+            });
+            // Support speech bubble
+            const bubs = ['🥗 Diet plan', '🏃 Activity goals', '📊 Track progress'];
+            bubs.forEach((b, i) => {
+                const ba = Math.min(1, (progress * 4 - i * .8));
+                if (ba <= 0) return;
+                ctx.save();
+                ctx.globalAlpha = ease(ba);
+                ctx.beginPath();
+                ctx.roundRect(W * .38, H * .2 + i * 46, W * .28, 34, 8);
+                ctx.fillStyle = 'rgba(36,113,163,.12)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(36,113,163,.3)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.fillStyle = '#2471a3';
+                ctx.font = '600 9px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(b, W * .38 + W * .14, H * .2 + i * 46 + 17);
+                ctx.restore();
+            });
+            ctx.fillStyle = 'rgba(36,113,163,.8)';
+            ctx.font = '700 9px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Health Trainer', fx, fy + 18);
+            ctx.restore();
+        }
 
-  function drawGoalAchieved(progress){
-    ctx.save();ctx.globalAlpha=ease(progress);
-    ctx.fillStyle='#f5b942';ctx.font='700 18px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('🎯 Goal Achieved!',W/2,H*.35);
-    const metrics=[['BMI 23.4','✓ Healthy range'],['Waist 82cm','✓ Below target'],['Energy +40%','✓ Exercising regularly']];
-    metrics.forEach(([m,s],i)=>{
-      const ma=Math.min(1,(progress*4-i*.6));
-      if(ma<=0)return;
-      ctx.save();ctx.globalAlpha=ease(ma);
-      ctx.beginPath();ctx.roundRect(W*.18,H*.44+i*40,W*.64,32,8);
-      ctx.fillStyle='rgba(39,174,96,.15)';ctx.fill();ctx.strokeStyle='rgba(39,174,96,.35)';ctx.lineWidth=1;ctx.stroke();
-      ctx.fillStyle='#27ae60';ctx.font='700 10px "DM Sans",sans-serif';ctx.textAlign='left';
-      ctx.fillText(m,W*.24,H*.44+i*40+14);
-      ctx.textAlign='right';ctx.font='600 9px "DM Sans",sans-serif';
-      ctx.fillText(s,W*.76,H*.44+i*40+14);ctx.restore();
-    });
-    ctx.restore();
-  }
+        function drawGoalAchieved(progress) {
+            ctx.save();
+            ctx.globalAlpha = ease(progress);
+            ctx.fillStyle = '#f5b942';
+            ctx.font = '700 18px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎯 Goal Achieved!', W / 2, H * .35);
+            const metrics = [['BMI 23.4', '✓ Healthy range'], ['Waist 82cm', '✓ Below target'], ['Energy +40%', '✓ Exercising regularly']];
+            metrics.forEach(([m, s], i) => {
+                const ma = Math.min(1, (progress * 4 - i * .6));
+                if (ma <= 0) return;
+                ctx.save();
+                ctx.globalAlpha = ease(ma);
+                ctx.beginPath();
+                ctx.roundRect(W * .18, H * .44 + i * 40, W * .64, 32, 8);
+                ctx.fillStyle = 'rgba(39,174,96,.15)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(39,174,96,.35)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.fillStyle = '#27ae60';
+                ctx.font = '700 10px "DM Sans",sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(m, W * .24, H * .44 + i * 40 + 14);
+                ctx.textAlign = 'right';
+                ctx.font = '600 9px "DM Sans",sans-serif';
+                ctx.fillText(s, W * .76, H * .44 + i * 40 + 14);
+                ctx.restore();
+            });
+            ctx.restore();
+        }
 
-  function render(now){
-    if(!st)st=now;
-    const elapsed=(now-st)/1000;
-    const {idx,t}=getPhase(elapsed);
-    if(idx!==lastIdx){lastIdx=idx;setUI('weightPhase','weightDots','weight',LABELS,idx);}
-    ctx.clearRect(0,0,W,H);
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#1e1005');bg.addColorStop(1,'#150b03');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    ctx.save();ctx.globalAlpha=.12;ctx.fillStyle='#f5b942';ctx.font='600 10px "DM Sans",sans-serif';ctx.textAlign='center';
-    ctx.fillText('BMI & WAIST HEALTH MONITOR',W/2,H-10);ctx.restore();
+        function render(now) {
+            if (!st) st = now;
+            const elapsed = (now - st) / 1000;
+            const {idx, t} = getPhase(elapsed);
+            if (idx !== lastIdx) {
+                lastIdx = idx;
+                setUI('weightPhase', 'weightDots', 'weight', LABELS, idx);
+            }
+            ctx.clearRect(0, 0, W, H);
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#1e1005');
+            bg.addColorStop(1, '#150b03');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+            ctx.save();
+            ctx.globalAlpha = .12;
+            ctx.fillStyle = '#f5b942';
+            ctx.font = '600 10px "DM Sans",sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('BMI & WAIST HEALTH MONITOR', W / 2, H - 10);
+            ctx.restore();
 
-    if(idx===0){
-      const targetBMI=lerp(10,27.5,ease(t));
-      drawBMIGauge(targetBMI,t);
-      ctx.save();ctx.globalAlpha=ease(t)*.8;
-      ctx.fillStyle='rgba(255,255,255,.65)';ctx.font='700 10px "DM Sans",sans-serif';ctx.textAlign='center';
-      ctx.fillText('Healthy: 18.5 – 24.9',W*.38,H*.84);ctx.restore();
-    } else if(idx===1){
-      drawBMIGauge(27.5,.3);
-      drawWaistMeasure(t,'M');
-    } else if(idx===2){
-      drawHealthTrainer(t);
-    } else {
-      drawGoalAchieved(t);
-    }
-    requestAnimationFrame(render);
-  }
-  requestAnimationFrame(render);
-})();
+            if (idx === 0) {
+                const targetBMI = lerp(10, 27.5, ease(t));
+                drawBMIGauge(targetBMI, t);
+                ctx.save();
+                ctx.globalAlpha = ease(t) * .8;
+                ctx.fillStyle = 'rgba(255,255,255,.65)';
+                ctx.font = '700 10px "DM Sans",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Healthy: 18.5 – 24.9', W * .38, H * .84);
+                ctx.restore();
+            } else if (idx === 1) {
+                drawBMIGauge(27.5, .3);
+                drawWaistMeasure(t, 'M');
+            } else if (idx === 2) {
+                drawHealthTrainer(t);
+            } else {
+                drawGoalAchieved(t);
+            }
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+    })();
 </script>
 </body>
 </html>

@@ -1,1196 +1,2625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NHS App – Saluja Clinic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nhs-blue:      #005EB8;
-      --nhs-dark:      #003087;
-      --nhs-aqua:      #009FBB;
-      --nhs-green:     #007F3B;
-      --nhs-yellow:    #FFB81C;
-      --white:         #ffffff;
-      --off-white:     #f5f8fc;
-      --text-dark:     #1a1a2e;
-      --text-mid:      #3a3a5c;
-      --text-soft:     #6b7a99;
-      --border:        #d8e4f0;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>NHS App – Saluja Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-yellow: #FFB81C;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+        }
 
-    /* ── UTILITY BAR ── */
-    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
-    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
-    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .utility-bar a:hover { color: #fff; }
-    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── HEADER ── */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
-    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
-    .logo-wrap svg { height: 84px; width: auto; }
-    nav { display: flex; align-items: center; gap: 0.25rem; }
-    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
-    nav a.active { color: var(--nhs-blue); font-weight: 600; }
-    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
-    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── BREADCRUMB ── */
-    .breadcrumb { background: var(--off-white); border-bottom: 1px solid var(--border); padding: 0.75rem 2rem; }
-    .breadcrumb .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-soft); }
-    .breadcrumb a { color: var(--nhs-blue); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb .sep { opacity: 0.4; }
-    .breadcrumb .current { color: var(--text-mid); font-weight: 500; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    /* ── HERO ── */
-    .page-hero {
-      background: linear-gradient(135deg, var(--nhs-dark) 0%, #004a9f 50%, var(--nhs-blue) 100%);
-      padding: 5rem 2rem 5rem; position: relative; overflow: hidden;
-    }
-    /* Animated mesh background */
-    .hero-mesh { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .mesh-dot { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); animation: meshFloat ease-in-out infinite; }
-    @keyframes meshFloat {
-      0%,100% { transform: translateY(0) scale(1); opacity: 0.06; }
-      50% { transform: translateY(-30px) scale(1.12); opacity: 0.12; }
-    }
-    .hero-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+        /* ── UTILITY BAR ── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            padding: 0.45rem 0;
+        }
 
-    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
-    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1.2rem; }
-    .hero-tag .pulse-dot { width: 6px; height: 6px; background: #41B6E6; border-radius: 50%; animation: pulse-light 2s infinite; }
-    @keyframes pulse-light { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
-    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 4vw, 4rem); font-weight: 600; line-height: 1.1; color: #fff; margin-bottom: 1.2rem; }
-    .page-hero h1 em { font-style: italic; color: #41B6E6; }
-    .hero-lead { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.78); max-width: 480px; margin-bottom: 2.2rem; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-hero-primary { background: #fff; color: var(--nhs-dark); padding: 0.9rem 1.9rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.3); }
-    .btn-hero-outline { border: 2px solid rgba(255,255,255,0.4); color: #fff; padding: 0.85rem 1.7rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-hero-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
 
-    /* ── PHONE MOCKUP ── */
-    .phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
-    .phone-glow { position: absolute; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(65,182,230,0.35) 0%, transparent 70%); animation: glowPulse 3s ease-in-out infinite; }
-    @keyframes glowPulse { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.15);opacity:1} }
-    .phone-svg { width: 240px; height: auto; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5)); position: relative; z-index: 2; animation: phoneBob 4s ease-in-out infinite; }
-    @keyframes phoneBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        .utility-bar a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
 
-    /* Floating feature chips around the phone */
-    .chip { position: absolute; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.22); border-radius: 30px; padding: 0.4rem 0.85rem; font-size: 0.75rem; font-weight: 600; color: #fff; white-space: nowrap; z-index: 3; }
-    .chip-1 { top: 10%; right: 0; animation: chipFloat 5s ease-in-out infinite; }
-    .chip-2 { top: 38%; left: -10px; animation: chipFloat 5.5s ease-in-out infinite 0.8s; }
-    .chip-3 { bottom: 28%; right: -5px; animation: chipFloat 4.8s ease-in-out infinite 1.5s; }
-    .chip-4 { bottom: 10%; left: 5%; animation: chipFloat 5.2s ease-in-out infinite 0.4s; }
-    @keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .utility-bar a:hover {
+            color: #fff;
+        }
 
-    /* ── SCROLLING MARQUEE ── */
-    .marquee-section { background: var(--nhs-blue); padding: 0.9rem 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .marquee-track { display: flex; gap: 0; animation: marqueeScroll 28s linear infinite; width: max-content; }
-    .marquee-track:hover { animation-play-state: paused; }
-    .marquee-item { display: flex; align-items: center; gap: 0.6rem; padding: 0 2.5rem; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; }
-    .marquee-item::after { content: '·'; margin-left: 2.5rem; color: rgba(255,255,255,0.35); }
-    .marquee-icon { width: 18px; height: 18px; stroke: #41B6E6; fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
-    @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        .util-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+        }
 
-    /* ── SECTION COMMONS ── */
-    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-    section { padding: 5rem 2rem; }
-    .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px; padding: 0.3rem 0.9rem; margin-bottom: 1rem; }
-    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.7rem); font-weight: 600; line-height: 1.18; color: var(--text-dark); margin-bottom: 1rem; }
-    h2 em { font-style: italic; color: var(--nhs-blue); }
+        /* ── HEADER ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, 0.10);
+        }
 
-    /* ── SCROLL ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-left.visible { opacity: 1; transform: translateX(0); }
-    .fade-right { opacity: 0; transform: translateX(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-right.visible { opacity: 1; transform: translateX(0); }
-    .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .scale-in.visible { opacity: 1; transform: scale(1); }
-    .stagger-1 { transition-delay: 0.05s; }
-    .stagger-2 { transition-delay: 0.12s; }
-    .stagger-3 { transition-delay: 0.19s; }
-    .stagger-4 { transition-delay: 0.26s; }
-    .stagger-5 { transition-delay: 0.33s; }
-    .stagger-6 { transition-delay: 0.40s; }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
 
-    /* ── STATS BAND ── */
-    .stats-band { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3.5rem 2rem; }
-    .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-    .stat-item { text-align: center; }
-    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--nhs-blue); line-height: 1; margin-bottom: 0.3rem; display: block; }
-    .stat-label { font-size: 0.84rem; color: var(--text-soft); line-height: 1.5; }
+        .logo-wrap svg {
+            height: 84px;
+            width: auto;
+        }
 
-    /* ── FEATURES GRID ── */
-    .features-section { background: var(--white); }
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem 1.8rem; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: default; }
-    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,94,184,0.12); }
-    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .fc-blue::before  { background: var(--nhs-blue); }
-    .fc-aqua::before  { background: var(--nhs-aqua); }
-    .fc-green::before { background: var(--nhs-green); }
-    .fc-dark::before  { background: var(--nhs-dark); }
-    .fc-yellow::before { background: var(--nhs-yellow); }
-    .fc-teal::before  { background: #00838F; }
-    /* Hover shimmer */
-    .feature-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 40%, rgba(0,94,184,0.03) 100%); opacity: 0; transition: opacity 0.3s; }
-    .feature-card:hover::after { opacity: 1; }
-    .feat-icon { width: 54px; height: 54px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
-    .fi-blue   { background: rgba(0,94,184,0.09); }
-    .fi-aqua   { background: rgba(0,159,187,0.09); }
-    .fi-green  { background: rgba(0,127,59,0.09); }
-    .fi-dark   { background: rgba(0,48,135,0.09); }
-    .fi-yellow { background: rgba(255,184,28,0.12); }
-    .fi-teal   { background: rgba(0,131,143,0.09); }
-    .feat-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .fi-blue svg   { stroke: var(--nhs-blue); }
-    .fi-aqua svg   { stroke: var(--nhs-aqua); }
-    .fi-green svg  { stroke: var(--nhs-green); }
-    .fi-dark svg   { stroke: var(--nhs-dark); }
-    .fi-yellow svg { stroke: #c48a00; }
-    .fi-teal svg   { stroke: #00838F; }
-    .feat-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; }
-    .feat-desc { font-size: 0.88rem; line-height: 1.7; color: var(--text-mid); }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
 
-    /* ── PHONE SCREENS SHOWCASE ── */
-    .showcase-section { background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%); border-top: 1px solid var(--border); }
-    .showcase-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .showcase-phone-wrap { position: relative; display: flex; justify-content: center; }
-    .screen-container { position: relative; width: 220px; margin: 0 auto; }
-    /* Orbiting dots */
-    .orbit-ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(0,94,184,0.2); top: 50%; left: 50%; transform: translate(-50%, -50%); }
-    .orbit-ring-1 { width: 290px; height: 290px; animation: orbitSpin 18s linear infinite; }
-    .orbit-ring-2 { width: 360px; height: 360px; animation: orbitSpin 26s linear infinite reverse; }
-    @keyframes orbitSpin { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
-    .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; }
-    /* Scrolling feature list */
-    .feature-scroll-list { display: flex; flex-direction: column; gap: 1.1rem; }
-    .fsl-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.4rem; background: var(--white); border: 1px solid var(--border); border-radius: 16px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; cursor: default; }
-    .fsl-item:hover { transform: translateX(6px); box-shadow: 0 8px 28px rgba(0,94,184,0.1); border-color: rgba(0,94,184,0.3); }
-    .fsl-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .fsl-icon svg { width: 18px; height: 18px; fill: none; stroke-width: 2; stroke-linecap: round; }
-    .fsl-text strong { font-size: 0.92rem; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 0.2rem; }
-    .fsl-text span { font-size: 0.82rem; color: var(--text-soft); line-height: 1.5; }
+        nav a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    /* ── HOW TO GET STARTED ── */
-    .steps-section { background: var(--white); }
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
-    .steps-grid::before { content: ''; position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua), var(--nhs-green)); z-index: 0; }
-    .step-item { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
-    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 2px solid var(--nhs-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--nhs-blue); position: relative; transition: background 0.3s, color 0.3s; }
-    .step-item:hover .step-num { background: var(--nhs-blue); color: #fff; }
-    .step-num.green { border-color: var(--nhs-green); color: var(--nhs-green); }
-    .step-item:hover .step-num.green { background: var(--nhs-green); color: #fff; }
-    .step-num.aqua { border-color: var(--nhs-aqua); color: var(--nhs-aqua); }
-    .step-item:hover .step-num.aqua { background: var(--nhs-aqua); color: #fff; }
-    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
-    .step-desc { font-size: 0.84rem; line-height: 1.65; color: var(--text-mid); }
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue);
+        }
 
-    /* ── DOWNLOAD SECTION ── */
-    .download-section { background: linear-gradient(135deg, var(--nhs-dark) 0%, #004a9f 60%, var(--nhs-blue) 100%); padding: 5rem 2rem; position: relative; overflow: hidden; }
-    .download-section::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 50px 50px; }
-    .download-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
-    .download-text h2 { color: #fff; margin-bottom: 1rem; }
-    .download-text h2 em { color: #41B6E6; }
-    .download-text p { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.75; margin-bottom: 2rem; }
-    .store-badges { display: flex; flex-direction: column; gap: 0.9rem; }
-    .store-badge { display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.22); border-radius: 14px; padding: 0.9rem 1.4rem; text-decoration: none; color: #fff; transition: background 0.2s, transform 0.15s; max-width: 240px; }
-    .store-badge:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
-    .store-badge-icon { flex-shrink: 0; }
-    .store-badge-text .badge-sub { font-size: 0.68rem; color: rgba(255,255,255,0.65); letter-spacing: 0.04em; text-transform: uppercase; }
-    .store-badge-text .badge-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
+        nav a.active {
+            color: var(--nhs-blue);
+            font-weight: 600;
+        }
 
-    /* Download visual: animated QR-style graphic */
-    .download-visual { display: flex; justify-content: center; align-items: center; }
-    .qr-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 24px; padding: 2rem; text-align: center; max-width: 280px; width: 100%; }
-    .qr-card p { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 1rem; line-height: 1.5; }
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s !important;
+        }
 
-    /* ── TRUST SECTION ── */
-    .trust-section { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .trust-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; padding: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; }
-    .trust-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-    .trust-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 2; stroke-linecap: round; }
-    .trust-title { font-size: 1rem; font-weight: 600; color: var(--text-dark); }
-    .trust-desc { font-size: 0.86rem; line-height: 1.65; color: var(--text-mid); }
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px);
+        }
 
-    /* ── EXISTING USERS CALLOUT ── */
-    .existing-section { background: var(--white); }
-    .existing-card { background: var(--off-white); border: 1px solid var(--border); border-left: 4px solid var(--nhs-aqua); border-radius: 0 18px 18px 0; padding: 1.8rem 2rem; display: flex; gap: 1.5rem; align-items: flex-start; max-width: 760px; }
-    .existing-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(0,159,187,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .existing-icon svg { width: 22px; height: 22px; stroke: var(--nhs-aqua); fill: none; stroke-width: 2; }
-    .existing-text h4 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.4rem; }
-    .existing-text p { font-size: 0.88rem; line-height: 1.65; color: var(--text-mid); }
+        /* ── BREADCRUMB ── */
+        .breadcrumb {
+            background: var(--off-white);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+        }
 
-    /* ── EMERGENCY BAND ── */
-    .emergency { background: var(--nhs-dark); padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
-    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .emerg-card { border-radius: 16px; padding: 1.8rem 2rem; }
-    .emerg-card.nhs111 { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); }
-    .emerg-card.urgent { background: rgba(218,41,28,0.2); border: 1px solid rgba(218,41,28,0.35); }
-    .emerg-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
-    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
-    .emerg-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+        .breadcrumb .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--text-soft);
+        }
 
-    /* ── FOOTER ── */
-    footer { background: var(--text-dark); padding: 3.5rem 2rem 0; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0.8rem 0 1.2rem; }
-    .footer-address { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.9; }
-    .footer-address a { color: rgba(255,255,255,0.75); text-decoration: none; }
-    .footer-heading { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1rem; }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 0.55rem; }
-    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
-    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
-    .hour-row { display: flex; justify-content: space-between; font-size: 0.84rem; color: rgba(255,255,255,0.65); }
-    .hour-day { color: rgba(255,255,255,0.5); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.4rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+        .breadcrumb a {
+            color: var(--nhs-blue);
+            text-decoration: none;
+        }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-inner, .showcase-layout, .download-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .features-grid, .steps-grid { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .steps-grid::before { display: none; }
-      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .emergency-inner { grid-template-columns: 1fr; }
-      .phone-wrap, .showcase-phone-wrap { display: none; }
-    }
-    @media (max-width: 600px) {
-      .features-grid, .steps-grid, .stats-grid { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb .sep {
+            opacity: 0.4;
+        }
+
+        .breadcrumb .current {
+            color: var(--text-mid);
+            font-weight: 500;
+        }
+
+        /* ── HERO ── */
+        .page-hero {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, #004a9f 50%, var(--nhs-blue) 100%);
+            padding: 5rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated mesh background */
+        .hero-mesh {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .mesh-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            animation: meshFloat ease-in-out infinite;
+        }
+
+        @keyframes meshFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.06;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.12);
+                opacity: 0.12;
+            }
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-tag .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: #41B6E6;
+            border-radius: 50%;
+            animation: pulse-light 2s infinite;
+        }
+
+        @keyframes pulse-light {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7)
+            }
+        }
+
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 4vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: #fff;
+            margin-bottom: 1.2rem;
+        }
+
+        .page-hero h1 em {
+            font-style: italic;
+            color: #41B6E6;
+        }
+
+        .hero-lead {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.78);
+            max-width: 480px;
+            margin-bottom: 2.2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero-primary {
+            background: #fff;
+            color: var(--nhs-dark);
+            padding: 0.9rem 1.9rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-hero-outline {
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            padding: 0.85rem 1.7rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-hero-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* ── PHONE MOCKUP ── */
+        .phone-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-glow {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(65, 182, 230, 0.35) 0%, transparent 70%);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 1
+            }
+        }
+
+        .phone-svg {
+            width: 240px;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+            position: relative;
+            z-index: 2;
+            animation: phoneBob 4s ease-in-out infinite;
+        }
+
+        @keyframes phoneBob {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        /* Floating feature chips around the phone */
+        .chip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 30px;
+            padding: 0.4rem 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            z-index: 3;
+        }
+
+        .chip-1 {
+            top: 10%;
+            right: 0;
+            animation: chipFloat 5s ease-in-out infinite;
+        }
+
+        .chip-2 {
+            top: 38%;
+            left: -10px;
+            animation: chipFloat 5.5s ease-in-out infinite 0.8s;
+        }
+
+        .chip-3 {
+            bottom: 28%;
+            right: -5px;
+            animation: chipFloat 4.8s ease-in-out infinite 1.5s;
+        }
+
+        .chip-4 {
+            bottom: 10%;
+            left: 5%;
+            animation: chipFloat 5.2s ease-in-out infinite 0.4s;
+        }
+
+        @keyframes chipFloat {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        /* ── SCROLLING MARQUEE ── */
+        .marquee-section {
+            background: var(--nhs-blue);
+            padding: 0.9rem 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 0;
+            animation: marqueeScroll 28s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0 2.5rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+        }
+
+        .marquee-item::after {
+            content: '·';
+            margin-left: 2.5rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .marquee-icon {
+            width: 18px;
+            height: 18px;
+            stroke: #41B6E6;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            flex-shrink: 0;
+        }
+
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0)
+            }
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* ── SECTION COMMONS ── */
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.07);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3vw, 2.7rem);
+            font-weight: 600;
+            line-height: 1.18;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        h2 em {
+            font-style: italic;
+            color: var(--nhs-blue);
+        }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-left {
+            opacity: 0;
+            transform: translateX(-32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-right {
+            opacity: 0;
+            transform: translateX(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 {
+            transition-delay: 0.05s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.12s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.19s;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.26s;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.33s;
+        }
+
+        .stagger-6 {
+            transition-delay: 0.40s;
+        }
+
+        /* ── STATS BAND ── */
+        .stats-band {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3.5rem 2rem;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.84rem;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+
+        /* ── FEATURES GRID ── */
+        .features-section {
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem 1.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 94, 184, 0.12);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .fc-blue::before {
+            background: var(--nhs-blue);
+        }
+
+        .fc-aqua::before {
+            background: var(--nhs-aqua);
+        }
+
+        .fc-green::before {
+            background: var(--nhs-green);
+        }
+
+        .fc-dark::before {
+            background: var(--nhs-dark);
+        }
+
+        .fc-yellow::before {
+            background: var(--nhs-yellow);
+        }
+
+        .fc-teal::before {
+            background: #00838F;
+        }
+
+        /* Hover shimmer */
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(0, 94, 184, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .feat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .fi-blue {
+            background: rgba(0, 94, 184, 0.09);
+        }
+
+        .fi-aqua {
+            background: rgba(0, 159, 187, 0.09);
+        }
+
+        .fi-green {
+            background: rgba(0, 127, 59, 0.09);
+        }
+
+        .fi-dark {
+            background: rgba(0, 48, 135, 0.09);
+        }
+
+        .fi-yellow {
+            background: rgba(255, 184, 28, 0.12);
+        }
+
+        .fi-teal {
+            background: rgba(0, 131, 143, 0.09);
+        }
+
+        .feat-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .fi-blue svg {
+            stroke: var(--nhs-blue);
+        }
+
+        .fi-aqua svg {
+            stroke: var(--nhs-aqua);
+        }
+
+        .fi-green svg {
+            stroke: var(--nhs-green);
+        }
+
+        .fi-dark svg {
+            stroke: var(--nhs-dark);
+        }
+
+        .fi-yellow svg {
+            stroke: #c48a00;
+        }
+
+        .fi-teal svg {
+            stroke: #00838F;
+        }
+
+        .feat-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .feat-desc {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+        }
+
+        /* ── PHONE SCREENS SHOWCASE ── */
+        .showcase-section {
+            background: linear-gradient(180deg, var(--off-white) 0%, var(--white) 100%);
+            border-top: 1px solid var(--border);
+        }
+
+        .showcase-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .showcase-phone-wrap {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .screen-container {
+            position: relative;
+            width: 220px;
+            margin: 0 auto;
+        }
+
+        /* Orbiting dots */
+        .orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 94, 184, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-ring-1 {
+            width: 290px;
+            height: 290px;
+            animation: orbitSpin 18s linear infinite;
+        }
+
+        .orbit-ring-2 {
+            width: 360px;
+            height: 360px;
+            animation: orbitSpin 26s linear infinite reverse;
+        }
+
+        @keyframes orbitSpin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg)
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg)
+            }
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Scrolling feature list */
+        .feature-scroll-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .fsl-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem 1.4rem;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            cursor: default;
+        }
+
+        .fsl-item:hover {
+            transform: translateX(6px);
+            box-shadow: 0 8px 28px rgba(0, 94, 184, 0.1);
+            border-color: rgba(0, 94, 184, 0.3);
+        }
+
+        .fsl-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .fsl-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .fsl-text strong {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .fsl-text span {
+            font-size: 0.82rem;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+
+        /* ── HOW TO GET STARTED ── */
+        .steps-section {
+            background: var(--white);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua), var(--nhs-green));
+            z-index: 0;
+        }
+
+        .step-item {
+            text-align: center;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--nhs-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            position: relative;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .step-item:hover .step-num {
+            background: var(--nhs-blue);
+            color: #fff;
+        }
+
+        .step-num.green {
+            border-color: var(--nhs-green);
+            color: var(--nhs-green);
+        }
+
+        .step-item:hover .step-num.green {
+            background: var(--nhs-green);
+            color: #fff;
+        }
+
+        .step-num.aqua {
+            border-color: var(--nhs-aqua);
+            color: var(--nhs-aqua);
+        }
+
+        .step-item:hover .step-num.aqua {
+            background: var(--nhs-aqua);
+            color: #fff;
+        }
+
+        .step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.84rem;
+            line-height: 1.65;
+            color: var(--text-mid);
+        }
+
+        /* ── DOWNLOAD SECTION ── */
+        .download-section {
+            background: linear-gradient(135deg, var(--nhs-dark) 0%, #004a9f 60%, var(--nhs-blue) 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .download-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-text h2 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .download-text h2 em {
+            color: #41B6E6;
+        }
+
+        .download-text p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .store-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .store-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            border-radius: 14px;
+            padding: 0.9rem 1.4rem;
+            text-decoration: none;
+            color: #fff;
+            transition: background 0.2s, transform 0.15s;
+            max-width: 240px;
+        }
+
+        .store-badge:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .store-badge-icon {
+            flex-shrink: 0;
+        }
+
+        .store-badge-text .badge-sub {
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .store-badge-text .badge-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Download visual: animated QR-style graphic */
+        .download-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .qr-card p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        /* ── TRUST SECTION ── */
+        .trust-section {
+            background: var(--off-white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .trust-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .trust-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trust-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .trust-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .trust-desc {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            color: var(--text-mid);
+        }
+
+        /* ── EXISTING USERS CALLOUT ── */
+        .existing-section {
+            background: var(--white);
+        }
+
+        .existing-card {
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--nhs-aqua);
+            border-radius: 0 18px 18px 0;
+            padding: 1.8rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            max-width: 760px;
+        }
+
+        .existing-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(0, 159, 187, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .existing-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--nhs-aqua);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .existing-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .existing-text p {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--text-mid);
+        }
+
+        /* ── EMERGENCY BAND ── */
+        .emergency {
+            background: var(--nhs-dark);
+            padding: 2.5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+        }
+
+        .emerg-card.nhs111 {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .emerg-card.urgent {
+            background: rgba(218, 41, 28, 0.2);
+            border: 1px solid rgba(218, 41, 28, 0.35);
+        }
+
+        .emerg-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.4rem;
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        .emerg-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.6;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--text-dark);
+            padding: 3.5rem 2rem 0;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin: 0.8rem 0 1.2rem;
+        }
+
+        .footer-address {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.9;
+        }
+
+        .footer-address a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+
+        .footer-heading {
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.55rem;
+        }
+
+        .footer-links a {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .hours-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.84rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .hour-day {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.4rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .hero-inner, .showcase-layout, .download-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .features-grid, .steps-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .emergency-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .phone-wrap, .showcase-phone-wrap {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .features-grid, .steps-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div>🏥 NHS GP Practice · Southall, West London · Serving our community since 1976</div>
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <a href="tel:02085745136" class="util-pill">📞 0208 574 5136</a>
-      <a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment →</a>
+    <div class="inner">
+        <div>🏥 NHS GP Practice · Southall, West London · Serving our community since 1976</div>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <a href="tel:02085745136" class="util-pill">📞 0208 574 5136</a>
+            <a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment →</a>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="84" style="width:auto">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
-            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
-            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
-            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
-            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
-            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
-            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
-            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
-          </filter>
-          <filter id="textSheen">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="news.html">News</a>
-      <a href="clinics-and-services.html">Services</a>
-      <a href="practice-policies-patient-information.html">Our Practice</a>
-      <a href="health-information.html">Health Info</a>
-      <a href="contact-us.html">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="84" style="width:auto">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment</a>
+        </nav>
+    </div>
 </header>
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <div class="inner">
-    <a href="/">Home</a>
-    <span class="sep">›</span>
-    <span class="current">NHS App</span>
-  </div>
+    <div class="inner">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <span class="current">NHS App</span>
+    </div>
 </div>
 
 <!-- PAGE HERO -->
 <section class="page-hero">
-  <div class="hero-mesh">
-    <div class="mesh-dot" style="width:180px;height:180px;top:10%;left:5%;animation-duration:7s;animation-delay:0s;"></div>
-    <div class="mesh-dot" style="width:120px;height:120px;top:60%;left:15%;animation-duration:9s;animation-delay:1.5s;"></div>
-    <div class="mesh-dot" style="width:240px;height:240px;top:-5%;right:20%;animation-duration:11s;animation-delay:0.5s;"></div>
-    <div class="mesh-dot" style="width:90px;height:90px;bottom:10%;right:5%;animation-duration:8s;animation-delay:2s;"></div>
-  </div>
-  <div class="hero-grid-lines"></div>
-
-  <div class="hero-inner">
-    <!-- Left text -->
-    <div>
-      <div class="hero-tag"><span class="pulse-dot"></span>Digital Health · NHS England</div>
-      <h1>Your NHS,<br>in your<br><em>pocket</em></h1>
-      <p class="hero-lead">The NHS App is the official, secure way to manage your healthcare from your smartphone. As a registered patient at Saluja Clinic, you can use it right now — free, 24 hours a day.</p>
-      <div class="hero-actions">
-        <a href="https://apps.apple.com/us/app/nhs-app/id1388411277" target="_blank" class="btn-hero-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
-          Download the App
-        </a>
-        <a href="#features" class="btn-hero-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          See What It Does
-        </a>
-      </div>
+    <div class="hero-mesh">
+        <div class="mesh-dot"
+             style="width:180px;height:180px;top:10%;left:5%;animation-duration:7s;animation-delay:0s;"></div>
+        <div class="mesh-dot"
+             style="width:120px;height:120px;top:60%;left:15%;animation-duration:9s;animation-delay:1.5s;"></div>
+        <div class="mesh-dot"
+             style="width:240px;height:240px;top:-5%;right:20%;animation-duration:11s;animation-delay:0.5s;"></div>
+        <div class="mesh-dot"
+             style="width:90px;height:90px;bottom:10%;right:5%;animation-duration:8s;animation-delay:2s;"></div>
     </div>
+    <div class="hero-grid-lines"></div>
 
-    <!-- Right: phone mockup -->
-    <div class="phone-wrap">
-      <!-- Floating feature chips -->
-      <span class="chip chip-1">📋 View Health Records</span>
-      <span class="chip chip-2">💊 Order Prescriptions</span>
-      <span class="chip chip-3">📅 Manage Appointments</span>
-      <span class="chip chip-4">🔒 NHS Secure Login</span>
+    <div class="hero-inner">
+        <!-- Left text -->
+        <div>
+            <div class="hero-tag"><span class="pulse-dot"></span>Digital Health · NHS England</div>
+            <h1>Your NHS,<br>in your<br><em>pocket</em></h1>
+            <p class="hero-lead">The NHS App is the official, secure way to manage your healthcare from your smartphone.
+                As a registered patient at Saluja Clinic, you can use it right now — free, 24 hours a day.</p>
+            <div class="hero-actions">
+                <a href="https://apps.apple.com/us/app/nhs-app/id1388411277" target="_blank" class="btn-hero-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.5">
+                        <rect x="5" y="2" width="14" height="20" rx="2"/>
+                        <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/>
+                    </svg>
+                    Download the App
+                </a>
+                <a href="#features" class="btn-hero-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                    See What It Does
+                </a>
+            </div>
+        </div>
 
-      <div class="phone-glow"></div>
+        <!-- Right: phone mockup -->
+        <div class="phone-wrap">
+            <!-- Floating feature chips -->
+            <span class="chip chip-1">📋 View Health Records</span>
+            <span class="chip chip-2">💊 Order Prescriptions</span>
+            <span class="chip chip-3">📅 Manage Appointments</span>
+            <span class="chip chip-4">🔒 NHS Secure Login</span>
 
-      <!-- Phone SVG with animated screen content -->
-      <svg class="phone-svg" viewBox="0 0 220 440" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="phoneBody" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1a1a2e"/>
-            <stop offset="100%" stop-color="#0d0d1a"/>
-          </linearGradient>
-          <linearGradient id="screenBg" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#f5f8fc"/>
-            <stop offset="100%" stop-color="#eef3fb"/>
-          </linearGradient>
-          <linearGradient id="nhsHeader" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#003087"/>
-            <stop offset="100%" stop-color="#005EB8"/>
-          </linearGradient>
-          <clipPath id="screenClip">
-            <rect x="14" y="52" width="192" height="360" rx="4"/>
-          </clipPath>
-        </defs>
+            <div class="phone-glow"></div>
 
-        <!-- Phone body -->
-        <rect x="2" y="2" width="216" height="436" rx="28" fill="url(#phoneBody)"/>
-        <rect x="2" y="2" width="216" height="436" rx="28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-        <!-- Side buttons -->
-        <rect x="-2" y="100" width="4" height="30" rx="2" fill="#2a2a3e"/>
-        <rect x="-2" y="140" width="4" height="50" rx="2" fill="#2a2a3e"/>
-        <rect x="218" y="120" width="4" height="60" rx="2" fill="#2a2a3e"/>
-        <!-- Camera notch -->
-        <rect x="78" y="10" width="64" height="16" rx="8" fill="#0d0d1a"/>
-        <circle cx="110" cy="18" r="4" fill="#111"/>
-        <circle cx="110" cy="18" r="1.5" fill="#1a3a5c"/>
+            <!-- Phone SVG with animated screen content -->
+            <svg class="phone-svg" viewBox="0 0 220 440" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="phoneBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#1a1a2e"/>
+                        <stop offset="100%" stop-color="#0d0d1a"/>
+                    </linearGradient>
+                    <linearGradient id="screenBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#f5f8fc"/>
+                        <stop offset="100%" stop-color="#eef3fb"/>
+                    </linearGradient>
+                    <linearGradient id="nhsHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#003087"/>
+                        <stop offset="100%" stop-color="#005EB8"/>
+                    </linearGradient>
+                    <clipPath id="screenClip">
+                        <rect x="14" y="52" width="192" height="360" rx="4"/>
+                    </clipPath>
+                </defs>
 
-        <!-- Screen background -->
-        <rect x="14" y="44" width="192" height="376" rx="10" fill="url(#screenBg)" clip-path="url(#screenClip)"/>
+                <!-- Phone body -->
+                <rect x="2" y="2" width="216" height="436" rx="28" fill="url(#phoneBody)"/>
+                <rect x="2" y="2" width="216" height="436" rx="28" fill="none" stroke="rgba(255,255,255,0.08)"
+                      stroke-width="1"/>
+                <!-- Side buttons -->
+                <rect x="-2" y="100" width="4" height="30" rx="2" fill="#2a2a3e"/>
+                <rect x="-2" y="140" width="4" height="50" rx="2" fill="#2a2a3e"/>
+                <rect x="218" y="120" width="4" height="60" rx="2" fill="#2a2a3e"/>
+                <!-- Camera notch -->
+                <rect x="78" y="10" width="64" height="16" rx="8" fill="#0d0d1a"/>
+                <circle cx="110" cy="18" r="4" fill="#111"/>
+                <circle cx="110" cy="18" r="1.5" fill="#1a3a5c"/>
 
-        <!-- NHS App Header -->
-        <rect x="14" y="44" width="192" height="56" rx="0" fill="url(#nhsHeader)" clip-path="url(#screenClip)"/>
-        <!-- NHS logo text in header -->
-        <text x="30" y="63" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="white" letter-spacing="1">NHS App</text>
-        <!-- Hamburger -->
-        <line x1="172" y1="59" x2="186" y2="59" stroke="white" stroke-width="1.5" opacity="0.8"/>
-        <line x1="172" y1="64" x2="186" y2="64" stroke="white" stroke-width="1.5" opacity="0.8"/>
-        <line x1="172" y1="69" x2="186" y2="69" stroke="white" stroke-width="1.5" opacity="0.8"/>
-        <!-- User avatar placeholder -->
-        <circle cx="40" cy="85" r="12" fill="rgba(255,255,255,0.15)"/>
-        <circle cx="40" cy="82" r="4.5" fill="rgba(255,255,255,0.6)"/>
-        <path d="M31,95 Q40,90 49,95" fill="rgba(255,255,255,0.5)" stroke="none"/>
-        <text x="58" y="82" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="white">Good morning</text>
-        <text x="58" y="94" font-family="Cormorant Garamond,serif" font-size="11" font-weight="600" fill="white" opacity="0.9">Your Health Dashboard</text>
+                <!-- Screen background -->
+                <rect x="14" y="44" width="192" height="376" rx="10" fill="url(#screenBg)"
+                      clip-path="url(#screenClip)"/>
 
-        <!-- Screen cards — animated screen cycle -->
-        <g clip-path="url(#screenClip)">
-          <!-- Card 1: Appointments -->
-          <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8">
-            <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="22" y="110" width="4" height="60" rx="2" fill="#005EB8">
-            <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99" letter-spacing="0.5">UPCOMING APPOINTMENT</text>
-          <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#1a1a2e">GP Consultation</text>
-          <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">Saluja Clinic · Southall</text>
-          <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#005EB8" font-weight="600">View details →</text>
-          <g transform="translate(168, 125)">
-            <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-            <rect x="-12" y="-12" width="24" height="24" rx="6" fill="rgba(0,94,184,0.1)"/>
-            <rect x="-5" y="-6" width="10" height="12" rx="1" fill="none" stroke="#005EB8" stroke-width="1.4"/>
-            <line x1="-2" y1="-8" x2="-2" y2="-6" stroke="#005EB8" stroke-width="1.4"/>
-            <line x1="2" y1="-8" x2="2" y2="-6" stroke="#005EB8" stroke-width="1.4"/>
-            <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#005EB8" stroke-width="1"/>
-            <line x1="-3" y1="1" x2="1" y2="1" stroke="#005EB8" stroke-width="1"/>
-          </g>
+                <!-- NHS App Header -->
+                <rect x="14" y="44" width="192" height="56" rx="0" fill="url(#nhsHeader)" clip-path="url(#screenClip)"/>
+                <!-- NHS logo text in header -->
+                <text x="30" y="63" font-family="DM Sans,sans-serif" font-size="8" font-weight="700" fill="white"
+                      letter-spacing="1">NHS App
+                </text>
+                <!-- Hamburger -->
+                <line x1="172" y1="59" x2="186" y2="59" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                <line x1="172" y1="64" x2="186" y2="64" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                <line x1="172" y1="69" x2="186" y2="69" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                <!-- User avatar placeholder -->
+                <circle cx="40" cy="85" r="12" fill="rgba(255,255,255,0.15)"/>
+                <circle cx="40" cy="82" r="4.5" fill="rgba(255,255,255,0.6)"/>
+                <path d="M31,95 Q40,90 49,95" fill="rgba(255,255,255,0.5)" stroke="none"/>
+                <text x="58" y="82" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="white">Good
+                    morning
+                </text>
+                <text x="58" y="94" font-family="Cormorant Garamond,serif" font-size="11" font-weight="600" fill="white"
+                      opacity="0.9">Your Health Dashboard
+                </text>
 
-          <!-- Card 2: Prescriptions (fades in) -->
-          <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8">
-            <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="22" y="110" width="4" height="60" rx="2" fill="#007F3B">
-            <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99" letter-spacing="0.5">
-            PRESCRIPTIONS<animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#1a1a2e">
-            Repeat Prescriptions<animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">
-            2 medications due for renewal<animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#007F3B" font-weight="600">
-            Order now →<animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
+                <!-- Screen cards — animated screen cycle -->
+                <g clip-path="url(#screenClip)">
+                    <!-- Card 1: Appointments -->
+                    <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8">
+                        <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="22" y="110" width="4" height="60" rx="2" fill="#005EB8">
+                        <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99"
+                          letter-spacing="0.5">UPCOMING APPOINTMENT
+                    </text>
+                    <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600"
+                          fill="#1a1a2e">GP Consultation
+                    </text>
+                    <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">Saluja Clinic ·
+                        Southall
+                    </text>
+                    <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#005EB8"
+                          font-weight="600">View details →
+                    </text>
+                    <g transform="translate(168, 125)">
+                        <animate attributeName="opacity" values="1;1;0;0;0;1;1" keyTimes="0;0.28;0.32;0.65;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                        <rect x="-12" y="-12" width="24" height="24" rx="6" fill="rgba(0,94,184,0.1)"/>
+                        <rect x="-5" y="-6" width="10" height="12" rx="1" fill="none" stroke="#005EB8"
+                              stroke-width="1.4"/>
+                        <line x1="-2" y1="-8" x2="-2" y2="-6" stroke="#005EB8" stroke-width="1.4"/>
+                        <line x1="2" y1="-8" x2="2" y2="-6" stroke="#005EB8" stroke-width="1.4"/>
+                        <line x1="-3" y1="-2" x2="3" y2="-2" stroke="#005EB8" stroke-width="1"/>
+                        <line x1="-3" y1="1" x2="1" y2="1" stroke="#005EB8" stroke-width="1"/>
+                    </g>
 
-          <!-- Card 3: Health Record -->
-          <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8">
-            <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="22" y="110" width="4" height="60" rx="2" fill="#009FBB">
-            <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </rect>
-          <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99" letter-spacing="0.5">
-            HEALTH RECORD<animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600" fill="#1a1a2e">
-            Test Results Available<animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">
-            Blood panel · GP notes<animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
-          <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#009FBB" font-weight="600">
-            View records →<animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1" dur="9s" repeatCount="indefinite"/>
-          </text>
+                    <!-- Card 2: Prescriptions (fades in) -->
+                    <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8">
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="22" y="110" width="4" height="60" rx="2" fill="#007F3B">
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99"
+                          letter-spacing="0.5">
+                        PRESCRIPTIONS
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600"
+                          fill="#1a1a2e">
+                        Repeat Prescriptions
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">
+                        2 medications due for renewal
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#007F3B"
+                          font-weight="600">
+                        Order now →
+                        <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.3;0.34;0.62;0.66;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
 
-          <!-- Quick action buttons row -->
-          <rect x="22" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8"/>
-          <text x="50" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle" fill="#005EB8">📅</text>
-          <text x="50" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600" fill="#3a3a5c" text-anchor="middle">Book</text>
+                    <!-- Card 3: Health Record -->
+                    <rect x="22" y="110" width="176" height="60" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8">
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="22" y="110" width="4" height="60" rx="2" fill="#009FBB">
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </rect>
+                    <text x="34" y="126" font-family="DM Sans,sans-serif" font-size="7" font-weight="700" fill="#6b7a99"
+                          letter-spacing="0.5">
+                        HEALTH RECORD
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="139" font-family="DM Sans,sans-serif" font-size="9" font-weight="600"
+                          fill="#1a1a2e">
+                        Test Results Available
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="151" font-family="DM Sans,sans-serif" font-size="8" fill="#6b7a99">
+                        Blood panel · GP notes
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
+                    <text x="34" y="163" font-family="DM Sans,sans-serif" font-size="7.5" fill="#009FBB"
+                          font-weight="600">
+                        View records →
+                        <animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.3;0.64;0.66;0.68;0.95;1"
+                                 dur="9s" repeatCount="indefinite"/>
+                    </text>
 
-          <rect x="82" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8"/>
-          <text x="110" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle" fill="#007F3B">💊</text>
-          <text x="110" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600" fill="#3a3a5c" text-anchor="middle">Rx</text>
+                    <!-- Quick action buttons row -->
+                    <rect x="22" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8"/>
+                    <text x="50" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle"
+                          fill="#005EB8">📅
+                    </text>
+                    <text x="50" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600"
+                          fill="#3a3a5c" text-anchor="middle">Book
+                    </text>
 
-          <rect x="142" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0" stroke-width="0.8"/>
-          <text x="170" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle" fill="#009FBB">📋</text>
-          <text x="170" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600" fill="#3a3a5c" text-anchor="middle">Records</text>
+                    <rect x="82" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8"/>
+                    <text x="110" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle"
+                          fill="#007F3B">💊
+                    </text>
+                    <text x="110" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600"
+                          fill="#3a3a5c" text-anchor="middle">Rx
+                    </text>
 
-          <!-- NHS 111 bar -->
-          <rect x="22" y="234" width="176" height="34" rx="10" fill="rgba(0,48,135,0.06)" stroke="rgba(0,48,135,0.15)" stroke-width="0.8"/>
-          <text x="30" y="251" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#003087">NHS 111 Online</text>
-          <text x="30" y="261" font-family="DM Sans,sans-serif" font-size="7" fill="#6b7a99">Get urgent medical advice anytime</text>
-          <text x="174" y="256" font-family="DM Sans,sans-serif" font-size="10" fill="#003087" text-anchor="middle">›</text>
+                    <rect x="142" y="180" width="56" height="44" rx="10" fill="white" stroke="#d8e4f0"
+                          stroke-width="0.8"/>
+                    <text x="170" y="197" font-family="DM Sans,sans-serif" font-size="14" text-anchor="middle"
+                          fill="#009FBB">📋
+                    </text>
+                    <text x="170" y="218" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="600"
+                          fill="#3a3a5c" text-anchor="middle">Records
+                    </text>
 
-          <!-- Animated data pulse line -->
-          <polyline points="22,290 42,282 62,295 82,278 102,288 122,275 142,285 162,270 182,282 198,278"
-            fill="none" stroke="#005EB8" stroke-width="1.5" opacity="0.3">
-            <animate attributeName="stroke-dasharray" values="0 300;300 0" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.15;0.4;0.15" dur="3s" repeatCount="indefinite"/>
-          </polyline>
+                    <!-- NHS 111 bar -->
+                    <rect x="22" y="234" width="176" height="34" rx="10" fill="rgba(0,48,135,0.06)"
+                          stroke="rgba(0,48,135,0.15)" stroke-width="0.8"/>
+                    <text x="30" y="251" font-family="DM Sans,sans-serif" font-size="8" font-weight="600"
+                          fill="#003087">NHS 111 Online
+                    </text>
+                    <text x="30" y="261" font-family="DM Sans,sans-serif" font-size="7" fill="#6b7a99">Get urgent
+                        medical advice anytime
+                    </text>
+                    <text x="174" y="256" font-family="DM Sans,sans-serif" font-size="10" fill="#003087"
+                          text-anchor="middle">›
+                    </text>
 
-          <text x="30" y="285" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#6b7a99" letter-spacing="0.5">YOUR HEALTH ACTIVITY</text>
+                    <!-- Animated data pulse line -->
+                    <polyline points="22,290 42,282 62,295 82,278 102,288 122,275 142,285 162,270 182,282 198,278"
+                              fill="none" stroke="#005EB8" stroke-width="1.5" opacity="0.3">
+                        <animate attributeName="stroke-dasharray" values="0 300;300 0" dur="3s"
+                                 repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.15;0.4;0.15" dur="3s" repeatCount="indefinite"/>
+                    </polyline>
 
-          <!-- Bottom nav -->
-          <rect x="14" y="355" width="192" height="65" fill="white" stroke="rgba(0,0,0,0.05)" stroke-width="0.5"/>
-          <line x1="14" y1="355" x2="206" y2="355" stroke="#d8e4f0" stroke-width="0.8"/>
-          <!-- Nav icons -->
-          <text x="42"  y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">🏠</text>
-          <text x="88"  y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">📋</text>
-          <text x="134" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">💊</text>
-          <text x="180" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">👤</text>
-          <text x="42"  y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#005EB8" font-weight="700" text-anchor="middle">Home</text>
-          <text x="88"  y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0" text-anchor="middle">Records</text>
-          <text x="134" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0" text-anchor="middle">Prescriptions</text>
-          <text x="180" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0" text-anchor="middle">Account</text>
-          <!-- Home tab indicator -->
-          <rect x="29" y="352" width="26" height="2" rx="1" fill="#005EB8"/>
-        </g>
+                    <text x="30" y="285" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700"
+                          fill="#6b7a99" letter-spacing="0.5">YOUR HEALTH ACTIVITY
+                    </text>
 
-        <!-- Home indicator bar -->
-        <rect x="80" y="428" width="60" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-      </svg>
+                    <!-- Bottom nav -->
+                    <rect x="14" y="355" width="192" height="65" fill="white" stroke="rgba(0,0,0,0.05)"
+                          stroke-width="0.5"/>
+                    <line x1="14" y1="355" x2="206" y2="355" stroke="#d8e4f0" stroke-width="0.8"/>
+                    <!-- Nav icons -->
+                    <text x="42" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">🏠</text>
+                    <text x="88" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">📋</text>
+                    <text x="134" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">💊</text>
+                    <text x="180" y="376" font-family="DM Sans,sans-serif" font-size="16" text-anchor="middle">👤</text>
+                    <text x="42" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#005EB8" font-weight="700"
+                          text-anchor="middle">Home
+                    </text>
+                    <text x="88" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0"
+                          text-anchor="middle">Records
+                    </text>
+                    <text x="134" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0"
+                          text-anchor="middle">Prescriptions
+                    </text>
+                    <text x="180" y="388" font-family="DM Sans,sans-serif" font-size="6" fill="#9ba8c0"
+                          text-anchor="middle">Account
+                    </text>
+                    <!-- Home tab indicator -->
+                    <rect x="29" y="352" width="26" height="2" rx="1" fill="#005EB8"/>
+                </g>
+
+                <!-- Home indicator bar -->
+                <rect x="80" y="428" width="60" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+            </svg>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- SCROLLING MARQUEE -->
 <div class="marquee-section" aria-hidden="true">
-  <div class="marquee-track">
-    <!-- Two identical sets for seamless loop -->
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Book Appointments
+    <div class="marquee-track">
+        <!-- Two identical sets for seamless loop -->
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Book Appointments
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+            </svg>
+            Order Repeat Prescriptions
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            View GP Health Records
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Check Test Results
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/>
+            </svg>
+            NHS 111 Online
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Find Nearby NHS Services
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            NHS Secure Login
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                <line x1="6" y1="1" x2="6" y2="4"/>
+                <line x1="10" y1="1" x2="10" y2="4"/>
+                <line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+            Organ Donation Preferences
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Book Appointments
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+            </svg>
+            Order Repeat Prescriptions
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            View GP Health Records
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Check Test Results
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/>
+            </svg>
+            NHS 111 Online
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Find Nearby NHS Services
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            NHS Secure Login
+        </div>
+        <div class="marquee-item">
+            <svg class="marquee-icon" viewBox="0 0 24 24">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                <line x1="6" y1="1" x2="6" y2="4"/>
+                <line x1="10" y1="1" x2="10" y2="4"/>
+                <line x1="14" y1="1" x2="14" y2="4"/>
+            </svg>
+            Organ Donation Preferences
+        </div>
     </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-      Order Repeat Prescriptions
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      View GP Health Records
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Check Test Results
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
-      NHS 111 Online
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Find Nearby NHS Services
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      NHS Secure Login
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-      Organ Donation Preferences
-    </div>
-    <!-- Duplicate for seamless loop -->
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Book Appointments
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-      Order Repeat Prescriptions
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      View GP Health Records
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Check Test Results
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12"/></svg>
-      NHS 111 Online
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Find Nearby NHS Services
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      NHS Secure Login
-    </div>
-    <div class="marquee-item">
-      <svg class="marquee-icon" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-      Organ Donation Preferences
-    </div>
-  </div>
 </div>
 
 <!-- STATS BAND -->
 <div class="stats-band">
-  <div class="stats-grid">
-    <div class="stat-item fade-up stagger-1">
-      <span class="stat-number" data-target="40">0</span><span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">M+</span>
-      <div class="stat-label">people registered<br>with the NHS App in England</div>
+    <div class="stats-grid">
+        <div class="stat-item fade-up stagger-1">
+            <span class="stat-number" data-target="40">0</span><span
+                style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">M+</span>
+            <div class="stat-label">people registered<br>with the NHS App in England</div>
+        </div>
+        <div class="stat-item fade-up stagger-2">
+            <span class="stat-number" data-target="67">0</span><span
+                style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">M</span>
+            <div class="stat-label">repeat prescriptions ordered<br>through the app in one year</div>
+        </div>
+        <div class="stat-item fade-up stagger-3">
+            <span class="stat-number" data-target="24">0</span><span
+                style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">/7</span>
+            <div class="stat-label">access to your NHS services<br>— any time, any place</div>
+        </div>
+        <div class="stat-item fade-up stagger-4">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">Free</span>
+            <div class="stat-label">to download and use<br>for all registered NHS patients</div>
+        </div>
     </div>
-    <div class="stat-item fade-up stagger-2">
-      <span class="stat-number" data-target="67">0</span><span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">M</span>
-      <div class="stat-label">repeat prescriptions ordered<br>through the app in one year</div>
-    </div>
-    <div class="stat-item fade-up stagger-3">
-      <span class="stat-number" data-target="24">0</span><span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">/7</span>
-      <div class="stat-label">access to your NHS services<br>— any time, any place</div>
-    </div>
-    <div class="stat-item fade-up stagger-4">
-      <span style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--nhs-blue);">Free</span>
-      <div class="stat-label">to download and use<br>for all registered NHS patients</div>
-    </div>
-  </div>
 </div>
 
 <!-- FEATURES -->
 <section class="features-section" id="features">
-  <div class="section-inner">
-    <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;" class="fade-up">
-      <div class="section-tag">What You Can Do</div>
-      <h2>Everything in <em>One Place</em></h2>
-      <p style="font-size:1.02rem;line-height:1.75;color:var(--text-mid);">The NHS App brings together the services you need most — securely, simply, and available from your smartphone around the clock.</p>
+    <div class="section-inner">
+        <div style="text-align:center;max-width:640px;margin:0 auto 3.5rem;" class="fade-up">
+            <div class="section-tag">What You Can Do</div>
+            <h2>Everything in <em>One Place</em></h2>
+            <p style="font-size:1.02rem;line-height:1.75;color:var(--text-mid);">The NHS App brings together the
+                services you need most — securely, simply, and available from your smartphone around the clock.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card fc-blue fade-up stagger-1">
+                <div class="feat-icon fi-blue">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <line x1="8" y1="14" x2="16" y2="14"/>
+                        <line x1="8" y1="18" x2="12" y2="18"/>
+                    </svg>
+                </div>
+                <div class="feat-title">Book Appointments</div>
+                <p class="feat-desc">Request GP appointments directly through the app — without waiting on hold.
+                    Depending on availability, you can also manage, reschedule and cancel upcoming appointments.</p>
+            </div>
+
+            <div class="feature-card fc-green fade-up stagger-2">
+                <div class="feat-icon fi-green">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+                    </svg>
+                </div>
+                <div class="feat-title">Order Prescriptions</div>
+                <p class="feat-desc">Order your repeat prescriptions in seconds and nominate your preferred pharmacy for
+                    collection. Track your prescription status — and get a notification when it's ready.</p>
+            </div>
+
+            <div class="feature-card fc-aqua fade-up stagger-3">
+                <div class="feat-icon fi-aqua">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <div class="feat-title">View Health Records</div>
+                <p class="feat-desc">Access your full GP health record including test results, medications, allergies,
+                    conditions and immunisations. Your medical history, always in your pocket.</p>
+            </div>
+
+            <div class="feature-card fc-dark fade-up stagger-4">
+                <div class="feat-icon fi-dark">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <div class="feat-title">Check Test Results</div>
+                <p class="feat-desc">View your blood test results, letters and documents from your GP — often before
+                    they arrive by post. Stay informed about your health between appointments.</p>
+            </div>
+
+            <div class="feature-card fc-teal fade-up stagger-5">
+                <div class="feat-icon fi-teal">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 15.07 16l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </div>
+                <div class="feat-title">NHS 111 Online</div>
+                <p class="feat-desc">Access NHS 111 directly through the app for urgent medical advice at any time of
+                    day or night — without needing to call. Get directed to the right care, fast.</p>
+            </div>
+
+            <div class="feature-card fc-yellow fade-up stagger-6">
+                <div class="feat-icon fi-yellow">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="feat-title">Manage for Family</div>
+                <p class="feat-desc">Parents and carers can manage healthcare services for their children and loved ones
+                    through the app — making it easy to keep the whole family's health organised.</p>
+            </div>
+        </div>
     </div>
-
-    <div class="features-grid">
-      <div class="feature-card fc-blue fade-up stagger-1">
-        <div class="feat-icon fi-blue">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
-        </div>
-        <div class="feat-title">Book Appointments</div>
-        <p class="feat-desc">Request GP appointments directly through the app — without waiting on hold. Depending on availability, you can also manage, reschedule and cancel upcoming appointments.</p>
-      </div>
-
-      <div class="feature-card fc-green fade-up stagger-2">
-        <div class="feat-icon fi-green">
-          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-        </div>
-        <div class="feat-title">Order Prescriptions</div>
-        <p class="feat-desc">Order your repeat prescriptions in seconds and nominate your preferred pharmacy for collection. Track your prescription status — and get a notification when it's ready.</p>
-      </div>
-
-      <div class="feature-card fc-aqua fade-up stagger-3">
-        <div class="feat-icon fi-aqua">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <div class="feat-title">View Health Records</div>
-        <p class="feat-desc">Access your full GP health record including test results, medications, allergies, conditions and immunisations. Your medical history, always in your pocket.</p>
-      </div>
-
-      <div class="feature-card fc-dark fade-up stagger-4">
-        <div class="feat-icon fi-dark">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="feat-title">Check Test Results</div>
-        <p class="feat-desc">View your blood test results, letters and documents from your GP — often before they arrive by post. Stay informed about your health between appointments.</p>
-      </div>
-
-      <div class="feature-card fc-teal fade-up stagger-5">
-        <div class="feat-icon fi-teal">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86A16 16 0 0 0 15.07 16l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="feat-title">NHS 111 Online</div>
-        <p class="feat-desc">Access NHS 111 directly through the app for urgent medical advice at any time of day or night — without needing to call. Get directed to the right care, fast.</p>
-      </div>
-
-      <div class="feature-card fc-yellow fade-up stagger-6">
-        <div class="feat-icon fi-yellow">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="feat-title">Manage for Family</div>
-        <p class="feat-desc">Parents and carers can manage healthcare services for their children and loved ones through the app — making it easy to keep the whole family's health organised.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- FEATURE SHOWCASE (scroll-driven) -->
 <section class="showcase-section">
-  <div class="section-inner">
-    <div class="showcase-layout">
-      <!-- Left: orbiting phone graphic -->
-      <div class="showcase-phone-wrap fade-left">
-        <div class="orbit-ring orbit-ring-1">
-          <div class="orbit-dot" style="top:-5px;left:50%;transform:translateX(-50%);background:#005EB8;"></div>
-          <div class="orbit-dot" style="bottom:-5px;left:50%;transform:translateX(-50%);background:#009FBB;"></div>
-        </div>
-        <div class="orbit-ring orbit-ring-2">
-          <div class="orbit-dot" style="top:-5px;left:50%;transform:translateX(-50%);background:#007F3B;"></div>
-          <div class="orbit-dot" style="bottom:-5px;right:10%;background:rgba(255,184,28,0.8);"></div>
-        </div>
-        <!-- Central icon -->
-        <div style="width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#003087,#005EB8);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,94,184,0.3);position:relative;z-index:2;">
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2"/>
-            <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/>
-            <!-- NHS cross on screen -->
-            <line x1="12" y1="7" x2="12" y2="13" stroke-width="2" stroke="rgba(255,255,255,0.7)"/>
-            <line x1="9" y1="10" x2="15" y2="10" stroke-width="2" stroke="rgba(255,255,255,0.7)"/>
-          </svg>
-        </div>
-      </div>
+    <div class="section-inner">
+        <div class="showcase-layout">
+            <!-- Left: orbiting phone graphic -->
+            <div class="showcase-phone-wrap fade-left">
+                <div class="orbit-ring orbit-ring-1">
+                    <div class="orbit-dot"
+                         style="top:-5px;left:50%;transform:translateX(-50%);background:#005EB8;"></div>
+                    <div class="orbit-dot"
+                         style="bottom:-5px;left:50%;transform:translateX(-50%);background:#009FBB;"></div>
+                </div>
+                <div class="orbit-ring orbit-ring-2">
+                    <div class="orbit-dot"
+                         style="top:-5px;left:50%;transform:translateX(-50%);background:#007F3B;"></div>
+                    <div class="orbit-dot" style="bottom:-5px;right:10%;background:rgba(255,184,28,0.8);"></div>
+                </div>
+                <!-- Central icon -->
+                <div style="width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#003087,#005EB8);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,94,184,0.3);position:relative;z-index:2;">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="5" y="2" width="14" height="20" rx="2"/>
+                        <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/>
+                        <!-- NHS cross on screen -->
+                        <line x1="12" y1="7" x2="12" y2="13" stroke-width="2" stroke="rgba(255,255,255,0.7)"/>
+                        <line x1="9" y1="10" x2="15" y2="10" stroke-width="2" stroke="rgba(255,255,255,0.7)"/>
+                    </svg>
+                </div>
+            </div>
 
-      <!-- Right: scrolling feature list -->
-      <div class="fade-right">
-        <div class="section-tag">Why Use the NHS App</div>
-        <h2>Healthcare on<br>your <em>terms</em></h2>
-        <p style="font-size:1rem;line-height:1.75;color:var(--text-mid);margin-bottom:2rem;">The NHS App lets you take control of your health — no phone queues, no waiting rooms for routine admin, no paperwork. Everything your practice offers digitally, in one secure place.</p>
+            <!-- Right: scrolling feature list -->
+            <div class="fade-right">
+                <div class="section-tag">Why Use the NHS App</div>
+                <h2>Healthcare on<br>your <em>terms</em></h2>
+                <p style="font-size:1rem;line-height:1.75;color:var(--text-mid);margin-bottom:2rem;">The NHS App lets
+                    you take control of your health — no phone queues, no waiting rooms for routine admin, no paperwork.
+                    Everything your practice offers digitally, in one secure place.</p>
 
-        <div class="feature-scroll-list">
-          <div class="fsl-item">
-            <div class="fsl-icon" style="background:rgba(0,94,184,0.09);">
-              <svg viewBox="0 0 24 24" style="stroke:var(--nhs-blue)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <div class="feature-scroll-list">
+                    <div class="fsl-item">
+                        <div class="fsl-icon" style="background:rgba(0,94,184,0.09);">
+                            <svg viewBox="0 0 24 24" style="stroke:var(--nhs-blue)">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="fsl-text">
+                            <strong>Available 24 hours a day</strong>
+                            <span>Order prescriptions at midnight, check results on your lunch break. The app is always on, even when the surgery is closed.</span>
+                        </div>
+                    </div>
+                    <div class="fsl-item">
+                        <div class="fsl-icon" style="background:rgba(0,127,59,0.09);">
+                            <svg viewBox="0 0 24 24" style="stroke:var(--nhs-green)">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <div class="fsl-text">
+                            <strong>Safe and secure</strong>
+                            <span>NHS Login verifies your identity using official documents or your face. Your health data is protected by NHS-grade security.</span>
+                        </div>
+                    </div>
+                    <div class="fsl-item">
+                        <div class="fsl-icon" style="background:rgba(0,159,187,0.09);">
+                            <svg viewBox="0 0 24 24" style="stroke:var(--nhs-aqua)">
+                                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <div class="fsl-text">
+                            <strong>Works on any device</strong>
+                            <span>Available on iPhone, Android, and via your web browser on a computer. One account, all your devices.</span>
+                        </div>
+                    </div>
+                    <div class="fsl-item">
+                        <div class="fsl-icon" style="background:rgba(0,48,135,0.09);">
+                            <svg viewBox="0 0 24 24" style="stroke:var(--nhs-dark)">
+                                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                                <line x1="6" y1="1" x2="6" y2="4"/>
+                                <line x1="10" y1="1" x2="10" y2="4"/>
+                                <line x1="14" y1="1" x2="14" y2="4"/>
+                            </svg>
+                        </div>
+                        <div class="fsl-text">
+                            <strong>Completely free</strong>
+                            <span>The NHS App is free to download and free to use. There are no subscription fees or hidden charges — it is your NHS, at no cost to you.</span>
+                        </div>
+                    </div>
+                    <div class="fsl-item">
+                        <div class="fsl-icon" style="background:rgba(255,184,28,0.1);">
+                            <svg viewBox="0 0 24 24" style="stroke:#c48a00">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="fsl-text">
+                            <strong>Linked to Saluja Clinic</strong>
+                            <span>Once registered, the app automatically links to your Saluja Clinic record. Your data is already there — no manual setup needed.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="fsl-text">
-              <strong>Available 24 hours a day</strong>
-              <span>Order prescriptions at midnight, check results on your lunch break. The app is always on, even when the surgery is closed.</span>
-            </div>
-          </div>
-          <div class="fsl-item">
-            <div class="fsl-icon" style="background:rgba(0,127,59,0.09);">
-              <svg viewBox="0 0 24 24" style="stroke:var(--nhs-green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="fsl-text">
-              <strong>Safe and secure</strong>
-              <span>NHS Login verifies your identity using official documents or your face. Your health data is protected by NHS-grade security.</span>
-            </div>
-          </div>
-          <div class="fsl-item">
-            <div class="fsl-icon" style="background:rgba(0,159,187,0.09);">
-              <svg viewBox="0 0 24 24" style="stroke:var(--nhs-aqua)"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
-            </div>
-            <div class="fsl-text">
-              <strong>Works on any device</strong>
-              <span>Available on iPhone, Android, and via your web browser on a computer. One account, all your devices.</span>
-            </div>
-          </div>
-          <div class="fsl-item">
-            <div class="fsl-icon" style="background:rgba(0,48,135,0.09);">
-              <svg viewBox="0 0 24 24" style="stroke:var(--nhs-dark)"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            </div>
-            <div class="fsl-text">
-              <strong>Completely free</strong>
-              <span>The NHS App is free to download and free to use. There are no subscription fees or hidden charges — it is your NHS, at no cost to you.</span>
-            </div>
-          </div>
-          <div class="fsl-item">
-            <div class="fsl-icon" style="background:rgba(255,184,28,0.1);">
-              <svg viewBox="0 0 24 24" style="stroke:#c48a00"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
-            <div class="fsl-text">
-              <strong>Linked to Saluja Clinic</strong>
-              <span>Once registered, the app automatically links to your Saluja Clinic record. Your data is already there — no manual setup needed.</span>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <!-- HOW TO GET STARTED -->
 <section class="steps-section" id="get-started">
-  <div class="section-inner">
-    <div style="text-align:center;max-width:600px;margin:0 auto 4rem;" class="fade-up">
-      <div class="section-tag">Getting Started</div>
-      <h2>Up and running in<br><em>four steps</em></h2>
-      <p style="font-size:1rem;line-height:1.75;color:var(--text-mid);">Setting up the NHS App takes just a few minutes. You will need your mobile number and a form of photo ID to verify your identity.</p>
-    </div>
-
-    <div class="steps-grid">
-      <div class="step-item fade-up stagger-1">
-        <div class="step-num">1</div>
-        <div class="step-title">Download the App</div>
-        <p class="step-desc">Search for "NHS App" on the App Store (iPhone) or Google Play Store (Android) and download it for free. It also works in your web browser.</p>
-      </div>
-      <div class="step-item fade-up stagger-2">
-        <div class="step-num aqua">2</div>
-        <div class="step-title">Create an NHS Login</div>
-        <p class="step-desc">Register with your email address and mobile number. Verify your identity using a photo ID such as a passport or driving licence.</p>
-      </div>
-      <div class="step-item fade-up stagger-3">
-        <div class="step-num green">3</div>
-        <div class="step-title">Link to Your GP</div>
-        <p class="step-desc">The app will automatically connect to your Saluja Clinic record. You must be aged 13 or over and registered with an NHS GP in England.</p>
-      </div>
-      <div class="step-item fade-up stagger-4">
-        <div class="step-num">4</div>
-        <div class="step-title">Start Using It</div>
-        <p class="step-desc">Book appointments, order prescriptions, view your health records and more — all from your phone, any time you need.</p>
-      </div>
-    </div>
-
-    <!-- Existing users callout -->
-    <div style="margin-top:3.5rem;" class="fade-up">
-      <div class="existing-card">
-        <div class="existing-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div class="section-inner">
+        <div style="text-align:center;max-width:600px;margin:0 auto 4rem;" class="fade-up">
+            <div class="section-tag">Getting Started</div>
+            <h2>Up and running in<br><em>four steps</em></h2>
+            <p style="font-size:1rem;line-height:1.75;color:var(--text-mid);">Setting up the NHS App takes just a few
+                minutes. You will need your mobile number and a form of photo ID to verify your identity.</p>
         </div>
-        <div class="existing-text">
-          <h4>Already using Systm Online?</h4>
-          <p>You can continue to use Systm Online exactly as you do now — nothing changes. The NHS App is an additional way to access your services and you can use both side by side. There is no need to switch if you prefer Systm Online.</p>
+
+        <div class="steps-grid">
+            <div class="step-item fade-up stagger-1">
+                <div class="step-num">1</div>
+                <div class="step-title">Download the App</div>
+                <p class="step-desc">Search for "NHS App" on the App Store (iPhone) or Google Play Store (Android) and
+                    download it for free. It also works in your web browser.</p>
+            </div>
+            <div class="step-item fade-up stagger-2">
+                <div class="step-num aqua">2</div>
+                <div class="step-title">Create an NHS Login</div>
+                <p class="step-desc">Register with your email address and mobile number. Verify your identity using a
+                    photo ID such as a passport or driving licence.</p>
+            </div>
+            <div class="step-item fade-up stagger-3">
+                <div class="step-num green">3</div>
+                <div class="step-title">Link to Your GP</div>
+                <p class="step-desc">The app will automatically connect to your Saluja Clinic record. You must be aged
+                    13 or over and registered with an NHS GP in England.</p>
+            </div>
+            <div class="step-item fade-up stagger-4">
+                <div class="step-num">4</div>
+                <div class="step-title">Start Using It</div>
+                <p class="step-desc">Book appointments, order prescriptions, view your health records and more — all
+                    from your phone, any time you need.</p>
+            </div>
         </div>
-      </div>
+
+        <!-- Existing users callout -->
+        <div style="margin-top:3.5rem;" class="fade-up">
+            <div class="existing-card">
+                <div class="existing-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <div class="existing-text">
+                    <h4>Already using Systm Online?</h4>
+                    <p>You can continue to use Systm Online exactly as you do now — nothing changes. The NHS App is an
+                        additional way to access your services and you can use both side by side. There is no need to
+                        switch if you prefer Systm Online.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- VIDEO SECTION -->
 <section style="background:var(--off-white);border-top:1px solid var(--border);padding:5rem 2rem;">
-  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
-    <a href="https://www.youtube.com/watch?v=Q0SCcLtw8JA" target="_blank" rel="noopener"
-       style="display:block;position:relative;border-radius:18px;overflow:hidden;box-shadow:0 20px 50px rgba(0,48,135,0.15);border:1px solid var(--border);text-decoration:none;">
-      <img src="https://img.youtube.com/vi/Q0SCcLtw8JA/maxresdefault.jpg"
-           alt="Register with the NHS App – Quick Guide"
-           style="width:100%;display:block;">
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,30,80,0.35);">
-        <div style="width:72px;height:72px;background:#005EB8;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,0.35);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+        <a href="https://www.youtube.com/watch?v=Q0SCcLtw8JA" target="_blank" rel="noopener"
+           style="display:block;position:relative;border-radius:18px;overflow:hidden;box-shadow:0 20px 50px rgba(0,48,135,0.15);border:1px solid var(--border);text-decoration:none;">
+            <img src="https://img.youtube.com/vi/Q0SCcLtw8JA/maxresdefault.jpg"
+                 alt="Register with the NHS App – Quick Guide"
+                 style="width:100%;display:block;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,30,80,0.35);">
+                <div style="width:72px;height:72px;background:#005EB8;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,0.35);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                        <polygon points="6 3 20 12 6 21 6 3"/>
+                    </svg>
+                </div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,60,0.85));padding:1.5rem 1.2rem 1rem;color:#fff;">
+                <strong style="display:block;font-size:0.95rem;margin-bottom:0.2rem;">Register with the NHS App – Quick
+                    Guide</strong>
+                <span style="font-size:0.82rem;opacity:0.8;">NHS England · YouTube</span>
+            </div>
+        </a>
+        <div>
+            <div class="section-tag">Video Guide</div>
+            <h2>Watch how to<br><em>get started</em></h2>
+            <p style="font-size:1rem;line-height:1.8;color:var(--text-mid);margin-bottom:1.5rem;">This short NHS England
+                guide walks you through downloading the app, setting up your NHS Login, and accessing your health
+                services in just a few minutes.</p>
+            <a href="https://www.youtube.com/watch?v=Q0SCcLtw8JA" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--nhs-blue);color:#fff;padding:0.85rem 1.7rem;border-radius:10px;font-weight:600;font-size:0.92rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,0.25);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Watch on YouTube
+            </a>
         </div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,60,0.85));padding:1.5rem 1.2rem 1rem;color:#fff;">
-        <strong style="display:block;font-size:0.95rem;margin-bottom:0.2rem;">Register with the NHS App – Quick Guide</strong>
-        <span style="font-size:0.82rem;opacity:0.8;">NHS England · YouTube</span>
-      </div>
-    </a>
-    <div>
-      <div class="section-tag">Video Guide</div>
-      <h2>Watch how to<br><em>get started</em></h2>
-      <p style="font-size:1rem;line-height:1.8;color:var(--text-mid);margin-bottom:1.5rem;">This short NHS England guide walks you through downloading the app, setting up your NHS Login, and accessing your health services in just a few minutes.</p>
-      <a href="https://www.youtube.com/watch?v=Q0SCcLtw8JA" target="_blank" rel="noopener"
-         style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--nhs-blue);color:#fff;padding:0.85rem 1.7rem;border-radius:10px;font-weight:600;font-size:0.92rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,94,184,0.25);">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Watch on YouTube
-      </a>
     </div>
-  </div>
 </section>
 
 <!-- TRUST SECTION -->
 <section class="trust-section">
-  <div class="section-inner">
-    <div style="text-align:center;max-width:600px;margin:0 auto 3rem;" class="fade-up">
-      <div class="section-tag">Privacy &amp; Security</div>
-      <h2>Built on <em>NHS-grade</em> security</h2>
+    <div class="section-inner">
+        <div style="text-align:center;max-width:600px;margin:0 auto 3rem;" class="fade-up">
+            <div class="section-tag">Privacy &amp; Security</div>
+            <h2>Built on <em>NHS-grade</em> security</h2>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-card fade-up stagger-1">
+                <div class="trust-icon" style="background:rgba(0,94,184,0.09);">
+                    <svg viewBox="0 0 24 24" style="stroke:var(--nhs-blue)">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div class="trust-title">NHS Login — Verified Identity</div>
+                <div class="trust-desc">Your account is protected by NHS Login, which verifies your identity using
+                    official photo ID. Face ID and fingerprint login are supported for daily convenience.
+                </div>
+            </div>
+            <div class="trust-card fade-up stagger-2">
+                <div class="trust-icon" style="background:rgba(0,127,59,0.09);">
+                    <svg viewBox="0 0 24 24" style="stroke:var(--nhs-green)">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <div class="trust-title">End-to-End Encrypted</div>
+                <div class="trust-desc">Your health data is transmitted and stored with end-to-end encryption. The NHS
+                    App is developed and maintained by NHS England to the highest data security standards.
+                </div>
+            </div>
+            <div class="trust-card fade-up stagger-3">
+                <div class="trust-icon" style="background:rgba(0,159,187,0.09);">
+                    <svg viewBox="0 0 24 24" style="stroke:var(--nhs-aqua)">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <div class="trust-title">You Control Your Data</div>
+                <div class="trust-desc">The NHS App lets you manage your own data sharing preferences. You decide what
+                    is shared, with whom, and when — including national data opt-out settings.
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="trust-grid">
-      <div class="trust-card fade-up stagger-1">
-        <div class="trust-icon" style="background:rgba(0,94,184,0.09);">
-          <svg viewBox="0 0 24 24" style="stroke:var(--nhs-blue)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="trust-title">NHS Login — Verified Identity</div>
-        <div class="trust-desc">Your account is protected by NHS Login, which verifies your identity using official photo ID. Face ID and fingerprint login are supported for daily convenience.</div>
-      </div>
-      <div class="trust-card fade-up stagger-2">
-        <div class="trust-icon" style="background:rgba(0,127,59,0.09);">
-          <svg viewBox="0 0 24 24" style="stroke:var(--nhs-green)"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <div class="trust-title">End-to-End Encrypted</div>
-        <div class="trust-desc">Your health data is transmitted and stored with end-to-end encryption. The NHS App is developed and maintained by NHS England to the highest data security standards.</div>
-      </div>
-      <div class="trust-card fade-up stagger-3">
-        <div class="trust-icon" style="background:rgba(0,159,187,0.09);">
-          <svg viewBox="0 0 24 24" style="stroke:var(--nhs-aqua)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="trust-title">You Control Your Data</div>
-        <div class="trust-desc">The NHS App lets you manage your own data sharing preferences. You decide what is shared, with whom, and when — including national data opt-out settings.</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- DOWNLOAD SECTION -->
 <section class="download-section" id="download">
-  <div class="download-inner">
-    <div class="download-text fade-left">
-      <div class="section-tag" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.2);">Download Now — Free</div>
-      <h2>Get the NHS App<br><em>today</em></h2>
-      <p>Available free on iPhone and Android. You can also use it on any computer at <strong style="color:#fff;">nhs.uk/nhsapp</strong> — no download required.</p>
+    <div class="download-inner">
+        <div class="download-text fade-left">
+            <div class="section-tag"
+                 style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.2);">
+                Download Now — Free
+            </div>
+            <h2>Get the NHS App<br><em>today</em></h2>
+            <p>Available free on iPhone and Android. You can also use it on any computer at <strong style="color:#fff;">nhs.uk/nhsapp</strong>
+                — no download required.</p>
 
-      <div class="store-badges">
-        <a href="https://apps.apple.com/us/app/nhs-app/id1388411277" target="_blank" class="store-badge">
-          <div class="store-badge-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a4 4 0 0 1 4 4c0 1.5-.6 2.9-1.6 3.8C15.8 10.5 17 12.6 17 15c0 3.9-2.2 7-5 7s-5-3.1-5-7c0-2.4 1.2-4.5 3.6-5.2C9.6 8.9 9 7.5 9 6a4 4 0 0 1 3-3.87V2z"/>
-            </svg>
-          </div>
-          <div class="store-badge-text">
-            <div class="badge-sub">Download on the</div>
-            <div class="badge-name">App Store</div>
-          </div>
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.nhs.online.nhsonline" target="_blank" class="store-badge">
-          <div class="store-badge-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>
-          </div>
-          <div class="store-badge-text">
-            <div class="badge-sub">Get it on</div>
-            <div class="badge-name">Google Play</div>
-          </div>
-        </a>
-        <a href="https://www.nhs.uk/nhsapp" target="_blank" class="store-badge">
-          <div class="store-badge-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-          </div>
-          <div class="store-badge-text">
-            <div class="badge-sub">Use in your browser at</div>
-            <div class="badge-name">nhs.uk/nhsapp</div>
-          </div>
-        </a>
-      </div>
+            <div class="store-badges">
+                <a href="https://apps.apple.com/us/app/nhs-app/id1388411277" target="_blank" class="store-badge">
+                    <div class="store-badge-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a4 4 0 0 1 4 4c0 1.5-.6 2.9-1.6 3.8C15.8 10.5 17 12.6 17 15c0 3.9-2.2 7-5 7s-5-3.1-5-7c0-2.4 1.2-4.5 3.6-5.2C9.6 8.9 9 7.5 9 6a4 4 0 0 1 3-3.87V2z"/>
+                        </svg>
+                    </div>
+                    <div class="store-badge-text">
+                        <div class="badge-sub">Download on the</div>
+                        <div class="badge-name">App Store</div>
+                    </div>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.nhs.online.nhsonline" target="_blank"
+                   class="store-badge">
+                    <div class="store-badge-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    </div>
+                    <div class="store-badge-text">
+                        <div class="badge-sub">Get it on</div>
+                        <div class="badge-name">Google Play</div>
+                    </div>
+                </a>
+                <a href="https://www.nhs.uk/nhsapp" target="_blank" class="store-badge">
+                    <div class="store-badge-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="store-badge-text">
+                        <div class="badge-sub">Use in your browser at</div>
+                        <div class="badge-name">nhs.uk/nhsapp</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Animated QR / data visual -->
+        <div class="download-visual fade-right">
+            <div class="qr-card">
+                <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:1rem;">
+                    Scan to Download
+                </div>
+
+                <!-- Animated QR-style SVG graphic -->
+                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg"
+                     style="width:100%;max-width:160px;display:block;margin:0 auto;">
+                    <defs>
+                        <linearGradient id="qrBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+                            <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="160" height="160" rx="12" fill="url(#qrBg)"/>
+
+                    <!-- QR corner squares -->
+                    <!-- Top-left -->
+                    <rect x="10" y="10" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)"
+                          stroke-width="3"/>
+                    <rect x="18" y="18" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
+                    <!-- Top-right -->
+                    <rect x="108" y="10" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)"
+                          stroke-width="3"/>
+                    <rect x="116" y="18" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
+                    <!-- Bottom-left -->
+                    <rect x="10" y="108" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)"
+                          stroke-width="3"/>
+                    <rect x="18" y="116" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
+
+                    <!-- QR data dots (decorative) -->
+                    <rect x="62" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="72" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="82" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="92" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="62" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="72" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="92" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="62" y="30" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="82" y="30" width="6" height="6" rx="1" fill="rgba(255,255,255,0.25)"/>
+                    <rect x="62" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="72" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="92" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="10" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="20" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="40" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="62" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="82" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="102" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="122" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="142" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="10" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="30" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="50" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="72" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="92" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="112" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="132" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="20" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="40" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="60" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="80" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="100" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="120" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="140" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="62" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="82" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="102" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="122" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="142" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="62" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="82" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="112" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="132" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="62" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="72" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="92" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="102" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="122" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="62" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="82" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="112" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="142" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+                    <rect x="62" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                    <rect x="72" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
+                    <rect x="92" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    <rect x="102" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                    <rect x="132" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
+
+                    <!-- Animated scan line -->
+                    <line x1="10" y1="80" x2="150" y2="80" stroke="#41B6E6" stroke-width="1.5" opacity="0.6">
+                        <animate attributeName="y1" values="10;150;10" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="y2" values="10;150;10" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" repeatCount="indefinite"/>
+                    </line>
+                    <rect x="10" y="10" width="140" height="2" fill="rgba(65,182,230,0.2)">
+                        <animate attributeName="y" values="10;148;10" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+
+                    <!-- NHS logo centre overlay -->
+                    <circle cx="80" cy="80" r="16" fill="rgba(0,48,135,0.7)"/>
+                    <rect x="76" y="72" width="8" height="16" rx="1.5" fill="white" opacity="0.9"/>
+                    <rect x="72" y="76" width="16" height="8" rx="1.5" fill="white" opacity="0.9"/>
+                </svg>
+
+                <p>Point your phone camera at this code, or search "NHS App" in your app store.</p>
+                <div style="margin-top:1rem;font-size:0.78rem;color:rgba(255,255,255,0.45);">Official app by NHS England
+                    · Free to download
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Animated QR / data visual -->
-    <div class="download-visual fade-right">
-      <div class="qr-card">
-        <div style="font-size:0.74rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:1rem;">Scan to Download</div>
-
-        <!-- Animated QR-style SVG graphic -->
-        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:160px;display:block;margin:0 auto;">
-          <defs>
-            <linearGradient id="qrBg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
-              <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="160" height="160" rx="12" fill="url(#qrBg)"/>
-
-          <!-- QR corner squares -->
-          <!-- Top-left -->
-          <rect x="10" y="10" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
-          <rect x="18" y="18" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
-          <!-- Top-right -->
-          <rect x="108" y="10" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
-          <rect x="116" y="18" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
-          <!-- Bottom-left -->
-          <rect x="10" y="108" width="42" height="42" rx="4" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
-          <rect x="18" y="116" width="26" height="26" rx="2" fill="rgba(255,255,255,0.5)"/>
-
-          <!-- QR data dots (decorative) -->
-          <rect x="62" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="72" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="82" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="92" y="10" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="62" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="72" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="92" y="20" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="62" y="30" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="82" y="30" width="6" height="6" rx="1" fill="rgba(255,255,255,0.25)"/>
-          <rect x="62" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="72" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="92" y="40" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="10" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="20" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="40" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="62" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="82" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="102" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="122" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="142" y="62" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="10" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="30" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="50" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="72" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="92" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="112" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="132" y="72" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="20" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="40" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="60" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="80" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="100" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="120" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="140" y="82" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="62" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="82" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="102" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="122" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="142" y="108" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="62" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="82" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="112" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="132" y="118" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="62" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="72" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="92" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="102" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="122" y="128" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="62" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="82" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="112" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="142" y="138" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-          <rect x="62" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
-          <rect x="72" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.45)"/>
-          <rect x="92" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.2)"/>
-          <rect x="102" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
-          <rect x="132" y="148" width="6" height="6" rx="1" fill="rgba(255,255,255,0.3)"/>
-
-          <!-- Animated scan line -->
-          <line x1="10" y1="80" x2="150" y2="80" stroke="#41B6E6" stroke-width="1.5" opacity="0.6">
-            <animate attributeName="y1" values="10;150;10" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="y2" values="10;150;10" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" repeatCount="indefinite"/>
-          </line>
-          <rect x="10" y="10" width="140" height="2" fill="rgba(65,182,230,0.2)">
-            <animate attributeName="y" values="10;148;10" dur="3s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/>
-          </rect>
-
-          <!-- NHS logo centre overlay -->
-          <circle cx="80" cy="80" r="16" fill="rgba(0,48,135,0.7)"/>
-          <rect x="76" y="72" width="8" height="16" rx="1.5" fill="white" opacity="0.9"/>
-          <rect x="72" y="76" width="16" height="8" rx="1.5" fill="white" opacity="0.9"/>
-        </svg>
-
-        <p>Point your phone camera at this code, or search "NHS App" in your app store.</p>
-        <div style="margin-top:1rem;font-size:0.78rem;color:rgba(255,255,255,0.45);">Official app by NHS England · Free to download</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- EMERGENCY BAND -->
 <div class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div class="emerg-label">Non-Emergency Urgent Advice</div>
-      <div class="emerg-number">NHS 111</div>
-      <div class="emerg-desc">Available in the NHS App, by phone on 111, or online at <strong>111.nhs.uk</strong> — free, 24 hours a day.</div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div class="emerg-label">Non-Emergency Urgent Advice</div>
+            <div class="emerg-number">NHS 111</div>
+            <div class="emerg-desc">Available in the NHS App, by phone on 111, or online at <strong>111.nhs.uk</strong>
+                — free, 24 hours a day.
+            </div>
+        </div>
+        <div class="emerg-card urgent">
+            <div class="emerg-label">Life-Threatening Emergency</div>
+            <div class="emerg-number">999</div>
+            <div class="emerg-desc">Call 999 immediately for chest pain, stroke symptoms, serious injury, or any
+                life-threatening situation. Do not use the NHS App in an emergency.
+            </div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div class="emerg-label">Life-Threatening Emergency</div>
-      <div class="emerg-number">999</div>
-      <div class="emerg-desc">Call 999 immediately for chest pain, stroke symptoms, serious injury, or any life-threatening situation. Do not use the NHS App in an emergency.</div>
-    </div>
-  </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="60" style="width:auto;opacity:0.85">
-        <defs>
-          <linearGradient id="chromeSf" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff"/><stop offset="15%" stop-color="#d0d0d0"/>
-            <stop offset="30%" stop-color="#f8f8f8"/><stop offset="50%" stop-color="#a0a0a0"/>
-            <stop offset="65%" stop-color="#e8e8e8"/><stop offset="80%" stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeTextf" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#c8c8c8"/><stop offset="10%" stop-color="#f0f0f0"/>
-            <stop offset="25%" stop-color="#b0b0b0"/><stop offset="40%" stop-color="#ffffff"/>
-            <stop offset="55%" stop-color="#909090"/><stop offset="70%" stop-color="#e0e0e0"/>
-            <stop offset="85%" stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShinef" cx="38%" cy="32%" r="65%">
-            <stop offset="0%" stop-color="#3a3a3a"/><stop offset="40%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRimf" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#666666"/><stop offset="30%" stop-color="#222222"/>
-            <stop offset="70%" stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadowf" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
-          </filter>
-          <filter id="textSheenf">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRimf)" filter="url(#shadowf)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShinef)"/>
-        <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeSf)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeTextf)" filter="url(#textSheenf)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" height="60" style="width:auto;opacity:0.85">
+                <defs>
+                    <linearGradient id="chromeSf" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeTextf" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShinef" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRimf" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadowf" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheenf">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRimf)" filter="url(#shadowf)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShinef)"/>
+                <text x="80" y="114" font-family="Georgia,'Times New Roman',serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeSf)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeTextf)"
+                      filter="url(#textSheenf)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136">📞 0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="new-patients.html">Register as New Patient</a></li>
+                <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App Info</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">NHS Login</a>
+                </li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk/location/1-2180983569" target="_blank">CQC Rating</a></li>
+                <li><a href="contact-us.html">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="new-patients.html">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="appointments.html">Appointments</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App Info</a></li>
-        <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">NHS Login</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk/location/1-2180983569" target="_blank">CQC Rating</a></li>
-        <li><a href="contact-us.html">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-  /* ── Scroll-triggered animations ── */
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.12 }
-  );
-  document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEach(el => observer.observe(el));
+    /* ── Scroll-triggered animations ── */
+    const observer = new IntersectionObserver(
+        entries => entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }),
+        {threshold: 0.12}
+    );
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in').forEach(el => observer.observe(el));
 
-  /* ── Counter animation ── */
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target);
-    const duration = 1800;
-    const step = target / (duration / 16);
-    let current = 0;
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = Math.floor(current);
-      if (current >= target) clearInterval(timer);
-    }, 16);
-  }
+    /* ── Counter animation ── */
+    function animateCounter(el) {
+        const target = parseInt(el.dataset.target);
+        const duration = 1800;
+        const step = target / (duration / 16);
+        let current = 0;
+        const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = Math.floor(current);
+            if (current >= target) clearInterval(timer);
+        }, 16);
+    }
 
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-            animateCounter(e.target.querySelector('[data-target]') || e.target);
-        counterObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
+    const counterObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                animateCounter(e.target.querySelector('[data-target]') || e.target);
+                counterObserver.unobserve(e.target);
+            }
+        });
+    }, {threshold: 0.5});
 
-  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 </script>
 </body>
 </html>

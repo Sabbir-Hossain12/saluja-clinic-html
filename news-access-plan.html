@@ -1,758 +1,1749 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>2025/26 Access Improvement Plan – Saluja Clinic · West London GP Practice</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --nhs-blue:       #005EB8;
-      --nhs-dark:       #003087;
-      --nhs-aqua:       #009FBB;
-      --nhs-green:      #007F3B;
-      --nhs-light-blue: #41B6E6;
-      --white:          #ffffff;
-      --off-white:      #f5f8fc;
-      --text-dark:      #1a1a2e;
-      --text-mid:       #3a3a5c;
-      --text-soft:      #6b7a99;
-      --border:         #d8e4f0;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>2025/26 Access Improvement Plan – Saluja Clinic · West London GP Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark: #003087;
+            --nhs-aqua: #009FBB;
+            --nhs-green: #007F3B;
+            --nhs-light-blue: #41B6E6;
+            --white: #ffffff;
+            --off-white: #f5f8fc;
+            --text-dark: #1a1a2e;
+            --text-mid: #3a3a5c;
+            --text-soft: #6b7a99;
+            --border: #d8e4f0;
+        }
 
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── UTILITY BAR ─────────────────────────────────────── */
-    .utility-bar { background: var(--nhs-dark); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.45rem 0; }
-    .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
-    .utility-bar a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .utility-bar a:hover { color: #fff; }
-    .utility-bar .emer { display: flex; align-items: center; gap: 1.5rem; }
-    .util-pill { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 0.2rem 0.8rem; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* ── HEADER ──────────────────────────────────────────── */
-    header { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--nhs-blue); box-shadow: 0 2px 24px rgba(0,94,184,0.10); }
-    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 100px; }
-    .logo-wrap { display: flex; align-items: center; text-decoration: none; }
-    .logo-wrap svg { height: 84px; width: auto; }
-    nav { display: flex; align-items: center; gap: 0.25rem; }
-    nav a { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0.9rem; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: var(--off-white); color: var(--nhs-blue); }
-    nav a.active { color: var(--nhs-blue); font-weight: 600; }
-    .nav-cta { background: var(--nhs-blue) !important; color: var(--white) !important; padding: 0.55rem 1.2rem !important; border-radius: 8px !important; margin-left: 0.5rem; box-shadow: 0 2px 10px rgba(0,94,184,0.25); transition: background 0.2s, transform 0.15s !important; }
-    .nav-cta:hover { background: var(--nhs-dark) !important; transform: translateY(-1px); }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    /* ── HERO — white, minimalistic, matches homepage ─────── */
-    .hero {
-      background: var(--white);
-      padding: 4.5rem 2rem 3.5rem;
-      position: relative; overflow: hidden;
-    }
-    /* Soft radial blobs — same technique as homepage */
-    .hero::before {
-      content: '';
-      position: absolute; top: -80px; right: -100px;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,94,184,0.055) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: -60px; left: -80px;
-      width: 420px; height: 420px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,159,187,0.065) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    /* Extra blob top-left */
-    .hero-blob3 {
-      position: absolute; top: 20%; left: 38%;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,94,184,0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
 
-    .hero-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center;
-      position: relative; z-index: 2;
-    }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-soft); margin-bottom: 1rem; flex-wrap: wrap; }
-    .breadcrumb a { color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
-    .breadcrumb a:hover { color: var(--nhs-blue); }
+        /* ── UTILITY BAR ─────────────────────────────────────── */
+        .utility-bar {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            padding: 0.45rem 0;
+        }
 
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--nhs-blue); background: rgba(0,94,184,0.07); border-radius: 20px;
-      padding: 0.3rem 0.9rem; margin-bottom: 1.2rem;
-    }
-    .hero-tag span { width: 6px; height: 6px; background: var(--nhs-blue); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
-    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(1.5)} }
+        .utility-bar .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
 
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 600; line-height: 1.1; color: var(--text-dark); margin-bottom: 1.2rem; }
-    .hero h1 em { font-style: normal; color: var(--nhs-blue); }
-    .hero-sub { font-size: 1rem; line-height: 1.75; color: var(--text-mid); margin-bottom: 1.6rem; max-width: 500px; }
-    .article-meta { display: flex; align-items: center; gap: 1.2rem; font-size: 0.82rem; color: var(--text-soft); flex-wrap: wrap; }
-    .article-meta span { display: flex; align-items: center; gap: 0.35rem; }
+        .utility-bar a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
 
-    /* Hero right: animated stat card stack */
-    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+        .utility-bar a:hover {
+            color: #fff;
+        }
 
-    .stat-stack { position: relative; width: 100%; max-width: 340px; }
+        .utility-bar .emer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-    .stat-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 18px;
-      padding: 1.6rem 1.8rem;
-      box-shadow: 0 6px 32px rgba(0,94,184,0.09);
-      position: relative; overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,94,184,0.15); }
-    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
+        .util-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+        }
 
-    .stat-card-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.5rem; }
-    .stat-card-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem; font-weight: 700; color: var(--nhs-blue);
-      line-height: 1; margin-bottom: 0.3rem;
-    }
-    .stat-card-desc { font-size: 0.84rem; color: var(--text-mid); line-height: 1.5; }
-    .stat-card-progress { margin-top: 1rem; }
-    .sc-prog-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .sc-prog-fill {
-      height: 100%; border-radius: 99px;
-      background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
-      width: 0; transition: width 1.6s cubic-bezier(0.4,0,0.2,1) 0.4s;
-    }
-    .sc-prog-fill.anim { width: var(--w); }
+        /* ── HEADER ──────────────────────────────────────────── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--nhs-blue);
+            box-shadow: 0 2px 24px rgba(0, 94, 184, 0.10);
+        }
 
-    /* Floating mini badges */
-    .float-badge {
-      position: absolute;
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 0.6rem 1rem;
-      box-shadow: 0 4px 18px rgba(0,94,184,0.1);
-      font-size: 0.78rem; font-weight: 600;
-      color: var(--text-dark); white-space: nowrap;
-      z-index: 3;
-    }
-    .float-badge .fb-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
 
-    .badge-calls  { top: -22px; right: -20px; animation: float-a 5s ease-in-out infinite; }
-    .badge-online { bottom: -18px; left: -18px; animation: float-b 5.5s ease-in-out infinite; }
-    .badge-app    { top: 50%; right: -28px; transform: translateY(-50%); animation: float-a 4.8s ease-in-out infinite 0.8s; }
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
 
-    @keyframes float-a { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    @keyframes float-b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
-    .badge-app { animation: float-c 4.8s ease-in-out infinite 0.8s; }
-    @keyframes float-c { 0%,100%{transform:translateY(-50%) translateX(0)} 50%{transform:translateY(-50%) translateX(6px)} }
+        .logo-wrap svg {
+            height: 84px;
+            width: auto;
+        }
 
-    /* Divider wave */
-    .wave-divider { width: 100%; overflow: hidden; line-height: 0; margin-top: -1px; }
-    .wave-divider svg { display: block; width: 100%; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
 
-    /* ── ARTICLE LAYOUT ──────────────────────────────────── */
-    .article-wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: start; }
+        nav a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--text-mid);
+            text-decoration: none;
+            padding: 0.5rem 0.9rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
 
-    .article-body .intro { font-size: 1.12rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-    .article-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; color: var(--text-dark); margin: 2.2rem 0 0.8rem; line-height: 1.2; }
-    .article-body h2 em { font-style: normal; color: var(--nhs-blue); }
-    .article-body p { font-size: 0.97rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.2rem; }
+        nav a:hover {
+            background: var(--off-white);
+            color: var(--nhs-blue);
+        }
 
-    /* ── ANIMATED TARGETS GRID ───────────────────────────── */
-    .targets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
-    .target-card {
-      background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 1.6rem;
-      position: relative; overflow: hidden;
-      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
-    }
-    .target-card:hover { border-color: var(--nhs-aqua); box-shadow: 0 8px 32px rgba(0,159,187,0.12); transform: translateY(-4px); }
-    .target-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); }
-    /* Animated background watermark */
-    .target-card::after {
-      content: attr(data-num);
-      position: absolute; bottom: -10px; right: 10px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 6rem; font-weight: 700; color: rgba(0,94,184,0.04);
-      line-height: 1; pointer-events: none;
-    }
-    .target-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
-    .target-stat { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--nhs-blue); line-height: 1; margin-bottom: 0.3rem; }
-    .target-stat sup { font-size: 1.2rem; vertical-align: super; }
-    .target-name { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.6rem; line-height: 1.3; }
-    .target-desc { font-size: 0.82rem; line-height: 1.6; color: var(--text-soft); margin-bottom: 1rem; }
-    .progress-wrap {}
-    .progress-meta { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-soft); margin-bottom: 0.4rem; }
-    .progress-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua)); width: 0; transition: width 1.5s cubic-bezier(0.4,0,0.2,1); }
-    .progress-fill.animated { width: var(--target-width); }
+        nav a.active {
+            color: var(--nhs-blue);
+            font-weight: 600;
+        }
 
-    /* ── COMMITMENT LIST ─────────────────────────────────── */
-    .commitment-list { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
-    .commitment-item { display: flex; align-items: flex-start; gap: 1rem; background: var(--off-white); border: 1.5px solid var(--border); border-radius: 12px; padding: 1.1rem 1.3rem; transition: border-color 0.2s, transform 0.2s; }
-    .commitment-item:hover { border-color: var(--nhs-light-blue); transform: translateX(4px); }
-    .ci-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
-    .commitment-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; }
-    .commitment-item p { font-size: 0.84rem; line-height: 1.6; color: var(--text-mid); margin: 0; }
+        .nav-cta {
+            background: var(--nhs-blue) !important;
+            color: var(--white) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: 8px !important;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 94, 184, 0.25);
+            transition: background 0.2s, transform 0.15s !important;
+        }
 
-    /* ── COUNTER STRIP ───────────────────────────────────── */
-    .counter-strip {
-      background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue));
-      border-radius: 16px; padding: 2.5rem 2rem;
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin: 2.5rem 0; text-align: center;
-    }
-    .counter-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-    .counter-item + .counter-item { border-left: 1px solid rgba(255,255,255,0.15); }
-    .counter-val { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: #fff; line-height: 1; }
-    .counter-unit { font-size: 1.2rem; color: var(--nhs-light-blue); }
-    .counter-lbl { font-size: 0.8rem; color: rgba(255,255,255,0.7); font-weight: 500; }
-    .counter-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+        .nav-cta:hover {
+            background: var(--nhs-dark) !important;
+            transform: translateY(-1px);
+        }
 
-    /* ── PULL QUOTE ──────────────────────────────────────── */
-    .pull-quote { border-left: 4px solid var(--nhs-aqua); background: linear-gradient(135deg, #f0fafd, #f8fdfe); border-radius: 0 12px 12px 0; padding: 1.5rem 2rem; margin: 2rem 0; }
-    .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; line-height: 1.65; color: var(--text-dark); margin: 0 0 0.6rem; }
-    .pull-quote cite { font-size: 0.82rem; color: var(--text-soft); font-style: normal; font-weight: 600; }
+        /* ── HERO — white, minimalistic, matches homepage ─────── */
+        .hero {
+            background: var(--white);
+            padding: 4.5rem 2rem 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* ── ARTICLE CTA ─────────────────────────────────────── */
-    .article-cta { background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue)); border-radius: 16px; padding: 2rem 2.5rem; margin: 2.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
-    .article-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
-    .article-cta p { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
-    .btn-white { background: #fff; color: var(--nhs-blue); padding: 0.75rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: transform 0.15s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        /* Soft radial blobs — same technique as homepage */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, 0.055) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── ARTICLE FOOTER ──────────────────────────────────── */
-    .article-footer-strip { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .article-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .tag { font-size: 0.75rem; font-weight: 600; color: var(--nhs-blue); background: rgba(0,94,184,0.07); border: 1px solid rgba(0,94,184,0.15); padding: 0.25rem 0.7rem; border-radius: 20px; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; font-weight: 600; color: var(--text-soft); text-decoration: none; transition: color 0.2s; }
-    .back-link:hover { color: var(--nhs-blue); }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -80px;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 159, 187, 0.065) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── SIDEBAR ─────────────────────────────────────────── */
-    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; position: sticky; top: 120px; }
-    .sidebar-card { background: var(--off-white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; }
-    .sidebar-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
-    .quick-action { display: flex; align-items: center; gap: 0.9rem; padding: 0.8rem; border-radius: 10px; text-decoration: none; color: var(--text-dark); transition: background 0.2s; margin-bottom: 0.3rem; }
-    .quick-action:hover { background: var(--white); }
-    .qa-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(0,94,184,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .qa-label { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); display: block; }
-    .qa-desc  { font-size: 0.76rem; color: var(--text-soft); display: block; }
-    .info-row { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
-    .info-row:last-child { border-bottom: none; }
-    .info-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); min-width: 60px; margin-top: 0.15rem; }
-    .info-value { font-size: 0.87rem; color: var(--text-dark); font-weight: 500; line-height: 1.4; }
-    .info-value a { color: var(--nhs-blue); text-decoration: none; }
-    .related-item { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; }
-    .related-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .related-item:hover .related-title { color: var(--nhs-blue); }
-    .related-date { font-size: 0.74rem; color: var(--text-soft); }
-    .related-title { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); line-height: 1.3; transition: color 0.2s; }
+        /* Extra blob top-left */
+        .hero-blob3 {
+            position: absolute;
+            top: 20%;
+            left: 38%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 94, 184, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    /* ── EMERGENCY ───────────────────────────────────────── */
-    .emergency { background: var(--text-dark); padding: 2.5rem 2rem; }
-    .emergency-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .emerg-card { border-radius: 16px; padding: 2rem; }
-    .nhs111 { background: rgba(0,94,184,0.35); border: 1.5px solid rgba(65,182,230,0.3); }
-    .urgent  { background: rgba(180,0,0,0.35); border: 1.5px solid rgba(255,100,100,0.3); }
-    .emerg-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
-    .emerg-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.5rem; }
-    .emerg-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer { background: var(--nhs-dark); color: rgba(255,255,255,0.8); padding: 3.5rem 2rem 0; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
 
-    /* Chrome logo in footer — wrapped in white pill */
-    .footer-logo-wrap {
-      display: inline-block;
-      background: #fff;
-      border-radius: 10px;
-      padding: 6px 14px 4px;
-      margin-bottom: 1rem;
-    }
-    .footer-logo-wrap svg { height: 42px; width: auto; display: block; }
+        .breadcrumb a {
+            color: var(--text-soft);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
 
-    .footer-tagline { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
-    .footer-address { font-size: 0.85rem; line-height: 1.8; color: rgba(255,255,255,0.65); }
-    .footer-address a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .footer-heading { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .footer-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
-    .footer-links a:hover { color: #fff; }
-    .hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
-    .hour-row { display: flex; justify-content: space-between; font-size: 0.83rem; color: rgba(255,255,255,0.7); }
-    .hour-day { color: rgba(255,255,255,0.45); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 1.2rem 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.38); }
+        .breadcrumb a:hover {
+            color: var(--nhs-blue);
+        }
 
-    @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .article-wrap { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .targets-grid { grid-template-columns: 1fr 1fr; }
-      .counter-strip { grid-template-columns: 1fr; }
-      .counter-item + .counter-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.15); }
-    }
-    @media (max-width: 700px) {
-      .targets-grid { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .emergency-inner { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
-  </style>
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.07);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-tag span {
+            width: 6px;
+            height: 6px;
+            background: var(--nhs-blue);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 0.35;
+                transform: scale(1.5)
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--nhs-blue);
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-mid);
+            margin-bottom: 1.6rem;
+            max-width: 500px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 0.82rem;
+            color: var(--text-soft);
+            flex-wrap: wrap;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        /* Hero right: animated stat card stack */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stat-stack {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 6px 32px rgba(0, 94, 184, 0.09);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 94, 184, 0.15);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        .stat-card-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card-desc {
+            font-size: 0.84rem;
+            color: var(--text-mid);
+            line-height: 1.5;
+        }
+
+        .stat-card-progress {
+            margin-top: 1rem;
+        }
+
+        .sc-prog-bar {
+            height: 5px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .sc-prog-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+            width: 0;
+            transition: width 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+        }
+
+        .sc-prog-fill.anim {
+            width: var(--w);
+        }
+
+        /* Floating mini badges */
+        .float-badge {
+            position: absolute;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            box-shadow: 0 4px 18px rgba(0, 94, 184, 0.1);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            white-space: nowrap;
+            z-index: 3;
+        }
+
+        .float-badge .fb-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .badge-calls {
+            top: -22px;
+            right: -20px;
+            animation: float-a 5s ease-in-out infinite;
+        }
+
+        .badge-online {
+            bottom: -18px;
+            left: -18px;
+            animation: float-b 5.5s ease-in-out infinite;
+        }
+
+        .badge-app {
+            top: 50%;
+            right: -28px;
+            transform: translateY(-50%);
+            animation: float-a 4.8s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes float-a {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        @keyframes float-b {
+            0%, 100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(10px)
+            }
+        }
+
+        .badge-app {
+            animation: float-c 4.8s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes float-c {
+            0%, 100% {
+                transform: translateY(-50%) translateX(0)
+            }
+            50% {
+                transform: translateY(-50%) translateX(6px)
+            }
+        }
+
+        /* Divider wave */
+        .wave-divider {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            margin-top: -1px;
+        }
+
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+        }
+
+        /* ── ARTICLE LAYOUT ──────────────────────────────────── */
+        .article-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .article-body .intro {
+            font-size: 1.12rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-body h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 2.2rem 0 0.8rem;
+            line-height: 1.2;
+        }
+
+        .article-body h2 em {
+            font-style: normal;
+            color: var(--nhs-blue);
+        }
+
+        .article-body p {
+            font-size: 0.97rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+            margin-bottom: 1.2rem;
+        }
+
+        /* ── ANIMATED TARGETS GRID ───────────────────────────── */
+        .targets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .target-card {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.6rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+
+        .target-card:hover {
+            border-color: var(--nhs-aqua);
+            box-shadow: 0 8px 32px rgba(0, 159, 187, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .target-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+        }
+
+        /* Animated background watermark */
+        .target-card::after {
+            content: attr(data-num);
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            color: rgba(0, 94, 184, 0.04);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .target-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .target-stat {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--nhs-blue);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .target-stat sup {
+            font-size: 1.2rem;
+            vertical-align: super;
+        }
+
+        .target-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        .target-desc {
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: var(--text-soft);
+            margin-bottom: 1rem;
+        }
+
+        .progress-wrap {
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-soft);
+            margin-bottom: 0.4rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--nhs-blue), var(--nhs-aqua));
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-fill.animated {
+            width: var(--target-width);
+        }
+
+        /* ── COMMITMENT LIST ─────────────────────────────────── */
+        .commitment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .commitment-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 1.1rem 1.3rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .commitment-item:hover {
+            border-color: var(--nhs-light-blue);
+            transform: translateX(4px);
+        }
+
+        .ci-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .commitment-item h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .commitment-item p {
+            font-size: 0.84rem;
+            line-height: 1.6;
+            color: var(--text-mid);
+            margin: 0;
+        }
+
+        /* ── COUNTER STRIP ───────────────────────────────────── */
+        .counter-strip {
+            background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue));
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+
+        .counter-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .counter-item + .counter-item {
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .counter-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .counter-unit {
+            font-size: 1.2rem;
+            color: var(--nhs-light-blue);
+        }
+
+        .counter-lbl {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .counter-sub {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* ── PULL QUOTE ──────────────────────────────────────── */
+        .pull-quote {
+            border-left: 4px solid var(--nhs-aqua);
+            background: linear-gradient(135deg, #f0fafd, #f8fdfe);
+            border-radius: 0 12px 12px 0;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .pull-quote p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            line-height: 1.65;
+            color: var(--text-dark);
+            margin: 0 0 0.6rem;
+        }
+
+        .pull-quote cite {
+            font-size: 0.82rem;
+            color: var(--text-soft);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* ── ARTICLE CTA ─────────────────────────────────────── */
+        .article-cta {
+            background: linear-gradient(135deg, var(--nhs-dark), var(--nhs-blue));
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .article-cta h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .article-cta p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--nhs-blue);
+            padding: 0.75rem 1.6rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ── ARTICLE FOOTER ──────────────────────────────────── */
+        .article-footer-strip {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+            background: rgba(0, 94, 184, 0.07);
+            border: 1px solid rgba(0, 94, 184, 0.15);
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--nhs-blue);
+        }
+
+        /* ── SIDEBAR ─────────────────────────────────────────── */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-card {
+            background: var(--off-white);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quick-action {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: background 0.2s;
+            margin-bottom: 0.3rem;
+        }
+
+        .quick-action:hover {
+            background: var(--white);
+        }
+
+        .qa-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(0, 94, 184, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .qa-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .qa-desc {
+            font-size: 0.76rem;
+            color: var(--text-soft);
+            display: block;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+            min-width: 60px;
+            margin-top: 0.15rem;
+        }
+
+        .info-value {
+            font-size: 0.87rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .info-value a {
+            color: var(--nhs-blue);
+            text-decoration: none;
+        }
+
+        .related-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .related-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .related-item:hover .related-title {
+            color: var(--nhs-blue);
+        }
+
+        .related-date {
+            font-size: 0.74rem;
+            color: var(--text-soft);
+        }
+
+        .related-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+            transition: color 0.2s;
+        }
+
+        /* ── EMERGENCY ───────────────────────────────────────── */
+        .emergency {
+            background: var(--text-dark);
+            padding: 2.5rem 2rem;
+        }
+
+        .emergency-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .emerg-card {
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .nhs111 {
+            background: rgba(0, 94, 184, 0.35);
+            border: 1.5px solid rgba(65, 182, 230, 0.3);
+        }
+
+        .urgent {
+            background: rgba(180, 0, 0, 0.35);
+            border: 1.5px solid rgba(255, 100, 100, 0.3);
+        }
+
+        .emerg-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 0.3rem;
+        }
+
+        .emerg-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .emerg-desc {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            background: var(--nhs-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3.5rem 2rem 0;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Chrome logo in footer — wrapped in white pill */
+        .footer-logo-wrap {
+            display: inline-block;
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px 14px 4px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-wrap svg {
+            height: 42px;
+            width: auto;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 1rem;
+        }
+
+        .footer-address {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .footer-address a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
+
+        .footer-heading {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.72);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .hours-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .hour-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hour-day {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.38);
+        }
+
+        @media (max-width: 960px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .article-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .targets-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .counter-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .counter-item + .counter-item {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .targets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .emergency-inner {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+            .header-inner {
+                max-width: 1200px;
+                margin: 0 !important;
+                padding: 0 !important;
+
+            }
+
+            .lw svg {
+                height: 60px;
+                width: auto;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
 <!-- UTILITY BAR -->
 <div class="utility-bar">
-  <div class="inner">
-    <div class="emer">
-      <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
-      <span class="util-pill">NHS GP Practice · West London</span>
+    <div class="inner">
+        <div class="emer">
+            <span>📞 <strong>0208 574 5136</strong> &nbsp;|&nbsp; Mon–Fri 08:00–18:30</span>
+            <span class="util-pill">NHS GP Practice · West London</span>
+        </div>
+        <div class="emer">
+            <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
+            <span>|</span>
+            <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
+        </div>
     </div>
-    <div class="emer">
-      <a href="mailto:salujaclinic@nhs.net">salujaclinic@nhs.net</a>
-      <span>|</span>
-      <a href="https://111.nhs.uk" target="_blank">Non-urgent: NHS 111</a>
-    </div>
-  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-        <defs>
-          <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
-            <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
-            <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
-            <stop offset="100%" stop-color="#d8d8d8"/>
-          </linearGradient>
-          <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
-            <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
-            <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
-            <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-          </linearGradient>
-          <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
-            <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
-            <stop offset="100%" stop-color="#000000"/>
-          </radialGradient>
-          <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
-            <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-          </linearGradient>
-          <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
-          </filter>
-          <filter id="textSheen">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-            <feOffset dx="0" dy="1" result="offsetBlur"/>
-            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-          </filter>
-        </defs>
-        <rect width="720" height="160" fill="#ffffff"/>
-        <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
-        <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
-        <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#chromeS)">S</text>
-        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)" filter="url(#textSheen)">SALUJA CLINIC</text>
-        <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-      </svg>
-    </a>
-    <nav>
-      <a href="practice-policies-patient-information.html">Our Practice</a>
-      <a href="clinics-and-services.html">Clinics &amp; Services</a>
-      <a href="health-information.html">Health Information</a>
-      <a href="news.html" class="active">News</a>
-      <a href="contact-us.html">Contact</a>
-      <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
-    </nav>
-  </div>
+    <div class="header-inner">
+        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                <defs>
+                    <linearGradient id="chromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="15%" stop-color="#d0d0d0"/>
+                        <stop offset="30%" stop-color="#f8f8f8"/>
+                        <stop offset="50%" stop-color="#a0a0a0"/>
+                        <stop offset="65%" stop-color="#e8e8e8"/>
+                        <stop offset="80%" stop-color="#b0b0b0"/>
+                        <stop offset="100%" stop-color="#d8d8d8"/>
+                    </linearGradient>
+                    <linearGradient id="chromeText" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#c8c8c8"/>
+                        <stop offset="10%" stop-color="#f0f0f0"/>
+                        <stop offset="25%" stop-color="#b0b0b0"/>
+                        <stop offset="40%" stop-color="#ffffff"/>
+                        <stop offset="55%" stop-color="#909090"/>
+                        <stop offset="70%" stop-color="#e0e0e0"/>
+                        <stop offset="85%" stop-color="#a8a8a8"/>
+                        <stop offset="100%" stop-color="#d0d0d0"/>
+                    </linearGradient>
+                    <radialGradient id="circleShine" cx="38%" cy="32%" r="65%">
+                        <stop offset="0%" stop-color="#3a3a3a"/>
+                        <stop offset="40%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#000000"/>
+                    </radialGradient>
+                    <linearGradient id="circleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#666666"/>
+                        <stop offset="30%" stop-color="#222222"/>
+                        <stop offset="70%" stop-color="#444444"/>
+                        <stop offset="100%" stop-color="#111111"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                    </filter>
+                    <filter id="textSheen">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                        <feOffset dx="0" dy="1" result="offsetBlur"/>
+                        <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                    </filter>
+                </defs>
+                <rect width="720" height="160" fill="#ffffff"/>
+                <circle cx="80" cy="80" r="68" fill="url(#circleRim)" filter="url(#shadow)"/>
+                <circle cx="80" cy="80" r="63" fill="url(#circleShine)"/>
+                <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700"
+                      text-anchor="middle" fill="url(#chromeS)">S
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#chromeText)"
+                      filter="url(#textSheen)">SALUJA CLINIC
+                </text>
+                <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                      font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                      opacity="0.08">SALUJA CLINIC
+                </text>
+            </svg>
+        </a>
+        <nav>
+            <a href="news.html" target="_blank">News</a>
+            <a href="clinics-and-services.html">Clinics &amp; Services</a>
+            <a href="practice-policies-patient-information.html">Our Practice</a>
+
+            <a href="health-information.html" target="_blank">Health Information</a>
+            <a href="contact-us.html">Contact Us</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
+        </nav>
+    </div>
 </header>
 
 <!-- HERO — white, minimalistic -->
 <section class="hero">
-  <div class="hero-blob3"></div>
-  <div class="hero-inner">
+    <div class="hero-blob3"></div>
+    <div class="hero-inner">
 
-    <!-- Left: text -->
-    <div>
-      <div class="breadcrumb">
-        <a href="/">Home</a><span>›</span>
-        <a href="news.html">Practice News</a><span>›</span>
-        <span>2025/26 Access Improvement Plan</span>
-      </div>
-      <div class="hero-tag"><span></span> Practice Update</div>
-      <h1>2025/26 <em>Access<br>Improvement</em> Plan</h1>
-      <p class="hero-sub">We are committed to making it quicker, simpler, and more convenient for every patient to access their GP services — online, by phone, and in person.</p>
-      <div class="article-meta">
-        <span>📅 8 March 2026</span>
-        <span>✍️ Saluja Clinic Team</span>
-        <span>⏱ 3 min read</span>
-      </div>
-    </div>
-
-    <!-- Right: animated stat card -->
-    <div class="hero-visual">
-      <div class="stat-stack">
-
-        <!-- Floating badges -->
-        <div class="float-badge badge-calls">
-          <span class="fb-dot" style="background:var(--nhs-green);"></span>
-          Calls answered in &lt;10 min
-        </div>
-        <div class="float-badge badge-online">
-          <span class="fb-dot" style="background:var(--nhs-blue);"></span>
-          Next-day online response
-        </div>
-        <div class="float-badge badge-app">
-          <span class="fb-dot" style="background:var(--nhs-aqua);"></span>
-          NHS App · 75% target
-        </div>
-
-        <!-- Main card -->
-        <div class="stat-card">
-          <div class="stat-card-label">Q4 2025 Target</div>
-          <div class="stat-card-number" id="heroNum">0<span style="font-size:1.6rem;">%</span></div>
-          <div class="stat-card-desc">of calls answered within 10 minutes</div>
-          <div class="stat-card-progress">
-            <div class="sc-prog-bar">
-              <div class="sc-prog-fill" id="heroBar" style="--w:90%"></div>
+        <!-- Left: text -->
+        <div>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span>›</span>
+                <a href="news.html">Practice News</a><span>›</span>
+                <span>2025/26 Access Improvement Plan</span>
             </div>
-          </div>
+            <div class="hero-tag"><span></span> Practice Update</div>
+            <h1>2025/26 <em>Access<br>Improvement</em> Plan</h1>
+            <p class="hero-sub">We are committed to making it quicker, simpler, and more convenient for every patient to
+                access their GP services — online, by phone, and in person.</p>
+            <div class="article-meta">
+                <span>📅 8 March 2026</span>
+                <span>✍️ Saluja Clinic Team</span>
+                <span>⏱ 3 min read</span>
+            </div>
         </div>
 
-      </div>
-    </div>
+        <!-- Right: animated stat card -->
+        <div class="hero-visual">
+            <div class="stat-stack">
 
-  </div>
+                <!-- Floating badges -->
+                <div class="float-badge badge-calls">
+                    <span class="fb-dot" style="background:var(--nhs-green);"></span>
+                    Calls answered in &lt;10 min
+                </div>
+                <div class="float-badge badge-online">
+                    <span class="fb-dot" style="background:var(--nhs-blue);"></span>
+                    Next-day online response
+                </div>
+                <div class="float-badge badge-app">
+                    <span class="fb-dot" style="background:var(--nhs-aqua);"></span>
+                    NHS App · 75% target
+                </div>
+
+                <!-- Main card -->
+                <div class="stat-card">
+                    <div class="stat-card-label">Q4 2025 Target</div>
+                    <div class="stat-card-number" id="heroNum">0<span style="font-size:1.6rem;">%</span></div>
+                    <div class="stat-card-desc">of calls answered within 10 minutes</div>
+                    <div class="stat-card-progress">
+                        <div class="sc-prog-bar">
+                            <div class="sc-prog-fill" id="heroBar" style="--w:90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </section>
 
 <!-- SVG Wave divider -->
 <div class="wave-divider">
-  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
-  </svg>
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="#f5f8fc"/>
+    </svg>
 </div>
 
 <!-- ARTICLE + SIDEBAR -->
 <div class="article-wrap">
 
-  <article class="article-body">
+    <article class="article-body">
 
-    <p class="intro fade-up">
-      At Saluja Clinic, we are committed to continuously improving how our patients access their GP services. As part of our 2025/26 Access Improvement Plan, we have set out clear, measurable targets designed to make it quicker, simpler, and more convenient for you to reach us — whether by phone, online, or in person.
-    </p>
+        <p class="intro fade-up">
+            At Saluja Clinic, we are committed to continuously improving how our patients access their GP services. As
+            part of our 2025/26 Access Improvement Plan, we have set out clear, measurable targets designed to make it
+            quicker, simpler, and more convenient for you to reach us — whether by phone, online, or in person.
+        </p>
 
-    <h2 class="fade-up">Our <em>Commitments</em> to You</h2>
-    <p class="fade-up">We know that accessing your GP practice should be straightforward. This plan reflects our honest assessment of where we are today and the specific steps we are taking to improve.</p>
+        <h2 class="fade-up">Our <em>Commitments</em> to You</h2>
+        <p class="fade-up">We know that accessing your GP practice should be straightforward. This plan reflects our
+            honest assessment of where we are today and the specific steps we are taking to improve.</p>
 
-    <!-- Animated target cards -->
-    <div class="targets-grid fade-up">
-      <div class="target-card" data-num="90">
-        <div class="target-icon">📞</div>
-        <div class="target-stat">90<sup>%</sup></div>
-        <div class="target-name">Calls answered within 10 minutes</div>
-        <p class="target-desc">Our goal is for 90% of all incoming calls to be answered within 10 minutes.</p>
-        <div class="progress-meta"><span>Target</span><span>Q4 2025</span></div>
-        <div class="progress-bar"><div class="progress-fill" style="--target-width:90%"></div></div>
-      </div>
-      <div class="target-card" data-num="90">
-        <div class="target-icon">💻</div>
-        <div class="target-stat">90<sup>%</sup></div>
-        <div class="target-name">Online consultations responded to by next working day</div>
-        <p class="target-desc">We are committed to responding to 90% of online consultations by end of next working day.</p>
-        <div class="progress-meta"><span>Target</span><span>Q4 2025</span></div>
-        <div class="progress-bar"><div class="progress-fill" style="--target-width:90%"></div></div>
-      </div>
-      <div class="target-card" data-num="75">
-        <div class="target-icon">📱</div>
-        <div class="target-stat">75<sup>%</sup></div>
-        <div class="target-name">NHS App registration rate</div>
-        <p class="target-desc">Targeting 75% of patients registered on the NHS App for greater digital access.</p>
-        <div class="progress-meta"><span>Digital Goal</span><span>2025</span></div>
-        <div class="progress-bar"><div class="progress-fill" style="--target-width:75%"></div></div>
-      </div>
-    </div>
+        <!-- Animated target cards -->
+        <div class="targets-grid fade-up">
+            <div class="target-card" data-num="90">
+                <div class="target-icon">📞</div>
+                <div class="target-stat">90<sup>%</sup></div>
+                <div class="target-name">Calls answered within 10 minutes</div>
+                <p class="target-desc">Our goal is for 90% of all incoming calls to be answered within 10 minutes.</p>
+                <div class="progress-meta"><span>Target</span><span>Q4 2025</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target-width:90%"></div>
+                </div>
+            </div>
+            <div class="target-card" data-num="90">
+                <div class="target-icon">💻</div>
+                <div class="target-stat">90<sup>%</sup></div>
+                <div class="target-name">Online consultations responded to by next working day</div>
+                <p class="target-desc">We are committed to responding to 90% of online consultations by end of next
+                    working day.</p>
+                <div class="progress-meta"><span>Target</span><span>Q4 2025</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target-width:90%"></div>
+                </div>
+            </div>
+            <div class="target-card" data-num="75">
+                <div class="target-icon">📱</div>
+                <div class="target-stat">75<sup>%</sup></div>
+                <div class="target-name">NHS App registration rate</div>
+                <p class="target-desc">Targeting 75% of patients registered on the NHS App for greater digital
+                    access.</p>
+                <div class="progress-meta"><span>Digital Goal</span><span>2025</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--target-width:75%"></div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Animated counter strip -->
-    <div class="counter-strip fade-up">
-      <div class="counter-item">
-        <div class="counter-val"><span class="count-up" data-target="90">0</span><span class="counter-unit">%</span></div>
-        <div class="counter-lbl">Calls Answered</div>
-        <div class="counter-sub">Within 10 minutes · Q4 2025</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-val"><span class="count-up" data-target="90">0</span><span class="counter-unit">%</span></div>
-        <div class="counter-lbl">Online Responses</div>
-        <div class="counter-sub">By next working day · Q4 2025</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-val"><span class="count-up" data-target="75">0</span><span class="counter-unit">%</span></div>
-        <div class="counter-lbl">NHS App Target</div>
-        <div class="counter-sub">Patient registration goal · 2025</div>
-      </div>
-    </div>
+        <!-- Animated counter strip -->
+        <div class="counter-strip fade-up">
+            <div class="counter-item">
+                <div class="counter-val"><span class="count-up" data-target="90">0</span><span
+                        class="counter-unit">%</span></div>
+                <div class="counter-lbl">Calls Answered</div>
+                <div class="counter-sub">Within 10 minutes · Q4 2025</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-val"><span class="count-up" data-target="90">0</span><span
+                        class="counter-unit">%</span></div>
+                <div class="counter-lbl">Online Responses</div>
+                <div class="counter-sub">By next working day · Q4 2025</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-val"><span class="count-up" data-target="75">0</span><span
+                        class="counter-unit">%</span></div>
+                <div class="counter-lbl">NHS App Target</div>
+                <div class="counter-sub">Patient registration goal · 2025</div>
+            </div>
+        </div>
 
-    <div class="pull-quote fade-up">
-      <p>"We understand that getting through to your GP practice quickly matters. These targets are not aspirational — they are commitments we are actively working to deliver for every one of our patients."</p>
-      <cite>— Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</cite>
-    </div>
+        <div class="pull-quote fade-up">
+            <p>"We understand that getting through to your GP practice quickly matters. These targets are not
+                aspirational — they are commitments we are actively working to deliver for every one of our
+                patients."</p>
+            <cite>— Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</cite>
+        </div>
 
-    <h2 class="fade-up">How We're <em>Improving Access</em></h2>
-    <p class="fade-up">We have introduced a number of practical changes to help meet these targets and to make your experience with the practice as smooth as possible.</p>
+        <h2 class="fade-up">How We're <em>Improving Access</em></h2>
+        <p class="fade-up">We have introduced a number of practical changes to help meet these targets and to make your
+            experience with the practice as smooth as possible.</p>
 
-    <div class="commitment-list fade-up">
-      <div class="commitment-item">
-        <div class="ci-icon">📞</div>
-        <div><h4>Improved Telephone Access</h4><p>We have reviewed our telephone system and staffing to reduce waiting times. Phone lines open Monday to Friday, 08:00–18:30.</p></div>
-      </div>
-      <div class="commitment-item">
-        <div class="ci-icon">🌐</div>
-        <div><h4>Online Consultations via WebGP</h4><p>Our online consultation service is available 24 hours a day at salujaclinic.webgp.com. Submit your query at any time and we'll respond by the next working day.</p></div>
-      </div>
-      <div class="commitment-item">
-        <div class="ci-icon">📱</div>
-        <div><h4>NHS App Registration Drive</h4><p>We are actively encouraging all patients to register for the NHS App to book appointments, order repeat prescriptions, and view records online.</p></div>
-      </div>
-      <div class="commitment-item">
-        <div class="ci-icon">💊</div>
-        <div><h4>Streamlined Repeat Prescriptions</h4><p>Repeat prescription requests can be submitted online, reducing the need to call the practice for routine medication.</p></div>
-      </div>
-      <div class="commitment-item">
-        <div class="ci-icon">📋</div>
-        <div><h4>Regular Progress Reviews</h4><p>We will review performance against these targets regularly and share updates through this website and our Patient Participation Group.</p></div>
-      </div>
-    </div>
+        <div class="commitment-list fade-up">
+            <div class="commitment-item">
+                <div class="ci-icon">📞</div>
+                <div><h4>Improved Telephone Access</h4>
+                    <p>We have reviewed our telephone system and staffing to reduce waiting times. Phone lines open
+                        Monday to Friday, 08:00–18:30.</p></div>
+            </div>
+            <div class="commitment-item">
+                <div class="ci-icon">🌐</div>
+                <div><h4>Online Consultations via WebGP</h4>
+                    <p>Our online consultation service is available 24 hours a day at salujaclinic.webgp.com. Submit
+                        your query at any time and we'll respond by the next working day.</p></div>
+            </div>
+            <div class="commitment-item">
+                <div class="ci-icon">📱</div>
+                <div><h4>NHS App Registration Drive</h4>
+                    <p>We are actively encouraging all patients to register for the NHS App to book appointments, order
+                        repeat prescriptions, and view records online.</p></div>
+            </div>
+            <div class="commitment-item">
+                <div class="ci-icon">💊</div>
+                <div><h4>Streamlined Repeat Prescriptions</h4>
+                    <p>Repeat prescription requests can be submitted online, reducing the need to call the practice for
+                        routine medication.</p></div>
+            </div>
+            <div class="commitment-item">
+                <div class="ci-icon">📋</div>
+                <div><h4>Regular Progress Reviews</h4>
+                    <p>We will review performance against these targets regularly and share updates through this website
+                        and our Patient Participation Group.</p></div>
+            </div>
+        </div>
 
-    <div class="article-cta fade-up">
-      <div>
-        <h3>Access Our Services Online</h3>
-        <p>Book a consultation, request a prescription, or download the NHS App — all available right now.</p>
-      </div>
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-white">→ Online Consultation</a>
-    </div>
+        <div class="article-cta fade-up">
+            <div>
+                <h3>Access Our Services Online</h3>
+                <p>Book a consultation, request a prescription, or download the NHS App — all available right now.</p>
+            </div>
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="btn-white">→ Online Consultation</a>
+        </div>
 
-    <h2 class="fade-up">Your <em>Feedback</em> Matters</h2>
-    <p class="fade-up">We value the views of all our patients and encourage you to share your experiences. If you have feedback on how we are delivering against this plan — positive or constructive — please contact the practice or complete our Friends and Family Test.</p>
-    <p class="fade-up">Our Patient Participation Group meets regularly and welcomes patient involvement in shaping how services are delivered. If you'd like to get involved, please speak to our reception team.</p>
+        <h2 class="fade-up">Your <em>Feedback</em> Matters</h2>
+        <p class="fade-up">We value the views of all our patients and encourage you to share your experiences. If you
+            have feedback on how we are delivering against this plan — positive or constructive — please contact the
+            practice or complete our Friends and Family Test.</p>
+        <p class="fade-up">Our Patient Participation Group meets regularly and welcomes patient involvement in shaping
+            how services are delivered. If you'd like to get involved, please speak to our reception team.</p>
 
-    <div class="article-footer-strip fade-up">
-      <div class="article-tags">
-        <span class="tag">Access Improvement</span>
-        <span class="tag">Practice News</span>
-        <span class="tag">NHS App</span>
-        <span class="tag">Online Services</span>
-        <span class="tag">2025/26</span>
-      </div>
-      <a href="news.html" class="back-link">← Back to News</a>
-    </div>
+        <div class="article-footer-strip fade-up">
+            <div class="article-tags">
+                <span class="tag">Access Improvement</span>
+                <span class="tag">Practice News</span>
+                <span class="tag">NHS App</span>
+                <span class="tag">Online Services</span>
+                <span class="tag">2025/26</span>
+            </div>
+            <a href="news.html" class="back-link">← Back to News</a>
+        </div>
 
-  </article>
+    </article>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-card fade-up">
-      <h4>Access Our Services</h4>
-      <a href="https://salujaclinic.webgp.com/" target="_blank" class="quick-action">
-        <div class="qa-icon">📅</div>
-        <div><span class="qa-label">Book Appointment</span><span class="qa-desc">Online consultation 24/7</span></div>
-      </a>
-      <a href="repeat-prescriptions.html" class="quick-action">
-        <div class="qa-icon">💊</div>
-        <div><span class="qa-label">Repeat Prescription</span><span class="qa-desc">Request online</span></div>
-      </a>
-      <a href="https://www.nhs.uk/nhs-app/" target="_blank" class="quick-action">
-        <div class="qa-icon">📱</div>
-        <div><span class="qa-label">Download NHS App</span><span class="qa-desc">Manage your health digitally</span></div>
-      </a>
-      <a href="friends-and-family-test.html" class="quick-action">
-        <div class="qa-icon">⭐</div>
-        <div><span class="qa-label">Friends &amp; Family Test</span><span class="qa-desc">Share your feedback</span></div>
-      </a>
-    </div>
-    <div class="sidebar-card fade-up">
-      <h4>Practice Information</h4>
-      <div class="info-row"><div class="info-label">Address</div><div class="info-value">36A Northcote Avenue,<br>Southall, UB1 2AY</div></div>
-      <div class="info-row"><div class="info-label">Phone</div><div class="info-value"><a href="tel:02085745136">0208 574 5136</a></div></div>
-      <div class="info-row"><div class="info-label">Hours</div><div class="info-value">Mon–Fri 08:00–18:30</div></div>
-      <div class="info-row"><div class="info-label">Online</div><div class="info-value"><a href="https://salujaclinic.webgp.com/" target="_blank">salujaclinic.webgp.com</a></div></div>
-    </div>
-    <div class="sidebar-card fade-up">
-      <h4>Related News</h4>
-      <a href="news-welcome.html" class="related-item">
-        <span class="related-date">8 March 2026</span>
-        <span class="related-title">Welcome to Our New Website</span>
-      </a>
-      <a href="news.html" class="related-item">
-        <span class="related-date">View all</span>
-        <span class="related-title">All Practice News &amp; Announcements →</span>
-      </a>
-    </div>
-  </aside>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-card fade-up">
+            <h4>Access Our Services</h4>
+            <a href="https://salujaclinic.webgp.com/" target="_blank" class="quick-action">
+                <div class="qa-icon">📅</div>
+                <div><span class="qa-label">Book Appointment</span><span class="qa-desc">Online consultation 24/7</span>
+                </div>
+            </a>
+            <a href="repeat-prescriptions.html" class="quick-action">
+                <div class="qa-icon">💊</div>
+                <div><span class="qa-label">Repeat Prescription</span><span class="qa-desc">Request online</span></div>
+            </a>
+            <a href="https://www.nhs.uk/nhs-app/" target="_blank" class="quick-action">
+                <div class="qa-icon">📱</div>
+                <div><span class="qa-label">Download NHS App</span><span
+                        class="qa-desc">Manage your health digitally</span></div>
+            </a>
+            <a href="friends-and-family-test.html" class="quick-action">
+                <div class="qa-icon">⭐</div>
+                <div><span class="qa-label">Friends &amp; Family Test</span><span
+                        class="qa-desc">Share your feedback</span></div>
+            </a>
+        </div>
+        <div class="sidebar-card fade-up">
+            <h4>Practice Information</h4>
+            <div class="info-row">
+                <div class="info-label">Address</div>
+                <div class="info-value">36A Northcote Avenue,<br>Southall, UB1 2AY</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Phone</div>
+                <div class="info-value"><a href="tel:02085745136">0208 574 5136</a></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Hours</div>
+                <div class="info-value">Mon–Fri 08:00–18:30</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Online</div>
+                <div class="info-value"><a href="https://salujaclinic.webgp.com/"
+                                           target="_blank">salujaclinic.webgp.com</a></div>
+            </div>
+        </div>
+        <div class="sidebar-card fade-up">
+            <h4>Related News</h4>
+            <a href="news-welcome.html" class="related-item">
+                <span class="related-date">8 March 2026</span>
+                <span class="related-title">Welcome to Our New Website</span>
+            </a>
+            <a href="news.html" class="related-item">
+                <span class="related-date">View all</span>
+                <span class="related-title">All Practice News &amp; Announcements →</span>
+            </a>
+        </div>
+    </aside>
 
 </div>
 
 <!-- EMERGENCY -->
 <section class="emergency">
-  <div class="emergency-inner">
-    <div class="emerg-card nhs111">
-      <div><div class="emerg-label">Non-Emergency</div><div class="emerg-number">NHS 111</div><p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and mobiles.</p></div>
+    <div class="emergency-inner">
+        <div class="emerg-card nhs111">
+            <div>
+                <div class="emerg-label">Non-Emergency</div>
+                <div class="emerg-number">NHS 111</div>
+                <p class="emerg-desc">Available 24 hours a day, 365 days a year — free from all landlines and
+                    mobiles.</p></div>
+        </div>
+        <div class="emerg-card urgent">
+            <div>
+                <div class="emerg-label">Life-Threatening Emergency</div>
+                <div class="emerg-number">999</div>
+                <p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of
+                    consciousness, or any life-threatening condition.</p></div>
+        </div>
     </div>
-    <div class="emerg-card urgent">
-      <div><div class="emerg-label">Life-Threatening Emergency</div><div class="emerg-number">999</div><p class="emerg-desc">Dial 999 immediately for chest pain, breathing difficulties, loss of consciousness, or any life-threatening condition.</p></div>
-    </div>
-  </div>
 </section>
 
 <!-- FOOTER with chrome logo -->
 <footer id="contact">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <!-- Chrome logo in white pill -->
-      <div class="footer-logo-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
-          <defs>
-            <linearGradient id="fchromeS" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#ffffff"/><stop offset="15%"  stop-color="#d0d0d0"/>
-              <stop offset="30%"  stop-color="#f8f8f8"/><stop offset="50%"  stop-color="#a0a0a0"/>
-              <stop offset="65%"  stop-color="#e8e8e8"/><stop offset="80%"  stop-color="#b0b0b0"/>
-              <stop offset="100%" stop-color="#d8d8d8"/>
-            </linearGradient>
-            <linearGradient id="fchroneText" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"   stop-color="#c8c8c8"/><stop offset="10%"  stop-color="#f0f0f0"/>
-              <stop offset="25%"  stop-color="#b0b0b0"/><stop offset="40%"  stop-color="#ffffff"/>
-              <stop offset="55%"  stop-color="#909090"/><stop offset="70%"  stop-color="#e0e0e0"/>
-              <stop offset="85%"  stop-color="#a8a8a8"/><stop offset="100%" stop-color="#d0d0d0"/>
-            </linearGradient>
-            <radialGradient id="fcircleShine" cx="38%" cy="32%" r="65%">
-              <stop offset="0%"   stop-color="#3a3a3a"/><stop offset="40%"  stop-color="#1a1a1a"/>
-              <stop offset="100%" stop-color="#000000"/>
-            </radialGradient>
-            <linearGradient id="fcircleRim" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stop-color="#666666"/><stop offset="30%"  stop-color="#222222"/>
-              <stop offset="70%"  stop-color="#444444"/><stop offset="100%" stop-color="#111111"/>
-            </linearGradient>
-            <filter id="fshadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
-            </filter>
-            <filter id="ftextSheen">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
-              <feOffset dx="0" dy="1" result="offsetBlur"/>
-              <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
-            </filter>
-          </defs>
-          <rect width="720" height="160" fill="#ffffff"/>
-          <circle cx="80" cy="80" r="68" fill="url(#fcircleRim)" filter="url(#fshadow)"/>
-          <circle cx="80" cy="80" r="63" fill="url(#fcircleShine)"/>
-          <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" text-anchor="middle" fill="url(#fchroneS)">S</text>
-          <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="url(#fchroneText)" filter="url(#ftextSheen)">SALUJA CLINIC</text>
-          <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif" font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white" opacity="0.08">SALUJA CLINIC</text>
-        </svg>
-      </div>
-      <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since 1976.</p>
-      <p class="footer-address">
-        36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
-        <a href="tel:02085745136">📞 0208 574 5136</a><br>
-        <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
-      </p>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <!-- Chrome logo in white pill -->
+            <div class="footer-logo-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
+                    <defs>
+                        <linearGradient id="fchromeS" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="15%" stop-color="#d0d0d0"/>
+                            <stop offset="30%" stop-color="#f8f8f8"/>
+                            <stop offset="50%" stop-color="#a0a0a0"/>
+                            <stop offset="65%" stop-color="#e8e8e8"/>
+                            <stop offset="80%" stop-color="#b0b0b0"/>
+                            <stop offset="100%" stop-color="#d8d8d8"/>
+                        </linearGradient>
+                        <linearGradient id="fchroneText" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#c8c8c8"/>
+                            <stop offset="10%" stop-color="#f0f0f0"/>
+                            <stop offset="25%" stop-color="#b0b0b0"/>
+                            <stop offset="40%" stop-color="#ffffff"/>
+                            <stop offset="55%" stop-color="#909090"/>
+                            <stop offset="70%" stop-color="#e0e0e0"/>
+                            <stop offset="85%" stop-color="#a8a8a8"/>
+                            <stop offset="100%" stop-color="#d0d0d0"/>
+                        </linearGradient>
+                        <radialGradient id="fcircleShine" cx="38%" cy="32%" r="65%">
+                            <stop offset="0%" stop-color="#3a3a3a"/>
+                            <stop offset="40%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000000"/>
+                        </radialGradient>
+                        <linearGradient id="fcircleRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#666666"/>
+                            <stop offset="30%" stop-color="#222222"/>
+                            <stop offset="70%" stop-color="#444444"/>
+                            <stop offset="100%" stop-color="#111111"/>
+                        </linearGradient>
+                        <filter id="fshadow" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000033"/>
+                        </filter>
+                        <filter id="ftextSheen">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+                            <feOffset dx="0" dy="1" result="offsetBlur"/>
+                            <feComposite in="SourceGraphic" in2="offsetBlur" operator="over"/>
+                        </filter>
+                    </defs>
+                    <rect width="720" height="160" fill="#ffffff"/>
+                    <circle cx="80" cy="80" r="68" fill="url(#fcircleRim)" filter="url(#fshadow)"/>
+                    <circle cx="80" cy="80" r="63" fill="url(#fcircleShine)"/>
+                    <text x="80" y="114" font-family="Georgia, 'Times New Roman', serif" font-size="90"
+                          font-weight="700" text-anchor="middle" fill="url(#fchroneS)">S
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start"
+                          fill="url(#fchroneText)" filter="url(#ftextSheen)">SALUJA CLINIC
+                    </text>
+                    <text x="178" y="100" font-family="'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif"
+                          font-size="52" font-weight="700" letter-spacing="6" text-anchor="start" fill="white"
+                          opacity="0.08">SALUJA CLINIC
+                    </text>
+                </svg>
+            </div>
+            <p class="footer-tagline">An NHS GP Practice proudly serving West London and its diverse communities since
+                1976.</p>
+            <p class="footer-address">
+                36A Northcote Avenue<br>Southall, UB1 2AY<br><br>
+                <a href="tel:02085745136">📞 0208 574 5136</a><br>
+                <a href="mailto:salujaclinic@nhs.net">✉ salujaclinic@nhs.net</a>
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="new-patients.html">Register as New Patient</a></li>
+                <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
+                <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
+                <li><a href="health-information.html">Health Information</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Opening Hours</div>
+            <div class="hours-grid">
+                <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
+                <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
+                <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
+            </div>
+        </div>
+        <div>
+            <div class="footer-heading">Useful Links</div>
+            <ul class="footer-links">
+                <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
+                <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
+                <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
+                <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
+                <li><a href="contact-us.html">Contact the Practice</a></li>
+            </ul>
+        </div>
     </div>
-    <div>
-      <div class="footer-heading">Quick Links</div>
-      <ul class="footer-links">
-        <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
-        <li><a href="new-patients.html">Register as New Patient</a></li>
-        <li><a href="repeat-prescriptions.html">Repeat Prescriptions</a></li>
-        <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-        <li><a href="health-information.html">Health Information</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
+        <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
     </div>
-    <div>
-      <div class="footer-heading">Opening Hours</div>
-      <div class="hours-grid">
-        <div class="hour-row"><span class="hour-day">Monday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Tuesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Wednesday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Thursday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Friday</span><span>08:00–18:30</span></div>
-        <div class="hour-row"><span class="hour-day">Saturday</span><span>Closed</span></div>
-        <div class="hour-row"><span class="hour-day">Sunday</span><span>Closed</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-heading">Useful Links</div>
-      <ul class="footer-links">
-        <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
-        <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
-        <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-        <li><a href="practice-policies-patient-information.html">Practice Policies</a></li>
-        <li><a href="contact-us.html">Contact the Practice</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Saluja Clinic · NHS GP Practice · 36A Northcote Avenue, Southall, UB1 2AY</span>
-    <span>Serving West London since 1976 · Dr Rajinder Singh Saluja &amp; Dr Angad Singh Saluja, GP Partners</span>
-  </div>
 </footer>
 
 <script>
-  /* ── Intersection observer: fade-up + progress bars + counters ── */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('visible');
-      // Progress bars
-      e.target.querySelectorAll('.progress-fill').forEach(f => f.classList.add('animated'));
-      // Count-up numbers
-      e.target.querySelectorAll('.count-up').forEach(el => {
-        if (el.dataset.counted) return;
-        el.dataset.counted = '1';
-        const target = +el.dataset.target;
-        const dur = 1800;
-        const start = performance.now();
-        function step(now) {
-          const p = Math.min((now - start) / dur, 1);
-          const ease = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(ease * target);
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    /* ── Intersection observer: fade-up + progress bars + counters ── */
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('visible');
+            // Progress bars
+            e.target.querySelectorAll('.progress-fill').forEach(f => f.classList.add('animated'));
+            // Count-up numbers
+            e.target.querySelectorAll('.count-up').forEach(el => {
+                if (el.dataset.counted) return;
+                el.dataset.counted = '1';
+                const target = +el.dataset.target;
+                const dur = 1800;
+                const start = performance.now();
 
-  /* ── Hero stat card animate on load ─────────────────────── */
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('heroBar').classList.add('anim');
-      // Count hero number 0→90
-      const el = document.getElementById('heroNum');
-      const dur = 1600, target = 90;
-      const start = performance.now();
-      function stepHero(now) {
-        const p = Math.min((now - start) / dur, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(ease * target) + '%';
-        if (p < 1) requestAnimationFrame(stepHero);
-      }
-      requestAnimationFrame(stepHero);
-    }, 400);
-  });
+                function step(now) {
+                    const p = Math.min((now - start) / dur, 1);
+                    const ease = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.round(ease * target);
+                    if (p < 1) requestAnimationFrame(step);
+                }
+
+                requestAnimationFrame(step);
+            });
+        });
+    }, {threshold: 0.1});
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* ── Hero stat card animate on load ─────────────────────── */
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('heroBar').classList.add('anim');
+            // Count hero number 0→90
+            const el = document.getElementById('heroNum');
+            const dur = 1600, target = 90;
+            const start = performance.now();
+
+            function stepHero(now) {
+                const p = Math.min((now - start) / dur, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(ease * target) + '%';
+                if (p < 1) requestAnimationFrame(stepHero);
+            }
+
+            requestAnimationFrame(stepHero);
+        }, 400);
+    });
 </script>
 </body>
 </html>
