@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
           rel="stylesheet">
 
+<!--    <script type="text/javascript"-->
+<!--            src="https://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=9FboFFttbI-W2nxq9EXp_NJgBrucREStChLdfX1EYtE1KhrM-d7jxbfsAJxJdSDeeMCHXJ7dYSQ5T6uB3zLjEHJYJH4d7muSH2_hGqeq7_25I4aLnnWF7dbhaUGb3KME5xhfTw4YIihhkgXUZ8nWQ-w_JVRfIIge4Li_oloGYI3APJBXlYcRa2syQAPqOeuED-AkmI9IUsR9exEVq_MkEKtr9QUbsA5IEC_m_Wqa4jNZR3DynqcD7rep5lxpf2NMdLjxnTzDxCUaksgQz-REYybbIXSwELtzN0ewIEf8UviWNhY6EjVrJ-nZGvzGhSSyr3bFqqWVuY9ZXOOMiP4iwM_H_nfvt8PIjRHhIgv9PhKkA54Tv9o63qg0eDLNEQ3e27HHLpBV6D8J2Jx-Qpn5mt1VBAlg2xqn214ZVxm92n1l_Dp5PXNPxfbgUTstMt4C"-->
+<!--            charset="UTF-8"></script>-->
     <style>
         /* ── NHS Colour Palette ─────────────────────────────── */
         :root {
@@ -397,6 +400,66 @@
             }
         }
 
+        /* New Patient Registration CTA button */
+        .hero-card-cta-wrap {
+            margin-top: 1.2rem;
+        }
+
+        .btn-new-patient {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            width: 100%;
+            background: linear-gradient(135deg, var(--nhs-green) 0%, #009647 100%);
+            color: var(--white);
+            padding: 0.82rem 1.4rem;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(0, 127, 59, 0.32);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .btn-new-patient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 2.6s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -75%;
+            }
+            60% {
+                left: 130%;
+            }
+            100% {
+                left: 130%;
+            }
+        }
+
+        .btn-new-patient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px rgba(0, 127, 59, 0.38);
+            background: linear-gradient(135deg, #006b33 0%, #007f3b 100%);
+        }
+
+        .btn-new-patient svg {
+            flex-shrink: 0;
+        }
+
         /* ── QUICK ACCESS ─────────────────────────────────────── */
         .quick-access {
             background: var(--nhs-blue);
@@ -464,67 +527,6 @@
             font-size: 0.75rem;
             opacity: 0.75;
         }
-
-        /* New Patient Registration CTA button */
-        .hero-card-cta-wrap {
-            margin-top: 1.2rem;
-        }
-
-        .btn-new-patient {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.55rem;
-            width: 100%;
-            background: linear-gradient(135deg, var(--nhs-green) 0%, #009647 100%);
-            color: var(--white);
-            padding: 0.82rem 1.4rem;
-            border-radius: 10px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 600;
-            text-decoration: none;
-            letter-spacing: 0.01em;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 18px rgba(0, 127, 59, 0.32);
-            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-        }
-
-        .btn-new-patient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -75%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
-            transform: skewX(-20deg);
-            animation: shimmer 2.6s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                left: -75%;
-            }
-            60% {
-                left: 130%;
-            }
-            100% {
-                left: 130%;
-            }
-        }
-
-        .btn-new-patient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 26px rgba(0, 127, 59, 0.38);
-            background: linear-gradient(135deg, #006b33 0%, #007f3b 100%);
-        }
-
-        .btn-new-patient svg {
-            flex-shrink: 0;
-        }
-
 
         /* ── SECTION COMMON ──────────────────────────────────── */
         section {
@@ -1638,50 +1640,6 @@
                 transform: scale(1);
             }
         }
-
-        .partner-container {
-            display: grid;
-            grid-template-columns:1fr 160px 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin-top: 2.5rem;
-        }
-
-        @media (min-width: 300px) and (max-width: 500px) {
-
-
-            .header-inner {
-                max-width: 1200px;
-                margin: 0 !important;
-                padding: 0 !important;
-
-            }
-
-            .lw svg {
-                height: 60px;
-                width: auto;
-            }
-
-            .app-inner {
-                max-width: 1200px;
-                margin: 0 auto;
-                display: block !important;
-                align-items: center;
-            }
-
-            .app-cta-wrap {
-                margin-top: 2rem;
-                flex-direction: column;
-            }
-
-            .partner-container {
-                display: grid;
-                grid-template-columns:1fr;
-                gap: 2rem;
-                align-items: center;
-                margin-top: 2.5rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1704,7 +1662,7 @@
 <!-- HEADER -->
 <header>
     <div class="header-inner">
-        <a href="index.html" class="logo-wrap" aria-label="Saluja Clinic Home">
+        <a href="#" class="logo-wrap" aria-label="Saluja Clinic Home">
             <!-- LOGO SVG (unchanged) -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" width="720" height="160">
                 <defs>
@@ -1765,13 +1723,13 @@
         </a>
 
         <nav>
+            <a href="#about">Our Practice</a>
+            <a href="#services">Clinics &amp; Services</a>
+            <a href="#team">Meet the Partners</a>
+            <a href="https://www.salujaclinic.co.uk/health-information/" target="_blank">Health Information</a>
             <a href="news.html" target="_blank">News</a>
-            <a href="clinics-and-services.html">Clinics &amp; Services</a>
-            <a href="practice-policies-patient-information.html">Our Practice</a>
-
-            <a href="health-information.html" target="_blank">Health Information</a>
-            <a href="contact-us.html">Contact Us</a>
-            <a href="appointments.html" class="nav-cta" target="_blank">Book Appointment →</a>
+            <a href="#contact">Contact</a>
+            <a href="https://salujaclinic.webgp.com/" class="nav-cta" target="_blank">Book Appointment →</a>
         </nav>
     </div>
 </header>
@@ -1787,7 +1745,7 @@
                 Trusted, accessible, and deeply rooted in the area since 1976.
             </p>
             <div class="hero-actions">
-                <a href="appointments.html" class="btn-primary" target="_blank">
+                <a href="https://salujaclinic.webgp.com/" class="btn-primary" target="_blank">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2.2">
                         <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -1965,7 +1923,7 @@
             <div class="qa-label">NHS App</div>
             <div class="qa-desc">Download & register</div>
         </a>
-        <a href="repeat-prescriptions.html" class="qa-item" target="_blank">
+        <a href="https://www.salujaclinic.co.uk/repeat-prescriptions/" class="qa-item" target="_blank">
             <div class="qa-icon">
                 <svg viewBox="0 0 24 24">
                     <path d="M9 12h6m-3-3v6"/>
@@ -2082,7 +2040,7 @@
                 profiles →</a>
         </p>
 
-        <div class="partner-container" style="">
+        <div style="display:grid;grid-template-columns:1fr 160px 1fr;gap:2rem;align-items:center;margin-top:2.5rem;">
 
             <!-- DR RAJINDER -->
             <div class="partner-card fade-up" style="padding:1.8rem;">
@@ -2478,12 +2436,14 @@
         <div>
             <div class="footer-heading">Quick Links</div>
             <ul class="footer-links">
-                <li><a href="appointments.html" target="_blank">Book Appointment</a></li>
-                <li><a href="new-patients.html" target="_blank">Register as New
+                <li><a href="https://salujaclinic.webgp.com/" target="_blank">Book Appointment</a></li>
+                <li><a href="https://www.nhs.uk/nhs-services/online-services/nhs-login/" target="_blank">Register as New
                     Patient</a></li>
-                <li><a href="repeat-prescriptions.html" target="_blank">Repeat Prescriptions</a></li>
+                <li><a href="https://www.salujaclinic.co.uk/repeat-prescriptions/" target="_blank">Repeat
+                    Prescriptions</a></li>
                 <li><a href="https://www.nhs.uk/nhs-app/" target="_blank">NHS App</a></li>
-                <li><a href="health-information.html" target="_blank">Health Information</a></li>
+                <li><a href="https://www.salujaclinic.co.uk/health-information/" target="_blank">Health Information</a>
+                </li>
             </ul>
         </div>
 
@@ -2506,8 +2466,9 @@
                 <li><a href="https://www.nhs.uk" target="_blank">NHS.uk</a></li>
                 <li><a href="https://111.nhs.uk" target="_blank">NHS 111 Online</a></li>
                 <li><a href="https://www.cqc.org.uk" target="_blank">Care Quality Commission</a></li>
-                <li><a href="practice-policies-patient-information.html" target="_blank">Practice Policies</a></li>
-                <li><a href="contact-us.html" target="_blank">Contact the Practice</a></li>
+                <li><a href="https://www.salujaclinic.co.uk/practice-policies-patient-information/" target="_blank">Practice
+                    Policies</a></li>
+                <li><a href="https://www.salujaclinic.co.uk/contact-us/" target="_blank">Contact the Practice</a></li>
             </ul>
         </div>
     </div>
@@ -2528,20 +2489,18 @@
     );
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Trigger progress bars when they scroll into view
-    const barObserver = new IntersectionObserver(
-        (entries) => entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.querySelectorAll('.progress-fill').forEach(fill => {
-                    fill.style.animation = 'none';
-                    fill.offsetHeight; // reflow
-                    fill.style.animation = '';
-                });
-            }
-        }),
-        {threshold: 0.3}
-    );
-    document.querySelectorAll('.targets-section').forEach(el => barObserver.observe(el));
+    // Trigger progress bars when they come into view
+    document.querySelectorAll('.prog-fill').forEach(el => {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    el.style.width = el.getAttribute('data-width') || el.style.width;
+                    io.unobserve(el);
+                }
+            });
+        }, {threshold: 0.2});
+        io.observe(el);
+    });
 </script>
 </body>
 </html>
